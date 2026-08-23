@@ -16,11 +16,11 @@ interface Props {
 const {
   title = "Screenshot Checker – Analyze & Verify Screenshots Online",
   description = "Screenshot Checker is an online tool for analyzing screenshots and images for editing signals, visual inconsistencies, metadata, fraud indicators, and other digital evidence.",
-  canonicalUrl = Astro.url.href,
+  canonicalUrl = Astro.url.href.replace(/\/$/, '') ? (Astro.url.pathname === '/' ? 'https://screenshotchecker.com' : `https://screenshotchecker.com${Astro.url.pathname.replace(/\/$/, '')}/`) : 'https://screenshotchecker.com',
   ogType = "website",
   ogTitle,
   ogDescription,
-  ogImage,
+  ogImage = "https://screenshotchecker.com/web-app-manifest-512x512.png",
   siteName = "ScreenshotChecker",
   structuredData,
 } = Astro.props;
@@ -28,6 +28,7 @@ const {
 const fullTitle = title.includes("Screenshot Checker") || title.includes("ScreenshotChecker") ? title : `${title} | ${siteName}`;
 const effectiveOgTitle = ogTitle || fullTitle;
 const effectiveOgDescription = ogDescription || description;
+const effectiveOgImage = ogImage.startsWith('http') ? ogImage : `https://screenshotchecker.com${ogImage.startsWith('/') ? ogImage : '/' + ogImage}`;
 ---
 
 <!doctype html>
@@ -70,14 +71,13 @@ const effectiveOgDescription = ogDescription || description;
     <meta property="og:title" content={effectiveOgTitle} />
     <meta property="og:description" content={effectiveOgDescription} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:site_name" content={siteName} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta property="og:image" content={effectiveOgImage} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={effectiveOgTitle} />
     <meta name="twitter:description" content={effectiveOgDescription} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="twitter:image" content={effectiveOgImage} />
 
     <!-- Google Fonts: Cormorant Garamond (Serif), Inter (Sans), JetBrains Mono (Code) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

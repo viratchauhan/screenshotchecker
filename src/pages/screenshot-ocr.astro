@@ -1,11 +1,55 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import OCRWorkspace from '../components/workspaces/OCRWorkspace.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': 'https://screenshotchecker.com/screenshot-ocr/#webapp',
+      name: 'Screenshot OCR & Text Extractor',
+      url: 'https://screenshotchecker.com/screenshot-ocr/',
+      description: 'Extract searchable, editable text and character counts directly from any screenshot or image inside your browser with client-side OCR.',
+      applicationCategory: 'UtilityApplication',
+      operatingSystem: 'Any (Browser-based)',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Tools',
+          item: 'https://screenshotchecker.com/tools/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Screenshot OCR',
+          item: 'https://screenshotchecker.com/screenshot-ocr/',
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
   title="Screenshot OCR — Extract Text from Screenshots Online"
   description="Extract searchable, editable text and character counts directly from any screenshot or image inside your browser."
+  structuredData={structuredData}
 >
   <OCRWorkspace />
 </Layout>

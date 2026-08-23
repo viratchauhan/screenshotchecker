@@ -1,0 +1,2 @@
+# Redirect /sitemap.xml to /sitemap-index.xml for full crawler compatibility
+/sitemap.xml    /sitemap-index.xml    301

@@ -32,9 +32,69 @@ const {
 } = Astro.props;
 
 const currentPath = Astro.url.pathname;
+const canonicalUrl = `https://screenshotchecker.com${currentPath.endsWith('/') ? currentPath : currentPath + '/'}`;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${canonicalUrl}#webapp`,
+      name: heading,
+      url: canonicalUrl,
+      description: metaDescription,
+      applicationCategory: 'SecurityApplication',
+      operatingSystem: 'Any (Browser-based)',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Tools',
+          item: 'https://screenshotchecker.com/tools/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: heading,
+          item: canonicalUrl,
+        },
+      ],
+    },
+    ...(faqs && faqs.length > 0
+      ? [
+          {
+            '@type': 'FAQPage',
+            '@id': `${canonicalUrl}#faq`,
+            mainEntity: faqs.map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+              },
+            })),
+          },
+        ]
+      : []),
+  ],
+};
 ---
 
-<Layout title={title} description={metaDescription}>
+<Layout title={title} description={metaDescription} canonicalUrl={canonicalUrl} structuredData={structuredData}>
   <Header currentPath={currentPath} />
 
   <main class="flex-1">
