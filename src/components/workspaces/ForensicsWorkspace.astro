@@ -1,0 +1,233 @@
+---
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+---
+
+<div class="min-h-screen flex flex-col bg-canvas text-body">
+  <Header currentPath="/image-manipulation-checker" />
+
+  <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full">
+    <!-- Workspace Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-hairline">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="badge-pill !text-xs font-mono font-semibold">Forensics Workspace</span>
+          <span class="text-xs text-muted">Error Level Analysis (ELA) & Compression Inspection</span>
+        </div>
+        <h1 class="font-serif text-2xl sm:text-3xl text-ink font-normal">
+          Image Manipulation & Forensics Inspector
+        </h1>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2">
+        <button id="forensics-analyze-btn" class="btn-secondary text-xs h-9" title="Analyze in Intelligence Engine">
+          <span>Analyze Meaning</span>
+          <span>→</span>
+        </button>
+        <button id="forensics-new-image-btn" class="btn-secondary text-xs h-9">
+          <span>Change Image</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty Upload State -->
+    <div id="forensics-upload-container" class="bg-surface-card border-2 border-dashed border-hairline rounded-2xl p-8 sm:p-14 text-center cursor-pointer hover:border-primary/50 transition-all mb-8">
+      <input type="file" id="forensics-file-input" class="hidden" accept="image/*" />
+      <div class="w-14 h-14 rounded-full bg-surface-cream-strong flex items-center justify-center text-primary mx-auto mb-4">
+        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+      </div>
+      <h3 class="font-serif text-2xl text-ink font-normal mb-2">Inspect Images for Digital Manipulation</h3>
+      <p class="text-xs sm:text-sm text-muted mb-5 max-w-md mx-auto">
+        Analyze compression difference heatmaps, Error Level Analysis (ELA), and regional noise variance to spot potential digital edits.
+      </p>
+      <button type="button" id="forensics-browse-btn" class="btn-primary text-xs sm:text-sm">
+        Select Image for Forensics
+      </button>
+    </div>
+
+    <!-- Active Forensics Workspace -->
+    <div id="forensics-active-workspace" class="hidden space-y-6">
+      <!-- Top Viewport & Mode Controls -->
+      <div class="bg-surface-card border border-hairline rounded-2xl p-5 shadow-sm space-y-4">
+        <!-- View Modes Toolbar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-hairline">
+          <div class="flex items-center gap-1.5" id="forensics-mode-buttons">
+            <button type="button" data-mode="ela" class="forensics-mode-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-cream-strong text-primary border border-hairline transition-all">
+              Error Level Analysis (ELA)
+            </button>
+            <button type="button" data-mode="original" class="forensics-mode-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+              Original Image
+            </button>
+            <button type="button" data-mode="noise" class="forensics-mode-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+              Noise Variance Map
+            </button>
+          </div>
+
+          <span id="forensics-status-pill" class="badge-status-safe">Consistent Compression</span>
+        </div>
+
+        <!-- Comparative Image Display -->
+        <div class="relative bg-surface-dark-soft rounded-xl overflow-hidden flex items-center justify-center min-h-[380px] max-h-[580px] border border-hairline p-2">
+          <img id="forensics-active-view" src="" alt="Forensic Analysis View" class="max-h-[560px] w-auto object-contain shadow-md rounded" />
+        </div>
+
+        <!-- Metric KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 text-xs">
+            <span class="text-muted block mb-0.5">Compression Uniformity</span>
+            <strong id="forensics-kpi-uniformity" class="font-mono text-ink text-sm">Normal</strong>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 text-xs">
+            <span class="text-muted block mb-0.5">Noise Variance Score</span>
+            <strong id="forensics-kpi-noise" class="font-mono text-ink text-sm">12.4</strong>
+          </div>
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 text-xs">
+            <span class="text-muted block mb-0.5">Regional Edits Flagged</span>
+            <strong id="forensics-kpi-anomalies" class="font-mono text-success text-sm">None Detected</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Educational Interpretation Guidance -->
+      <div class="bg-canvas border border-hairline rounded-2xl p-6 sm:p-8">
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-surface-cream-strong flex items-center justify-center text-primary shrink-0 mt-0.5">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="space-y-2">
+            <h3 class="font-serif text-xl text-ink font-normal">How to Interpret Forensic Signals</h3>
+            <p class="text-xs sm:text-sm text-body leading-relaxed">
+              Error Level Analysis (ELA) identifies differences in JPEG compression error rates across an image. Higher brightness areas in an ELA map represent regions that were modified or saved at a different compression ratio than the surrounding canvas.
+            </p>
+            <p class="text-xs text-muted leading-relaxed">
+              <strong class="text-ink">Important Note:</strong> Forensic signals indicate compression variances, which can occur naturally around text edges, high-contrast borders, or re-saved graphics. They are valuable investigatory clues, not absolute proof of fraud.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</div>
+
+<script>
+  import { analyzeImageForensics } from '../../lib/analyzer/forensics';
+  import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
+
+  let currentDataUrl = '';
+  let currentElaUrl = '';
+  let currentForensics: any = null;
+
+  const dropZone = document.getElementById('forensics-upload-container');
+  const fileInput = document.getElementById('forensics-file-input') as HTMLInputElement | null;
+  const browseBtn = document.getElementById('forensics-browse-btn');
+  const workspace = document.getElementById('forensics-active-workspace');
+  const activeView = document.getElementById('forensics-active-view') as HTMLImageElement | null;
+  const modeBtns = document.querySelectorAll('.forensics-mode-btn');
+
+  const statusPill = document.getElementById('forensics-status-pill');
+  const kpiUniformity = document.getElementById('forensics-kpi-uniformity');
+  const kpiNoise = document.getElementById('forensics-kpi-noise');
+  const kpiAnomalies = document.getElementById('forensics-kpi-anomalies');
+
+  async function processForensics(dataUrl: string) {
+    currentDataUrl = dataUrl;
+    dropZone?.classList.add('hidden');
+    workspace?.classList.remove('hidden');
+
+    const img = new Image();
+    img.src = dataUrl;
+    await new Promise((r) => (img.onload = r));
+
+    const result = await analyzeImageForensics(img);
+    currentForensics = result;
+    currentElaUrl = result.elaDataUrl || dataUrl;
+
+    if (activeView) activeView.src = currentElaUrl;
+
+    if (kpiUniformity) kpiUniformity.innerText = result.compressionInconsistency;
+    if (kpiNoise) kpiNoise.innerText = String(result.noiseVarianceScore);
+    if (kpiAnomalies) {
+      kpiAnomalies.innerText = result.anomaliesDetected ? 'Discrepancies Found' : 'Uniform Compression';
+      kpiAnomalies.className = result.anomaliesDetected ? 'font-mono text-error text-sm' : 'font-mono text-success text-sm';
+    }
+
+    if (statusPill) {
+      statusPill.innerText = result.anomaliesDetected ? 'Compression Anomaly' : 'Consistent Compression';
+      statusPill.className = result.anomaliesDetected ? 'badge-status-warning' : 'badge-status-safe';
+    }
+  }
+
+  modeBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      modeBtns.forEach((b) => {
+        b.classList.remove('bg-surface-cream-strong', 'text-primary', 'font-semibold');
+        b.classList.add('text-body', 'font-medium');
+      });
+      btn.classList.add('bg-surface-cream-strong', 'text-primary', 'font-semibold');
+      btn.classList.remove('text-body', 'font-medium');
+
+      const mode = btn.getAttribute('data-mode');
+      if (!activeView) return;
+      if (mode === 'original') {
+        activeView.src = currentDataUrl;
+      } else {
+        activeView.src = currentElaUrl;
+      }
+    });
+  });
+
+  dropZone?.addEventListener('click', () => fileInput?.click());
+  browseBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fileInput?.click();
+  });
+
+  fileInput?.addEventListener('change', () => {
+    if (fileInput.files?.[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => processForensics(e.target?.result as string);
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  });
+
+  document.addEventListener('paste', (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        const file = items[i].getAsFile();
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (ev) => processForensics(ev.target?.result as string);
+          reader.readAsDataURL(file);
+          break;
+        }
+      }
+    }
+  });
+
+  document.getElementById('forensics-new-image-btn')?.addEventListener('click', () => {
+    workspace?.classList.add('hidden');
+    dropZone?.classList.remove('hidden');
+  });
+
+  document.getElementById('forensics-analyze-btn')?.addEventListener('click', () => {
+    if (currentDataUrl) {
+      setHandoffImage(currentDataUrl, 'forensics');
+      window.location.href = '/';
+    }
+  });
+
+  const handoff = getHandoffImage();
+  if (handoff?.dataUrl) {
+    processForensics(handoff.dataUrl);
+  }
+</script>

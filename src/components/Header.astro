@@ -1,0 +1,168 @@
+---
+import ToolsMegaMenu from './ToolsMegaMenu.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSelector from './LanguageSelector.astro';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+const isCheckerActive = currentPath === '/';
+const isBlogActive = currentPath.startsWith('/blog');
+const isAboutActive = currentPath.startsWith('/about');
+---
+
+<header class="sticky top-0 z-40 bg-canvas/98 backdrop-blur-md border-b border-hairline transition-all duration-200" style="background-color: var(--color-canvas);">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <!-- Left: Brand Logo & Wordmark -->
+    <a href="/" class="flex items-center gap-2.5 text-ink group focus:outline-none focus:ring-2 focus:ring-primary/20 rounded-md">
+      <div class="w-8 h-8 rounded-lg bg-surface-dark flex items-center justify-center text-on-dark transition-transform group-hover:scale-105">
+        <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
+          <line x1="16" x2="22" y1="5" y2="5" />
+          <circle cx="9" cy="9" r="2" />
+          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+        </svg>
+      </div>
+      <span class="font-serif text-xl tracking-tight text-ink font-normal">
+        Screenshot<span class="text-primary font-medium">Checker</span>
+      </span>
+    </a>
+
+    <!-- Center/Desktop Navigation: Exactly Checker | Tools ▾ | Blog | About -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Main Navigation">
+      <a
+        href="/"
+        data-i18n="nav.checker"
+        class={`text-sm font-medium transition-colors ${
+          isCheckerActive
+            ? 'text-primary font-semibold'
+            : 'text-body hover:text-ink'
+        }`}
+      >
+        Checker
+      </a>
+
+      <!-- Tools Dropdown Mega Menu -->
+      <ToolsMegaMenu />
+
+      <a
+        href="/blog"
+        data-i18n="nav.blog"
+        class={`text-sm font-medium transition-colors ${
+          isBlogActive
+            ? 'text-primary font-semibold'
+            : 'text-body hover:text-ink'
+        }`}
+      >
+        Blog
+      </a>
+
+      <a
+        href="/about"
+        data-i18n="nav.about"
+        class={`text-sm font-medium transition-colors ${
+          isAboutActive
+            ? 'text-primary font-semibold'
+            : 'text-body hover:text-ink'
+        }`}
+      >
+        About
+      </a>
+    </nav>
+
+    <!-- Right Controls: Dark Mode Toggle & Language Selector -->
+    <div class="flex items-center gap-2">
+      <!-- Dark Mode -->
+      <ThemeToggle />
+
+      <!-- Language Selector -->
+      <LanguageSelector />
+
+      <!-- Mobile Menu Hamburger Button -->
+      <button
+        id="mobile-nav-toggle"
+        class="md:hidden p-2 text-body hover:text-ink rounded-lg hover:bg-surface-card focus:outline-none ml-1 cursor-pointer"
+        aria-label="Open mobile menu"
+        aria-expanded="false"
+      >
+        <svg id="hamburger-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="close-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-nav-drawer" class="hidden md:hidden border-t border-hairline bg-canvas px-4 py-4 space-y-3" style="background-color: var(--color-canvas);">
+    <a
+      href="/"
+      data-i18n="nav.checker"
+      class={`block px-3 py-2 rounded-lg text-sm font-medium ${
+        isCheckerActive ? 'bg-surface-cream-strong text-primary font-semibold' : 'text-body hover:text-ink hover:bg-surface-card'
+      }`}
+    >
+      Checker
+    </a>
+
+    <a
+      href="/tools"
+      class="block px-3 py-2 rounded-lg text-sm font-medium text-body hover:text-ink hover:bg-surface-card flex items-center justify-between"
+    >
+      <span data-i18n="nav.tools">Tools</span>
+      <span class="text-xs text-primary font-semibold" data-i18n="nav.directory">Tools Directory →</span>
+    </a>
+
+    <a
+      href="/blog"
+      data-i18n="nav.blog"
+      class={`block px-3 py-2 rounded-lg text-sm font-medium ${
+        isBlogActive ? 'bg-surface-cream-strong text-primary font-semibold' : 'text-body hover:text-ink hover:bg-surface-card'
+      }`}
+    >
+      Blog
+    </a>
+
+    <a
+      href="/about"
+      data-i18n="nav.about"
+      class={`block px-3 py-2 rounded-lg text-sm font-medium ${
+        isAboutActive ? 'bg-surface-cream-strong text-primary font-semibold' : 'text-body hover:text-ink hover:bg-surface-card'
+      }`}
+    >
+      About
+    </a>
+  </div>
+</header>
+
+<script>
+  function setupMobileNav() {
+    const toggleBtn = document.getElementById('mobile-nav-toggle');
+    const drawer = document.getElementById('mobile-nav-drawer');
+    const hamburger = document.getElementById('hamburger-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    toggleBtn?.addEventListener('click', () => {
+      const isHidden = drawer?.classList.contains('hidden');
+      if (isHidden) {
+        drawer?.classList.remove('hidden');
+        hamburger?.classList.add('hidden');
+        closeIcon?.classList.remove('hidden');
+        toggleBtn?.setAttribute('aria-expanded', 'true');
+      } else {
+        drawer?.classList.add('hidden');
+        hamburger?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+        toggleBtn?.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  setupMobileNav();
+  document.addEventListener('astro:page-load', setupMobileNav);
+</script>

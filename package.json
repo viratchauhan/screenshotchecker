@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "screenshotchecker",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,9 +9,19 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "astro build && wrangler deploy"
   },
   "dependencies": {
-    "astro": "^7.2.4"
+    "@astrojs/sitemap": "^3.7.3",
+    "@contentauth/c2pa-web": "^0.14.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.2.4",
+    "exifreader": "^4.44.0",
+    "tailwindcss": "^4.3.3",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.125.0"
   }
 }

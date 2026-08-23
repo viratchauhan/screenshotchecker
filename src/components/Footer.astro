@@ -1,0 +1,81 @@
+---
+import { TOOLS_REGISTRY } from '../data/tools';
+
+const topTools = TOOLS_REGISTRY.slice(0, 6);
+---
+
+<footer class="bg-surface-dark text-on-dark border-t border-hairline/20 mt-auto transition-colors">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-white/10">
+      <!-- Brand column (5 cols) -->
+      <div class="md:col-span-5 space-y-4">
+        <a href="/" class="flex items-center gap-2.5 text-on-dark">
+          <div class="w-8 h-8 rounded-lg bg-surface-dark-elevated border border-white/10 flex items-center justify-center text-on-dark">
+            <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
+              <line x1="16" x2="22" y1="5" y2="5" />
+              <circle cx="9" cy="9" r="2" />
+              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+            </svg>
+          </div>
+          <span class="font-serif text-2xl tracking-tight font-normal">
+            Screenshot<span class="text-primary font-medium">Checker</span>
+          </span>
+        </a>
+        <p class="text-xs text-on-dark-soft leading-relaxed max-w-sm">
+          Privacy-first image intelligence, text extraction, sensitive data redaction, and forensic analysis directly inside your browser. No remote uploads.
+        </p>
+        <div class="flex items-center gap-2 text-[11px] text-on-dark-soft pt-1">
+          <span class="w-2 h-2 rounded-full bg-success inline-block"></span>
+          <span>100% In-Browser Privacy Guarantee</span>
+        </div>
+      </div>
+
+      <!-- Quick Tools (4 cols) -->
+      <div class="md:col-span-4 space-y-3">
+        <span class="text-xs font-semibold uppercase tracking-wider text-on-dark font-mono block">
+          Specialized Workspaces
+        </span>
+        <ul class="space-y-2 text-xs text-on-dark-soft">
+          {topTools.map((t) => (
+            <li>
+              <a href={t.route} class="hover:text-on-dark transition-colors">
+                {t.name}
+              </a>
+            </li>
+          ))}
+          <li class="pt-1">
+            <a href="/tools" class="text-primary hover:text-primary-active font-semibold flex items-center gap-1">
+              <span>Explore all tools</span>
+              <span>→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Platform Links (3 cols) -->
+      <div class="md:col-span-3 space-y-3">
+        <span class="text-xs font-semibold uppercase tracking-wider text-on-dark font-mono block">
+          Platform
+        </span>
+        <ul class="space-y-2 text-xs text-on-dark-soft">
+          <li><a href="/" class="hover:text-on-dark transition-colors">Checker</a></li>
+          <li><a href="/tools" class="hover:text-on-dark transition-colors">Tools Directory</a></li>
+          <li><a href="/blog" class="hover:text-on-dark transition-colors">Blog</a></li>
+          <li><a href="/about" class="hover:text-on-dark transition-colors">About</a></li>
+          <li><a href="/privacy" class="hover:text-on-dark transition-colors">Privacy Policy</a></li>
+          <li><a href="/terms" class="hover:text-on-dark transition-colors">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-on-dark-soft text-center sm:text-left">
+      <p>© 2026 ScreenshotChecker.com. All analysis executed locally.</p>
+      <p class="text-xs text-on-dark-soft">
+        Made with <span class="text-red-400 font-serif text-sm">♥</span> by <a href="https://www.linkedin.com/in/viratchauhan1/" target="_blank" rel="noopener noreferrer" class="text-on-dark hover:text-primary font-medium underline underline-offset-4 decoration-white/20 hover:decoration-primary transition-all">Virat Chauhan</a>
+      </p>
+      <p class="text-[11px]">Client-Side Architecture · Zero Data Storage</p>
+    </div>
+  </div>
+</footer>

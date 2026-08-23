@@ -1,0 +1,75 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout
+  title="Privacy Architecture & Policy — Screenshot Checker"
+  description="Learn how Screenshot Checker ensures 100% privacy by processing all image recognition, OCR, and metadata analysis directly inside your browser runtime."
+>
+  <Header currentPath={currentPath} />
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <div class="mb-10 text-center">
+      <span class="badge-coral text-xs mb-3 inline-block">Privacy First</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink mb-4">
+        Privacy Policy & Local Architecture
+      </h1>
+      <p class="text-sm sm:text-base text-muted max-w-2xl mx-auto">
+        We believe your screenshots and personal documents belong solely to you. Here is exactly how our browser-local processing works.
+      </p>
+    </div>
+
+    <div class="space-y-10 text-sm text-body leading-relaxed">
+      <!-- Section 1 -->
+      <div class="feature-card !p-8 space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">1. 100% Client-Side Processing</h2>
+        <p>
+          Unlike conventional image analysis and conversion websites that transmit uploaded files to remote servers or cloud storage buckets, Screenshot Checker executes <strong>entirely within your browser's local sandbox</strong>.
+        </p>
+        <p>
+          When you select, drop, or paste an image, the file is read into your device's random-access memory (RAM) via standard HTML5 <code>FileReader</code> APIs. No binary data, pixel matrices, or extracted OCR text is transmitted over the internet to our servers or any third-party AI provider.
+        </p>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="feature-card !p-8 space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">2. How Each Module Executes Locally</h2>
+        <ul class="space-y-3 list-disc list-inside">
+          <li><strong>Optical Character Recognition (OCR):</strong> Powered by a client-side WebAssembly build of Tesseract.js running inside an isolated Web Worker on your CPU.</li>
+          <li><strong>Metadata & EXIF Inspection:</strong> Analyzes raw binary array buffers using pure JavaScript directly in the browser to extract camera and GPS tags.</li>
+          <li><strong>Sensitive Information (PII) Scanning:</strong> Executes local regular expression pattern matching and Luhn checksum validation against OCR output in memory.</li>
+          <li><strong>Image Forensics & Error Level Analysis (ELA):</strong> Computed on an offscreen HTML5 <code>&lt;canvas&gt;</code> element without server-side rendering.</li>
+          <li><strong>Redaction & Export:</strong> Renders pixel modifications (blur, pixelate, blackout) directly to canvas and exports a sanitized PNG/JPEG file without metadata.</li>
+        </ul>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="feature-card !p-8 space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">3. No Accounts, No Tracking of Image Contents</h2>
+        <p>
+          Screenshot Checker requires no registration, login, or user account. We do not store cookies that profile your image analysis history, and we do not employ tracking scripts that capture canvas or file contents.
+        </p>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="feature-card !p-8 space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">4. Open Verification</h2>
+        <p>
+          You can independently verify our privacy claims at any time:
+        </p>
+        <ol class="list-decimal list-inside space-y-1.5 pl-2">
+          <li>Open your browser's Developer Tools (<code>F12</code> or <code>Ctrl+Shift+I</code>).</li>
+          <li>Navigate to the <strong>Network</strong> tab.</li>
+          <li>Drop an image into Screenshot Checker and run the analysis.</li>
+          <li>Observe that zero <code>POST</code> requests or image payload uploads occur during the entire analysis workflow.</li>
+        </ol>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

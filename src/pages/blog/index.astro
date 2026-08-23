@@ -1,0 +1,110 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getAllArticles } from '../../data/blogArticles';
+
+const articles = getAllArticles();
+
+const canonicalUrl = 'https://screenshotchecker.com/blog';
+
+// ItemList schema for Blog Index
+const blogListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Guides & Investigations — Screenshot Checker',
+  description:
+    'Insights into digital visual trust, screenshot security, privacy protection, and image forensics.',
+  itemListElement: articles.map((article, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    url: `https://screenshotchecker.com/blog/${article.slug}`,
+    name: article.title,
+  })),
+};
+---
+
+<Layout
+  title="Guides & Investigations — Screenshot Checker Blog"
+  description="Insights into digital visual trust, screenshot security, privacy protection, and image forensics. Practical guides to detecting edited screenshots, AI media, and smishing scams."
+  canonicalUrl={canonicalUrl}
+  structuredData={blogListSchema}
+>
+  <Header currentPath="/blog" />
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-16 w-full">
+    <!-- Blog Header -->
+    <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+      <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block mb-2">Editorial Hub</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink tracking-tight mb-4">
+        Guides & Investigations
+      </h1>
+      <p class="text-sm sm:text-base text-body leading-relaxed">
+        Insights into digital visual trust, screenshot security, privacy protection, and image forensics.
+      </p>
+    </div>
+
+    <!-- Featured Top Article -->
+    {articles.length > 0 && (
+      <div class="mb-10">
+        <a
+          href={`/blog/${articles[0].slug}`}
+          class="feature-card flex flex-col md:flex-row justify-between gap-6 hover:border-primary/50 transition-all text-left group p-6 sm:p-8 bg-surface-card rounded-2xl border border-hairline block"
+        >
+          <div class="space-y-3 max-w-2xl">
+            <div class="flex items-center gap-3 text-xs text-muted font-mono">
+              <span class="badge-pill !text-[10px] font-semibold">{articles[0].category}</span>
+              <span>•</span>
+              <time datetime="2026-08-22">{articles[0].publishedAt}</time>
+              <span>•</span>
+              <span>{articles[0].readTime}</span>
+              <span>•</span>
+              <span class="text-primary font-medium">Featured Guide</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal group-hover:text-primary transition-colors leading-snug">
+              {articles[0].title}
+            </h2>
+            <p class="text-xs sm:text-sm text-body leading-relaxed line-clamp-3">
+              {articles[0].excerpt}
+            </p>
+          </div>
+          <div class="md:self-end pt-4 md:pt-0 shrink-0">
+            <span class="btn-secondary text-xs inline-flex items-center gap-2 group-hover:bg-primary group-hover:text-white transition-colors">
+              <span>Read featured guide</span>
+              <span>→</span>
+            </span>
+          </div>
+        </a>
+      </div>
+    )}
+
+    <!-- Articles Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+      {articles.slice(1).map((article) => (
+        <a
+          href={`/blog/${article.slug}`}
+          class="feature-card flex flex-col justify-between hover:border-primary/50 transition-all text-left group p-6 bg-surface-card rounded-2xl border border-hairline"
+        >
+          <div>
+            <div class="flex items-center justify-between text-xs text-muted font-mono mb-3">
+              <span class="badge-pill !text-[10px] font-semibold">{article.category}</span>
+              <span>{article.publishedAt} · {article.readTime}</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl text-ink font-normal group-hover:text-primary transition-colors mb-3 leading-snug">
+              {article.title}
+            </h2>
+            <p class="text-xs sm:text-sm text-muted leading-relaxed line-clamp-3">
+              {article.excerpt}
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-hairline flex items-center justify-between text-xs text-primary font-medium">
+            <span>Read guide</span>
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

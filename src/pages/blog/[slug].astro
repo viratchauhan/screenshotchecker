@@ -1,0 +1,289 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getAllArticles, getArticleBySlug, getRelatedArticles, type BlogArticle } from '../../data/blogArticles';
+
+export async function getStaticPaths() {
+  const articles = getAllArticles();
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+interface Props {
+  article: BlogArticle;
+}
+
+const { article } = Astro.props;
+
+if (!article) {
+  return Astro.redirect('/404');
+}
+
+const relatedArticles = getRelatedArticles(article.slug);
+const canonicalUrl = `https://screenshotchecker.com/blog/${article.slug}`;
+
+// 1. Article / BlogPosting Schema
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: article.title,
+  description: article.metaDescription,
+  datePublished: '2026-08-22T00:00:00Z',
+  dateModified: article.updatedAt ? '2026-08-22T00:00:00Z' : '2026-08-22T00:00:00Z',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': canonicalUrl,
+  },
+  author: {
+    '@type': 'Organization',
+    name: 'Screenshot Checker Editorial Team',
+    url: 'https://screenshotchecker.com',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Screenshot Checker',
+    url: 'https://screenshotchecker.com',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://screenshotchecker.com/favicon.svg',
+    },
+  },
+  keywords: article.targetKeywords.join(', '),
+};
+
+// 2. BreadcrumbList Schema
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://screenshotchecker.com/',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Blog',
+      item: 'https://screenshotchecker.com/blog',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: article.title,
+      item: canonicalUrl,
+    },
+  ],
+};
+
+// 3. FAQPage Schema
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: article.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+const combinedStructuredData = [articleSchema, breadcrumbSchema, faqSchema];
+---
+
+<Layout
+  title={article.seoTitle}
+  description={article.metaDescription}
+  canonicalUrl={canonicalUrl}
+  ogType="article"
+  structuredData={combinedStructuredData}
+>
+  <Header currentPath="/blog" />
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-14 w-full">
+    <!-- Breadcrumbs -->
+    <nav aria-label="Breadcrumb" class="mb-6">
+      <ol class="flex items-center gap-2 text-xs text-muted font-mono flex-wrap">
+        <li>
+          <a href="/" class="hover:text-ink transition-colors">Home</a>
+        </li>
+        <li class="select-none">/</li>
+        <li>
+          <a href="/blog" class="hover:text-ink transition-colors">Blog</a>
+        </li>
+        <li class="select-none">/</li>
+        <li class="text-ink truncate max-w-[240px] sm:max-w-md font-medium" aria-current="page">
+          {article.title}
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="pb-8 mb-8 border-b border-hairline space-y-4">
+      <div class="flex items-center gap-3 text-xs text-muted font-mono flex-wrap">
+        <span class="badge-pill !text-[11px] font-semibold">{article.category}</span>
+        <span>•</span>
+        <time datetime="2026-08-22">{article.publishedAt}</time>
+        <span>•</span>
+        <span>{article.readTime}</span>
+      </div>
+
+      <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-ink font-normal leading-[1.15] tracking-tight">
+        {article.title}
+      </h1>
+
+      <p class="text-base sm:text-lg text-body leading-relaxed max-w-3xl pt-2 font-normal">
+        {article.introduction}
+      </p>
+    </header>
+
+    <!-- Key Takeaway Box -->
+    <div class="bg-surface-card border-l-4 border-primary border border-hairline p-5 sm:p-6 rounded-r-xl mb-10 shadow-xs">
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="w-2 h-2 rounded-full bg-primary"></span>
+        <span class="font-mono text-xs uppercase font-bold text-ink tracking-wider">
+          {article.keyTakeaway.title}
+        </span>
+      </div>
+      <p class="text-sm sm:text-base text-body leading-relaxed">
+        {article.keyTakeaway.text}
+      </p>
+    </div>
+
+    <!-- Article Body Content Sections -->
+    <div class="space-y-10 text-body leading-relaxed text-sm sm:text-base">
+      {article.contentSections.map((section) => (
+        <section class="space-y-4">
+          <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal pt-2">
+            {section.heading}
+          </h2>
+
+          <div class="space-y-3.5 text-body">
+            {section.paragraphs.map((p) => (
+              <p class="leading-relaxed">{p}</p>
+            ))}
+          </div>
+
+          {section.callout && (
+            <div
+              class={`p-4 sm:p-5 rounded-xl border text-xs sm:text-sm my-4 leading-relaxed ${
+                section.callout.type === 'warning'
+                  ? 'bg-canvas border-error/30 text-error font-medium'
+                  : 'bg-canvas border-hairline text-ink'
+              }`}
+            >
+              <div class="flex items-start gap-2.5">
+                <span class="font-bold font-mono uppercase text-[11px] block shrink-0 mt-0.5">
+                  {section.callout.type === 'warning' ? '⚠️ Caution:' : '💡 Note:'}
+                </span>
+                <span>{section.callout.text}</span>
+              </div>
+            </div>
+          )}
+        </section>
+      ))}
+    </div>
+
+    <!-- Call to Action Banner -->
+    <div class="my-12 bg-surface-card border border-hairline rounded-2xl p-6 sm:p-8 text-center space-y-4 shadow-sm">
+      <span class="badge-pill !text-xs font-mono font-semibold">Interactive Tool</span>
+      <h3 class="font-serif text-2xl text-ink font-normal">
+        {article.cta.label}
+      </h3>
+      <p class="text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
+        {article.cta.description}
+      </p>
+      <div>
+        <a href={article.cta.url} class="btn-primary text-xs sm:text-sm inline-flex items-center gap-2">
+          <span>{article.cta.label}</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="pt-10 mb-12 border-t border-hairline space-y-6">
+      <div class="space-y-1">
+        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block">Clear Answers</span>
+        <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal">
+          Frequently Asked Questions
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {article.faq.map((item) => (
+          <div class="bg-surface-card border border-hairline rounded-xl p-5 sm:p-6 space-y-2">
+            <h3 class="font-serif text-lg sm:text-xl text-ink font-medium">
+              {item.question}
+            </h3>
+            <p class="text-xs sm:text-sm text-body leading-relaxed">
+              {item.answer}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- People Also Search For -->
+    <section class="pt-8 mb-12 border-t border-hairline space-y-4">
+      <div class="space-y-1">
+        <span class="text-xs uppercase tracking-wider font-semibold text-muted font-mono block">Related Search Intent</span>
+        <h2 class="font-serif text-xl sm:text-2xl text-ink font-normal">
+          People Also Search For
+        </h2>
+      </div>
+
+      <div class="flex flex-wrap gap-2 pt-2">
+        {article.peopleAlsoSearch.map((query) => (
+          <span class="bg-canvas border border-hairline px-3.5 py-1.5 rounded-lg text-xs font-mono text-body hover:border-primary/40 transition-colors">
+            {query}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related Guides Section -->
+    <section class="pt-8 border-t border-hairline space-y-6">
+      <div class="space-y-1">
+        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block">Explore More</span>
+        <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal">
+          Related Guides & Investigations
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {relatedArticles.map((rel) => (
+          <a
+            href={`/blog/${rel.slug}`}
+            class="feature-card flex flex-col justify-between hover:border-primary/50 transition-all text-left group p-5 bg-surface-card rounded-xl border border-hairline"
+          >
+            <div>
+              <div class="flex items-center justify-between text-[10px] text-muted font-mono mb-2">
+                <span class="badge-pill !text-[9px]">{rel.category}</span>
+                <span>{rel.readTime}</span>
+              </div>
+              <h3 class="font-serif text-base sm:text-lg text-ink font-medium group-hover:text-primary transition-colors mb-2 leading-snug">
+                {rel.title}
+              </h3>
+              <p class="text-xs text-muted leading-relaxed line-clamp-3">
+                {rel.excerpt}
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-hairline flex items-center justify-between text-xs text-primary font-medium">
+              <span>Read guide</span>
+              <span class="group-hover:translate-x-1 transition-transform">→</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

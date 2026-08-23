@@ -1,0 +1,375 @@
+---
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+---
+
+<div class="min-h-screen flex flex-col bg-canvas text-body">
+  <Header currentPath="/screenshot-redactor" />
+
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 w-full flex flex-col">
+    <!-- Workspace Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-3 border-b border-hairline">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="badge-pill !text-xs font-mono font-semibold">Redactor Workspace</span>
+          <span class="text-xs text-muted">100% In-Browser Privacy Protection</span>
+        </div>
+        <h1 class="font-serif text-2xl sm:text-3xl text-ink font-normal">
+          Interactive Screenshot Redactor
+        </h1>
+      </div>
+
+      <!-- Quick Export Actions -->
+      <div class="flex items-center gap-2">
+        <button id="redact-export-png" class="btn-primary text-xs h-9 px-3.5">
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+          <span>Export Clean PNG</span>
+        </button>
+        <button id="redact-new-image" class="btn-secondary text-xs h-9 px-3">
+          <span>Change Image</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty Upload State -->
+    <div id="redact-upload-container" class="bg-surface-card border-2 border-dashed border-hairline rounded-2xl p-8 sm:p-14 text-center cursor-pointer hover:border-primary/50 transition-all my-auto">
+      <input type="file" id="redact-file-input" class="hidden" accept="image/*" />
+      <div class="w-14 h-14 rounded-full bg-surface-cream-strong flex items-center justify-center text-primary mx-auto mb-4">
+        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+        </svg>
+      </div>
+      <h3 class="font-serif text-2xl text-ink font-normal mb-2">Mask Sensitive Information Before Sharing</h3>
+      <p class="text-xs sm:text-sm text-muted mb-5 max-w-md mx-auto">
+        Blur or blackout credit card numbers, phone numbers, addresses, and private messages directly in your browser.
+      </p>
+      <button type="button" id="redact-browse-btn" class="btn-primary text-xs sm:text-sm">
+        Select Image to Redact
+      </button>
+    </div>
+
+    <!-- Active Redactor Editor (Central Canvas + Toolbar + PII Side Panel) -->
+    <div id="redact-active-editor" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
+      <!-- Left / Center: Interactive Canvas & Toolbars (8 cols) -->
+      <div class="lg:col-span-8 flex flex-col space-y-3">
+        <!-- Top Drawing Toolbar -->
+        <div class="bg-surface-card border border-hairline rounded-xl p-2 flex flex-wrap items-center justify-between gap-2">
+          <!-- Tool selection -->
+          <div class="flex items-center gap-1">
+            <button type="button" data-tool="blur" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-cream-strong text-primary border border-hairline transition-all">
+              Blur
+            </button>
+            <button type="button" data-tool="pixelate" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+              Pixelate
+            </button>
+            <button type="button" data-tool="blackout" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+              Blackout
+            </button>
+            <button type="button" data-tool="whiteout" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+              Whiteout
+            </button>
+          </div>
+
+          <!-- Undo / Clear History -->
+          <div class="flex items-center gap-1.5">
+            <button id="redact-undo-btn" class="btn-secondary text-xs h-7 px-2.5" title="Undo last box">
+              <span>Undo</span>
+            </button>
+            <button id="redact-clear-btn" class="btn-secondary text-xs h-7 px-2.5 text-error" title="Clear all boxes">
+              <span>Clear All</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Container -->
+        <div class="bg-surface-dark-soft border border-hairline rounded-2xl flex-1 min-h-[480px] max-h-[680px] flex items-center justify-center overflow-hidden p-2 relative select-none">
+          <canvas id="main-redactor-canvas" class="max-w-full max-h-[660px] object-contain cursor-crosshair shadow-lg rounded"></canvas>
+        </div>
+
+        <p class="text-[11px] text-muted text-center">
+          Click and drag anywhere across the image to draw redaction masks.
+        </p>
+      </div>
+
+      <!-- Right: Detected PII & Quick Actions (4 cols) -->
+      <div class="lg:col-span-4 space-y-4">
+        <div class="bg-surface-card border border-hairline rounded-xl p-5 space-y-4 shadow-sm">
+          <div class="flex items-center justify-between">
+            <h3 class="font-serif text-lg text-ink font-normal">Sensitive Information</h3>
+            <button id="redact-auto-all-btn" class="btn-primary text-[11px] h-7 px-2.5">
+              Auto-Mask All
+            </button>
+          </div>
+
+          <div id="redact-pii-list" class="space-y-2 max-h-72 overflow-y-auto pr-1 text-xs">
+            <p class="text-muted italic">Scanning for sensitive data...</p>
+          </div>
+
+          <div class="pt-4 border-t border-hairline space-y-2">
+            <span class="text-[11px] font-semibold text-muted uppercase tracking-wider block">Cross-Tool Workflows</span>
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <a href="/screenshot-ocr" id="redact-go-ocr" class="btn-secondary text-[11px] h-8 justify-center">
+                Extract Text →
+              </a>
+              <a href="/image-manipulation-checker" id="redact-go-forensics" class="btn-secondary text-[11px] h-8 justify-center">
+                Run Forensics →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</div>
+
+<script>
+  import { scanPrivacyRisks } from '../../lib/analyzer/privacyScanner';
+  import { runClientOCR } from '../../lib/analyzer/ocr';
+  import { renderRedactedImage, type RedactionBox } from '../../lib/analyzer/redactor';
+  import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
+
+  let currentImage: HTMLImageElement | null = null;
+  let currentDataUrl = '';
+  let currentTool: 'blur' | 'pixelate' | 'blackout' | 'whiteout' = 'blur';
+  let boxes: RedactionBox[] = [];
+  let detectedPiiFindings: any[] = [];
+  let isDrawing = false;
+  let startX = 0;
+  let startY = 0;
+
+  const dropZone = document.getElementById('redact-upload-container');
+  const fileInput = document.getElementById('redact-file-input') as HTMLInputElement | null;
+  const browseBtn = document.getElementById('redact-browse-btn');
+  const editor = document.getElementById('redact-active-editor');
+  const canvas = document.getElementById('main-redactor-canvas') as HTMLCanvasElement | null;
+  const piiList = document.getElementById('redact-pii-list');
+  const toolBtns = document.querySelectorAll('.redact-tool-btn');
+
+  async function loadEditor(dataUrl: string) {
+    currentDataUrl = dataUrl;
+    dropZone?.classList.add('hidden');
+    editor?.classList.remove('hidden');
+
+    const img = new Image();
+    img.src = dataUrl;
+    await new Promise((r) => (img.onload = r));
+    currentImage = img;
+
+    if (canvas) {
+      canvas.width = img.naturalWidth || img.width;
+      canvas.height = img.naturalHeight || img.height;
+      redraw();
+    }
+
+    // Run quick background OCR & PII scan to populate sidebar
+    runClientOCR(img).then((ocr) => {
+      const pii = scanPrivacyRisks(ocr.text, ocr.words);
+      detectedPiiFindings = pii.findings;
+      renderPiiSidebar(pii.findings);
+    });
+  }
+
+  function redraw() {
+    if (!canvas || !currentImage) return;
+    renderRedactedImage(currentImage, boxes).then(({ dataUrl }) => {
+      const temp = new Image();
+      temp.onload = () => {
+        const ctx = canvas.getContext('2d');
+        ctx?.drawImage(temp, 0, 0);
+      };
+      temp.src = dataUrl;
+    });
+  }
+
+  function renderPiiSidebar(findings: any[]) {
+    if (!piiList) return;
+    if (findings.length === 0) {
+      piiList.innerHTML = `<p class="text-muted italic">No high-risk PII automatically identified. You can manually draw redactions anywhere.</p>`;
+      return;
+    }
+
+    piiList.innerHTML = findings
+      .map(
+        (f, idx) => `
+      <div class="bg-canvas border border-hairline rounded-lg p-2.5 flex items-center justify-between gap-2">
+        <div class="truncate">
+          <span class="font-semibold text-ink">${f.label}</span>
+          <p class="font-mono text-muted text-[11px] truncate">${f.value}</p>
+        </div>
+        <button type="button" class="btn-secondary text-[10px] h-6 px-2 shrink-0 redact-single-pii" data-idx="${idx}">
+          Mask
+        </button>
+      </div>
+    `
+      )
+      .join('');
+
+    document.querySelectorAll('.redact-single-pii').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.getAttribute('data-idx'));
+        const f = findings[idx];
+        if (f && f.bbox) {
+          boxes.push({
+            id: `box_pii_${Date.now()}`,
+            x: f.bbox.x - 4,
+            y: f.bbox.y - 4,
+            width: f.bbox.width + 8,
+            height: f.bbox.height + 8,
+            type: currentTool,
+          });
+          redraw();
+        }
+      });
+    });
+  }
+
+  dropZone?.addEventListener('click', () => fileInput?.click());
+  browseBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fileInput?.click();
+  });
+
+  fileInput?.addEventListener('change', () => {
+    if (fileInput.files?.[0]) {
+      const reader = new FileReader();
+      reader.onload = (e) => loadEditor(e.target?.result as string);
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  });
+
+  document.addEventListener('paste', (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        const file = items[i].getAsFile();
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (ev) => loadEditor(ev.target?.result as string);
+          reader.readAsDataURL(file);
+          break;
+        }
+      }
+    }
+  });
+
+  toolBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      toolBtns.forEach((b) => {
+        b.classList.remove('bg-surface-cream-strong', 'text-primary', 'font-semibold');
+        b.classList.add('text-body', 'font-medium');
+      });
+      btn.classList.add('bg-surface-cream-strong', 'text-primary', 'font-semibold');
+      btn.classList.remove('text-body', 'font-medium');
+      currentTool = btn.getAttribute('data-tool') as any;
+    });
+  });
+
+  canvas?.addEventListener('mousedown', (e) => {
+    if (!canvas) return;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    startX = (e.clientX - rect.left) * scaleX;
+    startY = (e.clientY - rect.top) * scaleY;
+    isDrawing = true;
+  });
+
+  canvas?.addEventListener('mouseup', (e) => {
+    if (!isDrawing || !canvas) return;
+    isDrawing = false;
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+
+    const endX = (e.clientX - rect.left) * scaleX;
+    const endY = (e.clientY - rect.top) * scaleY;
+
+    const width = Math.abs(endX - startX);
+    const height = Math.abs(endY - startY);
+    const x = Math.min(startX, endX);
+    const y = Math.min(startY, endY);
+
+    if (width > 4 && height > 4) {
+      boxes.push({
+        id: `box_${Date.now()}`,
+        x,
+        y,
+        width,
+        height,
+        type: currentTool,
+      });
+      redraw();
+    }
+  });
+
+  document.getElementById('redact-auto-all-btn')?.addEventListener('click', () => {
+    for (const f of detectedPiiFindings) {
+      if (f.bbox) {
+        boxes.push({
+          id: `auto_${f.id || Date.now()}`,
+          x: f.bbox.x - 4,
+          y: f.bbox.y - 4,
+          width: f.bbox.width + 8,
+          height: f.bbox.height + 8,
+          type: currentTool,
+        });
+      }
+    }
+    redraw();
+  });
+
+  document.getElementById('redact-undo-btn')?.addEventListener('click', () => {
+    boxes.pop();
+    redraw();
+  });
+
+  document.getElementById('redact-clear-btn')?.addEventListener('click', () => {
+    boxes = [];
+    redraw();
+  });
+
+  document.getElementById('redact-new-image')?.addEventListener('click', () => {
+    editor?.classList.add('hidden');
+    dropZone?.classList.remove('hidden');
+    boxes = [];
+  });
+
+  document.getElementById('redact-export-png')?.addEventListener('click', async () => {
+    if (!currentImage) return;
+    const { blob } = await renderRedactedImage(currentImage, boxes, 'image/png');
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `redacted-${Date.now()}.png`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // Cross-Tool Handoff
+  document.getElementById('redact-go-ocr')?.addEventListener('click', (e) => {
+    if (currentDataUrl) {
+      e.preventDefault();
+      setHandoffImage(currentDataUrl, 'redactor');
+      window.location.href = '/screenshot-ocr';
+    }
+  });
+
+  document.getElementById('redact-go-forensics')?.addEventListener('click', (e) => {
+    if (currentDataUrl) {
+      e.preventDefault();
+      setHandoffImage(currentDataUrl, 'redactor');
+      window.location.href = '/image-manipulation-checker';
+    }
+  });
+
+  const handoff = getHandoffImage();
+  if (handoff?.dataUrl) {
+    loadEditor(handoff.dataUrl);
+  }
+</script>

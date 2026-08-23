@@ -1,0 +1,1158 @@
+---
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+---
+
+<div class="min-h-screen flex flex-col bg-canvas text-body selection:bg-surface-cream-strong selection:text-ink">
+  <Header currentPath="/screenshot-comparison" />
+
+  <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 w-full">
+    <!-- Workspace Header -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-hairline">
+      <div>
+        <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+          <span class="badge-pill !text-xs font-mono font-semibold">Visual Diff Studio</span>
+          <span class="text-xs text-muted font-mono">Semantic & Forensic Image Comparison</span>
+        </div>
+        <h1 class="font-serif text-2xl sm:text-4xl text-ink font-normal tracking-tight">
+          Screenshot & Image Comparison
+        </h1>
+      </div>
+
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <button
+          id="btn-explain-differences"
+          type="button"
+          class="btn-primary text-xs h-9 inline-flex items-center gap-2"
+          title="Run semantic difference explanation"
+        >
+          <span>✨ Explain Differences</span>
+        </button>
+
+        <div class="relative inline-block text-left" id="align-dropdown-container">
+          <button
+            id="btn-align-mode"
+            type="button"
+            class="btn-secondary text-xs h-9 inline-flex items-center gap-1.5"
+            title="Image alignment mode"
+          >
+            <span id="align-label">Auto Align ✓</span>
+            <span class="text-[10px]">▼</span>
+          </button>
+          <div
+            id="align-menu"
+            class="hidden absolute right-0 mt-1 w-36 bg-surface-card border border-hairline rounded-xl shadow-lg z-30 py-1 text-xs font-mono"
+          >
+            <button class="w-full text-left px-3 py-1.5 hover:bg-canvas text-ink align-option" data-align="auto">Auto Align ✓</button>
+            <button class="w-full text-left px-3 py-1.5 hover:bg-canvas text-ink align-option" data-align="center">Align Center</button>
+            <button class="w-full text-left px-3 py-1.5 hover:bg-canvas text-ink align-option" data-align="top-left">Align Edges</button>
+            <button class="w-full text-left px-3 py-1.5 hover:bg-canvas text-ink align-option" data-align="reset">Reset Alignment</button>
+          </div>
+        </div>
+
+        <button id="compare-reset-btn" type="button" class="btn-secondary text-xs h-9">
+          <span>Reset</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty Upload State (Dual Dropzones) -->
+    <div id="compare-upload-container" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <!-- Image A Slot -->
+      <div
+        id="drop-zone-a"
+        class="bg-surface-card border-2 border-dashed border-hairline rounded-2xl p-8 text-center cursor-pointer hover:border-primary/50 transition-all flex flex-col items-center justify-center min-h-[300px] group relative"
+      >
+        <input type="file" id="file-input-a" class="hidden" accept="image/*" />
+        <div class="w-14 h-14 rounded-full bg-surface-cream-strong flex items-center justify-center text-primary mb-3 shadow-xs group-hover:scale-105 transition-transform">
+          <span class="font-serif text-xl font-bold">A</span>
+        </div>
+        <h3 class="font-serif text-xl text-ink font-normal mb-1">Select Image A</h3>
+        <p class="text-xs text-muted max-w-xs mb-3">Original, baseline, or first screenshot (Click or Drag & Drop)</p>
+        <span class="badge-pill !text-[10px] font-mono">PNG, JPG, WebP</span>
+      </div>
+
+      <!-- Image B Slot -->
+      <div
+        id="drop-zone-b"
+        class="bg-surface-card border-2 border-dashed border-hairline rounded-2xl p-8 text-center cursor-pointer hover:border-primary/50 transition-all flex flex-col items-center justify-center min-h-[300px] group relative"
+      >
+        <input type="file" id="file-input-b" class="hidden" accept="image/*" />
+        <div class="w-14 h-14 rounded-full bg-surface-cream-strong flex items-center justify-center text-primary mb-3 shadow-xs group-hover:scale-105 transition-transform">
+          <span class="font-serif text-xl font-bold">B</span>
+        </div>
+        <h3 class="font-serif text-xl text-ink font-normal mb-1">Select Image B</h3>
+        <p class="text-xs text-muted max-w-xs mb-3">Modified, suspect, or second screenshot (Click or Drag & Drop)</p>
+        <span class="badge-pill !text-[10px] font-mono">PNG, JPG, WebP</span>
+      </div>
+    </div>
+
+    <!-- Active Comparison Studio -->
+    <div id="compare-active-workspace" class="hidden space-y-6">
+      <!-- Toolbar & Mode Selector -->
+      <div class="bg-surface-card border border-hairline rounded-2xl p-3 sm:p-4 flex flex-wrap items-center justify-between gap-4 shadow-xs">
+        <!-- Comparison Mode Tabs -->
+        <div class="flex items-center gap-1.5 flex-wrap" id="compare-mode-buttons" role="tablist">
+          <button type="button" data-compare-mode="side-by-side" class="compare-mode-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-surface-cream-strong text-primary border border-hairline transition-all">
+            Side by Side
+          </button>
+          <button type="button" data-compare-mode="overlay" class="compare-mode-btn px-3 py-1.5 rounded-xl text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+            Interactive Overlay
+          </button>
+          <button type="button" data-compare-mode="flicker" class="compare-mode-btn px-3 py-1.5 rounded-xl text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+            Flicker
+          </button>
+          <button type="button" data-compare-mode="diff" class="compare-mode-btn px-3 py-1.5 rounded-xl text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+            Difference Map
+          </button>
+          <button type="button" data-compare-mode="semantic" class="compare-mode-btn px-3 py-1.5 rounded-xl text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+            AI Analysis
+          </button>
+          <button type="button" data-compare-mode="game" class="compare-mode-btn px-3 py-1.5 rounded-xl text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+            Game Mode 🎮
+          </button>
+        </div>
+
+        <!-- Mode Specific Context Controls -->
+        <div class="flex items-center gap-3 flex-wrap text-xs">
+          <!-- Flicker speed -->
+          <div id="flicker-controls" class="hidden flex items-center gap-2 bg-canvas px-2.5 py-1 rounded-xl border border-hairline">
+            <span class="text-muted font-mono text-[11px]">Speed:</span>
+            <button type="button" class="flicker-speed-btn px-2 py-0.5 rounded text-[11px] font-mono text-body" data-speed="1000">Slow</button>
+            <button type="button" class="flicker-speed-btn px-2 py-0.5 rounded text-[11px] font-mono bg-surface-cream-strong text-primary font-bold" data-speed="500">Med</button>
+            <button type="button" class="flicker-speed-btn px-2 py-0.5 rounded text-[11px] font-mono text-body" data-speed="250">Fast</button>
+            <button type="button" id="flicker-toggle-pause" class="btn-secondary !text-[11px] !py-0.5 !px-2 ml-1">Pause</button>
+          </div>
+
+          <!-- Difference Map Visualization & Sensitivity Controls -->
+          <div id="diff-map-controls" class="hidden flex items-center gap-3 flex-wrap">
+            <div class="flex items-center gap-1 bg-canvas px-2 py-1 rounded-xl border border-hairline">
+              <span class="text-muted font-mono text-[11px] mr-1">View:</span>
+              <button type="button" class="diff-vis-btn px-2 py-0.5 rounded text-[11px] font-mono bg-surface-cream-strong text-primary font-bold" data-vis="heatmap">Heatmap</button>
+              <button type="button" class="diff-vis-btn px-2 py-0.5 rounded text-[11px] font-mono text-body" data-vis="boxes">Boxes</button>
+              <button type="button" class="diff-vis-btn px-2 py-0.5 rounded text-[11px] font-mono text-body" data-vis="clean">Clean</button>
+            </div>
+
+            <div class="flex items-center gap-1 bg-canvas px-2 py-1 rounded-xl border border-hairline">
+              <span class="text-muted font-mono text-[11px] mr-1">Filter:</span>
+              <button type="button" class="diff-sens-btn px-2 py-0.5 rounded text-[11px] font-mono text-body" data-sens="low">Low (Noise Filter)</button>
+              <button type="button" class="diff-sens-btn px-2 py-0.5 rounded text-[11px] font-mono bg-surface-cream-strong text-primary font-bold" data-sens="medium">Med</button>
+              <button type="button" class="diff-sens-btn px-2 py-0.5 rounded text-[11px] font-mono text-body" data-sens="high">High</button>
+            </div>
+          </div>
+
+          <!-- Game HUD Quick Bar -->
+          <div id="game-controls" class="hidden flex items-center gap-3 flex-wrap">
+            <div class="flex items-center gap-2 bg-canvas px-3 py-1 rounded-xl border border-hairline font-mono text-xs">
+              <span class="text-muted">Target:</span>
+              <select id="game-target-select" class="bg-transparent text-ink font-bold focus:outline-none cursor-pointer">
+                <option value="5">5 Differences</option>
+                <option value="10">10 Differences</option>
+                <option value="15">15 Differences</option>
+                <option value="all">All Differences</option>
+              </select>
+            </div>
+            <button type="button" id="game-hint-btn" class="btn-secondary !text-xs !py-1 !px-3 inline-flex items-center gap-1">
+              <span>💡 Hint</span>
+            </button>
+            <button type="button" id="game-restart-btn" class="btn-secondary !text-xs !py-1 !px-2.5">
+              <span>Restart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Workspace Grid (Viewport + Optional Analysis Drawer) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <!-- Main Comparison Viewport Column -->
+        <div id="viewport-column" class="lg:col-span-12 space-y-4 transition-all duration-300">
+          <!-- Floating Image Controls Toolbar -->
+          <div class="flex items-center justify-between bg-surface-card border border-hairline rounded-xl px-3 py-2 text-xs font-mono">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <button type="button" id="ctrl-zoom-out" class="p-1.5 hover:bg-canvas rounded text-body hover:text-ink transition-colors" title="Zoom Out (-)">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+              </button>
+              <span id="zoom-level-text" class="px-2 py-0.5 bg-canvas border border-hairline rounded text-[11px] font-bold">100%</span>
+              <button type="button" id="ctrl-zoom-in" class="p-1.5 hover:bg-canvas rounded text-body hover:text-ink transition-colors" title="Zoom In (+)">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              </button>
+              <button type="button" id="ctrl-zoom-fit" class="px-2 py-1 hover:bg-canvas rounded text-[11px] text-body hover:text-ink transition-colors" title="Fit to Screen (0)">Fit</button>
+              <button type="button" id="ctrl-zoom-100" class="px-2 py-1 hover:bg-canvas rounded text-[11px] text-body hover:text-ink transition-colors">100%</button>
+              <button type="button" id="ctrl-zoom-200" class="px-2 py-1 hover:bg-canvas rounded text-[11px] text-body hover:text-ink transition-colors">200%</button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <label class="flex items-center gap-1.5 cursor-pointer select-none text-[11px] text-muted hover:text-ink">
+                <input type="checkbox" id="ctrl-sync-view" checked class="accent-primary rounded" />
+                <span>Sync View</span>
+              </label>
+              <button type="button" id="ctrl-fullscreen" class="p-1.5 hover:bg-canvas rounded text-body hover:text-ink transition-colors" title="Fullscreen (F)">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5h-4m4 0v4m0-4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+              </button>
+              <button type="button" id="ctrl-reset-view" class="px-2 py-1 hover:bg-canvas rounded text-[11px] text-body hover:text-ink transition-colors" title="Reset View (R)">Reset</button>
+            </div>
+          </div>
+
+          <!-- VIEW 1: Side by Side -->
+          <div id="view-side-by-side" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Slot A -->
+            <div class="bg-surface-card border border-hairline rounded-2xl p-4 space-y-3">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <div class="flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-surface-cream-strong flex items-center justify-center font-bold text-primary text-[11px]">A</span>
+                  <span class="font-semibold text-ink">Image A (Baseline)</span>
+                </div>
+                <span id="meta-dim-a" class="text-[11px] text-muted">-</span>
+              </div>
+              <div class="bg-surface-dark-soft rounded-xl overflow-hidden flex items-center justify-center min-h-[380px] max-h-[560px] p-2 relative group comparison-pan-container" id="pan-container-a">
+                <img id="img-preview-a" src="" alt="Image A" class="max-h-[540px] w-auto object-contain transition-transform origin-center select-none" />
+                <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button type="button" id="btn-replace-a" class="btn-secondary !text-[10px] !py-1 !px-2 shadow-md bg-surface-card/90">Replace Image A</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Slot B -->
+            <div class="bg-surface-card border border-hairline rounded-2xl p-4 space-y-3">
+              <div class="flex items-center justify-between text-xs font-mono">
+                <div class="flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-surface-cream-strong flex items-center justify-center font-bold text-primary text-[11px]">B</span>
+                  <span class="font-semibold text-ink">Image B (Modified)</span>
+                </div>
+                <span id="meta-dim-b" class="text-[11px] text-muted">-</span>
+              </div>
+              <div class="bg-surface-dark-soft rounded-xl overflow-hidden flex items-center justify-center min-h-[380px] max-h-[560px] p-2 relative group comparison-pan-container" id="pan-container-b">
+                <img id="img-preview-b" src="" alt="Image B" class="max-h-[540px] w-auto object-contain transition-transform origin-center select-none" />
+                <div class="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button type="button" id="btn-replace-b" class="btn-secondary !text-[10px] !py-1 !px-2 shadow-md bg-surface-card/90">Replace Image B</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW 2: Interactive Draggable Split Overlay -->
+          <div id="view-overlay" class="hidden bg-surface-card border border-hairline rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <div class="flex items-center gap-2">
+                <span class="badge-pill !text-[10px]">Split Slider</span>
+                <span class="text-muted">Drag divider to reveal Image A / Image B</span>
+              </div>
+              <span id="overlay-pos-label" class="text-muted text-[11px]">50% Split</span>
+            </div>
+            <div class="bg-surface-dark-soft rounded-xl overflow-hidden flex items-center justify-center min-h-[420px] max-h-[620px] p-2 relative select-none" id="overlay-viewport">
+              <div class="relative max-h-[600px] w-full flex items-center justify-center" id="overlay-stage-wrapper">
+                <canvas id="overlay-canvas-bottom" class="max-h-[600px] w-auto object-contain"></canvas>
+                <div id="overlay-top-clip" class="absolute inset-0 overflow-hidden flex items-center justify-center pointer-events-none" style="clip-path: inset(0 0 0 50%);">
+                  <canvas id="overlay-canvas-top" class="max-h-[600px] w-auto object-contain"></canvas>
+                </div>
+                <!-- Draggable Divider Line & Handle -->
+                <div id="overlay-handle-line" class="absolute top-0 bottom-0 w-0.5 bg-primary cursor-ew-resize z-20 flex items-center justify-center" style="left: 50%;">
+                  <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-xs shadow-lg font-mono select-none">
+                    ◂▸
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- VIEW 3: Flicker Viewport -->
+          <div id="view-flicker" class="hidden bg-surface-card border border-hairline rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <div class="flex items-center gap-2">
+                <span class="badge-pill !text-[10px]">Flicker Mode</span>
+                <span id="flicker-active-frame" class="text-primary font-bold">Showing: Image A</span>
+              </div>
+              <span class="text-muted text-[11px]">Press Space to Toggle</span>
+            </div>
+            <div class="bg-surface-dark-soft rounded-xl overflow-hidden flex items-center justify-center min-h-[420px] max-h-[620px] p-2 select-none">
+              <canvas id="flicker-canvas" class="max-h-[600px] w-auto object-contain shadow-md rounded"></canvas>
+            </div>
+          </div>
+
+          <!-- VIEW 4: Difference Map Viewport -->
+          <div id="view-diff-map" class="hidden bg-surface-card border border-hairline rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <div class="flex items-center gap-2">
+                <span class="badge-pill !text-[10px]">Difference Forensic Map</span>
+                <span id="diff-summary-badge" class="text-muted">-</span>
+              </div>
+              <span class="text-muted text-[11px]">Click any highlighted box to inspect</span>
+            </div>
+            <div class="bg-surface-dark-soft rounded-xl overflow-hidden flex items-center justify-center min-h-[420px] max-h-[620px] p-2 relative select-none">
+              <canvas id="diff-map-canvas" class="max-h-[600px] w-auto object-contain shadow-md rounded cursor-crosshair"></canvas>
+            </div>
+          </div>
+
+          <!-- VIEW 5: Spot-the-Difference Game Viewport -->
+          <div id="view-game" class="hidden bg-surface-card border border-hairline rounded-2xl p-4 space-y-3">
+            <!-- Game HUD Header -->
+            <div class="flex items-center justify-between bg-canvas border border-hairline rounded-xl p-3 text-xs font-mono flex-wrap gap-3">
+              <div class="flex items-center gap-4">
+                <div>
+                  <span class="text-[10px] text-muted block uppercase">Found</span>
+                  <span id="game-stat-found" class="text-base font-bold text-success">0 / 5</span>
+                </div>
+                <div class="h-6 w-px bg-hairline"></div>
+                <div>
+                  <span class="text-[10px] text-muted block uppercase">Time</span>
+                  <span id="game-stat-time" class="text-base font-bold text-ink">00:00</span>
+                </div>
+                <div class="h-6 w-px bg-hairline"></div>
+                <div>
+                  <span class="text-[10px] text-muted block uppercase">Score</span>
+                  <span id="game-stat-score" class="text-base font-bold text-primary">0</span>
+                </div>
+              </div>
+
+              <div id="game-hint-toast" class="hidden text-xs px-3 py-1 bg-surface-cream-strong text-primary rounded-lg border border-hairline animate-pulse">
+                💡 Hint: Look near the header area
+              </div>
+            </div>
+
+            <div class="bg-surface-dark-soft rounded-xl overflow-hidden flex items-center justify-center min-h-[420px] max-h-[620px] p-2 relative select-none cursor-pointer" id="game-canvas-container">
+              <canvas id="game-canvas" class="max-h-[600px] w-auto object-contain shadow-md rounded"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Semantic AI Analysis Sidebar / Drawer Column -->
+        <div id="analysis-sidebar-column" class="hidden lg:col-span-4 space-y-4">
+          <div class="bg-surface-card border border-hairline rounded-2xl p-5 space-y-5 sticky top-6 shadow-xs">
+            <div class="flex items-center justify-between pb-3 border-b border-hairline">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <h3 class="font-serif text-lg text-ink font-normal">Visual Analysis</h3>
+              </div>
+              <span id="sidebar-similarity-badge" class="badge-pill !text-xs font-mono font-bold">94% Match</span>
+            </div>
+
+            <!-- Metric Summary Breakdown -->
+            <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+              <div class="bg-canvas p-2.5 rounded-xl border border-hairline">
+                <span class="text-[10px] text-muted block">Differences</span>
+                <span id="stat-total-diffs" class="text-lg font-bold text-ink">0</span>
+              </div>
+              <div class="bg-canvas p-2.5 rounded-xl border border-hairline">
+                <span class="text-[10px] text-muted block">Noise Filtered</span>
+                <span id="stat-noise-filtered" class="text-lg font-bold text-muted">0 px</span>
+              </div>
+            </div>
+
+            <!-- Categories Pill List -->
+            <div class="space-y-1.5">
+              <span class="text-[10px] text-muted uppercase font-mono tracking-wider block">Category Breakdown</span>
+              <div id="category-pills-list" class="flex flex-wrap gap-1.5 text-xs font-mono">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- OCR Text Changes (if detected) -->
+            <div id="ocr-diffs-container" class="hidden space-y-2 pt-2 border-t border-hairline">
+              <span class="text-[10px] text-muted uppercase font-mono tracking-wider block">Text Alterations</span>
+              <div id="ocr-diffs-list" class="space-y-2 text-xs">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Semantic Difference Cards List -->
+            <div class="space-y-2 pt-2 border-t border-hairline max-h-[380px] overflow-y-auto pr-1" id="difference-cards-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Completion Celebration Modal -->
+    <div id="game-celebration-modal" class="hidden fixed inset-0 bg-ink/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+      <div class="bg-surface-card border border-hairline rounded-3xl p-6 sm:p-8 max-w-md w-full text-center space-y-5 shadow-2xl animate-scale-up">
+        <div class="w-16 h-16 rounded-full bg-surface-cream-strong text-primary flex items-center justify-center text-3xl mx-auto shadow-xs">
+          🎉
+        </div>
+        <div class="space-y-1.5">
+          <span class="badge-pill !text-xs font-mono font-semibold">Puzzle Solved</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal">You Found Them All!</h2>
+          <p class="text-xs text-muted">All visual differences were identified successfully.</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 bg-canvas p-4 rounded-2xl border border-hairline text-xs font-mono text-left">
+          <div>
+            <span class="text-muted block text-[10px]">Time Taken:</span>
+            <span id="modal-stat-time" class="font-bold text-ink text-sm">01:45</span>
+          </div>
+          <div>
+            <span class="text-muted block text-[10px]">Final Score:</span>
+            <span id="modal-stat-score" class="font-bold text-primary text-sm">9,450</span>
+          </div>
+          <div>
+            <span class="text-muted block text-[10px]">Wrong Clicks:</span>
+            <span id="modal-stat-wrong" class="font-bold text-error text-sm">1</span>
+          </div>
+          <div>
+            <span class="text-muted block text-[10px]">Hints Used:</span>
+            <span id="modal-stat-hints" class="font-bold text-body text-sm">0</span>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <button type="button" id="modal-play-again-btn" class="btn-primary w-full text-xs py-2.5">
+            <span>Play Again</span>
+          </button>
+          <button type="button" id="modal-inspect-btn" class="btn-secondary w-full text-xs py-2.5">
+            <span>Inspect Forensics</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</div>
+
+<script>
+  import { normalizeImages, type AlignmentStrategy } from '../../lib/comparison/imageNormalizer';
+  import { analyzeVisualDifferences } from '../../lib/comparison/semanticDifferenceEngine';
+  import { computePixelDifferences } from '../../lib/comparison/pixelDifferenceEngine';
+  import { SpotDifferenceGameEngine } from '../../lib/comparison/gameEngine';
+  import type {
+    ComparisonMode,
+    DifferenceSensitivity,
+    DiffVisualizationType,
+    ComparisonAnalysisResult,
+    DifferenceRegion,
+  } from '../../lib/comparison/types';
+
+  let imageAUrl = '';
+  let imageBUrl = '';
+  let imgA: HTMLImageElement | null = null;
+  let imgB: HTMLImageElement | null = null;
+
+  let currentMode: ComparisonMode = 'side-by-side';
+  let alignStrategy: AlignmentStrategy = 'auto';
+  let diffSensitivity: DifferenceSensitivity = 'medium';
+  let diffVisType: DiffVisualizationType = 'heatmap';
+
+  let zoomScale = 1;
+  let syncView = true;
+  let panX = 0, panY = 0;
+
+  let analysisResult: ComparisonAnalysisResult | null = null;
+  let gameEngine: SpotDifferenceGameEngine | null = null;
+
+  let flickerInterval: any = null;
+  let flickerSpeed = 500;
+  let flickerFrame = 0; // 0 = A, 1 = B
+  let isFlickerPaused = false;
+
+  let overlaySplitRatio = 0.5;
+  let isDraggingOverlay = false;
+
+  // DOM Elements
+  const dropZoneA = document.getElementById('drop-zone-a');
+  const dropZoneB = document.getElementById('drop-zone-b');
+  const fileInputA = document.getElementById('file-input-a') as HTMLInputElement | null;
+  const fileInputB = document.getElementById('file-input-b') as HTMLInputElement | null;
+  const uploadContainer = document.getElementById('compare-upload-container');
+  const activeWorkspace = document.getElementById('compare-active-workspace');
+
+  const previewA = document.getElementById('img-preview-a') as HTMLImageElement | null;
+  const previewB = document.getElementById('img-preview-b') as HTMLImageElement | null;
+  const metaDimA = document.getElementById('meta-dim-a');
+  const metaDimB = document.getElementById('meta-dim-b');
+
+  const viewSideBySide = document.getElementById('view-side-by-side');
+  const viewOverlay = document.getElementById('view-overlay');
+  const viewFlicker = document.getElementById('view-flicker');
+  const viewDiffMap = document.getElementById('view-diff-map');
+  const viewGame = document.getElementById('view-game');
+
+  const overlayCanvasBottom = document.getElementById('overlay-canvas-bottom') as HTMLCanvasElement | null;
+  const overlayCanvasTop = document.getElementById('overlay-canvas-top') as HTMLCanvasElement | null;
+  const overlayTopClip = document.getElementById('overlay-top-clip');
+  const overlayHandleLine = document.getElementById('overlay-handle-line');
+  const overlayPosLabel = document.getElementById('overlay-pos-label');
+  const overlayStageWrapper = document.getElementById('overlay-stage-wrapper');
+
+  const flickerCanvas = document.getElementById('flicker-canvas') as HTMLCanvasElement | null;
+  const flickerActiveFrame = document.getElementById('flicker-active-frame');
+  const flickerControls = document.getElementById('flicker-controls');
+  const flickerTogglePause = document.getElementById('flicker-toggle-pause');
+
+  const diffMapCanvas = document.getElementById('diff-map-canvas') as HTMLCanvasElement | null;
+  const diffMapControls = document.getElementById('diff-map-controls');
+  const diffSummaryBadge = document.getElementById('diff-summary-badge');
+
+  const gameCanvas = document.getElementById('game-canvas') as HTMLCanvasElement | null;
+  const gameControls = document.getElementById('game-controls');
+  const gameStatFound = document.getElementById('game-stat-found');
+  const gameStatTime = document.getElementById('game-stat-time');
+  const gameStatScore = document.getElementById('game-stat-score');
+  const gameHintToast = document.getElementById('game-hint-toast');
+
+  const viewportColumn = document.getElementById('viewport-column');
+  const analysisSidebarColumn = document.getElementById('analysis-sidebar-column');
+
+  const zoomLevelText = document.getElementById('zoom-level-text');
+  const ctrlSyncView = document.getElementById('ctrl-sync-view') as HTMLInputElement | null;
+
+  // Initialize
+  function checkBothLoaded() {
+    if (imageAUrl && imageBUrl) {
+      uploadContainer?.classList.add('hidden');
+      activeWorkspace?.classList.remove('hidden');
+
+      imgA = new Image();
+      imgA.crossOrigin = 'anonymous';
+      imgA.src = imageAUrl;
+
+      imgB = new Image();
+      imgB.crossOrigin = 'anonymous';
+      imgB.src = imageBUrl;
+
+      if (previewA) previewA.src = imageAUrl;
+      if (previewB) previewB.src = imageBUrl;
+
+      Promise.all([
+        new Promise((r) => (imgA!.onload = r)),
+        new Promise((r) => (imgB!.onload = r)),
+      ]).then(() => {
+        if (metaDimA) metaDimA.innerText = `${imgA!.naturalWidth} × ${imgA!.naturalHeight} px`;
+        if (metaDimB) metaDimB.innerText = `${imgB!.naturalWidth} × ${imgB!.naturalHeight} px`;
+        runFullAnalysis();
+        switchMode(currentMode);
+      });
+    }
+  }
+
+  function runFullAnalysis() {
+    if (!imgA || !imgB) return;
+    const pair = normalizeImages(imgA, imgB, alignStrategy);
+    analysisResult = analyzeVisualDifferences(pair.ctxA, pair.ctxB, pair.width, pair.height, '', '', diffSensitivity);
+    renderSidebarAnalysis(analysisResult);
+  }
+
+  function switchMode(mode: ComparisonMode) {
+    currentMode = mode;
+
+    // Update tab button styles
+    document.querySelectorAll('.compare-mode-btn').forEach((btn) => {
+      if (btn.getAttribute('data-compare-mode') === mode) {
+        btn.className = 'compare-mode-btn px-3 py-1.5 rounded-xl text-xs font-semibold bg-surface-cream-strong text-primary border border-hairline transition-all';
+      } else {
+        btn.className = 'compare-mode-btn px-3 py-1.5 rounded-xl text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all';
+      }
+    });
+
+    // Hide all viewports
+    viewSideBySide?.classList.add('hidden');
+    viewOverlay?.classList.add('hidden');
+    viewFlicker?.classList.add('hidden');
+    viewDiffMap?.classList.add('hidden');
+    viewGame?.classList.add('hidden');
+
+    // Context controls
+    flickerControls?.classList.add('hidden');
+    diffMapControls?.classList.add('hidden');
+    gameControls?.classList.add('hidden');
+
+    stopFlicker();
+    if (gameEngine) gameEngine.stop();
+
+    // Show sidebar if in semantic mode or toggle column width
+    if (mode === 'semantic') {
+      viewportColumn?.classList.remove('lg:col-span-12');
+      viewportColumn?.classList.add('lg:col-span-8');
+      analysisSidebarColumn?.classList.remove('hidden');
+    } else {
+      viewportColumn?.classList.remove('lg:col-span-8');
+      viewportColumn?.classList.add('lg:col-span-12');
+      analysisSidebarColumn?.classList.add('hidden');
+    }
+
+    if (mode === 'side-by-side' || mode === 'semantic') {
+      viewSideBySide?.classList.remove('hidden');
+    } else if (mode === 'overlay') {
+      viewOverlay?.classList.remove('hidden');
+      renderOverlay();
+    } else if (mode === 'flicker') {
+      viewFlicker?.classList.remove('hidden');
+      flickerControls?.classList.remove('hidden');
+      startFlicker();
+    } else if (mode === 'diff') {
+      viewDiffMap?.classList.remove('hidden');
+      diffMapControls?.classList.remove('hidden');
+      renderDiffMap();
+    } else if (mode === 'game') {
+      viewGame?.classList.remove('hidden');
+      gameControls?.classList.remove('hidden');
+      initGameMode();
+    }
+  }
+
+  // Overlay Split View
+  function renderOverlay() {
+    if (!imgA || !imgB || !overlayCanvasBottom || !overlayCanvasTop) return;
+    const pair = normalizeImages(imgA, imgB, alignStrategy);
+
+    overlayCanvasBottom.width = pair.width;
+    overlayCanvasBottom.height = pair.height;
+    const ctxBottom = overlayCanvasBottom.getContext('2d')!;
+    ctxBottom.drawImage(pair.canvasA, 0, 0);
+
+    overlayCanvasTop.width = pair.width;
+    overlayCanvasTop.height = pair.height;
+    const ctxTop = overlayCanvasTop.getContext('2d')!;
+    ctxTop.drawImage(pair.canvasB, 0, 0);
+
+    updateOverlaySplit(overlaySplitRatio);
+  }
+
+  function updateOverlaySplit(ratio: number) {
+    overlaySplitRatio = Math.max(0, Math.min(1, ratio));
+    const pct = Math.round(overlaySplitRatio * 100);
+
+    if (overlayTopClip) {
+      overlayTopClip.style.clipPath = `inset(0 0 0 ${pct}%)`;
+    }
+    if (overlayHandleLine) {
+      overlayHandleLine.style.left = `${pct}%`;
+    }
+    if (overlayPosLabel) {
+      overlayPosLabel.innerText = `${pct}% Split`;
+    }
+  }
+
+  // Flicker Mode
+  function startFlicker() {
+    if (!imgA || !imgB || !flickerCanvas) return;
+    const pair = normalizeImages(imgA, imgB, alignStrategy);
+    flickerCanvas.width = pair.width;
+    flickerCanvas.height = pair.height;
+    const ctx = flickerCanvas.getContext('2d')!;
+
+    flickerFrame = 0;
+    isFlickerPaused = false;
+    if (flickerTogglePause) flickerTogglePause.innerText = 'Pause';
+
+    function tick() {
+      if (isFlickerPaused) return;
+      ctx.clearRect(0, 0, pair.width, pair.height);
+      if (flickerFrame === 0) {
+        ctx.drawImage(pair.canvasA, 0, 0);
+        if (flickerActiveFrame) flickerActiveFrame.innerText = 'Showing: Image A (Baseline)';
+        flickerFrame = 1;
+      } else {
+        ctx.drawImage(pair.canvasB, 0, 0);
+        if (flickerActiveFrame) flickerActiveFrame.innerText = 'Showing: Image B (Modified)';
+        flickerFrame = 0;
+      }
+    }
+
+    tick();
+    if (flickerInterval) clearInterval(flickerInterval);
+    flickerInterval = setInterval(tick, flickerSpeed);
+  }
+
+  function stopFlicker() {
+    if (flickerInterval) {
+      clearInterval(flickerInterval);
+      flickerInterval = null;
+    }
+  }
+
+  // Difference Forensic Map
+  function renderDiffMap() {
+    if (!imgA || !imgB || !diffMapCanvas) return;
+    const pair = normalizeImages(imgA, imgB, alignStrategy);
+    diffMapCanvas.width = pair.width;
+    diffMapCanvas.height = pair.height;
+    const ctx = diffMapCanvas.getContext('2d')!;
+
+    if (!analysisResult) {
+      analysisResult = analyzeVisualDifferences(pair.ctxA, pair.ctxB, pair.width, pair.height, '', '', diffSensitivity);
+    }
+
+    if (diffSummaryBadge) {
+      diffSummaryBadge.innerText = `${analysisResult.totalDifferencesCount} difference regions (${analysisResult.similarityScore}% match)`;
+    }
+
+    ctx.clearRect(0, 0, pair.width, pair.height);
+
+    if (diffVisType === 'clean') {
+      ctx.drawImage(pair.canvasA, 0, 0);
+    } else {
+      // Re-run pixel difference to draw heatmap
+      const pDiff = computePixelDifferences(pair.ctxA, pair.ctxB, pair.width, pair.height, diffSensitivity);
+      ctx.putImageData(pDiff.diffHeatmapData, 0, 0);
+    }
+
+    // Draw bounding boxes if requested
+    if (diffVisType === 'boxes' || diffVisType === 'heatmap') {
+      for (const region of analysisResult.regions) {
+        const { box } = region;
+        ctx.strokeStyle = region.category === 'Text Changed' ? '#e11d48' : '#2563eb';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(box.pixelX, box.pixelY, box.pixelWidth, box.pixelHeight);
+
+        // Badge label
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+        ctx.fillRect(box.pixelX, Math.max(0, box.pixelY - 18), 24, 18);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '10px monospace';
+        ctx.fillText(String(region.index + 1).padStart(2, '0'), box.pixelX + 4, Math.max(12, box.pixelY - 5));
+      }
+    }
+  }
+
+  // Spot-the-Difference Game Mode
+  function initGameMode() {
+    if (!imgA || !imgB || !gameCanvas) return;
+    const pair = normalizeImages(imgA, imgB, alignStrategy);
+    gameCanvas.width = pair.width;
+    gameCanvas.height = pair.height;
+
+    if (!analysisResult) {
+      analysisResult = analyzeVisualDifferences(pair.ctxA, pair.ctxB, pair.width, pair.height, '', '', diffSensitivity);
+    }
+
+    const targetVal = (document.getElementById('game-target-select') as HTMLSelectElement)?.value || '5';
+    const targetCount = targetVal === 'all' ? analysisResult.regions.length : parseInt(targetVal, 10);
+
+    gameEngine = new SpotDifferenceGameEngine(analysisResult.regions, targetCount, (state) => {
+      if (gameStatFound) gameStatFound.innerText = `${state.foundCount} / ${state.targetCount}`;
+      if (gameStatScore) gameStatScore.innerText = state.score.toLocaleString();
+
+      const mins = String(Math.floor(state.elapsedSeconds / 60)).padStart(2, '0');
+      const secs = String(state.elapsedSeconds % 60).padStart(2, '0');
+      if (gameStatTime) gameStatTime.innerText = `${mins}:${secs}`;
+
+      if (state.activeHint && gameHintToast) {
+        gameHintToast.innerText = `💡 ${state.activeHint.text}`;
+        gameHintToast.classList.remove('hidden');
+      }
+
+      renderGameCanvas();
+
+      if (state.isCompleted) {
+        showCelebrationModal(state);
+      }
+    });
+
+    gameEngine.start();
+    renderGameCanvas();
+  }
+
+  function renderGameCanvas() {
+    if (!imgA || !imgB || !gameCanvas || !gameEngine || !analysisResult) return;
+    const pair = normalizeImages(imgA, imgB, alignStrategy);
+    const ctx = gameCanvas.getContext('2d')!;
+    const state = gameEngine.getState();
+
+    ctx.clearRect(0, 0, pair.width, pair.height);
+    ctx.drawImage(pair.canvasB, 0, 0);
+
+    // Draw discovered regions with green target rings
+    for (const id of state.discoveredRegionIds) {
+      const region = analysisResult.regions.find((r) => r.id === id);
+      if (!region) continue;
+
+      ctx.save();
+      ctx.strokeStyle = '#16a34a';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      const cx = region.box.pixelX + region.box.pixelWidth / 2;
+      const cy = region.box.pixelY + region.box.pixelHeight / 2;
+      const radius = Math.max(20, Math.max(region.box.pixelWidth, region.box.pixelHeight) / 2 + 8);
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.fillStyle = '#16a34a';
+      ctx.font = 'bold 12px monospace';
+      ctx.fillText('✓ FOUND', cx - 24, cy - radius - 6);
+      ctx.restore();
+    }
+
+    // Draw active hint if Level 3 (exact box) or Level 1 (pulse broad area)
+    if (state.activeHint?.exactBox && state.activeHint.level === 3) {
+      ctx.save();
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 3;
+      ctx.setLineDash([6, 6]);
+      ctx.strokeRect(
+        state.activeHint.exactBox.pixelX,
+        state.activeHint.exactBox.pixelY,
+        state.activeHint.exactBox.pixelWidth,
+        state.activeHint.exactBox.pixelHeight
+      );
+      ctx.restore();
+    }
+  }
+
+  function showCelebrationModal(state: any) {
+    const modal = document.getElementById('game-celebration-modal');
+    if (!modal) return;
+
+    const mins = String(Math.floor(state.elapsedSeconds / 60)).padStart(2, '0');
+    const secs = String(state.elapsedSeconds % 60).padStart(2, '0');
+
+    const mTime = document.getElementById('modal-stat-time');
+    const mScore = document.getElementById('modal-stat-score');
+    const mWrong = document.getElementById('modal-stat-wrong');
+    const mHints = document.getElementById('modal-stat-hints');
+
+    if (mTime) mTime.innerText = `${mins}:${secs}`;
+    if (mScore) mScore.innerText = state.score.toLocaleString();
+    if (mWrong) mWrong.innerText = String(state.wrongClicks);
+    if (mHints) mHints.innerText = String(state.hintsUsed);
+
+    modal.classList.remove('hidden');
+  }
+
+  // Sidebar Renderer
+  function renderSidebarAnalysis(res: ComparisonAnalysisResult) {
+    const simBadge = document.getElementById('sidebar-similarity-badge');
+    const totalDiffs = document.getElementById('stat-total-diffs');
+    const noiseFiltered = document.getElementById('stat-noise-filtered');
+    const pillsList = document.getElementById('category-pills-list');
+    const cardsList = document.getElementById('difference-cards-list');
+
+    if (simBadge) simBadge.innerText = `${res.similarityScore}% Match`;
+    if (totalDiffs) totalDiffs.innerText = String(res.totalDifferencesCount);
+    if (noiseFiltered) noiseFiltered.innerText = `${res.noiseFilteredCount.toLocaleString()} px`;
+
+    if (pillsList) {
+      pillsList.innerHTML = Object.entries(res.categoryCounts)
+        .filter(([_, count]) => count > 0)
+        .map(
+          ([cat, count]) =>
+            `<span class="badge-pill !text-[10px] font-mono">${cat}: <strong>${count}</strong></span>`
+        )
+        .join('');
+    }
+
+    if (cardsList) {
+      if (res.regions.length === 0) {
+        cardsList.innerHTML = `<div class="text-center py-6 text-xs text-muted font-mono">No visual differences detected.</div>`;
+      } else {
+        cardsList.innerHTML = res.regions
+          .map(
+            (r) => `
+          <div class="bg-canvas border border-hairline rounded-xl p-3 space-y-2 hover:border-primary/50 transition-colors group">
+            <div class="flex items-center justify-between text-xs font-mono">
+              <span class="font-bold text-ink">#${String(r.index + 1).padStart(2, '0')}</span>
+              <span class="badge-pill !text-[9px]">${r.category}</span>
+            </div>
+            <p class="text-xs text-body leading-relaxed">${r.description}</p>
+            <div class="flex items-center justify-between pt-1 text-[11px] font-mono text-muted">
+              <span>${r.confidence}% confidence</span>
+              <button type="button" class="btn-show-me text-primary hover:underline font-bold text-xs" data-region-idx="${r.index}">
+                [SHOW ME]
+              </button>
+            </div>
+          </div>
+        `
+          )
+          .join('');
+
+        // Wire SHOW ME buttons
+        document.querySelectorAll('.btn-show-me').forEach((btn) => {
+          btn.addEventListener('click', (e) => {
+            const idx = parseInt((e.currentTarget as HTMLElement).getAttribute('data-region-idx') || '0', 10);
+            focusRegion(idx);
+          });
+        });
+      }
+    }
+  }
+
+  function focusRegion(index: number) {
+    if (!analysisResult || !analysisResult.regions[index]) return;
+    const region = analysisResult.regions[index];
+
+    // Zoom in and center on region
+    zoomScale = 2;
+    applyZoom();
+    switchMode('diff');
+    renderDiffMap();
+  }
+
+  function applyZoom() {
+    if (zoomLevelText) zoomLevelText.innerText = `${Math.round(zoomScale * 100)}%`;
+    if (previewA) previewA.style.transform = `scale(${zoomScale})`;
+    if (previewB) previewB.style.transform = `scale(${zoomScale})`;
+  }
+
+  // Event Listeners: Uploading
+  function handleFileSelect(file: File, isSlotA: boolean) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const url = e.target?.result as string;
+      if (isSlotA) {
+        imageAUrl = url;
+        if (dropZoneA) dropZoneA.innerHTML = `<span class="text-xs font-semibold text-success font-mono">✓ Image A Loaded</span>`;
+      } else {
+        imageBUrl = url;
+        if (dropZoneB) dropZoneB.innerHTML = `<span class="text-xs font-semibold text-success font-mono">✓ Image B Loaded</span>`;
+      }
+      checkBothLoaded();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  dropZoneA?.addEventListener('click', () => fileInputA?.click());
+  dropZoneB?.addEventListener('click', () => fileInputB?.click());
+
+  fileInputA?.addEventListener('change', () => {
+    if (fileInputA.files?.[0]) handleFileSelect(fileInputA.files[0], true);
+  });
+  fileInputB?.addEventListener('change', () => {
+    if (fileInputB.files?.[0]) handleFileSelect(fileInputB.files[0], false);
+  });
+
+  // Drag & Drop
+  [dropZoneA, dropZoneB].forEach((zone, idx) => {
+    zone?.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      zone.classList.add('border-primary');
+    });
+    zone?.addEventListener('dragleave', () => zone.classList.remove('border-primary'));
+    zone?.addEventListener('drop', (e) => {
+      e.preventDefault();
+      zone.classList.remove('border-primary');
+      if (e.dataTransfer?.files?.[0]) {
+        handleFileSelect(e.dataTransfer.files[0], idx === 0);
+      }
+    });
+  });
+
+  // Replace buttons
+  document.getElementById('btn-replace-a')?.addEventListener('click', () => fileInputA?.click());
+  document.getElementById('btn-replace-b')?.addEventListener('click', () => fileInputB?.click());
+
+  // Clipboard Paste Support
+  window.addEventListener('paste', (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.indexOf('image') !== -1) {
+        const blob = items[i].getAsFile();
+        if (blob) {
+          if (!imageAUrl) handleFileSelect(blob, true);
+          else handleFileSelect(blob, false);
+          break;
+        }
+      }
+    }
+  });
+
+  // Mode tabs
+  document.querySelectorAll('.compare-mode-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const mode = (btn.getAttribute('data-compare-mode') || 'side-by-side') as ComparisonMode;
+      switchMode(mode);
+    });
+  });
+
+  // "✨ Explain Differences" action
+  document.getElementById('btn-explain-differences')?.addEventListener('click', () => {
+    switchMode('semantic');
+  });
+
+  // Alignment dropdown
+  const alignBtn = document.getElementById('btn-align-mode');
+  const alignMenu = document.getElementById('align-menu');
+  const alignLabel = document.getElementById('align-label');
+
+  alignBtn?.addEventListener('click', () => alignMenu?.classList.toggle('hidden'));
+  document.querySelectorAll('.align-option').forEach((opt) => {
+    opt.addEventListener('click', (e) => {
+      const target = e.currentTarget as HTMLElement;
+      alignStrategy = (target.getAttribute('data-align') || 'auto') as AlignmentStrategy;
+      if (alignLabel) alignLabel.innerText = target.innerText;
+      alignMenu?.classList.add('hidden');
+      runFullAnalysis();
+      switchMode(currentMode);
+    });
+  });
+
+  // Overlay drag handling
+  overlayStageWrapper?.addEventListener('mousedown', (e) => {
+    isDraggingOverlay = true;
+  });
+  window.addEventListener('mouseup', () => (isDraggingOverlay = false));
+  window.addEventListener('mousemove', (e) => {
+    if (!isDraggingOverlay || !overlayStageWrapper) return;
+    const rect = overlayStageWrapper.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    updateOverlaySplit(ratio);
+  });
+
+  // Touch overlay drag
+  overlayStageWrapper?.addEventListener('touchmove', (e) => {
+    if (!overlayStageWrapper) return;
+    const rect = overlayStageWrapper.getBoundingClientRect();
+    const ratio = (e.touches[0].clientX - rect.left) / rect.width;
+    updateOverlaySplit(ratio);
+  });
+
+  // Flicker controls
+  flickerTogglePause?.addEventListener('click', () => {
+    isFlickerPaused = !isFlickerPaused;
+    if (flickerTogglePause) flickerTogglePause.innerText = isFlickerPaused ? 'Resume' : 'Pause';
+  });
+
+  document.querySelectorAll('.flicker-speed-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.flicker-speed-btn').forEach((b) => (b.className = 'flicker-speed-btn px-2 py-0.5 rounded text-[11px] font-mono text-body'));
+      btn.className = 'flicker-speed-btn px-2 py-0.5 rounded text-[11px] font-mono bg-surface-cream-strong text-primary font-bold';
+      flickerSpeed = parseInt(btn.getAttribute('data-speed') || '500', 10);
+      startFlicker();
+    });
+  });
+
+  // Diff Map controls
+  document.querySelectorAll('.diff-vis-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.diff-vis-btn').forEach((b) => (b.className = 'diff-vis-btn px-2 py-0.5 rounded text-[11px] font-mono text-body'));
+      btn.className = 'diff-vis-btn px-2 py-0.5 rounded text-[11px] font-mono bg-surface-cream-strong text-primary font-bold';
+      diffVisType = (btn.getAttribute('data-vis') || 'heatmap') as DiffVisualizationType;
+      renderDiffMap();
+    });
+  });
+
+  document.querySelectorAll('.diff-sens-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.diff-sens-btn').forEach((b) => (b.className = 'diff-sens-btn px-2 py-0.5 rounded text-[11px] font-mono text-body'));
+      btn.className = 'diff-sens-btn px-2 py-0.5 rounded text-[11px] font-mono bg-surface-cream-strong text-primary font-bold';
+      diffSensitivity = (btn.getAttribute('data-sens') || 'medium') as DifferenceSensitivity;
+      runFullAnalysis();
+      renderDiffMap();
+    });
+  });
+
+  // Game Click & Hints
+  gameCanvas?.addEventListener('click', (e) => {
+    if (!gameEngine || !gameCanvas) return;
+    const rect = gameCanvas.getBoundingClientRect();
+    const relX = (e.clientX - rect.left) / rect.width;
+    const relY = (e.clientY - rect.top) / rect.height;
+    gameEngine.handleClick(relX, relY);
+  });
+
+  document.getElementById('game-hint-btn')?.addEventListener('click', () => {
+    gameEngine?.useHint();
+  });
+
+  document.getElementById('game-restart-btn')?.addEventListener('click', () => {
+    initGameMode();
+  });
+
+  document.getElementById('game-target-select')?.addEventListener('change', () => {
+    initGameMode();
+  });
+
+  // Modal actions
+  document.getElementById('modal-play-again-btn')?.addEventListener('click', () => {
+    document.getElementById('game-celebration-modal')?.classList.add('hidden');
+    initGameMode();
+  });
+
+  document.getElementById('modal-inspect-btn')?.addEventListener('click', () => {
+    document.getElementById('game-celebration-modal')?.classList.add('hidden');
+    switchMode('semantic');
+  });
+
+  // Zoom and Pan controls
+  document.getElementById('ctrl-zoom-in')?.addEventListener('click', () => {
+    zoomScale = Math.min(4, zoomScale + 0.25);
+    applyZoom();
+  });
+  document.getElementById('ctrl-zoom-out')?.addEventListener('click', () => {
+    zoomScale = Math.max(0.5, zoomScale - 0.25);
+    applyZoom();
+  });
+  document.getElementById('ctrl-zoom-fit')?.addEventListener('click', () => {
+    zoomScale = 1;
+    applyZoom();
+  });
+  document.getElementById('ctrl-zoom-100')?.addEventListener('click', () => {
+    zoomScale = 1;
+    applyZoom();
+  });
+  document.getElementById('ctrl-zoom-200')?.addEventListener('click', () => {
+    zoomScale = 2;
+    applyZoom();
+  });
+  document.getElementById('ctrl-reset-view')?.addEventListener('click', () => {
+    zoomScale = 1;
+    applyZoom();
+  });
+
+  // Fullscreen
+  document.getElementById('ctrl-fullscreen')?.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      activeWorkspace?.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  });
+
+  // Keyboard Shortcuts
+  window.addEventListener('keydown', (e) => {
+    if (activeWorkspace?.classList.contains('hidden')) return;
+
+    if (e.key === '+' || e.key === '=') {
+      zoomScale = Math.min(4, zoomScale + 0.25);
+      applyZoom();
+    } else if (e.key === '-' || e.key === '_') {
+      zoomScale = Math.max(0.5, zoomScale - 0.25);
+      applyZoom();
+    } else if (e.key === '0') {
+      zoomScale = 1;
+      applyZoom();
+    } else if (e.key === 'f' || e.key === 'F') {
+      if (!document.fullscreenElement) activeWorkspace?.requestFullscreen();
+      else document.exitFullscreen();
+    } else if (e.key === 'r' || e.key === 'R') {
+      zoomScale = 1;
+      applyZoom();
+    } else if (e.key === ' ' && currentMode === 'flicker') {
+      e.preventDefault();
+      isFlickerPaused = !isFlickerPaused;
+      if (flickerTogglePause) flickerTogglePause.innerText = isFlickerPaused ? 'Resume' : 'Pause';
+    }
+  });
+
+  // Reset comparison
+  document.getElementById('compare-reset-btn')?.addEventListener('click', () => {
+    imageAUrl = '';
+    imageBUrl = '';
+    imgA = null;
+    imgB = null;
+    analysisResult = null;
+    stopFlicker();
+    if (gameEngine) gameEngine.stop();
+
+    activeWorkspace?.classList.add('hidden');
+    uploadContainer?.classList.remove('hidden');
+
+    if (dropZoneA) {
+      dropZoneA.innerHTML = `
+        <input type="file" id="file-input-a" class="hidden" accept="image/*" />
+        <div class="w-14 h-14 rounded-full bg-surface-cream-strong flex items-center justify-center text-primary mb-3 shadow-xs group-hover:scale-105 transition-transform"><span class="font-serif text-xl font-bold">A</span></div>
+        <h3 class="font-serif text-xl text-ink font-normal mb-1">Select Image A</h3>
+        <p class="text-xs text-muted max-w-xs mb-3">Original, baseline, or first screenshot</p>
+        <span class="badge-pill !text-[10px] font-mono">PNG, JPG, WebP</span>
+      `;
+    }
+    if (dropZoneB) {
+      dropZoneB.innerHTML = `
+        <input type="file" id="file-input-b" class="hidden" accept="image/*" />
+        <div class="w-14 h-14 rounded-full bg-surface-cream-strong flex items-center justify-center text-primary mb-3 shadow-xs group-hover:scale-105 transition-transform"><span class="font-serif text-xl font-bold">B</span></div>
+        <h3 class="font-serif text-xl text-ink font-normal mb-1">Select Image B</h3>
+        <p class="text-xs text-muted max-w-xs mb-3">Modified, suspect, or second screenshot</p>
+        <span class="badge-pill !text-[10px] font-mono">PNG, JPG, WebP</span>
+      `;
+    }
+  });
+</script>

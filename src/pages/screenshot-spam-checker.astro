@@ -1,0 +1,37 @@
+---
+import ToolLayout from '../components/ToolLayout.astro';
+
+const props = {
+  title: "Screenshot Spam Checker — Detect Promotional Phrasing & Marketing Triggers",
+  metaDescription: "Analyze screenshots of messages, emails, and social posts for spam density, excessive urgency, repetitive marketing CTAs, and buzzwords.",
+  badge: "Spam & Marketing Analysis",
+  heading: "Check Screenshot Text for Spam Signals",
+  subheading: "Identify aggressive promotional language, un-targeted marketing campaigns, and spam triggers inside message and email screenshots.",
+  howItWorksSteps: [
+    { step: "1", title: "Upload Screenshot", desc: "Upload a screenshot of any promotional message, email, or social media post." },
+    { step: "2", title: "Spam Density Audit", desc: "Our engine scans OCR text for keyword density, formatting anomalies (excessive caps/exclamation), and aggressive CTAs." },
+    { step: "3", title: "View Indicators", desc: "Inspect specific trigger words, score breakdown, and URL indicators." },
+  ],
+  examples: [
+    { title: "Unsolicited Promotional SMS", desc: "Analyze mass-marketing text messages promising huge discount codes, free trials, and exclusive deals." },
+    { title: "Get-Rich-Quick Marketing Ads", desc: "Detect high-density hype phrases such as 'earn from home', 'guaranteed returns', and 'limited slots'." },
+    { title: "Cold Email Outreach", desc: "Evaluate cold promotional pitch screenshots for spam triggers and unsubscribe language." },
+    { title: "Social Media Comment Spam", desc: "Inspect screenshot captures of bot-generated comment threads." },
+  ],
+  limitations: [
+    "Spam indicators are based on linguistic heuristics and formatting traits. Legitimate flash sales or marketing announcements may score high promotional density.",
+  ],
+  faqs: [
+    {
+      question: "How does Screenshot Checker score spam?",
+      answer: "We evaluate promotional keyword density, the presence of repetitive direct-response call-to-actions ('reply STOP', 'tap link below'), and formatting pressure tactics (excessive capitalization and multi-exclamation marks).",
+    },
+    {
+      question: "Can I extract the text while checking for spam?",
+      answer: "Yes. The full extracted text is available in the OCR module where you can search, copy, or download it.",
+    },
+  ],
+};
+---
+
+<ToolLayout {...props} />

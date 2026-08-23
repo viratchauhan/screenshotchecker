@@ -1,0 +1,708 @@
+FRAUD SMS / WHATSAPP REFERENCE DATASET
+======================================
+
+Purpose:
+Use this file as a local reference dataset for the Screenshot Analyzer / Fraud Message Checker.
+The checker should compare OCR-extracted text and detected elements against these known fraud patterns.
+A match should increase the fraud score; it should NOT rely only on exact wording.
+
+IMPORTANT:
+- Treat these as known/example scam patterns.
+- Do not require an exact text match.
+- Compare meaning, intent, entities, urgency, requested action, links, phone numbers, attachments, and scam category.
+- A similar message should be flagged as suspicious/high risk even if the wording is different.
+- Do not classify a legitimate message as fraud only because it contains a bank name, OTP, URL, phone number, or urgency.
+
+==================================================
+EXAMPLE 1 — BANK / REKYC / APK PHISHING
+==================================================
+
+Original visible message:
+"*URGENTLY REQUIRED:-Your Bank of Maharashtra ReKYC pending for Bank of Maharashtra CustID XXXX.Complete ReKYC Last Date 13.may 2025 to avoid A/c blocking. Open PDF file. Immediately Thank you!"
+
+Attachment visible:
+"Bank of Maharashtra A1..."
+"18 MB · APK"
+
+Known signals:
+- Claimed organization: Bank of Maharashtra
+- ReKYC / KYC request
+- Account blocking threat
+- Urgent action
+- Deadline pressure
+- Attachment
+- APK file
+- User instructed to open the file
+- Banking identity impersonation
+
+Scam category:
+BANK_KYC_PHISHING
+MALICIOUS_ATTACHMENT
+BANK_IMPERSONATION
+
+Risk:
+CRITICAL / HIGH
+
+Strong matching concepts:
+"ReKYC pending"
+"complete KYC"
+"account will be blocked"
+"avoid account blocking"
+"last date"
+"urgently required"
+"open attached file"
+"bank APK"
+"banking APK"
+"KYC APK"
+"18 MB APK"
+"customer ID"
+"account suspension"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The message claims to be from a bank, creates urgency by threatening account blocking, and asks the user to open an APK/attachment for KYC. This combination is a major phishing/malicious-attachment red flag.
+
+
+==================================================
+EXAMPLE 2 — UNKNOWN CONTACT ASKING FOR PERSONAL DETAILS
+==================================================
+
+Visible conversation:
+Sender: Unknown
+
+Message:
+"May you send me your emails and address for our record?"
+
+Known signals:
+- Unknown contact
+- Requests personal information
+- Email address requested
+- Physical address requested
+- No clear legitimate context
+- Social engineering / information harvesting possibility
+
+Scam category:
+SOCIAL_ENGINEERING
+PERSONAL_DATA_HARVESTING
+
+Risk:
+SUSPICIOUS / MEDIUM-HIGH depending on context
+
+Strong matching concepts:
+"send me your email"
+"send your email address"
+"send your address"
+"for our record"
+"please share your personal details"
+"send your information"
+
+
+==================================================
+EXAMPLE 3 — FAKE ACCOUNT SECURITY ALERT
+==================================================
+
+Visible conversation:
+Sender: Unknown
+
+Message:
+"Fed3x: Attention! We've found suspicious activities on your account! Contact us to protects your information!!"
+
+Known signals:
+- Claims suspicious account activity
+- Fear/urgency
+- Requests contact
+- Possible FedEx impersonation
+- Grammar irregularities
+- Unknown sender
+
+Scam category:
+ACCOUNT_SECURITY_PHISHING
+BRAND_IMPERSONATION
+SOCIAL_ENGINEERING
+
+Risk:
+HIGH
+
+Strong matching concepts:
+"suspicious activity on your account"
+"your account has been compromised"
+"contact us to protect your account"
+"verify your account"
+"security alert"
+"your information is at risk"
+"FedEx account"
+"account protection"
+
+
+==================================================
+EXAMPLE 4 — FAKE JOB / REVIEW TASK SCAM
+==================================================
+
+Visible conversation:
+Unknown/international number:
++234 ... 7755
+
+Messages:
+"May I share the job information with you?"
+
+"Great. We are Big Mover Company Llc. Your role is to right Google reviews for us. Each review pays $10."
+
+"Can I share the links to the Google Doc with you?"
+
+Known signals:
+- Unsolicited job offer
+- Unknown/international number
+- Easy-money promise
+- Payment per simple task/review
+- Google review manipulation
+- External Google Doc/link
+- Conversation designed to establish trust before sending links
+
+Scam category:
+FAKE_JOB_SCAM
+TASK_SCAM
+SOCIAL_ENGINEERING
+
+Risk:
+HIGH
+
+Strong matching concepts:
+"job information"
+"each review pays"
+"earn $10 per review"
+"paid to write Google reviews"
+"easy online job"
+"work from home"
+"simple tasks"
+"Google reviews"
+"Google Doc"
+"click the link"
+"unknown recruiter"
+
+
+==================================================
+EXAMPLE 5 — FAKE BANK ACCOUNT LOCK ALERT
+==================================================
+
+Message:
+"Your Wells Fargo account has been locked for suspicious activity. Please call us at 201-429-3304 to verify your identity."
+
+Known signals:
+- Bank impersonation
+- Account lock claim
+- Suspicious activity claim
+- Requests identity verification
+- Unknown phone number
+- Urgency/fear
+- Phone-based social engineering
+
+Scam category:
+BANK_IMPERSONATION
+ACCOUNT_LOCK_PHISHING
+PHONE_PHISHING
+
+Risk:
+HIGH
+
+Strong matching concepts:
+"your account has been locked"
+"account locked for suspicious activity"
+"verify your identity"
+"call us"
+"call this number"
+"bank account locked"
+"security verification"
+"account suspended"
+
+
+==================================================
+EXAMPLE 6 — FAKE DELIVERY / PARCEL LINK
+==================================================
+
+Message:
+"You've missed our delivery. To reschedule delivery of your parcel, please visit:
+https://myparcel-ups.com."
+
+Known signals:
+- Unexpected delivery claim
+- Parcel/delivery impersonation
+- Rescheduling request
+- External link
+- Brand impersonation
+- Potential payment or credential harvesting
+
+Scam category:
+DELIVERY_SCAM
+PARCEL_PHISHING
+BRAND_IMPERSONATION
+
+Risk:
+HIGH
+
+Strong matching concepts:
+"missed delivery"
+"reschedule delivery"
+"your parcel"
+"delivery attempt"
+"package could not be delivered"
+"pay delivery fee"
+"confirm delivery"
+"track your parcel"
+"click to reschedule"
+
+
+==================================================
+EXAMPLE 7 — FAKE PRIZE / GIFT CARD
+==================================================
+
+Message:
+"Congratulations! You've won a $500 gift card to Target. Click here to claim your reward:
+https://targetwinner.com"
+
+Known signals:
+- Unexpected prize
+- Large reward
+- Brand impersonation
+- Claim link
+- Urgency/bait
+- User did not establish participation in a contest
+
+Scam category:
+PRIZE_SCAM
+GIFT_CARD_SCAM
+PHISHING
+
+Risk:
+HIGH
+
+Strong matching concepts:
+"you've won"
+"you won a gift card"
+"claim your reward"
+"congratulations winner"
+"$500 gift card"
+"free gift card"
+"selected as a winner"
+"click to claim"
+
+
+==================================================
+EXAMPLE 8 — FAKE TOLL / PAYMENT DEMAND
+==================================================
+
+Message:
+"Florida toll services: We noticed an outstanding toll amount of $34.50 on your account. Please make a payment now to avoid a late fee:
+https://tolls-sunpass.com"
+
+Known signals:
+- Claims unpaid toll
+- Unexpected debt
+- Specific payment amount
+- Immediate payment pressure
+- Threat of late fee
+- Suspicious domain/link
+- Government/transport/toll impersonation
+
+Scam category:
+TOLL_SCAM
+PAYMENT_PHISHING
+IMPERSONATION
+
+Risk:
+HIGH
+
+Strong matching concepts:
+"outstanding toll amount"
+"unpaid toll"
+"pay now"
+"avoid late fee"
+"toll balance"
+"toll invoice"
+"make a payment"
+"DMV/toll record"
+"driver's license"
+
+
+==================================================
+EXAMPLE 9 — FAKE STUDENT LOAN FORGIVENESS
+==================================================
+
+Message:
+"You may qualify for a new student loan forgiveness program! Enrollment ends soon. Call 1-855-412-0901 to apply now."
+
+Known signals:
+- Unsolicited financial benefit
+- Loan forgiveness promise
+- Urgency
+- Enrollment deadline
+- Phone call requested
+- Unknown number
+- Potential financial information harvesting
+
+Scam category:
+LOAN_SCAM
+FINANCIAL_IMPERSONATION
+PHONE_PHISHING
+
+Risk:
+SUSPICIOUS / HIGH
+
+Strong matching concepts:
+"you may qualify"
+"loan forgiveness"
+"student loan forgiveness"
+"enrollment ends soon"
+"apply now"
+"call this number"
+"government loan program"
+
+
+==================================================
+EXAMPLE 10 — FAKE AMAZON / OTP SECURITY MESSAGE
+==================================================
+
+Message:
+"Amazon: Your code is 412739. If you didn't request this, click here https://amazon.com/73538111"
+
+Known signals:
+- Claims to be Amazon
+- OTP/security code
+- Link attached to a security message
+- Attempts to make the user click if they did not request the code
+- Brand impersonation possible
+
+Scam category:
+OTP_PHISHING
+BRAND_IMPERSONATION
+ACCOUNT_TAKEOVER
+
+Risk:
+SUSPICIOUS / HIGH depending on link authenticity
+
+IMPORTANT:
+An OTP message itself can be legitimate.
+Do NOT classify it as fraud solely because it contains an OTP.
+Check whether the link/domain is genuine and whether the message asks for sensitive action.
+
+Strong matching concepts:
+"your code is"
+"verification code"
+"OTP"
+"if you didn't request this"
+"click here"
+"verify your account"
+"Amazon security"
+
+
+==================================================
+EXAMPLE 11 — UNKNOWN CONTACT / WRONG-NUMBER OPENING
+==================================================
+
+Message:
+"Hello and good morning. Is this John?"
+
+Known signals:
+- Unknown sender
+- Generic greeting
+- Attempts to start a conversation
+- May be a wrong-number opening used for social engineering
+
+Scam category:
+SOCIAL_ENGINEERING
+WRONG_NUMBER_SCAM
+
+Risk:
+LOW / SUSPICIOUS initially
+
+IMPORTANT:
+This message alone is NOT proof of fraud.
+Risk should increase only if later messages introduce investment, jobs, payments, links, romance, crypto, or requests for personal information.
+
+
+==================================================
+EXAMPLE 12 — FAKE TOLL / DMV THREAT MESSAGE
+==================================================
+
+Message:
+"Warm Reminder - You have unpaid toll invoices, please be sure to pay the balance by March 10, 2025. Otherwise, you will be charged an excessive fine. Please complete your payment on time: https://bit.ly/3Fq2btY?xVd=knm... Failure to pay on time may also affect your DMV record and cause your driver's license to not be renewed. E-ZPASS - Wishing you a sunny day filled with happiness."
+
+Known signals:
+- Unpaid invoice claim
+- Deadline pressure
+- Threat of excessive fine
+- DMV/license threat
+- Payment request
+- Bitly URL shortener
+- Government/toll impersonation
+- Unsolicited financial demand
+- Contradictory friendly language after threats
+
+Scam category:
+TOLL_SCAM
+PAYMENT_PHISHING
+SHORT_URL_PHISHING
+GOVERNMENT_IMPERSONATION
+
+Risk:
+HIGH
+
+Strong matching concepts:
+"unpaid toll invoices"
+"pay the balance"
+"excessive fine"
+"DMV record"
+"driver's license"
+"license will not be renewed"
+"EZPASS"
+"complete your payment"
+"bit.ly"
+
+
+==================================================
+CROSS-MESSAGE FRAUD SIGNAL LIBRARY
+==================================================
+
+These signals should be reusable across all examples.
+
+1. URGENCY
+- urgently
+- immediately
+- act now
+- last date
+- final warning
+- enrollment ends soon
+- payment due today
+- avoid blocking
+- avoid suspension
+- avoid penalty
+- failure to act
+
+2. FEAR / THREAT
+- account blocked
+- account locked
+- account suspended
+- suspicious activity
+- legal action
+- fine
+- penalty
+- license cancellation
+- information at risk
+- payment failure
+
+3. MONEY REQUEST
+- pay now
+- outstanding amount
+- processing fee
+- delivery fee
+- toll payment
+- claim fee
+- verification fee
+
+4. SENSITIVE INFORMATION
+- OTP
+- PIN
+- CVV
+- password
+- bank details
+- card number
+- Aadhaar
+- PAN
+- KYC
+- email
+- address
+- identity documents
+
+5. LINK SIGNALS
+- unexpected link
+- shortened URL
+- unfamiliar domain
+- misspelled brand domain
+- brand/domain mismatch
+- suspicious path
+- link asking for login/payment
+
+6. ATTACHMENT SIGNALS
+- APK
+- EXE
+- ZIP
+- unknown document
+- unexpected PDF
+- "open file"
+- "install application"
+- banking APK
+- KYC APK
+
+7. IMPERSONATION
+- bank
+- courier
+- delivery company
+- government
+- tax authority
+- telecom provider
+- Amazon
+- Google
+- WhatsApp
+- payment provider
+- toll authority
+- employer
+
+8. SOCIAL ENGINEERING
+- unknown person starts conversation
+- wrong-number opening
+- unsolicited job
+- unusually high payment
+- investment opportunity
+- prize/winner claim
+- requests personal information
+- builds trust before sending a link
+- asks user to move to another platform
+
+
+==================================================
+MATCHING LOGIC FOR THE WEBSITE
+==================================================
+
+DO NOT implement:
+
+if exact_text == dataset_text:
+    fraud = true
+
+Instead use semantic/pattern matching.
+
+Suggested scoring approach:
+
++25  Exact/near-exact known scam pattern
++20  Same scam intent/category
++15  Suspicious link or URL pattern
++20  Sensitive attachment such as APK
++15  Account-blocking/security threat
++10  Urgency pressure
++10  Unexpected payment request
++10  Sensitive information request
++10  Brand impersonation indicators
++10  Unknown sender + suspicious context
++10  Unsolicited job/prize/financial offer
+
+Cap score at 100.
+
+Suggested interpretation:
+
+0–20   LOW RISK
+21–40  CAUTION
+41–60  SUSPICIOUS
+61–80  HIGH RISK
+81–100 CRITICAL
+
+IMPORTANT:
+Do not add points simply because a normal word appears.
+Use context.
+
+Example:
+"OTP" alone = NOT fraud.
+"Your OTP is 123456. Never share it." = potentially legitimate.
+"Your OTP is 123456. Call this unknown number and tell us the OTP." = HIGH RISK.
+
+"Amazon" alone = NOT fraud.
+"Amazon: your code is..." with a genuine official domain may be legitimate.
+"Amazon: your account is locked, click an unfamiliar domain to verify" = HIGH RISK.
+
+
+==================================================
+OUTPUT FORMAT
+==================================================
+
+The checker should return:
+
+VERDICT:
+Likely Fraud / Suspicious / Likely Legitimate
+
+RISK SCORE:
+0–100
+
+MESSAGE MEANING:
+Explain in simple language what the message is trying to make the user do.
+
+SCAM TYPE:
+Example: Bank KYC Phishing
+
+WHY:
+List the exact evidence detected in the screenshot.
+
+DETECTED ELEMENTS:
+Sender
+Phone number
+URL
+Attachment
+Organization
+Amount
+Date
+Requested action
+
+RECOMMENDATION:
+Tell the user what NOT to do and how to verify safely.
+
+==================================================
+FALSE-POSITIVE PROTECTION
+==================================================
+
+Never declare fraud only because:
+- A bank name appears
+- An OTP appears
+- A link appears
+- A phone number appears
+- A delivery message appears
+- The sender is unknown
+- The message uses urgent language
+
+Combine multiple signals and message intent.
+
+If evidence is insufficient:
+VERDICT = SUSPICIOUS
+not
+VERDICT = CONFIRMED FRAUD
+
+==================================================
+DATASET EXTENSION
+==================================================
+
+Future verified scam screenshots should be added using this structure:
+
+SCAM EXAMPLE:
+Original message:
+[full OCR text]
+
+Category:
+[category]
+
+Signals:
+[list]
+
+Risk:
+[low/medium/high/critical]
+
+Important entities:
+[bank/company/person/etc.]
+
+URLs:
+[URLs]
+
+Phone numbers:
+[numbers]
+
+Attachments:
+[file type/name]
+
+Why fraudulent:
+[explanation]
+
+Matching phrases/concepts:
+[list]
+
+Also add legitimate examples later so the checker learns both:
+FRAUD patterns
+and
+LEGITIMATE patterns.
+
+END OF DATASET

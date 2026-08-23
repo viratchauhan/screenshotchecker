@@ -1,0 +1,62 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Internal Server Error (500) — ScreenshotChecker"
+  description="An unexpected error occurred while processing the request. Return to ScreenshotChecker to inspect and analyze screenshots in your browser."
+>
+  <Header currentPath="/500" />
+
+  <main class="flex-1 max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
+    <!-- Status Badge -->
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-hairline text-ink text-xs font-semibold uppercase tracking-wider mb-6 font-mono">
+      <span class="w-2 h-2 rounded-full bg-error"></span>
+      <span>Error 500 · Processing Issue</span>
+    </div>
+
+    <!-- Main Heading -->
+    <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-ink tracking-tight mb-4">
+      Something Unexpected Happened
+    </h1>
+
+    <p class="font-sans text-sm sm:text-base text-body max-w-lg mx-auto leading-relaxed mb-8">
+      An unexpected internal error interrupted this request. Because ScreenshotChecker runs locally in your browser sandbox, refreshing or returning home usually resolves the issue.
+    </p>
+
+    <!-- Main Action Buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-12">
+      <button
+        type="button"
+        onclick="window.location.reload()"
+        class="btn-primary"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+        <span>Reload Page</span>
+      </button>
+      <a href="/" class="btn-secondary">
+        <span>Go to Screenshot Checker</span>
+      </a>
+      <a href="/tools" class="btn-secondary">
+        <span>Explore All Tools</span>
+      </a>
+    </div>
+
+    <!-- Diagnostic Details Callout -->
+    <div class="feature-card !p-5 text-left text-xs space-y-2 border-hairline bg-surface-card/60 max-w-lg mx-auto">
+      <div class="flex items-center justify-between font-mono text-muted">
+        <span class="font-semibold text-ink uppercase tracking-wider">Client-Side Architecture</span>
+        <span class="text-success font-semibold">● 100% In-Browser</span>
+      </div>
+      <p class="text-body leading-relaxed">
+        Your uploaded screenshots, OCR data, and metadata never leave your device. If a local Web Worker crashed or memory was exhausted by a very large image, reloading will start a fresh session.
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

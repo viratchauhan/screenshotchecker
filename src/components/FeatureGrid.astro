@@ -1,0 +1,70 @@
+---
+const features = [
+  {
+    title: 'Privacy & PII Scanner',
+    description: 'Find exposed emails, phone numbers, payment card numbers, IP addresses, street addresses, and social security formats before sharing screenshots.',
+    icon: `<svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>`,
+    href: '/screenshot-privacy-checker',
+  },
+  {
+    title: 'Scam & Fraud Signals',
+    description: 'Evaluate screenshot messages for high urgency, threat language, unsolicited prize notifications, OTP requests, and unauthorized payment demands.',
+    icon: `<svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>`,
+    href: '/screenshot-scam-checker',
+  },
+  {
+    title: 'Metadata & GPS Inspector',
+    description: 'Inspect embedded EXIF tags, camera hardware details, timestamps, and geographic location coordinates, with one-click metadata stripping.',
+    icon: `<svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
+    href: '/screenshot-metadata-checker',
+  },
+  {
+    title: 'Browser OCR & Text Extractor',
+    description: 'Extract text directly inside your browser with high precision. Search, copy to clipboard, or export clean text without remote servers.',
+    icon: `<svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+    href: '/screenshot-ocr',
+  },
+  {
+    title: 'Suspicious Link Analyzer',
+    description: 'Parse visible URLs for plaintext HTTP risks, IP hostnames, hidden URL shorteners, and Punycode spoofing characteristics.',
+    icon: `<svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>`,
+    href: '/suspicious-link-checker',
+  },
+  {
+    title: 'Manipulation & Forensics',
+    description: 'Inspect compression gradient variances and Error Level Analysis (ELA) maps to review potential visual splicing anomalies.',
+    icon: `<svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>`,
+    href: '/image-manipulation-checker',
+  },
+];
+---
+
+<section id="features-section" class="py-20 max-w-6xl mx-auto px-4 sm:px-6">
+  <div class="text-center max-w-2xl mx-auto mb-14">
+    <span class="text-xs uppercase tracking-wider font-semibold text-primary">Multi-Layer Image Intelligence</span>
+    <h2 class="font-serif text-3xl sm:text-4xl text-ink font-normal mt-2 mb-4">
+      Comprehensive Safety Checks in a Single Scan
+    </h2>
+    <p class="text-sm sm:text-base text-muted leading-relaxed">
+      Unlike single-purpose tools, Screenshot Checker combines privacy auditing, OCR, forensic heuristics, and scam risk analysis in one client-side workflow.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {features.map((f) => (
+      <div class="feature-card flex flex-col justify-between hover:border-muted-soft transition-colors">
+        <div>
+          <div class="w-10 h-10 rounded-lg bg-canvas border border-hairline flex items-center justify-center mb-5" set:html={f.icon} />
+          <h3 class="font-serif text-xl text-ink font-normal mb-2.5">{f.title}</h3>
+          <p class="text-sm text-body leading-relaxed">{f.description}</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-hairline/60">
+          <a href={f.href} class="text-xs font-medium text-primary hover:text-primary-active inline-flex items-center gap-1">
+            <span>Learn more & explore tool</span>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

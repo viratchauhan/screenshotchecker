@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="About ScreenshotChecker — Privacy-First Visual Intelligence"
+  description="Learn about ScreenshotChecker's mission, privacy-first client-side architecture, and commitment to evidence-based image investigation."
+>
+  <Header currentPath="/about" />
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <!-- Hero / Title -->
+    <div class="text-center max-w-2xl mx-auto mb-14">
+      <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block mb-2">Our Mission</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink tracking-tight mb-5">
+        Image Intelligence Built on Privacy & Evidence
+      </h1>
+      <p class="text-base text-body leading-relaxed">
+        We believe that understanding, verifying, and protecting screenshots should be effortless, fast, and completely confidential.
+      </p>
+    </div>
+
+    <!-- Core Philosophy Cards -->
+    <div class="space-y-12 text-body">
+      <!-- 1. The Core Problem -->
+      <section class="feature-card !p-8 space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">
+          Why Screenshots Require Special Understanding
+        </h2>
+        <p class="text-sm sm:text-base leading-relaxed">
+          Screenshots are the primary currency of digital communication today: banking transaction receipts, WhatsApp messages, order confirmations, security alerts, and invoices. Yet visual evidence is easily manipulated, faked, or misunderstood.
+        </p>
+        <p class="text-sm sm:text-base leading-relaxed">
+          Traditional image tools treat every graphic as a generic bundle of pixels. ScreenshotChecker was built to behave like a visual investigator: observing context, extracting structured numbers and claims, auditing internal consistency, and warning users about social-engineering threats.
+        </p>
+      </section>
+
+      <!-- 2. The 3 Core Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-surface-cream-strong flex items-center justify-center text-primary font-bold">
+            1
+          </div>
+          <h3 class="font-serif text-xl text-ink font-normal">100% Client-Side</h3>
+          <p class="text-xs text-body leading-relaxed">
+            Your images and personal data never leave your computer. OCR, metadata stripping, ELA forensics, and semantic analysis run directly inside your browser.
+          </p>
+        </div>
+
+        <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-surface-cream-strong flex items-center justify-center text-primary font-bold">
+            2
+          </div>
+          <h3 class="font-serif text-xl text-ink font-normal">No Fake AI Claims</h3>
+          <p class="text-xs text-body leading-relaxed">
+            We never return arbitrary percentage scores. If something cannot be proven from a screenshot alone (such as bank settlement), we state it clearly.
+          </p>
+        </div>
+
+        <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-lg bg-surface-cream-strong flex items-center justify-center text-primary font-bold">
+            3
+          </div>
+          <h3 class="font-serif text-xl text-ink font-normal">Connected Toolkit</h3>
+          <p class="text-xs text-body leading-relaxed">
+            Every tool has a specialized workspace, yet all tools work together: find PII in an analysis, and immediately redact it in the editor.
+          </p>
+        </div>
+      </div>
+
+      <!-- 3. Our Technical Boundaries -->
+      <section class="bg-canvas border border-hairline rounded-2xl p-6 sm:p-8 space-y-3">
+        <h3 class="font-serif text-xl text-ink font-normal">Our Stance on Authenticity</h3>
+        <p class="text-xs sm:text-sm text-body leading-relaxed">
+          <strong class="text-ink">Content is not authenticity.</strong> A visual receipt can be internally consistent, beautifully rendered, and completely fabricated by a mock generation app. Therefore, we explicitly distinguish <em>"looks consistent"</em> from <em>"is verified"</em> and encourage users to verify financial transactions directly through official bank portals.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

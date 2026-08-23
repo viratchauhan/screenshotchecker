@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout
+  title="Terms of Service & Disclaimer — Screenshot Checker"
+  description="Terms of service, technical limitations, and security disclaimers for Screenshot Checker."
+>
+  <Header currentPath={currentPath} />
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-16">
+    <div class="mb-10 text-center">
+      <span class="badge-pill text-xs mb-3 inline-block">Legal & Guidance</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink mb-4">
+        Terms of Service & Disclaimer
+      </h1>
+      <p class="text-sm sm:text-base text-muted max-w-2xl mx-auto">
+        Please review the operational terms, guidance principles, and limitations of our browser-based image analysis tool.
+      </p>
+    </div>
+
+    <div class="space-y-8 text-sm text-body leading-relaxed">
+      <div class="feature-card !p-8 space-y-3">
+        <h2 class="font-serif text-xl text-ink font-normal">1. Heuristic Risk Analysis, Not Definitive Proof</h2>
+        <p>
+          Screenshot Checker provides automated heuristic indicators, signal detection, and educational risk assessments. It does <strong>not</strong> provide legally binding determinations of document authenticity, financial solvency, identity verification, or criminal fraud detection.
+        </p>
+      </div>
+
+      <div class="feature-card !p-8 space-y-3">
+        <h2 class="font-serif text-xl text-ink font-normal">2. User Responsibility & Independent Verification</h2>
+        <p>
+          Users are solely responsible for conducting independent verification of any critical financial transaction, legal document, or security notice. Never rely exclusively on automated software outputs for financial or safety-critical decisions.
+        </p>
+      </div>
+
+      <div class="feature-card !p-8 space-y-3">
+        <h2 class="font-serif text-xl text-ink font-normal">3. Disclaimer of Warranties</h2>
+        <p>
+          The service is provided on an "as is" and "as available" basis without warranties of any kind, whether express or implied. We do not warrant that optical character recognition or forensic analysis will be completely error-free or uninterrupted across all device hardware.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

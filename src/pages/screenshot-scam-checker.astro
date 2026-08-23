@@ -1,0 +1,38 @@
+---
+import ToolLayout from '../components/ToolLayout.astro';
+
+const props = {
+  title: "Screenshot Scam & Fraud Checker — Identify Suspicious Signals & Phishing",
+  metaDescription: "Scan screenshot text for high urgency triggers, threat language, unsolicited prizes, OTP requests, and unusual payment demands.",
+  badge: "Scam & Phishing Risk Analysis",
+  heading: "Check Screenshot Messages for Scam Signals",
+  subheading: "Identify common social engineering patterns, artificial urgency, legal threats, and suspicious verification demands in SMS, email, and chat captures.",
+  howItWorksSteps: [
+    { step: "1", title: "Upload Message Capture", desc: "Upload a screenshot of the suspicious SMS, WhatsApp message, email, or social DM." },
+    { step: "2", title: "Heuristic Risk Analysis", desc: "Our engine analyzes extracted text against known scam vectors, phishing triggers, and pressure tactics." },
+    { step: "3", title: "Review Explanations", desc: "Read why specific phrases were flagged as risk indicators and follow recommended safety guidelines." },
+  ],
+  examples: [
+    { title: "Bank Account Suspension Notices", desc: "Analyze fake SMS messages claiming your debit card is locked or account will close within 24 hours." },
+    { title: "Delivery Courier Alerts (USPS, FedEx, DHL)", desc: "Spot fake tracking notices requesting address verification or customs fee payments." },
+    { title: "Prize & Lottery Winner Alerts", desc: "Flag unsolicited notifications claiming you've won gift cards, cash prizes, or crypto rewards." },
+    { title: "Two-Factor / OTP Phishing", desc: "Detect messages urging you to forward or reveal 6-digit authentication codes." },
+  ],
+  limitations: [
+    "This tool provides heuristic risk signals; it is NOT a definitive fraud detector. Sophisticated scams may evade pattern rules, while legitimate urgent notices may trigger warnings.",
+    "Always independently verify suspicious messages by contacting the official organization through their verified website or phone number.",
+  ],
+  faqs: [
+    {
+      question: "Does this tool guarantee whether a message is 100% genuine or fake?",
+      answer: "No. Security best practices dictate that no automated tool can definitively guarantee authenticity without backend transaction verification. We provide clear signal indicators and risk explanations to guide your judgment.",
+    },
+    {
+      question: "What should I do if high-risk signals are detected?",
+      answer: "Do NOT click links, do NOT reply with OTP codes or personal passwords, and do NOT wire money or buy gift cards. Contact the purported service through an official app or verified URL.",
+    },
+  ],
+};
+---
+
+<ToolLayout {...props} />

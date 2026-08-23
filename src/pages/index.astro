@@ -1,11 +1,839 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Uploader from '../components/Uploader.astro';
+import AnalysisDashboard from '../components/AnalysisDashboard.astro';
+import RedactorModal from '../components/RedactorModal.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import SeoContent from '../components/SeoContent.astro';
+import TrustPrivacy from '../components/TrustPrivacy.astro';
+import FaqSection from '../components/FaqSection.astro';
+import RelatedTools from '../components/RelatedTools.astro';
+import Footer from '../components/Footer.astro';
+import { HOMEPAGE_FAQS } from '../data/homepageFaqs';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const canonicalUrl = 'https://screenshotchecker.com';
+const pageTitle = 'Screenshot Checker – Analyze & Verify Screenshots Online';
+const pageDescription =
+  'Screenshot Checker is an online tool for analyzing screenshots and images for editing signals, visual inconsistencies, metadata, fraud indicators, and other digital evidence.';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${canonicalUrl}/#website`,
+      name: 'ScreenshotChecker',
+      url: canonicalUrl,
+      description: pageDescription,
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'WebPage',
+      '@id': `${canonicalUrl}/#webpage`,
+      url: canonicalUrl,
+      name: pageTitle,
+      isPartOf: {
+        '@id': `${canonicalUrl}/#website`,
+      },
+      description: pageDescription,
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'WebApplication',
+      '@id': `${canonicalUrl}/#webapp`,
+      name: 'ScreenshotChecker',
+      url: canonicalUrl,
+      description:
+        'Client-side multimodal screenshot and image safety analysis directly in your browser. Scan for privacy risks, sensitive information, scam signals, metadata, OCR text, and manipulation signals.',
+      applicationCategory: 'SecurityApplication',
+      operatingSystem: 'Any (Browser-based)',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${canonicalUrl}/#faq`,
+      mainEntity: HOMEPAGE_FAQS.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    },
+  ],
+};
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle="Screenshot Checker – Analyze & Verify Screenshots Online"
+  ogDescription="Analyze screenshots and images for editing signals, visual inconsistencies, metadata, fraud indicators, and other digital evidence."
+  ogType="website"
+  siteName="ScreenshotChecker"
+  structuredData={structuredData}
+>
+  <Header currentPath="/" />
+
+  <main class="flex-1">
+    <Hero />
+    <Uploader />
+    <AnalysisDashboard />
+    <RedactorModal />
+    <FeatureGrid />
+    <HowItWorks />
+    <SeoContent />
+    <TrustPrivacy />
+    <FaqSection />
+    <RelatedTools currentPath="/" />
+  </main>
+
+  <Footer />
 </Layout>
+
+<script>
+  import { runFullAnalysis } from '../lib/analyzer/pipeline';
+  import { SAMPLE_PRESETS } from '../lib/samples/sampleData';
+  import { renderRedactedImage, type RedactionBox } from '../lib/analyzer/redactor';
+  import { stripImageMetadata } from '../lib/analyzer/metadata';
+  import { formatBytes } from '../lib/utils/formatters';
+  import { setHandoffImage } from '../lib/utils/toolHandoff';
+  import type { AgenticInvestigationResult } from '../lib/ai/reasoningSchema';
+
+  let currentFile: File | null = null;
+  let currentDataUrl: string = '';
+  let currentResult: AgenticInvestigationResult | null = null;
+  let isElaActive = false;
+
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input') as HTMLInputElement | null;
+  const browseBtn = document.getElementById('browse-btn');
+  const idleState = document.getElementById('upload-idle-state');
+  const progressState = document.getElementById('upload-progress-state');
+  const progressText = document.getElementById('progress-status-text');
+  const progressBarFill = document.getElementById('progress-bar-fill');
+  const dashboard = document.getElementById('analysis-dashboard');
+
+  const previewImg = document.getElementById('preview-image') as HTMLImageElement | null;
+  const imgInfoName = document.getElementById('img-info-name');
+  const imgInfoSize = document.getElementById('img-info-size');
+  const imgInfoRatio = document.getElementById('img-info-ratio');
+  const imgInfoFormat = document.getElementById('img-info-format');
+  const previewSpecs = document.getElementById('preview-image-specs');
+
+  const redactorModal = document.getElementById('redactor-modal');
+  const openRedactorBtn = document.getElementById('open-redactor-btn');
+  const closeRedactorBtn = document.getElementById('close-redactor-modal-btn');
+  const cancelRedactorBtn = document.getElementById('cancel-redact-btn');
+  const redactorCanvas = document.getElementById('redactor-canvas') as HTMLCanvasElement | null;
+  const autoRedactPiiBtn = document.getElementById('auto-redact-pii-btn');
+  const undoRedactBtn = document.getElementById('undo-redact-btn');
+  const clearRedactBtn = document.getElementById('clear-all-redact-btn');
+  const exportRedactedBtn = document.getElementById('export-redacted-btn');
+
+  let currentTool: 'blur' | 'pixelate' | 'blackout' | 'whiteout' = 'blur';
+  let redactionBoxes: RedactionBox[] = [];
+  let isDrawing = false;
+  let startX = 0;
+  let startY = 0;
+
+  async function processImageFile(file: File) {
+    currentFile = file;
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      currentDataUrl = e.target?.result as string;
+      await executeAnalysis(file, currentDataUrl);
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function executeAnalysis(file: File, dataUrl: string) {
+    if (!idleState || !progressState || !progressBarFill || !progressText) return;
+    
+    idleState.classList.add('hidden');
+    progressState.classList.remove('hidden');
+    progressBarFill.style.width = '10%';
+    progressText.innerText = 'Observing visual image...';
+
+    try {
+      const result = await runFullAnalysis(file, dataUrl, (pct, status) => {
+        progressBarFill.style.width = `${pct}%`;
+        progressText.innerText = status;
+      });
+
+      currentResult = result;
+      renderDashboard(result);
+
+      progressState.classList.add('hidden');
+      idleState.classList.remove('hidden');
+      dashboard?.classList.remove('hidden');
+      dashboard?.scrollIntoView({ behavior: 'smooth' });
+    } catch (err) {
+      console.error('Analysis failed', err);
+      alert('An error occurred during local image analysis. Please ensure the file is a valid image.');
+      progressState.classList.add('hidden');
+      idleState.classList.remove('hidden');
+    }
+  }
+
+  function renderDashboard(result: AgenticInvestigationResult) {
+    // Populate Fraud Analysis Section if present
+    const fraudSection = document.getElementById('fraud-analysis-section');
+    const agenticSection = document.getElementById('agentic-investigation-section');
+    
+    if (result.fraudAnalysis && result.fraudAnalysis.classification !== 'unverifiable' && result.fraudAnalysis.classification !== 'ocr_error') {
+      fraudSection?.classList.remove('hidden');
+      agenticSection?.classList.add('hidden'); // Hide the generic AI one to focus on Fraud
+      
+      const fraudScoreTitle = document.getElementById('fraud-score-title');
+      const fraudRiskLabel = document.getElementById('fraud-risk-level-label');
+      const fraudDot = document.getElementById('fraud-pulsing-dot');
+      const fraudSummary = document.getElementById('fraud-summary');
+      const fraudSignals = document.getElementById('fraud-signals-list');
+      const fraudScamType = document.getElementById('fraud-scam-type');
+      const fraudClaimedOrg = document.getElementById('fraud-claimed-org');
+      const fraudRec = document.getElementById('fraud-recommendation');
+      
+      if (fraudScoreTitle) fraudScoreTitle.innerText = `${result.fraudAnalysis.risk_score}/100`;
+      
+      if (fraudRiskLabel && fraudDot) {
+        fraudRiskLabel.innerText = result.fraudAnalysis.risk_level.toUpperCase().replace('_', ' ');
+        if (result.fraudAnalysis.risk_level === 'critical' || result.fraudAnalysis.risk_level === 'high') {
+          fraudRiskLabel.className = 'text-xs uppercase tracking-wider font-semibold text-error font-mono';
+          fraudDot.className = 'w-2.5 h-2.5 rounded-full bg-error animate-pulse';
+        } else if (result.fraudAnalysis.risk_level === 'suspicious' || result.fraudAnalysis.risk_level === 'caution') {
+          fraudRiskLabel.className = 'text-xs uppercase tracking-wider font-semibold text-warning font-mono';
+          fraudDot.className = 'w-2.5 h-2.5 rounded-full bg-warning animate-pulse';
+        } else {
+          fraudRiskLabel.className = 'text-xs uppercase tracking-wider font-semibold text-success font-mono';
+          fraudDot.className = 'w-2.5 h-2.5 rounded-full bg-success animate-pulse';
+        }
+      }
+      
+      const fraudUrl = document.getElementById('fraud-detected-url');
+      const fraudAttachment = document.getElementById('fraud-detected-attachment');
+      const fraudPhone = document.getElementById('fraud-detected-phone');
+      const fraudAction = document.getElementById('fraud-requested-action');
+      
+      if (fraudSummary) fraudSummary.innerText = result.fraudAnalysis.summary;
+      if (fraudScamType) fraudScamType.innerText = result.fraudAnalysis.message_type;
+      if (fraudClaimedOrg) fraudClaimedOrg.innerText = result.fraudAnalysis.claimed_organization;
+      if (fraudRec) fraudRec.innerText = result.fraudAnalysis.recommendation;
+      if (fraudUrl) fraudUrl.innerText = result.fraudAnalysis.urls.length > 0 ? result.fraudAnalysis.urls.join(', ') : 'None';
+      if (fraudAttachment) {
+        fraudAttachment.innerText = result.fraudAnalysis.attachments.length > 0
+          ? result.fraudAnalysis.attachments.map(a => `${a.filename} (${a.type})`).join(', ')
+          : 'None detected';
+      }
+      if (fraudPhone) fraudPhone.innerText = result.fraudAnalysis.phone_numbers.length > 0 ? result.fraudAnalysis.phone_numbers.join(', ') : 'None';
+      if (fraudAction) fraudAction.innerText = result.fraudAnalysis.requested_action;
+      
+      if (fraudSignals) {
+        fraudSignals.innerHTML = result.fraudAnalysis.signals.map(s => `
+          <div class="flex items-start gap-3 bg-canvas border border-hairline p-3 rounded-lg">
+            <span class="${s.severity === 'critical' || s.severity === 'high' ? 'text-error' : 'text-warning'} shrink-0 mt-0.5">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </span>
+            <div>
+              <span class="font-sans text-xs uppercase tracking-wider text-muted font-bold block mb-0.5">${s.type.replace('_', ' ')}</span>
+              <p class="text-sm font-medium text-ink">${s.evidence}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+    } else {
+      fraudSection?.classList.add('hidden');
+      agenticSection?.classList.remove('hidden');
+    }
+
+    const authBadge = document.getElementById('authenticity-status-badge');
+    const modalityBadge = document.getElementById('agent-modality-badge');
+    const summary = document.getElementById('overall-status-summary');
+
+    if (authBadge) {
+      if (result.fraudAnalysis?.classification === 'ocr_error' || result.ocr.text.length === 0) {
+        authBadge.innerText = '⚠️ OCR ERROR';
+        authBadge.className = 'badge-status-warning font-bold';
+      } else if (result.fraudAnalysis && result.fraudAnalysis.risk_score >= 60) {
+        authBadge.innerText = `🚨 ${result.fraudAnalysis.risk_level.toUpperCase()} RISK`;
+        authBadge.className = 'badge-status-risk font-bold';
+      } else {
+        authBadge.innerText = result.authenticity.status;
+        if (result.authenticity.status === 'SUSPICIOUS' || result.authenticity.status === 'CONTRADICTED') {
+          authBadge.className = 'badge-status-risk';
+        } else if (result.authenticity.status === 'UNVERIFIABLE' || result.authenticity.status === 'INSUFFICIENT_EVIDENCE') {
+          authBadge.className = 'badge-status-warning';
+        } else if (result.authenticity.status === 'CONSISTENT' || result.authenticity.status === 'SUPPORTED') {
+          authBadge.className = 'badge-status-safe';
+        } else {
+          authBadge.className = 'badge-pill';
+        }
+      }
+    }
+
+    if (modalityBadge) {
+      modalityBadge.innerText = result.observation.visualModality.replace('_', ' ');
+    }
+
+    if (summary) {
+      summary.innerText = result.overallSummary;
+    }
+
+    // KPIs
+    const kpiAuth = document.getElementById('kpi-authenticity-verdict');
+    const kpiTools = document.getElementById('kpi-tools-count');
+    const kpiEvidence = document.getElementById('kpi-evidence-count');
+    const kpiOcr = document.getElementById('kpi-ocr-chars');
+
+    if (kpiAuth) kpiAuth.innerText = result.authenticity.status;
+    if (kpiTools) kpiTools.innerText = String(result.toolsInvoked.length);
+    if (kpiEvidence) kpiEvidence.innerText = String(result.evidenceTraces.length);
+    if (kpiOcr) kpiOcr.innerText = String(result.ocr.text.length);
+
+    // Image specs
+    if (previewImg) previewImg.src = result.dataUrl;
+    if (imgInfoName) imgInfoName.innerText = result.imageInfo.name;
+    if (imgInfoSize) imgInfoSize.innerText = formatBytes(result.imageInfo.sizeBytes);
+    if (imgInfoRatio) imgInfoRatio.innerText = result.imageInfo.aspectRatio;
+    if (imgInfoFormat) imgInfoFormat.innerText = result.imageInfo.mimeType.replace('image/', '');
+    if (previewSpecs) previewSpecs.innerText = `${result.imageInfo.width} × ${result.imageInfo.height} px`;
+
+    // Investigator report
+    const whatIsThis = document.getElementById('investigator-what-is-this');
+    const planSteps = document.getElementById('investigator-plan-steps');
+    const recAction = document.getElementById('investigator-recommended-action');
+    const whatClaims = document.getElementById('investigator-what-it-claims');
+    const actionDesc = document.getElementById('investigator-action-desc');
+    const foundList = document.getElementById('investigator-found-list');
+    const canVerify = document.getElementById('investigator-can-verify');
+    const concernsList = document.getElementById('investigator-concerns-list');
+
+    if (whatIsThis) whatIsThis.innerText = result.whatAmILookingAt;
+    if (recAction) recAction.innerText = result.humanReadable.recommendedAction;
+    if (whatClaims) whatClaims.innerText = result.whatIsItClaiming;
+    if (actionDesc) actionDesc.innerText = result.whatDoesItWantTheUserToDo;
+
+    if (planSteps) {
+      planSteps.innerHTML = result.plan.steps
+        .map(
+          (s, idx) => `
+        <div class="flex items-center gap-2">
+          <span class="font-mono font-semibold text-primary">${idx + 1}. [${s.tool}]</span>
+          <span class="text-muted">${s.reason}</span>
+        </div>
+      `
+        )
+        .join('');
+    }
+
+    if (foundList) {
+      foundList.innerHTML = result.humanReadable.whatWeFound
+        .map((f) => `<li class="leading-relaxed">${f}</li>`)
+        .join('');
+    }
+
+    if (canVerify) {
+      canVerify.innerText = result.humanReadable.canWeVerifyIt;
+    }
+
+    if (concernsList) {
+      concernsList.innerHTML = result.humanReadable.whatConcernsUs
+        .map((c) => `<li class="leading-relaxed text-body">${c}</li>`)
+        .join('');
+    }
+
+    // Evidence traces
+    const evidenceList = document.getElementById('evidence-chains-list');
+    const evidenceBadge = document.getElementById('evidence-chains-count-badge');
+    if (evidenceBadge) evidenceBadge.innerText = `${result.evidenceTraces.length} Chains`;
+
+    if (evidenceList) {
+      if (result.evidenceTraces.length === 0) {
+        evidenceList.innerHTML = `<p class="text-xs text-muted italic bg-canvas p-3 rounded-lg border border-hairline">No severe deceptive patterns or contradictions identified.</p>`;
+      } else {
+        evidenceList.innerHTML = result.evidenceTraces
+          .map(
+            (t) => `
+          <div class="bg-canvas border border-hairline rounded-lg p-4 text-xs space-y-2.5">
+            <div class="flex items-center justify-between pb-2 border-b border-hairline font-mono">
+              <span class="font-semibold text-ink uppercase tracking-wider text-[11px]">Reasoning Chain</span>
+              <span class="${t.severity === 'high' ? 'text-error bg-error/10' : t.severity === 'medium' ? 'text-warning bg-warning/10' : 'text-success bg-success/10'} px-2 py-0.5 rounded text-[10px] uppercase font-semibold">${t.severity} Severity</span>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+              <div>
+                <strong class="text-muted block text-[10px] uppercase tracking-wider font-mono">1. Observation</strong>
+                <p class="text-ink font-medium">${t.observation}</p>
+              </div>
+              <div>
+                <strong class="text-muted block text-[10px] uppercase tracking-wider font-mono">2. Evidence</strong>
+                <ul class="text-body list-disc list-inside space-y-0.5">
+                  ${t.evidence.map((ev) => `<li>${ev}</li>`).join('')}
+                </ul>
+              </div>
+              <div>
+                <strong class="text-muted block text-[10px] uppercase tracking-wider font-mono">3. Interpretation</strong>
+                <p class="text-body">${t.interpretation}</p>
+              </div>
+              <div>
+                <strong class="text-error block text-[10px] uppercase tracking-wider font-mono">4. Risk Assessment</strong>
+                <p class="text-body font-medium text-error">${t.risk}</p>
+              </div>
+              <div>
+                <strong class="text-muted block text-[10px] uppercase tracking-wider font-mono">5. Limitation</strong>
+                <p class="text-muted">${t.limitation}</p>
+              </div>
+              <div>
+                <strong class="text-primary block text-[10px] uppercase tracking-wider font-mono">6. Recommendation</strong>
+                <p class="text-body font-medium">${t.recommendation}</p>
+              </div>
+            </div>
+          </div>
+        `
+          )
+          .join('');
+      }
+    }
+
+    // Privacy Findings
+    const privacyList = document.getElementById('privacy-findings-list');
+    const privacyBadge = document.getElementById('privacy-count-badge');
+    if (privacyBadge) privacyBadge.innerText = `${result.privacy.totalItems} items`;
+    if (privacyList) {
+      if (result.privacy.findings.length === 0) {
+        privacyList.innerHTML = `<p class="text-xs text-muted italic bg-canvas p-3 rounded-lg border border-hairline">No sensitive personal information (emails, phones, credentials) detected.</p>`;
+      } else {
+        privacyList.innerHTML = result.privacy.findings
+          .map(
+            (f) => `
+          <div class="bg-canvas border border-hairline rounded-lg p-3 flex items-center justify-between gap-3 text-xs">
+            <div class="space-y-0.5">
+              <div class="flex items-center gap-2">
+                <span class="font-medium text-ink">${f.label}</span>
+                <span class="${f.severity === 'high' ? 'text-error bg-error/10 border-error/20' : 'text-warning bg-warning/10 border-warning/20'} border px-1.5 py-0.5 rounded text-[10px] uppercase font-semibold">${f.severity}</span>
+              </div>
+              <p class="font-mono text-body truncate max-w-md">${f.value}</p>
+            </div>
+            <button type="button" class="btn-secondary text-[11px] h-7 px-2.5 shrink-0" onclick="window.redactSpecificItem('${f.value.replace(/'/g, "\\'")}')">
+              Hide / Redact
+            </button>
+          </div>
+        `
+          )
+          .join('');
+      }
+    }
+
+    // Links Findings
+    const linksList = document.getElementById('links-findings-list');
+    const linksBadge = document.getElementById('links-count-badge');
+    if (linksBadge) linksBadge.innerText = `${result.links.totalUrls} URLs`;
+    if (linksList) {
+      if (result.links.findings.length === 0) {
+        linksList.innerHTML = `<p class="text-xs text-muted italic bg-canvas p-3 rounded-lg border border-hairline">No visible URLs found in image.</p>`;
+      } else {
+        linksList.innerHTML = result.links.findings
+          .map(
+            (l) => `
+          <div class="bg-canvas border border-hairline rounded-lg p-3 text-xs space-y-1.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-mono text-ink font-medium truncate">${l.url}</span>
+              <span class="${l.riskLevel === 'high' ? 'text-error bg-error/10' : l.riskLevel === 'medium' ? 'text-warning bg-warning/10' : 'text-success bg-success/10'} px-1.5 py-0.5 rounded text-[10px] uppercase font-semibold shrink-0">${l.riskLevel}</span>
+            </div>
+            <ul class="text-body space-y-0.5 list-disc list-inside">
+              ${l.issues.map((iss) => `<li>${iss}</li>`).join('')}
+            </ul>
+          </div>
+        `
+          )
+          .join('');
+      }
+    }
+
+    // Metadata
+    const metaContainer = document.getElementById('metadata-details-container');
+    if (metaContainer) {
+      if (!result.metadata.hasExif && result.metadata.tags.length === 0) {
+        metaContainer.innerHTML = `<p class="text-xs text-muted italic bg-canvas p-3 rounded-lg border border-hairline">No metadata or EXIF tags found in this image.</p>`;
+      } else {
+        let metaHtml = `
+          <div class="bg-canvas border border-hairline rounded-lg p-3 text-xs space-y-2">
+            <div class="grid grid-cols-2 gap-2">
+              <div><span class="text-muted">Camera / Device:</span> <span class="text-ink font-medium">${result.metadata.camera ? `${result.metadata.camera.make || ''} ${result.metadata.camera.model || ''}`.trim() : 'Unknown'}</span></div>
+              <div><span class="text-muted">Software:</span> <span class="text-ink font-medium">${result.metadata.software || 'None detected'}</span></div>
+              <div><span class="text-muted">Creation Date:</span> <span class="text-ink font-medium">${result.metadata.dateTime || 'Not specified'}</span></div>
+              <div><span class="text-muted">GPS Coordinates:</span> <span class="text-ink font-medium">${result.metadata.gps ? `${result.metadata.gps.lat.toFixed(4)}, ${result.metadata.gps.lng.toFixed(4)}` : 'None'}</span></div>
+            </div>
+          </div>
+        `;
+        if (result.metadata.tags.length > 0) {
+          metaHtml += `
+            <details class="text-xs">
+              <summary class="cursor-pointer font-medium text-primary hover:underline py-1">View all ${result.metadata.tags.length} metadata tags</summary>
+              <div class="mt-2 max-h-48 overflow-y-auto bg-canvas border border-hairline rounded-lg p-2 font-mono text-[11px] space-y-1">
+                ${result.metadata.tags.map((t) => `<div><span class="text-muted">[${t.group}] ${t.tag}:</span> <span class="text-ink">${t.value}</span></div>`).join('')}
+              </div>
+            </details>
+          `;
+        }
+        metaContainer.innerHTML = metaHtml;
+      }
+    }
+
+    // OCR Text
+    const ocrDisplay = document.getElementById('ocr-text-display');
+    if (ocrDisplay) {
+      ocrDisplay.innerText = result.ocr.text.trim() || 'No text detected in screenshot.';
+    }
+
+    // Visual Highlighting for Fraud on Canvas
+    const overlayCanvas = document.getElementById('preview-overlay-canvas') as HTMLCanvasElement | null;
+    if (overlayCanvas && previewImg && result.fraudAnalysis && result.fraudAnalysis.classification !== 'unverifiable') {
+      if (previewImg.complete) {
+        drawFraudHighlights();
+      } else {
+        previewImg.onload = drawFraudHighlights;
+      }
+      
+      function drawFraudHighlights() {
+        if (!overlayCanvas || !previewImg || !result.fraudAnalysis) return;
+        overlayCanvas.width = previewImg.naturalWidth;
+        overlayCanvas.height = previewImg.naturalHeight;
+        overlayCanvas.style.width = '100%';
+        overlayCanvas.style.height = '100%';
+        overlayCanvas.style.objectFit = 'contain';
+        
+        const ctx = overlayCanvas.getContext('2d');
+        if (!ctx) return;
+        ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+        
+        // Target keywords from signals, URLs, and phone numbers
+        const highlightWords: string[] = [];
+        result.fraudAnalysis.signals.forEach(s => {
+          if (s.type.includes('urgency') || s.type.includes('threat')) highlightWords.push('urgent', 'urgently', 'immediately', 'act', 'now', 'locked', 'suspended', 'penalty', 'late fee', 'blocked');
+          if (s.type.includes('phone') || s.type.includes('vishing')) highlightWords.push('call', 'verify', 'identity');
+          if (s.type.includes('prize') || s.type.includes('reward')) highlightWords.push('won', 'gift card', '$500', 'claim', 'target');
+          if (s.type.includes('delivery')) highlightWords.push('missed', 'reschedule', 'parcel', 'ups');
+          if (s.type.includes('toll')) highlightWords.push('toll', 'sunpass', '$34.50', 'payment', 'outstanding');
+          if (s.type.includes('loan')) highlightWords.push('student loan', 'forgiveness', 'qualify', 'enrollment');
+          if (s.type.includes('attachment')) highlightWords.push('apk', '.apk', 'rekyc');
+        });
+        
+        result.fraudAnalysis.urls.forEach(u => highlightWords.push(u));
+        result.fraudAnalysis.phone_numbers.forEach(p => highlightWords.push(p));
+        
+        const lowerWords = highlightWords.map(w => w.toLowerCase());
+        
+        result.ocr.words.forEach(w => {
+          const lowerWord = w.text.toLowerCase();
+          const shouldHighlight = lowerWords.some(hw => lowerWord.includes(hw) || hw.includes(lowerWord));
+          
+          if (shouldHighlight && w.bbox) {
+            ctx.strokeStyle = 'rgba(239, 68, 68, 0.85)';
+            ctx.lineWidth = Math.max(2, overlayCanvas.width / 220);
+            ctx.fillStyle = 'rgba(239, 68, 68, 0.18)';
+            
+            const boxWidth = w.bbox.x1 - w.bbox.x0;
+            const boxHeight = w.bbox.y1 - w.bbox.y0;
+            
+            ctx.strokeRect(w.bbox.x0, w.bbox.y0, boxWidth, boxHeight);
+            ctx.fillRect(w.bbox.x0, w.bbox.y0, boxWidth, boxHeight);
+          }
+        });
+      }
+    } else if (overlayCanvas) {
+      const ctx = overlayCanvas.getContext('2d');
+      if (ctx) ctx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+    }
+
+    // Forensics
+    const forensicsContainer = document.getElementById('forensics-details-container');
+    if (forensicsContainer) {
+      forensicsContainer.innerHTML = `
+        <div class="bg-canvas border border-hairline rounded-lg p-3 text-xs space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-muted">Compression Consistency:</span>
+            <span class="text-ink font-medium">${result.forensics.compressionInconsistency}</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-muted">Noise Variance Score:</span>
+            <span class="text-ink font-mono">${result.forensics.noiseVarianceScore}</span>
+          </div>
+          <ul class="text-body space-y-1 list-disc list-inside pt-1">
+            ${result.forensics.notes.map((n) => `<li>${n}</li>`).join('')}
+          </ul>
+        </div>
+      `;
+    }
+  }
+
+  // Cross-Tool Handoff Actions
+  document.getElementById('handoff-to-redactor-btn')?.addEventListener('click', () => {
+    if (currentDataUrl) {
+      setHandoffImage(currentDataUrl, 'analyzer');
+      window.location.href = '/screenshot-redactor';
+    }
+  });
+
+  document.getElementById('handoff-to-ocr-btn')?.addEventListener('click', () => {
+    if (currentDataUrl) {
+      setHandoffImage(currentDataUrl, 'analyzer');
+      window.location.href = '/screenshot-ocr';
+    }
+  });
+
+  document.getElementById('handoff-to-metadata-btn')?.addEventListener('click', () => {
+    if (currentDataUrl) {
+      setHandoffImage(currentDataUrl, 'analyzer');
+      window.location.href = '/screenshot-metadata-checker';
+    }
+  });
+
+  document.getElementById('handoff-to-forensics-btn')?.addEventListener('click', () => {
+    if (currentDataUrl) {
+      setHandoffImage(currentDataUrl, 'analyzer');
+      window.location.href = '/image-manipulation-checker';
+    }
+  });
+
+  // Preset Buttons
+  const sampleButtons = document.querySelectorAll('.sample-btn');
+  sampleButtons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const sampleId = btn.getAttribute('data-sample-id');
+      const preset = SAMPLE_PRESETS.find((p) => p.id === sampleId);
+      if (preset) {
+        const dataUrl = await preset.generateDataUrl();
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        const file = new File([blob], `${preset.id}.png`, { type: 'image/png' });
+        await processImageFile(file);
+      }
+    });
+  });
+
+  // Drag and drop listeners
+  dropZone?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('border-primary', 'bg-surface-card');
+  });
+
+  dropZone?.addEventListener('dragleave', () => {
+    dropZone.classList.remove('border-primary', 'bg-surface-card');
+  });
+
+  dropZone?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('border-primary', 'bg-surface-card');
+    if (e.dataTransfer?.files?.[0]) {
+      processImageFile(e.dataTransfer.files[0]);
+    }
+  });
+
+  browseBtn?.addEventListener('click', () => fileInput?.click());
+  fileInput?.addEventListener('change', () => {
+    if (fileInput.files?.[0]) {
+      processImageFile(fileInput.files[0]);
+    }
+  });
+
+  window.addEventListener('paste', (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        const file = items[i].getAsFile();
+        if (file) {
+          processImageFile(file);
+          break;
+        }
+      }
+    }
+  });
+
+  document.getElementById('reset-analysis-btn')?.addEventListener('click', () => {
+    dashboard?.classList.add('hidden');
+    currentFile = null;
+    currentResult = null;
+    dropZone?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('copy-ocr-btn')?.addEventListener('click', () => {
+    if (currentResult?.ocr.text) {
+      navigator.clipboard.writeText(currentResult.ocr.text);
+      alert('Extracted text copied to clipboard!');
+    }
+  });
+
+  document.getElementById('download-ocr-txt-btn')?.addEventListener('click', () => {
+    if (currentResult?.ocr.text) {
+      const blob = new Blob([currentResult.ocr.text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `extracted-text-${Date.now()}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  });
+
+  async function downloadCleanImage() {
+    if (!previewImg) return;
+    const { blob } = await stripImageMetadata(previewImg, 'image/png');
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `cleaned-screenshot-${Date.now()}.png`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('strip-metadata-download-btn')?.addEventListener('click', downloadCleanImage);
+  document.getElementById('inline-strip-metadata-btn')?.addEventListener('click', downloadCleanImage);
+
+  document.getElementById('toggle-ela-btn')?.addEventListener('click', () => {
+    if (!previewImg || !currentResult?.forensics.elaDataUrl) return;
+    isElaActive = !isElaActive;
+    previewImg.src = isElaActive ? currentResult.forensics.elaDataUrl : currentResult.dataUrl;
+    const btn = document.getElementById('toggle-ela-btn');
+    if (btn) btn.innerText = isElaActive ? 'Show Original' : 'Toggle ELA Map';
+  });
+
+  document.getElementById('download-report-btn')?.addEventListener('click', () => {
+    if (!currentResult) return;
+    const blob = new Blob([JSON.stringify(currentResult, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `screenshot-investigation-report-${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  openRedactorBtn?.addEventListener('click', initRedactorModal);
+  closeRedactorBtn?.addEventListener('click', () => redactorModal?.classList.add('hidden'));
+  cancelRedactorBtn?.addEventListener('click', () => redactorModal?.classList.add('hidden'));
+
+  async function initRedactorModal() {
+    if (!previewImg || !redactorCanvas) return;
+    redactorModal?.classList.remove('hidden');
+
+    redactorCanvas.width = previewImg.naturalWidth || previewImg.width;
+    redactorCanvas.height = previewImg.naturalHeight || previewImg.height;
+    redrawRedactorCanvas();
+  }
+
+  function redrawRedactorCanvas() {
+    if (!redactorCanvas || !previewImg) return;
+    renderRedactedImage(previewImg, redactionBoxes).then(({ dataUrl }) => {
+      const img = new Image();
+      img.onload = () => {
+        const ctx = redactorCanvas.getContext('2d');
+        ctx?.drawImage(img, 0, 0);
+      };
+      img.src = dataUrl;
+    });
+  }
+
+  const toolBtns = document.querySelectorAll('.redactor-tool-btn');
+  toolBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      toolBtns.forEach((b) => b.classList.remove('bg-surface-card', 'text-ink'));
+      btn.classList.add('bg-surface-card', 'text-ink');
+      currentTool = btn.getAttribute('data-tool') as any;
+    });
+  });
+
+  redactorCanvas?.addEventListener('mousedown', (e) => {
+    if (!redactorCanvas) return;
+    const rect = redactorCanvas.getBoundingClientRect();
+    const scaleX = redactorCanvas.width / rect.width;
+    const scaleY = redactorCanvas.height / rect.height;
+
+    startX = (e.clientX - rect.left) * scaleX;
+    startY = (e.clientY - rect.top) * scaleY;
+    isDrawing = true;
+  });
+
+  redactorCanvas?.addEventListener('mouseup', (e) => {
+    if (!isDrawing || !redactorCanvas) return;
+    isDrawing = false;
+    const rect = redactorCanvas.getBoundingClientRect();
+    const scaleX = redactorCanvas.width / rect.width;
+    const scaleY = redactorCanvas.height / rect.height;
+
+    const endX = (e.clientX - rect.left) * scaleX;
+    const endY = (e.clientY - rect.top) * scaleY;
+
+    const width = Math.abs(endX - startX);
+    const height = Math.abs(endY - startY);
+    const x = Math.min(startX, endX);
+    const y = Math.min(startY, endY);
+
+    if (width > 5 && height > 5) {
+      redactionBoxes.push({
+        id: `box_${Date.now()}`,
+        x,
+        y,
+        width,
+        height,
+        type: currentTool,
+      });
+      redrawRedactorCanvas();
+    }
+  });
+
+  autoRedactPiiBtn?.addEventListener('click', () => {
+    if (!currentResult) return;
+    for (const f of currentResult.privacy.findings) {
+      if (f.bbox) {
+        redactionBoxes.push({
+          id: `auto_${f.id}`,
+          x: f.bbox.x - 4,
+          y: f.bbox.y - 4,
+          width: f.bbox.width + 8,
+          height: f.bbox.height + 8,
+          type: currentTool,
+        });
+      }
+    }
+    redrawRedactorCanvas();
+  });
+
+  undoRedactBtn?.addEventListener('click', () => {
+    redactionBoxes.pop();
+    redrawRedactorCanvas();
+  });
+
+  clearRedactBtn?.addEventListener('click', () => {
+    redactionBoxes = [];
+    redrawRedactorCanvas();
+  });
+
+  exportRedactedBtn?.addEventListener('click', async () => {
+    if (!previewImg) return;
+    const { blob } = await renderRedactedImage(previewImg, redactionBoxes, 'image/png');
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `redacted-screenshot-${Date.now()}.png`;
+    a.click();
+    URL.revokeObjectURL(url);
+    redactorModal?.classList.add('hidden');
+  });
+
+  (window as any).redactSpecificItem = (val: string) => {
+    initRedactorModal();
+  };
+</script>

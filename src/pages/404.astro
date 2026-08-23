@@ -1,0 +1,85 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const popularTools = [
+  { name: 'Screenshot Analyzer', href: '/screenshot-analyzer', desc: 'Central multi-vector image safety audit' },
+  { name: 'Scam & Fraud Checker', href: '/screenshot-scam-checker', desc: 'Identify fake urgency, legal threats, and OTP phishing' },
+  { name: 'AI Image Detector', href: '/ai-image-detector', desc: 'Inspect images for synthetic generative signals' },
+  { name: 'Privacy Scanner', href: '/screenshot-privacy-checker', desc: 'Scan exposed emails, phones, and card numbers' },
+  { name: 'Payment Screenshot Review', href: '/payment-screenshot-checker', desc: 'Audit transaction receipts and invoice consistency' },
+  { name: 'Screenshot OCR', href: '/screenshot-ocr', desc: 'Extract and transcribe readable text from images' },
+];
+---
+
+<Layout
+  title="Page Not Found (404) — ScreenshotChecker"
+  description="The page you requested could not be found. Return to ScreenshotChecker to inspect and analyze screenshots securely in your browser."
+>
+  <Header currentPath="/404" />
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
+    <!-- Status Badge -->
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-hairline text-ink text-xs font-semibold uppercase tracking-wider mb-6 font-mono">
+      <span class="w-2 h-2 rounded-full bg-warning"></span>
+      <span>Error 404 · Page Not Found</span>
+    </div>
+
+    <!-- Main Heading -->
+    <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal text-ink tracking-tight mb-4 max-w-2xl mx-auto">
+      We Couldn't Find That Evidence
+    </h1>
+
+    <p class="font-sans text-sm sm:text-base text-body max-w-xl mx-auto leading-relaxed mb-8">
+      The page or investigation workspace you're looking for may have been moved, renamed, or the link might be mistyped.
+    </p>
+
+    <!-- Main Action Buttons -->
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-16">
+      <a href="/" class="btn-primary">
+        <span>Go to Screenshot Checker</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+      <a href="/tools" class="btn-secondary">
+        <span>Explore Tools Directory</span>
+      </a>
+      <a href="/blog" class="btn-secondary">
+        <span>Read Investigation Guides</span>
+      </a>
+    </div>
+
+    <!-- Quick Shortcuts Grid -->
+    <div class="pt-10 border-t border-hairline text-left">
+      <div class="mb-6 text-center sm:text-left">
+        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block">Quick Navigation</span>
+        <h2 class="font-serif text-xl sm:text-2xl text-ink font-normal mt-1">
+          Popular Image Investigation Tools
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {popularTools.map((tool) => (
+          <a
+            href={tool.href}
+            class="feature-card !p-4 group hover:border-primary/40 hover:bg-surface-cream-strong/50 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="font-serif text-base text-ink font-normal group-hover:text-primary transition-colors mb-1 flex items-center justify-between">
+                <span>{tool.name}</span>
+                <svg class="w-3.5 h-3.5 text-muted group-hover:text-primary transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </h3>
+              <p class="text-xs text-body leading-relaxed">{tool.desc}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

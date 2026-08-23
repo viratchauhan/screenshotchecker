@@ -1,0 +1,87 @@
+---
+import { SAMPLE_PRESETS } from '../lib/samples/sampleData';
+---
+
+<section id="uploader-section" class="max-w-4xl mx-auto px-4 sm:px-6 mb-12 sm:mb-16">
+  <!-- Interactive Drop Area -->
+  <div
+    id="drop-zone"
+    class="relative group bg-surface-card border-2 border-dashed border-hairline hover:border-primary/60 rounded-2xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-sm"
+    tabindex="0"
+    role="button"
+    aria-label="Upload or drop an image file for analysis"
+  >
+    <input
+      type="file"
+      id="file-input"
+      class="hidden"
+      accept="image/png, image/jpeg, image/webp, image/gif, image/bmp"
+    />
+
+    <!-- Initial Idle State -->
+    <div id="upload-idle-state" class="space-y-4">
+      <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-surface-cream-strong flex items-center justify-center text-primary group-hover:scale-105 transition-transform duration-200">
+        <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+        </svg>
+      </div>
+
+      <div class="space-y-1.5">
+        <h3 class="font-serif text-xl sm:text-2xl text-ink font-normal" data-i18n="uploader.drop_title">
+          Upload a screenshot to analyze it
+        </h3>
+        <p class="font-sans text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed" data-i18n="uploader.drop_subtitle">
+          Check screenshots for potential editing signals, suspicious visual inconsistencies, metadata, and other available evidence.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <button
+          type="button"
+          id="browse-btn"
+          class="btn-primary text-xs sm:text-sm"
+          data-i18n="uploader.browse_btn"
+        >
+          Select Screenshot
+        </button>
+        <span class="text-xs text-muted font-mono hidden sm:inline">
+          or press <kbd class="px-2 py-1 bg-surface-cream-strong rounded border border-hairline font-mono text-[11px]">Ctrl+V</kbd>
+        </span>
+      </div>
+
+      <p class="text-[11px] text-muted-soft font-mono pt-2">
+        Supports PNG, JPG, WebP, GIF & BMP up to 25MB
+      </p>
+    </div>
+
+    <!-- Active Scanning / Progress State -->
+    <div id="upload-progress-state" class="hidden py-8 space-y-4">
+      <div class="w-12 h-12 mx-auto rounded-full border-3 border-primary/20 border-t-primary animate-spin"></div>
+      <div>
+        <h4 class="font-serif text-xl text-ink font-normal" id="progress-status-text" data-i18n="uploader.processing_status">
+          Observing visual image...
+        </h4>
+        <p class="text-xs text-muted mt-1 font-mono">100% In-Browser Privacy</p>
+      </div>
+      <div class="max-w-xs mx-auto bg-surface-cream-strong rounded-full h-1.5 overflow-hidden">
+        <div id="progress-bar-fill" class="bg-primary h-full transition-all duration-300 w-0"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Sample Presets -->
+  <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-muted">
+    <span class="font-medium text-ink shrink-0">Try real-world test cases:</span>
+    <div class="flex flex-wrap items-center justify-center gap-1.5">
+      {SAMPLE_PRESETS.map((preset) => (
+        <button
+          type="button"
+          data-sample-id={preset.id}
+          class="sample-btn px-2.5 py-1 rounded-md bg-surface-card hover:bg-surface-cream-strong border border-hairline text-body hover:text-ink transition-colors font-mono text-[11px] cursor-pointer"
+        >
+          {preset.name}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>

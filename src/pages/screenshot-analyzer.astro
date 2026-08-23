@@ -1,0 +1,39 @@
+---
+import ToolLayout from '../components/ToolLayout.astro';
+
+const props = {
+  title: "Screenshot Analyzer — Multi-Signal Image Safety & Content Inspection",
+  metaDescription: "Audit screenshots for exposed sensitive information, scam triggers, spam signals, metadata, and visual manipulation in your browser.",
+  badge: "All-in-One Image Safety",
+  heading: "Comprehensive Screenshot Safety Analyzer",
+  subheading: "Perform multi-layer checks on your screenshots and images before sharing them publicly, sending them to colleagues, or trusting their authenticity.",
+  howItWorksSteps: [
+    { step: "1", title: "Select or Paste", desc: "Drag and drop any image file or paste directly from clipboard into the local analyzer." },
+    { step: "2", title: "Automated Browser Audit", desc: "Our engine executes OCR, metadata extraction, privacy heuristics, and forensic analysis concurrently." },
+    { step: "3", title: "Review & Protect", desc: "Inspect detailed risk signals, redact sensitive data, and download clean reports." },
+  ],
+  examples: [
+    { title: "Sharing Work Chat Screenshots", desc: "Audit Slack or Teams conversations to ensure internal API tokens, passwords, customer emails, or private URLs aren't accidentally exposed." },
+    { title: "Verifying Suspicious Messages", desc: "Check urgent SMS or direct messages for scam triggers, threat keywords, or dangerous unencrypted links." },
+    { title: "Auditing Online Receipts", desc: "Verify that personal credit card numbers, order reference numbers, and home addresses are hidden before posting." },
+    { title: "Checking Photo Location Metadata", desc: "Ensure sensitive home or office GPS coordinates are removed from camera photos before sharing on social platforms." },
+  ],
+  limitations: [
+    "Screenshot Analyzer provides objective risk signals and heuristic analysis; it does not provide definitive legal or authenticity verdicts.",
+    "OCR accuracy depends on image resolution, contrast, and compression artifacts.",
+    "Manipulation detection evaluates compression and noise gradients and may flag normal resaving or cropping as variance.",
+  ],
+  faqs: [
+    {
+      question: "What makes Screenshot Analyzer different from standard image viewers?",
+      answer: "Screenshot Analyzer evaluates multiple layers simultaneously: optical character recognition, sensitive PII extraction, scam heuristics, URL safety structure, and Error Level Analysis (ELA), all within a secure browser sandbox.",
+    },
+    {
+      question: "Are any images uploaded to a cloud server?",
+      answer: "No. The entire analysis pipeline executes locally on your device via client-side JavaScript, Web Workers, and WebAssembly.",
+    },
+  ],
+};
+---
+
+<ToolLayout {...props} />

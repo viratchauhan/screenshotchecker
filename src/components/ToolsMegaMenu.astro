@@ -1,0 +1,128 @@
+---
+import { TOOLS_REGISTRY, TOOL_CATEGORIES } from '../data/tools';
+
+const groupedTools = TOOL_CATEGORIES.map((category) => ({
+  category,
+  tools: TOOLS_REGISTRY.filter((t) => t.category === category),
+})).filter((g) => g.tools.length > 0);
+---
+
+<div class="relative" id="tools-megamenu-container">
+  <button
+    id="tools-megamenu-btn"
+    type="button"
+    class="flex items-center gap-1.5 text-sm font-medium text-body hover:text-ink transition-colors py-2 focus:outline-none cursor-pointer"
+    aria-expanded="false"
+    aria-haspopup="true"
+    data-i18n="nav.tools"
+  >
+    <span>Tools</span>
+    <svg class="w-3.5 h-3.5 text-muted transition-transform duration-200" id="tools-arrow-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <!-- Mega Menu Dropdown Panel (100% OPAQUE SOLID SURFACE) -->
+  <div
+    id="tools-megamenu-panel"
+    class="hidden absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[680px] max-w-[94vw] bg-canvas border border-hairline rounded-2xl shadow-2xl p-5 z-50 transition-all duration-150 select-none opacity-100"
+    style="background-color: var(--color-canvas); opacity: 1 !important; isolation: isolate;"
+    role="menu"
+  >
+    <!-- 3 Compact Columns -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-h-[55vh] overflow-y-auto pr-1">
+      {groupedTools.map((group) => (
+        <div class="space-y-2">
+          <span class="text-[11px] font-bold text-muted uppercase tracking-wider block border-b border-hairline pb-1">
+            {group.category}
+          </span>
+          <div class="space-y-1">
+            {group.tools.map((tool) => (
+              <a
+                href={tool.route}
+                class="group block p-1.5 rounded-lg hover:bg-surface-card transition-colors text-left"
+                role="menuitem"
+              >
+                <div class="flex items-center justify-between gap-1 mb-0.5">
+                  <span class="text-xs font-semibold text-ink group-hover:text-primary transition-colors">
+                    {tool.name}
+                  </span>
+                  {tool.badge && (
+                    <span class="badge-pill !text-[9px] !py-0 !px-1.5 font-mono">
+                      {tool.badge}
+                    </span>
+                  )}
+                </div>
+                <p class="text-[11px] text-muted line-clamp-1 leading-snug">
+                  {tool.description}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Action Footer -->
+    <div class="mt-4 pt-3 border-t border-hairline flex items-center justify-between text-xs">
+      <span class="text-muted text-[11px]" data-i18n="tools.privacy_guarantee">100% Client-Side Private Analysis</span>
+      <a
+        href="/tools"
+        class="font-semibold text-primary hover:text-primary-active flex items-center gap-1 group py-1"
+        data-i18n="tools.view_all"
+      >
+        <span>View all tools</span>
+        <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupToolsMegaMenu() {
+    const btn = document.getElementById('tools-megamenu-btn');
+    const panel = document.getElementById('tools-megamenu-panel');
+    const arrow = document.getElementById('tools-arrow-icon');
+    const container = document.getElementById('tools-megamenu-container');
+
+    function toggleMenu(show?: boolean) {
+      const isHidden = panel?.classList.contains('hidden');
+      const shouldShow = show !== undefined ? show : isHidden;
+
+      if (shouldShow) {
+        panel?.classList.remove('hidden');
+        btn?.setAttribute('aria-expanded', 'true');
+        arrow?.classList.add('rotate-180');
+      } else {
+        panel?.classList.add('hidden');
+        btn?.setAttribute('aria-expanded', 'false');
+        arrow?.classList.remove('rotate-180');
+      }
+    }
+
+    btn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!container?.contains(e.target as Node)) {
+        toggleMenu(false);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        toggleMenu(false);
+      }
+    });
+
+    // Close when any link inside is clicked
+    panel?.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+  }
+
+  setupToolsMegaMenu();
+  document.addEventListener('astro:page-load', setupToolsMegaMenu);
+</script>

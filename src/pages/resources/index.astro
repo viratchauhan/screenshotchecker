@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import RelatedTools from '../../components/RelatedTools.astro';
+
+const currentPath = Astro.url.pathname;
+
+const guides = [
+  {
+    title: 'How to Check If a Screenshot Contains Personal Information',
+    category: 'Privacy & Security',
+    readTime: '4 min read',
+    desc: 'Learn how to audit chat captures, invoices, and bug reports for exposed email addresses, phone numbers, API keys, and credit cards before sharing.',
+  },
+  {
+    title: 'How to Remove EXIF & GPS Metadata from an Image',
+    category: 'Metadata & Privacy',
+    readTime: '3 min read',
+    desc: 'Step-by-step guide on how photos capture latitude, longitude, and device serial numbers, and how to safely sanitize them in your browser.',
+  },
+  {
+    title: 'How to Spot Scam Messages & Fake Urgency in Screenshots',
+    category: 'Scam Prevention',
+    readTime: '5 min read',
+    desc: 'Explore the most common social engineering triggers used in SMS and DM phishing, from fake bank lockouts to 24-hour penalty threats.',
+  },
+  {
+    title: 'How to Safely Share Screenshots Online Without Data Leaks',
+    category: 'Best Practices',
+    readTime: '4 min read',
+    desc: 'Essential redaction techniques: why drawing over text with semi-transparent brushes fails and how solid canvas redaction protects your identity.',
+  },
+  {
+    title: 'Understanding Error Level Analysis (ELA) for Image Forensics',
+    category: 'Image Forensics',
+    readTime: '6 min read',
+    desc: 'A technical deep-dive into how JPEG compression error gradients reveal spliced text, altered numbers, and overlaid graphics.',
+  },
+  {
+    title: 'Why Automated AI-Image Detection Is Not Definitive',
+    category: 'AI & Verification',
+    readTime: '5 min read',
+    desc: 'Understand why re-encoding, cropping, and screenshotting destroy high-frequency diffusion artifacts and why human review remains vital.',
+  },
+];
+---
+
+<Layout
+  title="Educational Guides & Knowledge Base — Screenshot Checker"
+  description="Explore comprehensive guides on screenshot privacy, metadata removal, scam message detection, image forensics, and safe sharing best practices."
+>
+  <Header currentPath={currentPath} />
+
+  <main class="flex-1 max-w-5xl mx-auto px-4 sm:px-6 py-16">
+    <div class="mb-14 text-center max-w-2xl mx-auto">
+      <span class="badge-coral text-xs mb-3 inline-block">Knowledge Base</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink mb-4">
+        Screenshot Safety & Privacy Guides
+      </h1>
+      <p class="text-sm sm:text-base text-muted">
+        Practical tutorials, security explanations, and best practices for auditing and protecting digital images.
+      </p>
+    </div>
+
+    <!-- Guides Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+      {guides.map((guide) => (
+        <article class="feature-card !p-6 flex flex-col justify-between hover:border-primary/40 transition-colors">
+          <div>
+            <div class="flex items-center justify-between text-xs text-muted mb-3">
+              <span class="badge-pill !text-[11px] !py-0.5">{guide.category}</span>
+              <span>{guide.readTime}</span>
+            </div>
+            <h2 class="font-serif text-xl text-ink font-normal mb-2.5 leading-snug">
+              {guide.title}
+            </h2>
+            <p class="text-xs sm:text-sm text-body leading-relaxed">
+              {guide.desc}
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-hairline flex items-center justify-between">
+            <a href="/#uploader-section" class="text-xs font-medium text-primary hover:text-primary-active inline-flex items-center gap-1">
+              <span>Scan screenshot now</span>
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <RelatedTools currentPath={currentPath} />
+  </main>
+
+  <Footer />
+</Layout>

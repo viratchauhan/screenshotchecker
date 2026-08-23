@@ -1,0 +1,38 @@
+---
+import ToolLayout from '../components/ToolLayout.astro';
+
+const props = {
+  title: "Payment Screenshot Review — Review Receipt & Invoice Layout Signals",
+  metaDescription: "Review payment receipts, bank transfer captures, and invoice screenshots for internal consistency, layout alignment, and sensitive financial PII.",
+  badge: "Receipt & Payment Review",
+  heading: "Payment Screenshot Review & Consistency Check",
+  subheading: "Review payment screenshots, money transfer slips, and digital receipts for internal layout consistency, typography alignment, and exposed financial details.",
+  howItWorksSteps: [
+    { step: "1", title: "Load Receipt / Slip", desc: "Upload or paste the transaction receipt or payment confirmation screenshot." },
+    { step: "2", title: "OCR & Field Extraction", desc: "Our engine extracts amounts, transaction reference numbers, timestamps, and recipient names." },
+    { step: "3", title: "Consistency & Forensics", desc: "Inspect ELA compression consistency around digits and verify that sensitive card numbers are masked." },
+  ],
+  examples: [
+    { title: "Reviewing P2P Transfer Confirmations", desc: "Check peer-to-peer payment screenshots (Zelle, Venmo, UPI, PayPal) for font alignment anomalies around amount digits." },
+    { title: "Auditing Vendor Invoices", desc: "Verify that invoice bank routing numbers, total amounts, and tax breakdowns align logically." },
+    { title: "Protecting Customer Billing Slips", desc: "Mask cardholder full names and 16-digit card numbers before sharing receipt proofs." },
+    { title: "Examining Digital Bank Receipts", desc: "Review whether payment confirmation screens contain spliced compression boundaries around date stamps." },
+  ],
+  limitations: [
+    "CRITICAL NOTICE: This tool provides 'Payment Screenshot Review', NOT definitive payment verification. A visually consistent screenshot cannot prove that funds actually cleared a banking network.",
+    "Never ship goods, release escrow, or confirm financial obligations solely based on a screenshot without checking your official bank or merchant portal.",
+  ],
+  faqs: [
+    {
+      question: "Can Screenshot Checker verify that money has actually arrived in my account?",
+      answer: "No. Only your official banking app or merchant processing dashboard can confirm settled funds. Scammers frequently generate visually convincing fake payment receipts.",
+    },
+    {
+      question: "What inconsistencies does the review tool look for?",
+      answer: "The tool extracts amount and reference strings, analyzes compression artifacts around modified text areas with ELA, and checks for exposed PII.",
+    },
+  ],
+};
+---
+
+<ToolLayout {...props} />

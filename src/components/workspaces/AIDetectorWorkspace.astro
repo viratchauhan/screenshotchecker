@@ -1,0 +1,832 @@
+---
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+---
+
+<div class="min-h-screen flex flex-col bg-canvas text-body">
+  <Header currentPath="/ai-image-detector" />
+
+  <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full">
+    <!-- Workspace Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-hairline">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="badge-pill !text-xs font-mono font-semibold">C2PA & AI Forensics</span>
+          <span class="text-xs text-muted">Cryptographic Provenance & Multi-Signal Forensic Pipeline</span>
+        </div>
+        <h1 class="font-serif text-2xl sm:text-3xl text-ink font-normal">
+          AI & Synthetic Image Detector
+        </h1>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2">
+        <button id="ai-toggle-ela-btn" class="btn-secondary text-xs h-9 hidden">
+          <span>Toggle ELA View</span>
+        </button>
+        <button id="ai-forensics-handoff-btn" class="btn-secondary text-xs h-9 hidden" title="Inspect in Full Forensics Workspace">
+          <span>Forensics Studio</span>
+          <span>→</span>
+        </button>
+        <button id="ai-new-image-btn" class="btn-secondary text-xs h-9 hidden">
+          <span>Change Image</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty Upload State -->
+    <div
+      id="ai-upload-container"
+      class="bg-surface-card border-2 border-dashed border-hairline rounded-2xl p-8 sm:p-14 text-center cursor-pointer hover:border-primary/50 transition-all mb-8"
+    >
+      <input type="file" id="ai-file-input" class="hidden" accept="image/*" />
+      <div class="w-14 h-14 rounded-full bg-surface-cream-strong flex items-center justify-center text-primary mx-auto mb-4">
+        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <h3 class="font-serif text-2xl text-ink font-normal mb-2">Analyze Images for Generative AI & Content Credentials</h3>
+      <p class="text-xs sm:text-sm text-muted mb-5 max-w-md mx-auto">
+        Inspect images through real C2PA Content Credentials, provenance validation, texture & noise frequency metrics, ELA compression analysis, and typographic rendering checks.
+      </p>
+      <button type="button" id="ai-browse-btn" class="btn-primary text-xs sm:text-sm">
+        Select Image to Analyze
+      </button>
+    </div>
+
+    <!-- Progress / Loading State -->
+    <div id="ai-loading-state" class="hidden bg-surface-card border border-hairline rounded-2xl p-10 text-center space-y-4 max-w-lg mx-auto mb-8 shadow-sm">
+      <div class="w-10 h-10 border-3 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
+      <div>
+        <h4 id="ai-loading-step" class="font-serif text-lg text-ink font-medium">Reading original file bytes & inspecting C2PA credentials...</h4>
+        <p class="text-xs text-muted mt-1">Multi-signal cryptographic & visual forensic analysis in progress</p>
+      </div>
+      <div class="w-full bg-surface-cream rounded-full h-1.5 overflow-hidden">
+        <div id="ai-loading-bar" class="bg-primary h-full transition-all duration-300" style="width: 25%"></div>
+      </div>
+    </div>
+
+    <!-- Active AI Detector Dashboard -->
+    <div id="ai-active-dashboard" class="hidden space-y-6">
+      
+      <!-- Top Overview Card -->
+      <div class="bg-surface-card border border-hairline rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-hairline">
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-xs font-semibold text-muted uppercase tracking-wider font-mono">Forensic Assessment:</span>
+              <span id="ai-verdict-badge" class="badge-status-risk font-bold text-sm">LIKELY AI-GENERATED</span>
+              <span id="ai-strength-badge" class="badge-pill !text-xs font-mono">Evidence Strength: HIGH</span>
+            </div>
+            <h2 id="ai-verdict-title" class="font-serif text-2xl sm:text-3xl text-ink font-normal">
+              Likely AI-Generated
+            </h2>
+          </div>
+
+          <div class="flex items-center gap-4 bg-canvas border border-hairline px-4 py-3 rounded-xl shrink-0">
+            <div>
+              <span class="text-[10px] font-semibold text-muted uppercase tracking-wider block font-mono">C2PA Credentials</span>
+              <span id="ai-c2pa-badge" class="text-sm font-semibold text-ink">Not Found</span>
+            </div>
+            <div class="w-px h-8 bg-hairline"></div>
+            <div>
+              <span class="text-[10px] font-semibold text-muted uppercase tracking-wider block font-mono">Visual Modality</span>
+              <span id="ai-modality-label" class="text-sm font-semibold text-ink">Digital Illustration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Why Explanation Section -->
+        <div class="mt-6 space-y-3">
+          <span class="text-xs font-semibold text-ink uppercase tracking-wider block font-mono">Why This Verdict?</span>
+          <ul id="ai-why-list" class="space-y-2 text-sm text-body">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Dual-Column Content -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left: Image & ELA Interactive Preview (5 cols) -->
+        <div class="lg:col-span-5 space-y-4">
+          <div class="bg-surface-card border border-hairline rounded-xl p-4 sticky top-20 space-y-3">
+            <div class="flex items-center justify-between">
+              <span id="ai-preview-mode-label" class="text-xs font-semibold uppercase tracking-wider text-muted font-mono">Inspected Visual</span>
+              <div class="flex items-center gap-1 bg-canvas border border-hairline p-0.5 rounded-lg text-xs">
+                <button id="ai-view-orig-tab" class="px-2.5 py-1 rounded font-medium bg-surface-card text-ink shadow-xs">Original</button>
+                <button id="ai-view-ela-tab" class="px-2.5 py-1 rounded font-medium text-muted hover:text-ink">ELA Map</button>
+              </div>
+            </div>
+
+            <div class="bg-surface-dark-soft rounded-lg overflow-hidden flex items-center justify-center min-h-[320px] max-h-[500px] border border-hairline relative">
+              <img id="ai-preview-img" src="" alt="Analyzed Visual" class="max-h-[500px] w-auto object-contain shadow-md transition-opacity duration-200" />
+              <img id="ai-ela-img" src="" alt="ELA Error Level Map" class="max-h-[500px] w-auto object-contain shadow-md hidden transition-opacity duration-200" />
+            </div>
+
+            <p id="ai-viewer-caption" class="text-[11px] text-muted leading-relaxed text-center">
+              Original uncompressed uploaded image displayed.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Forensic Evidence Breakdown (7 cols) -->
+        <div class="lg:col-span-7 space-y-6">
+          
+          <!-- C2PA Content Credentials Card (New Dedicated Section) -->
+          <div class="bg-surface-card border border-hairline rounded-xl p-6 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-hairline">
+              <div class="flex items-center gap-2">
+                <span id="ai-c2pa-dot" class="w-2.5 h-2.5 rounded-full bg-muted"></span>
+                <h3 class="font-serif text-lg text-ink font-normal">C2PA Content Credentials</h3>
+              </div>
+              <span id="ai-c2pa-status-pill" class="badge-pill !text-xs font-mono font-semibold">NOT FOUND</span>
+            </div>
+
+            <!-- C2PA Overview Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-muted block mb-1 font-mono uppercase text-[10px]">Claim Generator</span>
+                <span id="ai-c2pa-generator" class="font-medium text-ink block">None Detected</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-muted block mb-1 font-mono uppercase text-[10px]">Digital Source Type</span>
+                <span id="ai-c2pa-sourcetype" class="font-medium text-ink block">Not Specified</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-muted block mb-1 font-mono uppercase text-[10px]">AI Provenance</span>
+                <span id="ai-c2pa-aistatus" class="font-medium text-ink block">No AI Provenance</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-muted block mb-1 font-mono uppercase text-[10px]">Validation State</span>
+                <span id="ai-c2pa-valstate" class="font-medium text-ink block">No Manifest</span>
+              </div>
+            </div>
+
+            <!-- C2PA Summary Statement -->
+            <p id="ai-c2pa-explanation" class="text-xs text-muted leading-relaxed">
+              No Content Credentials were found in this file. This does not prove that the image is authentic or AI-generated.
+            </p>
+
+            <!-- Provenance Actions & Ingredients Timeline (Shown if present) -->
+            <div id="ai-c2pa-actions-container" class="hidden space-y-3 pt-2 border-t border-hairline text-xs">
+              <span class="font-semibold text-ink uppercase tracking-wider block font-mono text-[11px]">Provenance History</span>
+              <div id="ai-c2pa-actions-list" class="space-y-2">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <div id="ai-c2pa-ingredients-container" class="hidden space-y-2 pt-2 border-t border-hairline text-xs">
+              <span class="font-semibold text-ink uppercase tracking-wider block font-mono text-[11px]">Source Ingredients</span>
+              <div id="ai-c2pa-ingredients-list" class="space-y-1.5">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Expandable Technical Provenance Section -->
+            <details id="ai-c2pa-tech-details" class="hidden bg-canvas border border-hairline rounded-lg p-3 text-xs">
+              <summary class="font-mono font-semibold text-muted uppercase tracking-wider cursor-pointer select-none">
+                View Technical C2PA Provenance
+              </summary>
+              <div id="ai-c2pa-tech-content" class="mt-2 font-mono text-[11px] space-y-1 text-ink overflow-x-auto">
+                <!-- Dynamically populated -->
+              </div>
+            </details>
+          </div>
+
+          <!-- Synthetic Signals Section -->
+          <div class="bg-surface-card border border-hairline rounded-xl p-6 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-hairline">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-error"></span>
+                <h3 class="font-serif text-lg text-ink font-normal">Synthetic & Generative Indicators</h3>
+              </div>
+              <span id="ai-synthetic-count" class="badge-pill !text-xs font-mono font-semibold">0 Signals</span>
+            </div>
+
+            <div id="ai-synthetic-signals-list" class="space-y-3">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Editing & Manipulation Signals Section -->
+          <div class="bg-surface-card border border-hairline rounded-xl p-6 shadow-sm space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-hairline">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-warning"></span>
+                <h3 class="font-serif text-lg text-ink font-normal">Editing & Compression Analysis (ELA)</h3>
+              </div>
+              <span id="ai-editing-count" class="badge-pill !text-xs font-mono font-semibold">0 Signals</span>
+            </div>
+
+            <div id="ai-editing-signals-list" class="space-y-3">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Metadata & EXIF Card -->
+          <div class="bg-surface-card border border-hairline rounded-xl p-6 shadow-sm space-y-4">
+            <h3 class="font-serif text-lg text-ink font-normal pb-3 border-b border-hairline">
+              Hardware EXIF & Container Tags
+            </h3>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-muted block mb-1 font-mono uppercase text-[10px]">Camera EXIF</span>
+                <span id="ai-meta-camera" class="font-medium text-ink block">Not Found</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-muted block mb-1 font-mono uppercase text-[10px]">Software Tag</span>
+                <span id="ai-meta-software" class="font-medium text-ink block">None Detected</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-muted block mb-1 font-mono uppercase text-[10px]">AI-Generation Tag</span>
+                <span id="ai-meta-ai-tag" class="font-medium text-ink block">Not Found</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-muted block mb-1 font-mono uppercase text-[10px]">Capture Date</span>
+                <span id="ai-meta-date" class="font-medium text-ink block">Not Available</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Texture, Noise & Typography Metrics -->
+          <div class="bg-surface-card border border-hairline rounded-xl p-6 shadow-sm space-y-4">
+            <h3 class="font-serif text-lg text-ink font-normal pb-3 border-b border-hairline">
+              Texture & Typography Metrics
+            </h3>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-[10px] text-muted uppercase font-mono block">Noise Level</span>
+                <span id="ai-metric-noise" class="text-base font-semibold text-ink">0/100</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-[10px] text-muted uppercase font-mono block">High-Freq Energy</span>
+                <span id="ai-metric-hf" class="text-base font-semibold text-ink">0.0</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-[10px] text-muted uppercase font-mono block">Smoothness Ratio</span>
+                <span id="ai-metric-smooth" class="text-base font-semibold text-ink">0%</span>
+              </div>
+              <div class="bg-canvas border border-hairline p-3 rounded-lg">
+                <span class="text-[10px] text-muted uppercase font-mono block">Legible Words</span>
+                <span id="ai-metric-words" class="text-base font-semibold text-ink">0</span>
+              </div>
+            </div>
+
+            <div id="ai-text-anomaly-box" class="hidden bg-canvas border border-error/30 p-3.5 rounded-lg text-xs space-y-1">
+              <span class="font-semibold text-error block">Typography Anomaly Detected</span>
+              <p id="ai-text-anomaly-msg" class="text-body leading-relaxed"></p>
+            </div>
+          </div>
+
+          <!-- Boundaries & Limitations Note -->
+          <div class="bg-canvas border border-hairline rounded-xl p-5 text-xs space-y-2">
+            <span class="font-semibold text-ink uppercase tracking-wider block font-mono">Detection Boundaries & Limitations</span>
+            <ul id="ai-limitations-list" class="space-y-1.5 text-muted leading-relaxed list-disc list-inside">
+              <!-- Populated dynamically -->
+            </ul>
+          </div>
+
+          <!-- Diagnostics Details Panel -->
+          <details class="bg-canvas border border-hairline rounded-xl p-4 text-xs">
+            <summary class="font-mono font-semibold text-muted uppercase tracking-wider cursor-pointer select-none">
+              Developer Diagnostics
+            </summary>
+            <div id="ai-debug-panel" class="mt-3 font-mono space-y-1 text-ink text-[11px] leading-relaxed">
+              <!-- Populated dynamically -->
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</div>
+
+<script>
+  import { runFullAIForensics, type AIForensicsReport } from '../../lib/analyzer/aiImageForensicsEngine';
+  import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
+
+  let currentFile: File | null = null;
+  let currentDataUrl = '';
+  let currentReport: AIForensicsReport | null = null;
+  let activeTab: 'orig' | 'ela' = 'orig';
+
+  const dropZone = document.getElementById('ai-upload-container');
+  const fileInput = document.getElementById('ai-file-input') as HTMLInputElement | null;
+  const browseBtn = document.getElementById('ai-browse-btn');
+  const loadingState = document.getElementById('ai-loading-state');
+  const loadingStep = document.getElementById('ai-loading-step');
+  const loadingBar = document.getElementById('ai-loading-bar');
+  const dashboard = document.getElementById('ai-active-dashboard');
+
+  const previewImg = document.getElementById('ai-preview-img') as HTMLImageElement | null;
+  const elaImg = document.getElementById('ai-ela-img') as HTMLImageElement | null;
+  const previewModeLabel = document.getElementById('ai-preview-mode-label');
+  const viewerCaption = document.getElementById('ai-viewer-caption');
+
+  const viewOrigTab = document.getElementById('ai-view-orig-tab');
+  const viewElaTab = document.getElementById('ai-view-ela-tab');
+  const newImageBtn = document.getElementById('ai-new-image-btn');
+  const toggleElaBtn = document.getElementById('ai-toggle-ela-btn');
+  const handoffBtn = document.getElementById('ai-forensics-handoff-btn');
+
+  // Top Overview Elements
+  const verdictBadge = document.getElementById('ai-verdict-badge');
+  const strengthBadge = document.getElementById('ai-strength-badge');
+  const verdictTitle = document.getElementById('ai-verdict-title');
+  const modalityLabel = document.getElementById('ai-modality-label');
+  const c2paTopBadge = document.getElementById('ai-c2pa-badge');
+  const whyList = document.getElementById('ai-why-list');
+
+  // C2PA Dedicated Elements
+  const c2paDot = document.getElementById('ai-c2pa-dot');
+  const c2paStatusPill = document.getElementById('ai-c2pa-status-pill');
+  const c2paGenerator = document.getElementById('ai-c2pa-generator');
+  const c2paSourceType = document.getElementById('ai-c2pa-sourcetype');
+  const c2paAiStatus = document.getElementById('ai-c2pa-aistatus');
+  const c2paValState = document.getElementById('ai-c2pa-valstate');
+  const c2paExplanation = document.getElementById('ai-c2pa-explanation');
+
+  const c2paActionsContainer = document.getElementById('ai-c2pa-actions-container');
+  const c2paActionsList = document.getElementById('ai-c2pa-actions-list');
+  const c2paIngredientsContainer = document.getElementById('ai-c2pa-ingredients-container');
+  const c2paIngredientsList = document.getElementById('ai-c2pa-ingredients-list');
+  const c2paTechDetails = document.getElementById('ai-c2pa-tech-details');
+  const c2paTechContent = document.getElementById('ai-c2pa-tech-content');
+
+  // Signals Elements
+  const syntheticCount = document.getElementById('ai-synthetic-count');
+  const syntheticList = document.getElementById('ai-synthetic-signals-list');
+  const editingCount = document.getElementById('ai-editing-count');
+  const editingList = document.getElementById('ai-editing-signals-list');
+
+  // Metadata Elements
+  const metaCamera = document.getElementById('ai-meta-camera');
+  const metaSoftware = document.getElementById('ai-meta-software');
+  const metaAiTag = document.getElementById('ai-meta-ai-tag');
+  const metaDate = document.getElementById('ai-meta-date');
+
+  // Metrics Elements
+  const metricNoise = document.getElementById('ai-metric-noise');
+  const metricHf = document.getElementById('ai-metric-hf');
+  const metricSmooth = document.getElementById('ai-metric-smooth');
+  const metricWords = document.getElementById('ai-metric-words');
+
+  const textAnomalyBox = document.getElementById('ai-text-anomaly-box');
+  const textAnomalyMsg = document.getElementById('ai-text-anomaly-msg');
+  const limitationsList = document.getElementById('ai-limitations-list');
+  const debugPanel = document.getElementById('ai-debug-panel');
+
+  function updateLoading(stepText: string, pct: number) {
+    if (loadingStep) loadingStep.innerText = stepText;
+    if (loadingBar) loadingBar.style.width = `${pct}%`;
+  }
+
+  function resetState() {
+    currentFile = null;
+    currentDataUrl = '';
+    currentReport = null;
+    activeTab = 'orig';
+
+    if (fileInput) fileInput.value = '';
+    if (previewImg) previewImg.src = '';
+    if (elaImg) {
+      elaImg.src = '';
+      elaImg.classList.add('hidden');
+    }
+    if (previewImg) previewImg.classList.remove('hidden');
+
+    dashboard?.classList.add('hidden');
+    loadingState?.classList.add('hidden');
+    dropZone?.classList.remove('hidden');
+
+    newImageBtn?.classList.add('hidden');
+    toggleElaBtn?.classList.add('hidden');
+    handoffBtn?.classList.add('hidden');
+  }
+
+  async function processImage(file: File, dataUrl: string) {
+    currentFile = file;
+    currentDataUrl = dataUrl;
+
+    dropZone?.classList.add('hidden');
+    dashboard?.classList.add('hidden');
+    loadingState?.classList.remove('hidden');
+    updateLoading('Reading original file bytes & inspecting C2PA Content Credentials...', 25);
+
+    const img = new Image();
+    img.src = dataUrl;
+    await new Promise((resolve) => {
+      img.onload = resolve;
+    });
+
+    updateLoading('Analyzing noise, texture & frequency spectrum...', 50);
+    await new Promise((r) => setTimeout(r, 60));
+
+    updateLoading('Computing Error Level Analysis (ELA)...', 75);
+    await new Promise((r) => setTimeout(r, 60));
+
+    updateLoading('Fusing cryptographic C2PA provenance with visual forensics...', 90);
+    // Note: file (original File bytes) is preserved and passed directly to runFullAIForensics
+    const report = await runFullAIForensics(file, img);
+    currentReport = report;
+
+    updateLoading('Finalizing report...', 100);
+    await new Promise((r) => setTimeout(r, 60));
+
+    loadingState?.classList.add('hidden');
+    dashboard?.classList.remove('hidden');
+    newImageBtn?.classList.remove('hidden');
+    toggleElaBtn?.classList.remove('hidden');
+    handoffBtn?.classList.remove('hidden');
+
+    renderReport(report, dataUrl);
+  }
+
+  function renderReport(report: AIForensicsReport, dataUrl: string) {
+    // 1. Preview
+    if (previewImg) previewImg.src = dataUrl;
+    if (elaImg) elaImg.src = report.ela.elaDataUrl || dataUrl;
+    setTab('orig');
+
+    // 2. Top Overview & Verdict
+    if (verdictTitle) verdictTitle.innerText = report.verdictLabel;
+
+    if (verdictBadge) {
+      verdictBadge.innerText = report.verdict.replace(/_/g, ' ');
+      if (report.verdict === 'LIKELY_AI_GENERATED') {
+        verdictBadge.className = 'badge-status-risk font-bold text-sm';
+      } else if (report.verdict === 'LIKELY_AI_ASSISTED' || report.verdict === 'LIKELY_EDITED') {
+        verdictBadge.className = 'badge-status-warning font-bold text-sm';
+      } else if (report.verdict === 'LIKELY_AUTHENTIC_CAPTURE') {
+        verdictBadge.className = 'badge-status-safe font-bold text-sm';
+      } else {
+        verdictBadge.className = 'badge-pill font-mono font-semibold text-sm';
+      }
+    }
+
+    if (strengthBadge) {
+      strengthBadge.innerText = `Evidence: ${report.evidenceStrength}`;
+    }
+
+    if (modalityLabel) modalityLabel.innerText = report.modalityLabel;
+
+    // 3. C2PA Dedicated Section
+    const c2pa = report.c2pa;
+    if (c2paTopBadge) {
+      if (c2pa.present && c2pa.validation.isValid) {
+        c2paTopBadge.innerText = c2pa.ai.isAIGenerated ? 'Verified AI' : 'Verified Provenance';
+      } else if (c2pa.present) {
+        c2paTopBadge.innerText = 'Validation Failed';
+      } else {
+        c2paTopBadge.innerText = 'Not Found';
+      }
+    }
+
+    if (c2paStatusPill && c2paDot) {
+      if (c2pa.present && c2pa.validation.isValid) {
+        c2paStatusPill.innerText = 'VERIFIED';
+        c2paStatusPill.className = 'badge-status-safe font-bold text-xs';
+        c2paDot.className = 'w-2.5 h-2.5 rounded-full bg-success';
+      } else if (c2pa.present) {
+        c2paStatusPill.innerText = 'INVALID / UNTRUSTED';
+        c2paStatusPill.className = 'badge-status-warning font-bold text-xs';
+        c2paDot.className = 'w-2.5 h-2.5 rounded-full bg-warning animate-pulse';
+      } else {
+        c2paStatusPill.innerText = 'NOT FOUND';
+        c2paStatusPill.className = 'badge-pill !text-xs font-mono font-semibold';
+        c2paDot.className = 'w-2.5 h-2.5 rounded-full bg-muted';
+      }
+    }
+
+    if (c2paGenerator) {
+      c2paGenerator.innerText = c2pa.activeManifest.claimGenerator || 'None Detected';
+    }
+    if (c2paSourceType) {
+      c2paSourceType.innerText = c2pa.source.digitalSourceLabel || c2pa.source.digitalSourceType || 'Not Specified';
+    }
+    if (c2paAiStatus) {
+      c2paAiStatus.innerText = c2pa.ai.isAIGenerated
+        ? '✓ Generative AI Creation'
+        : c2pa.ai.isAIEdited
+        ? '✓ AI-Assisted Editing'
+        : 'No AI Provenance';
+    }
+    if (c2paValState) {
+      c2paValState.innerText = c2pa.present
+        ? c2pa.validation.isTrusted
+          ? 'Trusted & Cryptographically Valid'
+          : c2pa.validation.isValid
+          ? 'Valid Structure'
+          : 'Validation Failed'
+        : 'No Manifest Found';
+    }
+    if (c2paExplanation) {
+      c2paExplanation.innerText = c2pa.summaryExplanation;
+    }
+
+    // C2PA Actions Timeline
+    if (c2paActionsContainer && c2paActionsList) {
+      if (c2pa.actions && c2pa.actions.length > 0) {
+        c2paActionsContainer.classList.remove('hidden');
+        c2paActionsList.innerHTML = c2pa.actions
+          .map(
+            (act) => `
+          <div class="flex items-center gap-2.5 bg-canvas border border-hairline p-2.5 rounded-lg">
+            <span class="w-2 h-2 rounded-full ${act.isAI ? 'bg-error' : 'bg-primary'} shrink-0"></span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-medium text-ink">${act.action}</span>
+                ${act.isAI ? '<span class="badge-status-risk !text-[10px] py-0 px-1.5 font-mono">AI Action</span>' : ''}
+              </div>
+              ${act.softwareAgent ? `<span class="text-muted text-[11px] block">${act.softwareAgent}</span>` : ''}
+            </div>
+          </div>
+        `
+          )
+          .join('');
+      } else {
+        c2paActionsContainer.classList.add('hidden');
+      }
+    }
+
+    // C2PA Ingredients
+    if (c2paIngredientsContainer && c2paIngredientsList) {
+      if (c2pa.ingredients && c2pa.ingredients.length > 0) {
+        c2paIngredientsContainer.classList.remove('hidden');
+        c2paIngredientsList.innerHTML = c2pa.ingredients
+          .map(
+            (ing) => `
+          <div class="bg-canvas border border-hairline p-2 rounded flex items-center justify-between text-[11px]">
+            <span class="font-medium text-ink truncate">${ing.title || 'Source Asset'}</span>
+            <span class="text-muted font-mono">${ing.format || ing.relationship || 'ingredient'}</span>
+          </div>
+        `
+          )
+          .join('');
+      } else {
+        c2paIngredientsContainer.classList.add('hidden');
+      }
+    }
+
+    // Technical C2PA Details
+    if (c2paTechDetails && c2paTechContent) {
+      if (c2pa.present) {
+        c2paTechDetails.classList.remove('hidden');
+        c2paTechContent.innerHTML = `
+          <div>MANIFEST_COUNT: ${c2pa.technicalDetails.manifestCount}</div>
+          <div>ACTIVE_LABEL: ${c2pa.technicalDetails.activeLabel || 'None'}</div>
+          <div>SIGNATURE_ALG: ${c2pa.technicalDetails.signatureAlg || 'None'}</div>
+          <div>CLAIM_GENERATOR: ${c2pa.activeManifest.claimGenerator || 'None'}</div>
+          <div>VALIDATION_STATUS: ${c2pa.validation.status}</div>
+          ${c2pa.validation.errors.length > 0 ? `<div>ERRORS: ${c2pa.validation.errors.join('; ')}</div>` : ''}
+        `;
+      } else {
+        c2paTechDetails.classList.add('hidden');
+      }
+    }
+
+    // 4. Why Explanation
+    if (whyList) {
+      whyList.innerHTML = report.whyExplanation
+        .map(
+          (reason) => `
+        <li class="flex items-start gap-2.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0"></span>
+          <span class="leading-relaxed">${reason}</span>
+        </li>
+      `
+        )
+        .join('');
+    }
+
+    // 5. Synthetic Signals
+    if (syntheticCount) {
+      syntheticCount.innerText = `${report.syntheticSignals.length} Signal${report.syntheticSignals.length === 1 ? '' : 's'}`;
+    }
+    if (syntheticList) {
+      if (report.syntheticSignals.length === 0) {
+        syntheticList.innerHTML = `
+          <div class="bg-canvas border border-hairline rounded-lg p-3 text-xs text-muted italic">
+            No distinct synthetic raster artifacts or generative signatures detected.
+          </div>
+        `;
+      } else {
+        syntheticList.innerHTML = report.syntheticSignals
+          .map(
+            (s) => `
+          <div class="bg-canvas border border-hairline rounded-lg p-3.5 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-ink text-xs">${s.signal}</span>
+              <span class="badge-pill !text-[10px] font-mono">${s.strength}</span>
+            </div>
+            <p class="text-xs text-body leading-relaxed">${s.description}</p>
+            <p class="text-[11px] text-muted font-mono">${s.evidence}</p>
+          </div>
+        `
+          )
+          .join('');
+      }
+    }
+
+    // 6. Editing Signals
+    if (editingCount) {
+      editingCount.innerText = `${report.editingSignals.length} Signal${report.editingSignals.length === 1 ? '' : 's'}`;
+    }
+    if (editingList) {
+      if (report.editingSignals.length === 0) {
+        editingList.innerHTML = `
+          <div class="bg-canvas border border-hairline rounded-lg p-3 text-xs text-muted italic">
+            No localized recompression disparities or compositing boundaries found via ELA.
+          </div>
+        `;
+      } else {
+        editingList.innerHTML = report.editingSignals
+          .map(
+            (s) => `
+          <div class="bg-canvas border border-hairline rounded-lg p-3.5 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold text-ink text-xs">${s.signal}</span>
+              <span class="badge-pill !text-[10px] font-mono">${s.strength}</span>
+            </div>
+            <p class="text-xs text-body leading-relaxed">${s.description}</p>
+            <p class="text-[11px] text-muted font-mono">${s.evidence}</p>
+          </div>
+        `
+          )
+          .join('');
+      }
+    }
+
+    // 7. Metadata / EXIF
+    if (metaCamera) {
+      metaCamera.innerText = report.provenance.cameraInfo
+        ? `${report.provenance.cameraInfo.make || ''} ${report.provenance.cameraInfo.model || ''}`.trim() || 'Found'
+        : 'Not Found';
+    }
+    if (metaSoftware) {
+      metaSoftware.innerText = report.provenance.softwareFound || 'None Detected';
+    }
+    if (metaAiTag) {
+      metaAiTag.innerText = report.provenance.isAISoftware ? `Found: ${report.provenance.softwareFound}` : 'Not Found';
+    }
+    if (metaDate) {
+      metaDate.innerText = report.provenance.dateTime || 'Not Available';
+    }
+
+    // 8. Metrics
+    if (metricNoise) metricNoise.innerText = `${report.textureMetrics.noiseLevel}/100`;
+    if (metricHf) metricHf.innerText = String(report.textureMetrics.highFrequencyEnergy);
+    if (metricSmooth) metricSmooth.innerText = `${Math.round(report.textureMetrics.smoothnessRatio * 100)}%`;
+    if (metricWords) metricWords.innerText = String(report.textAnalysis.wordCount);
+
+    if (textAnomalyBox && textAnomalyMsg) {
+      if (report.textAnalysis.hasMalformedText) {
+        textAnomalyBox.classList.remove('hidden');
+        textAnomalyMsg.innerText = `Detected distorted or non-dictionary token patterns: ${report.textAnalysis.anomalousWords.join(', ')}`;
+      } else {
+        textAnomalyBox.classList.add('hidden');
+      }
+    }
+
+    // 9. Limitations
+    if (limitationsList) {
+      limitationsList.innerHTML = report.limitations
+        .map((l) => `<li class="leading-relaxed">${l}</li>`)
+        .join('');
+    }
+
+    // 10. Developer Diagnostics
+    if (debugPanel && report.debugDiagnostics) {
+      const diag = report.debugDiagnostics;
+      debugPanel.innerHTML = `
+        <div>IMAGE: ${diag.imageDimensions}</div>
+        <div>MODALITY: ${report.modality}</div>
+        <div>C2PA_PRESENT: ${c2pa.present ? 'YES' : 'NO'}</div>
+        <div>C2PA_VALID: ${c2pa.validation.isValid ? 'YES' : 'NO'}</div>
+        <div>C2PA_TRUSTED: ${c2pa.validation.isTrusted ? 'YES' : 'NO'}</div>
+        <div>C2PA_AI_PROVENANCE: ${c2pa.ai.aiState}</div>
+        <div>C2PA_ACTIONS_COUNT: ${c2pa.actions.length}</div>
+        <div>C2PA_INGREDIENTS_COUNT: ${c2pa.ingredients.length}</div>
+        <div>SYNTHETIC_SCORE: ${diag.syntheticScore}</div>
+        <div>EDITING_SCORE: ${diag.editingScore}</div>
+        <div>CAPTURE_SCORE: ${diag.captureScore}</div>
+        <div>PROVENANCE_SCORE: ${diag.provenanceScore}</div>
+        <div>FINAL_VERDICT: ${report.verdict}</div>
+        <div>EVIDENCE_STRENGTH: ${report.evidenceStrength}</div>
+      `;
+    }
+  }
+
+  function setTab(tab: 'orig' | 'ela') {
+    activeTab = tab;
+    if (tab === 'orig') {
+      previewImg?.classList.remove('hidden');
+      elaImg?.classList.add('hidden');
+      viewOrigTab?.classList.add('bg-surface-card', 'text-ink', 'shadow-xs');
+      viewOrigTab?.classList.remove('text-muted');
+      viewElaTab?.classList.remove('bg-surface-card', 'text-ink', 'shadow-xs');
+      viewElaTab?.classList.add('text-muted');
+      if (previewModeLabel) previewModeLabel.innerText = 'Inspected Visual';
+      if (viewerCaption) viewerCaption.innerText = 'Original uncompressed uploaded image displayed.';
+    } else {
+      previewImg?.classList.add('hidden');
+      elaImg?.classList.remove('hidden');
+      viewElaTab?.classList.add('bg-surface-card', 'text-ink', 'shadow-xs');
+      viewElaTab?.classList.remove('text-muted');
+      viewOrigTab?.classList.remove('bg-surface-card', 'text-ink', 'shadow-xs');
+      viewOrigTab?.classList.add('text-muted');
+      if (previewModeLabel) previewModeLabel.innerText = 'Error Level Analysis (ELA)';
+      if (viewerCaption) {
+        viewerCaption.innerText =
+          'ELA difference map (amplified 20x). High-contrast regional variance indicates localized compression differences or editing.';
+      }
+    }
+  }
+
+  // Event Listeners
+  dropZone?.addEventListener('click', () => fileInput?.click());
+  browseBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    fileInput?.click();
+  });
+
+  fileInput?.addEventListener('change', () => {
+    if (fileInput.files?.[0]) {
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = (e) => processImage(file, e.target?.result as string);
+      reader.readAsDataURL(file);
+    }
+  });
+
+  document.addEventListener('paste', (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        const file = items[i].getAsFile();
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (ev) => processImage(file, ev.target?.result as string);
+          reader.readAsDataURL(file);
+          break;
+        }
+      }
+    }
+  });
+
+  // Drag & drop
+  dropZone?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('border-primary');
+  });
+
+  dropZone?.addEventListener('dragleave', () => {
+    dropZone.classList.remove('border-primary');
+  });
+
+  dropZone?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('border-primary');
+    if (e.dataTransfer?.files?.[0]) {
+      const file = e.dataTransfer.files[0];
+      const reader = new FileReader();
+      reader.onload = (ev) => processImage(file, ev.target?.result as string);
+      reader.readAsDataURL(file);
+    }
+  });
+
+  viewOrigTab?.addEventListener('click', () => setTab('orig'));
+  viewElaTab?.addEventListener('click', () => setTab('ela'));
+  toggleElaBtn?.addEventListener('click', () => {
+    setTab(activeTab === 'orig' ? 'ela' : 'orig');
+  });
+
+  newImageBtn?.addEventListener('click', () => {
+    resetState();
+  });
+
+  handoffBtn?.addEventListener('click', () => {
+    if (currentDataUrl) {
+      setHandoffImage(currentDataUrl, 'ai_detector');
+      window.location.href = '/image-manipulation-checker';
+    }
+  });
+
+  const handoff = getHandoffImage();
+  if (handoff?.dataUrl) {
+    fetch(handoff.dataUrl)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const file = new File([blob], 'inspected_visual.png', { type: blob.type });
+        processImage(file, handoff.dataUrl);
+      })
+      .catch(() => {});
+  }
+</script>
