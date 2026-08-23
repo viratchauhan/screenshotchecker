@@ -461,12 +461,671 @@ Strong matching concepts:
 
 
 ==================================================
+EXAMPLE 13 — ELECTRICITY / UTILITY DISCONNECTION SCAM
+==================================================
+
+Message:
+"Dear consumer, your electricity power will be disconnected tonight at 9:30 PM from electricity office because your previous month bill was not updated. Please immediately contact our power officer at 9876543210."
+
+Known signals:
+- Immediate service termination threat ("disconnected tonight at 9:30 PM")
+- Fear/panic creation during non-business hours
+- Unverified standard mobile phone number given as "power officer"
+- Claims previous month bill was not updated despite prior payment
+- Attempts to divert user from official utility apps to phone vishing/remote APK screen sharing (AnyDesk/TeamViewer)
+
+Scam category:
+UTILITY_SCAM
+ELECTRICITY_DISCONNECTION_SCAM
+PHONE_VISHING
+GOVERNMENT_UTILITY_IMPERSONATION
+
+Risk:
+CRITICAL / HIGH
+
+Strong matching concepts:
+"electricity power will be disconnected"
+"disconnected tonight"
+"electricity office"
+"previous month bill was not updated"
+"contact our power officer"
+"electricity bill overdue"
+"power cutoff"
+"bill not updated"
+"disconnection notice"
+"contact officer"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The message threatens immediate electricity disconnection tonight over an allegedly un-updated bill and asks you to call an unverified personal mobile number. Power companies never disconnect power at night without official paper notices or dispatch mobile numbers via SMS.
+
+
+==================================================
+EXAMPLE 14 — FAKE TRAFFIC E-CHALLAN / COURT SUMMONS
+==================================================
+
+Message:
+"Traffic Police Notice: Challan No. DL-82910 is pending against vehicle DL01AB1234 for overspeeding. Pay fine of Rs 1,500 within 24 hours to avoid court summons & license cancellation: http://echallan-parivahan-gov.net"
+
+Known signals:
+- Impersonates Traffic Police / Parivahan authority
+- Cites fake challan number and fake penalty amount
+- Severe legal threat: "court summons & license cancellation"
+- 24-hour urgency deadline
+- Fake lookalike domain ("echallan-parivahan-gov.net" instead of official "echallan.parivahan.gov.in")
+- Designed to steal banking credentials or install malicious APK
+
+Scam category:
+TRAFFIC_CHALLAN_SCAM
+GOVERNMENT_IMPERSONATION
+PAYMENT_PHISHING
+LOOKALIKE_DOMAIN
+
+Risk:
+CRITICAL / HIGH
+
+Strong matching concepts:
+"traffic police notice"
+"challan no"
+"challan is pending"
+"vehicle overspeeding"
+"court summons"
+"license cancellation"
+"pay fine within 24 hours"
+"echallan"
+"parivahan"
+"traffic fine"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+This message claims you have an unpaid traffic challan and threatens court summons and driver license cancellation if not paid immediately via a lookalike link. Official traffic notices only direct to legitimate government (.gov.in) portals.
+
+
+==================================================
+EXAMPLE 15 — DIGITAL ARREST / LAW ENFORCEMENT / CBI IMPERSONATION
+==================================================
+
+Message:
+"URGENT: Legal Notice from Cyber Crime Cell / CBI. A FIR has been registered against your mobile number for illegal money laundering and narcotics trafficking. Connect immediately on WhatsApp Video Call with Officer Sharma or face imminent arrest within 2 hours."
+
+Known signals:
+- Impersonation of law enforcement (CBI, Police, Cyber Crime Cell, Interpol)
+- Extreme intimidation: "Digital Arrest", FIR, narcotics, money laundering
+- Immediate deadline ("arrest within 2 hours")
+- Directs victim to connect via WhatsApp Video Call
+- Scammers use fake police stations, uniforms, and forged warrant documents to coerce money transfers into "safe verification accounts"
+
+Scam category:
+DIGITAL_ARREST_SCAM
+LAW_ENFORCEMENT_IMPERSONATION
+EXTORTION_SCAM
+SOCIAL_ENGINEERING
+
+Risk:
+CRITICAL / MAXIMUM RISK
+
+Strong matching concepts:
+"digital arrest"
+"cyber crime cell"
+"cbi legal notice"
+"fir has been registered"
+"money laundering"
+"narcotics trafficking"
+"whatsapp video call"
+"face imminent arrest"
+"police interrogation"
+"arrest warrant"
+"officer sharma"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The message claims law enforcement or CBI has filed an FIR against you and demands an urgent WhatsApp video call to avoid arrest. Law enforcement agencies never issue arrest warrants via WhatsApp or conduct "digital arrests" over video calls.
+
+
+==================================================
+EXAMPLE 16 — INCOME TAX / TAX REFUND PHISHING (IRS / HMRC / IT DEPT)
+==================================================
+
+Message:
+"Income Tax Department: An amount of Rs 15,490 has been approved for refund to your account. Please confirm your bank account details and PAN here to claim before expiration: https://incometax-refund-gov.in"
+
+Known signals:
+- Government tax department impersonation (Income Tax / IRS / HMRC)
+- Attractive financial bait: unexpected tax refund
+- Data harvesting: asks for bank account details, net banking credentials, and PAN/SSN
+- Phishing domain mimicking official tax filing portal
+- Urgency: "claim before expiration"
+
+Scam category:
+TAX_REFUND_PHISHING
+GOVERNMENT_IMPERSONATION
+CREDENTIAL_HARVESTING
+FINANCIAL_SCAM
+
+Risk:
+HIGH / CRITICAL
+
+Strong matching concepts:
+"income tax department"
+"tax refund"
+"refund approved"
+"confirm your bank account"
+"irs refund"
+"hmrc tax rebate"
+"claim before expiration"
+"tax refund portal"
+"submit form 1040"
+"pan card refund"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+This message claims that an income tax refund has been approved and instructs you to click a link to submit your bank details. Tax authorities process refunds directly into pre-validated bank accounts and never ask for account credentials via unsolicited text messages or links.
+
+
+==================================================
+EXAMPLE 17 — CREDIT CARD REWARD POINTS EXPIRY SCAM
+==================================================
+
+Message:
+"Dear HDFC cardholder, your credit card reward points worth Rs 9,850 are expiring today (23-Aug). Redeem points directly to cash into your bank account immediately by visiting: http://hdfc-rewards-redeem.cc"
+
+Known signals:
+- Bank & credit card brand impersonation (HDFC, SBI, ICICI, Chase, Amex)
+- Artificial deadline: "expiring today"
+- Unrealistic cash value conversion for reward points
+- Phishing link ("hdfc-rewards-redeem.cc") designed to capture card number, CVV, expiry date, and OTP
+- False sense of urgency
+
+Scam category:
+CREDIT_CARD_SCAM
+REWARD_POINTS_PHISHING
+BANK_IMPERSONATION
+CREDENTIAL_HARVESTING
+
+Risk:
+HIGH / CRITICAL
+
+Strong matching concepts:
+"reward points expiring"
+"credit card reward points"
+"redeem points to cash"
+"points worth"
+"expiring today"
+"redeem immediately"
+"card points expire"
+"redeem reward"
+"bank reward points"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The message claims your bank reward points are expiring today and asks you to redeem them for cash via a suspicious link. Banks do not send non-official links to convert reward points to cash; this is a credential harvesting phishing site.
+
+
+==================================================
+EXAMPLE 18 — TECH SUPPORT / GEEK SQUAD / NORTON INVOICE AUTO-RENEWAL VISHING
+==================================================
+
+Message:
+"Geek Squad Invoice #GS-99281: Thank you for your payment of $499.99 for 3-Year Total Tech Protection. This charge will auto-debit from your account within 24 hours. To cancel or dispute this transaction, call our Refund Desk immediately at +1-888-492-0199."
+
+Known signals:
+- Brand impersonation (Geek Squad, Norton, McAfee, PayPal, Best Buy)
+- Fake high-dollar auto-debit charge ($499.99)
+- Panic bait designed to make victim call the "Refund Desk" number
+- Phone vishing trap: Scammers on the phone convince the victim to install remote desktop software (AnyDesk, UltraViewer) and manipulate bank balances on screen
+
+Scam category:
+TECH_SUPPORT_SCAM
+INVOICE_PHISHING
+PHONE_VISHING
+REFUND_SCAM
+
+Risk:
+CRITICAL / HIGH
+
+Strong matching concepts:
+"geek squad invoice"
+"auto-renewal"
+"total tech protection"
+"auto-debit from your account"
+"within 24 hours"
+"to cancel or dispute"
+"call our refund desk"
+"norton renewal"
+"mcafee subscription"
+"dispute this charge"
+"subscription invoice"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+This message is a fake auto-renewal invoice for Geek Squad/Norton claiming a $499.99 charge has been billed and asking you to call a toll-free number to cancel. This is a classic refund vishing scam designed to gain remote access to your computer or bank account.
+
+
+==================================================
+EXAMPLE 19 — FAMILY EMERGENCY / "HI MUM / HI DAD" NEW NUMBER SCAM
+==================================================
+
+Message:
+"Hi Mum, I dropped my phone down the toilet and broke it. This is my new temporary number. I urgently need to pay an emergency bill of £450 before 5pm or my service is cut off. Can you please transfer it to this bank account? Sort code: 04-00-04 Account: 82910394"
+
+Known signals:
+- Impersonates close family member (son, daughter, grandchild)
+- Pretext of broken/lost phone to explain unfamiliar phone number
+- Emotional manipulation & urgency
+- Immediate request for bank transfer, wire, or gift cards
+- Scammer discourages voice phone calls ("mic is broken", "in a meeting")
+
+Scam category:
+FAMILY_IMPERSONATION
+HI_MUM_SCAM
+EMERGENCY_SCAM
+SOCIAL_ENGINEERING
+
+Risk:
+HIGH / CRITICAL
+
+Strong matching concepts:
+"hi mum"
+"hi dad"
+"dropped my phone"
+"this is my new number"
+"new temporary number"
+"urgently need to pay"
+"emergency bill"
+"can you please transfer"
+"sort code"
+"before 5pm"
+"broken phone"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The message poses as a family member claiming to have a broken phone and an urgent unpaid bill, requesting an immediate bank transfer. This is the widespread 'Hi Mum / Hi Dad' impersonation scam.
+
+
+==================================================
+EXAMPLE 20 — WHATSAPP ACCOUNT HIJACKING / 6-DIGIT CODE SCAM
+==================================================
+
+Message:
+"Hey! I accidentally sent my 6-digit WhatsApp verification code to your phone by mistake. Can you please send it back to me quickly? It is very urgent!"
+
+Known signals:
+- Attempts to steal WhatsApp 6-digit 2FA/SMS verification code
+- Exploits social trust from a friend whose account was already compromised
+- Urgency: "send it back quickly"
+- If shared, the attacker immediately takes over victim's WhatsApp account and locks out the user
+
+Scam category:
+WHATSAPP_TAKEOVER
+VERIFICATION_CODE_THEFT
+ACCOUNT_HIJACKING
+SOCIAL_ENGINEERING
+
+Risk:
+CRITICAL / MAXIMUM RISK
+
+Strong matching concepts:
+"6-digit whatsapp verification code"
+"accidentally sent code"
+"send it back to me"
+"verification code to your phone"
+"whatsapp code"
+"share the 6-digit code"
+"sent code by mistake"
+"forward the otp"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The sender claims they accidentally sent their 6-digit WhatsApp code to your phone and asks you to send it to them. In reality, the attacker is trying to register your phone number on their device; sharing this code will instantly hijack your WhatsApp account.
+
+
+==================================================
+EXAMPLE 21 — CRYPTO VIP ARBITRAGE / PIG BUTCHERING WHATSAPP GROUP
+==================================================
+
+Message:
+"Hello, this is Sophie's assistant from Morgan Stanley Crypto Wealth Club. Our VIP WhatsApp group gives 300% daily guaranteed profit on BTC/ETH arbitrage trading. Join the exclusive group: https://chat.whatsapp.com/inv99281"
+
+Known signals:
+- Unsolicited investment outreach from unknown contact
+- Famous financial institution name used as lure (Morgan Stanley, BlackRock)
+- Unrealistic guaranteed returns ("300% daily guaranteed profit")
+- Directs user into a private WhatsApp/Telegram group (Pig Butchering / Sha Zhu Pan)
+- Manipulated fake crypto trading dashboard where victim's deposited money is stolen
+
+Scam category:
+CRYPTO_SCAM
+INVESTMENT_FRAUD
+PIG_BUTCHERING
+TELEGRAM_WHATSAPP_GROUP_SCAM
+
+Risk:
+CRITICAL / HIGH
+
+Strong matching concepts:
+"crypto wealth club"
+"guaranteed profit"
+"btc/eth arbitrage"
+"300% daily profit"
+"vip whatsapp group"
+"crypto trading"
+"investment opportunity"
+"high return investment"
+"chat.whatsapp.com"
+"crypto signal"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+This message promises guaranteed 300% daily profits on crypto trading and invites you to an exclusive WhatsApp group. This is a high-risk Pig Butchering investment scam where victims are tricked into sending crypto to fraudulent trading platforms.
+
+
+==================================================
+EXAMPLE 22 — SIM CARD BLOCK / 5G ESIM KYC UPGRADATION SCAM
+==================================================
+
+Message:
+"Dear Jio/Airtel customer, your SIM card will be blocked within 24 hours due to non-upgradation to 5G / incomplete KYC. Call customer care 9811099281 or click http://jio-5g-upgrade.site to activate 5G eSIM instantly."
+
+Known signals:
+- Telecom provider impersonation (Jio, Airtel, Vodafone, AT&T, Verizon)
+- Threat of complete SIM deactivation / service cutoff within 24 hours
+- Pretext of 5G upgrade or eSIM activation
+- Phishing link / callback number designed to capture identity docs, card details, or trigger unauthorized eSIM swap
+
+Scam category:
+SIM_SWAP_SCAM
+TELECOM_IMPERSONATION
+ESIM_FRAUD
+KYC_PHISHING
+
+Risk:
+HIGH / CRITICAL
+
+Strong matching concepts:
+"sim card will be blocked"
+"sim deactivation"
+"5g upgrade"
+"esim activation"
+"telecom kyc"
+"incomplete kyc"
+"jio customer"
+"airtel customer"
+"sim blocked within 24 hours"
+"activate 5g esim"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The message threatens that your SIM card will be blocked within 24 hours unless you complete a 5G upgrade via a provided link or number. Telecom operators do not deactivate SIMs or mandate upgrades via third-party web links; this is a SIM swap / phishing vector.
+
+
+==================================================
+EXAMPLE 23 — UNAUTHORIZED ORDER CANCELLATION VISHING (AMAZON / APPLE)
+==================================================
+
+Message:
+"Amazon Alert: Your order for Apple iPhone 15 Pro Max ($1,299.00) has been placed successfully and will be billed to your card. If you did not make this purchase, call Fraud Prevention immediately at +1-800-492-0199 to cancel the charge."
+
+Known signals:
+- High-ticket unauthorized purchase claim ($1,299 iPhone)
+- Impersonation of major retailer (Amazon, Apple, Walmart, PayPal)
+- Panic bait to compel the user to call the fake "Fraud Prevention" number
+- Goal is to harvest credit card numbers, online banking logins, or download remote support software under the guise of "cancelling the transaction"
+
+Scam category:
+ORDER_CANCELLATION_SCAM
+BRAND_IMPERSONATION
+PHONE_VISHING
+FAKE_TRANSACTION_ALERT
+
+Risk:
+CRITICAL / HIGH
+
+Strong matching concepts:
+"order for apple iphone"
+"placed successfully"
+"billed to your card"
+"if you did not make this purchase"
+"call fraud prevention"
+"cancel the charge"
+"amazon order alert"
+"unauthorized purchase"
+"dispute order"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+This message claims you ordered an expensive iPhone for $1,299 and urges you to call a fake phone number if you didn't authorize it. Genuine order confirmations never urge phone callbacks for order disputes; this is a vishing lure.
+
+
+==================================================
+EXAMPLE 24 — INSTANT PERSONAL LOAN / 1% INTEREST APK MALWARE SCAM
+==================================================
+
+Message:
+"Congratulations! Pre-approved personal loan of Rs 5,00,000 sanctioned at 1% interest rate without CIBIL check. Disbursal in 5 minutes. Download loan app: http://instant-dhan-loan.apk"
+
+Known signals:
+- Unrealistic financial offering (5 Lakh loan at 1% with no credit score check)
+- Instant disbursal claim ("in 5 minutes")
+- Distributes direct `.apk` malicious mobile application file
+- Predatory loan app / spyware that steals contact lists, photos, and messages to blackmail victims
+
+Scam category:
+LOAN_APP_SCAM
+MALICIOUS_ATTACHMENT
+PREDATORY_LENDING_FRAUD
+SPYWARE_DISTRIBUTION
+
+Risk:
+CRITICAL / MAXIMUM RISK
+
+Strong matching concepts:
+"pre-approved personal loan"
+"sanctioned at 1% interest"
+"without cibil check"
+"disbursal in 5 minutes"
+"instant loan"
+"download loan app"
+".apk"
+"dhan loan"
+"quick cash loan"
+"instant credit loan"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+This message offers an unsolicited instant ₹5 Lakh loan with zero credit check and provides a direct APK file link. Predatory loan APKs contain spyware that exfiltrates contacts and gallery photos for extortion.
+
+
+==================================================
+EXAMPLE 25 — SUBSCRIPTION RENEWAL SUSPENSION (NETFLIX / SPOTIFY)
+==================================================
+
+Message:
+"Netflix: We were unable to process your monthly subscription payment. Your membership is on hold. Update your payment details within 24 hours to avoid account cancellation: https://netflix-update-billing.info"
+
+Known signals:
+- Impersonation of popular subscription services (Netflix, Spotify, Apple, Disney+)
+- Fear of service interruption ("membership is on hold")
+- Urgency deadline: "within 24 hours"
+- Lookalike phishing domain ("netflix-update-billing.info" instead of official "netflix.com")
+- Designed to harvest credit card numbers and security codes
+
+Scam category:
+SUBSCRIPTION_PHISHING
+PAYMENT_CREDENTIAL_HARVESTING
+BRAND_IMPERSONATION
+SERVICE_SUSPENSION_BAIT
+
+Risk:
+HIGH / CRITICAL
+
+Strong matching concepts:
+"unable to process your monthly subscription"
+"membership is on hold"
+"update your payment details"
+"within 24 hours"
+"account cancellation"
+"netflix billing"
+"spotify subscription failed"
+"payment declined"
+"reactivate membership"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The message claims your Netflix subscription payment failed and your account is on hold, directing you to an external phishing link. Streaming providers never send third-party domains to update billing information.
+
+
+==================================================
+EXAMPLE 26 — POSTAL INCOMPLETE ADDRESS PHISHING (USPS / ROYAL MAIL)
+==================================================
+
+Message:
+"USPS: The package has arrived at the local depot but cannot be delivered due to incomplete street address information. Please update your address within 12 hours: https://usps-address-confirm.top"
+
+Known signals:
+- Postal service impersonation (USPS, Royal Mail, Australia Post, Canada Post)
+- Pretext of missing street number or incomplete address
+- Short countdown timer / 12-hour deadline to prevent package return
+- Phishing link capturing home address and credit card for a small "$0.30 redelivery fee"
+
+Scam category:
+POSTAL_SMISHING
+PARCEL_DELIVERY_SCAM
+CREDENTIAL_HARVESTING
+IMPERSONATION
+
+Risk:
+HIGH / CRITICAL
+
+Strong matching concepts:
+"package has arrived at the warehouse"
+"incomplete street address"
+"cannot be delivered"
+"update your address within 12 hours"
+"usps package update"
+"royal mail delivery address"
+"reschedule delivery"
+"confirm address"
+"postal delivery depot"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+The message claims a package cannot be delivered due to a missing street address and gives an urgent link to update your details. Postal smishing scams use this pretext to collect credit card info for fake redelivery fees.
+
+
+==================================================
+EXAMPLE 27 — EXECUTIVE BEC WIRE TRANSFER / CEO IMPERSONATION
+==================================================
+
+Message:
+"Hi, Are you at your desk? I am currently in a confidential executive meeting and need you to urgently process a wire transfer of $45,000 to our vendor before the close of business. Email me the confirmation once done."
+
+Known signals:
+- Business Email Compromise (BEC) / CEO Fraud
+- Impersonates company executive, boss, or CEO
+- Creates pressure and claims to be unavailable for phone verification ("in confidential meeting")
+- Demands urgent wire transfer or purchase of gift cards for "vendor payment"
+
+Scam category:
+BUSINESS_EMAIL_COMPROMISE
+EXECUTIVE_IMPERSONATION
+WIRE_FRAUD
+SOCIAL_ENGINEERING
+
+Risk:
+CRITICAL / HIGH
+
+Strong matching concepts:
+"are you at your desk"
+"confidential executive meeting"
+"urgently process a wire transfer"
+"before the close of business"
+"vendor payment"
+"ceo wire request"
+"urgent payment request"
+"do not call me"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+This message poses as a company executive asking for an urgent wire transfer during a confidential meeting. This is a Business Email Compromise (BEC) attack aimed at bypassing corporate financial controls.
+
+
+==================================================
+EXAMPLE 28 — WHATSAPP LOTTERY / KBC LUCKY DRAW SCAM
+==================================================
+
+Message:
+"Badhai ho! Aapka WhatsApp number KBC lottery me Rs 25,00,000 jeet chuka hai. Lottery claim karne ke liye WhatsApp audio call karein Lottery Officer Rana Pratap Singh ko number +92-300-9821034 par."
+
+Known signals:
+- Impersonates high-profile lottery / TV show (Kaun Banega Crorepati - KBC)
+- Massive unsolicited prize claim (₹25,00,000)
+- Instructs victim to make a WhatsApp audio call to an international number (+92 Pakistan country code)
+- Demands upfront "processing fees", "GST tax", or "clearance charges" before releasing the non-existent lottery money
+
+Scam category:
+LOTTERY_SCAM
+ADVANCE_FEE_FRAUD
+KBC_IMPERSONATION
+WHATSAPP_CALL_SCAM
+
+Risk:
+CRITICAL / MAXIMUM RISK
+
+Strong matching concepts:
+"kbc lottery"
+"kbc lucky draw"
+"aapka whatsapp number jeet chuka hai"
+"lottery officer"
+"rana pratap singh"
+"whatsapp audio call"
+"claim your lottery"
+"25 lakh lottery"
+"kbc winner"
+
+Recommended verdict:
+LIKELY FRAUD / PHISHING
+
+Recommended explanation:
+This message claims your WhatsApp number won a ₹25 Lakh KBC lottery and asks you to make a WhatsApp audio call to an unverified international number. Legitimate television shows never conduct random WhatsApp lotteries or demand advance clearance fees.
+
+
+==================================================
 CROSS-MESSAGE FRAUD SIGNAL LIBRARY
 ==================================================
 
-These signals should be reusable across all examples.
+These signals are reusable across all examples and live screenshots.
 
-1. URGENCY
+1. URGENCY & TIME PRESSURE
 - urgently
 - immediately
 - act now
@@ -478,20 +1137,40 @@ These signals should be reusable across all examples.
 - avoid suspension
 - avoid penalty
 - failure to act
+- within 24 hours
+- within 12 hours
+- disconnected tonight
+- before 5pm
+- expiring today
+- time sensitive
+- immediate action
 
-2. FEAR / THREAT
+2. FEAR, THREATS & LEGAL PRESSURE
 - account blocked
 - account locked
 - account suspended
+- account frozen
 - suspicious activity
+- suspicious activities
 - legal action
 - fine
 - penalty
 - license cancellation
 - information at risk
 - payment failure
+- power cutoff
+- electricity power will be disconnected
+- court summons
+- fir registered
+- digital arrest
+- cyber crime cell
+- arrest warrant
+- dmv record
+- driver license not be renewed
+- membership on hold
+- sim card will be blocked
 
-3. MONEY REQUEST
+3. MONEY REQUESTS & UNEXPECTED CHARGES
 - pay now
 - outstanding amount
 - processing fee
@@ -499,65 +1178,142 @@ These signals should be reusable across all examples.
 - toll payment
 - claim fee
 - verification fee
+- toll amount
+- unpaid toll
+- pay the balance
+- excessive fine
+- prepaid task
+- advance fee
+- clearance fee
+- auto-debit
+- billed to your card
+- auto-renewal
+- sort code
+- wire transfer
+- 300% guaranteed profit
 
-4. SENSITIVE INFORMATION
-- OTP
-- PIN
-- CVV
+4. SENSITIVE CREDENTIALS & IDENTITY HARVESTING
+- otp
+- pin
+- cvv
 - password
 - bank details
 - card number
-- Aadhaar
-- PAN
-- KYC
-- email
-- address
-- identity documents
+- aadhaar
+- pan card
+- kyc
+- rekyc
+- emails and address
+- email and address
+- verify your identity
+- share your verification code
+- 6-digit code
+- 6-digit whatsapp verification code
+- ssn
+- fsa id
+- personal details
+- personal info
 
-5. LINK SIGNALS
-- unexpected link
-- shortened URL
-- unfamiliar domain
-- misspelled brand domain
-- brand/domain mismatch
-- suspicious path
-- link asking for login/payment
+5. DANGEROUS ATTACHMENTS & APKS
+- .apk
+- apk
+- 18 mb · apk
+- .exe
+- .zip
+- open pdf file
+- open attached file
+- install application
+- download loan app
+- banking apk
+- kyc apk
+- anydesk
+- teamviewer
 
-6. ATTACHMENT SIGNALS
-- APK
-- EXE
-- ZIP
-- unknown document
-- unexpected PDF
-- "open file"
-- "install application"
-- banking APK
-- KYC APK
+6. BRAND & AUTHORITY IMPERSONATION
+- bank of maharashtra
+- wells fargo
+- chase
+- bank of america
+- sbi
+- state bank of india
+- hdfc
+- hdfc bank
+- icici
+- axis bank
+- fedex
+- fed3x
+- ups
+- usps
+- royal mail
+- dhl
+- target
+- walmart
+- amazon
+- apple
+- netflix
+- spotify
+- geek squad
+- norton
+- mcafee
+- sunpass
+- florida toll
+- e-zpass
+- ezpass
+- dmv
+- electricity office
+- power officer
+- traffic police
+- parivahan
+- cyber crime cell
+- cbi
+- income tax department
+- irs
+- hmrc
+- jio
+- airtel
+- kbc
+- morgan stanley
 
-7. IMPERSONATION
-- bank
-- courier
-- delivery company
-- government
-- tax authority
-- telecom provider
-- Amazon
-- Google
-- WhatsApp
-- payment provider
-- toll authority
-- employer
+7. SOCIAL ENGINEERING & PRETEXTS
+- may you send me
+- send me your
+- for our record
+- is this john
+- wrong number
+- hi mum
+- hi dad
+- dropped my phone
+- accidentally sent code
+- write google reviews
+- each review pays
+- google doc
+- part time job
+- easy money
+- earn per day
+- pre-approved personal loan
+- 1% interest rate
+- without cibil
+- 300% daily profit
+- are you at your desk
+- confidential executive meeting
 
-8. SOCIAL ENGINEERING
-- unknown person starts conversation
-- wrong-number opening
-- unsolicited job
-- unusually high payment
-- investment opportunity
-- prize/winner claim
-- requests personal information
-- builds trust before sending a link
-- asks user to move to another platform
+8. UNSOLICITED OFFERS & PRIZES
+- you've won
+- you won
+- won a
+- gift card
+- $500 gift card
+- claim your reward
+- congratulations winner
+- selected as a winner
+- click to claim
+- loan forgiveness
+- student loan forgiveness
+- enrollment ends soon
+- you may qualify
+- kbc lottery
+- lottery officer
+- cash prize
 
 
 ==================================================
@@ -565,144 +1321,49 @@ MATCHING LOGIC FOR THE WEBSITE
 ==================================================
 
 DO NOT implement:
-
 if exact_text == dataset_text:
     fraud = true
 
-Instead use semantic/pattern matching.
+Instead use semantic, contextual, and intent-based matching:
 
 Suggested scoring approach:
-
-+25  Exact/near-exact known scam pattern
-+20  Same scam intent/category
-+15  Suspicious link or URL pattern
-+20  Sensitive attachment such as APK
-+15  Account-blocking/security threat
-+10  Urgency pressure
-+10  Unexpected payment request
-+10  Sensitive information request
-+10  Brand impersonation indicators
-+10  Unknown sender + suspicious context
-+10  Unsolicited job/prize/financial offer
++30  High-severity attack matching (APK payload, digital arrest, utility cutoff)
++25  Known scam category/intent similarity
++20  Suspicious domain / lookalike link / shortened URL
++20  Malicious file attachment (APK, EXE)
++15  Account blocking / security / legal intimidation threat
++15  Urgency / countdown pressure
++15  Direct phone callback bait (vishing)
++10  Unexpected payment / fee demand
++10  Sensitive credential / PII request
++10  Brand / Government / Utility impersonation
++10  Unknown sender + unsolicited social engineering context
 
 Cap score at 100.
 
-Suggested interpretation:
-
-0–20   LOW RISK
-21–40  CAUTION
-41–60  SUSPICIOUS
-61–80  HIGH RISK
-81–100 CRITICAL
-
-IMPORTANT:
-Do not add points simply because a normal word appears.
-Use context.
-
-Example:
-"OTP" alone = NOT fraud.
-"Your OTP is 123456. Never share it." = potentially legitimate.
-"Your OTP is 123456. Call this unknown number and tell us the OTP." = HIGH RISK.
-
-"Amazon" alone = NOT fraud.
-"Amazon: your code is..." with a genuine official domain may be legitimate.
-"Amazon: your account is locked, click an unfamiliar domain to verify" = HIGH RISK.
+Score Interpretation:
+0–20   LOW RISK (Standard informational / genuine OTPs / receipts)
+21–40  CAUTION (Unverified unsolicited outreach)
+41–60  SUSPICIOUS (Multiple red flags requiring manual verification)
+61–80  HIGH RISK (Strong likelihood of fraud / phishing)
+81–100 CRITICAL FRAUD (Severe confirmed fraud pattern / malware / vishing / extortion)
 
 
 ==================================================
-OUTPUT FORMAT
+FALSE-POSITIVE PROTECTION SAFEGUARDS
 ==================================================
 
-The checker should return:
-
-VERDICT:
-Likely Fraud / Suspicious / Likely Legitimate
-
-RISK SCORE:
-0–100
-
-MESSAGE MEANING:
-Explain in simple language what the message is trying to make the user do.
-
-SCAM TYPE:
-Example: Bank KYC Phishing
-
-WHY:
-List the exact evidence detected in the screenshot.
-
-DETECTED ELEMENTS:
-Sender
-Phone number
-URL
-Attachment
-Organization
-Amount
-Date
-Requested action
-
-RECOMMENDATION:
-Tell the user what NOT to do and how to verify safely.
-
-==================================================
-FALSE-POSITIVE PROTECTION
-==================================================
-
-Never declare fraud only because:
+Never declare fraud solely because:
 - A bank name appears
-- An OTP appears
-- A link appears
-- A phone number appears
-- A delivery message appears
+- An OTP code appears
+- A link or phone number appears
+- An order receipt or delivery notification appears
 - The sender is unknown
-- The message uses urgent language
+- The message contains polite or urgent language
 
-Combine multiple signals and message intent.
-
-If evidence is insufficient:
-VERDICT = SUSPICIOUS
-not
-VERDICT = CONFIRMED FRAUD
-
-==================================================
-DATASET EXTENSION
-==================================================
-
-Future verified scam screenshots should be added using this structure:
-
-SCAM EXAMPLE:
-Original message:
-[full OCR text]
-
-Category:
-[category]
-
-Signals:
-[list]
-
-Risk:
-[low/medium/high/critical]
-
-Important entities:
-[bank/company/person/etc.]
-
-URLs:
-[URLs]
-
-Phone numbers:
-[numbers]
-
-Attachments:
-[file type/name]
-
-Why fraudulent:
-[explanation]
-
-Matching phrases/concepts:
-[list]
-
-Also add legitimate examples later so the checker learns both:
-FRAUD patterns
-and
-LEGITIMATE patterns.
+Safe examples to protect:
+- Genuine login OTP with "Never share OTP with anyone" and no link.
+- Genuine bank account credit/debit transaction SMS with available balance.
+- Genuine store receipt or order delivery notification from verified domains.
 
 END OF DATASET
