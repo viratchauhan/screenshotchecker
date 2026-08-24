@@ -1,0 +1,778 @@
+{
+  "schema_version": "2.4.0",
+  "purpose": "Fraud intelligence reference for ScreenshotChecker SMS, WhatsApp, Telegram, email and social-message analysis.",
+  "runtime_guidance": {
+    "do_not_scan_every_example_with_an_llm": true,
+    "recommended_pipeline": [
+      "OCR/text extraction",
+      "normalize text and URLs",
+      "extract entities/intents/signals",
+      "fast category matching",
+      "URL/domain intelligence when a URL exists",
+      "visual/OCR consistency checks",
+      "semantic/AI reasoning only for ambiguous cases",
+      "final calibrated risk score"
+    ],
+    "examples_are_synthetic": true,
+    "exact_text_matching_is_insufficient": true,
+    "new_examples_added": 500,
+    "source_basis_note": "Pattern families were expanded using official consumer guidance; examples are synthetic detection fixtures, not copied messages.",
+    "total_examples": 1050,
+    "research_update": {
+      "updated": "2026-08-24",
+      "note": "Expanded pattern families based on current FTC/FBI scam advisories; examples are synthetic fixtures for detection and are not copied victim messages."
+    },
+    "research_note": "Expanded using current 2026 patterns reported by FTC, FBI IC3, India I4C/MHA/PIB, USPIS, Meta and community scam reports. Quora was attempted but robots.txt blocked access; no Quora text was copied."
+  },
+  "risk_levels": {
+    "LOW": { "min": 0, "max": 20 },
+    "CAUTION": { "min": 21, "max": 40 },
+    "SUSPICIOUS": { "min": 41, "max": 60 },
+    "HIGH": { "min": 61, "max": 80 },
+    "CRITICAL": { "min": 81, "max": 100 }
+  },
+  "signal_weights": {
+    "malicious_attachment": 25,
+    "digital_arrest_or_extortion": 30,
+    "lookalike_or_suspicious_domain": 20,
+    "credential_or_otp_request": 20,
+    "payment_or_advance_fee": 15,
+    "account_lock_or_legal_threat": 15,
+    "urgency": 10,
+    "callback_or_vishing": 15,
+    "authority_or_brand_impersonation": 10,
+    "unknown_unsolicited_contact": 10,
+    "unexpected_prize_or_refund": 10
+  },
+  "high_confidence_combinations": [
+    ["law_enforcement_impersonation", "arrest_threat", "video_call", "money_request"],
+    ["bank_impersonation", "fake_transaction", "callback", "otp_or_pin_request"],
+    ["delivery_impersonation", "address_problem", "small_fee", "external_link"],
+    ["job_offer", "easy_money", "task_platform", "deposit_or_topup"],
+    ["wrong_number", "relationship_building", "crypto_or_investment", "deposit"],
+    ["executive_impersonation", "secrecy", "urgent_transfer_or_gift_cards"],
+    ["kyc_or_service_cutoff", "apk_or_qr", "urgency"],
+    ["refund_bait", "bank_details", "unexpected_contact", "deadline"],
+    ["recovery_service", "previous_scam", "upfront_fee"],
+    ["whatsapp_code", "accidental_code_claim", "six_digit_code"]
+  ],
+  "entity_groups": {
+    "india": ["SBI", "HDFC Bank", "ICICI Bank", "Axis Bank", "RBI", "SEBI", "Income Tax Department", "GST", "UIDAI", "TRAI", "Parivahan", "IRCTC", "Jio", "Airtel", "Vi", "BSNL", "FASTag", "UPI", "Paytm", "PhonePe", "Google Pay"],
+    "usa": ["Bank of America", "Wells Fargo", "Chase", "Citi", "Capital One", "IRS", "SSA", "Medicare", "USPS", "UPS", "FedEx", "Amazon", "Apple", "Microsoft", "PayPal", "DMV", "EZ Pass", "SunPass"],
+    "uk": ["HMRC", "DVLA", "NHS", "Royal Mail", "Evri", "DPD"],
+    "australia_new_zealand": ["ATO", "myGov", "Services Australia", "Australia Post", "NZTA", "NZ Post"],
+    "canada": ["CRA", "Service Canada", "Canada Post", "Interac"],
+    "singapore": ["DBS", "OCBC", "UOB", "Singpass", "CPF", "IRAS"],
+    "uae_gulf": ["Emirates ID", "Emirates Post", "UAE banks", "customs", "police"],
+    "global_technology": ["Microsoft", "Google", "Apple", "Amazon", "PayPal", "Netflix", "Spotify", "DocuSign", "Dropbox", "OneDrive"]
+  },
+  "payment_rails": {
+    "india": ["UPI", "UPI Collect", "QR", "bank transfer", "wallet", "gift card", "crypto"],
+    "usa_canada": ["Zelle", "Cash App", "Venmo", "wire transfer", "gift cards", "crypto"],
+    "uk_europe": ["bank transfer", "Faster Payments", "gift cards", "crypto", "IBAN"],
+    "global": ["mobile money", "prepaid card", "crypto", "cash courier"]
+  },
+  "visual_signals": [
+    "brand logo paired with unrelated domain",
+    "fake verified badge",
+    "government seal paired with consumer email domain",
+    "cropped address bar hiding registrable domain",
+    "QR code presented as a way to receive money",
+    "fake trading dashboard showing profits",
+    "APK or executable disguised as document",
+    "fake employee or police identification",
+    "countdown timer",
+    "mismatched sender display name and email domain",
+    "lookalike or homograph domain",
+    "fake bank balance or payment receipt"
+  ],
+  "false_positive_safeguards": [
+    "Do not classify solely because a bank name appears.",
+    "Do not classify solely because an OTP appears.",
+    "Do not classify solely because a URL or phone number appears.",
+    "Do not classify solely because the sender is unknown.",
+    "Do not classify solely because the message is urgent.",
+    "Legitimate receipts, delivery notifications and security alerts can exist.",
+    "Require multiple independent signals for high-confidence classification where possible."
+  ],
+  "examples": [
+    {
+      "id": "EX-201",
+      "country": "IN",
+      "channel": "SMS",
+      "category": "BANK_FRAUD_ALERT",
+      "risk": "HIGH",
+      "message": "SBI Security Alert: A transaction of Rs 48,700 is pending on your account. Reply YES to confirm or call the fraud desk immediately.",
+      "signals": [
+        "bank impersonation",
+        "unexpected transaction",
+        "callback bait",
+        "urgency"
+      ]
+    },
+    {
+      "id": "EX-202",
+      "country": "IN",
+      "channel": "WhatsApp",
+      "category": "UPI_REFUND_SCAM",
+      "risk": "CRITICAL",
+      "message": "Your UPI refund is ready. Please accept the collect request and enter your UPI PIN to receive Rs 7,850.",
+      "signals": [
+        "refund bait",
+        "UPI collect request",
+        "UPI PIN request",
+        "payment deception"
+      ]
+    },
+    {
+      "id": "EX-203",
+      "country": "IN",
+      "channel": "SMS",
+      "category": "FASTAG_PHISHING",
+      "risk": "HIGH",
+      "message": "FASTag account verification pending. Your toll service will stop tomorrow. Update KYC using the link provided.",
+      "signals": [
+        "FASTag impersonation",
+        "KYC",
+        "service suspension",
+        "link"
+      ]
+    },
+    {
+      "id": "EX-204",
+      "country": "IN",
+      "channel": "WhatsApp",
+      "category": "POLICE_IMPERSONATION",
+      "risk": "CRITICAL",
+      "message": "This is Cyber Crime Police. Your mobile number is connected to an illegal transaction. Stay on this video call while we verify your identity.",
+      "signals": [
+        "police impersonation",
+        "crime allegation",
+        "video call",
+        "digital confinement"
+      ]
+    },
+    {
+      "id": "EX-205",
+      "country": "IN",
+      "channel": "SMS",
+      "category": "SIM_SWAP_SCAM",
+      "risk": "CRITICAL",
+      "message": "Your SIM will be deactivated today because KYC is incomplete. Call customer support now to prevent permanent suspension.",
+      "signals": [
+        "telecom impersonation",
+        "SIM deactivation",
+        "KYC",
+        "callback"
+      ]
+    },
+    {
+      "id": "EX-206",
+      "country": "IN",
+      "channel": "Email",
+      "category": "GST_PHISHING",
+      "risk": "HIGH",
+      "message": "GST Compliance Notice: Your registration has an unresolved filing issue. Open the attached notice and complete verification today.",
+      "signals": [
+        "GST impersonation",
+        "compliance threat",
+        "attachment",
+        "urgency"
+      ]
+    },
+    {
+      "id": "EX-207",
+      "country": "IN",
+      "channel": "WhatsApp",
+      "category": "MARKETPLACE_QR_SCAM",
+      "risk": "CRITICAL",
+      "message": "I will buy your bike today. Scan this QR to receive my advance payment. Do not worry, no charges will be deducted.",
+      "signals": [
+        "marketplace",
+        "QR",
+        "false receive-money premise",
+        "UPI deception"
+      ]
+    },
+    {
+      "id": "EX-208",
+      "country": "IN",
+      "channel": "SMS",
+      "category": "LPG_KYC_SCAM",
+      "risk": "HIGH",
+      "message": "Your LPG subsidy is paused because KYC is incomplete. Confirm Aadhaar and bank details before midnight to restore benefits.",
+      "signals": [
+        "subsidy bait",
+        "Aadhaar",
+        "bank details",
+        "deadline"
+      ]
+    },
+    {
+      "id": "EX-209",
+      "country": "IN",
+      "channel": "WhatsApp",
+      "category": "FAKE_JOB_TASK",
+      "risk": "CRITICAL",
+      "message": "Work from home: earn Rs 3,000 daily by completing product reviews. Start with three free tasks, then recharge your wallet to unlock premium orders.",
+      "signals": [
+        "unsolicited job",
+        "easy money",
+        "reviews",
+        "wallet top-up"
+      ]
+    },
+    {
+      "id": "EX-210",
+      "country": "IN",
+      "channel": "SMS",
+      "category": "E_CHALLAN_SCAM",
+      "risk": "HIGH",
+      "message": "Traffic Notice: Vehicle challan remains unpaid. Pay the penalty today to avoid court action and license restrictions.",
+      "signals": [
+        "traffic authority impersonation",
+        "fine",
+        "legal threat",
+        "payment link likely"
+      ]
+    },
+    {
+      "id": "EX-211",
+      "country": "IN",
+      "channel": "WhatsApp",
+      "category": "LOAN_APP_SCAM",
+      "risk": "CRITICAL",
+      "message": "Pre-approved Rs 8 lakh loan. No CIBIL check, no documents, instant approval. Download our loan application to receive funds.",
+      "signals": [
+        "unrealistic loan",
+        "no credit check",
+        "APK/app lure",
+        "financial bait"
+      ]
+    },
+    {
+      "id": "EX-212",
+      "country": "IN",
+      "channel": "Email",
+      "category": "SEBI_RECOVERY_SCAM",
+      "risk": "CRITICAL",
+      "message": "Investor Recovery Department: Your lost investment has been recovered. Pay the verification charge to release the amount.",
+      "signals": [
+        "recovery scam",
+        "regulatory impersonation",
+        "advance fee"
+      ]
+    },
+    {
+      "id": "EX-213",
+      "country": "IN",
+      "channel": "WhatsApp",
+      "category": "ROMANCE_SCAM",
+      "risk": "HIGH",
+      "message": "I have a business opportunity that helped me earn quickly. Since I trust you, I can add you to my private investment group.",
+      "signals": [
+        "relationship trust",
+        "investment transition",
+        "private group"
+      ]
+    },
+    {
+      "id": "EX-214",
+      "country": "IN",
+      "channel": "SMS",
+      "category": "AIRTEL_JIO_IMPERSONATION",
+      "risk": "HIGH",
+      "message": "Your mobile service will be disconnected within 4 hours due to KYC failure. Verify your SIM details immediately.",
+      "signals": [
+        "telecom impersonation",
+        "KYC",
+        "service cutoff",
+        "urgency"
+      ]
+    },
+    {
+      "id": "EX-215",
+      "country": "IN",
+      "channel": "Email",
+      "category": "IRCTC_REFUND_SCAM",
+      "risk": "HIGH",
+      "message": "Your cancelled railway ticket refund could not be processed. Confirm your bank account to receive the pending refund.",
+      "signals": [
+        "travel refund",
+        "bank details",
+        "unexpected contact"
+      ]
+    },
+    {
+      "id": "EX-216",
+      "country": "IN",
+      "channel": "WhatsApp",
+      "category": "FAMILY_IMPERSONATION",
+      "risk": "HIGH",
+      "message": "Hi Papa, I lost my phone and this is my temporary number. Please send Rs 20,000 urgently. I cannot take a call right now.",
+      "signals": [
+        "new number",
+        "family impersonation",
+        "urgency",
+        "call avoidance"
+      ]
+    },
+    {
+      "id": "EX-217",
+      "country": "IN",
+      "channel": "SMS",
+      "category": "AADHAAR_IDENTITY_SCAM",
+      "risk": "CRITICAL",
+      "message": "Your Aadhaar was used for a suspicious financial account. Confirm your Aadhaar details with our officer immediately.",
+      "signals": [
+        "Aadhaar",
+        "identity theft pretext",
+        "authority impersonation",
+        "callback"
+      ]
+    },
+    {
+      "id": "EX-218",
+      "country": "IN",
+      "channel": "WhatsApp",
+      "category": "WHATSAPP_TAKEOVER",
+      "risk": "CRITICAL",
+      "message": "I accidentally sent my WhatsApp verification code to you. Please forward the six-digit code back before it expires.",
+      "signals": [
+        "verification code",
+        "social engineering",
+        "account takeover",
+        "urgency"
+      ]
+    },
+    {
+      "id": "EX-219",
+      "country": "IN",
+      "channel": "Email",
+      "category": "BANK_REKYC_PHISHING",
+      "risk": "HIGH",
+      "message": "Mandatory Re-KYC: Your account access may be restricted unless you complete verification through the secure link below.",
+      "signals": [
+        "bank impersonation",
+        "KYC",
+        "account restriction",
+        "link"
+      ]
+    },
+    {
+      "id": "EX-220",
+      "country": "IN",
+      "channel": "SMS",
+      "category": "ELECTRICITY_SCAM",
+      "risk": "CRITICAL",
+      "message": "Final electricity notice: your connection will be disconnected tonight due to an unpaid bill. Call the assigned officer immediately.",
+      "signals": [
+        "utility impersonation",
+        "disconnection threat",
+        "callback",
+        "urgency"
+      ]
+    },
+    {
+      "id": "EX-221",
+      "country": "US",
+      "channel": "SMS",
+      "category": "BANK_FRAUD_ALERT",
+      "risk": "HIGH",
+      "message": "Bank Fraud Alert: A $2,940 card transaction is under review. Reply YES or call the security department now.",
+      "signals": [
+        "bank impersonation",
+        "fake transaction",
+        "reply bait",
+        "callback"
+      ]
+    },
+    {
+      "id": "EX-222",
+      "country": "US",
+      "channel": "SMS",
+      "category": "USPS_SMISHING",
+      "risk": "HIGH",
+      "message": "USPS: Your package is being held because the delivery address is incomplete. Pay a small redelivery fee to release it.",
+      "signals": [
+        "USPS impersonation",
+        "package issue",
+        "small fee",
+        "link likely"
+      ]
+    },
+    {
+      "id": "EX-223",
+      "country": "US",
+      "channel": "SMS",
+      "category": "TOLL_SCAM",
+      "risk": "HIGH",
+      "message": "Final toll notice: Your unpaid road toll must be paid today to prevent registration restrictions.",
+      "signals": [
+        "toll impersonation",
+        "deadline",
+        "registration threat",
+        "payment"
+      ]
+    },
+    {
+      "id": "EX-224",
+      "country": "US",
+      "channel": "Email",
+      "category": "IRS_PHISHING",
+      "risk": "CRITICAL",
+      "message": "IRS Refund Notice: Your refund is waiting. Confirm your Social Security number and bank information to receive the payment.",
+      "signals": [
+        "IRS impersonation",
+        "refund bait",
+        "SSN",
+        "bank details"
+      ]
+    },
+    {
+      "id": "EX-225",
+      "country": "US",
+      "channel": "SMS",
+      "category": "SSA_IMPERSONATION",
+      "risk": "HIGH",
+      "message": "Social Security Alert: Your benefits may be suspended because identity verification is incomplete. Call now to restore access.",
+      "signals": [
+        "SSA impersonation",
+        "benefit suspension",
+        "callback",
+        "urgency"
+      ]
+    },
+    {
+      "id": "EX-226",
+      "country": "US",
+      "channel": "SMS",
+      "category": "MEDICARE_PHISHING",
+      "risk": "HIGH",
+      "message": "Medicare verification required. Confirm your Medicare number and date of birth today to prevent coverage interruption.",
+      "signals": [
+        "Medicare impersonation",
+        "identity data",
+        "coverage threat"
+      ]
+    },
+    {
+      "id": "EX-227",
+      "country": "US",
+      "channel": "SMS",
+      "category": "AMAZON_ORDER_VISHING",
+      "risk": "HIGH",
+      "message": "Amazon Alert: An expensive electronics order was placed on your account. If you did not authorize it, call the fraud team immediately.",
+      "signals": [
+        "brand impersonation",
+        "fake order",
+        "callback bait"
+      ]
+    },
+    {
+      "id": "EX-228",
+      "country": "US",
+      "channel": "Email",
+      "category": "FAKE_CHECK_JOB",
+      "risk": "CRITICAL",
+      "message": "You have been hired as a remote assistant. Deposit the enclosed check and send the remaining funds to our equipment supplier.",
+      "signals": [
+        "fake job",
+        "fake check",
+        "money forwarding",
+        "financial loss"
+      ]
+    },
+    {
+      "id": "EX-229",
+      "country": "US",
+      "channel": "SMS",
+      "category": "FAKE_RECRUITER",
+      "risk": "HIGH",
+      "message": "Hi, I am a recruiter for a major company. We have a remote position paying $900 weekly. Reply INTERESTED to begin.",
+      "signals": [
+        "unsolicited job",
+        "high pay",
+        "engagement bait"
+      ]
+    },
+    {
+      "id": "EX-230",
+      "country": "US",
+      "channel": "Email",
+      "category": "TECH_SUPPORT_REFUND",
+      "risk": "CRITICAL",
+      "message": "Your security subscription has renewed for $499. If you did not authorize this charge, call our billing team for an immediate refund.",
+      "signals": [
+        "fake invoice",
+        "refund bait",
+        "callback",
+        "tech-support scam"
+      ]
+    },
+    {
+      "id": "EX-231",
+      "country": "US",
+      "channel": "Email",
+      "category": "BEC_GIFT_CARD",
+      "risk": "CRITICAL",
+      "message": "I am in a confidential meeting and need you to purchase gift cards for a client. Send me the codes as soon as possible.",
+      "signals": [
+        "executive impersonation",
+        "secrecy",
+        "gift cards",
+        "urgency"
+      ]
+    },
+    {
+      "id": "EX-232",
+      "country": "US",
+      "channel": "Email",
+      "category": "PAYROLL_PHISHING",
+      "risk": "CRITICAL",
+      "message": "Payroll Update: Please confirm your bank account information before the next payroll run.",
+      "signals": [
+        "employee targeting",
+        "bank details",
+        "payroll"
+      ]
+    },
+    {
+      "id": "EX-233",
+      "country": "US",
+      "channel": "Email",
+      "category": "MICROSOFT_CREDENTIAL_PHISHING",
+      "risk": "HIGH",
+      "message": "Microsoft Security: An unusual sign-in was blocked. Review the activity and verify your password to secure your account.",
+      "signals": [
+        "cloud impersonation",
+        "credential request",
+        "security bait"
+      ]
+    },
+    {
+      "id": "EX-234",
+      "country": "US",
+      "channel": "Email",
+      "category": "DOCUSIGN_PHISHING",
+      "risk": "HIGH",
+      "message": "A confidential agreement is waiting for your signature. Sign in to the document portal to review it.",
+      "signals": [
+        "document lure",
+        "credential phishing",
+        "business pretext"
+      ]
+    },
+    {
+      "id": "EX-235",
+      "country": "US",
+      "channel": "SMS",
+      "category": "DMV_PHISHING",
+      "risk": "HIGH",
+      "message": "DMV Notice: Your driver's license verification is incomplete. Complete the process today to avoid restrictions.",
+      "signals": [
+        "DMV impersonation",
+        "license threat",
+        "deadline"
+      ]
+    },
+    {
+      "id": "EX-236",
+      "country": "US",
+      "channel": "WhatsApp",
+      "category": "ROMANCE_INVESTMENT",
+      "risk": "CRITICAL",
+      "message": "I have been using a private crypto platform with excellent returns. I can help you start with $300 so you can build wealth too.",
+      "signals": [
+        "romance context",
+        "crypto",
+        "investment",
+        "private platform"
+      ]
+    },
+    {
+      "id": "EX-237",
+      "country": "US",
+      "channel": "SMS",
+      "category": "GIFT_REWARD_SCAM",
+      "risk": "HIGH",
+      "message": "Congratulations! You have been selected for a $750 shopping reward. Pay a small shipping fee to claim it.",
+      "signals": [
+        "prize",
+        "small fee",
+        "reward bait"
+      ]
+    },
+    {
+      "id": "EX-238",
+      "country": "US",
+      "channel": "SMS",
+      "category": "APPLE_ACCOUNT_PHISHING",
+      "risk": "HIGH",
+      "message": "Apple Security: Your account was locked after unusual activity. Verify your identity within 24 hours.",
+      "signals": [
+        "Apple impersonation",
+        "account lock",
+        "urgency",
+        "link likely"
+      ]
+    },
+    {
+      "id": "EX-239",
+      "country": "US",
+      "channel": "WhatsApp",
+      "category": "WRONG_NUMBER_PIG_BUTCHERING",
+      "risk": "CRITICAL",
+      "message": "Sorry, I saved the wrong number. Nice meeting you anyway. I recently started trading crypto and can show you my strategy.",
+      "signals": [
+        "wrong number",
+        "conversation escalation",
+        "crypto investment"
+      ]
+    },
+    {
+      "id": "EX-240",
+      "country": "US",
+      "channel": "Email",
+      "category": "CHARITY_SCAM",
+      "risk": "HIGH",
+      "message": "Please help families affected by the disaster. Donate today through our emergency relief payment page.",
+      "signals": [
+        "emotional appeal",
+        "unexpected donation request",
+        "payment link"
+      ]
+    },
+    {
+      "id": "EX-241",
+      "country": "GB",
+      "channel": "SMS",
+      "category": "HMRC_PHISHING",
+      "risk": "HIGH",
+      "message": "HMRC: You are eligible for a tax repayment. Confirm your personal and bank details to receive the funds.",
+      "signals": [
+        "HMRC impersonation",
+        "tax refund",
+        "bank details"
+      ]
+    },
+    {
+      "id": "EX-242",
+      "country": "GB",
+      "channel": "SMS",
+      "category": "DVLA_PHISHING",
+      "risk": "HIGH",
+      "message": "DVLA: Your vehicle information requires immediate verification. Complete the form today to avoid penalties.",
+      "signals": [
+        "DVLA impersonation",
+        "government threat",
+        "deadline"
+      ]
+    },
+    {
+      "id": "EX-243",
+      "country": "GB",
+      "channel": "SMS",
+      "category": "ROYAL_MAIL_SMISHING",
+      "risk": "HIGH",
+      "message": "Royal Mail: Your parcel is waiting because the address is incomplete. Pay the redelivery charge to arrange delivery.",
+      "signals": [
+        "postal impersonation",
+        "address harvesting",
+        "small fee"
+      ]
+    },
+    {
+      "id": "EX-244",
+      "country": "GB",
+      "channel": "WhatsApp",
+      "category": "HI_MUM_SCAM",
+      "risk": "CRITICAL",
+      "message": "Hi Mum, I have a new number because my phone broke. I need £700 urgently. Please transfer it before the bank closes.",
+      "signals": [
+        "family impersonation",
+        "new number",
+        "urgent transfer"
+      ]
+    },
+    {
+      "id": "EX-245",
+      "country": "GB",
+      "channel": "Email",
+      "category": "NHS_REFUND_SCAM",
+      "risk": "HIGH",
+      "message": "NHS Refund: You have been approved for a healthcare reimbursement. Confirm your bank information to receive the payment.",
+      "signals": [
+        "NHS impersonation",
+        "refund",
+        "bank harvesting"
+      ]
+    },
+    {
+      "id": "EX-246",
+      "country": "IE",
+      "channel": "SMS",
+      "category": "BANK_IMPERSONATION",
+      "risk": "HIGH",
+      "message": "Security Alert: A new device has been registered on your account. Verify the activity immediately.",
+      "signals": [
+        "bank impersonation",
+        "account takeover",
+        "urgency"
+      ]
+    },
+    {
+      "id": "EX-247",
+      "country": "GB",
+      "channel": "Email",
+      "category": "FCA_RECOVERY_SCAM",
+      "risk": "CRITICAL",
+      "message": "Financial Recovery Office: We recovered your investment funds. Pay the administration charge before the refund can be released.",
+      "signals": [
+        "recovery scam",
+        "financial authority impersonation",
+        "advance fee"
+      ]
+    },
+    {
+      "id": "EX-248",
+      "country": "GB",
+      "channel": "SMS",
+      "category": "COURIER_SCAM",
+      "risk": "HIGH",
+      "message": "Your international parcel requires a customs payment prima delivery. Confirm your details using the secure portal.",
+      "signals": [
+        "customs",
+        "parcel",
+        "payment",
+        "identity data"
+      ]
+    },
+    {
+      "id": "EX-249",
+      "country": "AU",
+      "channel": "SMS",
+      "category": "ATO_PHISHING",
+      "risk": "HIGH",
+      "message": "ATO: Your tax refund is ready for processing. Verify your identity and banking information to receive the payment.",
+      "signals": [
+        "ATO impersonation",
+        "refund",
+        "bank details"
+      ]
+    },
+    {
+      "id": "EX-250",
+      "country": "AU",
+      "channel": "SMS",
+      "category": "AUSTRALIA_POST_SMISHING",
+      "risk": "HIGH",
+      "message": "Australia Post: Delivery failed because your address is incomplete. Confirm your address and pay the redelivery fee.",
+      "signals": [
+        "postal impersonation",
+        "address",
+        "fee"
+      ]
+    }
+  ]
+}
