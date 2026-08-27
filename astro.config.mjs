@@ -7,6 +7,9 @@ import { getAllArticles } from './src/data/blogArticles.ts';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://screenshotchecker.com',
+  build: {
+    inlineStylesheets: 'always',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
