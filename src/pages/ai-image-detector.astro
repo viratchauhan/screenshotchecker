@@ -1,11 +1,78 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AIDetectorWorkspace from '../components/workspaces/AIDetectorWorkspace.astro';
+import { getToolFaqs } from '../data/toolFaqs';
+
+const canonicalUrl = 'https://screenshotchecker.com/ai-image-detector/';
+const pageTitle = 'AI Image Detector – Check Synthetic & Fake Images';
+const pageDescription =
+  'Detect Midjourney, DALL-E, and generative AI images with C2PA credentials & visual forensics. Fast, free, and completely in-browser.';
+
+const faqs = getToolFaqs('ai-image-detector');
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${canonicalUrl}#webapp`,
+      name: 'AI Image Detector',
+      url: canonicalUrl,
+      description: pageDescription,
+      applicationCategory: 'SecurityApplication',
+      operatingSystem: 'Any (Browser-based)',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Tools',
+          item: 'https://screenshotchecker.com/tools/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'AI Image Detector',
+          item: canonicalUrl,
+        },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${canonicalUrl}#faq`,
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
+    },
+  ],
+};
 ---
 
 <Layout
-  title="AI Image Detector — Inspect Images for Generative Signals"
-  description="Analyze images and graphics for generative AI indicators, synthetic noise, and digital rendering patterns."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  structuredData={structuredData}
 >
   <AIDetectorWorkspace />
 </Layout>

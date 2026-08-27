@@ -1,16 +1,24 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import OCRWorkspace from '../components/workspaces/OCRWorkspace.astro';
+import { getToolFaqs } from '../data/toolFaqs';
+
+const canonicalUrl = 'https://screenshotchecker.com/screenshot-ocr/';
+const pageTitle = 'Screenshot OCR – Extract Text from Images Free';
+const pageDescription =
+  'Extract text from any screenshot in seconds. Fast, client-side WebAssembly OCR that never sends your image or text to a server.';
+
+const faqs = getToolFaqs('screenshot-ocr');
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'WebApplication',
-      '@id': 'https://screenshotchecker.com/screenshot-ocr/#webapp',
-      name: 'Screenshot OCR & Text Extractor',
-      url: 'https://screenshotchecker.com/screenshot-ocr/',
-      description: 'Extract searchable, editable text and character counts directly from any screenshot or image inside your browser with client-side OCR.',
+      '@id': `${canonicalUrl}#webapp`,
+      name: 'Screenshot OCR',
+      url: canonicalUrl,
+      description: pageDescription,
       applicationCategory: 'UtilityApplication',
       operatingSystem: 'Any (Browser-based)',
       offers: {
@@ -38,17 +46,32 @@ const structuredData = {
           '@type': 'ListItem',
           position: 3,
           name: 'Screenshot OCR',
-          item: 'https://screenshotchecker.com/screenshot-ocr/',
+          item: canonicalUrl,
         },
       ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${canonicalUrl}#faq`,
+      mainEntity: faqs.map((faq) => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer,
+        },
+      })),
     },
   ],
 };
 ---
 
 <Layout
-  title="Screenshot OCR — Extract Text from Screenshots Online"
-  description="Extract searchable, editable text and character counts directly from any screenshot or image inside your browser."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
   structuredData={structuredData}
 >
   <OCRWorkspace />

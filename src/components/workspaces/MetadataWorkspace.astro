@@ -1,10 +1,24 @@
 ---
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
+import FaqSection from '../FaqSection.astro';
+import RelatedLinks from '../RelatedLinks.astro';
+import { getToolFaqs } from '../../data/toolFaqs';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/screenshot-metadata-checker' } = Astro.props;
+const toolSlug = currentPath.includes('remover') ? 'image-metadata-remover' : 'screenshot-metadata-checker';
+const faqs = getToolFaqs(toolSlug);
+const heading = toolSlug === 'image-metadata-remover'
+  ? 'Frequently Asked Questions About Removing Metadata'
+  : 'Frequently Asked Questions About EXIF & Image Metadata';
 ---
 
 <div class="min-h-screen flex flex-col bg-canvas text-body">
-  <Header currentPath="/screenshot-metadata-checker" />
+  <Header currentPath={currentPath} />
 
   <main class="flex-1 max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full">
     <!-- Workspace Header -->
@@ -102,11 +116,16 @@ import Footer from '../Footer.astro';
     </div>
   </main>
 
+  <!-- FAQ Section -->
+  <FaqSection faqs={faqs} heading={heading} />
+
+  <!-- Contextual Internal Linking -->
+  <RelatedLinks currentPath={currentPath} />
+
   <Footer />
 </div>
 
 <script>
-  import { extractMetadata, stripImageMetadata } from '../../lib/analyzer/metadata';
   import { formatBytes } from '../../lib/utils/formatters';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
 
@@ -147,6 +166,7 @@ import Footer from '../Footer.astro';
       if (infoSize) infoSize.innerText = formatBytes(file.size);
       if (infoMime) infoMime.innerText = file.type.replace('image/', '').toUpperCase() || 'IMAGE';
 
+      const { extractMetadata } = await import('../../lib/analyzer/metadata');
       const meta = await extractMetadata(file);
       currentMetadata = meta;
       renderMetadataDashboard(meta);
@@ -240,6 +260,7 @@ import Footer from '../Footer.astro';
 
   document.getElementById('meta-strip-download-btn')?.addEventListener('click', async () => {
     if (!previewImg) return;
+    const { stripImageMetadata } = await import('../../lib/analyzer/metadata');
     const { blob } = await stripImageMetadata(previewImg, 'image/png');
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

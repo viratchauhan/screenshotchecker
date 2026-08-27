@@ -3,12 +3,43 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const currentPath = Astro.url.pathname;
+const currentPath = '/terms/';
+const canonicalUrl = 'https://screenshotchecker.com/terms/';
+const pageTitle = 'Terms of Service – ScreenshotChecker';
+const pageDescription =
+  "Review the terms and conditions for using ScreenshotChecker's free client-side image analysis and verification tools.";
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Terms of Service',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
-  title="Terms of Service & Disclaimer — Screenshot Checker"
-  description="Terms of service, technical limitations, and security disclaimers for Screenshot Checker."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  structuredData={structuredData}
 >
   <Header currentPath={currentPath} />
 

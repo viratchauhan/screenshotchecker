@@ -1,10 +1,24 @@
 ---
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
+import FaqSection from '../FaqSection.astro';
+import RelatedLinks from '../RelatedLinks.astro';
+import { getToolFaqs } from '../../data/toolFaqs';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/screenshot-redactor' } = Astro.props;
+const toolSlug = currentPath.includes('privacy') ? 'screenshot-privacy-checker' : 'screenshot-redactor';
+const faqs = getToolFaqs(toolSlug);
+const heading = toolSlug === 'screenshot-privacy-checker' 
+  ? 'Frequently Asked Questions About Screenshot Privacy' 
+  : 'Frequently Asked Questions About Screenshot Redaction';
 ---
 
 <div class="min-h-screen flex flex-col bg-canvas text-body">
-  <Header currentPath="/screenshot-redactor" />
+  <Header currentPath={currentPath} />
 
   <main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-10 w-full flex flex-col">
     <!-- Workspace Header -->
@@ -123,14 +137,18 @@ import Footer from '../Footer.astro';
     </div>
   </main>
 
+  <!-- FAQ Section -->
+  <FaqSection faqs={faqs} heading={heading} />
+
+  <!-- Contextual Internal Linking -->
+  <RelatedLinks currentPath={currentPath} />
+
   <Footer />
 </div>
 
 <script>
-  import { scanPrivacyRisks } from '../../lib/analyzer/privacyScanner';
-  import { runClientOCR } from '../../lib/analyzer/ocr';
-  import { renderRedactedImage, type RedactionBox } from '../../lib/analyzer/redactor';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
+  import type { RedactionBox } from '../../lib/analyzer/redactor';
 
   let currentImage: HTMLImageElement | null = null;
   let currentDataUrl = '';
@@ -166,6 +184,8 @@ import Footer from '../Footer.astro';
     }
 
     // Run quick background OCR & PII scan to populate sidebar
+    const { runClientOCR } = await import('../../lib/analyzer/ocr');
+    const { scanPrivacyRisks } = await import('../../lib/analyzer/privacyScanner');
     runClientOCR(img).then((ocr) => {
       const pii = scanPrivacyRisks(ocr.text, ocr.words);
       detectedPiiFindings = pii.findings;
@@ -173,8 +193,9 @@ import Footer from '../Footer.astro';
     });
   }
 
-  function redraw() {
+  async function redraw() {
     if (!canvas || !currentImage) return;
+    const { renderRedactedImage } = await import('../../lib/analyzer/redactor');
     renderRedactedImage(currentImage, boxes).then(({ dataUrl }) => {
       const temp = new Image();
       temp.onload = () => {
@@ -342,6 +363,7 @@ import Footer from '../Footer.astro';
 
   document.getElementById('redact-export-png')?.addEventListener('click', async () => {
     if (!currentImage) return;
+    const { renderRedactedImage } = await import('../../lib/analyzer/redactor');
     const { blob } = await renderRedactedImage(currentImage, boxes, 'image/png');
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

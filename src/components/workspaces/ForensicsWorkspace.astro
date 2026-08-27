@@ -1,6 +1,11 @@
 ---
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
+import FaqSection from '../FaqSection.astro';
+import RelatedLinks from '../RelatedLinks.astro';
+import { getToolFaqs } from '../../data/toolFaqs';
+
+const faqs = getToolFaqs('image-manipulation-checker');
 ---
 
 <div class="min-h-screen flex flex-col bg-canvas text-body">
@@ -114,11 +119,16 @@ import Footer from '../Footer.astro';
     </div>
   </main>
 
+  <!-- FAQ Section -->
+  <FaqSection faqs={faqs} heading="Frequently Asked Questions About Image Forensics & ELA" />
+
+  <!-- Contextual Internal Linking -->
+  <RelatedLinks currentPath="/image-manipulation-checker" />
+
   <Footer />
 </div>
 
 <script>
-  import { analyzeImageForensics } from '../../lib/analyzer/forensics';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
 
   let currentDataUrl = '';
@@ -146,6 +156,7 @@ import Footer from '../Footer.astro';
     img.src = dataUrl;
     await new Promise((r) => (img.onload = r));
 
+    const { analyzeImageForensics } = await import('../../lib/analyzer/forensics');
     const result = await analyzeImageForensics(img);
     currentForensics = result;
     currentElaUrl = result.elaDataUrl || dataUrl;

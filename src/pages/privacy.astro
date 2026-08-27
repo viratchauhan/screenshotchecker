@@ -3,12 +3,43 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-const currentPath = Astro.url.pathname;
+const currentPath = '/privacy/';
+const canonicalUrl = 'https://screenshotchecker.com/privacy/';
+const pageTitle = 'Privacy Architecture & Policy – Zero Storage';
+const pageDescription =
+  'Our zero-knowledge architecture ensures your screenshots and images are processed 100% locally in your browser. Zero cloud uploads.';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Privacy Policy',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
-  title="Privacy Architecture & Policy — Screenshot Checker"
-  description="Learn how Screenshot Checker ensures 100% privacy by processing all image recognition, OCR, and metadata analysis directly inside your browser runtime."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  structuredData={structuredData}
 >
   <Header currentPath={currentPath} />
 

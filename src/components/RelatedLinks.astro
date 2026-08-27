@@ -1,0 +1,258 @@
+---
+import { getAllArticles, type BlogArticle } from '../data/blogArticles';
+
+interface Props {
+  currentPath?: string;
+  toolSlugs?: string[];
+  articleSlugs?: string[];
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  currentPath = '',
+  toolSlugs,
+  articleSlugs,
+  title = 'Related Tools & Investigation Guides',
+  subtitle = 'Continue your investigation with specialized in-browser forensics tools and expert analysis guides.',
+} = Astro.props;
+
+// Central mapping of tool relationships
+const TOOLS_CATALOG: Record<
+  string,
+  { name: string; href: string; desc: string; action: string; category: string }
+> = {
+  'screenshot-analyzer': {
+    name: 'Screenshot Analyzer',
+    href: '/screenshot-analyzer',
+    desc: 'Audit screenshots for visual tampering, OCR content, PII exposure, and scam indicators.',
+    action: 'Analyze screenshot safety',
+    category: 'Security',
+  },
+  'payment-screenshot-checker': {
+    name: 'Fake Payment Screenshot Checker',
+    href: '/payment-screenshot-checker',
+    desc: 'Audit UPI slips, PayPal receipts, and bank transfer captures for layout and font alignment anomalies.',
+    action: 'Verify payment receipt',
+    category: 'Receipts',
+  },
+  'image-manipulation-checker': {
+    name: 'Screenshot Forensics & ELA',
+    href: '/image-manipulation-checker',
+    desc: 'Perform Error Level Analysis (ELA) and compression gradient forensics to spot digital edits.',
+    action: 'Inspect image manipulation',
+    category: 'Forensics',
+  },
+  'ai-image-detector': {
+    name: 'AI Image Detector',
+    href: '/ai-image-detector',
+    desc: 'Inspect synthetic imagery artifacts and verify C2PA Content Credentials provenance.',
+    action: 'Detect AI-generated images',
+    category: 'Vision',
+  },
+  'screenshot-ocr': {
+    name: 'Screenshot OCR Extractor',
+    href: '/screenshot-ocr',
+    desc: 'Extract and transcribe searchable text directly inside your browser with zero server uploads.',
+    action: 'Extract text from image',
+    category: 'OCR',
+  },
+  'screenshot-redactor': {
+    name: 'Screenshot Redactor',
+    href: '/screenshot-redactor',
+    desc: 'Interactively blur, pixelate, or black out sensitive text, card numbers, and faces before sharing.',
+    action: 'Mask sensitive details',
+    category: 'Privacy',
+  },
+  'screenshot-scam-checker': {
+    name: 'Screenshot Scam Checker',
+    href: '/screenshot-scam-checker',
+    desc: 'Detect phishing lures, urgent pressure tactics, and fraud indicators in SMS and chat captures.',
+    action: 'Scan suspicious message',
+    category: 'Security',
+  },
+  'screenshot-spam-checker': {
+    name: 'Screenshot Spam Checker',
+    href: '/screenshot-spam-checker',
+    desc: 'Audit messages for promotional buzzwords, excessive punctuation, and spam trigger phrases.',
+    action: 'Analyze promotional spam',
+    category: 'Spam',
+  },
+  'screenshot-metadata-checker': {
+    name: 'EXIF & Metadata Inspector',
+    href: '/screenshot-metadata-checker',
+    desc: 'Inspect hidden camera hardware serials, GPS coordinates, timestamps, and editing history.',
+    action: 'View image metadata',
+    category: 'Metadata',
+  },
+  'image-metadata-remover': {
+    name: 'Image Metadata Remover',
+    href: '/image-metadata-remover',
+    desc: 'Strip GPS coordinates and camera EXIF tags with 100% client-side privacy preservation.',
+    action: 'Remove EXIF & GPS',
+    category: 'Privacy',
+  },
+  'screenshot-privacy-checker': {
+    name: 'Screenshot Privacy Scanner',
+    href: '/screenshot-privacy-checker',
+    desc: 'Scan images for exposed credit card numbers, email addresses, phone numbers, and SSNs.',
+    action: 'Scan for exposed PII',
+    category: 'Privacy',
+  },
+  'screenshot-comparison': {
+    name: 'Screenshot Comparison Tool',
+    href: '/screenshot-comparison',
+    desc: 'Compare two image captures side-by-side with swipe sliders and difference heatmaps.',
+    action: 'Compare image versions',
+    category: 'Comparison',
+  },
+  'suspicious-link-checker': {
+    name: 'Suspicious Link Checker',
+    href: '/suspicious-link-checker',
+    desc: 'Audit links and shortened URLs embedded in screenshots for homoglyphs and phishing risks.',
+    action: 'Check screenshot links',
+    category: 'Links',
+  },
+};
+
+// Automatic context lookup based on clean route
+const cleanRoute = currentPath.replace(/^\//, '').replace(/\/$/, '');
+
+const DEFAULT_TOOL_RELATIONS: Record<string, string[]> = {
+  '': ['screenshot-analyzer', 'payment-screenshot-checker', 'image-manipulation-checker'],
+  'screenshot-analyzer': ['payment-screenshot-checker', 'image-manipulation-checker', 'screenshot-scam-checker'],
+  'payment-screenshot-checker': ['screenshot-analyzer', 'image-manipulation-checker', 'screenshot-redactor'],
+  'image-manipulation-checker': ['screenshot-comparison', 'ai-image-detector', 'payment-screenshot-checker'],
+  'ai-image-detector': ['image-manipulation-checker', 'screenshot-analyzer', 'screenshot-metadata-checker'],
+  'screenshot-ocr': ['screenshot-redactor', 'suspicious-link-checker', 'screenshot-analyzer'],
+  'screenshot-redactor': ['screenshot-privacy-checker', 'image-metadata-remover', 'screenshot-ocr'],
+  'screenshot-scam-checker': ['suspicious-link-checker', 'screenshot-spam-checker', 'screenshot-privacy-checker'],
+  'screenshot-spam-checker': ['screenshot-scam-checker', 'suspicious-link-checker', 'screenshot-ocr'],
+  'screenshot-metadata-checker': ['image-metadata-remover', 'image-manipulation-checker', 'screenshot-analyzer'],
+  'image-metadata-remover': ['screenshot-metadata-checker', 'screenshot-privacy-checker', 'screenshot-redactor'],
+  'screenshot-privacy-checker': ['screenshot-redactor', 'image-metadata-remover', 'screenshot-metadata-checker'],
+  'screenshot-comparison': ['image-manipulation-checker', 'payment-screenshot-checker', 'screenshot-analyzer'],
+  'suspicious-link-checker': ['screenshot-scam-checker', 'screenshot-ocr', 'screenshot-analyzer'],
+};
+
+const DEFAULT_ARTICLE_RELATIONS: Record<string, string[]> = {
+  '': ['screenshot-checker-online', 'fake-upi-payment-screenshot'],
+  'screenshot-analyzer': ['screenshot-checker-online', 'screenshot-analyzer-online'],
+  'payment-screenshot-checker': ['fake-upi-payment-screenshot', 'screenshot-checker-online'],
+  'image-manipulation-checker': ['screenshot-checker-online', 'ai-image-detector-online'],
+  'ai-image-detector': ['ai-image-detector-online', 'screenshot-checker-online'],
+  'screenshot-ocr': ['screenshot-analyzer-online', 'screenshot-checker-online'],
+  'screenshot-redactor': ['screenshot-analyzer-online', 'exif-metadata'],
+  'screenshot-scam-checker': ['smishing-fake-sms', 'fake-upi-payment-screenshot'],
+  'screenshot-spam-checker': ['smishing-fake-sms', 'screenshot-analyzer-online'],
+  'screenshot-metadata-checker': ['exif-metadata', 'screenshot-checker-online'],
+  'image-metadata-remover': ['exif-metadata', 'screenshot-analyzer-online'],
+  'screenshot-privacy-checker': ['screenshot-analyzer-online', 'exif-metadata'],
+  'screenshot-comparison': ['screenshot-checker-online', 'fake-upi-payment-screenshot'],
+  'suspicious-link-checker': ['smishing-fake-sms', 'screenshot-analyzer-online'],
+};
+
+// Resolve tool items
+const resolvedToolKeys =
+  toolSlugs && toolSlugs.length > 0
+    ? toolSlugs
+    : DEFAULT_TOOL_RELATIONS[cleanRoute] || ['screenshot-analyzer', 'payment-screenshot-checker', 'image-manipulation-checker'];
+
+const selectedTools = resolvedToolKeys
+  .filter((slug) => `/${slug}` !== currentPath && `/${slug}/` !== currentPath)
+  .map((slug) => TOOLS_CATALOG[slug])
+  .filter(Boolean)
+  .slice(0, 3);
+
+// Resolve article items
+const allArticles = getAllArticles();
+const resolvedArticleKeys =
+  articleSlugs && articleSlugs.length > 0
+    ? articleSlugs
+    : DEFAULT_ARTICLE_RELATIONS[cleanRoute] || ['screenshot-checker-online', 'fake-upi-payment-screenshot'];
+
+const selectedArticles: BlogArticle[] = resolvedArticleKeys
+  .map((slug) => allArticles.find((a) => a.slug === slug))
+  .filter((a): a is BlogArticle => a !== undefined)
+  .slice(0, 2);
+---
+
+<section class="py-16 max-w-5xl mx-auto px-4 sm:px-6 border-t border-hairline/80">
+  <div class="mb-10 text-center sm:text-left">
+    <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block mb-1">
+      Contextual Investigation Links
+    </span>
+    <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal">
+      {title}
+    </h2>
+    <p class="text-xs sm:text-sm text-muted mt-1 max-w-2xl">
+      {subtitle}
+    </p>
+  </div>
+
+  <div class="space-y-8">
+    <!-- Tool Links Grid -->
+    <div>
+      <h3 class="text-xs uppercase tracking-wider font-semibold text-muted font-mono mb-3">
+        Recommended Investigation Tools
+      </h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {selectedTools.map((tool) => (
+          <a
+            href={tool.href}
+            class="feature-card !p-5 group hover:border-primary/40 hover:bg-surface-cream-strong/40 transition-all flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex items-center justify-between text-xs text-muted font-mono mb-2">
+                <span class="badge-pill !text-[10px] font-semibold">{tool.category}</span>
+                <span class="text-primary font-mono group-hover:translate-x-0.5 transition-transform">→</span>
+              </div>
+              <h4 class="font-serif text-base text-ink font-normal group-hover:text-primary transition-colors mb-1.5">
+                {tool.name}
+              </h4>
+              <p class="text-xs text-body leading-relaxed mb-3">{tool.desc}</p>
+            </div>
+            <div class="pt-2 border-t border-hairline/60 text-[11px] font-mono text-primary font-medium">
+              <span>{tool.action}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Related Articles -->
+    {selectedArticles.length > 0 && (
+      <div>
+        <h3 class="text-xs uppercase tracking-wider font-semibold text-muted font-mono mb-3">
+          Related Forensic & Verification Guides
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {selectedArticles.map((article) => (
+            <a
+              href={`/blog/${article.slug}`}
+              class="feature-card !p-5 group hover:border-primary/40 hover:bg-surface-cream-strong/40 transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div class="flex items-center gap-2 text-xs text-muted font-mono mb-2">
+                  <span class="badge-pill !text-[10px] font-semibold">{article.category}</span>
+                  <span>•</span>
+                  <span>{article.readTime}</span>
+                </div>
+                <h4 class="font-serif text-base sm:text-lg text-ink font-normal group-hover:text-primary transition-colors mb-2 leading-snug">
+                  {article.title}
+                </h4>
+                <p class="text-xs text-body leading-relaxed line-clamp-2 mb-3">
+                  {article.excerpt}
+                </p>
+              </div>
+              <div class="pt-2 border-t border-hairline/60 flex items-center justify-between text-xs text-primary font-mono font-medium">
+                <span>Read detailed guide</span>
+                <span>→</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>

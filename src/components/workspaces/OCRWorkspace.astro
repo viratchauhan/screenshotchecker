@@ -1,6 +1,11 @@
 ---
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
+import FaqSection from '../FaqSection.astro';
+import RelatedLinks from '../RelatedLinks.astro';
+import { getToolFaqs } from '../../data/toolFaqs';
+
+const faqs = getToolFaqs('screenshot-ocr');
 ---
 
 <div class="min-h-screen flex flex-col bg-canvas text-body">
@@ -135,11 +140,16 @@ import Footer from '../Footer.astro';
     </div>
   </main>
 
+  <!-- FAQ Section -->
+  <FaqSection faqs={faqs} heading="Frequently Asked Questions About Screenshot OCR" />
+
+  <!-- Contextual Internal Linking -->
+  <RelatedLinks currentPath="/screenshot-ocr" />
+
   <Footer />
 </div>
 
 <script>
-  import { runClientOCR } from '../../lib/analyzer/ocr';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
 
   let currentDataUrl = '';
@@ -176,6 +186,7 @@ import Footer from '../Footer.astro';
     if (sourceImg) sourceImg.src = dataUrl;
 
     try {
+      const { runClientOCR } = await import('../../lib/analyzer/ocr');
       const result = await runClientOCR(img, (pct, status) => {
         if (statusText) statusText.innerText = `${status} (${pct}%)`;
         if (pct < 20 && statusTitle) statusTitle.innerText = 'Preprocessing clarity & contrast...';

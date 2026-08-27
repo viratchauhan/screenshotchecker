@@ -10,21 +10,21 @@ import HowItWorks from '../components/HowItWorks.astro';
 import SeoContent from '../components/SeoContent.astro';
 import TrustPrivacy from '../components/TrustPrivacy.astro';
 import FaqSection from '../components/FaqSection.astro';
-import RelatedTools from '../components/RelatedTools.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 import Footer from '../components/Footer.astro';
 import { HOMEPAGE_FAQS } from '../data/homepageFaqs';
 
-const canonicalUrl = 'https://screenshotchecker.com';
-const pageTitle = 'Screenshot Checker – Analyze & Verify Screenshots Online';
+const canonicalUrl = 'https://screenshotchecker.com/';
+const pageTitle = 'Screenshot Checker – Verify Image Authenticity';
 const pageDescription =
-  'Screenshot Checker is an online tool for analyzing screenshots and images for editing signals, visual inconsistencies, metadata, fraud indicators, and other digital evidence.';
+  'Think a screenshot might be faked? Check it in seconds — free, private, 100% in-browser. No uploads, no signup.';
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'WebSite',
-      '@id': `${canonicalUrl}/#website`,
+      '@id': `${canonicalUrl}#website`,
       name: 'ScreenshotChecker',
       url: canonicalUrl,
       description: pageDescription,
@@ -32,18 +32,18 @@ const structuredData = {
     },
     {
       '@type': 'WebPage',
-      '@id': `${canonicalUrl}/#webpage`,
+      '@id': `${canonicalUrl}#webpage`,
       url: canonicalUrl,
       name: pageTitle,
       isPartOf: {
-        '@id': `${canonicalUrl}/#website`,
+        '@id': `${canonicalUrl}#website`,
       },
       description: pageDescription,
       inLanguage: 'en',
     },
     {
       '@type': 'WebApplication',
-      '@id': `${canonicalUrl}/#webapp`,
+      '@id': `${canonicalUrl}#webapp`,
       name: 'ScreenshotChecker',
       url: canonicalUrl,
       description:
@@ -58,7 +58,7 @@ const structuredData = {
     },
     {
       '@type': 'FAQPage',
-      '@id': `${canonicalUrl}/#faq`,
+      '@id': `${canonicalUrl}#faq`,
       mainEntity: HOMEPAGE_FAQS.map((faq) => ({
         '@type': 'Question',
         name: faq.question,
@@ -76,8 +76,8 @@ const structuredData = {
   title={pageTitle}
   description={pageDescription}
   canonicalUrl={canonicalUrl}
-  ogTitle="Screenshot Checker – Analyze & Verify Screenshots Online"
-  ogDescription="Analyze screenshots and images for editing signals, visual inconsistencies, metadata, fraud indicators, and other digital evidence."
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
   ogType="website"
   siteName="ScreenshotChecker"
   structuredData={structuredData}
@@ -94,19 +94,17 @@ const structuredData = {
     <SeoContent />
     <TrustPrivacy />
     <FaqSection />
-    <RelatedTools currentPath="/" />
+    <RelatedLinks currentPath="/" />
   </main>
 
   <Footer />
 </Layout>
 
 <script>
-  import { runFullAnalysis } from '../lib/analyzer/pipeline';
   import { SAMPLE_PRESETS } from '../lib/samples/sampleData';
-  import { renderRedactedImage, type RedactionBox } from '../lib/analyzer/redactor';
-  import { stripImageMetadata } from '../lib/analyzer/metadata';
   import { formatBytes } from '../lib/utils/formatters';
   import { setHandoffImage } from '../lib/utils/toolHandoff';
+  import type { RedactionBox } from '../lib/analyzer/redactor';
   import type { AgenticInvestigationResult } from '../lib/ai/reasoningSchema';
 
   let currentFile: File | null = null;
@@ -165,6 +163,7 @@ const structuredData = {
     progressText.innerText = 'Observing visual image...';
 
     try {
+      const { runFullAnalysis } = await import('../lib/analyzer/pipeline');
       const result = await runFullAnalysis(file, dataUrl, (pct, status) => {
         progressBarFill.style.width = `${pct}%`;
         progressText.innerText = status;
@@ -690,6 +689,7 @@ const structuredData = {
 
   async function downloadCleanImage() {
     if (!previewImg) return;
+    const { stripImageMetadata } = await import('../lib/analyzer/metadata');
     const { blob } = await stripImageMetadata(previewImg, 'image/png');
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -734,8 +734,9 @@ const structuredData = {
     redrawRedactorCanvas();
   }
 
-  function redrawRedactorCanvas() {
+  async function redrawRedactorCanvas() {
     if (!redactorCanvas || !previewImg) return;
+    const { renderRedactedImage } = await import('../lib/analyzer/redactor');
     renderRedactedImage(previewImg, redactionBoxes).then(({ dataUrl }) => {
       const img = new Image();
       img.onload = () => {
@@ -823,6 +824,7 @@ const structuredData = {
 
   exportRedactedBtn?.addEventListener('click', async () => {
     if (!previewImg) return;
+    const { renderRedactedImage } = await import('../lib/analyzer/redactor');
     const { blob } = await renderRedactedImage(previewImg, redactionBoxes, 'image/png');
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');

@@ -47,7 +47,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     slug: 'screenshot-checker-online',
     title: 'Screenshot Checker Online: How to Check If a Screenshot Is Real or Edited',
-    seoTitle: 'Screenshot Checker Online: How to Check If a Screenshot Is Real or Edited',
+    seoTitle: 'Screenshot Checker Online: How to Check Edited Images',
     metaDescription:
       'Learn how to check screenshots for editing, manipulation, compression issues, and suspicious changes using a screenshot checker online.',
     category: 'Security',
@@ -158,7 +158,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     title: 'Screenshot Analyzer Online: What Can It Actually Detect?',
     seoTitle: 'Screenshot Analyzer Online: What Can It Actually Detect?',
     metaDescription:
-      'Learn what an online screenshot analyzer can detect, including editing signals, compression patterns, text inconsistencies, metadata, and image manipulation clues.',
+      'Learn what online screenshot analyzers detect: editing signals, compression patterns, text inconsistencies, metadata, and visual forensics.',
     category: 'Forensics',
     publishedAt: 'August 22, 2026',
     readTime: '5 min read',
@@ -264,7 +264,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     slug: 'fake-upi-payment-screenshot',
     title: 'Fake UPI Payment Screenshot: How to Check If a Payment Is Real',
-    seoTitle: 'Fake UPI Payment Screenshot: How to Check If a Payment Is Real',
+    seoTitle: 'Fake UPI Payment Screenshot: Check If Payment Is Real',
     metaDescription:
       'Received a UPI payment screenshot? Learn how to spot suspicious payment screenshots and why you should always verify the transaction in your own bank account.',
     category: 'Security',
@@ -375,7 +375,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     slug: 'ai-image-detector-online',
     title: 'AI Image Detector Online: How AI-Generated Images Are Detected',
-    seoTitle: 'AI Image Detector Online: How AI-Generated Images Are Detected',
+    seoTitle: 'AI Image Detector Online: How AI Media Is Detected',
     metaDescription:
       'Learn how AI image detectors analyze visual patterns, metadata, C2PA Content Credentials, editing signals, text rendering, and other evidence.',
     category: 'AI & Forensics',

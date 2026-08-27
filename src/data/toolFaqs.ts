@@ -1,0 +1,145 @@
+export interface ToolFaqItem {
+  question: string;
+  answer: string;
+}
+
+export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
+  'ai-image-detector': [
+    {
+      question: 'How does this AI image detector identify synthetic images?',
+      answer: 'Our detector combines C2PA Content Credentials provenance checking with visual artifact inspection, including Error Level Analysis (ELA), frequency domain noise variance, and typographic anomalies common in AI generation models like Midjourney, DALL-E, and Stable Diffusion.',
+    },
+    {
+      question: 'Is any AI image detection tool 100% accurate?',
+      answer: 'No. No automated AI detector can guarantee 100% accuracy because generative models improve continuously. We provide multi-signal forensic indicators to help you make informed evaluations rather than relying on an oversimplified black-box score.',
+    },
+    {
+      question: 'Are my images uploaded to external cloud servers for AI detection?',
+      answer: 'No. All forensic checks, C2PA manifest parsing, and image analysis execute entirely inside your local web browser sandbox using client-side WebAssembly and JavaScript.',
+    },
+  ],
+
+  'image-manipulation-checker': [
+    {
+      question: 'What is Error Level Analysis (ELA) and how does it detect manipulation?',
+      answer: 'Error Level Analysis (ELA) works by intentionally resaving an image at a known compression level and calculating the difference matrix. Because edited sections usually have different compression histories than the surrounding image, they appear with distinct brightness patterns in the ELA heatmap.',
+    },
+    {
+      question: 'Can normal image cropping or re-saving trigger an ELA warning?',
+      answer: 'Yes. Every time a JPEG is saved, compression artifacts change. High-contrast edges or text naturally produce higher error levels. ELA should be evaluated alongside context, font consistency, and metadata rather than viewed in isolation.',
+    },
+    {
+      question: 'Does this manipulation checker run privately on my device?',
+      answer: 'Yes. ELA computation and visual diffing run 100% locally in your browser canvas. No image bytes or personal documents are transmitted to any server.',
+    },
+  ],
+
+  'screenshot-ocr': [
+    {
+      question: 'How does client-side OCR extract text from screenshots?',
+      answer: 'We utilize a specialized WebAssembly build of Tesseract.js running in an isolated browser Web Worker. It analyzes character glyphs directly on your device CPU and outputs selectable, editable text without requiring any server-side OCR API.',
+    },
+    {
+      question: 'Is my extracted screenshot text private and secure?',
+      answer: 'Yes. Because OCR processing is executed entirely within your browser, your sensitive messages, receipts, and personal notes are never uploaded or stored on remote servers.',
+    },
+    {
+      question: 'What image resolutions provide the best OCR text accuracy?',
+      answer: 'Standard screenshot resolutions from smartphones and desktop displays (72 to 300 DPI) work reliably. Clear contrast between text and background produces near-perfect transcription.',
+    },
+  ],
+
+  'screenshot-redactor': [
+    {
+      question: 'What redaction methods are available for hiding sensitive information?',
+      answer: 'You can choose between heavy Gaussian blur, pixelation mosaic, solid blackout blocks, or subtle highlighter strokes to obscure phone numbers, emails, addresses, and financial account figures.',
+    },
+    {
+      question: 'Can redacted text be reversed or unmasked after export?',
+      answer: 'No. When you export a redacted image, the underlying pixels are permanently overwritten and re-rasterized onto a fresh HTML5 canvas. The original pixel data is destroyed upon export.',
+    },
+    {
+      question: 'Is there any file upload required to redact screenshots?',
+      answer: 'No. All drawing, blurring, and export operations happen completely in-memory on your client machine.',
+    },
+  ],
+
+  'screenshot-metadata-checker': [
+    {
+      question: 'What metadata can be extracted from screenshots and photos?',
+      answer: 'The inspector extracts EXIF tags, GPS latitude/longitude coordinates, camera hardware make and model, lens details, shutter speeds, ISO levels, color profiles, and software modification history.',
+    },
+    {
+      question: 'Do screenshots usually have EXIF and GPS tags?',
+      answer: 'Native screen captures taken on iOS, Android, macOS, or Windows rarely contain camera EXIF or GPS coordinates, but direct camera photos and saved camera files almost always contain detailed hardware and location tags.',
+    },
+    {
+      question: 'How does this tool read EXIF data privately?',
+      answer: 'Our client-side parser reads the binary byte headers of your file directly in your browser. No file data is transmitted across the internet.',
+    },
+  ],
+
+  'image-metadata-remover': [
+    {
+      question: 'Why should I remove metadata before sharing images online?',
+      answer: 'Camera photos often contain precise GPS coordinates pointing to your home or office, along with device serial numbers and creation timestamps that can compromise your privacy when uploaded to forums or social networks.',
+    },
+    {
+      question: 'How does this tool strip image metadata?',
+      answer: 'The tool extracts the raw visual pixel raster from your image and exports a pristine, clean file into memory with all EXIF, GPS, IPTC, and XMP metadata headers completely stripped out.',
+    },
+    {
+      question: 'Does stripping metadata reduce image visual quality?',
+      answer: 'No. When exported in lossless PNG or high-quality WebP/JPEG, the visual pixels remain crisp while the invisible privacy-invasive tracking tags are permanently discarded.',
+    },
+  ],
+
+  'screenshot-privacy-checker': [
+    {
+      question: 'What types of sensitive personal data does the privacy scanner detect?',
+      answer: 'The scanner extracts and flags phone numbers, email addresses, 16-digit payment card numbers, Social Security Numbers (SSNs), residential street addresses, and API/access tokens.',
+    },
+    {
+      question: 'Can I redact sensitive information directly from the scanner?',
+      answer: 'Yes. Once sensitive entities are detected, you can seamlessly open the integrated Redactor to blur, pixelate, or black out the flagged regions before sharing.',
+    },
+    {
+      question: 'Does the scanner store any detected personal information?',
+      answer: 'Never. The entire detection heuristic runs in your local browser sandbox. No phone numbers, card details, or names are ever recorded or transmitted.',
+    },
+  ],
+
+  'screenshot-comparison': [
+    {
+      question: 'How does the screenshot comparison tool highlight differences?',
+      answer: 'You can compare two image captures using side-by-side view, an interactive swipe slider, an opacity overlay, or a pixel-difference heatmap that highlights modified regions.',
+    },
+    {
+      question: 'What are common use cases for visual screenshot comparison?',
+      answer: 'Common use cases include verifying before-and-after UI changes, detecting text edits between two versions of a document, and spotting subtle modifications in transactional receipts.',
+    },
+    {
+      question: 'Can I compare images of different dimensions?',
+      answer: 'Yes. The comparison tool automatically normalizes aspect ratios and viewport alignments so you can inspect visual differences smoothly.',
+    },
+  ],
+
+  'suspicious-link-checker': [
+    {
+      question: 'How does this tool extract and audit links inside screenshots?',
+      answer: 'The tool uses client-side OCR to detect URLs, domain names, and IP addresses embedded in screenshot images, analyzing them for deceptive subdomains, Punycode homoglyphs, and known suspicious TLD patterns.',
+    },
+    {
+      question: 'Does checking a link in a screenshot visit or trigger the malicious website?',
+      answer: 'No. The scanner performs passive structural parsing and reputation checks without executing client-side redirects or loading dangerous scripts from the target domain.',
+    },
+    {
+      question: 'Can this tool detect smishing links in text messages?',
+      answer: 'Yes. It specifically highlights shortened URLs (such as bit.ly or tinyurl) and lookalike banking or courier delivery domains commonly used in SMS phishing campaigns.',
+    },
+  ],
+};
+
+export function getToolFaqs(slug: string): ToolFaqItem[] {
+  return TOOL_FAQS[slug] || [];
+}

@@ -6,11 +6,43 @@ import { TOOLS_REGISTRY, TOOL_CATEGORIES } from '../../data/tools';
 
 const featuredTool = TOOLS_REGISTRY.find((t) => t.isFeatured) || TOOLS_REGISTRY[0];
 const popularTools = TOOLS_REGISTRY.filter((t) => t.isPopular && !t.isFeatured);
+
+const canonicalUrl = 'https://screenshotchecker.com/tools/';
+const pageTitle = 'Free Screenshot Analysis Tools – Forensics & OCR';
+const pageDescription =
+  'Explore 12+ free browser tools for screenshot forensics, payment slip verification, OCR extraction, metadata cleaning, and redaction.';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Tools',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
-  title="Tools Directory — Screenshot & Image Intelligence Toolkit"
-  description="Explore tools to analyze, understand, protect, and transform screenshots and images directly in your browser."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  structuredData={structuredData}
 >
   <Header currentPath="/tools" />
 

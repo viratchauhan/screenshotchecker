@@ -11,24 +11,84 @@ interface Props {
   ogImage?: string;
   siteName?: string;
   structuredData?: object;
+  robots?: string;
 }
 
 const {
-  title = "Screenshot Checker – Analyze & Verify Screenshots Online",
-  description = "Screenshot Checker is an online tool for analyzing screenshots and images for editing signals, visual inconsistencies, metadata, fraud indicators, and other digital evidence.",
-  canonicalUrl = Astro.url.href.replace(/\/$/, '') ? (Astro.url.pathname === '/' ? 'https://screenshotchecker.com' : `https://screenshotchecker.com${Astro.url.pathname.replace(/\/$/, '')}/`) : 'https://screenshotchecker.com',
+  title = "Screenshot Checker – Verify Image Authenticity",
+  description = "Think a screenshot might be faked? Check it in seconds — free, private, 100% in-browser. No uploads, no signup.",
+  canonicalUrl: propCanonicalUrl,
   ogType = "website",
   ogTitle,
   ogDescription,
   ogImage = "https://screenshotchecker.com/web-app-manifest-512x512.png",
   siteName = "ScreenshotChecker",
   structuredData,
+  robots = "index, follow",
 } = Astro.props;
 
-const fullTitle = title.includes("Screenshot Checker") || title.includes("ScreenshotChecker") ? title : `${title} | ${siteName}`;
+// Standardize canonical URL with trailing slash matching sitemap format
+const pathname = Astro.url.pathname;
+const normalizedPath = pathname === '/' ? '/' : (pathname.endsWith('/') ? pathname : `${pathname}/`);
+const canonicalUrl = propCanonicalUrl 
+  ? (propCanonicalUrl.endsWith('/') || propCanonicalUrl.includes('?') ? propCanonicalUrl : `${propCanonicalUrl}/`)
+  : `https://screenshotchecker.com${normalizedPath}`;
+
+// Ensure title tag strictly stays under 60 characters
+const fullTitle =
+  title.includes("Screenshot Checker") ||
+  title.includes("ScreenshotChecker") ||
+  title.length + siteName.length + 3 > 60
+    ? title
+    : `${title} | ${siteName}`;
+
 const effectiveOgTitle = ogTitle || fullTitle;
 const effectiveOgDescription = ogDescription || description;
 const effectiveOgImage = ogImage.startsWith('http') ? ogImage : `https://screenshotchecker.com${ogImage.startsWith('/') ? ogImage : '/' + ogImage}`;
+
+// Site-wide Organization JSON-LD Schema
+const organizationSchema = {
+  '@type': 'Organization',
+  '@id': 'https://screenshotchecker.com/#organization',
+  name: 'ScreenshotChecker',
+  url: 'https://screenshotchecker.com/',
+  logo: {
+    '@type': 'ImageObject',
+    '@id': 'https://screenshotchecker.com/#logo',
+    url: 'https://screenshotchecker.com/web-app-manifest-512x512.png',
+    caption: 'ScreenshotChecker',
+  },
+  sameAs: [
+    'https://github.com/viratchauhan/screenshotchecker',
+  ],
+};
+
+// Combine page structured data with site-wide Organization into @graph
+let finalStructuredData: any = null;
+if (structuredData) {
+  if (Array.isArray(structuredData)) {
+    finalStructuredData = {
+      '@context': 'https://schema.org',
+      '@graph': [...structuredData, organizationSchema],
+    };
+  } else if (typeof structuredData === 'object' && '@graph' in structuredData && Array.isArray((structuredData as any)['@graph'])) {
+    const hasOrg = (structuredData as any)['@graph'].some((item: any) => item['@type'] === 'Organization');
+    finalStructuredData = {
+      '@context': 'https://schema.org',
+      '@graph': hasOrg ? (structuredData as any)['@graph'] : [...(structuredData as any)['@graph'], organizationSchema],
+    };
+  } else if (typeof structuredData === 'object') {
+    finalStructuredData = {
+      '@context': 'https://schema.org',
+      '@graph': [structuredData, organizationSchema],
+    };
+  }
+} else {
+  finalStructuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [organizationSchema],
+  };
+}
 ---
 
 <!doctype html>
@@ -74,7 +134,7 @@ const effectiveOgImage = ogImage.startsWith('http') ? ogImage : `https://screens
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content="ScreenshotChecker" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content={ogType} />
@@ -97,8 +157,8 @@ const effectiveOgImage = ogImage.startsWith('http') ? ogImage : `https://screens
       rel="stylesheet"
     />
 
-    {structuredData && (
-      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    {finalStructuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)} />
     )}
   </head>
   <body class="bg-canvas text-body selection:bg-surface-cream-strong selection:text-ink min-h-screen flex flex-col">

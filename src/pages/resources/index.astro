@@ -2,9 +2,36 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import RelatedTools from '../../components/RelatedTools.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
 
-const currentPath = Astro.url.pathname;
+const currentPath = '/resources/';
+const canonicalUrl = 'https://screenshotchecker.com/resources/';
+const pageTitle = 'Screenshot Security & Forensics Resources';
+const pageDescription =
+  'Step-by-step security tutorials on safe screenshot sharing, removing GPS metadata, detecting smishing, and running ELA forensics.';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Resources',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
 
 const guides = [
   {
@@ -47,8 +74,12 @@ const guides = [
 ---
 
 <Layout
-  title="Educational Guides & Knowledge Base — Screenshot Checker"
-  description="Explore comprehensive guides on screenshot privacy, metadata removal, scam message detection, image forensics, and safe sharing best practices."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  structuredData={structuredData}
 >
   <Header currentPath={currentPath} />
 
@@ -89,7 +120,7 @@ const guides = [
       ))}
     </div>
 
-    <RelatedTools currentPath={currentPath} />
+    <RelatedLinks currentPath={currentPath} />
   </main>
 
   <Footer />

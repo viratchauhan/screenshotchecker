@@ -2,11 +2,43 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const canonicalUrl = 'https://screenshotchecker.com/about/';
+const pageTitle = 'About ScreenshotChecker – Private Image Forensics';
+const pageDescription =
+  "Learn about ScreenshotChecker's mission to provide 100% private, client-side image forensics and authenticity verification tools.";
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'About',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
-  title="About ScreenshotChecker — Privacy-First Visual Intelligence"
-  description="Learn about ScreenshotChecker's mission, privacy-first client-side architecture, and commitment to evidence-based image investigation."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  structuredData={structuredData}
 >
   <Header currentPath="/about" />
 

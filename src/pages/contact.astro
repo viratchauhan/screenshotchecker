@@ -2,11 +2,43 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+const canonicalUrl = 'https://screenshotchecker.com/contact/';
+const pageTitle = 'Contact Us – ScreenshotChecker Support';
+const pageDescription =
+  'Have questions or feedback about ScreenshotChecker? Contact our team for assistance with in-browser image analysis and privacy tools.';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Contact',
+          item: canonicalUrl,
+        },
+      ],
+    },
+  ],
+};
 ---
 
 <Layout
-  title="Contact Us — ScreenshotChecker"
-  description="Get in touch with ScreenshotChecker for inquiries, feedback, security reports, or questions."
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  structuredData={structuredData}
 >
   <Header currentPath="/contact" />
 

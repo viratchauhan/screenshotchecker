@@ -6,29 +6,54 @@ import { getAllArticles } from '../../data/blogArticles';
 
 const articles = getAllArticles();
 
-const canonicalUrl = 'https://screenshotchecker.com/blog';
+const canonicalUrl = 'https://screenshotchecker.com/blog/';
+const pageTitle = 'Screenshot Forensics & Verification Guides';
+const pageDescription =
+  'Expert guides to detecting fake screenshots, payment fraud, smishing SMS, and AI-generated media. Free forensic analysis insights.';
 
-// ItemList schema for Blog Index
-const blogListSchema = {
+// Structured data for Blog Index
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Guides & Investigations — Screenshot Checker',
-  description:
-    'Insights into digital visual trust, screenshot security, privacy protection, and image forensics.',
-  itemListElement: articles.map((article, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    url: `https://screenshotchecker.com/blog/${article.slug}`,
-    name: article.title,
-  })),
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Blog',
+          item: canonicalUrl,
+        },
+      ],
+    },
+    {
+      '@type': 'ItemList',
+      name: pageTitle,
+      description: pageDescription,
+      itemListElement: articles.map((article, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `https://screenshotchecker.com/blog/${article.slug}/`,
+        name: article.title,
+      })),
+    },
+  ],
 };
 ---
 
 <Layout
-  title="Guides & Investigations — Screenshot Checker Blog"
-  description="Insights into digital visual trust, screenshot security, privacy protection, and image forensics. Practical guides to detecting edited screenshots, AI media, and smishing scams."
+  title={pageTitle}
+  description={pageDescription}
   canonicalUrl={canonicalUrl}
-  structuredData={blogListSchema}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  structuredData={structuredData}
 >
   <Header currentPath="/blog" />
 

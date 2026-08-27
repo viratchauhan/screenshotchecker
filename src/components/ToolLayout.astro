@@ -5,7 +5,7 @@ import Footer from './Footer.astro';
 import Uploader from './Uploader.astro';
 import AnalysisDashboard from './AnalysisDashboard.astro';
 import RedactorModal from './RedactorModal.astro';
-import RelatedTools from './RelatedTools.astro';
+import RelatedLinks from './RelatedLinks.astro';
 
 interface Props {
   title: string;
@@ -203,38 +203,32 @@ const structuredData = {
 
       <div class="space-y-4" id="tool-faq-accordion">
         {faqs.map((faq, index) => (
-          <div class="feature-card !p-5 cursor-pointer group transition-all" data-faq-index={index}>
-            <button
-              type="button"
-              class="w-full flex items-center justify-between text-left gap-4 font-serif text-base text-ink font-normal focus:outline-none"
-              aria-expanded="false"
-            >
+          <details class="feature-card !p-5 group transition-all cursor-pointer" data-faq-index={index}>
+            <summary class="w-full flex items-center justify-between text-left gap-4 font-serif text-base text-ink font-normal list-none focus:outline-none select-none">
               <span>{faq.question}</span>
-              <svg class="w-4 h-4 text-primary shrink-0 transition-transform duration-200 tool-faq-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <svg class="w-4 h-4 text-primary shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
-            </button>
-            <div class="tool-faq-answer hidden mt-3 pt-3 border-t border-hairline text-xs sm:text-sm text-body leading-relaxed">
+            </summary>
+            <div class="tool-faq-answer mt-3 pt-3 border-t border-hairline text-xs sm:text-sm text-body leading-relaxed">
               <p>{faq.answer}</p>
             </div>
-          </div>
+          </details>
         ))}
       </div>
     </section>
 
-    <!-- Related Tools Grid -->
-    <RelatedTools currentPath={currentPath} />
+    <!-- Contextual Internal Linking (Tools & Guides) -->
+    <RelatedLinks currentPath={currentPath} />
   </main>
 
   <Footer />
 </Layout>
 
 <script>
-  import { runFullAnalysis } from '../lib/analyzer/pipeline';
   import { SAMPLE_PRESETS } from '../lib/samples/sampleData';
-  import { renderRedactedImage, type RedactionBox } from '../lib/analyzer/redactor';
-  import { stripImageMetadata } from '../lib/analyzer/metadata';
   import { formatBytes } from '../lib/utils/formatters';
+  import type { RedactionBox } from '../lib/analyzer/redactor';
   import type { AgenticInvestigationResult } from '../lib/ai/reasoningSchema';
 
   let currentFile: File | null = null;
@@ -293,6 +287,7 @@ const structuredData = {
     progressText.innerText = 'Observing visual image...';
 
     try {
+      const { runFullAnalysis } = await import('../lib/analyzer/pipeline');
       const result = await runFullAnalysis(file, dataUrl, (pct, status) => {
         progressBarFill.style.width = `${pct}%`;
         progressText.innerText = status;
@@ -794,6 +789,7 @@ const structuredData = {
 
   async function downloadCleanImage() {
     if (!previewImg) return;
+    const { stripImageMetadata } = await import('../lib/analyzer/metadata');
     const { blob } = await stripImageMetadata(previewImg, 'image/png');
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -868,8 +864,9 @@ const structuredData = {
     redrawRedactorCanvas();
   }
 
-  function redrawRedactorCanvas() {
+  async function redrawRedactorCanvas() {
     if (!redactorCanvas || !previewImg) return;
+    const { renderRedactedImage } = await import('../lib/analyzer/redactor');
     renderRedactedImage(previewImg, redactionBoxes).then(({ dataUrl }) => {
       const img = new Image();
       img.onload = () => {
@@ -957,6 +954,7 @@ const structuredData = {
 
   exportRedactedBtn?.addEventListener('click', async () => {
     if (!previewImg) return;
+    const { renderRedactedImage } = await import('../lib/analyzer/redactor');
     const { blob } = await renderRedactedImage(previewImg, redactionBoxes, 'image/png');
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -970,18 +968,4 @@ const structuredData = {
   (window as any).redactSpecificItem = (val: string) => {
     initRedactorModal();
   };
-
-  const toolFaqCards = document.querySelectorAll('#tool-faq-accordion .feature-card');
-  toolFaqCards.forEach((card) => {
-    const btn = card.querySelector('button');
-    const answer = card.querySelector('.tool-faq-answer');
-    const icon = card.querySelector('.tool-faq-icon');
-
-    btn?.addEventListener('click', () => {
-      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!isExpanded));
-      answer?.classList.toggle('hidden');
-      icon?.classList.toggle('rotate-180');
-    });
-  });
 </script>
