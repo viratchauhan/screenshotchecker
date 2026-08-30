@@ -169,23 +169,43 @@ const combinedStructuredData = {
 
           <div class="space-y-3.5 text-body">
             {section.paragraphs.map((p) => (
-              <p class="leading-relaxed">{p}</p>
+              <p class="leading-relaxed" set:html={p} />
             ))}
           </div>
 
           {section.callout && (
             <div
-              class={`p-4 sm:p-5 rounded-xl border text-xs sm:text-sm my-4 leading-relaxed ${
+              class={`p-4 sm:p-6 rounded-xl border text-xs sm:text-sm my-5 leading-relaxed shadow-xs ${
                 section.callout.type === 'warning'
                   ? 'bg-canvas border-error/30 text-error font-medium'
+                  : section.callout.type === 'golden-rule'
+                  ? 'bg-surface-card border-2 border-warning/40 text-ink space-y-3'
                   : 'bg-canvas border-hairline text-ink'
               }`}
             >
-              <div class="flex items-start gap-2.5">
-                <span class="font-bold font-mono uppercase text-[11px] block shrink-0 mt-0.5">
-                  {section.callout.type === 'warning' ? '⚠️ Caution:' : '💡 Note:'}
-                </span>
-                <span>{section.callout.text}</span>
+              {section.callout.type === 'golden-rule' ? (
+                <div class="space-y-3" set:html={section.callout.text} />
+              ) : (
+                <div class="flex items-start gap-2.5">
+                  <span class="font-bold font-mono uppercase text-[11px] block shrink-0 mt-0.5">
+                    {section.callout.type === 'warning' ? '⚠️ Caution:' : '💡 Note:'}
+                  </span>
+                  <span set:html={section.callout.text} />
+                </div>
+              )}
+            </div>
+          )}
+
+          {section.cta && (
+            <div class="my-8 p-5 sm:p-6 rounded-2xl bg-surface-card border border-hairline text-center space-y-3 shadow-xs">
+              <span class="badge-pill !text-[11px] font-mono font-semibold">Specialized Forensic Tool</span>
+              <h3 class="font-serif text-xl sm:text-2xl text-ink font-normal">{section.cta.label}</h3>
+              <p class="text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">{section.cta.description}</p>
+              <div>
+                <a href={section.cta.url} class="btn-primary text-xs sm:text-sm inline-flex items-center gap-2">
+                  <span>{section.cta.label}</span>
+                  <span>→</span>
+                </a>
               </div>
             </div>
           )}

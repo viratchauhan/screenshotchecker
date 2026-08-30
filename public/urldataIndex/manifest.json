@@ -1,0 +1,13 @@
+{
+  "source": "urldata.csv",
+  "totalRecords": 420464,
+  "uniqueUrls": 406591,
+  "uniqueHostnames": 143283,
+  "uniqueRegistrableDomains": 116211,
+  "labels": {
+    "bad": 75643,
+    "good": 344821
+  },
+  "generatedAt": "2026-08-30T07:47:53.417Z",
+  "version": "2026.08"
+}

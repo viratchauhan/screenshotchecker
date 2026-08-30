@@ -117,7 +117,7 @@ export async function inspectUrl(rawUrl: string): Promise<LinkCheckReport> {
           weight: 15,
           evidence: `Original: ${components.hostname} → Final: ${finalUrlObj.hostname}`,
         });
-      } catch {}
+      } catch { }
     }
   }
 

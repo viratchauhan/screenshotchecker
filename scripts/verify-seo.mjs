@@ -33,8 +33,10 @@ for (const filePath of htmlFiles) {
   const title = titleMatch ? titleMatch[1].trim() : '';
 
   // Meta Description
-  const descMatch = html.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i) ||
-                    html.match(/<meta\s+content=["']([^"']*)["']\s+name=["']description["']/i);
+  const descMatch = html.match(/<meta\s+name=["']description["']\s+content="([^"]*)"/i) ||
+                    html.match(/<meta\s+name=["']description["']\s+content='([^']*)'/i) ||
+                    html.match(/<meta\s+content="([^"]*)"\s+name=["']description["']/i) ||
+                    html.match(/<meta\s+content='([^']*)'\s+name=["']description["']/i);
   const description = descMatch ? descMatch[1].trim() : '';
 
   // Canonical

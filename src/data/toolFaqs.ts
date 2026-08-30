@@ -126,16 +126,40 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
 
   'suspicious-link-checker': [
     {
-      question: 'How does this tool extract and audit links inside screenshots?',
-      answer: 'The tool uses client-side OCR to detect URLs, domain names, and IP addresses embedded in screenshot images, analyzing them for deceptive subdomains, Punycode homoglyphs, and known suspicious TLD patterns.',
+      question: 'What is a suspicious link checker?',
+      answer: 'A suspicious link checker is an investigative tool that verifies a submitted URL or domain against a database of known web classifications to identify whether it matches cataloged bad, good, or conflicting records.',
     },
     {
-      question: 'Does checking a link in a screenshot visit or trigger the malicious website?',
-      answer: 'No. The scanner performs passive structural parsing and reputation checks without executing client-side redirects or loading dangerous scripts from the target domain.',
+      question: 'How does ScreenshotChecker check a URL?',
+      answer: 'ScreenshotChecker performs standards-compliant URL normalization, extracts the full hostname and registrable domain using Public Suffix rules, and queries our local 420K+ record dataset across three match levels: exact URL, exact hostname, and registrable domain.',
     },
     {
-      question: 'Can this tool detect smishing links in text messages?',
-      answer: 'Yes. It specifically highlights shortened URLs (such as bit.ly or tinyurl) and lookalike banking or courier delivery domains commonly used in SMS phishing campaigns.',
+      question: 'What is a local URL dataset?',
+      answer: 'A local URL dataset is an offline, curated repository of categorized web addresses and domains (containing over 420,000 verified entries) used to look up historical classifications without sending traffic to third-party APIs.',
+    },
+    {
+      question: 'What does a domain match mean?',
+      answer: 'A domain match means the primary registrable root domain of the submitted URL (e.g. example.com) exists in the local dataset, even if the specific sub-page or path is different.',
+    },
+    {
+      question: 'What does an exact URL match mean?',
+      answer: 'An exact URL match is the strongest match level, indicating that the full web address (including path and query parameters) exists verbatim in the local intelligence dataset.',
+    },
+    {
+      question: 'What does "No Local Match" mean?',
+      answer: '"No Local Match" means the submitted URL, hostname, or domain was not found in ScreenshotChecker\'s local dataset. It indicates absence of cataloged data, not proof of safety.',
+    },
+    {
+      question: 'Does no match mean the website is safe?',
+      answer: 'No. An absence of matching records in the dataset does NOT guarantee that a website is safe. Newly created phishing websites or unindexed domains will not appear in the dataset.',
+    },
+    {
+      question: 'Does ScreenshotChecker open or visit the submitted URL?',
+      answer: 'No. ScreenshotChecker performs a purely passive local database query. Your browser and our servers never establish a network connection with the submitted website.',
+    },
+    {
+      question: 'Can I check a domain without visiting it?',
+      answer: 'Yes. You can safely paste any link or domain name into the checker to inspect its local classification without loading any scripts, redirects, or files from the destination server.',
     },
   ],
 };

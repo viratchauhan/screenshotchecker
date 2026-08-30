@@ -1,209 +1,174 @@
-import type { UrlComponents } from './types';
-
-// Multi-part Public Suffix list for accurate registrable domain determination
-const TWO_PART_TLDS = new Set([
-  'co.uk',
-  'co.in',
-  'org.uk',
-  'gov.uk',
-  'ac.uk',
-  'net.in',
-  'org.in',
-  'gov.in',
-  'ac.in',
-  'res.in',
-  'com.au',
-  'net.au',
-  'org.au',
-  'edu.au',
-  'gov.au',
-  'co.nz',
-  'net.nz',
-  'org.nz',
-  'co.jp',
-  'ne.jp',
-  'or.jp',
-  'co.za',
-  'org.za',
-  'com.br',
-  'org.br',
-  'net.br',
-  'com.mx',
-  'org.mx',
-  'com.sg',
-  'edu.sg',
-  'gov.sg',
-  'com.ph',
-  'gov.ph',
-  'com.pk',
-  'com.bd',
-  'co.id',
-  'web.id',
-  'co.ke',
-  'co.ng',
-  'gov.ng',
-  'state.gov',
-]);
-
-/**
- * Strips wrapping quotes, angle brackets, markdown symbols, and whitespace commonly found in copied SMS/WhatsApp text.
- */
-export function sanitizeRawInput(raw: string): string {
-  let cleaned = raw.trim();
-  // Strip enclosing quotes or brackets: <url>, (url), [url], "url", 'url'
-  cleaned = cleaned.replace(/^["'<(\[]+/, '').replace(/[>"')\].,;:]+$/, '');
-  return cleaned.trim();
+export interface NormalizedUrlResult {
+  originalUrl: string;
+  normalizedUrl: string;
+  protocol: string;
+  hostname: string;
+  subdomain: string;
+  registrableDomain: string;
+  pathname: string;
+  search: string;
+  hash: string;
+  port: string;
+  isIpAddress: boolean;
+  isValid: boolean;
+  error?: string;
 }
 
-/**
- * Derives the registrable domain and subdomain from a hostname.
- */
-export function extractDomainParts(hostname: string): {
-  registrableDomain: string;
-  subdomain: string;
-  topLevelDomain: string;
-} {
-  const host = hostname.toLowerCase();
+// Common multi-part TLDs (Public Suffix reference subset)
+const MULTI_PART_TLDS = new Set([
+  'co.uk', 'org.uk', 'gov.uk', 'ac.uk', 'me.uk', 'net.uk', 'ltd.uk', 'plc.uk',
+  'com.au', 'net.au', 'org.au', 'edu.au', 'gov.au', 'id.au',
+  'co.in', 'net.in', 'org.in', 'gen.in', 'firm.in', 'ind.in', 'edu.in', 'gov.in', 'res.in',
+  'co.nz', 'net.nz', 'org.nz', 'govt.nz', 'ac.nz',
+  'co.za', 'org.za', 'net.za', 'gov.za',
+  'co.jp', 'ne.jp', 'or.jp', 'ac.jp', 'go.jp', 'ed.jp',
+  'com.br', 'net.br', 'org.br', 'gov.br',
+  'com.cn', 'net.cn', 'org.cn', 'gov.cn',
+  'com.sg', 'org.sg', 'edu.sg', 'gov.sg',
+  'com.mx', 'org.mx', 'net.mx', 'edu.mx', 'gob.mx',
+  'co.kr', 'ne.kr', 'or.kr', 're.kr', 'pe.kr', 'go.kr',
+  'spb.ru', 'msk.ru', 'com.ru', 'net.ru', 'org.ru', 'pp.ru',
+  'ch.ma', 'co.id', 'ac.id', 'or.id', 'go.id',
+  'com.pk', 'org.pk', 'net.pk', 'edu.pk', 'gov.pk',
+  'com.tr', 'org.tr', 'net.tr', 'edu.tr', 'gov.tr',
+  'com.tw', 'org.tw', 'net.tw', 'edu.tw', 'gov.tw',
+  'com.my', 'net.my', 'org.my', 'edu.my', 'gov.my',
+  'com.ph', 'net.ph', 'org.ph', 'edu.ph', 'gov.ph',
+  'com.ng', 'org.ng', 'net.ng', 'edu.ng', 'gov.ng',
+  'com.ar', 'net.ar', 'org.ar', 'gov.ar',
+]);
 
-  // If host is an IP address
-  if (/^(\d{1,3}\.){3}\d{1,3}$/.test(host) || host.includes(':')) {
-    return {
-      registrableDomain: host,
-      subdomain: '',
-      topLevelDomain: '',
-    };
+const IPV4_REGEX = /^(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?:\.(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
+
+export function extractRegistrableDomain(hostname: string): string {
+  const cleanHost = hostname.toLowerCase().replace(/\.+$/, '');
+  if (IPV4_REGEX.test(cleanHost)) {
+    return cleanHost;
   }
 
-  const parts = host.split('.');
-  if (parts.length <= 1) {
-    return { registrableDomain: host, subdomain: '', topLevelDomain: '' };
-  }
+  const parts = cleanHost.split('.').filter(Boolean);
+  if (parts.length <= 2) return cleanHost;
 
   const lastTwo = parts.slice(-2).join('.');
   const lastThree = parts.slice(-3).join('.');
 
-  if (parts.length >= 3 && TWO_PART_TLDS.has(lastTwo)) {
-    const regDomain = parts.slice(-3).join('.');
-    const sub = parts.slice(0, -3).join('.');
+  if (MULTI_PART_TLDS.has(lastTwo) && parts.length >= 3) {
+    return parts.slice(-3).join('.');
+  }
+  if (MULTI_PART_TLDS.has(lastThree) && parts.length >= 4) {
+    return parts.slice(-4).join('.');
+  }
+
+  return parts.slice(-2).join('.');
+}
+
+export function extractSubdomain(hostname: string, registrableDomain: string): string {
+  if (hostname === registrableDomain) return '';
+  if (hostname.endsWith('.' + registrableDomain)) {
+    return hostname.substring(0, hostname.length - registrableDomain.length - 1);
+  }
+  return '';
+}
+
+/**
+ * Standards-compliant URL normalization for dataset lookup and display.
+ */
+export function normalizeUrl(rawInput: string): NormalizedUrlResult {
+  const trimmed = rawInput.trim();
+
+  if (!trimmed) {
     return {
-      registrableDomain: regDomain,
-      subdomain: sub,
-      topLevelDomain: lastTwo,
+      originalUrl: '',
+      normalizedUrl: '',
+      protocol: '',
+      hostname: '',
+      subdomain: '',
+      registrableDomain: '',
+      pathname: '',
+      search: '',
+      hash: '',
+      port: '',
+      isIpAddress: false,
+      isValid: false,
+      error: 'Empty URL input',
     };
   }
 
-  const regDomain = parts.slice(-2).join('.');
-  const sub = parts.slice(0, -2).join('.');
-  const tld = parts[parts.length - 1];
-
-  return {
-    registrableDomain: regDomain,
-    subdomain: sub,
-    topLevelDomain: tld,
-  };
-}
-
-/**
- * Decodes Punycode (xn--) domain labels into their Unicode representation.
- */
-export function decodePunycodeHostname(hostname: string): {
-  decoded: string;
-  isPunycode: boolean;
-  hasHomoglyphs: boolean;
-} {
-  const isPunycode = hostname.toLowerCase().includes('xn--');
-  let decoded = hostname;
-
-  if (isPunycode) {
-    try {
-      // In modern browsers and Node 18+, URL parser supports idn or we can use native URL decoding
-      const tempUrl = new URL(`https://${hostname}`);
-      // Hostname in decoded form
-      decoded = tempUrl.hostname;
-    } catch {
-      decoded = hostname;
-    }
+  // Prepend http:// if protocol is omitted
+  let candidate = trimmed;
+  const hasProtocol = /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(candidate);
+  if (!hasProtocol) {
+    candidate = 'http://' + candidate;
   }
 
-  // Check for suspicious mixed scripts / homoglyphs (Cyrillic lookalikes to Latin)
-  const CYRILLIC_LOOKALIKES = /[а-яА-Я\u0400-\u04FF]/;
-  const hasHomoglyphs = CYRILLIC_LOOKALIKES.test(decoded);
-
-  return {
-    decoded,
-    isPunycode,
-    hasHomoglyphs,
-  };
-}
-
-/**
- * Fully normalizes and extracts structured components from a user-supplied URL.
- */
-export function normalizeUrlComponents(rawInput: string): UrlComponents {
-  const sanitized = sanitizeRawInput(rawInput);
-  if (!sanitized) {
-    throw new Error('Please enter a URL to check.');
-  }
-
-  // Check for dangerous / unsupported schemes before parsing
-  const FORBIDDEN_PROTOCOLS = /^(javascript|data|file|vbscript|blob|about|filesystem|gopher|ldap):/i;
-  if (FORBIDDEN_PROTOCOLS.test(sanitized)) {
-    throw new Error('Unsupported or dangerous protocol. Only standard HTTP and HTTPS web links are supported.');
-  }
-
-  // Ensure protocol
-  let urlWithProtocol = sanitized;
-  if (!/^https?:\/\//i.test(urlWithProtocol)) {
-    // If user provided raw domain e.g. "example.com/path"
-    urlWithProtocol = `https://${urlWithProtocol}`;
-  }
-
-  let parsed: URL;
   try {
-    parsed = new URL(urlWithProtocol);
-  } catch (err) {
-    throw new Error(`Invalid URL format: Unable to parse "${sanitized}".`);
+    const urlObj = new URL(candidate);
+    const protocol = urlObj.protocol.replace(':', '').toLowerCase();
+
+    if (protocol !== 'http' && protocol !== 'https') {
+      return {
+        originalUrl: trimmed,
+        normalizedUrl: candidate,
+        protocol,
+        hostname: urlObj.hostname.toLowerCase(),
+        subdomain: '',
+        registrableDomain: '',
+        pathname: urlObj.pathname,
+        search: urlObj.search,
+        hash: urlObj.hash,
+        port: urlObj.port,
+        isIpAddress: false,
+        isValid: false,
+        error: `Unsupported protocol: ${protocol}`,
+      };
+    }
+
+    const rawHost = urlObj.hostname.toLowerCase().replace(/\.+$/, '');
+    const isIpAddress = IPV4_REGEX.test(rawHost);
+    const registrableDomain = extractRegistrableDomain(rawHost);
+    const subdomain = extractSubdomain(rawHost, registrableDomain);
+
+    // Standard normalized URL
+    let normPath = urlObj.pathname || '/';
+    if (normPath.length > 1 && normPath.endsWith('/')) {
+      normPath = normPath.slice(0, -1);
+    }
+
+    const portSuffix = urlObj.port && !((protocol === 'http' && urlObj.port === '80') || (protocol === 'https' && urlObj.port === '443'))
+      ? `:${urlObj.port}`
+      : '';
+
+    const normalizedUrl = `${protocol}://${rawHost}${portSuffix}${normPath}${urlObj.search}`;
+
+    return {
+      originalUrl: trimmed,
+      normalizedUrl,
+      protocol,
+      hostname: rawHost,
+      subdomain,
+      registrableDomain,
+      pathname: normPath,
+      search: urlObj.search,
+      hash: urlObj.hash,
+      port: urlObj.port || (protocol === 'https' ? '443' : '80'),
+      isIpAddress,
+      isValid: true,
+    };
+  } catch (err: any) {
+    return {
+      originalUrl: trimmed,
+      normalizedUrl: '',
+      protocol: '',
+      hostname: '',
+      subdomain: '',
+      registrableDomain: '',
+      pathname: '',
+      search: '',
+      hash: '',
+      port: '',
+      isIpAddress: false,
+      isValid: false,
+      error: 'Malformed URL format',
+    };
   }
-
-  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
-    throw new Error(`Unsupported protocol "${parsed.protocol}". Only HTTP and HTTPS are permitted.`);
-  }
-
-  const rawHostname = parsed.hostname;
-  const isIpv4 = /^(\d{1,3}\.){3}\d{1,3}$/.test(rawHostname);
-  const isIpv6 = rawHostname.includes(':');
-  const isIp = isIpv4 || isIpv6;
-
-  const { registrableDomain, subdomain, topLevelDomain } = extractDomainParts(rawHostname);
-  const punycodeInfo = decodePunycodeHostname(rawHostname);
-
-  // Build clean normalized URL
-  const normalizedProtocol = parsed.protocol.toLowerCase();
-  const normalizedHostname = rawHostname.toLowerCase();
-  const normalizedPort = parsed.port ? `:${parsed.port}` : '';
-  const normalizedPath = parsed.pathname || '/';
-  const normalizedSearch = parsed.search || '';
-  const normalizedHash = parsed.hash || '';
-
-  const normalizedUrl = `${normalizedProtocol}//${normalizedHostname}${normalizedPort}${normalizedPath}${normalizedSearch}${normalizedHash}`;
-
-  return {
-    originalUrl: rawInput,
-    normalizedUrl,
-    protocol: parsed.protocol.replace(':', '').toLowerCase(),
-    hostname: normalizedHostname,
-    port: parsed.port,
-    pathname: parsed.pathname,
-    search: parsed.search,
-    hash: parsed.hash,
-    username: parsed.username || undefined,
-    password: parsed.password || undefined,
-    subdomain,
-    registrableDomain,
-    topLevelDomain,
-    isIpAddress: isIp,
-    isIpv6,
-    isPunycode: punycodeInfo.isPunycode,
-    decodedHostname: punycodeInfo.decoded,
-  };
 }
