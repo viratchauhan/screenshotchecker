@@ -1,0 +1,193 @@
+---
+// PaymentAnalysisDashboard.astro - Dedicated UI for Payment Screenshot Forensics
+---
+
+<div id="payment-analysis-dashboard" class="hidden max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-10">
+  
+  <!-- 1. Top Verdict Banner -->
+  <div id="payment-verdict-card" class="bg-surface-card border border-hairline rounded-2xl p-6 sm:p-8 shadow-sm transition-all">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-hairline">
+      <div>
+        <div class="flex items-center gap-3 mb-2">
+          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">
+            Payment Screenshot Forensic Report
+          </span>
+          <span id="payment-receipt-type-pill" class="badge-pill text-[11px] font-sans">
+            UPI Transfer
+          </span>
+        </div>
+        <h2 id="payment-verdict-headline" class="font-serif text-2xl sm:text-4xl text-ink font-normal tracking-tight">
+          Analyzing Screenshot...
+        </h2>
+        <p id="payment-verdict-subtext" class="text-xs sm:text-sm text-body mt-2 max-w-2xl leading-relaxed">
+          Forensic evaluation of layout structure, typography consistency, and transaction reference formatting.
+        </p>
+      </div>
+
+      <!-- Risk Score Indicator -->
+      <div class="flex items-center gap-4 bg-canvas border border-hairline px-5 py-3.5 rounded-xl shrink-0">
+        <div class="text-right">
+          <span class="text-[10px] uppercase tracking-wider text-muted font-bold block">Payment Risk</span>
+          <span id="payment-risk-score" class="font-serif text-3xl font-normal text-ink">--</span>
+        </div>
+        <div id="payment-risk-indicator-dot" class="w-3 h-3 rounded-full bg-muted animate-pulse"></div>
+      </div>
+    </div>
+
+    <!-- Highlight Callout: Bank Statement Rule -->
+    <div class="mt-6 p-4 rounded-xl bg-surface-soft border border-hairline flex items-start gap-3.5">
+      <span class="text-warning text-lg shrink-0 mt-0.5">🚨</span>
+      <div class="text-xs sm:text-sm space-y-1 leading-relaxed">
+        <strong class="text-ink font-semibold">The Only Legit Verification Method:</strong>
+        <p class="text-body">
+          If a payment is not showing up in your UPI App, <span class="text-ink font-medium underline decoration-warning decoration-2 underline-offset-2">check your Bank Statement via your Bank App or through your Bank</span>. Screenshots are easily forged by prank APKs and cannot guarantee settled funds.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Main 2-Column Grid: Image Preview & Payment Field Extraction -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    
+    <!-- Left: Image Preview & Visual Forensics Overlay -->
+    <div class="lg:col-span-5 space-y-4">
+      <div class="bg-surface-card border border-hairline rounded-2xl p-4 sm:p-5">
+        <div class="flex items-center justify-between pb-3 border-b border-hairline mb-3">
+          <span class="text-xs font-semibold uppercase tracking-wider text-muted">Original Screenshot</span>
+          <span id="payment-img-specs" class="text-[11px] font-mono text-muted">0 × 0 px</span>
+        </div>
+
+        <div class="relative bg-canvas rounded-xl overflow-hidden border border-hairline flex items-center justify-center min-h-[260px] max-h-[500px]">
+          <img
+            id="payment-preview-image"
+            src=""
+            alt="Payment Screenshot Preview"
+            class="max-w-full max-h-[480px] object-contain block mx-auto select-none"
+          />
+        </div>
+
+        <div class="mt-3 flex items-center justify-between text-xs text-muted">
+          <span id="payment-img-name" class="truncate max-w-[200px]">screenshot.png</span>
+          <span id="payment-img-size">0 KB</span>
+        </div>
+      </div>
+
+      <!-- Payment Proof Strength Card -->
+      <div class="bg-surface-card border border-hairline rounded-xl p-5 space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs uppercase tracking-wider font-semibold text-muted">Payment Proof Strength</span>
+          <span id="payment-proof-badge" class="badge-status-safe font-mono font-bold text-xs">STRONG VISUAL</span>
+        </div>
+        <p id="payment-proof-desc" class="text-xs text-body leading-relaxed">
+          The screenshot contains standard confirmation identifiers. However, visual proof alone does not confirm banking network settlement.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: Extracted Payment Details & Forensic Analysis -->
+    <div class="lg:col-span-7 space-y-6">
+      
+      <!-- Key Payment Entities Card -->
+      <div class="bg-surface-card border border-hairline rounded-2xl p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-hairline">
+          <h3 class="font-serif text-lg text-ink font-normal">Grounded Payment Details</h3>
+          <span class="text-[11px] font-mono text-muted">Extracted from current image only</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+          
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 space-y-1">
+            <span class="text-muted text-[10px] uppercase tracking-wider block font-semibold">Payment App</span>
+            <span id="field-payment-app" class="font-medium text-sm text-ink block truncate">--</span>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 space-y-1">
+            <span class="text-muted text-[10px] uppercase tracking-wider block font-semibold">Amount Shown</span>
+            <span id="field-amount" class="font-serif text-base text-primary font-medium block truncate">--</span>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 space-y-1">
+            <span class="text-muted text-[10px] uppercase tracking-wider block font-semibold">Recipient / Payee</span>
+            <span id="field-recipient" class="font-medium text-xs sm:text-sm text-ink block truncate">--</span>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 space-y-1">
+            <span class="text-muted text-[10px] uppercase tracking-wider block font-semibold">UPI ID (VPA)</span>
+            <span id="field-upi-id" class="font-mono text-xs text-ink block truncate">--</span>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 space-y-1">
+            <span class="text-muted text-[10px] uppercase tracking-wider block font-semibold">Bank & Account</span>
+            <span id="field-bank" class="font-medium text-xs text-ink block truncate">--</span>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 space-y-1">
+            <span class="text-muted text-[10px] uppercase tracking-wider block font-semibold">UPI UTR / RRN (12 Digits)</span>
+            <span id="field-utr" class="font-mono text-xs text-ink block truncate">--</span>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 space-y-1">
+            <span class="text-muted text-[10px] uppercase tracking-wider block font-semibold">Transaction ID</span>
+            <span id="field-txnid" class="font-mono text-xs text-ink block truncate">--</span>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-3.5 space-y-1">
+            <span class="text-muted text-[10px] uppercase tracking-wider block font-semibold">Timestamp</span>
+            <span id="field-timestamp" class="font-medium text-xs text-ink block truncate">--</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- "Why This Result?" / Anomaly Breakdown Section -->
+      <div id="payment-anomalies-section" class="bg-surface-card border border-hairline rounded-2xl p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-hairline">
+          <div class="flex items-center gap-2">
+            <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Forensic Findings</span>
+            <span id="payment-issues-count-badge" class="badge-pill text-[10px]">0 Issues</span>
+          </div>
+          <span class="text-xs text-muted">WHAT • WHERE • WHY</span>
+        </div>
+
+        <div id="payment-issues-list" class="space-y-3">
+          <!-- Dynamic Anomaly Cards will be injected here -->
+        </div>
+      </div>
+
+      <!-- Grounded "What We Found" List -->
+      <div class="bg-surface-card border border-hairline rounded-2xl p-6 space-y-3">
+        <h4 class="font-serif text-base text-ink font-normal">Observed Evidence Traces</h4>
+        <ul id="payment-what-we-found-list" class="list-disc list-inside text-xs text-body space-y-1.5 leading-relaxed">
+          <!-- Grounded facts injected here -->
+        </ul>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-3 pt-2">
+        <button
+          type="button"
+          id="payment-reset-btn"
+          class="btn-primary text-xs px-5 py-2.5 flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+          </svg>
+          <span>Check Another Screenshot</span>
+        </button>
+
+        <button
+          type="button"
+          id="payment-copy-ocr-btn"
+          class="btn-secondary text-xs px-4 py-2.5 flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+          </svg>
+          <span>Copy Extracted Text</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

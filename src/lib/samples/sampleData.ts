@@ -220,34 +220,202 @@ export function createBankCreditSample(): Promise<string> {
   });
 }
 
+export function createFakePhonePeSample(): Promise<string> {
+  return new Promise((resolve) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 600;
+    canvas.height = 900;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return resolve('');
+
+    // PhonePe purple tinted background
+    ctx.fillStyle = '#f3f0fa';
+    ctx.fillRect(0, 0, 600, 900);
+
+    // Status bar
+    ctx.fillStyle = '#1e1b4b';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('11:17', 40, 40);
+    ctx.fillText('5G 🔋', 510, 40);
+
+    // Success Banner Card
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.roundRect(30, 60, 540, 100, 20);
+    ctx.fill();
+
+    // Checkmark circle
+    ctx.fillStyle = '#059669';
+    ctx.beginPath();
+    ctx.arc(80, 110, 26, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 26px sans-serif';
+    ctx.fillText('✓', 70, 119);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 20px sans-serif';
+    ctx.fillText('Transaction Successful', 125, 100);
+    ctx.fillStyle = '#64748b';
+    ctx.font = '14px sans-serif';
+    ctx.fillText('30 Aug 2026, 11:17 AM', 125, 128);
+
+    // Main Transaction Card
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.roundRect(30, 180, 540, 520, 24);
+    ctx.fill();
+
+    // Recipient row
+    ctx.fillStyle = '#581c87';
+    ctx.beginPath();
+    ctx.roundRect(50, 205, 50, 50, 12);
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillText('↗', 65, 238);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 18px sans-serif';
+    ctx.fillText('ReviewCraft Store', 115, 226);
+    ctx.fillStyle = '#64748b';
+    ctx.font = '13px monospace';
+    ctx.fillText('reviewcraftstore@ybl', 115, 248);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 24px sans-serif';
+    ctx.fillText('₹500.00', 430, 235);
+
+    // Divider
+    ctx.strokeStyle = '#f1f5f9';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(50, 275);
+    ctx.lineTo(550, 275);
+    ctx.stroke();
+
+    // Inconsistent typography row: Serif font for "Banking name:"
+    ctx.fillStyle = '#0f172a';
+    ctx.font = '16px "Times New Roman", Times, serif';
+    ctx.fillText('Banking name:', 50, 310);
+    ctx.fillStyle = '#059669';
+    ctx.font = '14px sans-serif';
+    ctx.fillText('ReviewCraft Store ✓', 390, 310);
+
+    // Payment details
+    ctx.fillStyle = '#475569';
+    ctx.font = '13px sans-serif';
+    ctx.fillText('Payment for subscription', 60, 380);
+
+    ctx.fillStyle = '#64748b';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('Transaction ID', 50, 440);
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 13px monospace';
+    ctx.fillText('TXN1JB2JWHL', 50, 465);
+
+    ctx.fillStyle = '#64748b';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('Debited from', 50, 520);
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('₹500.00', 460, 520);
+
+    // State Bank of India with icon inside text string
+    ctx.fillStyle = '#f8fafc';
+    ctx.beginPath();
+    ctx.roundRect(50, 540, 500, 70, 16);
+    ctx.fill();
+
+    ctx.fillStyle = '#1e3a8a';
+    ctx.beginPath();
+    ctx.arc(85, 575, 20, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 16px sans-serif';
+    ctx.fillText('S', 79, 581);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = '15px "Times New Roman", Times, serif';
+    ctx.fillText('State 🏦 Bank of India - 2845', 120, 568);
+    ctx.fillStyle = '#64748b';
+    ctx.font = '12px monospace';
+    ctx.fillText('UTR:  423189271602', 120, 592);
+
+    // Bottom branding
+    ctx.fillStyle = '#6b21a8';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('🛡️ Secured by PhonePe • BHIM UPI', 200, 740);
+
+    resolve(canvas.toDataURL('image/png'));
+  });
+}
+
+export function createCanaraBankBalanceSample(): Promise<string> {
+  return new Promise((resolve) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 600;
+    canvas.height = 800;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return resolve('');
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.fillRect(0, 0, 600, 800);
+
+    // Header
+    ctx.fillStyle = '#0284c7';
+    ctx.fillRect(0, 0, 600, 120);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 20px sans-serif';
+    ctx.fillText('Canara Bank UPI', 40, 70);
+
+    // Balance Card
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.roundRect(40, 160, 520, 320, 20);
+    ctx.fill();
+
+    ctx.fillStyle = '#059669';
+    ctx.font = 'bold 18px sans-serif';
+    ctx.fillText('✓ Bank balance fetched successfully', 70, 220);
+
+    ctx.fillStyle = '#64748b';
+    ctx.font = '14px sans-serif';
+    ctx.fillText('Canara Bank - Savings A/c (Ending 9012)', 70, 270);
+
+    ctx.fillStyle = '#0f172a';
+    ctx.font = 'bold 36px sans-serif';
+    ctx.fillText('₹ 3,884.63', 70, 340);
+
+    ctx.fillStyle = '#64748b';
+    ctx.font = '12px sans-serif';
+    ctx.fillText('Available Balance at 30 Aug 2026, 11:20 AM', 70, 380);
+
+    resolve(canvas.toDataURL('image/png'));
+  });
+}
+
 export const SAMPLE_PRESETS: SamplePreset[] = [
+  {
+    id: 'fake_phonepe_sample',
+    name: 'Fake PhonePe ₹500 (Typography & Icon Flaws)',
+    badge: 'Fake UPI Receipt',
+    description: 'PhonePe ₹500 receipt with serif fonts and embedded bank icon',
+    generateDataUrl: createFakePhonePeSample,
+  },
+  {
+    id: 'canara_bank_balance',
+    name: 'Canara Bank Balance Screen (No Proof)',
+    badge: 'Account Balance',
+    description: 'Bank balance inquiry showing ₹3,884.63 with zero transfer proof',
+    generateDataUrl: createCanaraBankBalanceSample,
+  },
   {
     id: 'wells_fargo_vishing',
     name: 'Wells Fargo Locked (Vishing)',
     badge: 'Bank Phishing',
     description: 'SMS claiming account locked with unverified 201 callback number',
     generateDataUrl: createWellsFargoSample,
-  },
-  {
-    id: 'student_loan_scam',
-    name: 'Student Loan Forgiveness',
-    badge: 'Loan Bait',
-    description: 'SMS baiting debt forgiveness eligibility with 1-855 toll-free number',
-    generateDataUrl: createStudentLoanSample,
-  },
-  {
-    id: 'target_gift_card',
-    name: 'Target $500 Gift Card',
-    badge: 'Prize Phishing',
-    description: 'Fake prize winner SMS with targetwinner.com link',
-    generateDataUrl: createTargetWinnerSample,
-  },
-  {
-    id: 'ups_missed_parcel',
-    name: 'UPS Missed Parcel',
-    badge: 'Parcel Scam',
-    description: 'Missed delivery SMS with spoofed myparcel-ups.com link',
-    generateDataUrl: createUPSDeliverySample,
   },
   {
     id: 'sunpass_toll_scam',
@@ -264,3 +432,21 @@ export const SAMPLE_PRESETS: SamplePreset[] = [
     generateDataUrl: createBankCreditSample,
   },
 ];
+
+export const PAYMENT_SAMPLE_PRESETS: SamplePreset[] = [
+  {
+    id: 'fake_phonepe_sample',
+    name: 'PhonePe ₹500 (Typography & Icon Inconsistency)',
+    badge: 'Fake UPI Receipt',
+    description: 'PhonePe ₹500 receipt with serif typography and embedded bank icon',
+    generateDataUrl: createFakePhonePeSample,
+  },
+  {
+    id: 'canara_bank_balance',
+    name: 'Canara Bank Balance Screen (No Proof)',
+    badge: 'Account Balance Only',
+    description: 'Bank balance inquiry showing ₹3,884.63 with no transfer verification',
+    generateDataUrl: createCanaraBankBalanceSample,
+  },
+];
+

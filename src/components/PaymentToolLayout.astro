@@ -1,0 +1,654 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import PaymentPreAnalysisModal from './PaymentPreAnalysisModal.astro';
+import PaymentAnalysisDashboard from './PaymentAnalysisDashboard.astro';
+import RelatedLinks from './RelatedLinks.astro';
+import { PAYMENT_SAMPLE_PRESETS } from '../lib/samples/sampleData';
+
+interface Props {
+  title: string;
+  metaDescription: string;
+  badge: string;
+  heading: string;
+  subheading: string;
+  howItWorksSteps: Array<{ step: string; title: string; desc: string }>;
+  examples: Array<{ title: string; desc: string }>;
+  limitations: string[];
+  faqs: Array<{ question: string; answer: string }>;
+}
+
+const {
+  title,
+  metaDescription,
+  badge,
+  heading,
+  subheading,
+  howItWorksSteps,
+  examples,
+  limitations,
+  faqs,
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const canonicalUrl = `https://screenshotchecker.com${currentPath.endsWith('/') ? currentPath : currentPath + '/'}`;
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      '@id': `${canonicalUrl}#webapp`,
+      name: heading,
+      url: canonicalUrl,
+      description: metaDescription,
+      applicationCategory: 'SecurityApplication',
+      operatingSystem: 'Any (Browser-based)',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://screenshotchecker.com/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Tools',
+          item: 'https://screenshotchecker.com/tools/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: heading,
+          item: canonicalUrl,
+        },
+      ],
+    },
+    ...(faqs && faqs.length > 0
+      ? [
+          {
+            '@type': 'FAQPage',
+            '@id': `${canonicalUrl}#faq`,
+            mainEntity: faqs.map((faq) => ({
+              '@type': 'Question',
+              name: faq.question,
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+              },
+            })),
+          },
+        ]
+      : []),
+  ],
+};
+---
+
+<Layout title={title} description={metaDescription} canonicalUrl={canonicalUrl} structuredData={structuredData}>
+  <Header currentPath={currentPath} />
+
+  <main class="flex-1">
+    <!-- Hero Banner -->
+    <section class="py-14 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-card border border-hairline text-ink text-xs font-medium mb-6">
+        <span class="w-2 h-2 rounded-full bg-primary"></span>
+        <span class="font-sans">{badge}</span>
+      </div>
+
+      <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink tracking-tight leading-[1.15] mb-5">
+        {heading}
+      </h1>
+
+      <p class="font-sans text-base sm:text-lg text-body max-w-2xl mx-auto leading-relaxed mb-8">
+        {subheading}
+      </p>
+
+      <div class="inline-flex items-center gap-2 text-xs text-muted-soft bg-surface-card px-3 py-1.5 rounded-full border border-hairline">
+        <svg class="w-4 h-4 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <span>100% Client-Side Forensics. Financial screenshots never leave your browser.</span>
+      </div>
+    </section>
+
+    <!-- Uploader Section -->
+    <section id="uploader-section" class="max-w-4xl mx-auto px-4 sm:px-6 mb-12 sm:mb-16">
+      <div
+        id="drop-zone"
+        class="relative group bg-surface-card border-2 border-dashed border-hairline hover:border-primary/60 rounded-2xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-sm"
+        tabindex="0"
+        role="button"
+        aria-label="Upload or drop a payment screenshot for analysis"
+      >
+        <input
+          type="file"
+          id="file-input"
+          class="hidden"
+          accept="image/png, image/jpeg, image/webp, image/gif, image/bmp"
+        />
+
+        <!-- Idle State -->
+        <div id="upload-idle-state" class="space-y-4">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-full bg-surface-cream-strong flex items-center justify-center text-primary group-hover:scale-105 transition-transform duration-200">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+
+          <div class="space-y-1.5">
+            <h3 class="font-serif text-xl sm:text-2xl text-ink font-normal">
+              Upload UPI or Payment Screenshot
+            </h3>
+            <p class="font-sans text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
+              Check screenshots from PhonePe, Google Pay, Paytm, BHIM, and Pop UPI for typography flaws, altered amounts, and fake template artifacts.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button
+              type="button"
+              id="browse-btn"
+              class="btn-primary text-xs sm:text-sm"
+            >
+              Select Payment Screenshot
+            </button>
+            <span class="text-xs text-muted font-mono hidden sm:inline">
+              or press <kbd class="px-2 py-1 bg-surface-cream-strong rounded border border-hairline font-mono text-[11px]">Ctrl+V</kbd>
+            </span>
+          </div>
+
+          <p class="text-[11px] text-muted-soft font-mono pt-2">
+            Supports PNG, JPG, WebP & BMP up to 25MB
+          </p>
+        </div>
+
+        <!-- Progress State -->
+        <div id="upload-progress-state" class="hidden py-8 space-y-4">
+          <div class="w-12 h-12 mx-auto rounded-full border-3 border-primary/20 border-t-primary animate-spin"></div>
+          <div>
+            <h4 class="font-serif text-xl text-ink font-normal" id="progress-status-text">
+              Reading payment details...
+            </h4>
+            <p class="text-xs text-muted mt-1 font-mono">100% In-Browser Isolation</p>
+          </div>
+          <div class="max-w-xs mx-auto bg-surface-cream-strong rounded-full h-1.5 overflow-hidden">
+            <div id="progress-bar-fill" class="bg-primary h-full transition-all duration-300 w-0"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Test Samples -->
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-muted">
+        <span class="font-medium text-ink shrink-0">Try real-world payment cases:</span>
+        <div class="flex flex-wrap items-center justify-center gap-1.5">
+          {PAYMENT_SAMPLE_PRESETS.map((preset) => (
+            <button
+              type="button"
+              data-sample-id={preset.id}
+              class="payment-sample-btn px-2.5 py-1 rounded-md bg-surface-card hover:bg-surface-cream-strong border border-hairline text-body hover:text-ink transition-colors font-mono text-[11px] cursor-pointer"
+            >
+              {preset.name}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Bilingual Pre-Analysis Warning Modal -->
+    <PaymentPreAnalysisModal />
+
+    <!-- Dedicated Payment Analysis Dashboard -->
+    <PaymentAnalysisDashboard />
+
+    <!-- Educational Section: Hints From a Fake Payment Screenshot -->
+    <section class="py-16 bg-surface-soft border-y border-hairline">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Forensic Guidance</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
+            Hints From a Fake Payment Screenshot
+          </h2>
+          <p class="text-xs sm:text-sm text-muted mt-2 leading-relaxed">
+            Fraudulent UPI payment generators and prank APKs often leave subtle structural defects behind. Here are the key indicators our engine analyzes:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">01</span>
+              <h3 class="font-serif text-lg text-ink font-normal">Typography & Font Family Inconsistency</h3>
+            </div>
+            <p class="text-xs text-body leading-relaxed">
+              Official UPI apps (Google Pay, PhonePe, Paytm) use proprietary, clean sans-serif fonts. Malicious APK templates often render specific lines (like <em>"Banking name:"</em> or bank titles) in default system serif fonts, creating a distinct visual mismatch.
+            </p>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">02</span>
+              <h3 class="font-serif text-lg text-ink font-normal">Unusual Icon Placement Inside Text</h3>
+            </div>
+            <p class="text-xs text-body leading-relaxed">
+              In spoofed templates, bank icons or card glyphs are frequently inserted awkwardly inside the bank title text string (e.g. <em>"State 🏦 Bank of India"</em>) instead of appearing as a separate, properly padded vector element.
+            </p>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">03</span>
+              <h3 class="font-serif text-lg text-ink font-normal">Spliced or Inconsistent Amounts</h3>
+            </div>
+            <p class="text-xs text-body leading-relaxed">
+              Scammers often modify a genuine small transaction by editing digits in image software. This leads to discrepancies between the large header amount and the breakdown row, as well as abnormal compression artifacts around numbers.
+            </p>
+          </div>
+
+          <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
+            <div class="flex items-center gap-2.5">
+              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">04</span>
+              <h3 class="font-serif text-lg text-ink font-normal">Invalid or Shortened 12-Digit UTRs</h3>
+            </div>
+            <p class="text-xs text-body leading-relaxed">
+              Every genuine Indian UPI transfer produces a standard 12-digit numeric Unique Transaction Reference (UTR / RRN). Fake receipts frequently display placeholder text, letters, or fewer than 12 digits.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Workflow</span>
+        <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
+          How It Works
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {howItWorksSteps.map((s, idx) => (
+          <div class="bg-surface-card border border-hairline rounded-lg p-5 flex flex-col justify-between">
+            <div>
+              <span class="w-7 h-7 rounded-full bg-surface-cream-strong text-primary flex items-center justify-center font-serif text-sm mb-3">
+                {idx + 1}
+              </span>
+              <h3 class="font-serif text-base text-ink font-normal mb-1.5">{s.title}</h3>
+              <p class="text-xs text-body leading-relaxed">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Practical Examples & Coverage -->
+    <section class="py-16 bg-surface-soft border-y border-hairline">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="mb-10 text-center max-w-xl mx-auto">
+          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Ecosystem Support</span>
+          <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
+            Supported Indian UPI Apps
+          </h2>
+          <p class="text-xs sm:text-sm text-muted mt-2">
+            Analyze payment screenshots from popular Indian UPI apps including Google Pay (GPay), PhonePe, Paytm, BHIM UPI and Pop UPI.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {examples.map((ex) => (
+            <div class="bg-canvas border border-hairline rounded-xl p-6">
+              <h3 class="font-serif text-base text-ink font-normal mb-2">{ex.title}</h3>
+              <p class="text-xs text-body leading-relaxed">{ex.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Limitations & Security Notice with Prominent Highlight -->
+    <section class="py-12 max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-surface-card border border-hairline rounded-xl p-6 sm:p-8 space-y-6">
+        <div class="flex items-start gap-4">
+          <div class="w-8 h-8 rounded-lg bg-surface-cream-strong flex items-center justify-center text-warning shrink-0 mt-1">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="space-y-3">
+            <h3 class="font-serif text-xl text-ink font-normal">Technical Limitations & Essential Guidance</h3>
+            
+            <!-- Bilingual Highlight Note Box -->
+            <div class="p-4 rounded-xl bg-canvas border border-warning/30 space-y-2 text-xs leading-relaxed">
+              <strong class="text-warning block font-bold">🚨 HIGHLIGHT NOTE (ENGLISH):</strong>
+              <p class="text-ink">
+                If a payment is not showing up in your UPI App, then <strong>Check your Bank Statement by Bank App or Through Bank</strong>. This is the Only Legit Method you should follow to verify a payment screenshot.
+              </p>
+              <strong class="text-primary block font-bold pt-2">🚨 महत्वपूर्ण सूचना (HINDI):</strong>
+              <p class="text-ink">
+                अगर कोई भुगतान आपके UPI ऐप में नहीं दिख रहा है, तो <strong>अपने बैंक ऐप से Bank Statement चेक करें या सीधे बैंक से पुष्टि करें</strong>। भुगतान सत्यापित करने का केवल यही एकमात्र वैध तरीका है।
+              </p>
+            </div>
+
+            <ul class="list-disc list-inside space-y-1.5 text-xs text-body leading-relaxed pt-1">
+              {limitations.map((lim) => (
+                <li>{lim}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 SEO-Rich FAQs -->
+    <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center max-w-xl mx-auto mb-10">
+        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Questions & Answers</span>
+        <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
+          Frequently Asked Questions
+        </h2>
+      </div>
+
+      <div class="space-y-4" id="tool-faq-accordion">
+        {faqs.map((faq, index) => (
+          <details class="bg-surface-card border border-hairline rounded-xl p-5 group transition-all cursor-pointer" data-faq-index={index}>
+            <summary class="w-full flex items-center justify-between text-left gap-4 font-serif text-base text-ink font-normal list-none focus:outline-none select-none">
+              <span>{faq.question}</span>
+              <svg class="w-4 h-4 text-primary shrink-0 transition-transform duration-200 group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </summary>
+            <div class="tool-faq-answer mt-3 pt-3 border-t border-hairline text-xs sm:text-sm text-body leading-relaxed">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- Related Links -->
+    <RelatedLinks currentPath={currentPath} />
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import type { PaymentAnalysisResult } from '../lib/paymentAnalyzer/paymentTypes';
+
+  let pendingFile: File | null = null;
+  let pendingDataUrl: string = '';
+  let currentResult: PaymentAnalysisResult | null = null;
+
+  const dropZone = document.getElementById('drop-zone');
+  const fileInput = document.getElementById('file-input') as HTMLInputElement | null;
+  const browseBtn = document.getElementById('browse-btn');
+  const idleState = document.getElementById('upload-idle-state');
+  const progressState = document.getElementById('upload-progress-state');
+  const progressText = document.getElementById('progress-status-text');
+  const progressBarFill = document.getElementById('progress-bar-fill');
+  const dashboard = document.getElementById('payment-analysis-dashboard');
+
+  // Pre-Analysis Modal Elements
+  const modal = document.getElementById('payment-pre-analysis-modal');
+  const closeModalBtn = document.getElementById('close-payment-modal-btn');
+  const dismissModalBtn = document.getElementById('dismiss-payment-modal-btn');
+  const acceptModalBtn = document.getElementById('accept-payment-modal-btn');
+
+  function showModal() {
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideModal() {
+    if (!modal) return;
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  closeModalBtn?.addEventListener('click', hideModal);
+  dismissModalBtn?.addEventListener('click', hideModal);
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) hideModal();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+      hideModal();
+    }
+  });
+
+  acceptModalBtn?.addEventListener('click', async () => {
+    hideModal();
+    if (pendingFile && pendingDataUrl) {
+      await executePaymentAnalysis(pendingFile, pendingDataUrl);
+    }
+  });
+
+  async function handleFileSelected(file: File) {
+    pendingFile = file;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      pendingDataUrl = e.target?.result as string;
+      showModal();
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function executePaymentAnalysis(file: File, dataUrl: string) {
+    if (!idleState || !progressState || !progressBarFill || !progressText) return;
+
+    idleState.classList.add('hidden');
+    progressState.classList.remove('hidden');
+    progressBarFill.style.width = '15%';
+    progressText.innerText = 'Loading image for payment forensics...';
+
+    try {
+      const { runPaymentAnalysis } = await import('../lib/paymentAnalyzer/paymentPipeline');
+      const result = await runPaymentAnalysis(file, dataUrl, (pct, status) => {
+        progressBarFill.style.width = `${pct}%`;
+        progressText.innerText = status;
+      });
+
+      currentResult = result;
+      renderPaymentDashboard(result);
+
+      progressState.classList.add('hidden');
+      idleState.classList.remove('hidden');
+      dashboard?.classList.remove('hidden');
+      dashboard?.scrollIntoView({ behavior: 'smooth' });
+    } catch (err) {
+      console.error('Payment analysis error:', err);
+      alert('An error occurred during payment screenshot analysis. Please ensure the file is a valid image.');
+      progressState.classList.add('hidden');
+      idleState.classList.remove('hidden');
+    }
+  }
+
+  function renderPaymentDashboard(result: PaymentAnalysisResult) {
+    // 1. Verdict & Headline
+    const headline = document.getElementById('payment-verdict-headline');
+    const subtext = document.getElementById('payment-verdict-subtext');
+    const pill = document.getElementById('payment-receipt-type-pill');
+    const riskScore = document.getElementById('payment-risk-score');
+    const riskDot = document.getElementById('payment-risk-indicator-dot');
+
+    if (headline) headline.innerText = result.verdictLabel;
+    if (subtext) subtext.innerText = result.verdictDescription;
+    if (pill) pill.innerText = result.receiptTypeLabel;
+    if (riskScore) riskScore.innerText = `${result.riskScore}/100`;
+
+    if (riskDot) {
+      if (result.verdict === 'HIGH_RISK' || result.verdict === 'VERY_HIGH_RISK') {
+        riskDot.className = 'w-3 h-3 rounded-full bg-error animate-pulse';
+      } else if (result.verdict === 'SUSPICIOUS' || result.verdict === 'CAUTION') {
+        riskDot.className = 'w-3 h-3 rounded-full bg-warning animate-pulse';
+      } else if (result.verdict === 'NO_PAYMENT_PROOF') {
+        riskDot.className = 'w-3 h-3 rounded-full bg-muted';
+      } else {
+        riskDot.className = 'w-3 h-3 rounded-full bg-success';
+      }
+    }
+
+    // 2. Image Preview
+    const previewImg = document.getElementById('payment-preview-image') as HTMLImageElement | null;
+    const imgSpecs = document.getElementById('payment-img-specs');
+    const imgName = document.getElementById('payment-img-name');
+    const imgSize = document.getElementById('payment-img-size');
+
+    if (previewImg) previewImg.src = result.dataUrl;
+    if (imgSpecs) imgSpecs.innerText = `${result.imageInfo.width} × ${result.imageInfo.height} px`;
+    if (imgName) imgName.innerText = result.imageInfo.name;
+    if (imgSize) imgSize.innerText = `${Math.round(result.imageInfo.sizeBytes / 1024)} KB`;
+
+    // 3. Payment Proof Strength
+    const proofBadge = document.getElementById('payment-proof-badge');
+    const proofDesc = document.getElementById('payment-proof-desc');
+
+    if (proofBadge) {
+      proofBadge.innerText = result.paymentProofStrength.replace('_', ' ');
+      if (result.paymentProofStrength === 'STRONG_VISUAL') {
+        proofBadge.className = 'badge-status-safe font-mono font-bold text-xs';
+      } else if (result.paymentProofStrength === 'NONE') {
+        proofBadge.className = 'badge-status-risk font-mono font-bold text-xs';
+      } else {
+        proofBadge.className = 'badge-status-warning font-mono font-bold text-xs';
+      }
+    }
+    if (proofDesc) proofDesc.innerText = result.paymentProofExplanation;
+
+    // 4. Extracted Field Values
+    const setField = (id: string, val: string) => {
+      const el = document.getElementById(id);
+      if (el) el.innerText = val || 'Not detected';
+    };
+
+    setField('field-payment-app', result.paymentApp);
+    setField('field-amount', result.amount);
+    setField('field-recipient', result.recipientName);
+    setField('field-upi-id', result.upiId);
+    setField('field-bank', result.bank);
+    setField('field-utr', result.utr);
+    setField('field-txnid', result.transactionId);
+    setField('field-timestamp', [result.date, result.time].filter((v) => v !== 'Not detected').join(', '));
+
+    // 5. Forensic Anomalies
+    const issuesBadge = document.getElementById('payment-issues-count-badge');
+    const issuesList = document.getElementById('payment-issues-list');
+
+    if (issuesBadge) issuesBadge.innerText = `${result.riskFactors.length} Detected`;
+    if (issuesList) {
+      if (result.riskFactors.length === 0) {
+        issuesList.innerHTML = `
+          <div class="p-4 rounded-xl bg-canvas border border-hairline text-xs text-muted italic">
+            ✓ No obvious typography inconsistencies, altered amounts, or misplaced icons identified.
+          </div>
+        `;
+      } else {
+        issuesList.innerHTML = result.riskFactors
+          .map(
+            (f) => `
+          <div class="p-4 rounded-xl bg-canvas border border-hairline space-y-2 text-xs">
+            <div class="flex items-center justify-between pb-1 border-b border-hairline">
+              <span class="font-semibold text-ink uppercase tracking-wider text-[11px]">${f.title}</span>
+              <span class="${f.severity === 'critical' || f.severity === 'high' ? 'text-error bg-error/10' : 'text-warning bg-warning/10'} px-2 py-0.5 rounded text-[10px] uppercase font-semibold font-mono">${f.severity} Severity</span>
+            </div>
+            <p class="text-body leading-relaxed">${f.explanation}</p>
+            ${f.where ? `<div class="text-muted"><strong class="text-ink">Where:</strong> ${f.where}</div>` : ''}
+            ${f.why ? `<div class="text-muted"><strong class="text-ink">Why it matters:</strong> ${f.why}</div>` : ''}
+          </div>
+        `
+          )
+          .join('');
+      }
+    }
+
+    // 6. Grounded What We Found List
+    const whatFoundList = document.getElementById('payment-what-we-found-list');
+    if (whatFoundList) {
+      whatFoundList.innerHTML = result.whatWeFound.map((f) => `<li>${f}</li>`).join('');
+    }
+  }
+
+  // Preset Buttons
+  const sampleButtons = document.querySelectorAll('.payment-sample-btn');
+  sampleButtons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const sampleId = btn.getAttribute('data-sample-id');
+      const { PAYMENT_SAMPLE_PRESETS } = await import('../lib/samples/sampleData');
+      const preset = PAYMENT_SAMPLE_PRESETS.find((p) => p.id === sampleId);
+      if (preset) {
+        const dataUrl = await preset.generateDataUrl();
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        const file = new File([blob], `${preset.id}.png`, { type: 'image/png' });
+        await handleFileSelected(file);
+      }
+    });
+  });
+
+  // Drag & drop listeners
+  dropZone?.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('border-primary', 'bg-surface-card');
+  });
+
+  dropZone?.addEventListener('dragleave', () => {
+    dropZone.classList.remove('border-primary', 'bg-surface-card');
+  });
+
+  dropZone?.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('border-primary', 'bg-surface-card');
+    if (e.dataTransfer?.files?.[0]) {
+      handleFileSelected(e.dataTransfer.files[0]);
+    }
+  });
+
+  browseBtn?.addEventListener('click', () => fileInput?.click());
+  fileInput?.addEventListener('change', () => {
+    if (fileInput.files?.[0]) {
+      handleFileSelected(fileInput.files[0]);
+    }
+  });
+
+  window.addEventListener('paste', (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type.startsWith('image/')) {
+        const file = items[i].getAsFile();
+        if (file) {
+          handleFileSelected(file);
+          break;
+        }
+      }
+    }
+  });
+
+  document.getElementById('payment-reset-btn')?.addEventListener('click', () => {
+    dashboard?.classList.add('hidden');
+    pendingFile = null;
+    pendingDataUrl = '';
+    currentResult = null;
+    dropZone?.scrollIntoView({ behavior: 'smooth' });
+  });
+
+  document.getElementById('payment-copy-ocr-btn')?.addEventListener('click', () => {
+    if (currentResult?.rawOcrText) {
+      navigator.clipboard.writeText(currentResult.rawOcrText);
+      alert('Extracted payment text copied to clipboard!');
+    }
+  });
+</script>
