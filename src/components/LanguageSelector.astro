@@ -41,12 +41,18 @@ const languages = [
 </div>
 
 <script>
-  import { setAppLanguage, initI18n, type SupportedLanguage } from '../i18n';
-
   function setupLangSelector() {
     const btn = document.getElementById('lang-selector-btn');
     const dropdown = document.getElementById('lang-dropdown');
     const choices = document.querySelectorAll('.lang-choice-btn');
+
+    // Only load full i18n dictionaries if user previously selected a non-English language
+    try {
+      const savedLang = localStorage.getItem('sc_lang');
+      if (savedLang && savedLang !== 'en') {
+        import('../i18n').then(({ initI18n }) => initI18n());
+      }
+    } catch (_) {}
 
     btn?.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -58,14 +64,13 @@ const languages = [
     });
 
     choices.forEach((choice) => {
-      choice.addEventListener('click', () => {
-        const code = (choice.getAttribute('data-lang-code') || 'en') as SupportedLanguage;
-        setAppLanguage(code);
+      choice.addEventListener('click', async () => {
+        const code = choice.getAttribute('data-lang-code') || 'en';
+        const { setAppLanguage } = await import('../i18n');
+        setAppLanguage(code as any);
         dropdown?.classList.add('hidden');
       });
     });
-
-    initI18n();
   }
 
   setupLangSelector();

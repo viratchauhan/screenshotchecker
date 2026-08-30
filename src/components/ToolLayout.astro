@@ -226,10 +226,17 @@ const structuredData = {
 </Layout>
 
 <script>
-  import { SAMPLE_PRESETS } from '../lib/samples/sampleData';
-  import { formatBytes } from '../lib/utils/formatters';
   import type { RedactionBox } from '../lib/analyzer/redactor';
   import type { AgenticInvestigationResult } from '../lib/ai/reasoningSchema';
+
+  function formatBytes(bytes: number, decimals = 1): string {
+    if (bytes === 0) return '0 B';
+    const k = 1024;
+    const dm = decimals < 0 ? 0 : decimals;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+  }
 
   let currentFile: File | null = null;
   let currentDataUrl: string = '';
@@ -711,6 +718,7 @@ const structuredData = {
   sampleButtons.forEach((btn) => {
     btn.addEventListener('click', async () => {
       const sampleId = btn.getAttribute('data-sample-id');
+      const { SAMPLE_PRESETS } = await import('../lib/samples/sampleData');
       const preset = SAMPLE_PRESETS.find((p) => p.id === sampleId);
       if (preset) {
         const dataUrl = await preset.generateDataUrl();
