@@ -319,6 +319,7 @@ const faqs = getToolFaqs('ai-image-detector');
 </div>
 
 <script>
+  import { escapeHtml } from '../../lib/utils/reportSafety';
   import { runFullAIForensics, type AIForensicsReport } from '../../lib/analyzer/aiImageForensicsEngine';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
 
@@ -482,7 +483,7 @@ const faqs = getToolFaqs('ai-image-detector');
     }
 
     if (strengthBadge) {
-      strengthBadge.innerText = `Evidence: ${report.evidenceStrength}`;
+      strengthBadge.innerText = `Evidence: ${escapeHtml(report.evidenceStrength)}`;
     }
 
     if (modalityLabel) modalityLabel.innerText = report.modalityLabel;
@@ -552,10 +553,10 @@ const faqs = getToolFaqs('ai-image-detector');
             <span class="w-2 h-2 rounded-full ${act.isAI ? 'bg-error' : 'bg-primary'} shrink-0"></span>
             <div class="flex-1 min-w-0">
               <div class="flex items-center justify-between gap-2">
-                <span class="font-medium text-ink">${act.action}</span>
+                <span class="font-medium text-ink">${escapeHtml(act.action)}</span>
                 ${act.isAI ? '<span class="badge-status-risk !text-[10px] py-0 px-1.5 font-mono">AI Action</span>' : ''}
               </div>
-              ${act.softwareAgent ? `<span class="text-muted text-[11px] block">${act.softwareAgent}</span>` : ''}
+              ${act.softwareAgent ? `<span class="text-muted text-[11px] block">${escapeHtml(act.softwareAgent)}</span>` : ''}
             </div>
           </div>
         `
@@ -574,8 +575,8 @@ const faqs = getToolFaqs('ai-image-detector');
           .map(
             (ing) => `
           <div class="bg-canvas border border-hairline p-2 rounded flex items-center justify-between text-[11px]">
-            <span class="font-medium text-ink truncate">${ing.title || 'Source Asset'}</span>
-            <span class="text-muted font-mono">${ing.format || ing.relationship || 'ingredient'}</span>
+            <span class="font-medium text-ink truncate">${escapeHtml(ing.title || 'Source Asset')}</span>
+            <span class="text-muted font-mono">${escapeHtml(ing.format || ing.relationship || 'ingredient')}</span>
           </div>
         `
           )
@@ -590,12 +591,12 @@ const faqs = getToolFaqs('ai-image-detector');
       if (c2pa.present) {
         c2paTechDetails.classList.remove('hidden');
         c2paTechContent.innerHTML = `
-          <div>MANIFEST_COUNT: ${c2pa.technicalDetails.manifestCount}</div>
-          <div>ACTIVE_LABEL: ${c2pa.technicalDetails.activeLabel || 'None'}</div>
-          <div>SIGNATURE_ALG: ${c2pa.technicalDetails.signatureAlg || 'None'}</div>
-          <div>CLAIM_GENERATOR: ${c2pa.activeManifest.claimGenerator || 'None'}</div>
-          <div>VALIDATION_STATUS: ${c2pa.validation.status}</div>
-          ${c2pa.validation.errors.length > 0 ? `<div>ERRORS: ${c2pa.validation.errors.join('; ')}</div>` : ''}
+          <div>MANIFEST_COUNT: ${escapeHtml(c2pa.technicalDetails.manifestCount)}</div>
+          <div>ACTIVE_LABEL: ${escapeHtml(c2pa.technicalDetails.activeLabel || 'None')}</div>
+          <div>SIGNATURE_ALG: ${escapeHtml(c2pa.technicalDetails.signatureAlg || 'None')}</div>
+          <div>CLAIM_GENERATOR: ${escapeHtml(c2pa.activeManifest.claimGenerator || 'None')}</div>
+          <div>VALIDATION_STATUS: ${escapeHtml(c2pa.validation.status)}</div>
+          ${c2pa.validation.errors.length > 0 ? `<div>ERRORS: ${escapeHtml(c2pa.validation.errors.join('; '))}</div>` : ''}
         `;
       } else {
         c2paTechDetails.classList.add('hidden');
@@ -609,7 +610,7 @@ const faqs = getToolFaqs('ai-image-detector');
           (reason) => `
         <li class="flex items-start gap-2.5">
           <span class="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0"></span>
-          <span class="leading-relaxed">${reason}</span>
+          <span class="leading-relaxed">${escapeHtml(reason)}</span>
         </li>
       `
         )
@@ -633,11 +634,11 @@ const faqs = getToolFaqs('ai-image-detector');
             (s) => `
           <div class="bg-canvas border border-hairline rounded-lg p-3.5 space-y-1.5">
             <div class="flex items-center justify-between">
-              <span class="font-semibold text-ink text-xs">${s.signal}</span>
-              <span class="badge-pill !text-[10px] font-mono">${s.strength}</span>
+              <span class="font-semibold text-ink text-xs">${escapeHtml(s.signal)}</span>
+              <span class="badge-pill !text-[10px] font-mono">${escapeHtml(s.strength)}</span>
             </div>
-            <p class="text-xs text-body leading-relaxed">${s.description}</p>
-            <p class="text-[11px] text-muted font-mono">${s.evidence}</p>
+            <p class="text-xs text-body leading-relaxed">${escapeHtml(s.description)}</p>
+            <p class="text-[11px] text-muted font-mono">${escapeHtml(s.evidence)}</p>
           </div>
         `
           )
@@ -662,11 +663,11 @@ const faqs = getToolFaqs('ai-image-detector');
             (s) => `
           <div class="bg-canvas border border-hairline rounded-lg p-3.5 space-y-1.5">
             <div class="flex items-center justify-between">
-              <span class="font-semibold text-ink text-xs">${s.signal}</span>
-              <span class="badge-pill !text-[10px] font-mono">${s.strength}</span>
+              <span class="font-semibold text-ink text-xs">${escapeHtml(s.signal)}</span>
+              <span class="badge-pill !text-[10px] font-mono">${escapeHtml(s.strength)}</span>
             </div>
-            <p class="text-xs text-body leading-relaxed">${s.description}</p>
-            <p class="text-[11px] text-muted font-mono">${s.evidence}</p>
+            <p class="text-xs text-body leading-relaxed">${escapeHtml(s.description)}</p>
+            <p class="text-[11px] text-muted font-mono">${escapeHtml(s.evidence)}</p>
           </div>
         `
           )
@@ -708,7 +709,7 @@ const faqs = getToolFaqs('ai-image-detector');
     // 9. Limitations
     if (limitationsList) {
       limitationsList.innerHTML = report.limitations
-        .map((l) => `<li class="leading-relaxed">${l}</li>`)
+        .map((l) => `<li class="leading-relaxed">${escapeHtml(l)}</li>`)
         .join('');
     }
 
@@ -716,20 +717,20 @@ const faqs = getToolFaqs('ai-image-detector');
     if (debugPanel && report.debugDiagnostics) {
       const diag = report.debugDiagnostics;
       debugPanel.innerHTML = `
-        <div>IMAGE: ${diag.imageDimensions}</div>
-        <div>MODALITY: ${report.modality}</div>
+        <div>IMAGE: ${escapeHtml(diag.imageDimensions)}</div>
+        <div>MODALITY: ${escapeHtml(report.modality)}</div>
         <div>C2PA_PRESENT: ${c2pa.present ? 'YES' : 'NO'}</div>
         <div>C2PA_VALID: ${c2pa.validation.isValid ? 'YES' : 'NO'}</div>
         <div>C2PA_TRUSTED: ${c2pa.validation.isTrusted ? 'YES' : 'NO'}</div>
-        <div>C2PA_AI_PROVENANCE: ${c2pa.ai.aiState}</div>
-        <div>C2PA_ACTIONS_COUNT: ${c2pa.actions.length}</div>
-        <div>C2PA_INGREDIENTS_COUNT: ${c2pa.ingredients.length}</div>
-        <div>SYNTHETIC_SCORE: ${diag.syntheticScore}</div>
-        <div>EDITING_SCORE: ${diag.editingScore}</div>
-        <div>CAPTURE_SCORE: ${diag.captureScore}</div>
-        <div>PROVENANCE_SCORE: ${diag.provenanceScore}</div>
-        <div>FINAL_VERDICT: ${report.verdict}</div>
-        <div>EVIDENCE_STRENGTH: ${report.evidenceStrength}</div>
+        <div>C2PA_AI_PROVENANCE: ${escapeHtml(c2pa.ai.aiState)}</div>
+        <div>C2PA_ACTIONS_COUNT: ${escapeHtml(c2pa.actions.length)}</div>
+        <div>C2PA_INGREDIENTS_COUNT: ${escapeHtml(c2pa.ingredients.length)}</div>
+        <div>SYNTHETIC_SCORE: ${escapeHtml(diag.syntheticScore)}</div>
+        <div>EDITING_SCORE: ${escapeHtml(diag.editingScore)}</div>
+        <div>CAPTURE_SCORE: ${escapeHtml(diag.captureScore)}</div>
+        <div>PROVENANCE_SCORE: ${escapeHtml(diag.provenanceScore)}</div>
+        <div>FINAL_VERDICT: ${escapeHtml(report.verdict)}</div>
+        <div>EVIDENCE_STRENGTH: ${escapeHtml(report.evidenceStrength)}</div>
       `;
     }
   }

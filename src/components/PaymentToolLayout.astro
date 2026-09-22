@@ -383,6 +383,7 @@ const structuredData = {
 </Layout>
 
 <script>
+  import { escapeHtml } from '../lib/utils/reportSafety';
   import type { PaymentAnalysisResult } from '../lib/paymentAnalyzer/paymentTypes';
 
   let pendingFile: File | null = null;
@@ -561,12 +562,12 @@ const structuredData = {
             (f) => `
           <div class="p-4 rounded-xl bg-canvas border border-hairline space-y-2 text-xs">
             <div class="flex items-center justify-between pb-1 border-b border-hairline">
-              <span class="font-semibold text-ink uppercase tracking-wider text-[11px]">${f.title}</span>
-              <span class="${f.severity === 'critical' || f.severity === 'high' ? 'text-error bg-error/10' : 'text-warning bg-warning/10'} px-2 py-0.5 rounded text-[10px] uppercase font-semibold font-mono">${f.severity} Severity</span>
+              <span class="font-semibold text-ink uppercase tracking-wider text-[11px]">${escapeHtml(f.title)}</span>
+              <span class="${f.severity === 'critical' || f.severity === 'high' ? 'text-error bg-error/10' : 'text-warning bg-warning/10'} px-2 py-0.5 rounded text-[10px] uppercase font-semibold font-mono">${escapeHtml(f.severity)} Severity</span>
             </div>
-            <p class="text-body leading-relaxed">${f.explanation}</p>
-            ${f.where ? `<div class="text-muted"><strong class="text-ink">Where:</strong> ${f.where}</div>` : ''}
-            ${f.why ? `<div class="text-muted"><strong class="text-ink">Why it matters:</strong> ${f.why}</div>` : ''}
+            <p class="text-body leading-relaxed">${escapeHtml(f.explanation)}</p>
+            ${f.where ? `<div class="text-muted"><strong class="text-ink">Where:</strong> ${escapeHtml(f.where)}</div>` : ''}
+            ${f.why ? `<div class="text-muted"><strong class="text-ink">Why it matters:</strong> ${escapeHtml(f.why)}</div>` : ''}
           </div>
         `
           )
@@ -577,7 +578,7 @@ const structuredData = {
     // 6. Grounded What We Found List
     const whatFoundList = document.getElementById('payment-what-we-found-list');
     if (whatFoundList) {
-      whatFoundList.innerHTML = result.whatWeFound.map((f) => `<li>${f}</li>`).join('');
+      whatFoundList.innerHTML = result.whatWeFound.map((f) => `<li>${escapeHtml(f)}</li>`).join('');
     }
   }
 

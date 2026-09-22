@@ -147,6 +147,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
 </div>
 
 <script>
+  import { escapeHtml } from '../../lib/utils/reportSafety';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
   import type { RedactionBox } from '../../lib/analyzer/redactor';
 
@@ -218,8 +219,8 @@ const heading = toolSlug === 'screenshot-privacy-checker'
         (f, idx) => `
       <div class="bg-canvas border border-hairline rounded-lg p-2.5 flex items-center justify-between gap-2">
         <div class="truncate">
-          <span class="font-semibold text-ink">${f.label}</span>
-          <p class="font-mono text-muted text-[11px] truncate">${f.value}</p>
+          <span class="font-semibold text-ink">${escapeHtml(f.label)}</span>
+          <p class="font-mono text-muted text-[11px] truncate">${escapeHtml(f.value)}</p>
         </div>
         <button type="button" class="btn-secondary text-[10px] h-6 px-2 shrink-0 redact-single-pii" data-idx="${idx}">
           Mask

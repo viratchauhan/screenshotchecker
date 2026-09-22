@@ -126,6 +126,8 @@ const heading = toolSlug === 'image-metadata-remover'
 </div>
 
 <script>
+  import { renderMetadataGroups } from "../../lib/utils/metadataRenderer";
+  import type { MetadataInfo } from "../../lib/analyzer/types";
   import { formatBytes } from '../../lib/utils/formatters';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
 
@@ -174,7 +176,7 @@ const heading = toolSlug === 'image-metadata-remover'
     reader.readAsDataURL(file);
   }
 
-  function renderMetadataDashboard(meta: any) {
+  function renderMetadataDashboard(meta: MetadataInfo) {
     if (meta.gps && gpsAlert && gpsCoords) {
       gpsCoords.innerText = `${meta.gps.lat.toFixed(6)}, ${meta.gps.lng.toFixed(6)}`;
       gpsAlert.classList.remove('hidden');
@@ -182,49 +184,7 @@ const heading = toolSlug === 'image-metadata-remover'
       gpsAlert?.classList.add('hidden');
     }
 
-    if (!tablesContainer) return;
-
-    if (!meta.hasExif && meta.tags.length === 0) {
-      tablesContainer.innerHTML = `
-        <div class="bg-canvas border border-hairline rounded-xl p-6 text-center text-xs text-muted">
-          <p class="font-medium text-body">No EXIF or hardware tags found in this image.</p>
-          <p class="mt-1">This file has either already been cleaned or was captured through a platform that strips EXIF tags.</p>
-        </div>
-      `;
-      return;
-    }
-
-    // Group tags by category
-    const groups: Record<string, any[]> = {};
-    for (const tag of meta.tags) {
-      const groupName = tag.group || 'General';
-      if (!groups[groupName]) groups[groupName] = [];
-      groups[groupName].push(tag);
-    }
-
-    tablesContainer.innerHTML = Object.entries(groups)
-      .map(
-        ([group, tags]) => `
-      <div class="bg-canvas border border-hairline rounded-xl overflow-hidden text-xs">
-        <div class="bg-surface-cream-strong/50 px-4 py-2 font-semibold uppercase tracking-wider text-muted font-mono text-[11px]">
-          ${group} Information (${tags.length})
-        </div>
-        <div class="divide-y divide-hairline">
-          ${tags
-            .map(
-              (t) => `
-            <div class="px-4 py-2 flex items-center justify-between gap-4 hover:bg-surface-card/40 transition-colors">
-              <span class="text-muted font-mono">${t.tag}</span>
-              <span class="font-mono text-ink font-medium text-right truncate max-w-md">${t.value}</span>
-            </div>
-          `
-            )
-            .join('')}
-        </div>
-      </div>
-    `
-      )
-      .join('');
+    if (tablesContainer) renderMetadataGroups(tablesContainer, meta);
   }
 
   dropZone?.addEventListener('click', () => fileInput?.click());

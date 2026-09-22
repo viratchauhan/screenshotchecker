@@ -421,6 +421,7 @@ const faqs = getToolFaqs('screenshot-comparison');
 </div>
 
 <script>
+  import { escapeHtml } from '../../lib/utils/reportSafety';
   import { normalizeImages, type AlignmentStrategy } from '../../lib/comparison/imageNormalizer';
   import { analyzeVisualDifferences } from '../../lib/comparison/semanticDifferenceEngine';
   import { computePixelDifferences } from '../../lib/comparison/pixelDifferenceEngine';
@@ -836,7 +837,7 @@ const faqs = getToolFaqs('screenshot-comparison');
         .filter(([_, count]) => count > 0)
         .map(
           ([cat, count]) =>
-            `<span class="badge-pill !text-[10px] font-mono">${cat}: <strong>${count}</strong></span>`
+            `<span class="badge-pill !text-[10px] font-mono">${escapeHtml(cat)}: <strong>${escapeHtml(count)}</strong></span>`
         )
         .join('');
     }
@@ -850,13 +851,13 @@ const faqs = getToolFaqs('screenshot-comparison');
             (r) => `
           <div class="bg-canvas border border-hairline rounded-xl p-3 space-y-2 hover:border-primary/50 transition-colors group">
             <div class="flex items-center justify-between text-xs font-mono">
-              <span class="font-bold text-ink">#${String(r.index + 1).padStart(2, '0')}</span>
-              <span class="badge-pill !text-[9px]">${r.category}</span>
+              <span class="font-bold text-ink">#${escapeHtml(String(r.index + 1).padStart(2, '0'))}</span>
+              <span class="badge-pill !text-[9px]">${escapeHtml(r.category)}</span>
             </div>
-            <p class="text-xs text-body leading-relaxed">${r.description}</p>
+            <p class="text-xs text-body leading-relaxed">${escapeHtml(r.description)}</p>
             <div class="flex items-center justify-between pt-1 text-[11px] font-mono text-muted">
-              <span>${r.confidence}% confidence</span>
-              <button type="button" class="btn-show-me text-primary hover:underline font-bold text-xs" data-region-idx="${r.index}">
+              <span>${escapeHtml(r.confidence)}% confidence</span>
+              <button type="button" class="btn-show-me text-primary hover:underline font-bold text-xs" data-region-idx="${escapeHtml(r.index)}">
                 [SHOW ME]
               </button>
             </div>

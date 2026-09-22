@@ -6,6 +6,8 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "test:metadata": "node --experimental-strip-types --test src/lib/utils/__tests__/metadataRenderer.test.mjs",
+    "test:reports": "node --experimental-strip-types --test src/lib/utils/__tests__/reportSafety.test.mjs src/lib/utils/__tests__/workspaceSafety.test.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
@@ -16,12 +18,13 @@
     "@astrojs/sitemap": "^3.7.3",
     "@contentauth/c2pa-web": "^0.14.3",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "^7.2.4",
+    "astro": "^7.2.8",
     "exifreader": "^4.44.0",
     "tailwindcss": "^4.3.3",
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {
-    "wrangler": "^4.125.0"
+    "jsdom": "^26.1.0",
+    "wrangler": "^4.136.2"
   }
 }
