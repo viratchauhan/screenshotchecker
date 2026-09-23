@@ -1,0 +1,27 @@
+﻿import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { JSDOM } from 'jsdom';
+import { bindRedactionInput } from '../redactionInput.ts';
+test('pointer capture, reverse dragging, cancellation, and keyboard placement', () => {
+  const dom = new JSDOM('<section><div><div><canvas width="640" height="360"></canvas></div></div></section>');
+  globalThis.document = dom.window.document;
+  const canvas = document.querySelector('canvas');
+  canvas.getBoundingClientRect = () => ({ left: 0, top: 0, width: 320, height: 180 });
+  let captured;
+  canvas.setPointerCapture = id => { captured = id; };
+  canvas.hasPointerCapture = id => captured === id;
+  canvas.releasePointerCapture = () => { captured = undefined; };
+  const boxes = [];
+  bindRedactionInput(canvas, () => 'blackout', b => boxes.push(b));
+  const event = (name, x, y, id = 1) => { const e = new dom.window.Event(name, { cancelable: true }); Object.assign(e, { clientX: x, clientY: y, pointerId: id, button: 0 }); canvas.dispatchEvent(e); };
+  event('pointerdown', 100, 100); assert.equal(captured, 1);
+  event('pointerup', 20, 20);
+  assert.deepEqual([boxes[0].x, boxes[0].y, boxes[0].width, boxes[0].height], [40,40,160,160]);
+  event('pointerdown', 10, 10); event('pointercancel', 20,20); event('pointerup', 30,30); assert.equal(boxes.length, 1);
+  const form = document.querySelector('form');
+  form.dispatchEvent(new dom.window.Event('submit', { cancelable: true })); assert.equal(boxes.length, 2);
+  document.querySelector('input').value = '9999';
+  form.dispatchEvent(new dom.window.Event('submit', { cancelable: true })); assert.equal(boxes.length, 2);
+  assert.match(form.textContent, /Keep the mask inside/);
+  delete globalThis.document;
+});

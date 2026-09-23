@@ -1,4 +1,5 @@
-import type { OCRResult, OCRWord } from './types';
+import type { OCRResult } from './types';
+import { recognizeWithCoordinates } from './ocrCoordinates';
 import { preprocessImageForOCR } from './ocrPreprocessor';
 
 export type ProgressCallback = (progress: number, status: string) => void;
@@ -39,7 +40,9 @@ export async function runClientOCR(
 
     let ocrInput: any = imageSource;
     let scaleFactor = 1;
-    let fallbackInput: any = null;
+    let fallbackInput: any = undefined;
+    let originalWidth: number | undefined;
+    let originalHeight: number | undefined;
 
     // In browser environment, run intelligent image preprocessing
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
@@ -47,7 +50,9 @@ export async function runClientOCR(
         const prep = await preprocessImageForOCR(imageSource);
         ocrInput = prep.canvas;
         fallbackInput = prep.originalCanvas;
-        scaleFactor = prep.scaleFactor || 1;
+        scaleFactor = prep.scaleFactor;
+        originalWidth = prep.originalCanvas.width;
+        originalHeight = prep.originalCanvas.height;
       } catch (prepErr) {
         console.warn('Preprocessing skipped due to fallback', prepErr);
       }
@@ -55,40 +60,16 @@ export async function runClientOCR(
 
     if (onProgress) onProgress(25, `Reading visible content...`);
     const worker = await getWorkerForLanguage(language, onProgress);
-    let result = await worker.recognize(ocrInput);
-
-    let text = (result.data.text || '').trim();
-    let confidence = Math.round(result.data.confidence || 0);
-
-    // Multi-pass fallback: If 0 characters or very low confidence, try recognizing with fallback canvas
-    if (text.length === 0 && fallbackInput) {
-      console.log('OCR Pass 1 produced 0 chars, attempting fallback pass...');
-      const fallbackResult = await worker.recognize(fallbackInput);
-      const fallbackText = (fallbackResult.data.text || '').trim();
-      if (fallbackText.length > 0) {
-        result = fallbackResult;
-        text = fallbackText;
-        confidence = Math.round(fallbackResult.data.confidence || 0);
-        scaleFactor = 1;
-      }
-    }
+    const { data, words } = await recognizeWithCoordinates(worker, ocrInput, {
+      scale: scaleFactor, width: originalWidth, height: originalHeight,
+    }, fallbackInput);
+    const text = (data.text || '').trim();
+    const confidence = Math.round(data.confidence || 0);
 
     console.log('OCR COMPLETED: YES');
     console.log('OCR CHARACTER COUNT:', text.length);
     console.log('OCR CONFIDENCE:', confidence);
     console.log('OCR RAW RESULT:', text ? text.substring(0, 150) + (text.length > 150 ? '...' : '') : '[EMPTY]');
-
-    const words: OCRWord[] = (result.data.words || []).map((w: any) => ({
-      text: w.text,
-      bbox: w.bbox
-        ? {
-            x0: Math.round(w.bbox.x0 / scaleFactor),
-            y0: Math.round(w.bbox.y0 / scaleFactor),
-            x1: Math.round(w.bbox.x1 / scaleFactor),
-            y1: Math.round(w.bbox.y1 / scaleFactor),
-          }
-        : undefined,
-    }));
 
     const lines = text
       .split('\n')

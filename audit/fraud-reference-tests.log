@@ -1,0 +1,37 @@
+✔ historical example t1: no forced nearest-example verdict (3.0112ms)
+✔ historical example t2: no forced nearest-example verdict (0.5803ms)
+✔ historical example t3: no forced nearest-example verdict (0.1833ms)
+✔ historical example t4: no forced nearest-example verdict (0.176ms)
+✔ historical example t5: no forced nearest-example verdict (0.1608ms)
+✔ historical example t6: no forced nearest-example verdict (0.1987ms)
+✔ historical example t7: no forced nearest-example verdict (0.155ms)
+✔ historical example t8: no forced nearest-example verdict (0.1473ms)
+✔ historical example t9: no forced nearest-example verdict (0.1538ms)
+✔ historical example t10: no forced nearest-example verdict (0.1569ms)
+✔ historical example t11: no forced nearest-example verdict (0.0949ms)
+✔ historical example t12: no forced nearest-example verdict (0.0729ms)
+✔ historical example t13: no forced nearest-example verdict (0.1642ms)
+✔ historical example t14: no forced nearest-example verdict (0.168ms)
+✔ historical example t15: no forced nearest-example verdict (0.1636ms)
+✔ historical example t16: no forced nearest-example verdict (0.1717ms)
+✔ historical example t17: no forced nearest-example verdict (0.1731ms)
+✔ historical example t18: no forced nearest-example verdict (0.1814ms)
+✔ historical example t19: no forced nearest-example verdict (0.1971ms)
+✔ historical example t20: no forced nearest-example verdict (0.2089ms)
+✔ historical example t21: no forced nearest-example verdict (0.2367ms)
+✔ historical example t22: no forced nearest-example verdict (0.2324ms)
+✔ historical example t23: no forced nearest-example verdict (0.2162ms)
+✔ historical example t24: no forced nearest-example verdict (0.2036ms)
+✔ historical example t25: no forced nearest-example verdict (0.1841ms)
+✔ historical example t26: no forced nearest-example verdict (0.5499ms)
+✔ historical example t27: no forced nearest-example verdict (0.194ms)
+✔ historical example t28: no forced nearest-example verdict (0.1639ms)
+✔ every stored example remains discoverable without copying its explanation (2.4479ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 18.0241

@@ -342,6 +342,7 @@ export interface PrivacyFinding {
   confidence: 'high' | 'medium' | 'low';
   severity: 'low' | 'medium' | 'high';
   bbox?: BoundingBox;
+  bboxes?: BoundingBox[];
 }
 
 export interface LinkFinding {

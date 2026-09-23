@@ -72,13 +72,13 @@ const heading = toolSlug === 'screenshot-privacy-checker'
         <div class="bg-surface-card border border-hairline rounded-xl p-2 flex flex-wrap items-center justify-between gap-2">
           <!-- Tool selection -->
           <div class="flex items-center gap-1">
-            <button type="button" data-tool="blur" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-cream-strong text-primary border border-hairline transition-all">
+            <button type="button" data-tool="blur" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body transition-all">
               Blur
             </button>
             <button type="button" data-tool="pixelate" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
               Pixelate
             </button>
-            <button type="button" data-tool="blackout" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
+            <button type="button" data-tool="blackout" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-surface-cream-strong text-primary transition-all">
               Blackout
             </button>
             <button type="button" data-tool="whiteout" class="redact-tool-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
@@ -98,12 +98,12 @@ const heading = toolSlug === 'screenshot-privacy-checker'
         </div>
 
         <!-- Canvas Container -->
-        <div class="bg-surface-dark-soft border border-hairline rounded-2xl flex-1 min-h-[480px] max-h-[680px] flex items-center justify-center overflow-hidden p-2 relative select-none">
+        <div data-redaction-stage class="bg-surface-dark-soft border border-hairline rounded-2xl flex-1 min-h-[480px] max-h-[680px] flex items-center justify-center overflow-hidden p-2 relative select-none">
           <canvas id="main-redactor-canvas" class="max-w-full max-h-[660px] object-contain cursor-crosshair shadow-lg rounded"></canvas>
         </div>
 
         <p class="text-[11px] text-muted text-center">
-          Click and drag anywhere across the image to draw redaction masks.
+          Drag with mouse, touch or pen to draw masks, or enter pixel coordinates below the image. Blackout and whiteout fully cover pixels; blur and pixelate may leave readable detail.
         </p>
       </div>
 
@@ -117,6 +117,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
             </button>
           </div>
 
+          <p id="redact-status" role="status" class="text-xs">Automatic masks use solid black. Review all sensitive areas before sharing.</p>
           <div id="redact-pii-list" class="space-y-2 max-h-72 overflow-y-auto pr-1 text-xs">
             <p class="text-muted italic">Scanning for sensitive data...</p>
           </div>
@@ -147,18 +148,17 @@ const heading = toolSlug === 'screenshot-privacy-checker'
 </div>
 
 <script>
+  import { suggestedMasks } from '../../lib/analyzer/privacyLocations';
+  import { bindRedactionInput } from '../../lib/utils/redactionInput';
   import { escapeHtml } from '../../lib/utils/reportSafety';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
   import type { RedactionBox } from '../../lib/analyzer/redactor';
 
   let currentImage: HTMLImageElement | null = null;
   let currentDataUrl = '';
-  let currentTool: 'blur' | 'pixelate' | 'blackout' | 'whiteout' = 'blur';
+  let currentTool: 'blur' | 'pixelate' | 'blackout' | 'whiteout' = 'blackout';
   let boxes: RedactionBox[] = [];
   let detectedPiiFindings: any[] = [];
-  let isDrawing = false;
-  let startX = 0;
-  let startY = 0;
 
   const dropZone = document.getElementById('redact-upload-container');
   const fileInput = document.getElementById('redact-file-input') as HTMLInputElement | null;
@@ -168,7 +168,13 @@ const heading = toolSlug === 'screenshot-privacy-checker'
   const piiList = document.getElementById('redact-pii-list');
   const toolBtns = document.querySelectorAll('.redact-tool-btn');
 
+  let loadGeneration = 0;
   async function loadEditor(dataUrl: string) {
+    const generation = ++loadGeneration;
+    renderVersion++;
+    boxes = []; detectedPiiFindings = [];
+    currentImage = null;
+    if (piiList) piiList.textContent = 'Scanning for sensitive data...';
     currentDataUrl = dataUrl;
     dropZone?.classList.add('hidden');
     editor?.classList.remove('hidden');
@@ -176,6 +182,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
     const img = new Image();
     img.src = dataUrl;
     await new Promise((r) => (img.onload = r));
+    if (generation !== loadGeneration) return;
     currentImage = img;
 
     if (canvas) {
@@ -188,18 +195,22 @@ const heading = toolSlug === 'screenshot-privacy-checker'
     const { runClientOCR } = await import('../../lib/analyzer/ocr');
     const { scanPrivacyRisks } = await import('../../lib/analyzer/privacyScanner');
     runClientOCR(img).then((ocr) => {
+      if (generation !== loadGeneration) return;
       const pii = scanPrivacyRisks(ocr.text, ocr.words);
       detectedPiiFindings = pii.findings;
       renderPiiSidebar(pii.findings);
     });
   }
 
+  let renderVersion = 0;
   async function redraw() {
     if (!canvas || !currentImage) return;
     const { renderRedactedImage } = await import('../../lib/analyzer/redactor');
-    renderRedactedImage(currentImage, boxes).then(({ dataUrl }) => {
+    const version = ++renderVersion;
+    renderRedactedImage(currentImage, [...boxes]).then(({ dataUrl }) => {
       const temp = new Image();
       temp.onload = () => {
+        if (version !== renderVersion) return;
         const ctx = canvas.getContext('2d');
         ctx?.drawImage(temp, 0, 0);
       };
@@ -234,17 +245,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
       btn.addEventListener('click', () => {
         const idx = Number(btn.getAttribute('data-idx'));
         const f = findings[idx];
-        if (f && f.bbox) {
-          boxes.push({
-            id: `box_pii_${Date.now()}`,
-            x: f.bbox.x - 4,
-            y: f.bbox.y - 4,
-            width: f.bbox.width + 8,
-            height: f.bbox.height + 8,
-            type: currentTool,
-          });
-          redraw();
-        }
+        if (f) applySuggested([f]);
       });
     });
   }
@@ -280,6 +281,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
   });
 
   toolBtns.forEach((btn) => {
+    btn.setAttribute('aria-pressed', String(btn.getAttribute('data-tool') === currentTool));
     btn.addEventListener('click', () => {
       toolBtns.forEach((b) => {
         b.classList.remove('bg-surface-cream-strong', 'text-primary', 'font-semibold');
@@ -288,62 +290,23 @@ const heading = toolSlug === 'screenshot-privacy-checker'
       btn.classList.add('bg-surface-cream-strong', 'text-primary', 'font-semibold');
       btn.classList.remove('text-body', 'font-medium');
       currentTool = btn.getAttribute('data-tool') as any;
+      toolBtns.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
     });
   });
 
-  canvas?.addEventListener('mousedown', (e) => {
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
+  if (canvas) bindRedactionInput(canvas, () => currentTool, box => { boxes.push(box); redraw(); });
 
-    startX = (e.clientX - rect.left) * scaleX;
-    startY = (e.clientY - rect.top) * scaleY;
-    isDrawing = true;
-  });
-
-  canvas?.addEventListener('mouseup', (e) => {
-    if (!isDrawing || !canvas) return;
-    isDrawing = false;
-    const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-
-    const endX = (e.clientX - rect.left) * scaleX;
-    const endY = (e.clientY - rect.top) * scaleY;
-
-    const width = Math.abs(endX - startX);
-    const height = Math.abs(endY - startY);
-    const x = Math.min(startX, endX);
-    const y = Math.min(startY, endY);
-
-    if (width > 4 && height > 4) {
-      boxes.push({
-        id: `box_${Date.now()}`,
-        x,
-        y,
-        width,
-        height,
-        type: currentTool,
-      });
-      redraw();
-    }
-  });
+  function applySuggested(findings: any[]) {
+    const result = suggestedMasks(findings);
+    const ids = new Set(boxes.map(b => b.id));
+    boxes.push(...result.boxes.filter(b => !ids.has(b.id)));
+    const status = document.getElementById('redact-status');
+    if (status) status.textContent = result.message;
+    redraw();
+  }
 
   document.getElementById('redact-auto-all-btn')?.addEventListener('click', () => {
-    for (const f of detectedPiiFindings) {
-      if (f.bbox) {
-        boxes.push({
-          id: `auto_${f.id || Date.now()}`,
-          x: f.bbox.x - 4,
-          y: f.bbox.y - 4,
-          width: f.bbox.width + 8,
-          height: f.bbox.height + 8,
-          type: currentTool,
-        });
-      }
-    }
-    redraw();
+    applySuggested(detectedPiiFindings);
   });
 
   document.getElementById('redact-undo-btn')?.addEventListener('click', () => {
@@ -359,7 +322,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
   document.getElementById('redact-new-image')?.addEventListener('click', () => {
     editor?.classList.add('hidden');
     dropZone?.classList.remove('hidden');
-    boxes = [];
+    boxes = []; currentImage = null; currentDataUrl = ''; detectedPiiFindings = []; loadGeneration++;
   });
 
   document.getElementById('redact-export-png')?.addEventListener('click', async () => {

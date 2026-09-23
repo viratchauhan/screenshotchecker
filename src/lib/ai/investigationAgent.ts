@@ -113,7 +113,7 @@ export class InvestigationAgent {
     }
 
     // NEW: Call the mock LLM for fraud analysis using the OCR text and extracted links
-    if (onProgress) onProgress(95, 'Running multilingual fraud analysis model...');
+    if (onProgress) onProgress(95, 'Checking reference patterns and visible warning signs...');
     const urlStrings = linksResult?.findings ? linksResult.findings.map((l: any) => l.url) : [];
     const fraudAnalysis = await analyzeFraudWithMockLLM(rawText, urlStrings);
 
@@ -123,6 +123,15 @@ export class InvestigationAgent {
       reasoning.authenticity.status = 'INSUFFICIENT_EVIDENCE';
       reasoning.authenticity.headline = '⚠️ Text Could Not Be Read (OCR Error)';
       reasoning.authenticity.rationale = "Text couldn't be extracted from this screenshot. Please upload a clearer or higher-resolution image.";
+    }
+    else if (fraudAnalysis.classification === 'unverifiable') {
+      overallStatus = 'REVIEW_RECOMMENDED';
+      reasoning.authenticity.status = 'INSUFFICIENT_EVIDENCE';
+      reasoning.authenticity.headline = 'No reliable reference match';
+      reasoning.authenticity.rationale = fraudAnalysis.summary;
+      reasoning.whatAmILookingAt = fraudAnalysis.summary;
+      reasoning.whatIsItClaiming = 'No claim has been verified. Read the extracted text.';
+      reasoning.whatDoesItWantTheUserToDo = 'No requested action has been verified.';
     }
     // If fraud analysis detected high/critical risk or fraud classification, escalate verdict
     else if (fraudAnalysis && (fraudAnalysis.risk_score >= 60 || fraudAnalysis.classification === 'fraud')) {
@@ -168,9 +177,9 @@ export class InvestigationAgent {
     }
 
     const humanReadable = {
-      whatWeThinkThisIs: fraudAnalysis && fraudAnalysis.risk_score >= 60 ? `[${fraudAnalysis.message_type}] ${fraudAnalysis.summary}` : reasoning.whatAmILookingAt,
+      whatWeThinkThisIs: fraudAnalysis && (fraudAnalysis.risk_score >= 60 || fraudAnalysis.classification === 'unverifiable') ? `[${fraudAnalysis.message_type}] ${fraudAnalysis.summary}` : reasoning.whatAmILookingAt,
       whatItSays: rawText.substring(0, 180) || 'No readable textual content detected.',
-      whatItClaims: fraudAnalysis && fraudAnalysis.requested_action ? `Claims from ${fraudAnalysis.claimed_organization}: ${fraudAnalysis.requested_action}` : reasoning.whatIsItClaiming,
+      whatItClaims: fraudAnalysis.classification === 'unverifiable' ? 'No claim or intent has been verified. See the extracted text.' : fraudAnalysis && fraudAnalysis.requested_action ? `Claims from ${fraudAnalysis.claimed_organization}: ${fraudAnalysis.requested_action}` : reasoning.whatIsItClaiming,
       whatItWantsYouToDo: fraudAnalysis && fraudAnalysis.requested_action ? fraudAnalysis.requested_action : reasoning.whatDoesItWantTheUserToDo,
       whatWeFound,
       whatConcernsUs,
@@ -178,7 +187,7 @@ export class InvestigationAgent {
       recommendedAction: (fraudAnalysis && fraudAnalysis.recommendation) || reasoning.recommendations[0] || 'Verify details independently before taking action.',
     };
 
-    const overallSummary = `${humanReadable.whatWeThinkThisIs} ${humanReadable.recommendedAction}`;
+    const overallSummary = fraudAnalysis.classification === 'unverifiable' ? fraudAnalysis.summary : `${humanReadable.whatWeThinkThisIs} ${humanReadable.recommendedAction}`;
 
     if (onProgress) onProgress(100, 'Investigation report ready');
 

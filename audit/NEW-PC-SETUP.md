@@ -12,7 +12,16 @@ Your project is now at `D:\screenshotchecker`. The Git remote points to your Git
 | Python | Installed; only used for this audit, not needed to run the website |
 | Project packages | Installed locally in node_modules; includes Astro, Tailwind, Tesseract.js, ExifReader, C2PA, sitemap, and Wrangler |
 
-The package declares Node `>=22.12.0`. Your current version built successfully. For consistent development and deployment, choose a supported LTS version and pin the same major version locally and in Cloudflare; Node 24 LTS is a reasonable target. See [official Node releases](https://nodejs.org/en/about/previous-releases). No OS-level Node change was made.
+The package declares Node `>=22.12.0`; `.nvmrc` pins the tested local target to `26.9.0`, and package.json records npm `11.19.1`. Use that target for reproducible checks on this PC. No OS-level Node or Cloudflare build setting was changed. The locally installed, exact-version `tsx` runner is recorded in the lockfile; use `npm.cmd ci` on a clean checkout to restore dependencies.
+
+**Repeatable checks**
+
+- `npm.cmd test`: discovers test entrypoints in both existing test directory conventions, runs each in an isolated process, and returns a nonzero status if any fail. No test packages are downloaded on demand.
+- `npm.cmd run test:ocr`: focused OCR coordinate regressions.
+- `npm.cmd run check`: tests followed by production build; stops on test failure.
+- `npm.cmd run build`: run independently while baseline tests are being repaired.
+
+Current full-suite baseline (22 September 2026): 19 entrypoints, 16 passing and 3 failing. These failures are intentionally reported, not suppressed: agenticInvestigation (bank phishing and lottery verdicts), blogSystem (expects 6 articles, repository has 7), and linkChecker (missing normalizeUrlComponents export). Their fixes remain queued under 08A, 11 and 10B. The new OCR suite has four passing cases; the existing rendering suites have 17 passing checks. This is not a clean full-suite result.
 
 **Daily commands in PowerShell**
 

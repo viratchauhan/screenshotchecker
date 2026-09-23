@@ -30,10 +30,11 @@ export async function renderRedactedImage(
   ctx.drawImage(img, 0, 0, width, height);
 
   for (const box of boxes) {
-    const bx = Math.max(0, Math.round(box.x));
-    const by = Math.max(0, Math.round(box.y));
-    const bw = Math.min(width - bx, Math.round(box.width));
-    const bh = Math.min(height - by, Math.round(box.height));
+    if (![box.x, box.y, box.width, box.height].every(Number.isFinite) || box.width <= 0 || box.height <= 0) continue;
+    const bx = Math.max(0, Math.floor(box.x));
+    const by = Math.max(0, Math.floor(box.y));
+    const bw = Math.min(width, Math.ceil(box.x + box.width)) - bx;
+    const bh = Math.min(height, Math.ceil(box.y + box.height)) - by;
 
     if (bw <= 0 || bh <= 0) continue;
 

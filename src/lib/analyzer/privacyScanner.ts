@@ -1,3 +1,4 @@
+import { locateSensitiveText } from './privacyLocations';
 import type { PrivacyFinding, MetadataInfo, OCRWord } from './types';
 import { generateId } from '../utils/formatters';
 
@@ -33,23 +34,15 @@ export function scanPrivacyRisks(
     value: string,
     snippet: string,
     confidence: 'high' | 'medium' | 'low' = 'high',
-    severity: 'low' | 'medium' | 'high' = 'medium'
+    severity: 'low' | 'medium' | 'high' = 'medium',
+    sourceValue: string = value
   ) => {
     const trimmedVal = value.trim();
-    if (seenValues.has(trimmedVal.toLowerCase())) return;
-    seenValues.add(trimmedVal.toLowerCase());
+    if (seenValues.has(sourceValue.toLowerCase())) return;
+    seenValues.add(sourceValue.toLowerCase());
 
-    // Try finding bbox matching word
-    let bbox;
-    const matchWord = words.find((w) => w.text && trimmedVal.includes(w.text));
-    if (matchWord?.bbox) {
-      bbox = {
-        x: matchWord.bbox.x0,
-        y: matchWord.bbox.y0,
-        width: matchWord.bbox.x1 - matchWord.bbox.x0,
-        height: matchWord.bbox.y1 - matchWord.bbox.y0,
-      };
-    }
+    const bboxes = category === 'gps' ? [] : locateSensitiveText(sourceValue, words);
+    const bbox = bboxes[0];
 
     findings.push({
       id: generateId(),
@@ -60,6 +53,7 @@ export function scanPrivacyRisks(
       confidence,
       severity,
       bbox,
+      bboxes,
     });
   };
 
@@ -93,14 +87,14 @@ export function scanPrivacyRisks(
     const raw = match[0].replace(/[\s-]/g, '');
     if (isValidLuhn(raw)) {
       const masked = `${raw.slice(0, 4)} **** **** ${raw.slice(-4)}`;
-      addFinding('card', 'Payment Card Number', masked, `Payment card number detected`, 'high', 'high');
+      addFinding('card', 'Payment Card Number', masked, `Payment card number detected`, 'high', 'high', match[0]);
     }
   }
 
   // 5. Social Security Numbers / National IDs (e.g. XXX-XX-XXXX)
   const ssnRegex = /\b(?!000|666|9\d{2})\d{3}[- ](?!00)\d{2}[- ](?!0000)\d{4}\b/g;
   while ((match = ssnRegex.exec(text)) !== null) {
-    addFinding('ssn', 'SSN / National ID Pattern', '***-**-****', `National ID/SSN pattern detected`, 'medium', 'high');
+    addFinding('ssn', 'SSN / National ID Pattern', '***-**-****', `National ID/SSN pattern detected`, 'medium', 'high', match[0]);
   }
 
   // 6. Crypto Wallet Addresses (BTC, ETH, Solana)

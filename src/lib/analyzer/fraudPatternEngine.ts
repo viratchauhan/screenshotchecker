@@ -304,47 +304,11 @@ export function evaluateFraudPatterns(
   let highestMatchScore = 0;
   let bestMatch: ReferenceScamPattern | null = null;
 
-  for (const ref of REFERENCE_SCAM_DATASET) {
-    let matchScore = 0;
-
-    // Check concept overlap
-    for (const concept of ref.matchingConcepts) {
-      if (lower.includes(concept.toLowerCase())) {
-        matchScore += 10;
-      }
-    }
-
-    // Check category correlation
-    if (ref.categories.includes('BANK_KYC_PHISHING') && (lower.includes('kyc') || lower.includes('rekyc')) && (attachments.some((a) => a.type === 'APK') || lower.includes('bank'))) matchScore += 30;
-    if (ref.categories.includes('PHONE_PHISHING') && allPhones.length > 0 && lower.includes('call')) matchScore += 25;
-    if (ref.categories.includes('DELIVERY_SCAM') && (lower.includes('delivery') || lower.includes('parcel') || lower.includes('package'))) matchScore += 25;
-    if (ref.categories.includes('PRIZE_SCAM') && (lower.includes('won') || lower.includes('gift card') || lower.includes('reward') || lower.includes('lottery'))) matchScore += 25;
-    if (ref.categories.includes('TOLL_SCAM') && (lower.includes('toll') || lower.includes('sunpass') || lower.includes('ezpass'))) matchScore += 30;
-    if (ref.categories.includes('LOAN_SCAM') && (lower.includes('loan') || lower.includes('forgiveness'))) matchScore += 25;
-    if (ref.categories.includes('FAKE_JOB_SCAM') && (lower.includes('review') || lower.includes('job') || lower.includes('pays'))) matchScore += 30;
-    if (ref.categories.includes('PERSONAL_DATA_HARVESTING') && (lower.includes('emails and address') || lower.includes('for our record'))) matchScore += 25;
-    if (ref.categories.includes('ELECTRICITY_DISCONNECTION_SCAM') && (lower.includes('electricity') || lower.includes('power officer') || lower.includes('disconnected tonight') || lower.includes('power will be disconnected'))) matchScore += 35;
-    if (ref.categories.includes('TRAFFIC_CHALLAN_SCAM') && (lower.includes('challan') || lower.includes('traffic police') || lower.includes('parivahan') || lower.includes('court summons'))) matchScore += 35;
-    if (ref.categories.includes('DIGITAL_ARREST_SCAM') && (lower.includes('digital arrest') || lower.includes('cbi') || lower.includes('cyber crime') || lower.includes('money laundering') || lower.includes('fir'))) matchScore += 40;
-    if (ref.categories.includes('TAX_REFUND_PHISHING') && (lower.includes('tax refund') || lower.includes('income tax') || lower.includes('irs') || lower.includes('hmrc'))) matchScore += 30;
-    if (ref.categories.includes('CREDIT_CARD_SCAM') && (lower.includes('reward points') || lower.includes('points expiring') || lower.includes('redeem points'))) matchScore += 30;
-    if (ref.categories.includes('TECH_SUPPORT_SCAM') && (lower.includes('geek squad') || lower.includes('norton') || lower.includes('mcafee') || (lower.includes('auto-debit') && lower.includes('refund')))) matchScore += 35;
-    if (ref.categories.includes('FAMILY_IMPERSONATION') && (lower.includes('hi mum') || lower.includes('hi dad') || lower.includes('dropped my phone') || lower.includes('temporary number'))) matchScore += 35;
-    if (ref.categories.includes('WHATSAPP_TAKEOVER') && (lower.includes('6-digit') || lower.includes('verification code') || lower.includes('accidentally sent'))) matchScore += 40;
-    if (ref.categories.includes('CRYPTO_SCAM') && (lower.includes('crypto') || lower.includes('arbitrage') || lower.includes('guaranteed profit') || lower.includes('300%'))) matchScore += 35;
-    if (ref.categories.includes('SIM_SWAP_SCAM') && (lower.includes('sim card') || lower.includes('5g upgrade') || lower.includes('esim') || lower.includes('sim will be blocked'))) matchScore += 30;
-    if (ref.categories.includes('ORDER_CANCELLATION_SCAM') && lower.includes('order for') && (lower.includes('fraud prevention') || lower.includes('cancel the charge'))) matchScore += 35;
-    if (ref.categories.includes('LOAN_APP_SCAM') && (lower.includes('pre-approved') || lower.includes('personal loan')) && (attachments.some((a) => a.type === 'APK') || lower.includes('.apk') || lower.includes('without cibil'))) matchScore += 35;
-    if (ref.categories.includes('SUBSCRIPTION_PHISHING') && (lower.includes('netflix') || lower.includes('spotify') || lower.includes('membership is on hold'))) matchScore += 30;
-    if (ref.categories.includes('POSTAL_SMISHING') && (lower.includes('incomplete street address') || lower.includes('cannot be delivered') || lower.includes('usps-address'))) matchScore += 30;
-    if (ref.categories.includes('BUSINESS_EMAIL_COMPROMISE') && (lower.includes('confidential executive meeting') || lower.includes('wire transfer') || lower.includes('are you at your desk'))) matchScore += 35;
-    if (ref.categories.includes('LOTTERY_SCAM') && (lower.includes('kbc') || (lower.includes('lottery') && lower.includes('whatsapp')))) matchScore += 35;
-
-    if (matchScore > highestMatchScore) {
-      highestMatchScore = matchScore;
-      bestMatch = ref;
-    }
-  }
+  // A topic word is not evidence that this screenshot is a stored example.
+  // Require the full normalized message; paraphrases remain unverified.
+  const normalizeReference = (value: string) => value.toLowerCase().replace(/\s+/g, ' ').trim();
+  bestMatch = REFERENCE_SCAM_DATASET.find(ref => normalizeReference(ref.originalMessage) === normalizeReference(text)) ?? null;
+  highestMatchScore = bestMatch ? 100 : 0;
 
   // =========================================================================
   // 5. CALCULATE 0–100 RISK SCORE
@@ -539,35 +503,18 @@ export function evaluateFraudPatterns(
   // =========================================================================
   // 7. COMPOSE SUMMARY, INTENT & ACTION
   // =========================================================================
-  const summary = generateMessageSummary(
-    text,
-    claimedOrg,
-    routed,
-    bestMatch && highestMatchScore >= 20 ? bestMatch : null,
-    allUrls,
-    allPhones,
-    attachments,
-    amounts
-  );
-
-  let requestedAction = routed.requestedActions.length > 0 ? routed.requestedActions.join(' / ') : 'Verify message sender independently.';
-  let recommendation = 'Do not click external links, do not open attached files, and never disclose OTPs or passwords.';
-  let scamCategories: string[] = [];
-
-  if (bestMatch && highestMatchScore >= 20) {
-    if (routed.requestedActions.length === 0) requestedAction = bestMatch.intent.wantsUserToDo;
-    recommendation = bestMatch.recommendation;
-    scamCategories = bestMatch.categories;
-  } else if (verdict === 'CRITICAL_FRAUD' || verdict === 'LIKELY_FRAUD' || verdict === 'SUSPICIOUS') {
-    if (routed.requestedActions.length === 0) {
-      requestedAction = allUrls.length > 0 ? `Click provided link (${allUrls[0]})` : allPhones.length > 0 ? `Call phone number (${allPhones[0]})` : 'Perform requested verification';
-    }
-    recommendation = 'Do not follow the instructions in the message. Verify through official authorized channels only.';
-    scamCategories = ['SOCIAL_ENGINEERING', 'SUSPICIOUS_COMMUNICATION'];
-  } else {
-    if (routed.requestedActions.length === 0) requestedAction = 'None detected.';
-    recommendation = 'Appears legitimate based on visible information. Always exercise standard vigilance with unsolicited links.';
-    scamCategories = ['INFORMATIONAL'];
+  const noMatch = !bestMatch;
+  const databaseNotice = `No reliable match was found in our active reference database. This does not establish whether the screenshot is genuine or fraudulent. Verify with independent official sources. Our active database currently contains ${REFERENCE_SCAM_DATASET.length} reference patterns. For help, contact virat@screenshotchecker.com.`;
+  const summary = noMatch ? databaseNotice : generateMessageSummary(text, claimedOrg, routed, bestMatch, allUrls, allPhones, attachments, amounts);
+  const requestedAction = 'Read the extracted text below and verify any request independently.';
+  const recommendation = noMatch ? databaseNotice : 'A reference example matches the extracted text. This is not proof of fraud or authenticity. Verify the sender and any request through an independently obtained official channel.';
+  const scamCategories = bestMatch ? bestMatch.categories : [];
+  // Keep directly observed warning signs, but do not turn an unknown message
+  // into a fraud verdict based on broad words such as job, delivery or review.
+  if (noMatch) {
+    verdict = 'INSUFFICIENT_EVIDENCE';
+    riskLevel = 'CAUTION';
+    totalScore = 0; // Not a probability or a safe verdict; classification is unverifiable.
   }
 
   return {
@@ -577,7 +524,10 @@ export function evaluateFraudPatterns(
     summary,
     contentType: routed.contentType,
     scamCategories,
-    signals: detectedSignals,
+    signals: noMatch ? Array.from(new Set(matchedConcepts)).filter(c => lower.includes(c.toLowerCase())).map(c => ({
+      type: 'TEXT_CUE', severity: 'low' as const,
+      evidence: `Extracted text includes “${c}”. This phrase alone does not establish fraud.`, source: 'OCR',
+    })) : detectedSignals,
     entities: {
       organization: claimedOrg,
       phoneNumbers: allPhones,
@@ -602,202 +552,6 @@ export function generateMessageSummary(
   attachments: any[],
   amounts: string[]
 ): string {
-  const lower = text.toLowerCase();
-
-  // 1. If high-confidence match from reference knowledge base
-  if (bestMatch && bestMatch.explanation && bestMatch.explanation.en) {
-    let summaryEn = bestMatch.explanation.en;
-    if (
-      claimedOrg &&
-      claimedOrg !== 'Unknown / Personal Contact' &&
-      bestMatch.claimedOrganization &&
-      claimedOrg.toLowerCase() !== bestMatch.claimedOrganization.toLowerCase()
-    ) {
-      summaryEn = summaryEn.replace(new RegExp(bestMatch.claimedOrganization, 'gi'), claimedOrg);
-    }
-    return summaryEn;
-  }
-
-  // 2. Specific Meaning Summaries
-  const orgName = claimedOrg && claimedOrg !== 'Unknown / Personal Contact' ? claimedOrg : 'your bank';
-
-  // Bank KYC / ReKYC / Account Blocking / APK
-  if (
-    lower.includes('rekyc') ||
-    lower.includes('kyc') ||
-    lower.includes('pan card') ||
-    lower.includes('aadhaar') ||
-    (lower.includes('account') && (lower.includes('block') || lower.includes('suspend') || lower.includes('deactivat')))
-  ) {
-    if (attachments.length > 0 || lower.includes('apk') || lower.includes('pdf file') || lower.includes('attached file')) {
-      return `This message claims to be from ${orgName} and urges you to complete KYC immediately. It asks you to click an external link or download an attachment.`;
-    }
-    if (allUrls.length > 0) {
-      return `This message claims that your ${orgName} KYC is incomplete and pressures you to complete it immediately to avoid account restrictions. It directs you to use a provided link to take action.`;
-    }
-    return `This message claims that your ${orgName} account or KYC requires immediate verification to prevent account blocking.`;
-  }
-
-  // Digital Arrest / Police / CBI
-  if (lower.includes('digital arrest') || lower.includes('cyber crime') || lower.includes('cbi') || lower.includes('fir')) {
-    return `This message claims that law enforcement or the CBI has issued an FIR and arrest notice against you, demanding an immediate WhatsApp video call to avoid arrest.`;
-  }
-
-  // Tech Support / Geek Squad / Norton Auto-Renewal Invoice
-  if (lower.includes('geek squad') || lower.includes('norton') || lower.includes('mcafee') || (lower.includes('auto-debit') && lower.includes('refund'))) {
-    return `This message presents a fake subscription renewal invoice and urges you to call a telephone number immediately to cancel or dispute the charge.`;
-  }
-
-  // Family Emergency / Hi Mum / Hi Dad
-  if (lower.includes('hi mum') || lower.includes('hi dad') || lower.includes('dropped my phone') || lower.includes('temporary number')) {
-    return `The sender claims to be a family member using a temporary number due to a broken phone and asks you to urgently transfer money for an unpaid bill.`;
-  }
-
-  // WhatsApp 6-digit code theft
-  if (lower.includes('6-digit') || (lower.includes('verification code') && lower.includes('accidentally'))) {
-    return `The sender claims they accidentally sent their 6-digit WhatsApp verification code to your number and asks you to forward it to them.`;
-  }
-
-  // Crypto VIP Group / Arbitrage
-  if (lower.includes('crypto') && (lower.includes('arbitrage') || lower.includes('guaranteed profit') || lower.includes('wealth club'))) {
-    return `This message promises guaranteed high daily profits on crypto trading and invites you to join an exclusive WhatsApp group.`;
-  }
-
-  // Traffic E-Challan / Parivahan
-  if (lower.includes('challan') || lower.includes('traffic police') || lower.includes('parivahan')) {
-    return `This message claims that you have an unpaid traffic violation challan and threatens court summons and license cancellation unless paid immediately via a provided link.`;
-  }
-
-  // Income Tax Refund / IRS
-  if (lower.includes('income tax') || lower.includes('tax refund') || lower.includes('irs refund')) {
-    return `This message claims that an income tax refund has been approved and asks you to submit your bank account details and PAN through a provided link.`;
-  }
-
-  // Credit Card Reward Points Expiry
-  if (lower.includes('reward points') || (lower.includes('points') && lower.includes('expiring today'))) {
-    return `This message claims that your credit card reward points are expiring today and asks you to redeem them for cash through a provided link.`;
-  }
-
-  // Telecom / SIM card block / 5G upgrade
-  if (lower.includes('sim card') || lower.includes('5g upgrade') || lower.includes('esim') || lower.includes('sim will be blocked')) {
-    return `This message claims that your SIM card will be deactivated within 24 hours unless you upgrade to 5G or complete KYC through a provided link or number.`;
-  }
-
-  // Instant Loan APK
-  if (lower.includes('personal loan') && (lower.includes('1% interest') || lower.includes('.apk') || lower.includes('without cibil'))) {
-    return `This message offers an unsolicited instant loan with no credit check and instructs you to download an APK application file.`;
-  }
-
-  // Subscription Renewal Suspension (Netflix / Spotify)
-  if (lower.includes('netflix') || lower.includes('spotify') || lower.includes('membership is on hold')) {
-    return `This message claims that your subscription payment failed and asks you to update your payment details through a provided link.`;
-  }
-
-  // Executive BEC Wire Transfer
-  if (lower.includes('confidential executive meeting') || lower.includes('are you at your desk') || (lower.includes('wire transfer') && lower.includes('vendor'))) {
-    return `This message poses as a company executive in a confidential meeting and requests an urgent wire transfer to an external vendor account.`;
-  }
-
-  // KBC / WhatsApp Lottery
-  if (lower.includes('kbc') || (lower.includes('lottery') && lower.includes('jeet chuka hai'))) {
-    return `This message claims that your WhatsApp number won a lottery prize and instructs you to make a WhatsApp audio call to an unverified international number.`;
-  }
-
-  // Account Lock / Suspicious Activity / Phone Vishing
-  if (
-    (lower.includes('locked') || lower.includes('suspicious activit') || lower.includes('unauthorized')) &&
-    (allPhones.length > 0 || lower.includes('call us') || lower.includes('call this number') || lower.includes('contact us'))
-  ) {
-    return `This message claims that your ${orgName} account has been locked due to suspicious activity and asks you to call a provided number to verify your identity.`;
-  }
-
-  // Package / Delivery / Courier
-  if (
-    lower.includes('parcel') ||
-    lower.includes('package') ||
-    lower.includes('delivery') ||
-    lower.includes('courier') ||
-    lower.includes('shipment') ||
-    lower.includes('fedex') ||
-    lower.includes('ups') ||
-    lower.includes('usps') ||
-    lower.includes('dhl')
-  ) {
-    if (amounts.length > 0 || lower.includes('pay') || lower.includes('fee')) {
-      return `This message claims that a parcel delivery was missed and asks you to make a payment to reschedule the delivery.`;
-    }
-    return `This message claims that a parcel delivery was missed and directs you to a provided link to reschedule the delivery.`;
-  }
-
-  // Prize / Reward / Gift Card
-  if (
-    lower.includes('won a') ||
-    lower.includes('you won') ||
-    lower.includes('gift card') ||
-    lower.includes('claim your reward') ||
-    lower.includes('lottery') ||
-    lower.includes('winner')
-  ) {
-    const rewardStr = amounts.length > 0 ? `a ${amounts[0]} gift card` : 'a reward';
-    return `This message claims that you have won ${rewardStr} and asks you to click a link to claim the reward.`;
-  }
-
-  // Toll / Traffic / DMV Fine
-  if (
-    lower.includes('toll') ||
-    lower.includes('sunpass') ||
-    lower.includes('ezpass') ||
-    lower.includes('e-zpass') ||
-    lower.includes('dmv') ||
-    lower.includes('fine') ||
-    lower.includes('traffic violation')
-  ) {
-    return `This message claims that you have an outstanding toll or unpaid balance. It pressures you to make an immediate payment through a provided link to avoid penalties.`;
-  }
-
-  // Student Loan / Debt Relief
-  if (lower.includes('student loan') || lower.includes('loan forgiveness') || lower.includes('debt relief')) {
-    return `This message claims that you qualify for a student loan forgiveness program and asks you to call a provided number or use a link before enrollment ends.`;
-  }
-
-  // Job Offer / Review Tasks
-  if (
-    lower.includes('google review') ||
-    lower.includes('job information') ||
-    lower.includes('earn per day') ||
-    lower.includes('daily income') ||
-    lower.includes('part-time job') ||
-    lower.includes('part time job')
-  ) {
-    return `This message offers an online job opportunity for writing reviews or completing tasks and asks for your permission to share task documents and links.`;
-  }
-
-  // Personal Info Request / Contact
-  if (
-    lower.includes('email and address') ||
-    lower.includes('emails and address') ||
-    lower.includes('for our record') ||
-    lower.includes('send me your') ||
-    lower.includes('share your address')
-  ) {
-    return `The sender is asking for your email address and physical address for record-keeping purposes.`;
-  }
-
-  // Utility / Electricity Disconnection
-  if (lower.includes('electricity') || lower.includes('power connection') || lower.includes('bill overdue') || lower.includes('disconnection')) {
-    return `This message claims that your electricity or utility service will be disconnected due to an unpaid bill and directs you to call a number or use a link to resolve it.`;
-  }
-
-  // If link or attachment with urgency
-  if (allUrls.length > 0 || attachments.length > 0) {
-    const orgPrefix = claimedOrg && claimedOrg !== 'Unknown / Personal Contact' ? `claims to be from ${claimedOrg} and ` : '';
-    const actionTarget = attachments.length > 0 ? 'open an attached file' : 'click a provided link';
-    return `This message ${orgPrefix}pressures you to take immediate action. It asks you to ${actionTarget} to proceed.`;
-  }
-
-  if (allPhones.length > 0) {
-    return `This message asks you to call or contact a provided phone number (${allPhones[0]}) regarding your account.`;
-  }
-
-  return `This message appears to be standard communication without specific financial demands or account verification requests.`;
+  const excerpt = text.replace(/\s+/g, ' ').trim();
+  return `Extracted text${excerpt.length > 600 ? ' (excerpt)' : ''}: “${excerpt.slice(0, 600)}”. ${bestMatch ? 'This text matches a stored reference example; verify independently.' : 'No reliable reference match has been established.'}`;
 }

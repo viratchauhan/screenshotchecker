@@ -1,0 +1,23 @@
+﻿<!doctype html><html><body><h1>Redaction browser regression</h1><p id="result">Running</p><script type="module">
+import { renderRedactedImage } from '/src/lib/analyzer/redactor.ts';
+import { scanPrivacyRisks } from '/src/lib/analyzer/privacyScanner.ts';
+import { suggestedMasks } from '/src/lib/analyzer/privacyLocations.ts';
+try {
+ const source=document.createElement('canvas');source.width=240;source.height=80;
+ const ctx=source.getContext('2d');ctx.fillStyle='#abcdef';ctx.fillRect(0,0,240,80);
+ const words=['4111','1111','1111','1111'].map((text,i)=>({text,bbox:{x0:10+i*50,y0:10,x1:45+i*50,y1:35}}));
+ const img=new Image();img.src=source.toDataURL();await img.decode();
+ const card=scanPrivacyRisks('4111 1111 1111 1111',words).findings.find(f=>f.category==='card');
+ const {blob}=await renderRedactedImage(img,suggestedMasks([card]).boxes);
+ const copy=new Image();const url=URL.createObjectURL(blob);copy.src=url;await copy.decode();
+ ctx.clearRect(0,0,240,80);ctx.drawImage(copy,0,0);
+ for(const w of words) for(let y=w.bbox.y0;y<w.bbox.y1;y++) for(let x=w.bbox.x0;x<w.bbox.x1;x++) {
+  if(String([...ctx.getImageData(x,y,1,1).data])!=='20,20,19,255') throw Error('Uncovered private pixel');
+ }
+ if(String([...ctx.getImageData(230,70,1,1).data])!=='171,205,239,255')throw Error('Unrelated pixels changed');
+ const bytes=new Uint8Array(await blob.arrayBuffer());let at=8;const chunks=[];
+ while(at<bytes.length){const n=new DataView(bytes.buffer).getUint32(at);chunks.push(String.fromCharCode(...bytes.slice(at+4,at+8)));at+=12+n;}
+ if(chunks.some(x=>['eXIf','tEXt','iTXt','zTXt'].includes(x)))throw Error('Unexpected metadata');
+ URL.revokeObjectURL(url);document.getElementById('result').textContent='PASS: exported PNG covers all four card words with opaque pixels; outside pixels unchanged; no EXIF/text chunks.';
+} catch(e) {document.getElementById('result').textContent='FAIL: '+e.message;}
+</script></body></html>

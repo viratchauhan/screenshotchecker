@@ -12,7 +12,10 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler deploy"
+    "deploy": "astro build && wrangler deploy",
+    "test": "node scripts/run-tests.mjs",
+    "check": "npm run test && npm run build",
+    "test:ocr": "tsx --test src/lib/analyzer/__tests__/ocrCoordinates.test.ts"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
@@ -25,6 +28,8 @@
   },
   "devDependencies": {
     "jsdom": "^26.1.0",
+    "tsx": "4.23.15",
     "wrangler": "^4.136.2"
-  }
+  },
+  "packageManager": "npm@11.19.1"
 }

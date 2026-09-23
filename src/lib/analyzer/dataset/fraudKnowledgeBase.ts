@@ -1,4 +1,4 @@
-export type FraudVerdict = 'LIKELY_FRAUD' | 'SUSPICIOUS' | 'LIKELY_LEGITIMATE';
+export type FraudVerdict = 'INSUFFICIENT_EVIDENCE' | 'OCR_ERROR' | 'CRITICAL_FRAUD' | 'LIKELY_FRAUD' | 'SUSPICIOUS' | 'LIKELY_LEGITIMATE';
 export type RiskLevel = 'CRITICAL' | 'HIGH' | 'SUSPICIOUS' | 'CAUTION' | 'LOW';
 
 export interface ReferenceScamPattern {

@@ -101,6 +101,8 @@ const structuredData = {
 </Layout>
 
 <script>
+  import { suggestedMasks } from '../lib/analyzer/privacyLocations';
+  import { bindRedactionInput } from '../lib/utils/redactionInput';
   import { escapeHtml, renderPrivacyFindings } from '../lib/utils/reportSafety';
   import { renderMetadataSummary } from "../lib/utils/metadataRenderer";
   import type { RedactionBox } from '../lib/analyzer/redactor';
@@ -146,11 +148,8 @@ const structuredData = {
   const clearRedactBtn = document.getElementById('clear-all-redact-btn');
   const exportRedactedBtn = document.getElementById('export-redacted-btn');
 
-  let currentTool: 'blur' | 'pixelate' | 'blackout' | 'whiteout' = 'blur';
+  let currentTool: 'blur' | 'pixelate' | 'blackout' | 'whiteout' = 'blackout';
   let redactionBoxes: RedactionBox[] = [];
-  let isDrawing = false;
-  let startX = 0;
-  let startY = 0;
 
   async function processImageFile(file: File) {
     currentFile = file;
@@ -178,6 +177,7 @@ const structuredData = {
       });
 
       currentResult = result;
+      redactionBoxes = []; renderVersion++;
       renderDashboard(result);
 
       progressState.classList.add('hidden');
@@ -692,24 +692,37 @@ const structuredData = {
   });
 
   openRedactorBtn?.addEventListener('click', initRedactorModal);
-  closeRedactorBtn?.addEventListener('click', () => redactorModal?.classList.add('hidden'));
-  cancelRedactorBtn?.addEventListener('click', () => redactorModal?.classList.add('hidden'));
+  closeRedactorBtn?.addEventListener('click', closeRedactor);
+  cancelRedactorBtn?.addEventListener('click', closeRedactor);
 
+  function closeRedactor() { (redactorModal as HTMLDialogElement)?.close(); redactorModal?.classList.add('hidden'); }
+  redactorModal?.addEventListener('cancel', event => { event.preventDefault(); closeRedactor(); });
+
+  let redactorImage: HTMLImageElement | null = null;
   async function initRedactorModal() {
-    if (!previewImg || !redactorCanvas) return;
+    if (!currentResult || !redactorCanvas) return;
+    const source = currentResult.dataUrl;
+    const image = new Image(); image.src = source;
+    await image.decode();
+    if (currentResult?.dataUrl !== source) return;
+    redactorImage = image;
     redactorModal?.classList.remove('hidden');
+    (redactorModal as HTMLDialogElement)?.showModal();
 
-    redactorCanvas.width = previewImg.naturalWidth || previewImg.width;
-    redactorCanvas.height = previewImg.naturalHeight || previewImg.height;
+    redactorCanvas.width = redactorImage.naturalWidth;
+    redactorCanvas.height = redactorImage.naturalHeight;
     redrawRedactorCanvas();
   }
 
+  let renderVersion = 0;
   async function redrawRedactorCanvas() {
-    if (!redactorCanvas || !previewImg) return;
+    if (!redactorCanvas || !redactorImage) return;
     const { renderRedactedImage } = await import('../lib/analyzer/redactor');
-    renderRedactedImage(previewImg, redactionBoxes).then(({ dataUrl }) => {
+    const version = ++renderVersion;
+    renderRedactedImage(redactorImage, [...redactionBoxes]).then(({ dataUrl }) => {
       const img = new Image();
       img.onload = () => {
+        if (version !== renderVersion) return;
         const ctx = redactorCanvas.getContext('2d');
         ctx?.drawImage(img, 0, 0);
       };
@@ -719,67 +732,29 @@ const structuredData = {
 
   const toolBtns = document.querySelectorAll('.redactor-tool-btn');
   toolBtns.forEach((btn) => {
+    btn.setAttribute('aria-pressed', String(btn.getAttribute('data-tool') === currentTool));
     btn.addEventListener('click', () => {
       toolBtns.forEach((b) => b.classList.remove('bg-surface-card', 'text-ink'));
       btn.classList.add('bg-surface-card', 'text-ink');
       currentTool = btn.getAttribute('data-tool') as any;
+      toolBtns.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
     });
   });
 
-  redactorCanvas?.addEventListener('mousedown', (e) => {
-    if (!redactorCanvas) return;
-    const rect = redactorCanvas.getBoundingClientRect();
-    const scaleX = redactorCanvas.width / rect.width;
-    const scaleY = redactorCanvas.height / rect.height;
+  if (redactorCanvas) bindRedactionInput(redactorCanvas, () => currentTool, box => { redactionBoxes.push(box); redrawRedactorCanvas(); });
 
-    startX = (e.clientX - rect.left) * scaleX;
-    startY = (e.clientY - rect.top) * scaleY;
-    isDrawing = true;
-  });
-
-  redactorCanvas?.addEventListener('mouseup', (e) => {
-    if (!isDrawing || !redactorCanvas) return;
-    isDrawing = false;
-    const rect = redactorCanvas.getBoundingClientRect();
-    const scaleX = redactorCanvas.width / rect.width;
-    const scaleY = redactorCanvas.height / rect.height;
-
-    const endX = (e.clientX - rect.left) * scaleX;
-    const endY = (e.clientY - rect.top) * scaleY;
-
-    const width = Math.abs(endX - startX);
-    const height = Math.abs(endY - startY);
-    const x = Math.min(startX, endX);
-    const y = Math.min(startY, endY);
-
-    if (width > 5 && height > 5) {
-      redactionBoxes.push({
-        id: `box_${Date.now()}`,
-        x,
-        y,
-        width,
-        height,
-        type: currentTool,
-      });
-      redrawRedactorCanvas();
-    }
-  });
+  function applySuggested(findings: any[]) {
+    const result = suggestedMasks(findings);
+    const ids = new Set(redactionBoxes.map(b => b.id));
+    redactionBoxes.push(...result.boxes.filter(b => !ids.has(b.id)));
+    const status = document.getElementById('redactor-status');
+    if (status) status.textContent = result.message;
+    redrawRedactorCanvas();
+  }
 
   autoRedactPiiBtn?.addEventListener('click', () => {
     if (!currentResult) return;
-    for (const f of currentResult.privacy.findings) {
-      if (f.bbox) {
-        redactionBoxes.push({
-          id: `auto_${f.id}`,
-          x: f.bbox.x - 4,
-          y: f.bbox.y - 4,
-          width: f.bbox.width + 8,
-          height: f.bbox.height + 8,
-          type: currentTool,
-        });
-      }
-    }
-    redrawRedactorCanvas();
+    applySuggested(currentResult.privacy.findings);
   });
 
   undoRedactBtn?.addEventListener('click', () => {
@@ -793,19 +768,20 @@ const structuredData = {
   });
 
   exportRedactedBtn?.addEventListener('click', async () => {
-    if (!previewImg) return;
+    if (!redactorImage) return;
     const { renderRedactedImage } = await import('../lib/analyzer/redactor');
-    const { blob } = await renderRedactedImage(previewImg, redactionBoxes, 'image/png');
+    const { blob } = await renderRedactedImage(redactorImage, redactionBoxes, 'image/png');
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `redacted-screenshot-${Date.now()}.png`;
     a.click();
     URL.revokeObjectURL(url);
-    redactorModal?.classList.add('hidden');
+    closeRedactor();
   });
 
-  (window as any).redactSpecificItem = (val: string) => {
-    initRedactorModal();
+  (window as any).redactSpecificItem = async (val: string) => {
+    await initRedactorModal();
+    applySuggested(currentResult?.privacy.findings.filter(f => f.value === val) || []);
   };
 </script>

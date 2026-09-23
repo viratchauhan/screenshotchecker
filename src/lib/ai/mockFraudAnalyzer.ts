@@ -20,6 +20,8 @@ export async function analyzeFraudWithMockLLM(
     classification = 'fraud';
   } else if (engineResult.verdict === 'SUSPICIOUS') {
     classification = 'suspicious';
+  } else if (engineResult.verdict === 'INSUFFICIENT_EVIDENCE') {
+    classification = 'unverifiable';
   } else {
     classification = 'legitimate';
   }
@@ -48,6 +50,8 @@ export async function analyzeFraudWithMockLLM(
       ? 'SUSPICIOUS'
       : engineResult.verdict === 'OCR_ERROR'
       ? 'OCR_ERROR'
+      : engineResult.verdict === 'INSUFFICIENT_EVIDENCE'
+      ? 'INSUFFICIENT_EVIDENCE'
       : 'LIKELY_LEGITIMATE';
 
   return {

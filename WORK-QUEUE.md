@@ -1,8 +1,8 @@
 # ScreenshotChecker bounded work queue
 
-**Current state:** Tasks 01C and 02 complete together at the owner's explicit request. Standalone report text is escaped, 17 focused checks pass, all 30 pages build, Cloudflare packaging dry-run passes, and npm audit reports zero known vulnerabilities. Nothing pushed or deployed.
+**Current state:** Tasks 03, 04A, 04B and 05A completed locally. Owner-requested no-match correction also completed: unrelated text cannot inherit a stored example narrative. Latest production build: 30 pages; full test runner: 18 passing entrypoints and the same 3 baseline failures. Browser checks cover exported PNG pixels, phone-width keyboard placement, modal focus/Escape and a real OCR no-match report. Owner requested committing and publishing the current work to GitHub on 23 September 2026. See Git history for publication state; no direct Cloudflare deployment was requested.
 
-**Next:** Task 03. Default remains one bounded task per owner continuation; this session's two-task exception does not authorize further backlog work. Audience remains global, with US/UK first and India secondary.
+**Next:** Task 05B, large-image handoff and failure recovery. Default remains one bounded task per continuation unless the owner requests otherwise.
 
 **Session rules**
 
@@ -21,11 +21,11 @@
 | 01B | Safe extracted-text/report rendering | M | 01A | OCR-derived findings, names, URLs and evidence render safely across payment and shared dashboards; targeted regressions pass | DONE |
 | 01C | Standalone workspace rendering safety | M | 01B | Redactor PII values, comparison descriptions, C2PA fields and AI report strings render safely; original button behavior preserved; focused injection regressions pass. Split further if needed. | DONE |
 | 02 | Dependency repair | M | 00 | Supported compatible patches, reviewed lockfile, successful build and fresh audit; remaining advisories explicitly triaged | DONE |
-| 03 | Reproducible development checks | M | 00 | Pinned tested Node target, project test runner, unified existing-test command; baseline failures documented | NEXT |
-| 04A | OCR structured coordinates | M | 03 | Current OCR API returns word boxes mapped to original image; scaled/fallback fixtures verify bounds | TODO |
-| 04B | Automatic redaction and export | M | 01A,01B,04A | Suggested boxes actually hide selected data in exported files; unavailable locations give a visible warning | TODO |
-| 05A | Touch and keyboard redaction | M | 04B | Pointer drawing and accessible modal controls work; phone viewport and keyboard flow checked | TODO |
-| 05B | Large-image handoff and failure recovery | M | 04B | No silent storage failure; OCR initialization can retry; a meaningful pixel/memory limit and clear errors exist | TODO |
+| 03 | Reproducible development checks | M | 00 | Pinned tested Node target, project test runner, unified existing-test command; baseline failures documented | DONE |
+| 04A | OCR structured coordinates | M | 03 | Current OCR API returns word boxes mapped to original image; scaled/fallback fixtures verify bounds | DONE |
+| 04B | Automatic redaction and export | M | 01A,01B,04A | Suggested boxes actually hide selected data in exported files; unavailable locations give a visible warning | DONE |
+| 05A | Touch and keyboard redaction | M | 04B | Pointer drawing and accessible modal controls work; phone viewport and keyboard flow checked | DONE |
+| 05B | Large-image handoff and failure recovery | M | 04B | No silent storage failure; OCR initialization can retry; a meaningful pixel/memory limit and clear errors exist | NEXT |
 | 06 | Traffic baseline and measurement decision | S | 00 | Actual baseline recorded if available, or explicit unknowns; privacy-conscious event specification approved by existing product direction | TODO |
 | 07 | Correct global entity extraction | M | 03,04A | US/UK/Indian phones distinguished from payment references; USD/GBP/INR and ambiguous date fixtures pass; scope split if needed | TODO |
 | 08A | Fraud regression repair | M | 03,07 | Existing bank/prize failures resolved and final displayed verdict tested against benign counterexamples | TODO |
@@ -84,3 +84,28 @@ Task numbers are ordering guides, not calendar commitments. Task 06 may happen e
 - Production build: all 30 pages pass; existing large C2PA bundle warning remains. `wrangler deploy --dry-run` passes locally, reading 359 asset files; no production release performed. Logs: audit/task-01c-02-build.log and audit/task-02-cloudflare-dry-run.log.
 - npm emitted a cleanup warning for an old locked compiler binary and install-script notices; the updated compiler build and Cloudflare packaging both ran successfully. Existing three baseline legacy test failures were not changed or rerun in this bounded session; task 03 will establish the unified runner.
 - Stopped after the two authorized tasks. Next: 03, reproducible development checks.
+
+### 2026-09-22 ? Tasks 03 + 04A (owner-requested two-task session)
+
+- Added `.nvmrc` for tested Node 26.9.0, packageManager npm 11.19.1, exact local tsx dependency, automatic isolated test discovery and npm test/check commands. Runner reports failures and exits nonzero without skipping baseline failures. New-PC setup documents commands and the three existing failures.
+- Baseline before OCR changes: 18 entrypoints, 15 pass / 3 fail. After adding OCR tests: 19 entrypoints, 16 pass / same 3 fail. Logs: audit/task-03-tests.log and audit/task-03-04a-tests.log. No new failing entrypoints.
+- OCR now requests `{ text: true, blocks: true }` for both passes and traverses blocks/paragraphs/lines/words instead of the removed flat data.words field. Source: https://github.com/naptha/tesseract.js/blob/master/docs/api.md and installed v7 types.
+- Word boxes map to source pixels with outward rounding, image-bound clipping when source dimensions are available, and rejection of invalid/empty boxes. Selecting the original-image fallback resets scaling to 1; an empty fallback preserves the first-pass geometry.
+- Four focused production-helper tests pass (structured mock worker fixtures, scaled bounds, invalid boxes and fallback selection). All 30 pages build; existing large bundle warning remains. Production dependency audit: zero advisories. These fixtures do not establish real-image OCR accuracy or prove exported redactions; task 04B covers redaction/export behavior.
+- No push, deployment, automatic continuation or new commit. Stopped after the two requested tasks.
+
+### 2026-09-23 — Finish 04B + 05A and owner-requested no-match correction
+
+- Redaction: full multiword and repeated sensitive values are located, including masked card/SSN labels via their original matches. Automatic masks are solid blackout and cover all matched words; missing locations report manual placement is needed. Invalid locations do not create partial claimed coverage. Bounding box clipping rounds outward. Individual finding buttons now apply masks in both shared dashboards. Shared modal exports the original screenshot rather than an ELA preview. New-image state and stale preview guards added.
+- Input/accessibility: shared Pointer Events handler uses capture and cancellation for mouse/touch/pen. Numeric coordinate forms provide keyboard placement. Modal uses native dialog behavior with a label, named close control, Escape handling and focus restoration; toolbar exposes selected state. Tall dialog scrolls internally and fits phone width.
+- Verification: production renderer browser harness decoded a real PNG and checked every pixel of four card word regions (opaque), unchanged outside pixels, and absence of EXIF/text chunks. Harness retained at scripts/redaction-browser-check.html; its temporary public copy was removed before the final build. Browser at 390x844 verified keyboard masks and no horizontal overflow. Production-preview modal verified initial close-button focus, focus containment, Escape, focus restoration, and phone layout. Touch cancellation/scaling covered by synthetic Pointer Events tests; no physical phone test claimed.
+- User expanded scope on resumption: fix unrelated screenshots borrowing fraud example answers. Replaced broad keyword nearest-example selection with conservative full-message matching (case/whitespace insensitive). Unknown text yields INSUFFICIENT_EVIDENCE/unverifiable, no matched ID/category, and a verification notice with virat@screenshotchecker.com. Text cues remain non-conclusive, not copied evidence. Known-example summaries quote source text instead of copying stored explanations/actions. Recognizable informational safeguards and empty OCR remain separate states.
+- Verified active database: 28 reference patterns from fraudKnowledgeBase.ts. The supplied JSON filename says 1050 but actually contains 50 examples and is not imported by the current app. No 2,000-example or trained-model claim added. Counts in user-facing copy derive from the active array.
+- Deliberate tradeoff: even a paraphrased scam can receive no-match; that result explicitly does not establish safety. This conservative policy addresses forced example answers; broader evidence-grounded detection remains future work, not a claim of comprehensive fraud detection.
+- Retained all 28 historical fraud fixtures and 12 summary inputs, revised assertions to the requested abstention/grounding contract, and added benign-topic, changed-meaning, mapping, OTP and empty-input checks. All active reference examples are tested for discoverability. Full suite: 18/21 entrypoints pass; unchanged failures remain agenticInvestigation (4 pass/2 fail), stale blog count, missing URL normalizer. Logs: audit/task-no-match-tests.log and audit/task-final-build.log. All 30 pages build; prior bundle-size warning remains.
+- Full real-image browser path confirmed OCR reads the synthetic job-interview message, renders INSUFFICIENT_EVIDENCE with the correct 28-pattern count and contact email, and does not invent a job scam. A stale development-module fetch interrupted early browser checks; production preview completed them successfully.
+- No commit, push or deployment. Stop here; do not execute the next queue item automatically.
+
+### 2026-09-23 — GitHub publication requested
+
+Owner explicitly requested updating GitHub with the current website code. Publish the completed local work and previous security commit to origin/main. Remote was fetched and had no newer commits. Latest recorded production build passes (30 pages); three documented baseline test failures remain. No .github workflow exists in this checkout; Cloudflare dashboard Git integration may still deploy a push. This request does not authorize additional feature work or a separate Wrangler deployment.
