@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+const title = 'Screenshot Detector: Screenshot or Photo?';
+const description = 'Check whether an image has screenshot or camera-photo clues. Inspect metadata and dimensions locally, with clear evidence and inconclusive results.';
+const canonicalUrl = 'https://screenshotchecker.com/screenshot-detector/';
+const faqs = [
+  ['How can I tell if a photo is a screenshot?', 'Check the original file for camera fields and capture-software metadata. These are clues, not proof. Cropping, exporting or sharing can remove them, so an inconclusive result is normal.'],
+  ['Does missing EXIF mean an image is a screenshot?', 'No. Photos and graphics may also lack EXIF. This tool does not classify an image as a screenshot just because metadata is absent.'],
+  ['Can it identify the exact phone or app?', 'No. Dimensions overlap across devices and can be resized. Software metadata may describe an export rather than the original capture.'],
+  ['Does this detect fake or edited screenshots?', 'No. Source clues and authenticity are different questions. Use the screenshot analyzer to investigate content and editing concerns, then verify important claims independently.'],
+];
+const structuredData = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'WebApplication', name: 'Screenshot Detector', url: canonicalUrl, description, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Web browser', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+  { '@type': 'FAQPage', mainEntity: faqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
+] };
+---
+<Layout title={title} description={description} canonicalUrl={canonicalUrl} structuredData={structuredData}>
+  <Header currentPath="/screenshot-detector" />
+  <main class="source-page">
+    <a href="/tools">All tools</a>
+    <h1>Screenshot detector: screenshot or photo?</h1>
+    <p>Inspect the file for camera and screen-capture clues. Get an explanation of the evidence, including when the source cannot be determined.</p>
+    <p>Looking for a <strong>real-or-fake screenshot check</strong>? <a href="/screenshot-analyzer">Open the screenshot analyzer</a> instead.</p>
+    <section class="source-panel" aria-labelledby="choose-title">
+      <h2 id="choose-title">Choose an image to inspect</h2>
+      <p id="file-help">PNG, JPEG or WebP · up to 10 MB and 4 megapixels. Image bytes are inspected in your browser, without uploading the file. No account required.</p>
+      <label for="source-file">Select image</label>
+      <input id="source-file" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="file-help" />
+      <button id="source-clear" type="button" class="btn-secondary">Clear image and result</button>
+      <p id="source-status" role="status" aria-live="polite"></p>
+      <noscript>Enable JavaScript to inspect an image. The explanations below remain available without it.</noscript>
+    </section>
+    <section id="source-result" class="source-panel" hidden aria-labelledby="source-verdict">
+      <h2 id="source-verdict" tabindex="-1"></h2>
+      <ul id="source-signals"></ul>
+      <p id="source-limitation"></p>
+      <p><a href="/screenshot-metadata-checker">Inspect more metadata</a> · <a href="/blog/screenshot-checker-online">Follow the screenshot verification checklist</a></p>
+    </section>
+    <section>
+      <h2>How this screenshot scanner works</h2>
+      <p>The tool reads image dimensions and selected metadata fields. A named screen-capture program is a clue about software used; a combination of camera fields is a clue about photographic origin. Conflicting clues, absent clues or unreadable metadata produce an inconclusive result.</p>
+      <p>A PNG without EXIF is not automatically a screenshot. A photo exported from an editor can look the same to a metadata check. A screenshot of a photo may lose the original camera fields, and a file can carry copied metadata. There is no accuracy percentage or device-identification claim here.</p>
+      <p>Keep the original file for review. If someone says an image proves a payment or conversation, check that claim in the original service rather than relying on the image type.</p>
+    </section>
+    <section>
+      <h2>Screenshot detection questions</h2>
+      {faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}
+    </section>
+  </main>
+  <Footer />
+</Layout>
+<style>
+  .source-page { max-width: 52rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.7; }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.2; }
+  h2 { font-size: 1.4rem; margin-bottom: .75rem; }
+  p { margin: .8rem 0; }
+  a { text-decoration: underline; text-underline-offset: .2em; }
+  section { margin: 2rem 0; }
+  .source-panel { border: 1px solid var(--color-hairline, #ccc); border-radius: 1rem; padding: 1.25rem; }
+  label { display: block; font-weight: 600; }
+  input { display: block; max-width: 100%; margin: .75rem 0 1rem; }
+  ul { padding-left: 1.25rem; list-style: disc; }
+  li { margin: .6rem 0; overflow-wrap: anywhere; }
+  details { border-bottom: 1px solid var(--color-hairline, #ccc); padding: 1rem 0; }
+  summary { cursor: pointer; font-weight: 600; }
+</style>
+<script>
+  import { assessScreenshotSource, selectSourceMetadata } from '../lib/analyzer/screenshotSource';
+  import { loadImageFromDataUrl } from '../lib/analyzer/imageInfo';
+  const input = document.getElementById('source-file') as HTMLInputElement;
+  const status = document.getElementById('source-status')!;
+  const result = document.getElementById('source-result')!;
+  let generation = 0;
+  document.getElementById('source-clear')!.addEventListener('click', () => {
+    generation++; input.value = ''; result.hidden = true; status.textContent = 'Image and result cleared.';
+    document.getElementById('source-signals')!.replaceChildren();
+    document.getElementById('source-verdict')!.textContent = '';
+    document.getElementById('source-limitation')!.textContent = '';
+    input.focus();
+  });
+  input.addEventListener('change', async () => {
+    const file = input.files?.[0];
+    if (!file) return;
+    const run = ++generation;
+    result.hidden = true; status.textContent = 'Inspecting image…';
+    input.value = '';
+    let url = '';
+    try {
+      if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type)) throw new Error('Choose a PNG, JPEG or WebP image.');
+      if (file.size > 10 * 1024 * 1024) throw new Error('Choose an image smaller than 10 MB.');
+      url = URL.createObjectURL(file);
+      const img = await loadImageFromDataUrl(url);
+      let metadataReadable = true;
+      let metadata = { cameraTags: [] as string[], software: '' };
+      try {
+        const { default: ExifReader } = await import('exifreader');
+        metadata = selectSourceMetadata(ExifReader.load(await file.arrayBuffer(), { expanded: true }));
+      } catch { metadataReadable = false; }
+      if (run !== generation) return;
+      const report = assessScreenshotSource({ width: img.naturalWidth, height: img.naturalHeight, format: file.type, metadataReadable, ...metadata });
+      document.getElementById('source-verdict')!.textContent = report.verdict;
+      document.getElementById('source-signals')!.replaceChildren(...report.signals.map(text => {
+        const li = document.createElement('li'); li.textContent = text; return li;
+      }));
+      document.getElementById('source-limitation')!.textContent = report.limitation;
+      result.hidden = false; status.textContent = 'Inspection complete. Review the clues and limitations below.';
+      document.getElementById('source-verdict')!.focus();
+    } catch (error) {
+      if (run === generation) status.textContent = error instanceof Error ? error.message : 'Image inspection failed. Please try again.';
+    } finally { if (url) URL.revokeObjectURL(url); }
+  });
+</script>

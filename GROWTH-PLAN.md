@@ -147,3 +147,10 @@ Use roughly 90 days as an initial experiment-and-review window, not a deadline f
 6. Record revision, deployment/version identifier, URL, test results, and rollback reference. Revert the release if a material regression is confirmed.
 
 The current repository's `src/worker.ts` is not active merely because hosting uses Cloudflare Workers. The assets-only configuration is valid for the present static site. The audit's API/asset-path problems must be addressed before intentionally activating backend routes.
+
+
+## Owner query evidence received 23 September 2026
+
+See audit/QUERY-RESEARCH-2026-09-23.md for the supplied query counts, limitations and public competitor observations. This partially replaces the earlier absence of search evidence: 17 clicks are shown across four general screenshot-checking queries, but reporting period, geography, landing pages and average positions remain unknown. It does not establish a monthly traffic baseline or commercial value.
+
+Owner-directed priority: Q1 adds one distinct screenshot-versus-photo clue tool; Q2 next improves the existing main checker workflow for the highest-click cluster. Then address metadata intent and the pending analyzer guide. Preserve existing URLs, avoid duplicate synonym landing pages and unsupported detection claims. Continue one bounded task at a time; publishing still requires an owner request.

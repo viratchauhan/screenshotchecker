@@ -77,6 +77,14 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
     icon: 'cpu',
   },
 
+  {
+    id: 'screenshot-detector', name: 'Screenshot Detector', slug: 'screenshot-detector',
+    category: 'Screenshot & Security',
+    description: 'Inspect screenshot-versus-photo clues with explicit evidence and inconclusive results.',
+    route: '/screenshot-detector', workspaceType: 'utility', icon: 'shield-check',
+    keywords: ['screenshot detector', 'screenshot scanner', 'photo', 'capture', 'source'],
+    aliases: ['how to tell if a photo is a screenshot', 'detect screenshot', 'screenshot identifier'],
+  },
   // 2. Screenshot & Security
   {
     id: 'screenshot-checker',

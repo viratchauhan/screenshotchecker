@@ -2,7 +2,7 @@
 
 **Current state:** Tasks 03, 04A, 04B and 05A completed locally. Owner-requested no-match correction also completed: unrelated text cannot inherit a stored example narrative. Latest production build: 30 pages; full test runner: 18 passing entrypoints and the same 3 baseline failures. Browser checks cover exported PNG pixels, phone-width keyboard placement, modal focus/Escape and a real OCR no-match report. Owner requested committing and publishing the current work to GitHub on 23 September 2026. Commit 122f10b was published and deployed at the owner's request on 23 September 2026. Cloudflare version: 19d1d234-39a4-494c-b87a-031c79a5e3f8 (rollback: e416bd75-714c-4b5a-af1f-dcce0a76ef64). Production smoke checks passed. Tasks 05B1 and 05B2 were published to GitHub in d9347f1; no subsequent Cloudflare deployment performed.
 
-**Next:** B2, improve the screenshot-analyzer guide with clear explanations of actual checks and their limitations. Task 06 remains pending while the owner prioritizes blogs. Default remains one bounded task per continuation.
+**Next:** Q2, improve the main checker workflow for the highest-click query cluster. Owner supplied query evidence and competitors; see audit/QUERY-RESEARCH-2026-09-23.md. B2 and task 06 remain pending. One bounded task per continuation.
 
 **Session rules**
 
@@ -39,7 +39,9 @@
 | R1 | Cloudflare release checkpoint | S | 12 + owner deployment request | Confirmed target deployed and smoke-tested; version/rollback recorded | WAIT FOR REQUEST |
 | 13 | SEO dates and publishing source | S | 11 | Article visible/schema/sitemap dates agree; single documented content source; build/SEO checks pass | DONE locally (owner prioritized blogs; relevant blog-test prerequisite completed) |
 | B1 | Main screenshot-verification guide quality | M | 13 | Practical verification checklist, clear limitations, original examples and primary-source links; existing URL preserved | DONE locally |
-| B2 | Screenshot-analyzer guide quality | M | B1 | Explain implemented checks, interpret uncertain/error results, link primary sources and preserve URL | NEXT |
+| Q1 | Query research and screenshot-source tool | M | Owner query document | Distinct source-clue tool, honest limits, discovery links and SEO checks | DONE locally |
+| Q2 | Main checker search-intent workflow | M | Q1 | Clear real-or-fake, payment and source-check routes; evidence/unknown explanations; preserve main URL | NEXT |
+| B2 | Screenshot-analyzer guide quality | M | B1 | Explain implemented checks, interpret uncertain/error results, link primary sources and preserve URL | TODO |
 | 14 | Homepage and report clarity | M | 08B,09 | Three task entry points clear; shorter mobile introduction; report toolbar usable at narrow widths | TODO |
 | 15 | Methods and limitations page | S | 08B,10B | Explains actual checks, error modes, evidence boundaries, and reproducible examples without invented accuracy | TODO |
 | 16A | Global scam explainer input | M | 08B,09,14 | Existing scam tool supports locally processed pasted text alongside screenshot input; honest evidence and error states tested | TODO |
@@ -148,3 +150,11 @@ Reworked the existing screenshot-checker-online guide around a five-step reader 
 Primary sources reviewed and linked in the article: FTC selling-online guidance (https://consumer.ftc.gov/consumer-alerts/2022/07/selling-stuff-online-heres-how-avoid-scam), FTC phishing guidance (https://consumer.ftc.gov/articles/how-recognize-avoid-phishing-scams), and MoneyHelper marketplace guidance (https://www.moneyhelper.org.uk/en/blog/scams-and-fraud/facebook-marketplace-scams-how-to-spot-fake-messages). FotoForensics ELA tutorial could not be fetched (403); no quotation or claim of reviewing it added. Technical limitations remain conservative explanations, not claims of measured accuracy.
 
 Verification: all seven blog data and generated SEO checks pass; all 30 pages build; internal links on the generated article resolve; diff whitespace check passes. Logs: audit/blog-b1-data.log and audit/blog-b1-build.log. No layout changes, new dependencies, push or deployment. Existing prior-session SEO changes preserved. No indexing or ranking improvement measured. Next B2: explain the actual analyzer checks and result limitations.
+
+### 23 September 2026 — Q1: owner query research and screenshot detector
+
+Read the supplied DOCX as data, compared both public competitor pages, and saved findings/priorities in audit/QUERY-RESEARCH-2026-09-23.md. Implemented one distinct tool at /screenshot-detector for screenshot-versus-photo queries with explicit clue-based results, metadata failure handling, local image processing, file/pixel limits, safe text rendering, clear action and stale-run protection. Added registry/homepage discovery, page SEO, FAQ and explanatory content. No detection accuracy, device-identification or authenticity guarantee.
+
+Verification: six new logic tests pass; browser synthetic PNG upload returns Inconclusive and clear removes the result/restores file-input focus. Generated canonical, H1, JSON-LD, sitemap and internal links verified. Build: 31 pages; all seven blog SEO checks pass. Full runner: 22 passing entrypoints, two existing failures (agentic investigation, link checker). Logs: audit/query-tool-build.log and audit/query-tool-tests.log. No physical/mobile device or competitor backend accuracy test. No new packages. No commit, push or deployment in this session.
+
+Release bookkeeping: previous blog changes were published in b48231a and deployed as Cloudflare 88ae0489-968c-4713-a25b-57ac641c665c, with homepage/blog/article/OCR/sitemap smoke checks. Q1 is newer and local only. Next Q2 focuses on the main checker cluster (17 clicks across four closely related query rows); metadata improvements follow. B2 is deferred, not discarded.
