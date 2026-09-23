@@ -50,109 +50,128 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   // ARTICLE 1: Screenshot Checker Online
   // =========================================================================
   {
-    slug: 'screenshot-checker-online',
-    title: 'Screenshot Checker Online: How to Check If a Screenshot Is Real or Edited',
-    seoTitle: 'Screenshot Checker Online: How to Check Edited Images',
-    metaDescription:
-      'Learn how to check screenshots for editing, manipulation, compression issues, and suspicious changes using a screenshot checker online.',
-    category: 'Security',
-    publishedAt: 'August 22, 2026',
-    readTime: '4 min read',
-    excerpt:
-      'Why screenshots can be misleading, how image manipulation happens, key visual and compression signals to inspect, and why original-source verification is essential.',
-    targetKeywords: [
-      'screenshot checker online',
-      'screenshot checker',
-      'screenshot verification',
-      'check screenshot',
-      'fake screenshot',
-      'edited screenshot',
+    "slug": "screenshot-checker-online",
+    "title": "How to Check If a Screenshot Is Real or Edited",
+    "seoTitle": "Is This Screenshot Real or Edited? A Verification Checklist",
+    "metaDescription": "Check a suspicious screenshot with a five-step checklist, payment and chat examples, and clear limits of OCR, metadata and image analysis.",
+    "category": "Security",
+    "publishedAt": "2026-08-22",
+    "updatedAt": "2026-09-23",
+    "readTime": "6 min read",
+    "excerpt": "A practical checklist for checking screenshot claims, with fictional US/UK payment examples and an explanation of what image tools cannot prove.",
+    "targetKeywords": [
+      "screenshot checker online",
+      "is this screenshot real",
+      "edited screenshot",
+      "screenshot verification"
     ],
-    keyTakeaway: {
-      title: 'Core Verification Rule',
-      text: 'A screenshot is a static raster image that can be manipulated in seconds. Visual inspection tools help identify red flags, but important financial and legal claims must always be confirmed directly with the issuing source or banking app.',
+    "keyTakeaway": {
+      "title": "Check the claim, not just the pixels",
+      "text": "A clean-looking screenshot does not prove that a payment arrived, a message was sent, or an account belongs to the sender. Use image checks to decide what needs investigating, then verify important claims in the original app or with the organisation directly."
     },
-    introduction:
-      'Screenshots are shared millions of times every day as receipts, conversation proof, and transaction records. Because they look like exact captures of a phone screen, people naturally assume they represent reality. However, creating an edited screenshot takes less than a minute with modern photo editors or template tools. Understanding how screenshots are modified—and how to inspect them—helps you avoid falling for deceptive visual proof.',
-    contentSections: [
+    "introduction": "To check whether a screenshot is real or edited, first identify what it is supposed to prove. Preserve the original file, inspect the visible details, compare any extracted text with the image, and verify the claim independently. An image checker can help you notice inconsistencies; it cannot authenticate a bank transaction or recover the full context of a conversation.",
+    "contentSections": [
       {
-        heading: 'Why Screenshots Can Be Misleading',
-        level: 'h2',
-        paragraphs: [
-          'A screenshot is not an official receipt or a cryptographically signed document. It is simply a grid of colored pixels stored as a JPEG, PNG, or WebP file. Anyone with a basic photo editing app can replace text, alter transaction amounts, modify timestamps, or completely fabricate a chat message.',
-          'In many online transactions, scammers use fake payment confirmations to pressure sellers into shipping goods or releasing crypto assets before the actual funds arrive in their bank account.',
-        ],
+        "heading": "1. Write down the claim before opening an image tool",
+        "level": "h2",
+        "paragraphs": [
+          "Ask one specific question: did a buyer pay me, did this person send this message, or did an organisation publish this notice? These are different questions from whether someone edited the image. A genuine screenshot can show a pending payment, an old message or the wrong account.",
+          "Record the amount, currency, date, account or username, and the action you are being asked to take. For example: “The buyer says they sent £180 and wants to collect the camera now.” Do not let a polished payment screen replace checking your own account."
+        ]
       },
       {
-        heading: 'Common Ways Screenshots Are Manipulated',
-        level: 'h2',
-        paragraphs: [
-          'Most manipulated screenshots fall into three primary categories:',
-          '1. Text Overlays and Splicing: Scammers take a real screenshot and paste new text over existing numbers (such as changing $50 into $5,000). This often introduces subtle font mismatches, baseline misalignment, or unnatural background pixel blur.',
-          '2. Template and Prank Generators: Web tools and fake billing apps generate synthetic payment slips and chat logs from scratch, inserting custom names, fake reference IDs, and custom balances.',
-          '3. DOM and Inspector Edits: On desktop web pages, users can edit web text using browser developer tools and take a screenshot of the modified webpage before saving.',
-        ],
-        callout: {
-          type: 'warning',
-          text: 'Payment screenshots should never be accepted as sole proof of payment. Always open your own banking or payment application to verify settled funds.',
-        },
+        "heading": "2. Keep the original and protect private details",
+        "level": "h2",
+        "paragraphs": [
+          "Keep the file as received, along with the surrounding messages and the time you received it. Work on a copy. Cropping, resizing and saving again can remove context or change the image data you want to inspect. Ask for the original file if you only have a compressed forward, but remember that an original file can still contain a false claim.",
+          "Before sharing a screenshot publicly, cover account numbers, email addresses, addresses, verification codes and other identifying details on a separate copy. Use the <a href=\"/screenshot-redactor\">screenshot redactor</a> to apply solid masks and inspect the exported image. Automatic suggestions can miss information; review the whole image yourself."
+        ]
       },
       {
-        heading: 'Key Visual and Technical Signals to Inspect',
-        level: 'h2',
-        paragraphs: [
-          'When evaluating a suspicious screenshot, look for these common forensic indicators:',
-          '• Typography and Kerning: Are font weights consistent across the image? Do currency symbols and digits match the native system font of iOS or Android?',
-          '• Compression Artifact Disparities: In JPEG files, modified areas often show different compression noise levels compared to the surrounding background when analyzed with Error Level Analysis (ELA).',
-          '• Layout Alignment: Check if text columns align neatly. Spliced text is frequently off by a few pixels from the official application grid.',
-          '• System Status Bar Inconsistencies: Notice the battery percentage, clock time, and Wi-Fi icons. In fabricated screenshots, the status bar time often contradicts the timestamp in the message body.',
-        ],
+        "heading": "3. Inspect the image and check the extracted text",
+        "level": "h2",
+        "paragraphs": [
+          "Read names, amounts and status labels at a comfortable zoom. Look for cropped context, inconsistent alignment or a digit that differs from nearby text. Treat these as questions to investigate, not a verdict. Different app versions, language settings, accessibility fonts and ordinary image resizing can change how a screen looks.",
+          "Use the <a href=\"/screenshot-ocr\">screenshot text extractor</a> if small text is difficult to read or compare. Check each important value against the image: OCR can confuse 0 with O, 1 with l, and decimal separators. A transcription mistake is not evidence that the sender edited the screenshot.",
+          "A phone status-bar time need not match the time of an older message or transaction. Compare the same kinds of timestamps before assuming that a difference is suspicious."
+        ]
       },
       {
-        heading: 'Why Screenshots Are Not Absolute Proof',
-        level: 'h2',
-        paragraphs: [
-          'Even an image that shows zero forensic artifacts is not proof that a transaction occurred. A scammer could take a completely unaltered screenshot of a cancelled payment or an account belonging to someone else.',
-          'Conversely, standard social media recompression can sometimes create visual noise that looks unusual without malicious intent. This is why forensic analysis should be used to spot warning signs, while critical decisions require direct confirmation.',
-        ],
+        "heading": "4. Understand what technical checks can and cannot establish",
+        "level": "h2",
+        "paragraphs": [
+          "The <a href=\"/screenshot-metadata-checker\">metadata checker</a> can show fields that are present in the file. Missing metadata is not proof of editing. Metadata can be removed or changed, and a software name may reflect an ordinary export rather than deception.",
+          "Compression views such as Error Level Analysis (ELA) highlight differences produced by recompression. They do not label a region as fraudulent or establish who changed it. A bright edge or unusual patch needs context; a clean result also cannot authenticate the underlying claim.",
+          "ScreenshotChecker uses extracted text and reference patterns to identify possible concerns. It does not access bank records, authenticate a sender, or verify a payment reference with a payment provider. “No reliable reference match” means the reference check did not establish a match; it does not mean safe or genuine. If text scanning fails, retry with a readable image rather than treating the missing result as reassurance."
+        ]
       },
+      {
+        "heading": "5. Verify in an independent source before acting",
+        "level": "h2",
+        "paragraphs": [
+          "For a payment, open your own bank or payment app using your usual route. Check the incoming transaction, amount, currency and status, and follow the provider’s guidance about availability and seller protection. Do not use a login link supplied in the screenshot. If the payment is missing or unclear, pause the sale and contact the provider through its official support channel.",
+          "The <a href=\"https://consumer.ftc.gov/consumer-alerts/2022/07/selling-stuff-online-heres-how-avoid-scam\">US Federal Trade Commission warns about fake payment notifications and bogus refund requests</a>. It also explains why a deposited cheque appearing in a balance does not establish that the cheque is genuine. A screenshot or an available balance is not a universal guarantee against reversal.",
+          "In the UK, <a href=\"https://www.moneyhelper.org.uk/en/blog/scams-and-fraud/facebook-marketplace-scams-how-to-spot-fake-messages\">MoneyHelper describes fake payment-confirmation screenshots</a> and recommends checking your own account before handing over an item.",
+          "For a chat, examine the conversation in your own account where possible and ask for the surrounding context. For a claimed public announcement, find it on the organisation’s official website or account. If the original source is unavailable, describe the screenshot as unverified rather than inventing a conclusion."
+        ]
+      },
+      {
+        "heading": "Three examples: suspicious, inconclusive and an innocent mismatch",
+        "level": "h2",
+        "paragraphs": [
+          "These are fictional teaching examples, not screenshots submitted by real users or results from an accuracy benchmark.",
+          "<strong>US sale: a $250 payment with a refund request.</strong> A buyer sends a convincing confirmation and asks you to return an alleged duplicate payment. Your own payment account shows no incoming transaction. The reason to stop is the unconfirmed payment and refund request, even if every pixel looks normal. Verify through the provider before sending money or releasing the item.",
+          "<strong>UK collection: a £180 transfer marked pending.</strong> A buyer shows a banking screen and says the money will arrive later. The screenshot might be genuine, edited or taken from another transaction. It does not establish that you received the money. Wait for independent confirmation in your account rather than deciding from the image alone.",
+          "<strong>A harmless OCR mismatch.</strong> The image reads $10.00, but extracted text reads $1000. Looking back at the image reveals a faint decimal point. Correct the transcription; do not accuse the sender based on the OCR output. Likewise, a chat sent at 09:10 can legitimately be captured at 10:45."
+        ]
+      },
+      {
+        "heading": "What to do when you still cannot verify it",
+        "level": "h2",
+        "paragraphs": [
+          "Keep your conclusion specific: “I cannot confirm this payment,” “The original message is unavailable,” or “The text is too unclear to assess.” Do not publish an allegation just because an automated result looks suspicious. Save the original evidence and use the platform’s reporting or support process if needed.",
+          "For the differences between individual checks, read <a href=\"/blog/screenshot-analyzer-online\">what a screenshot analyzer can actually detect</a>. If the screenshot contains a message asking you to sign in or send information, see the <a href=\"https://consumer.ftc.gov/articles/how-recognize-avoid-phishing-scams\">FTC’s phishing guidance</a>: contact the organisation using a website or number you already know is genuine, rather than the details in the message."
+        ]
+      }
     ],
-    faq: [
+    "faq": [
       {
-        question: 'How can I tell if a screenshot has been edited?',
-        answer:
-          'Look for mismatched font weights, inconsistent letter spacing, blurriness around numbers, and status bar timestamps that contradict the message text. You can also run Error Level Analysis (ELA) to detect localized compression differences.',
+        "question": "Can a screenshot checker prove a screenshot is genuine?",
+        "answer": "No. Image and text checks can highlight concerns but cannot authenticate the underlying payment, sender or conversation. Confirm important claims through the original service or a trusted independent source."
       },
       {
-        question: 'Can a screenshot checker prove an image is 100% fake or authentic?',
-        answer:
-          'No automated tool can provide 100% certainty. A screenshot checker detects visual anomalies, text distortions, and compression irregularities, but settled financial transactions must always be confirmed through your banking application.',
+        "question": "Is missing metadata evidence of a fake screenshot?",
+        "answer": "No. A screenshot may contain little metadata, and sharing or exporting can remove fields. Present metadata is not proof of authenticity either because it can be changed."
       },
       {
-        question: 'Can WhatsApp chat screenshots be easily faked?',
-        answer:
-          'Yes. Numerous online generator apps and photo editors allow anyone to create realistic WhatsApp conversations with custom sender names, checkmarks, and timestamps in seconds.',
+        "question": "Does a bright ELA result mean the image was edited?",
+        "answer": "Not by itself. Recompression differences need context and can appear around ordinary image features. ELA cannot independently establish fraud, and an unremarkable result does not prove authenticity."
       },
       {
-        question: 'What should I do if a buyer sends a payment screenshot?',
-        answer:
-          'Do not rely on the screenshot or email confirmation provided by the buyer. Open your own bank account or payment app independently to confirm that the money is settled and available in your balance.',
+        "question": "Should I accept a payment screenshot from a buyer?",
+        "answer": "Use it only as a claim to check. Open your own bank or payment app independently and verify the transaction and status. Follow your provider’s seller-protection guidance; a screenshot cannot guarantee receipt or prevent reversals."
       },
+      {
+        "question": "What does no reliable reference match mean?",
+        "answer": "It means the reference-pattern check did not establish a reliable match. The content may be unfamiliar, incomplete or misread. It remains unverified; check the source independently."
+      }
     ],
-    peopleAlsoSearch: [
-      'Screenshot checker online',
-      'Screenshot Scanner',
-      'Screenshot checker Google',
-      'Screenshot editor',
-      'Screenshot verification',
-      'Free screenshot checker',
+    "peopleAlsoSearch": [
+      "How to verify a payment screenshot",
+      "Can screenshots be edited?",
+      "Screenshot metadata limitations",
+      "How to check screenshot text"
     ],
-    relatedSlugs: ['screenshot-analyzer-online', 'fake-upi-payment-screenshot', 'smishing-fake-sms'],
-    cta: {
-      label: 'Analyze a Screenshot',
-      url: '/',
-      description: 'Upload a screenshot to inspect compression levels, OCR text, metadata, and visual consistency.',
-    },
+    "relatedSlugs": [
+      "screenshot-analyzer-online",
+      "exif-metadata",
+      "smishing-fake-sms"
+    ],
+    "cta": {
+      "label": "Inspect a Screenshot",
+      "url": "/screenshot-analyzer",
+      "description": "Review extracted text and available signals, then confirm the claim independently."
+    }
   },
 
   // =========================================================================
@@ -165,7 +184,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     metaDescription:
       'Learn what online screenshot analyzers detect: editing signals, compression patterns, text inconsistencies, metadata, and visual forensics.',
     category: 'Forensics',
-    publishedAt: 'August 22, 2026',
+    publishedAt: '2026-08-22',
     readTime: '5 min read',
     excerpt:
       'A practical guide to what screenshot analysis tools inspect: compression difference maps (ELA), text forensics, metadata structure, and the realistic limits of digital image forensics.',
@@ -273,8 +292,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     metaDescription:
       'Learn how to spot fake UPI payment screenshots, identify visual red flags, and verify payments safely. Analyze suspicious receipts with ScreenshotChecker\'s Fake UPI Screenshot Checker.',
     category: 'Security',
-    publishedAt: 'August 22, 2026',
-    updatedAt: 'August 30, 2026',
+    publishedAt: '2026-08-22',
+    updatedAt: '2026-08-30',
     readTime: '7 min read',
     excerpt:
       'How fake UPI payment screenshot generators work, visual typography and layout red flags to look for on receipts, and why official bank verification is the only reliable proof.',
@@ -522,7 +541,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     metaDescription:
       'Learn how AI image detectors analyze visual patterns, metadata, C2PA Content Credentials, editing signals, text rendering, and other evidence.',
     category: 'AI & Forensics',
-    publishedAt: 'August 22, 2026',
+    publishedAt: '2026-08-22',
     readTime: '6 min read',
     excerpt:
       'Understanding generative AI detection: visual synthetic signals, typography artifacts, frequency energy anomalies, and cryptographic C2PA Content Credentials.',
@@ -632,7 +651,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     metaDescription:
       'Learn what EXIF metadata is, what information photos can contain, and how camera, location, software, and GPS metadata can affect your privacy.',
     category: 'Privacy',
-    publishedAt: 'August 22, 2026',
+    publishedAt: '2026-08-22',
     readTime: '5 min read',
     excerpt:
       'Understanding camera hardware serials, embedded GPS coordinates, editing timestamps, and how to safely inspect and strip sensitive photo metadata.',
@@ -740,7 +759,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     metaDescription:
       'Learn how fake bank, delivery, toll, job, and reward messages use urgency, suspicious links, threats, and attachments to trick people.',
     category: 'Threat Analysis',
-    publishedAt: 'August 22, 2026',
+    publishedAt: '2026-08-22',
     readTime: '6 min read',
     excerpt:
       'Analyzing modern SMS and WhatsApp scams: bank KYC threats, malicious APK downloads, fake delivery fees, toll fines, and how to verify messages safely.',
@@ -853,7 +872,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     metaDescription:
       'Check suspicious links and domains online before clicking. Verify URLs against 420K+ threat records, detect fake subdomains, and inspect URL safety for free.',
     category: 'Security',
-    publishedAt: 'August 30, 2026',
+    publishedAt: '2026-08-30',
     readTime: '5 min read',
     excerpt:
       'How online link checkers detect phishing and malware, the anatomy of deceptive URLs and fake subdomains, and how to verify links safely without visiting them.',
@@ -1033,4 +1052,11 @@ export function getRelatedArticles(currentSlug: string): BlogArticle[] {
   }
 
   return related.slice(0, 3);
+}
+
+/** Dates are stored once as calendar dates; UTC avoids visitor/server timezone shifts. */
+export function formatArticleDate(value: string): string {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC',
+  }).format(new Date(`${value}T00:00:00Z`));
 }

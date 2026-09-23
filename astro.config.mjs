@@ -27,7 +27,7 @@ export default defineConfig({
         if (matchedArticle) {
           const dateStr = matchedArticle.updatedAt || matchedArticle.publishedAt;
           if (dateStr) {
-            item.lastmod = new Date(dateStr).toISOString();
+            item.lastmod = `${dateStr}T00:00:00.000Z`;
           }
         }
         return item;

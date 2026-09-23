@@ -3,7 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import RelatedLinks from '../../components/RelatedLinks.astro';
-import { getAllArticles, getArticleBySlug, getRelatedArticles, type BlogArticle } from '../../data/blogArticles';
+import { getAllArticles, formatArticleDate, getRelatedArticles, type BlogArticle } from '../../data/blogArticles';
 
 export async function getStaticPaths() {
   const articles = getAllArticles();
@@ -32,8 +32,8 @@ const articleSchema = {
   '@id': `${canonicalUrl}#article`,
   headline: article.title,
   description: article.metaDescription,
-  datePublished: '2026-08-22T00:00:00Z',
-  dateModified: article.updatedAt ? '2026-08-22T00:00:00Z' : '2026-08-22T00:00:00Z',
+  datePublished: article.publishedAt,
+  dateModified: article.updatedAt || article.publishedAt,
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': canonicalUrl,
@@ -132,7 +132,8 @@ const combinedStructuredData = {
       <div class="flex items-center gap-3 text-xs text-muted font-mono flex-wrap">
         <span class="badge-pill !text-[11px] font-semibold">{article.category}</span>
         <span>•</span>
-        <time datetime="2026-08-22">{article.publishedAt}</time>
+        <span>Published <time datetime={article.publishedAt}>{formatArticleDate(article.publishedAt)}</time></span>
+        {article.updatedAt && <span>Updated <time datetime={article.updatedAt}>{formatArticleDate(article.updatedAt)}</time></span>}
         <span>•</span>
         <span>{article.readTime}</span>
       </div>

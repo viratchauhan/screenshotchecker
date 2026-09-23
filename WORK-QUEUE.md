@@ -1,8 +1,8 @@
 # ScreenshotChecker bounded work queue
 
-**Current state:** Tasks 03, 04A, 04B and 05A completed locally. Owner-requested no-match correction also completed: unrelated text cannot inherit a stored example narrative. Latest production build: 30 pages; full test runner: 18 passing entrypoints and the same 3 baseline failures. Browser checks cover exported PNG pixels, phone-width keyboard placement, modal focus/Escape and a real OCR no-match report. Owner requested committing and publishing the current work to GitHub on 23 September 2026. Commit 122f10b was published and deployed at the owner's request on 23 September 2026. Cloudflare version: 19d1d234-39a4-494c-b87a-031c79a5e3f8 (rollback: e416bd75-714c-4b5a-af1f-dcce0a76ef64). Production smoke checks passed. Subsequent tasks 05B1 and 05B2 changes are local only.
+**Current state:** Tasks 03, 04A, 04B and 05A completed locally. Owner-requested no-match correction also completed: unrelated text cannot inherit a stored example narrative. Latest production build: 30 pages; full test runner: 18 passing entrypoints and the same 3 baseline failures. Browser checks cover exported PNG pixels, phone-width keyboard placement, modal focus/Escape and a real OCR no-match report. Owner requested committing and publishing the current work to GitHub on 23 September 2026. Commit 122f10b was published and deployed at the owner's request on 23 September 2026. Cloudflare version: 19d1d234-39a4-494c-b87a-031c79a5e3f8 (rollback: e416bd75-714c-4b5a-af1f-dcce0a76ef64). Production smoke checks passed. Tasks 05B1 and 05B2 were published to GitHub in d9347f1; no subsequent Cloudflare deployment performed.
 
-**Next:** Task 06, traffic baseline and measurement decision. Default remains one bounded task per continuation unless the owner requests otherwise.
+**Next:** B2, improve the screenshot-analyzer guide with clear explanations of actual checks and their limitations. Task 06 remains pending while the owner prioritizes blogs. Default remains one bounded task per continuation.
 
 **Session rules**
 
@@ -37,7 +37,9 @@
 | 11 | Baseline content/build test cleanup | S | 03 | Stale article-count test replaced with invariants; SEO validation returns meaningful failure status | TODO |
 | 12 | Security headers and release candidate | M | 01A,01B,01C,02,04B,05A,08B,09,11 | Appropriate headers tested with Workers/WASM/fonts; critical changed flows pass; local release checklist ready | TODO |
 | R1 | Cloudflare release checkpoint | S | 12 + owner deployment request | Confirmed target deployed and smoke-tested; version/rollback recorded | WAIT FOR REQUEST |
-| 13 | SEO dates and publishing source | S | 11 | Article visible/schema/sitemap dates agree; single documented content source; build/SEO checks pass | TODO |
+| 13 | SEO dates and publishing source | S | 11 | Article visible/schema/sitemap dates agree; single documented content source; build/SEO checks pass | DONE locally (owner prioritized blogs; relevant blog-test prerequisite completed) |
+| B1 | Main screenshot-verification guide quality | M | 13 | Practical verification checklist, clear limitations, original examples and primary-source links; existing URL preserved | DONE locally |
+| B2 | Screenshot-analyzer guide quality | M | B1 | Explain implemented checks, interpret uncertain/error results, link primary sources and preserve URL | NEXT |
 | 14 | Homepage and report clarity | M | 08B,09 | Three task entry points clear; shorter mobile introduction; report toolbar usable at narrow widths | TODO |
 | 15 | Methods and limitations page | S | 08B,10B | Explains actual checks, error modes, evidence boundaries, and reproducible examples without invented accuracy | TODO |
 | 16A | Global scam explainer input | M | 08B,09,14 | Existing scam tool supports locally processed pasted text alongside screenshot input; honest evidence and error states tested | TODO |
@@ -128,3 +130,21 @@ Source images used by the shared loader and OCR preprocessing are limited to 4 m
 Verification: five new recovery tests plus four existing coordinate tests pass. Cases include failed then successful initialization, shared concurrent initialization, invalid/tall/oversized dimensions, rejection before canvas allocation, decode failure, and no fraud verdict after failed OCR. Full suite: 20 passing entrypoints, the same three baseline failures (agentic investigation, blog count, link normalization). Log: audit/task-05b2-tests.log. Production build: all 30 pages pass; existing large-bundle warning remains. No live browser/network-failure or low-memory device simulation performed. No commit, push or deployment requested or performed this session.
 
 Next: task 06. Broader standalone-tool memory limits and worker lifecycle/concurrent OCR scheduling can be evaluated in task 18; this task bounds each OCR image operation, not aggregate concurrent memory.
+
+### 23 September 2026 — Blog SEO dates and publishing consistency (13)
+
+Owner prioritized blog and Google improvements over task 06. Fixed all seven articles' publication/update signals: ISO dates in the existing article records now drive visible dates, BlogPosting schema, index time elements and sitemap lastmod. Preserved existing recorded dates without inventing fresh publication dates. Documented the live content source and unused Markdown draft collection in BLOG-PUBLISHING.md. Updated the old six-article test to check all records, valid dates and related links; this completes the blog-test part of task 11, while the general verify-seo.mjs error-count/exit repair remains pending.
+
+Verification: all seven article data checks and generated-page checks pass; build passes 30 pages with the existing large-bundle warning. Generated-page checker validates unique titles/descriptions, canonical URLs, one matching H1, visible/schema/sitemap/index dates. A temporary generated-page date corruption produced a nonzero exit and was restored. Tests: npm run test:blog-seo after build. Logs: audit/blog-data-check.log and audit/blog-seo-build.log. Full unrelated suite not rerun. No deployment, push or ranking improvement claimed; Search Console data remains unavailable in this session.
+
+Research: Google's publication-date guidance recommends consistent visible and structured dates; its helpful-content guidance discourages artificial freshness. Sources: https://developers.google.com/search/docs/appearance/publication-dates and https://developers.google.com/search/docs/fundamentals/creating-helpful-content . Astro content collection guidance consulted; kept the current TypeScript publishing source instead of migrating content in this bounded task.
+
+Next B1: materially improve the main screenshot-verification article. Further content upgrades should proceed one useful guide per session, with performance judged from Search Console rather than assumed keyword rankings.
+
+### 23 September 2026 — B1: screenshot-verification guide
+
+Reworked the existing screenshot-checker-online guide around a five-step reader checklist. Added fictional US/UK payment examples and a benign OCR counterexample, corrected overconfident visual-forensics wording, explained no-match/failed-text states, and added relevant tool links. Preserved the existing URL/publication date and set the substantive update date to 2026-09-23. Updated title, description, excerpt and FAQs to match the content.
+
+Primary sources reviewed and linked in the article: FTC selling-online guidance (https://consumer.ftc.gov/consumer-alerts/2022/07/selling-stuff-online-heres-how-avoid-scam), FTC phishing guidance (https://consumer.ftc.gov/articles/how-recognize-avoid-phishing-scams), and MoneyHelper marketplace guidance (https://www.moneyhelper.org.uk/en/blog/scams-and-fraud/facebook-marketplace-scams-how-to-spot-fake-messages). FotoForensics ELA tutorial could not be fetched (403); no quotation or claim of reviewing it added. Technical limitations remain conservative explanations, not claims of measured accuracy.
+
+Verification: all seven blog data and generated SEO checks pass; all 30 pages build; internal links on the generated article resolve; diff whitespace check passes. Logs: audit/blog-b1-data.log and audit/blog-b1-build.log. No layout changes, new dependencies, push or deployment. Existing prior-session SEO changes preserved. No indexing or ranking improvement measured. Next B2: explain the actual analyzer checks and result limitations.

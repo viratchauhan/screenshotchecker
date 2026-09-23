@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getAllArticles } from '../../data/blogArticles';
+import { getAllArticles, formatArticleDate } from '../../data/blogArticles';
 
 const articles = getAllArticles();
 
@@ -80,7 +80,7 @@ const structuredData = {
             <div class="flex items-center gap-3 text-xs text-muted font-mono">
               <span class="badge-pill !text-[10px] font-semibold">{articles[0].category}</span>
               <span>•</span>
-              <time datetime="2026-08-22">{articles[0].publishedAt}</time>
+              <time datetime={articles[0].publishedAt}>{formatArticleDate(articles[0].publishedAt)}</time>
               <span>•</span>
               <span>{articles[0].readTime}</span>
               <span>•</span>
@@ -113,7 +113,7 @@ const structuredData = {
           <div>
             <div class="flex items-center justify-between text-xs text-muted font-mono mb-3">
               <span class="badge-pill !text-[10px] font-semibold">{article.category}</span>
-              <span>{article.publishedAt} · {article.readTime}</span>
+              <span><time datetime={article.publishedAt}>{formatArticleDate(article.publishedAt)}</time> · {article.readTime}</span>
             </div>
             <h2 class="font-serif text-xl sm:text-2xl text-ink font-normal group-hover:text-primary transition-colors mb-3 leading-snug">
               {article.title}

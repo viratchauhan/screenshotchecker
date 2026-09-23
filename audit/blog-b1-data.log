@@ -1,0 +1,165 @@
+================================================================
+--- RUNNING BLOG & SEO CONTENT SYSTEM UNIT TESTS ---
+================================================================
+
+  ✓ Published articles exist
+  ✓ Article slugs are unique
+
+[Testing Article: screenshot-checker-online]
+  ✓ Article "screenshot-checker-online" exists
+  ✓ Title is present: "How to Check If a Screenshot Is Real or Edited"
+  ✓ SEO Title is present: "Is This Screenshot Real or Edited? A Verification Checklist"
+  ✓ Meta description is present: "Check a suspicious screenshot with a five-step checklist, payment and chat examples, and clear limits of OCR, metadata and image analysis."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "6 min read"
+  ✓ Has 7 content sections
+  ✓ Has 5 FAQs
+  ✓ Has 4 People Also Search For queries
+  ✓ Has 4 target keywords
+  ✓ Key takeaway title: "Check the claim, not just the pixels"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Inspect a Screenshot"
+  ✓ CTA URL is internal: "/screenshot-analyzer"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: screenshot-analyzer-online]
+  ✓ Article "screenshot-analyzer-online" exists
+  ✓ Title is present: "Screenshot Analyzer Online: What Can It Actually Detect?"
+  ✓ SEO Title is present: "Screenshot Analyzer Online: What Can It Actually Detect?"
+  ✓ Meta description is present: "Learn what online screenshot analyzers detect: editing signals, compression patterns, text inconsistencies, metadata, and visual forensics."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "5 min read"
+  ✓ Has 4 content sections
+  ✓ Has 4 FAQs
+  ✓ Has 6 People Also Search For queries
+  ✓ Has 6 target keywords
+  ✓ Key takeaway title: "Multi-Signal Forensic Convergence"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Analyze Your Screenshot"
+  ✓ CTA URL is internal: "/"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: fake-upi-payment-screenshot]
+  ✓ Article "fake-upi-payment-screenshot" exists
+  ✓ Title is present: "Fake UPI Payment Screenshot: How to Check If a Payment Is Real"
+  ✓ SEO Title is present: "Fake UPI Payment Screenshot: How to Check If a Payment Is Real"
+  ✓ Meta description is present: "Learn how to spot fake UPI payment screenshots, identify visual red flags, and verify payments safely. Analyze suspicious receipts with ScreenshotChecker's Fake UPI Screenshot Checker."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "7 min read"
+  ✓ Has 9 content sections
+  ✓ Has 10 FAQs
+  ✓ Has 8 People Also Search For queries
+  ✓ Has 18 target keywords
+  ✓ Key takeaway title: "🚨 The Golden Rule of Payment Verification"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Inspect a Payment Screenshot with Fake UPI Checker"
+  ✓ CTA URL is internal: "/payment-screenshot-checker/"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: ai-image-detector-online]
+  ✓ Article "ai-image-detector-online" exists
+  ✓ Title is present: "AI Image Detector Online: How AI-Generated Images Are Detected"
+  ✓ SEO Title is present: "AI Image Detector Online: How AI Media Is Detected"
+  ✓ Meta description is present: "Learn how AI image detectors analyze visual patterns, metadata, C2PA Content Credentials, editing signals, text rendering, and other evidence."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "6 min read"
+  ✓ Has 4 content sections
+  ✓ Has 4 FAQs
+  ✓ Has 8 People Also Search For queries
+  ✓ Has 6 target keywords
+  ✓ Key takeaway title: "Evidence-Based & Probabilistic Analysis"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Analyze an Image"
+  ✓ CTA URL is internal: "/ai-image-detector"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: exif-metadata]
+  ✓ Article "exif-metadata" exists
+  ✓ Title is present: "What Is EXIF Metadata? What Your Photos Can Reveal"
+  ✓ SEO Title is present: "What Is EXIF Metadata? What Your Photos Can Reveal"
+  ✓ Meta description is present: "Learn what EXIF metadata is, what information photos can contain, and how camera, location, software, and GPS metadata can affect your privacy."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "5 min read"
+  ✓ Has 4 content sections
+  ✓ Has 4 FAQs
+  ✓ Has 6 People Also Search For queries
+  ✓ Has 6 target keywords
+  ✓ Key takeaway title: "Digital Fingerprints in Photos"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Inspect Image Metadata"
+  ✓ CTA URL is internal: "/"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: smishing-fake-sms]
+  ✓ Article "smishing-fake-sms" exists
+  ✓ Title is present: "Smishing: How Fake SMS and WhatsApp Messages Trick You"
+  ✓ SEO Title is present: "Smishing: How Fake SMS and WhatsApp Messages Trick You"
+  ✓ Meta description is present: "Learn how fake bank, delivery, toll, job, and reward messages use urgency, suspicious links, threats, and attachments to trick people."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "6 min read"
+  ✓ Has 4 content sections
+  ✓ Has 4 FAQs
+  ✓ Has 6 People Also Search For queries
+  ✓ Has 7 target keywords
+  ✓ Key takeaway title: "Zero-Trust Communication Rule"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Check a Suspicious Message"
+  ✓ CTA URL is internal: "/"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: suspicious-link-checker-online]
+  ✓ Article "suspicious-link-checker-online" exists
+  ✓ Title is present: "Suspicious Link Checker Online: How to Check If a Link or Domain Is Safe"
+  ✓ SEO Title is present: "Suspicious Link Checker Online: Check URL Safety"
+  ✓ Meta description is present: "Check suspicious links and domains online before clicking. Verify URLs against 420K+ threat records, detect fake subdomains, and inspect URL safety for free."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "5 min read"
+  ✓ Has 6 content sections
+  ✓ Has 5 FAQs
+  ✓ Has 8 People Also Search For queries
+  ✓ Has 11 target keywords
+  ✓ Key takeaway title: "The Golden Rule of Link Safety"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Verify a Suspicious Link Now"
+  ✓ CTA URL is internal: "/suspicious-link-checker"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Unknown Slug]
+  ✓ Unknown slug correctly returns undefined
+
+================================================================
+✅ ALL BLOG ARTICLES & SEO CONTENT SYSTEM TESTS PASSED 100%!
+================================================================
+
