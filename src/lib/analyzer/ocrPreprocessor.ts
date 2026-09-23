@@ -1,7 +1,7 @@
+import { imageProcessingScale } from './imageLimits';
 export interface PreprocessedImageResult {
   canvas: HTMLCanvasElement;
   originalCanvas: HTMLCanvasElement;
-  dataUrl: string;
   isDarkModeDetected: boolean;
   scaleFactor: number;
 }
@@ -19,35 +19,32 @@ export async function preprocessImageForOCR(
     img = imageSource;
   } else {
     img = new Image();
-    if (typeof imageSource === 'string') {
-      img.src = imageSource;
-    } else {
-      img.src = URL.createObjectURL(imageSource);
+    const url = typeof imageSource === 'string' ? imageSource : URL.createObjectURL(imageSource);
+    try {
+      await new Promise<void>((resolve, reject) => {
+        img.onload = () => resolve();
+        img.onerror = () => reject(new Error('Could not read this image. Try a PNG or JPEG file.'));
+        img.src = url;
+      });
+    } finally {
+      if (typeof imageSource !== 'string') URL.revokeObjectURL(url);
     }
-    await new Promise((resolve, reject) => {
-      img.onload = resolve;
-      img.onerror = reject;
-    });
   }
 
   const srcWidth = img.naturalWidth || img.width;
   const srcHeight = img.naturalHeight || img.height;
+
+  const scale = imageProcessingScale(srcWidth, srcHeight);
 
   // Unprocessed original canvas copy
   const originalCanvas = document.createElement('canvas');
   originalCanvas.width = srcWidth;
   originalCanvas.height = srcHeight;
   const oCtx = originalCanvas.getContext('2d');
-  if (oCtx) oCtx.drawImage(img, 0, 0);
+  if (!oCtx) throw new Error('Image processing is unavailable in this browser.');
+  oCtx.drawImage(img, 0, 0);
 
   // 2. Intelligent Scaling (scale up smaller screenshots for crisp character recognition)
-  let scale = 1;
-  if (srcWidth < 1200 && srcHeight < 1200) {
-    scale = 2;
-  } else if (srcWidth < 600) {
-    scale = 3;
-  }
-
   const targetWidth = Math.round(srcWidth * scale);
   const targetHeight = Math.round(srcHeight * scale);
 
@@ -55,15 +52,7 @@ export async function preprocessImageForOCR(
   canvas.width = targetWidth;
   canvas.height = targetHeight;
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
-  if (!ctx) {
-    return {
-      canvas,
-      originalCanvas,
-      dataUrl: typeof imageSource === 'string' ? imageSource : '',
-      isDarkModeDetected: false,
-      scaleFactor: 1,
-    };
-  }
+  if (!ctx) throw new Error('Image processing is unavailable in this browser.');
 
   // Draw scaled image with smoothing
   ctx.imageSmoothingEnabled = true;
@@ -161,7 +150,6 @@ export async function preprocessImageForOCR(
     return {
       canvas: sharpenCanvas,
       originalCanvas,
-      dataUrl: sharpenCanvas.toDataURL('image/png'),
       isDarkModeDetected: isDarkMode,
       scaleFactor: scale,
     };
@@ -170,7 +158,6 @@ export async function preprocessImageForOCR(
   return {
     canvas,
     originalCanvas,
-    dataUrl: canvas.toDataURL('image/png'),
     isDarkModeDetected: isDarkMode,
     scaleFactor: scale,
   };

@@ -1,3 +1,4 @@
+import { imageProcessingScale } from './imageLimits';
 import type { ImageInfo } from './types';
 import { formatAspectRatio } from '../utils/formatters';
 
@@ -21,7 +22,10 @@ export function loadImageFromDataUrl(dataUrl: string): Promise<HTMLImageElement>
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.onload = () => resolve(img);
+    img.onload = () => {
+      try { imageProcessingScale(img.naturalWidth, img.naturalHeight); resolve(img); }
+      catch (error) { reject(error); }
+    };
     img.onerror = (err) => reject(new Error('Failed to load image from data URL'));
     img.src = dataUrl;
   });

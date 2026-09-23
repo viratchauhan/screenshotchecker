@@ -151,6 +151,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
   import { suggestedMasks } from '../../lib/analyzer/privacyLocations';
   import { bindRedactionInput } from '../../lib/utils/redactionInput';
   import { escapeHtml } from '../../lib/utils/reportSafety';
+  import { loadImageFromDataUrl } from '../../lib/analyzer/imageInfo';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
   import type { RedactionBox } from '../../lib/analyzer/redactor';
 
@@ -179,9 +180,16 @@ const heading = toolSlug === 'screenshot-privacy-checker'
     dropZone?.classList.add('hidden');
     editor?.classList.remove('hidden');
 
-    const img = new Image();
-    img.src = dataUrl;
-    await new Promise((r) => (img.onload = r));
+    let img: HTMLImageElement;
+    try { img = await loadImageFromDataUrl(dataUrl); }
+    catch (error) {
+      if (generation !== loadGeneration) return;
+      currentDataUrl = '';
+      editor?.classList.add('hidden');
+      dropZone?.classList.remove('hidden');
+      alert(error instanceof Error ? error.message : 'Could not read this image. Please upload another image.');
+      return;
+    }
     if (generation !== loadGeneration) return;
     currentImage = img;
 
@@ -192,14 +200,18 @@ const heading = toolSlug === 'screenshot-privacy-checker'
     }
 
     // Run quick background OCR & PII scan to populate sidebar
-    const { runClientOCR } = await import('../../lib/analyzer/ocr');
-    const { scanPrivacyRisks } = await import('../../lib/analyzer/privacyScanner');
-    runClientOCR(img).then((ocr) => {
+    try {
+      const { runClientOCR } = await import('../../lib/analyzer/ocr');
+      const { scanPrivacyRisks } = await import('../../lib/analyzer/privacyScanner');
+      const ocr = await runClientOCR(img);
       if (generation !== loadGeneration) return;
       const pii = scanPrivacyRisks(ocr.text, ocr.words);
       detectedPiiFindings = pii.findings;
       renderPiiSidebar(pii.findings);
-    });
+    } catch {
+      if (generation !== loadGeneration) return;
+      if (piiList) piiList.textContent = 'Automatic scanning failed. You can still draw masks manually. Upload the image again to retry scanning.';
+    }
   }
 
   let renderVersion = 0;
@@ -261,6 +273,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
       const reader = new FileReader();
       reader.onload = (e) => loadEditor(e.target?.result as string);
       reader.readAsDataURL(fileInput.files[0]);
+      fileInput.value = ''; // Allow retrying the same image.
     }
   });
 
@@ -341,7 +354,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
   document.getElementById('redact-go-ocr')?.addEventListener('click', (e) => {
     if (currentDataUrl) {
       e.preventDefault();
-      setHandoffImage(currentDataUrl, 'redactor');
+      if (!setHandoffImage(currentDataUrl, 'redactor')) return;
       window.location.href = '/screenshot-ocr';
     }
   });
@@ -349,7 +362,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
   document.getElementById('redact-go-forensics')?.addEventListener('click', (e) => {
     if (currentDataUrl) {
       e.preventDefault();
-      setHandoffImage(currentDataUrl, 'redactor');
+      if (!setHandoffImage(currentDataUrl, 'redactor')) return;
       window.location.href = '/image-manipulation-checker';
     }
   });

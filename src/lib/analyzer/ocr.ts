@@ -1,28 +1,26 @@
 import type { OCRResult } from './types';
 import { recognizeWithCoordinates } from './ocrCoordinates';
 import { preprocessImageForOCR } from './ocrPreprocessor';
+import { retryableCache } from './retryableCache';
 
 export type ProgressCallback = (progress: number, status: string) => void;
 
-const workersCache: Record<string, any> = {};
+const cachedWorker = retryableCache<any>();
 
 async function getWorkerForLanguage(lang: string = 'eng', onProgress?: ProgressCallback) {
-  if (!workersCache[lang]) {
-    workersCache[lang] = (async () => {
-      const { createWorker } = await import('tesseract.js');
-      const worker = await createWorker(lang, 1, {
-        logger: (m: any) => {
-          if (m.status === 'recognizing text' && onProgress) {
-            onProgress(Math.round((m.progress || 0) * 100), 'Extracting text...');
-          } else if (onProgress) {
-            onProgress(15, `Initializing OCR engine (${lang})...`);
-          }
-        },
-      });
+  return cachedWorker(lang, async () => {
+    const { createWorker } = await import('tesseract.js');
+    const worker = await createWorker(lang, 1, {
+      logger: (m: any) => {
+        if (m.status === 'recognizing text' && onProgress) {
+          onProgress(Math.round((m.progress || 0) * 100), 'Extracting text...');
+        } else if (onProgress) {
+          onProgress(15, `Initializing OCR engine (${lang})...`);
+        }
+      },
+    });
       return worker;
-    })();
-  }
-  return workersCache[lang];
+  });
 }
 
 export async function runClientOCR(
@@ -30,11 +28,6 @@ export async function runClientOCR(
   onProgress?: ProgressCallback,
   language: string = 'eng'
 ): Promise<OCRResult> {
-  console.log('--- OCR DEBUG LOG ---');
-  console.log('IMAGE RECEIVED: YES');
-  console.log('IMAGE TYPE:', typeof imageSource === 'string' ? 'dataUrl/string' : (imageSource instanceof HTMLImageElement ? 'HTMLImageElement' : (imageSource as any)?.type || 'Blob/File'));
-  console.log('OCR STARTED: YES');
-
   try {
     if (onProgress) onProgress(5, 'Preprocessing image for optimal text clarity...');
 
@@ -46,16 +39,12 @@ export async function runClientOCR(
 
     // In browser environment, run intelligent image preprocessing
     if (typeof window !== 'undefined' && typeof document !== 'undefined') {
-      try {
-        const prep = await preprocessImageForOCR(imageSource);
-        ocrInput = prep.canvas;
-        fallbackInput = prep.originalCanvas;
-        scaleFactor = prep.scaleFactor;
-        originalWidth = prep.originalCanvas.width;
-        originalHeight = prep.originalCanvas.height;
-      } catch (prepErr) {
-        console.warn('Preprocessing skipped due to fallback', prepErr);
-      }
+      const prep = await preprocessImageForOCR(imageSource);
+      ocrInput = prep.canvas;
+      fallbackInput = prep.originalCanvas;
+      scaleFactor = prep.scaleFactor;
+      originalWidth = prep.originalCanvas.width;
+      originalHeight = prep.originalCanvas.height;
     }
 
     if (onProgress) onProgress(25, `Reading visible content...`);
@@ -65,11 +54,6 @@ export async function runClientOCR(
     }, fallbackInput);
     const text = (data.text || '').trim();
     const confidence = Math.round(data.confidence || 0);
-
-    console.log('OCR COMPLETED: YES');
-    console.log('OCR CHARACTER COUNT:', text.length);
-    console.log('OCR CONFIDENCE:', confidence);
-    console.log('OCR RAW RESULT:', text ? text.substring(0, 150) + (text.length > 150 ? '...' : '') : '[EMPTY]');
 
     const lines = text
       .split('\n')
@@ -85,12 +69,8 @@ export async function runClientOCR(
       lines,
     };
   } catch (err) {
-    console.error('OCR ERROR during execution:', err);
-    return {
-      text: '',
-      confidence: 0,
-      words: [],
-      lines: [],
-    };
+    throw new Error(err instanceof Error
+      ? `${err.message} OCR did not complete. Please upload the image again to retry.`
+      : 'OCR did not complete. Please upload the image again to retry.');
   }
 }

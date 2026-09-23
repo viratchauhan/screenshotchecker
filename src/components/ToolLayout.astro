@@ -768,28 +768,28 @@ const structuredData = {
 
   document.getElementById('handoff-to-redactor-btn')?.addEventListener('click', () => {
     if (currentDataUrl) {
-      setHandoffImage(currentDataUrl, 'analyzer');
+      if (!setHandoffImage(currentDataUrl, 'analyzer')) return;
       window.location.href = '/screenshot-redactor';
     }
   });
 
   document.getElementById('handoff-to-ocr-btn')?.addEventListener('click', () => {
     if (currentDataUrl) {
-      setHandoffImage(currentDataUrl, 'analyzer');
+      if (!setHandoffImage(currentDataUrl, 'analyzer')) return;
       window.location.href = '/screenshot-ocr';
     }
   });
 
   document.getElementById('handoff-to-metadata-btn')?.addEventListener('click', () => {
     if (currentDataUrl) {
-      setHandoffImage(currentDataUrl, 'analyzer');
+      if (!setHandoffImage(currentDataUrl, 'analyzer')) return;
       window.location.href = '/screenshot-metadata-checker';
     }
   });
 
   document.getElementById('handoff-to-forensics-btn')?.addEventListener('click', () => {
     if (currentDataUrl) {
-      setHandoffImage(currentDataUrl, 'analyzer');
+      if (!setHandoffImage(currentDataUrl, 'analyzer')) return;
       window.location.href = '/image-manipulation-checker';
     }
   });

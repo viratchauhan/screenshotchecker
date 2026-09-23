@@ -150,6 +150,7 @@ const faqs = getToolFaqs('screenshot-ocr');
 </div>
 
 <script>
+  import { loadImageFromDataUrl } from '../../lib/analyzer/imageInfo';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
 
   let currentDataUrl = '';
@@ -179,13 +180,9 @@ const faqs = getToolFaqs('screenshot-ocr');
 
     const selectedLang = langSelect?.value || 'eng';
 
-    const img = new Image();
-    img.src = dataUrl;
-    await new Promise((r) => (img.onload = r));
-
-    if (sourceImg) sourceImg.src = dataUrl;
-
     try {
+      const img = await loadImageFromDataUrl(dataUrl);
+      if (sourceImg) sourceImg.src = dataUrl;
       const { runClientOCR } = await import('../../lib/analyzer/ocr');
       const result = await runClientOCR(img, (pct, status) => {
         if (statusText) statusText.innerText = `${status} (${pct}%)`;
@@ -201,7 +198,8 @@ const faqs = getToolFaqs('screenshot-ocr');
       if (textArea) textArea.value = result.text;
       updateMetrics(result.text, result.confidence);
     } catch (e) {
-      alert('OCR could not be completed on this image.');
+      lastOcrResult = null;
+      alert(e instanceof Error ? e.message : 'OCR did not complete. Please upload the image again to retry.');
       processing?.classList.add('hidden');
       dropZone?.classList.remove('hidden');
     }
@@ -231,6 +229,7 @@ const faqs = getToolFaqs('screenshot-ocr');
       const reader = new FileReader();
       reader.onload = (e) => processOcr(e.target?.result as string);
       reader.readAsDataURL(fileInput.files[0]);
+      fileInput.value = ''; // Allow selecting the same image to retry.
     }
   });
 
@@ -289,14 +288,14 @@ const faqs = getToolFaqs('screenshot-ocr');
   // Cross-Tool Intelligence Handoff
   document.getElementById('ocr-redact-btn')?.addEventListener('click', () => {
     if (currentDataUrl) {
-      setHandoffImage(currentDataUrl, 'ocr');
+      if (!setHandoffImage(currentDataUrl, 'ocr')) return;
       window.location.href = '/screenshot-redactor';
     }
   });
 
   document.getElementById('ocr-analyze-btn')?.addEventListener('click', () => {
     if (currentDataUrl) {
-      setHandoffImage(currentDataUrl, 'ocr');
+      if (!setHandoffImage(currentDataUrl, 'ocr')) return;
       window.location.href = '/';
     }
   });

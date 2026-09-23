@@ -232,7 +232,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
 
   document.getElementById('forensics-analyze-btn')?.addEventListener('click', () => {
     if (currentDataUrl) {
-      setHandoffImage(currentDataUrl, 'forensics');
+      if (!setHandoffImage(currentDataUrl, 'forensics')) return;
       window.location.href = '/';
     }
   });

@@ -1,8 +1,8 @@
 # ScreenshotChecker bounded work queue
 
-**Current state:** Tasks 03, 04A, 04B and 05A completed locally. Owner-requested no-match correction also completed: unrelated text cannot inherit a stored example narrative. Latest production build: 30 pages; full test runner: 18 passing entrypoints and the same 3 baseline failures. Browser checks cover exported PNG pixels, phone-width keyboard placement, modal focus/Escape and a real OCR no-match report. Owner requested committing and publishing the current work to GitHub on 23 September 2026. See Git history for publication state; no direct Cloudflare deployment was requested.
+**Current state:** Tasks 03, 04A, 04B and 05A completed locally. Owner-requested no-match correction also completed: unrelated text cannot inherit a stored example narrative. Latest production build: 30 pages; full test runner: 18 passing entrypoints and the same 3 baseline failures. Browser checks cover exported PNG pixels, phone-width keyboard placement, modal focus/Escape and a real OCR no-match report. Owner requested committing and publishing the current work to GitHub on 23 September 2026. Commit 122f10b was published and deployed at the owner's request on 23 September 2026. Cloudflare version: 19d1d234-39a4-494c-b87a-031c79a5e3f8 (rollback: e416bd75-714c-4b5a-af1f-dcce0a76ef64). Production smoke checks passed. Subsequent tasks 05B1 and 05B2 changes are local only.
 
-**Next:** Task 05B, large-image handoff and failure recovery. Default remains one bounded task per continuation unless the owner requests otherwise.
+**Next:** Task 06, traffic baseline and measurement decision. Default remains one bounded task per continuation unless the owner requests otherwise.
 
 **Session rules**
 
@@ -25,7 +25,8 @@
 | 04A | OCR structured coordinates | M | 03 | Current OCR API returns word boxes mapped to original image; scaled/fallback fixtures verify bounds | DONE |
 | 04B | Automatic redaction and export | M | 01A,01B,04A | Suggested boxes actually hide selected data in exported files; unavailable locations give a visible warning | DONE |
 | 05A | Touch and keyboard redaction | M | 04B | Pointer drawing and accessible modal controls work; phone viewport and keyboard flow checked | DONE |
-| 05B | Large-image handoff and failure recovery | M | 04B | No silent storage failure; OCR initialization can retry; a meaningful pixel/memory limit and clear errors exist | NEXT |
+| 05B1 | Image handoff failure recovery | S | 04B | Storage failure stops navigation, explains recovery and clears stale images; malformed/expired payloads rejected | DONE locally |
+| 05B2 | OCR retry and image memory limits | M | 05B1 | OCR initialization can retry; a meaningful pixel/memory limit and clear errors exist | DONE locally |
 | 06 | Traffic baseline and measurement decision | S | 00 | Actual baseline recorded if available, or explicit unknowns; privacy-conscious event specification approved by existing product direction | TODO |
 | 07 | Correct global entity extraction | M | 03,04A | US/UK/Indian phones distinguished from payment references; USD/GBP/INR and ambiguous date fixtures pass; scope split if needed | TODO |
 | 08A | Fraud regression repair | M | 03,07 | Existing bank/prize failures resolved and final displayed verdict tested against benign counterexamples | TODO |
@@ -109,3 +110,21 @@ Task numbers are ordering guides, not calendar commitments. Task 06 may happen e
 ### 2026-09-23 — GitHub publication requested
 
 Owner explicitly requested updating GitHub with the current website code. Publish the completed local work and previous security commit to origin/main. Remote was fetched and had no newer commits. Latest recorded production build passes (30 pages); three documented baseline test failures remain. No .github workflow exists in this checkout; Cloudflare dashboard Git integration may still deploy a push. This request does not authorize additional feature work or a separate Wrangler deployment.
+
+### 23 September 2026 — Task 05B1: image handoff recovery
+
+Split 05B to keep this continuation bounded. All 14 transfer actions now check storage success before navigating. The homepage uses the same helper as the other tools. Quota/blocked-storage failures show a recovery message and keep the current workspace open; old saved images are removed before attempting a replacement. Reads discard corrupt, expired, future-dated and non-image payloads. No new dependency or upload service added.
+
+Verification: five targeted tests passed (success/replacement, quota failure, blocked storage, invalid/expired payloads, all 14 navigation guards); production build passed all 30 pages. Existing large-bundle warning remains. Full legacy suite not rerun for this isolated change; three previously recorded baseline failures remain unresolved. Browser quota behavior is simulated with DOM storage exceptions; no physical-device check performed. Storage remains sessionStorage, so large images can require manual upload in the destination tool. No commit, push or deployment this session.
+
+Next: 05B2, rejected OCR-worker initialization recovery, explicit OCR errors, and bounds on image processing allocations.
+
+### 23 September 2026 — Task 05B2: OCR retry and bounded image processing
+
+Failed OCR initialization promises are removed from the shared cache, allowing subsequent uploads to retry. OCR errors now reject instead of returning a successful empty result. Investigation stops before a fraud verdict when its OCR tool fails. The OCR workspace returns to upload; selecting the same file works again. Redactor scan failures show a manual-mask/retry message while keeping manual editing available. Both workspaces handle image decode errors.
+
+Source images used by the shared loader and OCR preprocessing are limited to 4 million pixels and 8192 pixels per side before canvas allocation. Upscaling stays within those same limits using integer scale factors to preserve coordinates. Removed unused PNG data-URL copies and revoked temporary blob URLs. Removed OCR text debug logging. These bounds constrain our canvas buffers, not total browser/WASM memory; decoding occurs before dimensions can be checked, and unrelated standalone image tools do not all use this loader yet.
+
+Verification: five new recovery tests plus four existing coordinate tests pass. Cases include failed then successful initialization, shared concurrent initialization, invalid/tall/oversized dimensions, rejection before canvas allocation, decode failure, and no fraud verdict after failed OCR. Full suite: 20 passing entrypoints, the same three baseline failures (agentic investigation, blog count, link normalization). Log: audit/task-05b2-tests.log. Production build: all 30 pages pass; existing large-bundle warning remains. No live browser/network-failure or low-memory device simulation performed. No commit, push or deployment requested or performed this session.
+
+Next: task 06. Broader standalone-tool memory limits and worker lifecycle/concurrent OCR scheduling can be evaluated in task 18; this task bounds each OCR image operation, not aggregate concurrent memory.

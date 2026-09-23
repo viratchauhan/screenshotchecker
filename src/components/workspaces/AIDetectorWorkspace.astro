@@ -826,7 +826,7 @@ const faqs = getToolFaqs('ai-image-detector');
 
   handoffBtn?.addEventListener('click', () => {
     if (currentDataUrl) {
-      setHandoffImage(currentDataUrl, 'ai_detector');
+      if (!setHandoffImage(currentDataUrl, 'ai_detector')) return;
       window.location.href = '/image-manipulation-checker';
     }
   });

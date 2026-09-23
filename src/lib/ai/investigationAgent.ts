@@ -63,6 +63,9 @@ export class InvestigationAgent {
         onProgress,
       });
 
+      if (step.tool === 'ocr_layout' && output.status === 'failed') {
+        throw new Error('Text scanning failed. Please upload the image again to retry; no fraud verdict was produced.');
+      }
       toolOutputs.push(output);
       toolsInvoked.push(step.tool);
 
