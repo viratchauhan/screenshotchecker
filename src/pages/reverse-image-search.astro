@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { REVERSE_PROVIDERS as providers, REVERSE_FAQS as faqs } from '../data/reverseSearch';
+const title = 'Free Reverse Image Search — Find Image Sources';
+const description = 'Prepare a photo or screenshot locally, then search with Google Lens, TinEye or Bing. Find image sources and similar pictures with clear privacy controls.';
+const url = 'https://screenshotchecker.com/reverse-image-search/';
+const structuredData = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'WebApplication', name: 'Reverse Image Search Helper', url, description, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Web browser', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
+  { '@type': 'FAQPage', mainEntity: faqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
+] };
+---
+<Layout title={title} description={description} canonicalUrl={url} structuredData={structuredData}>
+  <Header currentPath="/reverse-image-search" />
+  <main class="reverse-page">
+    <a href="/tools">All tools</a>
+    <h1>Free reverse image search</h1>
+    <p>Look for image sources, reused photos and similar pictures. Prepare your image here, then search with a provider you choose.</p>
+    <p><strong>Results open on the provider’s site.</strong> This tool does not have its own image index or automatically submit your file.</p>
+    <section class="panel" aria-labelledby="prepare-heading">
+      <h2 id="prepare-heading">1. Prepare your image</h2>
+      <p id="reverse-help">Choose or drop a PNG, JPEG or WebP. Up to 10 MB, 4 megapixels and 8192 pixels per side. You can also paste an image while this page is focused.</p>
+      <label for="reverse-file">Choose a photo or screenshot</label>
+      <input id="reverse-file" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="reverse-help" />
+      <p>File preparation stays in your browser. The PNG copy omits the original file’s metadata, but visible private information remains. <a href="/screenshot-redactor">Redact sensitive details first</a>.</p>
+      <div id="reverse-ready" hidden>
+        <img id="reverse-preview" alt="Preview of your prepared search image" />
+        <p id="reverse-info"></p>
+        <div class="actions">
+          <button id="reverse-copy" type="button" class="btn-secondary">Copy image</button>
+          <a id="reverse-download" class="btn-primary" download="search-image.png">Download PNG</a>
+          <button id="reverse-share" type="button" class="btn-secondary" hidden>Share to an app</button>
+        </div>
+      </div>
+      <button id="reverse-clear" type="button" class="btn-secondary">Clear image</button>
+      <p id="reverse-status" role="status" aria-live="polite"></p>
+      <noscript>Image preparation needs JavaScript. You can still open a provider below and upload your original image there.</noscript>
+    </section>
+    <section aria-labelledby="provider-heading">
+      <h2 id="provider-heading">2. Choose where to search</h2>
+      <p>Download the copy above, or copy it if your browser supports image clipboard access. Open a provider and upload or paste there. Opening a link alone does not start a search or transfer the image.</p>
+      <div class="providers">
+        {providers.map(provider => <article class="panel">
+          <h3>{provider.name}</h3><p>{provider.instruction}</p>
+          <a class="btn-primary" href={provider.url} target="_blank" rel="noopener noreferrer">Open {provider.name} ↗</a>
+          <p><a href={provider.help} target="_blank" rel="noopener noreferrer">Provider instructions ↗</a></p>
+        </article>)}
+      </div>
+      <p>Once you upload, paste or share, the receiving service processes your image under its own policies. Microsoft notes that submitted photos may be used to improve Bing’s image-processing services.</p>
+    </section>
+    <section>
+      <h2>3. Compare the results and check the context</h2>
+      <ol>
+        <li>Open the matching page, not only its thumbnail. Read the caption and surrounding text.</li>
+        <li>Compare distinctive details. Similar subjects are not necessarily the same photograph.</li>
+        <li>Try another provider when results are sparse. Their coverage and results can differ.</li>
+        <li>Keep the source links and note what remains uncertain. A matching image does not establish ownership or prove the claim attached to it.</li>
+      </ol>
+      <h3>Example: an old picture with a new claim</h3>
+      <p>A fictional message labels a street photo as an event from today. Reverse search finds the same scene on an older article. That is a reason to question the caption and investigate dates—not proof that the pixels were edited. If nothing matches, the image remains unverified.</p>
+      <p>For different questions, use the <a href="/screenshot-detector">screenshot-or-photo detector</a>, <a href="/screenshot-comparison">image comparison tool</a> or <a href="/blog/screenshot-checker-online">screenshot verification checklist</a>.</p>
+    </section>
+    <section><h2>Reverse image search questions</h2>{faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</section>
+  </main>
+  <Footer />
+</Layout>
+<style>
+  .reverse-page { width: 100%; min-width: 0; box-sizing: border-box; max-width: 62rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.7; }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); line-height: 1.2; }
+  h2 { font-size: 1.5rem; } h3 { font-size: 1.15rem; }
+  p { margin: .8rem 0; } section { margin: 2rem 0; }
+  a { text-decoration: underline; text-underline-offset: .2em; }
+  .panel { border: 1px solid var(--color-hairline, #ccc); border-radius: 1rem; padding: 1.25rem; }
+  .providers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 1rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin: 1rem 0; }
+  label { display: block; font-weight: 600; } input { display: block; max-width: 100%; margin: .75rem 0; }
+  #reverse-preview { display: block; max-width: 100%; max-height: 22rem; margin: 1rem auto; object-fit: contain; }
+  #reverse-info { overflow-wrap: anywhere; }
+  ol { list-style: decimal; padding-left: 1.5rem; } li { margin: .5rem 0; }
+  details { padding: 1rem 0; border-bottom: 1px solid var(--color-hairline, #ccc); } summary { cursor: pointer; font-weight: 600; }
+</style>
+<script>
+  import { setupReverseSearch } from '../lib/utils/reverseSearchUI';
+  setupReverseSearch();
+</script>

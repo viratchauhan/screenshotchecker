@@ -46,6 +46,13 @@ export const TOOL_CATEGORIES: ToolCategory[] = [
 ];
 
 export const TOOLS_REGISTRY: ToolDefinition[] = [
+  {
+    id: 'reverse-image-search', name: 'Reverse Image Search', slug: 'reverse-image-search',
+    category: 'Utilities', route: '/reverse-image-search', workspaceType: 'utility', icon: 'magnifying-glass',
+    description: 'Prepare an image locally and search with Google Lens, TinEye or Bing to investigate sources and copies.',
+    keywords: ['reverse image search', 'image source', 'similar pictures', 'search by photo'],
+    aliases: ['free reverse image search', 'reverse search', 'find image source'],
+  },
   // 1. AI & Intelligence
   {
     id: 'screenshot-intelligence',

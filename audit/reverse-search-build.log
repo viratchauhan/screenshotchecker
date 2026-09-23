@@ -1,0 +1,62 @@
+
+> screenshotchecker@0.0.1 build
+> astro build
+
+16:49:33 [content] Syncing content
+16:49:34 [content] Synced content
+16:49:34 [types] Generated 244ms
+16:49:34 [build] output: "static"
+16:49:34 [build] mode: "static"
+16:49:34 [build] directory: D:\screenshotchecker\dist\
+16:49:34 [build] Collecting build info...
+16:49:34 [build] ✓ Completed in 272ms.
+16:49:34 [build] Building static entrypoints...
+16:49:34 [vite] ✓ built in 413ms
+16:49:34 [WARN] [vite] [plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+16:49:34 [vite] ✓ built in 258ms
+16:49:34 [build] Rearranging server assets...
+
+ generating static routes 
+16:49:34   ├─ /404.html (+7ms) 
+16:49:34   ├─ /500.html (+2ms) 
+16:49:34   ├─ /about/index.html (+2ms) 
+16:49:34   ├─ /ai-image-detector/index.html (+4ms) 
+16:49:34   ├─ /blog/screenshot-checker-online/index.html (+2ms) 
+16:49:34   ├─ /blog/screenshot-analyzer-online/index.html (+1ms) 
+16:49:34   ├─ /blog/fake-upi-payment-screenshot/index.html (+2ms) 
+16:49:34   ├─ /blog/ai-image-detector-online/index.html (+1ms) 
+16:49:34   ├─ /blog/exif-metadata/index.html (+1ms) 
+16:49:34   ├─ /blog/smishing-fake-sms/index.html (+1ms) 
+16:49:34   ├─ /blog/suspicious-link-checker-online/index.html (+1ms) 
+16:49:34   ├─ /blog/index.html (+2ms) 
+16:49:34   ├─ /contact/index.html (+2ms) 
+16:49:34   ├─ /image-manipulation-checker/index.html (+2ms) 
+16:49:34   ├─ /image-metadata-remover/index.html (+3ms) 
+16:49:34   ├─ /payment-screenshot-checker/index.html (+3ms) 
+16:49:34   ├─ /privacy/index.html (+2ms) 
+16:49:34   ├─ /resources/index.html (+2ms) 
+16:49:34   ├─ /reverse-image-search/index.html (+2ms) 
+16:49:34   ├─ /screenshot-analyzer/index.html (+4ms) 
+16:49:34   ├─ /screenshot-comparison/index.html (+2ms) 
+16:49:34   ├─ /screenshot-detector/index.html (+2ms) 
+16:49:34   ├─ /screenshot-metadata-checker/index.html (+2ms) 
+16:49:34   ├─ /screenshot-ocr/index.html (+2ms) 
+16:49:34   ├─ /screenshot-privacy-checker/index.html (+3ms) 
+16:49:34   ├─ /screenshot-redactor/index.html (+2ms) 
+16:49:34   ├─ /screenshot-scam-checker/index.html (+2ms) 
+16:49:34   ├─ /screenshot-spam-checker/index.html (+2ms) 
+16:49:34   ├─ /sitemap.xml (+1ms) 
+16:49:34   ├─ /suspicious-link-checker/index.html (+2ms) 
+16:49:34   ├─ /terms/index.html (+2ms) 
+16:49:34   ├─ /tools/index.html (+2ms) 
+16:49:34   ├─ /index.html (+2ms) 
+16:49:34 ✓ Completed in 91ms.
+
+16:49:34 [build] ✓ Completed in 786ms.
+16:49:34 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+16:49:34 [build] 32 page(s) built in 1.08s
+16:49:34 [build] Complete!
