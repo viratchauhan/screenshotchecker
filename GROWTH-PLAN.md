@@ -4,7 +4,7 @@ Prepared 22 September 2026. Based on the repository/live-site audit in `audit/PR
 
 **Goal and working agreement**
 
-Aim for 10,000 qualified visits (sessions) in a rolling 30-day period, while making the product trustworthy enough to earn repeat use and recommendations. This is a target, not a traffic forecast or promise of virality. Current traffic, indexing, geography, and search demand have not been verified from account data.
+Aim for 10,000 qualified visits (sessions) in a rolling 30-day period, while making the product trustworthy enough to earn repeat use and recommendations. This is a target, not a traffic forecast or promise of virality. Search Console indexing and a 28-day search baseline were verified on 24 September 2026. Total visits/sessions, geography, completion and commercial value remain unverified; search clicks are not total visits.
 
 Work in small sessions. This planning session is Task 00. Subsequent sessions complete one bounded task and stop. Do not run the entire backlog, spawn agents, create active background jobs, or deploy automatically. No exact allowance savings can be promised: usage depends on the work and tooling. Large work must be split before starting.
 

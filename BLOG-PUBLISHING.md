@@ -19,7 +19,7 @@ Before publication:
 - Add original examples and relevant primary-source references where useful.
 - Keep related article slugs valid and link to the appropriate tool.
 - Run `node --import tsx src/lib/analyzer/__tests__/blogSystem.test.ts`.
-- Run `npm run build`, then `npm run test:blog-seo` to check the generated pages.
+- Run `npm run build`, then `npm run test:seo` and `npm run test:blog-seo` to check the generated pages.
 - Publish only when the owner requests it. Track search performance in Search Console;
   passing these checks does not establish indexing or a ranking increase.
 

@@ -288,9 +288,9 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     slug: 'fake-upi-payment-screenshot',
     title: 'Fake UPI Payment Screenshot: How to Check If a Payment Is Real',
-    seoTitle: 'Fake UPI Payment Screenshot: How to Check If a Payment Is Real',
+    seoTitle: 'Fake UPI Payment Screenshots: Checks and Warning Signs',
     metaDescription:
-      'Learn how to spot fake UPI payment screenshots, identify visual red flags, and verify payments safely. Analyze suspicious receipts with ScreenshotChecker\'s Fake UPI Screenshot Checker.',
+      'Review warning signs in UPI payment screenshots and learn why confirming the transaction in your own bank or payment app matters more than an image.',
     category: 'Security',
     publishedAt: '2026-08-22',
     updatedAt: '2026-08-30',

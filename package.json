@@ -16,7 +16,8 @@
     "test": "node scripts/run-tests.mjs",
     "check": "npm run test && npm run build",
     "test:ocr": "tsx --test src/lib/analyzer/__tests__/ocrCoordinates.test.ts",
-    "test:blog-seo": "node --import tsx scripts/verify-blog-seo.mjs"
+    "test:blog-seo": "node --import tsx scripts/verify-blog-seo.mjs",
+    "test:seo": "node scripts/verify-seo.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

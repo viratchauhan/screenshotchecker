@@ -1,7 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { JSDOM } from 'jsdom';
 
-const distDir = path.resolve('dist');
+const distDir = path.resolve(process.argv[2] || 'dist');
 
 function findHtmlFiles(dir, fileList = []) {
   const files = fs.readdirSync(dir);
@@ -21,7 +22,7 @@ const htmlFiles = findHtmlFiles(distDir);
 console.log(`Found ${htmlFiles.length} HTML files in dist/\n`);
 
 const results = [];
-let errorCount = 0;
+let errorCount = htmlFiles.length ? 0 : 1;
 let warnCount = 0;
 
 for (const filePath of htmlFiles) {
@@ -102,9 +103,34 @@ for (const filePath of htmlFiles) {
   if (!canonical && !isErrorPage) issues.push('Missing Canonical');
   if (isErrorPage && !robots.includes('noindex')) issues.push('Error page missing noindex');
 
+  errorCount += issues.filter(issue => !issue.includes(' > ')).length;
+  const dom = new JSDOM(html).window.document;
+  if (!isErrorPage) {
+    const route = relPath === 'index.html' ? '/' : '/' + relPath.replace(/index\.html$/, '');
+    if (canonical !== `https://screenshotchecker.com${route}`) { issues.push('Canonical does not match published route'); errorCount++; }
+    if (dom.querySelectorAll('h1').length !== 1) { issues.push('Expected exactly one H1'); errorCount++; }
+    if (robots.includes('noindex')) { issues.push('Published page unexpectedly noindex'); errorCount++; }
+  }
   row.issues = issues;
   results.push(row);
 }
+
+// Check that each indexable route is listed once and only canonical routes are listed.
+try {
+  const sitemap = new JSDOM(fs.readFileSync(path.join(distDir, 'sitemap-0.xml'), 'utf8'), { contentType: 'text/xml' }).window.document;
+  const urls = [...sitemap.querySelectorAll('url > loc')].map(node => node.textContent);
+  const expected = results.filter(row => !['404.html', '500.html'].includes(row.file)).map(row => row.canonical);
+  if (new Set(urls).size !== urls.length) { console.error('Duplicate sitemap URLs'); errorCount++; }
+  for (const url of expected) if (!urls.includes(url)) { console.error('Missing sitemap URL:', url); errorCount++; }
+  for (const url of urls) if (!expected.includes(url)) { console.error('Unexpected sitemap URL:', url); errorCount++; }
+  for (const field of ['title', 'description']) {
+    const seen = new Set();
+    for (const row of results.filter(row => !['404.html', '500.html'].includes(row.file))) {
+      if (seen.has(row[field])) { console.error(`Duplicate ${field}: ${row.file}`); errorCount++; }
+      seen.add(row[field]);
+    }
+  }
+} catch (error) { console.error('Sitemap validation failed:', error.message); errorCount++; }
 
 // Print report
 console.log('='.repeat(100));
@@ -139,3 +165,5 @@ if (fs.existsSync(sitemapXml)) {
   console.log('sitemap.xml size:', content.length, 'bytes');
   console.log('sitemap.xml first 200 chars:', content.slice(0, 200).replace(/\n/g, ' '));
 }
+
+process.exitCode = errorCount ? 1 : 0;
