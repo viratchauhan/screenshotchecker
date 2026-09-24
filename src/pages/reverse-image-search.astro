@@ -4,9 +4,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { REVERSE_PROVIDERS as providers, REVERSE_FAQS as faqs } from '../data/reverseSearch';
 const title = 'Free Reverse Image Search — Find Image Sources';
-const description = 'Prepare a photo or screenshot locally, then search with Google Lens, TinEye or Bing. Find image sources and similar pictures with clear privacy controls.';
+const description = 'Reverse search a photo or screenshot with Google Lens, TinEye or Bing. Prepare your image privately, find matching sources and compare results. Free, no signup.';
 const url = 'https://screenshotchecker.com/reverse-image-search/';
 const structuredData = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://screenshotchecker.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://screenshotchecker.com/tools/' },
+    { '@type': 'ListItem', position: 3, name: 'Reverse image search', item: url },
+  ] },
   { '@type': 'WebApplication', name: 'Reverse Image Search Helper', url, description, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Web browser', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } },
   { '@type': 'FAQPage', mainEntity: faqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
 ] };
@@ -14,15 +19,23 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
 <Layout title={title} description={description} canonicalUrl={url} structuredData={structuredData}>
   <Header currentPath="/reverse-image-search" />
   <main class="reverse-page">
-    <a href="/tools">All tools</a>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/tools/">Tools</a><span aria-hidden="true"> / </span><span aria-current="page">Reverse image search</span></nav>
+    <header class="hero">
+    <p class="eyebrow">FOLLOW THE IMAGE. FIND THE CONTEXT.</p>
     <h1>Free reverse image search</h1>
-    <p>Look for image sources, reused photos and similar pictures. Prepare your image here, then search with a provider you choose.</p>
+    <p class="intro">Find where a picture appears online. Look for its source, compare matches, and check the story behind it.</p>
+    <ul class="benefits"><li>No signup</li><li>Local image preparation</li><li>Three search providers</li></ul>
     <p><strong>Results open on the provider’s site.</strong> This tool does not have its own image index or automatically submit your file.</p>
+    </header>
+    <div class="workspace">
     <section class="panel" aria-labelledby="prepare-heading">
       <h2 id="prepare-heading">1. Prepare your image</h2>
-      <p id="reverse-help">Choose or drop a PNG, JPEG or WebP. Up to 10 MB, 4 megapixels and 8192 pixels per side. You can also paste an image while this page is focused.</p>
+      <div class="dropzone">
+      <svg aria-hidden="true" width="48" height="48" viewBox="0 0 48 48" fill="none"><rect x="7" y="7" width="34" height="34" rx="9" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="18" r="3" stroke="currentColor" stroke-width="1.5"/><path d="m9 34 10-10 7 7 5-5 9 9" stroke="currentColor" stroke-width="1.5"/></svg>
+      <p id="reverse-help">Drop a PNG, JPG or WebP, or paste with Ctrl / ⌘ + V.<br />Up to 10 MB, 4 megapixels and 8192 pixels per side.</p>
       <label for="reverse-file">Choose a photo or screenshot</label>
       <input id="reverse-file" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="reverse-help" />
+      </div>
       <p>File preparation stays in your browser. The PNG copy omits the original file’s metadata, but visible private information remains. <a href="/screenshot-redactor">Redact sensitive details first</a>.</p>
       <div id="reverse-ready" hidden>
         <img id="reverse-preview" alt="Preview of your prepared search image" />
@@ -43,13 +56,17 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
       <div class="providers">
         {providers.map(provider => <article class="panel">
           <h3>{provider.name}</h3><p>{provider.instruction}</p>
-          <a class="btn-primary" href={provider.url} target="_blank" rel="noopener noreferrer">Open {provider.name} ↗</a>
+          <a class="provider-link" href={provider.url} target="_blank" rel="noopener noreferrer">Open {provider.name} ↗</a>
           <p><a href={provider.help} target="_blank" rel="noopener noreferrer">Provider instructions ↗</a></p>
         </article>)}
       </div>
       <p>Once you upload, paste or share, the receiving service processes your image under its own policies. Microsoft notes that submitted photos may be used to improve Bing’s image-processing services.</p>
     </section>
+    </div>
     <section>
+      <h2>How to reverse search a photo or screenshot</h2>
+      <p>Choose your picture, save the prepared PNG, and open Google Lens, TinEye or Bing Images. Upload the saved copy using that provider’s image-search control. On a phone, choose the image from your downloads or photo picker. Results appear there, not inside this tool.</p>
+      <p>Use reverse image search to investigate a reused marketplace photo, find pages that credit a picture, or check whether a screenshot’s image appeared in an older story. Compare the matching pages before trusting a caption. A visual match alone cannot confirm a seller, a payment or someone’s identity.</p>
       <h2>3. Compare the results and check the context</h2>
       <ol>
         <li>Open the matching page, not only its thumbnail. Read the caption and surrounding text.</li>
@@ -79,6 +96,43 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
   #reverse-info { overflow-wrap: anywhere; }
   ol { list-style: decimal; padding-left: 1.5rem; } li { margin: .5rem 0; }
   details { padding: 1rem 0; border-bottom: 1px solid var(--color-hairline, #ccc); } summary { cursor: pointer; font-weight: 600; }
+  .reverse-page { max-width: 76rem; padding: 0 1.5rem 3rem; color: var(--color-body); }
+  .reverse-page * { box-sizing: border-box; }
+  .crumbs { font-size: .75rem; color: var(--color-muted); display:flex; flex-wrap:wrap; gap:.5rem; }
+  .crumbs a { text-decoration:none; }
+  .hero { text-align:center; max-width:48rem; margin:3.5rem auto 2.5rem; }
+  .hero h1 { font-family:var(--font-serif); font-size:clamp(2.5rem,5.5vw,4.3rem); font-weight:500; letter-spacing:-.04em; color:var(--color-ink); }
+  .eyebrow { font-size:.65rem; letter-spacing:.16em; font-weight:700; color:var(--color-muted); }
+  .hero .intro { font-size:1.08rem; max-width:37rem; margin:1rem auto; }
+  .hero > p:last-child { font-size:.75rem; color:var(--color-muted); max-width:37rem; margin:1rem auto; }
+  .benefits { display:flex; flex-wrap:wrap; justify-content:center; gap:.4rem 1.4rem; list-style:none; padding:0; font-size:.76rem; }
+  .benefits li::before { content:'✓'; margin-right:.4rem; color:var(--color-primary-active); }
+  .workspace { display:grid; grid-template-columns:1.05fr 1fr; border:1px solid var(--color-hairline); border-radius:1.3rem; overflow:hidden; box-shadow:0 12px 40px #00000006; }
+  .workspace > section { min-width:0; margin:0; padding:2rem; border:0; border-radius:0; }
+  .workspace > section:first-child { background:var(--color-surface-soft); border-right:1px solid var(--color-hairline); }
+  .workspace h2 { font-size:1.2rem; font-weight:600; color:var(--color-ink); margin-bottom:1.3rem; }
+  .workspace p { font-size:.78rem; color:var(--color-muted); }
+  .dropzone { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:17rem; padding:1.5rem 1rem; border:1px dashed var(--color-primary); border-radius:.85rem; background:var(--color-canvas); margin-bottom:1.2rem; }
+  .dropzone svg { color:var(--color-primary-active); margin-bottom:.5rem; }
+  .dropzone:focus-within { outline:3px solid var(--color-primary-active); outline-offset:3px; }
+  .dropzone label { font-size:.9rem; color:var(--color-ink); }
+  .dropzone input { font-size:.75rem; }
+  input::file-selector-button { background:var(--color-ink); color:var(--color-canvas); border:0; padding:.65rem .85rem; margin-right:.5rem; border-radius:.5rem; cursor:pointer; }
+  .providers { grid-template-columns:1fr; gap:.75rem; margin-top:1.2rem; }
+  .providers .panel { padding:1rem 1.2rem; border-radius:.75rem; }
+  .providers h3 { color:var(--color-ink); font-weight:600; font-size:1rem; }
+  .providers p { margin:.3rem 0; }
+  .providers p:last-child { font-size:.68rem; }
+  .provider-link { display:inline-block; font-size:.78rem; color:var(--color-primary-active); font-weight:600; padding:.4rem 0; }
+  #reverse-preview { border-radius:.5rem; }
+  .actions :is(a,button),#reverse-clear { font-size:.78rem; }
+  [hidden] { display:none !important; }
+  .reverse-page > section { max-width:48rem; margin:4rem auto 0; }
+  .reverse-page > section h2 { font-family:var(--font-serif); font-size:2rem; color:var(--color-ink); margin-bottom:1rem; }
+  .reverse-page > section h3 { margin-top:1.5rem; font-weight:600; }
+  details p { color:var(--color-muted); font-size:.9rem; }
+  :is(a,button,input,summary):focus-visible { outline:3px solid var(--color-primary-active); outline-offset:4px; }
+  @media(max-width:760px) { .workspace { grid-template-columns:1fr; } .workspace > section { padding:1.25rem; } .workspace > section:first-child { border-right:0; border-bottom:1px solid var(--color-hairline); } .reverse-page { padding:0 1rem 2rem; } .hero { margin:2.5rem auto 2rem; } .hero .intro { font-size:.95rem; } }
 </style>
 <script>
   import { setupReverseSearch } from '../lib/utils/reverseSearchUI';
