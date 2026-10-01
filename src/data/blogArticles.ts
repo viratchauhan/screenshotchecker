@@ -7,6 +7,16 @@ export interface BlogContentSection {
   heading: string;
   level?: 'h2' | 'h3';
   paragraphs: string[];
+  figure?: {
+    /** Zero-based paragraph index; the figure follows this paragraph. */
+    afterParagraph: number;
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    caption: string;
+  };
+  checklist?: string[];
   callout?: {
     type: 'tip' | 'warning' | 'info' | 'golden-rule';
     text: string;
@@ -24,7 +34,8 @@ export interface BlogArticle {
   seoTitle: string;
   metaDescription: string;
   category: 'Security' | 'Forensics' | 'AI & Forensics' | 'Privacy' | 'Threat Analysis';
-  publishedAt: string;
+  /** null is review-only: set the actual date in the authorized release commit. */
+  publishedAt: string | null;
   updatedAt?: string;
   authorName?: string;
   readTime: string;
@@ -85,7 +96,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         "level": "h2",
         "paragraphs": [
           "Keep the file as received, along with the surrounding messages and the time you received it. Work on a copy. Cropping, resizing and saving again can remove context or change the image data you want to inspect. Ask for the original file if you only have a compressed forward, but remember that an original file can still contain a false claim.",
-          "Before sharing a screenshot publicly, cover account numbers, email addresses, addresses, verification codes and other identifying details on a separate copy. Use the <a href=\"/screenshot-redactor\">screenshot redactor</a> to apply solid masks and inspect the exported image. Automatic suggestions can miss information; review the whole image yourself."
+          "Before sharing a screenshot publicly, cover account numbers, email addresses, addresses, verification codes and other identifying details on a separate copy. Use the <a href=\"/screenshot-redactor\">screenshot redactor</a> to apply solid masks and inspect the exported image. Automatic suggestions can miss information; review the whole image yourself. Follow the <a href=\"/blog/redact-screenshot-before-sharing/\">worked screenshot-redaction tutorial</a> for before-and-after examples and a saved-file checklist."
         ]
       },
       {
@@ -1033,6 +1044,136 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       url: '/suspicious-link-checker',
       description: 'Check any URL or domain against 420K+ intelligence records in under 5 milliseconds.',
     },
+  },
+  // Task 17: publication date stays pending until the authorized release.
+  {
+    "slug": "redact-screenshot-before-sharing",
+    "title": "How to redact a screenshot before sharing it",
+    "seoTitle": "How to Redact a Screenshot Before Sharing It",
+    "metaDescription": "Redact a screenshot with opaque masks, then check the saved PNG and metadata. Follow a fictional before-and-after example and a practical sharing checklist.",
+    "category": "Privacy",
+    "publishedAt": null,
+    "authorName": "ScreenshotChecker",
+    "readTime": "6 min read",
+    "excerpt": "A worked example of solid-mask redaction, checking the exported PNG, and reviewing metadata before sharing a screenshot.",
+    "targetKeywords": [
+      "how to redact a screenshot",
+      "hide private information in screenshot",
+      "screenshot redaction",
+      "check redacted PNG"
+    ],
+    "keyTakeaway": {
+      "title": "Share only the context the recipient needs",
+      "text": "A screenshot can expose more than the detail you meant to share: a notification preview, an account name, a reference number or a second copy of the same address. Start by deciding what the recipient actually needs. Leave useful context visible and cover everything else that could identify someone or disclose private information."
+    },
+    "introduction": "To redact a screenshot, keep the original privately, cover sensitive details with fully opaque blocks, export a separate image, and reopen that exact file before sharing. Check the whole screenshot and its metadata. Blur, pixelation and automatic suggestions are not substitutes for this review.",
+    "contentSections": [
+      {
+        "heading": "1 Keep the original and choose what to hide",
+        "paragraphs": [
+          "Save the original separately. For reporting or an investigation, retain the surrounding context and record the source; the redacted image is a sharing copy, not a replacement for the original evidence.",
+          "Look beyond obvious contact details. Check browser tabs, title bars, avatars, notification banners, filenames, QR codes and background conversations. A short message or location clue can be identifying even if it contains no email address or phone number.",
+          "This guide uses an original fictional test image, not a customer screenshot. The amount and reference-like text are demonstration content and say nothing about a real payment. We will cover the line “MASK THIS SAMPLE” while leaving the other lines unchanged."
+        ],
+        "figure": {
+          "afterParagraph": 2,
+          "src": "/images/blog/redact-screenshot-before-sharing/synthetic-redaction-before.png",
+          "alt": "Fictional test image with four lines of text; the last line is MASK THIS SAMPLE.",
+          "width": 1200,
+          "height": 500,
+          "caption": "Figure 1. The original 1200 × 500 pixel test image. The last line is the selected target. The remaining text is intentionally visible so it is possible to check whether the export changed unrelated pixels."
+        }
+      },
+      {
+        "heading": "2 Use a fully opaque mask",
+        "paragraphs": [
+          "Open the <a href=\"/screenshot-redactor/\">ScreenshotChecker redactor</a> and choose <strong>Select Image to Redact</strong>. Select the working copy. Use <strong>Blackout</strong> or <strong>Whiteout</strong> for sensitive text and draw a rectangle around the complete detail. Include the character edges, punctuation and any wrapped lines. Leave a margin around the text rather than tracing the letters tightly.",
+          "The editor also provides X, Y, Width and Height fields with <strong>Add mask</strong> for placing a rectangle. Check the preview after adding it; coordinates are in image pixels. Use <strong>Undo</strong> if the selected area is wrong, then review the replacement mask.",
+          "Use solid coverage for private text. Pixelation averages image information rather than replacing a selected region with a uniform color. Bishop Fox demonstrated recovery of pixelated text under specific conditions in its <a href=\"https://bishopfox.com/blog/unredacter-tool-never-pixelation\">Unredacter research</a>. Recovery is not guaranteed for every image, but making text look difficult to read is a weak basis for sharing it safely. Blur can also leave readable clues."
+        ]
+      },
+      {
+        "heading": "3 Review suggestions and the rest of the image",
+        "paragraphs": [
+          "If you use <strong>Auto-Mask All</strong>, treat the result as a starting point. Check every suggested box and inspect the rest of the screenshot yourself. A pattern-based suggestion can miss contextual details, and OCR can omit or misread text. Noise, resolution and layout affect recognition, as the <a href=\"https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html\">Tesseract documentation</a> explains.",
+          "For this example, the instruction “MASK THIS SAMPLE” is the target because we chose it. It is not a conventional email, phone number or card pattern. Manual selection is necessary when the information that matters does not match an automatic rule.",
+          "Zoom in around each edge. Then scan the full image again for repeated information. If the same name appears in both a message and its sidebar preview, masking only the message leaves the second copy visible."
+        ]
+      },
+      {
+        "heading": "4 Export and inspect the saved PNG",
+        "paragraphs": [
+          "Choose <strong>Export Clean PNG</strong>. Open the downloaded file in an image viewer and inspect it at a readable zoom. Check the saved image, not only the editor preview. Make sure the intended areas are covered and the remaining context is still useful.",
+          "In this one checked export, the entire selected rectangle was one fully opaque near-black color. Every pixel outside it matched the original. The source image also contained a fictional PNG Comment marker, which was absent from the exported file. Those observations support this example; they do not establish performance for every image, browser, mask type or metadata format."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/redact-screenshot-before-sharing/synthetic-redaction-after.png",
+          "alt": "Saved fictional example with the last line covered by a solid near-black rectangle and all other text unchanged.",
+          "width": 1200,
+          "height": 500,
+          "caption": "Figure 2. The supplied export from the fictional redaction check. The selected line is covered in the saved PNG. These are the actual source and exported files inspected on 1 October 2026; the after image has not been recreated for this guide."
+        }
+      },
+      {
+        "heading": "5 Check metadata and choose the right attachment",
+        "paragraphs": [
+          "Visible redaction and metadata review are separate checks. The <a href=\"https://www.w3.org/TR/png-3/#11textinfo\">PNG specification</a> allows textual information to accompany the pixels. A file can look clean while carrying information you did not intend to share.",
+          "Inspect the exported copy with a metadata tool you trust. The example above tested a PNG Comment field; the source contained no EXIF payload, so it was not an EXIF-removal test. Do not turn that narrow result into a promise that every kind of metadata is removed.",
+          "Give the sharing copy a clear, non-sensitive filename. In the message or upload dialog, confirm that you selected the exported copy rather than the original. If you later resize, convert or annotate it, inspect the resulting file again before sending."
+        ]
+      },
+      {
+        "heading": "What redaction does not establish",
+        "paragraphs": [
+          "A solid mask covers a selected region. It cannot hide clues left elsewhere, prevent someone inferring information from context, remove copies already shared, or prove that the screenshot depicts a real event. For the last question, use the <a href=\"/blog/screenshot-checker-online/\">screenshot investigation guide</a> and verify important claims at their source.",
+          "ScreenshotChecker processes images for redaction in the browser. Its <a href=\"/privacy/\">privacy policy</a> separately describes analytics, resource requests and browser storage. Browser-local processing does not mean that the entire website makes no network requests. Moving an image between tools can retain an original-image copy in the tab's session storage; consult that policy and your browser's site-data controls when working with sensitive material."
+        ]
+      },
+      {
+        "heading": "Before you share",
+        "paragraphs": [],
+        "checklist": [
+          "Keep the original privately and share a separate copy.",
+          "Use solid masks with enough coverage around every sensitive detail.",
+          "Check suggestions, repeated information and the whole image manually.",
+          "Reopen the exact exported file and review its metadata.",
+          "Confirm the recipient needs the remaining information and the correct copy is attached."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is blurring an email address enough?",
+        "answer": "Use a fully opaque block for sensitive text. Blur and pixelation can preserve clues, and the amount of readable information depends on the image and method. Review the exported file after masking."
+      },
+      {
+        "question": "Can a black rectangle be removed later?",
+        "answer": "An editable rectangle placed over an image can be moved or deleted in its original editing document. Share a flattened image in which the selected pixels have been replaced, and inspect that saved file. In the PNG example here, the mask pixels were fully opaque and uniform. This does not rule out information elsewhere in a file or other copies of the original."
+      },
+      {
+        "question": "Does automatic masking find everything private?",
+        "answer": "No. Automatic suggestions depend on the text that is recognized and the patterns supported. Names, private context, QR codes and small or distorted text still need manual review."
+      },
+      {
+        "question": "Does redaction remove EXIF and other metadata?",
+        "answer": "Not necessarily. Review the exported file separately. Our checked example removed its PNG Comment marker, but it did not test an EXIF-bearing source. Visible coverage alone is not evidence about metadata."
+      },
+      {
+        "question": "Does redacting a screenshot prove it is genuine?",
+        "answer": "No. Redaction prepares a sharing copy. Authenticity and the truth of a message, transaction or other claim require separate investigation."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "screenshot-checker-online",
+      "exif-metadata"
+    ],
+    "cta": {
+      "label": "Open the screenshot redactor",
+      "url": "/screenshot-redactor/",
+      "description": "Apply solid masks, export a sharing copy, and inspect the exact saved file before sending it."
+    }
   },
 ];
 

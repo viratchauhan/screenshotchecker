@@ -32,8 +32,10 @@ const articleSchema = {
   '@id': `${canonicalUrl}#article`,
   headline: article.title,
   description: article.metaDescription,
-  datePublished: article.publishedAt,
-  dateModified: article.updatedAt || article.publishedAt,
+  ...(article.publishedAt ? {
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt || article.publishedAt,
+  } : {}),
   mainEntityOfPage: {
     '@type': 'WebPage',
     '@id': canonicalUrl,
@@ -132,7 +134,9 @@ const combinedStructuredData = {
       <div class="flex items-center gap-3 text-xs text-muted font-mono flex-wrap">
         <span class="badge-pill !text-[11px] font-semibold">{article.category}</span>
         <span>•</span>
-        <span>Published <time datetime={article.publishedAt}>{formatArticleDate(article.publishedAt)}</time></span>
+        {article.publishedAt
+          ? <span>Published <time datetime={article.publishedAt}>{formatArticleDate(article.publishedAt)}</time></span>
+          : <span>Draft · Publication pending</span>}
         {article.updatedAt && <span>Updated <time datetime={article.updatedAt}>{formatArticleDate(article.updatedAt)}</time></span>}
         <span>•</span>
         <span>{article.readTime}</span>
@@ -171,10 +175,31 @@ const combinedStructuredData = {
           </h2>
 
           <div class="space-y-3.5 text-body">
-            {section.paragraphs.map((p) => (
-              <p class="leading-relaxed" set:html={p} />
+            {section.paragraphs.map((p, paragraphIndex) => (
+              <Fragment>
+                <p class="leading-relaxed" set:html={p} />
+                {section.figure?.afterParagraph === paragraphIndex && (
+                  <figure class="article-figure">
+                    <img
+                      src={section.figure.src}
+                      alt={section.figure.alt}
+                      width={section.figure.width}
+                      height={section.figure.height}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption class="text-sm text-muted leading-relaxed">{section.figure.caption}</figcaption>
+                  </figure>
+                )}
+              </Fragment>
             ))}
           </div>
+
+          {section.checklist && (
+            <ul class="article-checklist">
+              {section.checklist.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
 
           {section.callout && (
             <div
@@ -280,3 +305,27 @@ const combinedStructuredData = {
 
   <Footer />
 </Layout>
+
+<style>
+  .article-figure {
+    margin-block: 1.5rem;
+  }
+  .article-figure img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+  .article-figure figcaption {
+    margin-top: 0.75rem;
+  }
+  .article-checklist {
+    list-style: disc;
+    padding-left: 1.5rem;
+  }
+  .article-checklist li + li {
+    margin-top: 0.5rem;
+  }
+</style>
