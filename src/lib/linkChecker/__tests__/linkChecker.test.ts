@@ -23,16 +23,10 @@ record('hosts', 'host-only.test', 'bad');
 record('domains', 'parent.test', 'bad');
 const requested: string[] = [];
 const unexpected: string[] = [];
-let apiResponse: unknown = null;
 const originalFetch = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
   const target = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
   requested.push(target);
-  if (target === '/api/check-link' && init?.method === 'POST') {
-    assert.equal(init.headers && (init.headers as Record<string, string>)['Content-Type'], 'application/json');
-    assert.equal(typeof JSON.parse(String(init.body)).url, 'string');
-    return apiResponse ? Response.json(apiResponse) : new Response('', { status: 404 });
-  }
   const match = target.match(/^\/urldataIndex\/shard_([0-9a-f]{2})\.json$/);
   if (match && (!init?.method || init.method === 'GET')) {
     return Response.json(shards.get(match[1]) || { urls: {}, hosts: {}, domains: {} });
@@ -99,22 +93,18 @@ try {
   assert.equal((await verifySingleUrl('ftp://fixture.test/')).verdict, 'INVALID_URL');
   assert.equal(requested.length, beforeInvalid, 'Invalid input must not request shards');
 
-  // Exercise the actual UI entrypoint: static-host API miss -> local shards,
-  // multi-URL input, and a mocked successful server envelope.
+  // Exercise the local UI entrypoint and multi-URL extraction.
   const fallback = await checkLink('https://fixture.test/known?x=1');
   assert.equal(fallback.single.verdict, 'KNOWN_BAD');
   assert.equal(fallback.reports.length, 1);
   const multi = await checkLink('Check https://host-only.test and https://unknown-fixture.test');
   assert.equal(multi.reports.length, 2);
   assert.deepEqual(multi.reports.map(report => report.verdict), ['KNOWN_BAD', 'NO_LOCAL_MATCH']);
-  apiResponse = { single: conflict, reports: [conflict] };
-  const beforeApi = requested.length;
   assert.equal((await checkLink('https://conflict.test/')).single.verdict, 'CONFLICTING');
-  assert.deepEqual(requested.slice(beforeApi), ['/api/check-link']);
   await assert.rejects(checkLink('  '), /valid URL/);
   assert.deepEqual(unexpected, [], 'No destination/provider/other requests permitted');
   assert.ok(requested.some(path => path.startsWith('/urldataIndex/shard_')));
-  console.log('Current link-client regression entrypoint passed: normalization, strict SSRF, deterministic dataset verdicts and mocked UI/API fallback; zero live requests');
+  console.log('Current link-client regression entrypoint passed: normalization, strict SSRF, deterministic dataset verdicts and local UI lookup; zero live requests');
 } finally {
   globalThis.fetch = originalFetch;
 }

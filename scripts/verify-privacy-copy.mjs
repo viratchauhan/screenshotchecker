@@ -26,6 +26,6 @@ const policy = load('privacy');
 assert.equal(policy.querySelectorAll('h1').length, 1);
 assert.ok(normalize(policy.body.textContent).includes('not a scheduled deletion timer'));
 assert.ok(normalize(policy.body.textContent).includes('Google Analytics'));
-assert.ok(normalize(policy.body.textContent).includes('/api/check-link'));
+assert.ok(normalize(policy.body.textContent).includes('does not send the submitted URL or message text'));
 assert.equal(policy.querySelector('link[rel="canonical"]').getAttribute('href'), 'https://screenshotchecker.com/privacy/');
 console.log('Privacy page disclosure and canonical checks pass');

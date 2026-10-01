@@ -127,7 +127,7 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
   'suspicious-link-checker': [
     {
       question: 'What happens to the URL or message I submit?',
-      answer: 'The standalone checker first POSTs the full trimmed submission to this site\'s /api/check-link endpoint, then uses a browser-local fallback if unavailable. Up to ten recent URL results are saved in localStorage and can be removed with Clear History. Avoid submitting confidential messages or private links. See the privacy policy for analytics and storage details.',
+      answer: 'The standalone checker extracts URLs and compares them with the dataset in your browser, without sending the submitted URL or message text to an analysis endpoint or visiting the destination. Static dataset shard requests can still occur. Up to ten recent URL results are saved in localStorage and can be removed with Clear History. See the privacy policy for analytics and storage details.',
     },
     {
       question: 'What is a suspicious link checker?',

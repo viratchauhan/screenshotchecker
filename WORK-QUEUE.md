@@ -1,5 +1,7 @@
 # ScreenshotChecker bounded work queue
 
+**Latest 1 October 2026 task 10B privacy slice:** Removed the unnecessary standalone link-checker text POST after synthetic reproduction; the existing browser dataset lookup now runs directly. Related policy/FAQ wording and synthetic request/workflow regressions updated. Follow-up reproduced the unrelated redaction path-separator failure on clean main and normalized only its test comparison. Exact Node 26.9.0/npm 11.19.1: **35/35 entrypoints and 32-page build pass**, with SEO/blog and built privacy parity passing. See `audit/10B-local-link-privacy-2026-10-01.md`. Local review checkpoint only; no publication. Broader 09/10A/10B work stays open.
+
 **Latest 1 October 2026 privacy disclosure checkpoint:** Bounded task 09A corrects blanket zero-network/zero-storage claims and discloses existing analytics, cross-tool session storage and standalone URL submission/history. Application behavior is unchanged. Independent review accepted `a9da484`; 33/33 pinned test entrypoints, build, SEO/blog and built FAQ parity pass. See `audit/09A-privacy-disclosures-2026-10-01.md`; successor Preview validation follows before release consideration. Task 09 remains open for broader behavior/consent work.
 
 **Latest 1 October 2026 release-preparation checkpoint:** Cloudflare production-main and branch-Preview commands are verified. Required empty Preview config added locally; 32/32 pinned-runtime entrypoints and build/SEO/blog pass. Scoped review accepted `b89ccd0`; feature branch/draft PR only, with production unchanged. See `audit/R1-preview-readiness-2026-10-01.md`.
@@ -88,6 +90,12 @@ Task numbers are ordering guides, not calendar commitments. Task 06 may happen e
 - Regression checks are scoped to the change; a build alone is not a functional test.
 
 **Session log**
+
+### 2026-10-01 - task 10B local-only standalone link lookup
+
+Owner-delegated bounded privacy work in an isolated checkout from main `52c858db8c2d62269a00ad96d4599dfcaff8500d`; tutorial PR2 untouched. Reproduced the full-message POST with intercepted `.invalid` input, then removed only the server-first branch. Existing extraction, dataset verdicts, unavailable/conflict states and history UI remain. Synthetic regressions cover request shape, recovery, multi-URL picker, form/recheck and history controls. Exact pinned validation and the unrelated Windows aggregate-test limitation are recorded in `audit/10B-local-link-privacy-2026-10-01.md`. Parent independent review is next; no push, PR, deployment or next backlog task started.
+
+Owner-requested follow-up: clean-base redaction test reproduced 13/14 passing with the sole Windows separator mismatch. One-line test-only comparison normalization retains the complete-surface equality assertion; 14/14 targeted tests and the full 35/35 aggregate plus build/SEO/privacy parity now pass. Runtime privacy diff remains exactly the `0b18098568837ae237fb3c98e88442dc9562e519` checkpoint. No publication.
 
 | Date | Completed | Verification | Next |
 | --- | --- | --- | --- |
