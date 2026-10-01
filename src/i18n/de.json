@@ -8,7 +8,7 @@
   "hero.badge": "Datenschutz-Erste Bildintelligenz",
   "hero.title": "Verstehen Sie, was in einem Bild steckt",
   "hero.subtitle": "Laden Sie einen Screenshot oder ein Bild hoch und lassen Sie ScreenshotChecker verstehen, was er enthält, was er aussagt und worauf zu achten ist.",
-  "hero.privacy_pill": "100% clientseitige Privatanalyse. Keine Serverspeicherung.",
+  "hero.privacy_pill": "Bildverarbeitung in Ihrem Browser",
 
   "uploader.drop_title": "Screenshot zum Prüfen hochladen oder einfügen",
   "uploader.drop_subtitle": "Beliebiges Bild ziehen & ablegen, lokale Dateien wählen oder aus der Zwischenablage einfügen",

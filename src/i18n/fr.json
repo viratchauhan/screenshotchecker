@@ -8,7 +8,7 @@
   "hero.badge": "Intelligence Visuelle Privée",
   "hero.title": "Comprenez le Contenu d'une Image",
   "hero.subtitle": "Importez une capture d'écran ou une image et laissez ScreenshotChecker comprendre ce qu'elle contient, ce qu'elle communique et ce qui mérite attention.",
-  "hero.privacy_pill": "Analyse 100% côté client. Aucun stockage serveur.",
+  "hero.privacy_pill": "Traitement des images dans votre navigateur",
 
   "uploader.drop_title": "Déposez ou Collez une Capture à Inspecter",
   "uploader.drop_subtitle": "Glissez-déposez n'importe quelle image, parcourez vos fichiers ou collez depuis le presse-papiers",

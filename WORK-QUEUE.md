@@ -1,5 +1,7 @@
 # ScreenshotChecker bounded work queue
 
+**Latest 1 October 2026 privacy disclosure checkpoint:** Bounded task 09A corrects blanket zero-network/zero-storage claims and discloses existing analytics, cross-tool session storage and standalone URL submission/history. Application behavior is unchanged. Independent review accepted `a9da484`; 33/33 pinned test entrypoints, build, SEO/blog and built FAQ parity pass. See `audit/09A-privacy-disclosures-2026-10-01.md`; successor Preview validation follows before release consideration. Task 09 remains open for broader behavior/consent work.
+
 **Latest 1 October 2026 release-preparation checkpoint:** Cloudflare production-main and branch-Preview commands are verified. Required empty Preview config added locally; 32/32 pinned-runtime entrypoints and build/SEO/blog pass. Scoped review accepted `b89ccd0`; feature branch/draft PR only, with production unchanged. See `audit/R1-preview-readiness-2026-10-01.md`.
 
 **Latest 1 October 2026 checkpoint:** Bounded 04B export-recovery slice independently accepted at functional commit `71c1328`. Fourteen focused error/retry/stale-export tests pass; local Canvas pixel QA verifies opaque masks and removal of one synthetic PNG Comment marker. Exact pinned-runtime aggregate passes 31/31 and a 32-page build, plus SEO/blog checks. This does not close production download or whole-page privacy gates. See `audit/04B-export-qa-2026-10-01.md`. No remote changes.
@@ -272,3 +274,7 @@ Recovered reviewed `77b2cd8` and matching v5 artifacts before work. GitHub main 
 ## 1 October 2026 — R1 branch Preview preparation
 
 Verified main production command versus nonproduction Preview command. Added only the required empty previews block; no production fields, dependencies or commands changed. Two config controls and full pinned checks pass (32 entrypoints, 32 pages, SEO/blog). Scoped review accepted `b89ccd0` before draft PR publication; no production deployment authorized. See `audit/R1-preview-readiness-2026-10-01.md`.
+
+## 1 October 2026 — 09A privacy disclosure alignment
+
+The original draft PR/Preview is confirmed with unchanged production. Saved synthetic PNG pixel/Comment checks and narrow desktop layout passed; runtime network capture is blocked by organization policy. A source audit exposed blanket privacy guarantees that exceed existing analytics, handoff storage and URL-submission behavior. This bounded copy-only successor discloses those distinctions and adds focused source/FAQ-schema checks. No analytics, storage or image-processing behavior changed. Broader task 09 remains open. See audit/09A-privacy-disclosures-2026-10-01.md.

@@ -8,7 +8,7 @@
   "hero.badge": "Privacy-First Image Intelligence",
   "hero.title": "Screenshot Checker – Analyze Screenshots for Digital Evidence",
   "hero.subtitle": "Upload a screenshot or image to investigate what may be hidden inside it. ScreenshotChecker analyzes visible content, text, metadata, editing signals, and suspicious patterns to help you understand whether an image deserves a closer look.",
-  "hero.privacy_pill": "100% Client-Side Private Analysis. Zero Server Storage.",
+  "hero.privacy_pill": "Image processing in your browser",
 
   "uploader.drop_title": "Upload a screenshot to analyze it",
   "uploader.drop_subtitle": "Check screenshots for potential editing signals, suspicious visual inconsistencies, metadata, and other available evidence.",
