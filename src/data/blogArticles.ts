@@ -1045,14 +1045,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       description: 'Check any URL or domain against 420K+ intelligence records in under 5 milliseconds.',
     },
   },
-  // Task 17: publication date stays pending until the authorized release.
+  // Task 17: publication date set during the authorized 1 October release finalization.
   {
     "slug": "redact-screenshot-before-sharing",
     "title": "How to redact a screenshot before sharing it",
     "seoTitle": "How to Redact a Screenshot Before Sharing It",
     "metaDescription": "Redact a screenshot with opaque masks, then check the saved PNG and metadata. Follow a fictional before-and-after example and a practical sharing checklist.",
     "category": "Privacy",
-    "publishedAt": null,
+    "publishedAt": "2026-10-01",
     "authorName": "ScreenshotChecker",
     "readTime": "6 min read",
     "excerpt": "A worked example of solid-mask redaction, checking the exported PNG, and reviewing metadata before sharing a screenshot.",

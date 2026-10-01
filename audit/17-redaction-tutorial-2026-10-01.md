@@ -55,3 +55,17 @@ No rankings, indexing, traffic or conversion gains are claimed. The existing tas
 
 
 Independent acceptance covers the functional tutorial checkpoint. Later receipt/review documentation does not change reviewed application source. The null publication date is a truthful draft state, not a technical deployment interlock.
+
+
+## Release-date finalization after initial Preview
+
+Draft PR [#2](https://github.com/viratchauhan/screenshotchecker/pull/2) has remote feature commit `3e7c15b`, tree-identical to local documentation checkpoint `5491b2e`. Cloudflare [Preview receipt](https://github.com/viratchauhan/screenshotchecker/pull/2#issuecomment-5926878950) confirms build/deployment success for that exact commit, deployment `b8addd79-bcff-4a18-98f7-5922bf7afa03`.
+
+Independent Preview review passed wide and 485px layouts, figure loading/proportions and caption readability, checklist/FAQ, reciprocal contextual links and preservation of existing article dates. This is browser-width QA, not physical-phone testing or a new privacy/network/export guarantee.
+
+Following those checks, the new article's `publishedAt` is set to `2026-10-01` for the authorized 1 October release. The earlier pending-date section describes the reviewed draft checkpoint; this date-only application delta changes visible/schema/index/sitemap dates together. No old article date or `updatedAt` is changed. This remains a release candidate until final checks, independent date/schema confirmation, successor exact-head Preview and the controlled production decision. Correct the date if actual publication moves to a later day.
+
+Final date-candidate rerun on exact Node 26.9.0/npm 11.19.1: `npm run check` passes 34/34 entrypoints and 33-page build; general SEO reports 33 pages with zero errors/warnings; all eight article checks pass, including visible/schema/index/sitemap date parity and unchanged figure bytes. `git diff --check` passes. Independent confirmation of this narrow delta and successor Preview remain pending at this checkpoint.
+
+
+Independent final-date review **accepted** `9a243f3` with no blocking findings. The reviewer independently reran pinned 34/34 tests, the 33-page build and both SEO scripts, and confirmed visible/index/BlogPosting dates, sitemap lastmod `2026-10-01T00:00:00.000Z`, no invented `updatedAt`, and unchanged prior records/PNG hashes. The successor exact-head Preview and controlled release decision remain separate gates.

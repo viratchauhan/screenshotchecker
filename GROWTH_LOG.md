@@ -32,3 +32,8 @@ Reproduced failed shard requests appearing as no-match and fixed client/service/
 - The Free Tools Directory received one authorized Security-category submission at approximately 07:17 UTC; OSINT Newsletter Tools Library recorded one authorized maker-disclosed submission at approximately 07:21 UTC
 - Both directory submissions await editorial review. No acceptance, publication, referral traffic or measured acquisition improvement is claimed; no email/social contact details supplied
 - Existing `WORK-QUEUE.md` remains authoritative. No new outreach queue or automatic follow-up schedule was created
+
+
+## 1 October 2026 — task 17 release candidate after Preview
+
+Draft PR #2 and Cloudflare Preview for `3e7c15b` are verified. Independent wide/485px visual checks passed images, captions, checklist, FAQs, reciprocal links and unchanged historical dates. The new article is dated 1 October during release finalization; final exact-runtime checks, independent date/schema review and successor Preview remain gates before the production decision. No traffic/indexing improvement is claimed.
