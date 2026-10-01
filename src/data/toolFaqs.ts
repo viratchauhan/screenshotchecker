@@ -41,26 +41,26 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
     },
     {
       question: 'Is my extracted screenshot text private and secure?',
-      answer: 'Yes. Because OCR processing is executed entirely within your browser, your sensitive messages, receipts, and personal notes are never uploaded or stored on remote servers.',
+      answer: 'OCR processes image pixels and extracted text in your browser without an OCR upload. The page still uses analytics and downloads OCR resources. Sending the original image to another tool saves a copy in browser sessionStorage; see the privacy policy for storage lifetime and network details.',
     },
     {
       question: 'What image resolutions provide the best OCR text accuracy?',
-      answer: 'Standard screenshot resolutions from smartphones and desktop displays (72 to 300 DPI) work reliably. Clear contrast between text and background produces near-perfect transcription.',
+      answer: 'OCR accuracy depends on text size in pixels, contrast, sharpness, language, and layout. DPI metadata alone does not establish readability. Review the extracted text, especially names and numbers, against the original image.',
     },
   ],
 
   'screenshot-redactor': [
     {
       question: 'What redaction methods are available for hiding sensitive information?',
-      answer: 'You can choose between heavy Gaussian blur, pixelation mosaic, solid blackout blocks, or subtle highlighter strokes to obscure phone numbers, emails, addresses, and financial account figures.',
+      answer: 'The editor offers blur, pixelation, black blocks, and white blocks. Use fully opaque solid blocks to cover sensitive information; blur, pixelation, and highlighting can leave readable clues.',
     },
     {
       question: 'Can redacted text be reversed or unmasked after export?',
-      answer: 'No. When you export a redacted image, the underlying pixels are permanently overwritten and re-rasterized onto a fresh HTML5 canvas. The original pixel data is destroyed upon export.',
+      answer: 'Export creates a separate flattened image; your original file is unchanged. Fully cover sensitive information with opaque solid blocks. Blur, pixelation, and highlighting can leave clues or readable text, so inspect the exported copy before sharing.',
     },
     {
       question: 'Is there any file upload required to redact screenshots?',
-      answer: 'No. All drawing, blurring, and export operations happen completely in-memory on your client machine.',
+      answer: 'Redaction and export run in your browser without an image-processing upload. Cross-tool transfers save the original image in browser sessionStorage; the one-hour limit is checked when read, not a deletion timer. Pages also use analytics and download resources. See the privacy policy for details.',
     },
   ],
 
@@ -105,7 +105,7 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
     },
     {
       question: 'Does the scanner store any detected personal information?',
-      answer: 'Never. The entire detection heuristic runs in your local browser sandbox. No phone numbers, card details, or names are ever recorded or transmitted.',
+      answer: 'Detection runs in your browser. Cross-tool image transfers save the original image, which may contain personal information, in browser sessionStorage. An image is rejected after one hour when read, rather than deleted on a timer. Pages also use analytics and download resources; see the privacy policy.',
     },
   ],
 
@@ -125,6 +125,10 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
   ],
 
   'suspicious-link-checker': [
+    {
+      question: 'What happens to the URL or message I submit?',
+      answer: 'The standalone checker first POSTs the full trimmed submission to this site\'s /api/check-link endpoint, then uses a browser-local fallback if unavailable. Up to ten recent URL results are saved in localStorage and can be removed with Clear History. Avoid submitting confidential messages or private links. See the privacy policy for analytics and storage details.',
+    },
     {
       question: 'What is a suspicious link checker?',
       answer: 'A suspicious link checker is an investigative tool that verifies a submitted URL or domain against a database of known web classifications to identify whether it matches cataloged bad, good, or conflicting records.',

@@ -1,3 +1,4 @@
+import { isDatasetShard, datasetUnavailable } from './datasetAvailability';
 import { normalizeUrl } from './urlNormalizer';
 import type {
   LocalVerificationReport,
@@ -34,8 +35,10 @@ async function fetchShard(shardKey: string): Promise<{
     const response = await fetch(`/urldataIndex/shard_${shardKey}.json`);
     if (response.ok) {
       const data = await response.json();
-      CLIENT_SHARD_CACHE.set(shardKey, data);
-      return data;
+      if (isDatasetShard(data)) {
+        CLIENT_SHARD_CACHE.set(shardKey, data);
+        return data;
+      }
     }
   } catch {}
 
@@ -107,7 +110,8 @@ export async function verifySingleUrl(rawInput: string): Promise<LocalVerificati
   // 1. Check EXACT URL MATCH
   const urlShardKey = getShardKey(urlKey);
   const urlShard = await fetchShard(urlShardKey);
-  if (urlShard && urlShard.urls && urlShard.urls[urlKey]) {
+  if (!urlShard) return datasetUnavailable(norm, source, now);
+  if (Object.hasOwn(urlShard.urls, urlKey)) {
     matched = true;
     matchLevel = 'EXACT_URL';
     matchedValue = urlKey;
@@ -118,7 +122,8 @@ export async function verifySingleUrl(rawInput: string): Promise<LocalVerificati
   if (!matched && hostKey) {
     const hostShardKey = getShardKey(hostKey);
     const hostShard = await fetchShard(hostShardKey);
-    if (hostShard && hostShard.hosts && hostShard.hosts[hostKey]) {
+    if (!hostShard) return datasetUnavailable(norm, source, now);
+    if (Object.hasOwn(hostShard.hosts, hostKey)) {
       matched = true;
       matchLevel = 'EXACT_HOSTNAME';
       matchedValue = hostKey;
@@ -130,7 +135,8 @@ export async function verifySingleUrl(rawInput: string): Promise<LocalVerificati
   if (!matched && domainKey) {
     const domainShardKey = getShardKey(domainKey);
     const domainShard = await fetchShard(domainShardKey);
-    if (domainShard && domainShard.domains && domainShard.domains[domainKey]) {
+    if (!domainShard) return datasetUnavailable(norm, source, now);
+    if (Object.hasOwn(domainShard.domains, domainKey)) {
       matched = true;
       matchLevel = 'REGISTRABLE_DOMAIN';
       matchedValue = domainKey;

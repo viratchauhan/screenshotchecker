@@ -1,0 +1,26 @@
+{
+  "renderer": "real application function with @napi-rs/canvas adapter",
+  "width": 64,
+  "height": 48,
+  "opaquePixels": 492,
+  "unchangedPixels": 2580,
+  "sourceChunks": [
+    "IHDR",
+    "tEXt",
+    "sBIT",
+    "sRGB",
+    "IDAT",
+    "IEND"
+  ],
+  "exportedChunks": [
+    "IHDR",
+    "sBIT",
+    "sRGB",
+    "IDAT",
+    "IEND"
+  ],
+  "syntheticCommentRemoved": true,
+  "blobMatchesDataUrl": true,
+  "fetchAttempts": 0,
+  "limitation": "Local Canvas/PNG evidence only; does not establish production browser download, all source metadata formats, OCR, or full-page network privacy."
+}

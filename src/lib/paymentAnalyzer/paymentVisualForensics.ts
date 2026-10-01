@@ -17,29 +17,18 @@ export function evaluatePaymentVisualForensics(
   const lower = text.toLowerCase();
   const issues: PaymentRiskFactor[] = [];
 
-  // =========================================================================
-  // 1. TYPOGRAPHY INCONSISTENCY CHECK
-  // =========================================================================
-  // Look for cues indicating inconsistent font family or serif/sans-serif mix.
-  // Many fake UPI APKs render labels like "Banking name:" or bank names with a default Android/Web Serif font,
-  // while the rest of PhonePe/GPay uses a clean sans-serif (Proxima Nova / Roboto / Google Sans).
-  const hasSerifBankIndicators =
-    /\b(?:banking\s*name\s*:?\s*[^\n]+|state\s*bank\s*of\s*india|debited\s*from)\b/i.test(text) &&
-    // Check if OCR captured characteristic serif artifacts or abnormal casing/styling
-    (/[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\s*:\s*[A-Z]/.test(text) ||
-      /\bBanking\s+name\s*:/i.test(text));
-
-  // If "Banking name:" is present with anomalous layout or distinct line styling
+  // Legacy weighted OCR-label rule. This function receives no pixels, font
+  // metrics or text boxes; it cannot measure typography or layout.
   if (/\bBanking\s+name\s*:/i.test(text)) {
     issues.push({
       id: 'typography_inconsistency_label',
       type: 'TYPOGRAPHY_ANOMALY',
       severity: 'medium',
-      title: 'Typography & Font Family Inconsistency',
+      title: 'Banking Label Text Rule',
       explanation:
-        'A text region (such as "Banking name:" or the account details section) appears to use a noticeably different typography style or font rendering from surrounding official UI elements.',
+        'OCR contains the label "Banking name:". Font family, rendering and layout were not measured; this label alone does not establish an edit.',
       where: 'Banking name / Account Details row',
-      why: 'Official UPI apps use consistent, custom sans-serif typography across all fields. Font variations are a common artifact of spoofing templates and prank APKs.',
+      why: 'This is a legacy text-rule indicator. Compare the original with an official receipt; the rule is not validated as evidence of fraud.',
     });
   }
 
@@ -61,11 +50,11 @@ export function evaluatePaymentVisualForensics(
       id: 'icon_placement_in_bank_name',
       type: 'ICON_PLACEMENT_ANOMALY',
       severity: 'high',
-      title: 'Unusual Icon Placement Inside Bank Name',
+      title: 'Symbol Within OCR Bank Text',
       explanation:
-        'A bank or card graphic appears awkwardly positioned directly inside the "State Bank of India" text flow rather than as a properly aligned standalone UI vector.',
+        'OCR contains a symbol within bank-name text. Icon position and alignment were not measured; OCR can merge nearby graphics into text.',
       where: 'Bank Account / Debited From section',
-      why: 'Official banking apps render logos and bank names in separate layout containers with strict padding. Embedded glyphs indicate composite template generation.',
+      why: 'Inspect the original image manually. A symbol in extracted text does not establish composite editing.',
     });
   }
 
@@ -75,11 +64,11 @@ export function evaluatePaymentVisualForensics(
       id: 'floating_badge_placement',
       type: 'UI_ELEMENT_ANOMALY',
       severity: 'medium',
-      title: 'Irregular Verified Badge Placement',
+      title: 'Checkmark Within OCR Name Text',
       explanation:
-        'A verified checkmark badge appears attached directly inside the banking name field rather than in the primary merchant title banner.',
+        'OCR contains a checkmark alongside name text. Badge position and authenticity were not assessed.',
       where: 'Banking Name field',
-      why: 'Spoofed receipts frequently duplicate or misplace verification badges to make fake transfers appear legitimate.',
+      why: 'OCR text alone cannot establish whether a badge is official or correctly positioned.',
     });
   }
 

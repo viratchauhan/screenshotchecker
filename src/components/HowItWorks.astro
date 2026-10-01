@@ -23,7 +23,7 @@
           <div>
             <h3 class="font-serif text-lg text-ink font-normal mb-1">Local Image Decoding</h3>
             <p class="text-sm text-body leading-relaxed">
-              When you drop, pick, or paste an image, the browser reads it directly into memory via FileReader. No network upload request is dispatched.
+              When you drop, pick, or paste an image, the browser reads the selected file via FileReader for local processing rather than uploading it to an image-processing server.
             </p>
           </div>
         </div>
@@ -78,7 +78,7 @@
             <p>]);</p>
             <p class="text-on-dark-soft">// 3. Client-side risk & privacy heuristics</p>
             <p><span class="text-accent-amber">const</span> report = <span class="text-primary">evaluatePrivacyAndScamSignals</span>(ocrText, metadata);</p>
-            <p class="text-success font-semibold">✓ Status: REVIEW_RECOMMENDED | Findings: 3 | Transmitted: 0 Bytes</p>
+            <p class="text-success font-semibold">✓ Illustrative report: REVIEW_RECOMMENDED | Findings: 3 | Image processing: local</p>
           </div>
         </div>
       </div>

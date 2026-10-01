@@ -36,7 +36,7 @@ async function runBlogSystemTests() {
     assert(article.readTime.includes('min read'), `Read time formatted properly: "${article.readTime}"`);
     assert(article.contentSections.length >= 3, `Has ${article.contentSections.length} content sections`);
     assert(article.faq.length >= 4, `Has ${article.faq.length} FAQs`);
-    assert(article.peopleAlsoSearch.length >= 4, `Has ${article.peopleAlsoSearch.length} People Also Search For queries`);
+    assert(article.peopleAlsoSearch.every(query => query.trim().length > 0), 'Optional related search phrases are nonempty when present');
     assert(article.targetKeywords.length >= 4, `Has ${article.targetKeywords.length} target keywords`);
 
     // Verify key takeaway

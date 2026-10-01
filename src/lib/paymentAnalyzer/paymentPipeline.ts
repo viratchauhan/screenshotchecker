@@ -54,7 +54,7 @@ export async function runPaymentAnalysis(
   const extracted = extractPaymentEntities(currentImageOCR);
 
   // 5. RUN PAYMENT-SPECIFIC VISUAL & TYPOGRAPHY FORENSICS
-  if (onProgress) onProgress(85, 'Auditing typography, icons, and layout consistency...');
+  if (onProgress) onProgress(85, 'Checking receipt text and reference consistency...');
   const forensics = evaluatePaymentVisualForensics(
     currentImageOCR,
     extracted,
@@ -71,7 +71,7 @@ export async function runPaymentAnalysis(
     currentImageOCR,
     dataUrl,
     imageInfo,
-    ['Evaluated typography styles across receipt rows.', 'Audited 12-digit UTR formatting and amount alignment.']
+    ['Evaluated receipt-text rules; fonts, icon positions and layout were not measured.', 'Checked extracted reference formatting and amount strings.']
   );
 
   if (onProgress) onProgress(100, 'Payment analysis complete');

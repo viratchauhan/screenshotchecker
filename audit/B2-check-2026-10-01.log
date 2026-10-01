@@ -1,0 +1,1078 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> screenshotchecker@0.0.1 check
+> npm run test && npm run build
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> screenshotchecker@0.0.1 test
+> node scripts/run-tests.mjs
+
+Tested Node: 26.9.0; running: 24.19.0
+
+Running src/lib/analyzer/__tests/agenticInvestigation.test.ts
+================================================================
+   AGENTIC MULTIMODAL INVESTIGATION ARCHITECTURE TEST SUITE
+================================================================
+
+[Test 1] MANDATORY TEST — Unpaid Toll Invoice Phishing SMS
+  ✓ Open-Ended Observation: A road toll enforcement notice demanding payment of an outstanding balance to avoid late fees.
+  ✓ Claim Identified: Claims you owe an unpaid toll balance on your account and will incur additional penalty fees.
+  ✓ Action Identified: Pressures you to click http://bit.ly/toll-pay and submit payment immediately.
+  ✓ Authenticity Status: SUSPICIOUS ("High-Risk Highway Toll Smishing Pattern Detected")
+  ✓ Evidence-First Trace Generated: Financial theft from unauthorized credit card charges on spoofed payment portals.
+  ✓ Recommendation: Do not make any payment through the link. Check the official SunPass website directly.
+  ✓ PASS
+
+[Test 2] Real Bank Credit Notification
+  ✓ Observed: A financial notification or payment receipt displaying monetary transaction details.
+  ✓ Claim: Claims that a transaction of INR 25,000.00 was credited.
+  ✓ Authenticity: UNVERIFIABLE (Correctly states funds cannot be proven from screenshot alone)
+  ✓ PASS
+
+[Test 3] Fake Receipt with Internal Discrepancy
+  ✓ Discrepancy Caught: CONTRADICTED
+  ✓ Evidence Trace: High likelihood of edited or fabricated receipt proof.
+  ✓ PASS
+
+[Test 4] Bank Phishing SMS with IP Link
+  ✓ Phishing Threat Caught: SUSPICIOUS
+  ✓ Action Directive: The text asks you to use a link to unlock or verify an account.
+  ✓ PASS
+
+[Test 5] Natural Photograph (Minimal Text)
+  ✓ Natural Photo Handled: INSUFFICIENT_EVIDENCE
+  ✓ No false alarms triggered
+  ✓ PASS
+
+[Test 6] Advance-Fee Prize / Gift Card Scam
+  ✓ Advance-Fee Pattern Caught: SUSPICIOUS
+  ✓ Fee Demand Identified: Asks you to send or pay a fee to claim the prize.
+  ✓ PASS
+
+================================================================
+SUMMARY: 6 PASSED, 0 FAILED
+================================================================
+
+Running src/lib/analyzer/__tests/i18n.test.ts
+================================================================
+            MULTI-LANGUAGE (i18n) INTEGRITY TEST SUITE
+================================================================
+
+[Testing Language: EN]
+  ✓ 100% Key Completeness (83/83 keys translated)
+  ✓ Sample Title: "Screenshot Checker – Analyze Screenshots for Digital Evidence"
+  ✓ Sample Action: "Protect / Redact"
+  ✓ PASS
+
+[Testing Language: HI]
+  ✓ 100% Key Completeness (83/83 keys translated)
+  ✓ Sample Title: "छवि के अंदर क्या है, समझें"
+  ✓ Sample Action: "सुरक्षित करें / छिपाएं"
+  ✓ PASS
+
+[Testing Language: ES]
+  ✓ 100% Key Completeness (83/83 keys translated)
+  ✓ Sample Title: "Comprende lo que hay dentro de una Imagen"
+  ✓ Sample Action: "Proteger / Censurar"
+  ✓ PASS
+
+[Testing Language: FR]
+  ✓ 100% Key Completeness (83/83 keys translated)
+  ✓ Sample Title: "Comprenez le Contenu d'une Image"
+  ✓ Sample Action: "Protéger / Masquer"
+  ✓ PASS
+
+[Testing Language: DE]
+  ✓ 100% Key Completeness (83/83 keys translated)
+  ✓ Sample Title: "Verstehen Sie, was in einem Bild steckt"
+  ✓ Sample Action: "Schützen / Schwärzen"
+  ✓ PASS
+
+[Testing Language: JA]
+  ✓ 100% Key Completeness (83/83 keys translated)
+  ✓ Sample Title: "画像の中に何があるかを理解する"
+  ✓ Sample Action: "保護 / 黒塗り"
+  ✓ PASS
+
+================================================================
+SUMMARY: 6 PASSED, 0 FAILED
+================================================================
+
+
+Running src/lib/analyzer/__tests/ocrPreprocessing.test.ts
+================================================================
+            OCR PREPROCESSING PIPELINE TEST SUITE
+================================================================
+
+[Test 1] Luminance and Dark Mode Detection
+  Dark Background Luminance: 21.63 (Expected < 115) -> DARK MODE
+  Light Background Luminance: 248.84 (Expected > 115) -> LIGHT MODE
+  ✓ PASS
+
+[Test 2] Contrast Histogram Stretching
+  Min (50) -> 0 (Expected 0)
+  Max (150) -> 254.99999999999997 (Expected 255)
+  Mid (100) -> 127.49999999999999 (Expected 127.5)
+  ✓ PASS
+
+[Test 3] Sharpening 3x3 Edge Kernel
+  Center: 200, Surroundings: 100 -> Sharpened Edge: 255 (Expected 255)
+  ✓ PASS
+
+================================================================
+SUMMARY: 3/3 PASSED, 0 FAILED
+================================================================
+
+
+Running src/lib/analyzer/__tests__/aiImageForensicsEngine.test.ts
+================================================================
+--- RUNNING AI IMAGE DETECTOR FORENSICS ENGINE UNIT TESTS ---
+================================================================
+
+[Test 1] Provenance Inspection - Generative AI Software:
+  ✓ Identified AI software / C2PA manifest
+
+[Test 2] Text Typography Forensics - Malformed AI Text:
+  ✓ Detected malformed text anomaly
+  ✓ Identified anomalous tokens (MARKETNG, STRATGY, BZKPQ)
+
+[Test 3] Text Typography Forensics - Clean Natural Text:
+  ✓ Clean text correctly marked as not malformed
+
+[Test 4] Visual Modality Classification - UI Screenshot:
+  ✓ Classified as UI_SCREENSHOT (got: UI_SCREENSHOT)
+
+[Test 5] Visual Modality Classification - Digital Illustration:
+  ✓ Classified as DIGITAL_ILLUSTRATION (got: DIGITAL_ILLUSTRATION)
+
+[Test 6] Visual Modality Classification - Camera Photo:
+  ✓ Classified as PHOTOGRAPH (got: PHOTOGRAPH)
+
+================================================================
+✅ ALL AI IMAGE DETECTOR FORENSIC UNIT TESTS PASSED 100%!
+================================================================
+
+
+Running src/lib/analyzer/__tests__/bankPrizeEvidence.test.ts
+Bank-link/prize-fee evidence regressions: 26 cases passed; network prohibited
+
+Running src/lib/analyzer/__tests__/blogSystem.test.ts
+================================================================
+--- RUNNING BLOG & SEO CONTENT SYSTEM UNIT TESTS ---
+================================================================
+
+  ✓ Published articles exist
+  ✓ Article slugs are unique
+
+[Testing Article: screenshot-checker-online]
+  ✓ Article "screenshot-checker-online" exists
+  ✓ Title is present: "How to Check If a Screenshot Is Real or Edited"
+  ✓ SEO Title is present: "Is This Screenshot Real or Edited? A Verification Checklist"
+  ✓ Meta description is present: "Check a suspicious screenshot with a five-step checklist, payment and chat examples, and clear limits of OCR, metadata and image analysis."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "6 min read"
+  ✓ Has 7 content sections
+  ✓ Has 5 FAQs
+  ✓ Optional related search phrases are nonempty when present
+  ✓ Has 4 target keywords
+  ✓ Key takeaway title: "Check the claim, not just the pixels"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Inspect a Screenshot"
+  ✓ CTA URL is internal: "/screenshot-analyzer"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: screenshot-analyzer-online]
+  ✓ Article "screenshot-analyzer-online" exists
+  ✓ Title is present: "What Can a Screenshot Analyzer Actually Detect?"
+  ✓ SEO Title is present: "Screenshot Analysis: OCR, Metadata and ELA Explained"
+  ✓ Meta description is present: "Understand screenshot OCR, metadata and ELA results, with fictional examples and practical next steps for missing, uncertain or failed checks."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "5 min read"
+  ✓ Has 7 content sections
+  ✓ Has 5 FAQs
+  ✓ Optional related search phrases are nonempty when present
+  ✓ Has 4 target keywords
+  ✓ Key takeaway title: "Start with the claim"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Inspect a Screenshot"
+  ✓ CTA URL is internal: "/screenshot-analyzer"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: fake-upi-payment-screenshot]
+  ✓ Article "fake-upi-payment-screenshot" exists
+  ✓ Title is present: "Fake UPI Payment Screenshot: How to Check If a Payment Is Real"
+  ✓ SEO Title is present: "Fake UPI Payment Screenshots: Checks and Warning Signs"
+  ✓ Meta description is present: "Review warning signs in UPI payment screenshots and learn why confirming the transaction in your own bank or payment app matters more than an image."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "7 min read"
+  ✓ Has 9 content sections
+  ✓ Has 10 FAQs
+  ✓ Optional related search phrases are nonempty when present
+  ✓ Has 18 target keywords
+  ✓ Key takeaway title: "🚨 The Golden Rule of Payment Verification"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Inspect a Payment Screenshot with Fake UPI Checker"
+  ✓ CTA URL is internal: "/payment-screenshot-checker/"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: ai-image-detector-online]
+  ✓ Article "ai-image-detector-online" exists
+  ✓ Title is present: "AI Image Detector Online: How AI-Generated Images Are Detected"
+  ✓ SEO Title is present: "AI Image Detector Online: How AI Media Is Detected"
+  ✓ Meta description is present: "Learn how AI image detectors analyze visual patterns, metadata, C2PA Content Credentials, editing signals, text rendering, and other evidence."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "6 min read"
+  ✓ Has 4 content sections
+  ✓ Has 4 FAQs
+  ✓ Optional related search phrases are nonempty when present
+  ✓ Has 6 target keywords
+  ✓ Key takeaway title: "Evidence-Based & Probabilistic Analysis"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Analyze an Image"
+  ✓ CTA URL is internal: "/ai-image-detector"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: exif-metadata]
+  ✓ Article "exif-metadata" exists
+  ✓ Title is present: "What Is EXIF Metadata? What Your Photos Can Reveal"
+  ✓ SEO Title is present: "What Is EXIF Metadata? What Your Photos Can Reveal"
+  ✓ Meta description is present: "Learn what EXIF metadata is, what information photos can contain, and how camera, location, software, and GPS metadata can affect your privacy."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "5 min read"
+  ✓ Has 4 content sections
+  ✓ Has 4 FAQs
+  ✓ Optional related search phrases are nonempty when present
+  ✓ Has 6 target keywords
+  ✓ Key takeaway title: "Digital Fingerprints in Photos"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Inspect Image Metadata"
+  ✓ CTA URL is internal: "/"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: smishing-fake-sms]
+  ✓ Article "smishing-fake-sms" exists
+  ✓ Title is present: "Smishing: How Fake SMS and WhatsApp Messages Trick You"
+  ✓ SEO Title is present: "Smishing: How Fake SMS and WhatsApp Messages Trick You"
+  ✓ Meta description is present: "Learn how fake bank, delivery, toll, job, and reward messages use urgency, suspicious links, threats, and attachments to trick people."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "6 min read"
+  ✓ Has 4 content sections
+  ✓ Has 4 FAQs
+  ✓ Optional related search phrases are nonempty when present
+  ✓ Has 7 target keywords
+  ✓ Key takeaway title: "Zero-Trust Communication Rule"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Check a Suspicious Message"
+  ✓ CTA URL is internal: "/"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Article: suspicious-link-checker-online]
+  ✓ Article "suspicious-link-checker-online" exists
+  ✓ Title is present: "Suspicious Link Checker Online: How to Check If a Link or Domain Is Safe"
+  ✓ SEO Title is present: "Suspicious Link Checker Online: Check URL Safety"
+  ✓ Meta description is present: "Check suspicious links and domains online before clicking. Verify URLs against 420K+ threat records, detect fake subdomains, and inspect URL safety for free."
+  ✓ Valid ISO calendar date
+  ✓ Publication date is not in the future
+  ✓ Update does not precede publication
+  ✓ Related links resolve to other articles
+  ✓ Read time formatted properly: "5 min read"
+  ✓ Has 6 content sections
+  ✓ Has 5 FAQs
+  ✓ Optional related search phrases are nonempty when present
+  ✓ Has 11 target keywords
+  ✓ Key takeaway title: "The Golden Rule of Link Safety"
+  ✓ Key takeaway text present
+  ✓ CTA label: "Verify a Suspicious Link Now"
+  ✓ CTA URL is internal: "/suspicious-link-checker"
+  ✓ Has 3 related articles
+  ✓ Related articles do not contain current article
+
+[Testing Unknown Slug]
+  ✓ Unknown slug correctly returns undefined
+
+================================================================
+✅ ALL BLOG ARTICLES & SEO CONTENT SYSTEM TESTS PASSED 100%!
+================================================================
+
+
+Running src/lib/analyzer/__tests__/c2paForensics.test.ts
+================================================================
+--- RUNNING C2PA CONTENT CREDENTIALS FORENSIC TEST SUITE ---
+================================================================
+
+[Test 1] Valid C2PA Manifest with Generative AI Provenance:
+  ✓ C2PA manifest presence is true
+  ✓ Validation isValid is true
+  ✓ Validation isTrusted is true
+  ✓ ai.isAIGenerated detected
+  ✓ Verdict is VERIFIED_AI_PROVENANCE (got: VERIFIED_AI_PROVENANCE)
+  ✓ Extracted 1 actions
+  ✓ Extracted 1 ingredients
+  ✓ Synthetic bonus is >= 80 (got: 85)
+  ✓ Generated HIGH synthetic signal
+
+[Test 2] Valid C2PA Manifest with AI-Assisted Editing:
+  ✓ Manifest present
+  ✓ ai.isAIEdited detected
+  ✓ Verdict is VERIFIED_AI_EDITING (got: VERIFIED_AI_EDITING)
+
+[Test 3] Valid C2PA Manifest with Camera Provenance:
+  ✓ Verdict is VERIFIED_CAMERA_PROVENANCE (got: VERIFIED_CAMERA_PROVENANCE)
+  ✓ Capture bonus is >= 50 (got: 60)
+
+[Test 4] Invalid / Tampered C2PA Manifest:
+  ✓ Manifest presence detected
+  ✓ validation.isValid is false
+  ✓ Verdict is C2PA_PRESENT_UNTRUSTED (got: C2PA_PRESENT_UNTRUSTED)
+  ✓ No synthetic bonus on untrusted manifest
+
+[Test 5] Image With No C2PA Metadata (Standard Web Image):
+  ✓ present is false
+  ✓ presence is C2PA_NOT_FOUND (got: C2PA_NOT_FOUND)
+  ✓ Verdict is NO_C2PA (got: NO_C2PA)
+  ✓ Honest explanation provided
+
+[Test 6] Unsupported Format Graceful Handling:
+  ✓ present is false
+  ✓ presence is C2PA_UNSUPPORTED_FORMAT
+
+================================================================
+✅ ALL C2PA CONTENT CREDENTIALS UNIT TESTS PASSED 100%!
+================================================================
+
+
+Running src/lib/analyzer/__tests__/fraudDatasetTests.ts
+✔ historical example t1: no forced nearest-example verdict (4.699858ms)
+✔ historical example t2: no forced nearest-example verdict (1.262104ms)
+✔ historical example t3: no forced nearest-example verdict (0.375858ms)
+✔ historical example t4: no forced nearest-example verdict (0.320356ms)
+✔ historical example t5: no forced nearest-example verdict (0.273156ms)
+✔ historical example t6: no forced nearest-example verdict (0.380075ms)
+✔ historical example t7: no forced nearest-example verdict (0.297883ms)
+✔ historical example t8: no forced nearest-example verdict (0.28944ms)
+✔ historical example t9: no forced nearest-example verdict (0.393815ms)
+✔ historical example t10: no forced nearest-example verdict (0.30309ms)
+✔ historical example t11: no forced nearest-example verdict (0.234679ms)
+✔ historical example t12: no forced nearest-example verdict (0.18162ms)
+✔ historical example t13: no forced nearest-example verdict (0.297943ms)
+✔ historical example t14: no forced nearest-example verdict (0.292865ms)
+✔ historical example t15: no forced nearest-example verdict (0.320366ms)
+✔ historical example t16: no forced nearest-example verdict (0.260337ms)
+✔ historical example t17: no forced nearest-example verdict (0.282009ms)
+✔ historical example t18: no forced nearest-example verdict (0.937642ms)
+✔ historical example t19: no forced nearest-example verdict (0.306305ms)
+✔ historical example t20: no forced nearest-example verdict (0.264163ms)
+✔ historical example t21: no forced nearest-example verdict (0.232595ms)
+✔ historical example t22: no forced nearest-example verdict (0.230672ms)
+✔ historical example t23: no forced nearest-example verdict (0.332273ms)
+✔ historical example t24: no forced nearest-example verdict (0.318653ms)
+✔ historical example t25: no forced nearest-example verdict (0.570017ms)
+✔ historical example t26: no forced nearest-example verdict (0.312584ms)
+✔ historical example t27: no forced nearest-example verdict (0.297051ms)
+✔ historical example t28: no forced nearest-example verdict (0.427394ms)
+✔ every stored example remains discoverable without copying its explanation (3.672833ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 27.477279
+
+Running src/lib/analyzer/__tests__/fullPipelineTests.ts
+✔ unmatched text stays unverifiable: My first job interview is tomorrow. (405.720235ms)
+✔ unmatched text stays unverifiable: The package was delivered. Thank yo (401.127161ms)
+✔ unmatched text stays unverifiable: HMRC published its annual report. W (401.566723ms)
+✔ unmatched text stays unverifiable: Hi Mum, see you at dinner. My new p (401.411538ms)
+✔ unmatched text stays unverifiable: I am writing a review of a crypto b (401.494831ms)
+✔ unmatched text stays unverifiable: Our school is teaching children abo (401.545962ms)
+✔ unmatched text stays unverifiable: A new unfamiliar message asking for (401.188071ms)
+✔ exact references match, but changed meaning cannot borrow their narrative (803.162063ms)
+✔ empty OCR and recognizable informational OTP remain distinct from unmatched text (802.185649ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4426.430618
+
+Running src/lib/analyzer/__tests__/masterIntelligence.test.ts
+================================================================
+   SCREENSHOT INTELLIGENCE ENGINE — 25-CASE AUTOMATED TEST SUITE
+================================================================
+
+[Test 1/25] Real-looking bank credit (banking/credit/legitimate)
+  ✓ TopCategory: BANKING (credit_notification)
+  ✓ Claim: Money Credited (A financial account was credited with INR 25,000.00....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: UNVERIFIABLE — "Financial Claim (Unverifiable from Screenshot Alone)"
+  ✓ PASS
+
+[Test 2/25] Real-looking bank debit (banking/debit/legitimate)
+  ✓ TopCategory: BANKING (debit_notification)
+  ✓ Claim: Payment Debited / Transferred (A payment or debit of INR 1,250.00 was processed....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: UNVERIFIABLE — "Financial Claim (Unverifiable from Screenshot Alone)"
+  ✓ PASS
+
+[Test 3/25] Fake payment screenshot with amount discrepancy (banking/debit/suspicious)
+  ✓ TopCategory: PAYMENT (upi_receipt)
+  ✓ Claim: Payment Debited / Transferred (A payment or debit of ₹25,000 was processed....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONTRADICTED — "Internal Discrepancy Detected"
+  ✓ PASS
+
+[Test 4/25] Pending payment notification (banking/pending)
+  ✓ TopCategory: BANKING (payment_pending)
+  ✓ Claim: Payment Pending (A transaction of $450.00 is currently pending review or sett...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: UNVERIFIABLE — "Financial Claim (Unverifiable from Screenshot Alone)"
+  ✓ PASS
+
+[Test 5/25] Failed payment notification (banking/failed)
+  ✓ TopCategory: PAYMENT (upi_receipt)
+  ✓ Claim: Payment Failed (A payment transaction of ₹3,400 failed or was cancelled....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: UNVERIFIABLE — "Financial Claim (Unverifiable from Screenshot Alone)"
+  ✓ PASS
+
+[Test 6/25] Refund notification (banking/refund)
+  ✓ TopCategory: BANKING (credit_notification)
+  ✓ Claim: Money Credited (A financial account was credited with $89.99....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: UNVERIFIABLE — "Financial Claim (Unverifiable from Screenshot Alone)"
+  ✓ PASS
+
+[Test 7/25] WhatsApp normal conversation (messaging/whatsapp/normal)
+  ✓ TopCategory: MESSAGING (generic_chat)
+  ✓ Claim: Informational Notice (Informational graphic or message related to general communic...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONSISTENT — "Internally Consistent Visual Capture"
+  ✓ PASS
+
+[Test 8/25] WhatsApp suspicious urgent money demand (messaging/whatsapp/suspicious)
+  ✓ TopCategory: MESSAGING (generic_chat)
+  ✓ Claim: Informational Notice (Informational graphic or message related to Paytm....)
+  ✓ Action: Make Payment / Transfer Funds
+  ✓ Authenticity: CONSISTENT — "Internally Consistent Visual Capture"
+  ✓ PASS
+
+[Test 9/25] Chat with contradictory status text (messaging/whatsapp/fabricated)
+  ✓ TopCategory: MESSAGING (generic_chat)
+  ✓ Claim: Payment Failed (A payment transaction of ₹50,000 failed or was cancelled....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONTRADICTED — "Internal Discrepancy Detected"
+  ✓ PASS
+
+[Test 10/25] Legitimate OTP message (sms/legitimate)
+  ✓ TopCategory: SECURITY (otp_code)
+  ✓ Claim: OTP Delivery (A one-time verification passcode (OTP) has been generated fo...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONSISTENT — "Internally Consistent Visual Capture"
+  ✓ PASS
+
+[Test 11/25] OTP phishing / social engineering message (sms/scam)
+  ✓ TopCategory: SECURITY (account_warning)
+  ✓ Claim: Account Lockout Threat (Your service account is facing security lockout or suspensio...)
+  ✓ Action: Disclose OTP / Passcode
+  ✓ Authenticity: SUSPICIOUS — "Suspicious Risk Signals Identified"
+  ✓ PASS
+
+[Test 12/25] Legitimate bank balance update SMS (sms/legitimate)
+  ✓ TopCategory: BANKING (transaction_history)
+  ✓ Claim: Informational Notice (Informational graphic or message related to SBI....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: UNVERIFIABLE — "Financial Claim (Unverifiable from Screenshot Alone)"
+  ✓ PASS
+
+[Test 13/25] Scam bank SMS with urgent lockout and IP link (sms/scam)
+  ✓ TopCategory: SECURITY (account_warning)
+  ✓ Claim: Account Lockout Threat (Your Chase account is facing security lockout or suspension....)
+  ✓ Action: Log In or Enter Credentials
+  ✓ Authenticity: SUSPICIOUS — "Suspicious Risk Signals Identified"
+  ✓ PASS
+
+[Test 14/25] Promotional marketing SMS (sms/promotional)
+  ✓ TopCategory: ADVERTISEMENT (promotional_email)
+  ✓ Claim: Informational Notice (Informational graphic or message related to general communic...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: INSUFFICIENT_EVIDENCE — "Insufficient Authenticity Evidence"
+  ✓ PASS
+
+[Test 15/25] Legitimate service email (email/legitimate)
+  ✓ TopCategory: EMAIL (order_email)
+  ✓ Claim: Payment Debited / Transferred (A payment or debit of $15.99 was processed....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONSISTENT — "Internally Consistent Visual Capture"
+  ✓ PASS
+
+[Test 16/25] Urgent phishing email with domain mismatch (email/phishing)
+  ✓ TopCategory: EMAIL (phishing_like_email)
+  ✓ Claim: Account Lockout Threat (Your PayPal account is facing security lockout or suspension...)
+  ✓ Action: Log In or Enter Credentials
+  ✓ Authenticity: SUSPICIOUS — "Suspicious Risk Signals Identified"
+  ✓ PASS
+
+[Test 17/25] E-commerce order confirmation (commerce/orders)
+  ✓ TopCategory: COMMERCE (order_confirmation)
+  ✓ Claim: Order Placed (An e-commerce order has been placed with Amazon for $149.99....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONSISTENT — "Internally Consistent Visual Capture"
+  ✓ PASS
+
+[Test 18/25] Retail store POS receipt (commerce/receipts)
+  ✓ TopCategory: COMMERCE (retail_receipt)
+  ✓ Claim: Payment Debited / Transferred (A payment or debit of $8.00 was processed....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONSISTENT — "Internally Consistent Visual Capture"
+  ✓ PASS
+
+[Test 19/25] Commercial tax invoice (commerce/invoices)
+  ✓ TopCategory: COMMERCE (commercial_invoice)
+  ✓ Claim: Informational Notice (Informational graphic or message related to general communic...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONSISTENT — "Internally Consistent Visual Capture"
+  ✓ PASS
+
+[Test 20/25] Photograph with minimal text (images/photographs)
+  ✓ TopCategory: IMAGE (unknown_image)
+  ✓ Claim: Informational Notice (Informational graphic or message related to general communic...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: INSUFFICIENT_EVIDENCE — "Insufficient Authenticity Evidence"
+  ✓ PASS
+
+[Test 21/25] Advance-fee lottery scam (images/ai_generated)
+  ✓ TopCategory: ADVERTISEMENT (promotional_email)
+  ✓ Claim: Lottery / Prize Award (You have supposedly won a prize or cash reward of $10,000....)
+  ✓ Action: Make Payment / Transfer Funds
+  ✓ Authenticity: SUSPICIOUS — "Suspicious Risk Signals Identified"
+  ✓ PASS
+
+[Test 22/25] Edited payment receipt with amount mismatch (images/edited)
+  ✓ TopCategory: PAYMENT (upi_receipt)
+  ✓ Claim: Payment Debited / Transferred (A payment or debit of ₹50,000 was processed....)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: CONTRADICTED — "Internal Discrepancy Detected"
+  ✓ PASS
+
+[Test 23/25] Random UI screenshot (images/random)
+  ✓ TopCategory: DOCUMENT (scanned_document)
+  ✓ Claim: Informational Notice (Informational graphic or message related to general communic...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: INSUFFICIENT_EVIDENCE — "Insufficient Authenticity Evidence"
+  ✓ PASS
+
+[Test 24/25] Screenshot containing sensitive PII (images/pii)
+  ✓ TopCategory: DOCUMENT (scanned_document)
+  ✓ Claim: Informational Notice (Informational graphic or message related to general communic...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: INSUFFICIENT_EVIDENCE — "Insufficient Authenticity Evidence"
+  ✓ PASS
+
+[Test 25/25] Screenshot with direct IP URL link (images/links)
+  ✓ TopCategory: DOCUMENT (scanned_document)
+  ✓ Claim: Informational Notice (Informational graphic or message related to general communic...)
+  ✓ Action: Download / Install Application
+  ✓ Authenticity: INSUFFICIENT_EVIDENCE — "Insufficient Authenticity Evidence"
+  ✓ PASS
+
+[Test 26/25] Wells Fargo Account Locked Vishing SMS (sms/scam)
+  ✓ TopCategory: BANKING (transaction_history)
+  ✓ Claim: Account Lockout Threat (Your Wells Fargo account is facing security lockout or suspe...)
+  ✓ Action: Call Unverified Phone Number
+  ✓ Authenticity: UNVERIFIABLE — "Financial Claim (Unverifiable from Screenshot Alone)"
+  ✓ PASS
+
+[Test 27/25] Student Loan Forgiveness Urgency Bait SMS (sms/scam)
+  ✓ TopCategory: DOCUMENT (scanned_document)
+  ✓ Claim: Promotional Offer (An unsolicited financial promotion or loan forgiveness quali...)
+  ✓ Action: Call Unverified Phone Number
+  ✓ Authenticity: INSUFFICIENT_EVIDENCE — "Insufficient Authenticity Evidence"
+  ✓ PASS
+
+[Test 28/25] Target $500 Gift Card Winner Phishing SMS (sms/scam)
+  ✓ TopCategory: DOCUMENT (scanned_document)
+  ✓ Claim: Lottery / Prize Award (You have supposedly won a prize or cash reward of $500....)
+  ✓ Action: Click External Web Link
+  ✓ Authenticity: SUSPICIOUS — "Suspicious Risk Signals Identified"
+  ✓ PASS
+
+[Test 29/25] UPS Missed Parcel Delivery Reschedule SMS (sms/scam)
+  ✓ TopCategory: DOCUMENT (scanned_document)
+  ✓ Claim: Delivery Update (A parcel or delivery notification regarding a shipment from ...)
+  ✓ Action: Click External Web Link
+  ✓ Authenticity: INSUFFICIENT_EVIDENCE — "Insufficient Authenticity Evidence"
+  ✓ PASS
+
+[Test 30/25] Florida Toll Services SunPass Late Fee Smishing SMS (sms/scam)
+  ✓ TopCategory: DOCUMENT (scanned_document)
+  ✓ Claim: Payment Demand (An urgent payment or debt demand of $34.50 issued by SunPass...)
+  ✓ Action: No Explicit Action Demanded
+  ✓ Authenticity: UNVERIFIABLE — "Financial Claim (Unverifiable from Screenshot Alone)"
+  ✓ PASS
+
+================================================================
+SUMMARY: 30/25 PASSED, 0 FAILED
+================================================================
+
+Running src/lib/analyzer/__tests__/messageSummary.test.ts
+✔ text1: summary stays grounded in source or explicitly abstains (4.476957ms)
+✔ text2: summary stays grounded in source or explicitly abstains (1.382974ms)
+✔ text3: summary stays grounded in source or explicitly abstains (0.482116ms)
+✔ text4: summary stays grounded in source or explicitly abstains (0.366494ms)
+✔ text5: summary stays grounded in source or explicitly abstains (0.265524ms)
+✔ text6: summary stays grounded in source or explicitly abstains (0.342098ms)
+✔ text7: summary stays grounded in source or explicitly abstains (0.278593ms)
+✔ text8: summary stays grounded in source or explicitly abstains (0.248079ms)
+✔ text9: summary stays grounded in source or explicitly abstains (0.304602ms)
+✔ text10: summary stays grounded in source or explicitly abstains (0.301447ms)
+✔ text11: summary stays grounded in source or explicitly abstains (0.433393ms)
+✔ text12: summary stays grounded in source or explicitly abstains (0.257052ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17.437572
+
+Running src/lib/analyzer/__tests__/ocrCoordinates.test.ts
+✔ nested words map to original pixels with outward rounding and bounds (1.415983ms)
+✔ missing, reversed, nonfinite and off-image boxes never invent locations (0.275489ms)
+✔ recognition explicitly requests blocks and uses scaled first-pass geometry (0.297982ms)
+✔ fallback requests blocks and resets scale only when its result is selected (0.432121ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9.498293
+
+Running src/lib/analyzer/__tests__/ocrRecovery.test.ts
+✔ failed engine initialization can retry and concurrent startup is shared (1.125802ms)
+✔ canvas budget rejects invalid dimensions and bounds small and tall image scaling (0.291222ms)
+✔ oversized OCR fails explicitly before any canvas allocation, without fallback bypass (0.563026ms)
+✔ image decode failure rejects instead of waiting forever; oversized images also reject (0.335799ms)
+✔ an OCR tool failure stops investigation before a fraud verdict is produced (0.849371ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 12.811027
+
+Running src/lib/analyzer/__tests__/paymentContext.test.ts
+Payment-context fixtures passed (24 amount cases, 14 labelled-reference cases, 2 long-reference cases, 3 phone controls); not an accuracy benchmark
+
+Running src/lib/analyzer/__tests__/redaction.test.ts
+✔ complete multiword card and SSN matches retain raw locations without exposing values (3.754695ms)
+✔ all repeated occurrences are masked and partial or missing matches remain unavailable (0.898063ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11.07845
+
+Running src/lib/analyzer/__tests__/runTests.ts
+--- RUNNING SEMANTIC INTELLIGENCE TESTS ---
+
+[Test A] Genuine Bank Credit SMS:
+  ✓ Classified as BANKING (got: BANKING)
+  ✓ Claim event is MONEY_CREDITED (got: MONEY_CREDITED)
+  ✓ Extracted credited amount is 25000 (got: 25000)
+  ✓ Identified HDFC institution
+  ✓ Extracted UPI ID
+  ✓ Action is DO_NOTHING (got: DO_NOTHING)
+  ✓ Phishing is false
+  ✓ Flagged as unverified financial claim (requires banking portal verification)
+
+[Test B] Urgent Bank Phishing SMS:
+  ✓ Classified as SECURITY (got: SECURITY)
+  ✓ Claim is ACCOUNT_LOCKED (got: ACCOUNT_LOCKED)
+  ✓ Detected time pressure: Immediate action demanded
+  ✓ Action is credential/link extraction (got: SHARE_OTP)
+  ✓ Identified High-Risk Phishing pattern (Chase impersonation + Urgency + IP Link + Credential action)
+
+[Test C] Inconsistent Payment Slip:
+  ✓ Classified as PAYMENT (got: PAYMENT)
+  ✓ Detected internal amount discrepancy (₹25,000 vs ₹2,500)
+  ✓ Financial inconsistency note recorded
+
+[Test D] Advance-Fee Lottery Scam:
+  ✓ Claim is PRIZE_WON (got: PRIZE_WON)
+  ✓ Action is MAKE_PAYMENT (got: MAKE_PAYMENT)
+  ✓ Identified Advance-Fee Scam (Prize + Upfront Fee)
+
+[Test E] Clean E-Commerce Order:
+  ✓ Classified as COMMERCE (got: COMMERCE)
+  ✓ Claim is ORDER_PLACED (got: ORDER_PLACED)
+  ✓ Identified Amazon platform
+  ✓ Action is DO_NOTHING
+  ✓ Clean order - no scam patterns
+
+ALL 5 TEST CASES PASSED SUCCESSFULLY!
+
+Running src/lib/analyzer/__tests__/screenshotSource.test.ts
+✔ screen-sized PNG with no EXIF remains inconclusive (0.900196ms)
+✔ camera metadata is a clue, not an authenticity verdict (0.239466ms)
+✔ capture software is a clue and conflicting fields abstain (0.136783ms)
+✔ unavailable metadata cannot be presented as absent or used for a verdict (0.203493ms)
+✔ editor metadata and single camera field are insufficient (0.115722ms)
+✔ metadata selection ignores unrelated fields and bounds external text (0.634211ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8.981817
+
+Running src/lib/comparison/__tests__/comparisonEngine.test.ts
+================================================================
+--- RUNNING VISUAL COMPARISON WORKSPACE UNIT TESTS ---
+================================================================
+
+[Test 1] Region Detector: Connected Components & Bounding Boxes:
+  ✓ Detected 2 distinct clusters (got 2)
+  ✓ First region bounding box correct
+  ✓ Second region bounding box correct
+
+[Test 2] OCR Difference Engine:
+  ✓ Identified 2 text line differences (got 2)
+  ✓ Detected report -> pdf change
+  ✓ Detected amount change
+
+[Test 3] Spot-the-Difference Game Engine:
+  ✓ Game started successfully
+  ✓ Target count initialized to 2
+  Testing wrong click at (0.9, 0.9):
+  ✓ Wrong click rejected
+  ✓ Wrong clicks counter incremented
+  Testing progressive hint system:
+  ✓ Hint 1 triggered (got level 1)
+  ✓ Hint 1 includes location name
+  ✓ Hint 2 triggered (got level 2)
+  ✓ Hint 3 triggered (got level 3)
+  ✓ Hints counter updated to 3
+  Testing correct click at (0.12, 0.12):
+  ✓ First difference found
+  ✓ Found count is 1
+  ✓ Score incremented to 1500
+  Testing second correct click at (0.52, 0.52):
+  ✓ Second difference found
+  ✓ Found count is 2 / 2
+  ✓ Game marked as completed!
+  ✓ Game stopped playing
+
+================================================================
+✅ ALL VISUAL COMPARISON WORKSPACE UNIT TESTS PASSED 100%!
+================================================================
+
+
+Running src/lib/linkChecker/__tests__/datasetAvailability.test.ts
+Dataset availability: 20 mocked client/server scenarios passed; no live requests
+
+Running src/lib/linkChecker/__tests__/linkChecker.test.ts
+Current link-client regression entrypoint passed: normalization, strict SSRF, deterministic dataset verdicts and mocked UI/API fallback; zero live requests
+
+Running src/lib/linkChecker/__tests__/localDataset.test.ts
+▶ Local Dataset URL Verification Suite (urldata.csv)
+  ✔ 1. Exact URL match identifies exact URL record from dataset (4.073158ms)
+  ✔ 2. Exact hostname match identifies bad domain in dataset (3.662673ms)
+  ✔ 3. Registrable domain match matches sub-pages of known domain (3.631141ms)
+  ✔ 4. www variation matches seamlessly (0.284302ms)
+  ✔ 5. HTTP / HTTPS variation normalizes properly (2.822261ms)
+  ✔ 6. Trailing slash variation normalizes properly (1.894984ms)
+  ✔ 7. Uppercase URL normalizes to lowercase hostname (3.426458ms)
+  ✔ 8. Subdomain on known domain correctly resolves registrable domain (6.843642ms)
+  ✔ 9. Attacker domain containing target name (target.com.attacker.com) does NOT match target.com (4.413553ms)
+  ✔ 10. notgoogle.com does NOT match google.com (0.224714ms)
+  ✔ 11. Multi-part TLD .co.uk extracts registrable domain properly (0.162081ms)
+  ✔ 12. Multi-part TLD .com.au matches dataset record (1.327922ms)
+  ✔ 13. Multi-part TLD .co.in extracts registrable domain properly (0.136873ms)
+  ✔ 14. Invalid / Malformed URL returns INVALID_URL verdict (0.121901ms)
+  ✔ 15. Empty input returns INVALID_URL (0.075603ms)
+  ✔ 16. Extremely long URL (> 2048 chars) normalizes without crashing (0.103804ms)
+  ✔ 17. Good classification in dataset is reported accurately (1.56904ms)
+  ✔ 18. Unknown domain returns NO_LOCAL_MATCH without claiming safe (4.004606ms)
+  ✔ 19. Multiple URLs in text message are analyzed independently (3.40834ms)
+  ✔ 20. Transparent technical details are always returned (4.053559ms)
+✔ Local Dataset URL Verification Suite (urldata.csv) (48.766675ms)
+ℹ tests 20
+ℹ suites 1
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 65.009692
+
+Running src/lib/paymentAnalyzer/__tests__/paymentAnalyzer.test.ts
+=== RUNNING SEPARATE PAYMENT SCREENSHOT CHECKER TEST MATRIX ===
+
+[Test 1] Real-looking PhonePe Payment Receipt:
+  ✓ Domain is strictly payment
+  ✓ Identified as payment screenshot
+  ✓ Receipt type is PAYMENT_SUCCESS (got: PAYMENT_SUCCESS)
+  ✓ Payment app is PhonePe (got: PhonePe)
+  ✓ Amount is ₹500.00 (got: ₹500.00)
+  ✓ Recipient is ReviewCraft Store (got: ReviewCraft Store)
+  ✓ UPI ID is reviewcraftstore@ybl (got: reviewcraftstore@ybl)
+  ✓ UTR is 423189271602 (got: 423189271602)
+  ✓ Proof strength is STRONG_VISUAL (got: STRONG_VISUAL)
+  ✓ Does NOT contain Job Scam
+  ✓ Does NOT contain Vishing
+
+[Test 2] Fake PhonePe Screenshot with Serif Text & Embedded Bank Icon:
+  ✓ Identified as payment screenshot
+  ✓ Verdict is SUSPICIOUS/HIGH_RISK (got: SUSPICIOUS)
+  ✓ Detected Typography Anomaly
+  ✓ Detected Icon Placement Anomaly in Bank Name
+
+[Test 3] Fake Receipt with Conflicting Spliced Amounts:
+  ✓ Verdict is HIGH_RISK (got: SUSPICIOUS)
+  ✓ Detected internal Amount Mismatch
+
+[Test 4] Canara Bank Balance Screenshot:
+  ✓ Classified as BANK_BALANCE (got: BANK_BALANCE)
+  ✓ Payment proof strength is NONE (got: NONE)
+  ✓ Verdict is NO_PAYMENT_PROOF (got: NO_PAYMENT_PROOF)
+  ✓ Explains this is an account balance check
+
+[Test 5] Google Pay Transfer Confirmation:
+  ✓ Identified Google Pay (got: Google Pay)
+  ✓ Receipt type is PAYMENT_SUCCESS
+  ✓ Extracted amount ₹1,250.00
+
+[Test 6] Paytm Transfer Receipt:
+  ✓ Identified Paytm (got: Paytm)
+  ✓ Receipt type is PAYMENT_SUCCESS
+
+[Test 7] BHIM UPI Confirmation:
+  ✓ Identified BHIM UPI (got: BHIM UPI)
+
+[Test 8] Pop UPI Transfer:
+  ✓ Identified Pop UPI (got: Pop UPI)
+
+[Test 9] Completely Unrelated Job Scam Screenshot:
+  ✓ Domain is non_payment
+  ✓ isPaymentScreenshot is false
+  ✓ Verdict is NOT_A_PAYMENT (got: NOT_A_PAYMENT)
+  ✓ Verdict label is Payment Screenshot Not Detected
+  ✓ Does NOT output generic Job Scam verdict
+
+[Test 10] UPI Collect Request:
+  ✓ Classified as COLLECT_REQUEST
+  ✓ Proof strength is NONE
+  ✓ Flags money deduction risk
+
+=============================================================
+ALL 10 TESTS IN THE PAYMENT ANALYZER MATRIX PASSED CLEANLY! ✓
+=============================================================
+
+Running src/lib/utils/__tests__/metadataRenderer.test.mjs
+✔ renderMetadataSummary: metadata remains literal text, never markup (51.133954ms)
+✔ renderMetadataSummary: a new scan removes all old metadata (10.191673ms)
+✔ renderMetadataGroups: metadata remains literal text, never markup (6.994335ms)
+✔ renderMetadataGroups: a new scan removes all old metadata (5.006364ms)
+✔ summary preserves normal camera fields, coordinate precision, and expandable tags (5.271027ms)
+✔ groups accept prototype-like names and provide the General fallback (4.925053ms)
+✔ all three metadata surfaces use the tested renderer without old HTML sinks (0.543537ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 601.669464
+
+Running src/lib/utils/__tests__/redactionInput.test.mjs
+✔ pointer capture, reverse dragging, cancellation, and keyboard placement (49.807334ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 554.223791
+
+Running src/lib/utils/__tests__/reportSafety.test.mjs
+✔ src/pages/index.astro: report templates preserve hostile and ordinary text (77.137445ms)
+✔ src/pages/index.astro: privacy controls use listeners instead of interpolated JavaScript (0.145947ms)
+✔ src/components/ToolLayout.astro: report templates preserve hostile and ordinary text (19.316552ms)
+✔ src/components/ToolLayout.astro: privacy controls use listeners instead of interpolated JavaScript (0.140919ms)
+✔ src/components/PaymentToolLayout.astro: report templates preserve hostile and ordinary text (8.134879ms)
+✔ redact button passes the exact original value and labels remain literal (8.290809ms)
+✔ HTML encoding preserves null and numeric display values (0.156552ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 598.702634
+
+Running src/lib/utils/__tests__/reverseImage.test.ts
+✔ preparation accepts supported files and rejects empty, oversized and unsupported files (0.725036ms)
+✔ preparation uses a PNG copy and releases source URL on success, decode failure and export failure (1.418246ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8.263961
+
+Running src/lib/utils/__tests__/toolFaqClaims.test.ts
+Redactor and OCR shared FAQ claim regressions passed
+
+Running src/lib/utils/__tests__/toolHandoff.test.ts
+✔ successful transfer replaces the previous image (41.406802ms)
+✔ quota failure clears old image and explains how to recover (5.842335ms)
+✔ blocked storage fails visibly without throwing (4.102751ms)
+✔ invalid, expired and future payloads are discarded (3.876056ms)
+✔ every transfer action stops before navigation on failure (0.968938ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 63.464583
+
+Running src/lib/utils/__tests__/workspaceSafety.test.mjs
+✔ RedactorWorkspace: actual report templates preserve text and cannot inject elements or attributes (51.275254ms)
+✔ ComparisonWorkspace: actual report templates preserve text and cannot inject elements or attributes (14.066656ms)
+✔ AIDetectorWorkspace: actual report templates preserve text and cannot inject elements or attributes (23.896423ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 604.167151
+
+Entrypoints: 29 passed, 0 failed, 29 total
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> screenshotchecker@0.0.1 build
+> astro build
+
+07:25:51 [vite] Re-optimizing dependencies because vite config has changed
+07:25:51 [content] Syncing content
+07:25:51 [content] Synced content
+07:25:51 [types] Generated 522ms
+07:25:51 [build] output: "static"
+07:25:51 [build] mode: "static"
+07:25:51 [build] directory: /workspace/shared/screenshotchecker-content/dist/
+07:25:51 [build] Collecting build info...
+07:25:51 [build] ✓ Completed in 563ms.
+07:25:51 [build] Building static entrypoints...
+07:25:52 [vite] ✓ built in 726ms
+07:25:52 [WARN] [vite] [plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+07:25:52 [vite] ✓ built in 367ms
+07:25:52 [build] Rearranging server assets...
+
+ generating static routes
+07:25:52   ├─ /404.html (+19ms)
+07:25:52   ├─ /500.html (+4ms)
+07:25:52   ├─ /about/index.html (+4ms)
+07:25:52   ├─ /ai-image-detector/index.html (+4ms)
+07:25:52   ├─ /blog/screenshot-checker-online/index.html (+4ms)
+07:25:52   ├─ /blog/screenshot-analyzer-online/index.html (+2ms)
+07:25:52   ├─ /blog/fake-upi-payment-screenshot/index.html (+3ms)
+07:25:52   ├─ /blog/ai-image-detector-online/index.html (+2ms)
+07:25:52   ├─ /blog/exif-metadata/index.html (+3ms)
+07:25:52   ├─ /blog/smishing-fake-sms/index.html (+2ms)
+07:25:52   ├─ /blog/suspicious-link-checker-online/index.html (+2ms)
+07:25:52   ├─ /blog/index.html (+3ms)
+07:25:52   ├─ /contact/index.html (+2ms)
+07:25:52   ├─ /image-manipulation-checker/index.html (+3ms)
+07:25:52   ├─ /image-metadata-remover/index.html (+3ms)
+07:25:52   ├─ /payment-screenshot-checker/index.html (+4ms)
+07:25:52   ├─ /privacy/index.html (+2ms)
+07:25:52   ├─ /resources/index.html (+2ms)
+07:25:52   ├─ /reverse-image-search/index.html (+3ms)
+07:25:52   ├─ /screenshot-analyzer/index.html (+4ms)
+07:25:52   ├─ /screenshot-comparison/index.html (+3ms)
+07:25:52   ├─ /screenshot-detector/index.html (+2ms)
+07:25:52   ├─ /screenshot-metadata-checker/index.html (+2ms)
+07:25:52   ├─ /screenshot-ocr/index.html (+2ms)
+07:25:52   ├─ /screenshot-privacy-checker/index.html (+3ms)
+07:25:52   ├─ /screenshot-redactor/index.html (+5ms)
+07:25:52   ├─ /screenshot-scam-checker/index.html (+2ms)
+07:25:52   ├─ /screenshot-spam-checker/index.html (+3ms)
+07:25:52   ├─ /sitemap.xml (+1ms)
+07:25:52   ├─ /suspicious-link-checker/index.html (+3ms)
+07:25:52   ├─ /terms/index.html (+2ms)
+07:25:52   ├─ /tools/index.html (+3ms)
+07:25:52   ├─ /index.html (+4ms)
+07:25:52 ✓ Completed in 141ms.
+
+07:25:52 [build] ✓ Completed in 1.27s.
+07:25:52 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`
+07:25:52 [build] 32 page(s) built in 1.85s
+07:25:52 [build] Complete!
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

@@ -1,8 +1,22 @@
 # ScreenshotChecker bounded work queue
 
-**Current state:** Reverse image search and all preceding owner-approved releases are published at GitHub commit d908f58 and Cloudflare version 8ec869f7-d495-4d3e-8d70-0db2b6584a62 (rollback fbd0031c-65a6-49a5-ad33-7fcca38609e9). Build: 32 pages, 30 indexable URLs. Latest full suite has two known unrelated failing entrypoints (agentic investigation and link checker). On 24 September, SEO validation/snippet improvements pass and are deployed as Cloudflare version 434ed6ea-e426-4e7e-88e0-f7eacd918b3b (rollback 8ec869f7-d495-4d3e-8d70-0db2b6584a62). GitHub publication completed in f71316e. HTTP/www consolidation is now active and live-verified through a Cloudflare Single Redirect. Search Console accepted the refreshed sitemap (30 discovered URLs) and indexing requests for reverse search and the suspicious-link guide. Google indexing/ranking changes remain pending.
+**Latest 1 October 2026 privacy disclosure checkpoint:** Bounded task 09A corrects blanket zero-network/zero-storage claims and discloses existing analytics, cross-tool session storage and standalone URL submission/history. Application behavior is unchanged. Independent review accepted `a9da484`; 33/33 pinned test entrypoints, build, SEO/blog and built FAQ parity pass. See `audit/09A-privacy-disclosures-2026-10-01.md`; successor Preview validation follows before release consideration. Task 09 remains open for broader behavior/consent work.
 
-**Next:** Q2, improve the main checker workflow for the highest-click query cluster. Owner supplied query evidence and competitors; see audit/QUERY-RESEARCH-2026-09-23.md. B2 and task 06 remain pending. One bounded task per continuation.
+**Latest 1 October 2026 release-preparation checkpoint:** Cloudflare production-main and branch-Preview commands are verified. Required empty Preview config added locally; 32/32 pinned-runtime entrypoints and build/SEO/blog pass. Scoped review accepted `b89ccd0`; feature branch/draft PR only, with production unchanged. See `audit/R1-preview-readiness-2026-10-01.md`.
+
+**Latest 1 October 2026 checkpoint:** Bounded 04B export-recovery slice independently accepted at functional commit `71c1328`. Fourteen focused error/retry/stale-export tests pass; local Canvas pixel QA verifies opaque masks and removal of one synthetic PNG Comment marker. Exact pinned-runtime aggregate passes 31/31 and a 32-page build, plus SEO/blog checks. This does not close production download or whole-page privacy gates. See `audit/04B-export-qa-2026-10-01.md`. No remote changes.
+
+**Earlier 1 October 2026 checkpoint:** Reviewed task 10A dataset-unavailable slice distinguishes incomplete checks from no-match. Aggregate checks pass 29/29 and build; see `audit/10A-dataset-availability-2026-10-01.md`. Task 10A remains open for public-suffix/normalization scope. No release claimed.
+
+**Earlier 30 September 2026 checkpoint:** Reviewed test-only migration of obsolete link entrypoint now allows aggregate `npm run check` to pass (28/28 entrypoints plus 32-page build). See `audit/10B-test-migration-2026-09-30.md`. This does not repair the unused legacy provider service or certify live URL safety. No release occurred.
+
+**Earlier 30 September 2026 checkpoint:** A bounded bank-link/prize-fee slice of task 08A is locally implemented and independently reviewed; see `audit/08A-bank-prize-2026-09-30.md`. Full tests now pass 27/28 entrypoints; only the unchanged legacy link-checker import failure remains. No release occurred. Task 08A remains open for broader coverage.
+
+**Earlier 30 September 2026 checkpoint:** Task 07A is reviewed locally, not published on `fix/07a-payment-context`; see `audit/07A-2026-09-30.md` and `OPERATIONS.md`. No push or deployment has occurred. The release history below is historical, not independently reverified.
+
+**Previously recorded state:** Reverse image search and all preceding owner-approved releases are published at GitHub commit d908f58 and Cloudflare version 8ec869f7-d495-4d3e-8d70-0db2b6584a62 (rollback fbd0031c-65a6-49a5-ad33-7fcca38609e9). Build: 32 pages, 30 indexable URLs. Latest full suite has two known unrelated failing entrypoints (agentic investigation and link checker). On 24 September, SEO validation/snippet improvements pass and are deployed as Cloudflare version 434ed6ea-e426-4e7e-88e0-f7eacd918b3b (rollback 8ec869f7-d495-4d3e-8d70-0db2b6584a62). GitHub publication completed in f71316e. HTTP/www consolidation is now active and live-verified through a Cloudflare Single Redirect. Search Console accepted the refreshed sitemap (30 discovered URLs) and indexing requests for reverse search and the suspicious-link guide. Google indexing/ranking changes remain pending.
+
+**Next:** Q2, improve the main checker workflow for the highest-click query cluster. Owner supplied query evidence and competitors; see audit/QUERY-RESEARCH-2026-09-23.md. B2 is reviewed locally, not published; task 06 remains pending. One bounded task per continuation.
 
 **Session rules**
 
@@ -24,11 +38,13 @@
 | 03 | Reproducible development checks | M | 00 | Pinned tested Node target, project test runner, unified existing-test command; baseline failures documented | DONE |
 | 04A | OCR structured coordinates | M | 03 | Current OCR API returns word boxes mapped to original image; scaled/fallback fixtures verify bounds | DONE |
 | 04B | Automatic redaction and export | M | 01A,01B,04A | Suggested boxes actually hide selected data in exported files; unavailable locations give a visible warning | DONE |
+| 04B-QA | Bounded export failure recovery and local raster verification | M | 04B | Encoder errors reject, all three export surfaces allow retry, stale exports suppressed; synthetic local pixels/PNG metadata checked; browser limits recorded | REVIEWED LOCALLY (not published) |
 | 05A | Touch and keyboard redaction | M | 04B | Pointer drawing and accessible modal controls work; phone viewport and keyboard flow checked | DONE |
 | 05B1 | Image handoff failure recovery | S | 04B | Storage failure stops navigation, explains recovery and clears stale images; malformed/expired payloads rejected | DONE locally |
 | 05B2 | OCR retry and image memory limits | M | 05B1 | OCR initialization can retry; a meaningful pixel/memory limit and clear errors exist | DONE locally |
 | 06 | Traffic baseline and measurement decision | S | 00 | Actual baseline recorded if available, or explicit unknowns; privacy-conscious event specification approved by existing product direction | TODO |
 | 07 | Correct global entity extraction | M | 03,04A | US/UK/Indian phones distinguished from payment references; USD/GBP/INR and ambiguous date fixtures pass; scope split if needed | TODO |
+| 07A | Payment OCR context and labelled-reference regression slice | M | 03,04A; part of 07 | Both reports recover an unambiguous unmarked payment amount without inventing currency; labelled references are not phones; regressions pass | REVIEWED LOCALLY (not published) |
 | 08A | Fraud regression repair | M | 03,07 | Existing bank/prize failures resolved and final displayed verdict tested against benign counterexamples | TODO |
 | 08B | Honest evidence and error states | M | 08A | Text heuristics never claim measured fonts/icons; failed checks differ from absent evidence; mock/model wording corrected | TODO |
 | 09 | Local processing and privacy alignment | M | 01B | Chosen local URL flow avoids unnecessary text POST; analytics/resources/storage are accurately disclosed; OCR debug text removed | TODO |
@@ -41,7 +57,7 @@
 | B1 | Main screenshot-verification guide quality | M | 13 | Practical verification checklist, clear limitations, original examples and primary-source links; existing URL preserved | DONE locally |
 | Q1 | Query research and screenshot-source tool | M | Owner query document | Distinct source-clue tool, honest limits, discovery links and SEO checks | DONE locally |
 | Q2 | Main checker search-intent workflow | M | Q1 | Clear real-or-fake, payment and source-check routes; evidence/unknown explanations; preserve main URL | NEXT |
-| B2 | Screenshot-analyzer guide quality | M | B1 | Explain implemented checks, interpret uncertain/error results, link primary sources and preserve URL | TODO |
+| B2 | Screenshot-analyzer guide quality | M | B1 | Explain implemented checks, interpret uncertain/error results, link primary sources and preserve URL | DONE locally (independently reviewed; not published) |
 | 14 | Homepage and report clarity | M | 08B,09 | Three task entry points clear; shorter mobile introduction; report toolbar usable at narrow widths | TODO |
 | 15 | Methods and limitations page | S | 08B,10B | Explains actual checks, error modes, evidence boundaries, and reproducible examples without invented accuracy | TODO |
 | 16A | Global scam explainer input | M | 08B,09,14 | Existing scam tool supports locally processed pasted text alongside screenshot input; honest evidence and error states tested | TODO |
@@ -211,3 +227,54 @@ Fresh live crawl checked all 30 sitemap pages for HTTP 200, matching canonical, 
 Owner prioritized a cleaner reverse-search experience. Updated only the reverse-image-search page: editorial hero, visible breadcrumb, grouped benefits, two-column upload/provider workspace, prominent native file selection area, compact provider cards, consistent warm theme colors, keyboard focus outlines and stacked phone layout. Preserved upload/drop/paste/copy/download/share behavior and explicit external-results/privacy boundaries. Added matching BreadcrumbList schema, clearer description and practical photo/screenshot/mobile usage guidance; original URL, title intent, sitemap and visible FAQ/schema source preserved.
 
 Verification: desktop browser visual review and 390px phone layout check (no horizontal overflow), existing two reverse-image preparation tests pass, production build 32 pages, SEO zero errors/warnings and seven blog SEO checks pass. Whitespace check passes. No external image submission or new dependencies. Existing UI handlers unchanged; native sharing not retested. Prior audit log edit preserved. Changes are local, not pushed/deployed. Preview http://localhost:4321/reverse-image-search/ .
+
+## 30 September 2026 — bounded task 07A
+
+Owner-assigned execution plan prioritizes payment accuracy and privacy before promotion. Task 07A is a bounded split of existing task 07; no competing backlog was created. Objective, evidence, owner, dependencies, acceptance, test results, remaining risks and next action are in `audit/07A-2026-09-30.md`. Narrow shared FAQ claim corrections accompany this checkpoint in a separate commit. Full task 07 (global currency/date/phone validation) and broader plan work remain open.
+
+## 30 September 2026 — task 08A bounded follow-on
+
+Owner authorized repair of the two baseline bank/prize cases after task 07A was saved. Direct-action evidence rules and 26 synthetic controls are independently reviewed; broader task 08A stays open. See `audit/08A-bank-prize-2026-09-30.md` for scope, checks, limitations and next action. No link-pipeline repair or remote changes included.
+
+## 30 September 2026 — task 10B bounded test maintenance
+
+Owner authorized migration of the obsolete link test to the supported local-dataset pipeline. Reviewed commit `79f77ee` changes tests only; current client/API fallback and local dataset coverage pass with live requests prohibited. Full task 10B remains open for provenance/version notes and obsolete runtime-source cleanup. See `audit/10B-test-migration-2026-09-30.md`.
+
+## 1 October 2026 — task 10A dataset-availability slice
+
+Owner requested continued bounded implementation. Review accepted `bf1fff2`: required-tier dataset failures produce explicit unavailable state, not clean no-match or a lower-priority positive result. See `audit/10A-dataset-availability-2026-10-01.md`; remaining 10A scope stays open. Q3 score methodology unchanged. Parent coordinates PR/release; implementation worker does not push.
+
+### 2026-10-01 B2 existing analyzer guide
+
+- Reworked one existing article on an isolated branch from 7743401. Preserved URL and design; added answer-first limits, three labelled fictional examples, primary citations and task-relevant internal links. Removed unsupported typography/AI detection assertions and its keyword block.
+- Added a brand byline with matching schema only for this article; no invented reviewer, lab or credentials. Visible FAQ and structured answers share the same source and are checked in built HTML.
+- `ASTRO_TELEMETRY_DISABLED=1 npm run check`: 29/29 entrypoints pass, 32-page build succeeds. `npm run test:blog-seo` and `npm run test:seo` pass. Runtime Node 24.19.0 differs from pinned 26.9.0; existing large-bundle warning remains. First build attempt hit an unavailable telemetry config directory; disabling telemetry resolved it.
+- Independent review accepted code checkpoint `02d0117` with no blocking findings; reviewer independently reran 29/29 tests, a 32-page build and both SEO scripts. Cloud-browser visual inspection was attempted but localhost navigation was blocked by the browser client, so no visual QA pass is claimed. No push, deployment, outreach or claims of measured ranking/AI citation gains. See `audit/B2-content-2026-10-01.md`.
+
+## 1 October 2026 — B2 integration checkpoint
+
+Independently accepted B2 commit `02d0117` was fast-forwarded into the cumulative reviewed branch from `7743401`. The existing queue remains authoritative. One analyzer guide and its generated-output checks changed; the other six guides retain their behavior. No publication or release claimed; trigger/target verification remains a gate.
+
+## 1 October 2026 — exact pinned-runtime check
+
+Combined reviewed source executes successfully under Node 26.9.0/npm 11.19.1 from an isolated temporary prefix: aggregate 29/29 and 32-page build, SEO/blog SEO pass. No repo pins, global settings or credentials changed. See `audit/PINNED-RUNTIME-2026-10-01.md`; release/browser gates remain separate.
+
+## 1 October 2026 — Q3 read-only diagnosis and status reconciliation
+
+Q3 diagnosis saved in `audit/Q3-payment-consistency-2026-10-01.md`. Five synthetic text traces separate extraction/classifier mismatches, reference-headline overrides and uncalibrated rule scores. No product/scoring change made. Stale current-summary 07A/B2 review labels reconciled; both are reviewed locally, not published. Historical dated records and production/preview release gates are preserved. Next corrective change is proposed for separate review, not started.
+
+## 1 October 2026 — Q3 bounded correction
+
+Owner authorized evidence-grounded wording and preservation of executed financial uncertainty under reference no-match. Numeric rule weights remain unchanged; pending/balance classifier defects stay deferred. See `audit/Q3-evidence-presentation-fix-2026-10-01.md`. Local checks pass 30/30 with build and SEO; independent review accepted functional code `654f79d`. Release/browser gates remain pending. No remote publication.
+
+## 1 October 2026 — 04B bounded export recovery and QA
+
+Recovered reviewed `77b2cd8` and matching v5 artifacts before work. GitHub main still `6de574c`, with no other branch or PR. A Canvas callback error could leave redaction pending; fixed rejection propagation and guarded all three download handlers. Fourteen focused controls and real local Canvas PNG/pixel checks pass, with strict production/browser/privacy limits recorded in `audit/04B-export-qa-2026-10-01.md`. Exact pinned-runtime aggregate passes 31/31 and 32-page build; SEO/blog pass. Independent review accepted functional commit `71c1328`; cumulative artifacts may now be refreshed. No push, PR, merge, deployment or setting change.
+
+## 1 October 2026 — R1 branch Preview preparation
+
+Verified main production command versus nonproduction Preview command. Added only the required empty previews block; no production fields, dependencies or commands changed. Two config controls and full pinned checks pass (32 entrypoints, 32 pages, SEO/blog). Scoped review accepted `b89ccd0` before draft PR publication; no production deployment authorized. See `audit/R1-preview-readiness-2026-10-01.md`.
+
+## 1 October 2026 — 09A privacy disclosure alignment
+
+The original draft PR/Preview is confirmed with unchanged production. Saved synthetic PNG pixel/Comment checks and narrow desktop layout passed; runtime network capture is blocked by organization policy. A source audit exposed blanket privacy guarantees that exceed existing analytics, handoff storage and URL-submission behavior. This bounded copy-only successor discloses those distinctions and adds focused source/FAQ-schema checks. No analytics, storage or image-processing behavior changed. Broader task 09 remains open. See audit/09A-privacy-disclosures-2026-10-01.md.

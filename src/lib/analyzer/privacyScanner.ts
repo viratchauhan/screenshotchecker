@@ -1,3 +1,4 @@
+import { labelledReferenceSpans, overlapsReference } from './paymentTextContext';
 import { locateSensitiveText } from './privacyLocations';
 import type { PrivacyFinding, MetadataInfo, OCRWord } from './types';
 import { generateId } from '../utils/formatters';
@@ -64,11 +65,23 @@ export function scanPrivacyRisks(
     addFinding('email', 'Email Address', match[0], `Found email: ${match[0]}`, 'high', 'high');
   }
 
+  const referenceSpans = labelledReferenceSpans(text);
+  // Every span excluded from phone detection must remain fully redactable.
+  for (const span of referenceSpans) {
+    const reference = text.slice(span.start, span.end);
+    addFinding('order_id', 'Transaction Reference', reference, `Found reference: ${reference}`, 'medium', 'low');
+  }
+
   // 2. Phone Numbers (US, International, E.164 formats)
   const phoneRegex = /(?:(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9])\s*\)|([2-9]1[02-9]|[2-9][02-8]1|[2-9][02-8][02-9]))\s*(?:[.-]\s*)?)?([2-9]1[02-9]|[2-9][02-9]1|[2-9][02-9]{2})\s*(?:[.-]\s*)?([0-9]{4})\b|\b(?:\+?[0-9]{1,3}[-.\s]?)?\(?[0-9]{2,4}\)?[-.\s]?[0-9]{3,4}[-.\s]?[0-9]{3,4}\b/g;
   while ((match = phoneRegex.exec(text)) !== null) {
     const clean = match[0].replace(/\D/g, '');
-    if (clean.length >= 10 && clean.length <= 15) {
+    if (
+      clean.length >= 10 && clean.length <= 15 &&
+      !overlapsReference(match.index, match[0].length, referenceSpans) &&
+      !/\d/.test(text[match.index - 1] || '') &&
+      !/\d/.test(text[match.index + match[0].length] || '')
+    ) {
       addFinding('phone', 'Phone Number', match[0], `Phone pattern: ${match[0]}`, 'high', 'high');
     }
   }
@@ -108,9 +121,9 @@ export function scanPrivacyRisks(
   }
 
   // 7. Order IDs / Invoices / Reference Numbers
-  const orderRegex = /\b(?:Order|Invoice|Ref|Reference|Transaction|Tracking|Receipt)\s*(?:ID|Number|No|#)?[:\s-]*([A-Z0-9_-]{5,20})\b/gi;
+  const orderRegex = /\b(?:UTR|RRN|UPI Ref|Order|Invoice|Ref|Reference|Transaction|Tracking|Receipt)\s*(?:ID|Number|No|#)?[:\s-]*([A-Z0-9_-]{5,20})\b/gi;
   while ((match = orderRegex.exec(text)) !== null) {
-    if (match[1] && !match[1].match(/^(the|and|for|with|from|this|your)$/i)) {
+    if (match[1] && !overlapsReference(match.index, match[0].length, referenceSpans) && !match[1].match(/^(the|and|for|with|from|this|your)$/i)) {
       addFinding('order_id', 'Order / Invoice ID', match[0], `Found reference: ${match[0]}`, 'medium', 'low');
     }
   }

@@ -7,6 +7,16 @@ import type {
 } from './reasoningSchema';
 import type { ImageInfo, AuthenticityAssessment, AuthenticityStatus } from '../analyzer/types';
 
+/** Conservative abstention for advice, reported scam tactics, or negated payment duties.
+ * This does not certify benign content; it prevents these narrow rules from
+ * turning educational or negative wording into a demanded action.
+ */
+function shouldAbstainFromDemandInference(text: string): boolean {
+  return (/\b(?:beware|warning|advice|tips?)\b/i.test(text) &&
+    /\b(?:scam|scammers|fraud|fraudsters|phishing|lottery|prize)\b/i.test(text)) ||
+    /\bexample phishing\b/i.test(text);
+}
+
 export interface MultimodalAIProvider {
   id: string;
   name: string;
@@ -179,10 +189,76 @@ export class LocalMultimodalObserver implements MultimodalAIProvider {
     const phoneMatches = rawText.match(/(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*\d{3}\s*\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}|\b\d{3}-\d{3}-\d{4}\b|\b1-\d{3}-\d{3}-\d{4}\b/g) || [];
     const phone = phoneMatches[0] || '';
 
+    // Narrow evidence-based patterns. A warning is not proof of sender identity or fraud.
+    // Guidance: https://consumer.ftc.gov/articles/how-recognize-avoid-phishing-scams
+    // https://consumer.ftc.gov/consumer-alerts/2023/04/are-you-really-lucky-winner-spot-prize-scams
+    const abstainFromDemandInference = shouldAbstainFromDemandInference(rawText);
+    const urlEvidenceExecuted = toolOutputs.find(t => t.tool === 'url_analyzer')?.status === 'executed';
+    const warnsAgainstLinks = /\b(?:do not|don't|never)\s+(?:click|open|visit|follow|use)\b/i.test(rawText);
+    const riskyCredentialLink = links.find((link: any) => {
+      if (!urlEvidenceExecuted || typeof link.url !== 'string' || !rawText.includes(link.url)) return false;
+      try {
+        const url = new URL(link.url);
+        const beforeLink = rawText.slice(Math.max(0, rawText.indexOf(link.url) - 160), rawText.indexOf(link.url));
+        // The action must lead into this URL, not an unrelated official-app sentence.
+        const directsToLink = /(?:^|[.!?:\n])\s*(?:please\s+)?(?:unlock|verify|sign in|log in)(?:\s+(?:your|the))?(?:\s+(?:account|identity|credentials))?\s+(?:at|via|using)\s*$/i.test(beforeLink);
+        return directsToLink && /^https?:$/.test(url.protocol) &&
+          (link.riskLevel === 'high' || /^(?:\d{1,3}\.){3}\d{1,3}$/.test(url.hostname));
+      } catch { return false; }
+    });
+    const bankLinkDemand = /\b(?:bank|chase|wells fargo|bank of america|citi)\b/i.test(rawText) &&
+      /\b(?:locked|suspended|frozen)\b/i.test(rawText) &&
+      /\b(?:unlock|verify|sign in|log in)\b/i.test(rawText) &&
+      /\b(?:credentials|password|identity|account)\b/i.test(rawText) &&
+      riskyCredentialLink && !warnsAgainstLinks && !abstainFromDemandInference;
+    const prizeFeeDemand = /\b(?:won|winner|lottery|prize|sweepstakes)\b/i.test(rawText) &&
+      /(?:^|[.!?:\n])\s*(?:please\s+)?(?:send|pay|transfer)\b[^!?\n]{0,100}\b(?:fee|taxes|charge)\b[^.!?\n]{0,100}\bto\s+(?:claim(?:\s+(?:your|the)\s+(?:prize|reward|winnings))?(?=[.!?\n]|$)|(?:receive|release|collect)\s+(?:(?:your|the)\s+)?(?:prize|reward|winnings)\b)/i.test(rawText) &&
+      !abstainFromDemandInference &&
+      !/\b(?:no|without)\s+(?:processing\s+)?(?:fee|charge)|\bpay\s+nothing\b/i.test(rawText);
+
+    if (bankLinkDemand) {
+      whatIsHappening = 'The text pairs an account-lockout claim with a direct instruction to verify or unlock at a flagged link.';
+      whatIsItClaiming = 'Claims a bank account is locked or suspended and needs verification.';
+      whatDoesItWantTheUserToDo = 'The text asks you to use a link to unlock or verify an account.';
+      contextualReasoning = 'Account pressure combined with a risky credential link is a phishing warning sign. The screenshot does not establish who sent it.';
+      authenticityStatus = 'SUSPICIOUS';
+      authenticityHeadline = 'Account Verification Link Warning';
+      authenticityRationale = 'Account-lockout pressure and a risky verification destination appear together.';
+      evidenceTraces.push({
+        id: 'trace_bank_credential_link',
+        observation: 'Account-lockout language accompanies a verification link.',
+        evidence: [rawText, `Observed link: ${riskyCredentialLink.url}`],
+        interpretation: 'This rule-based pattern can indicate a phishing attempt; it does not establish one.',
+        risk: 'Entering credentials at an unverified destination could expose the account.',
+        limitation: 'The destination was not opened; screenshot text and URL indicators do not prove sender identity or maliciousness.',
+        recommendation: 'Do not use the message link. Check your account through the official bank app or a known address.',
+        severity: 'high',
+      });
+      recommendations.push('Do not use the message link. Open the official bank app or contact the bank using a number you already trust.');
+    } else if (prizeFeeDemand) {
+      whatIsHappening = 'A prize or lottery claim asks for an upfront fee before the reward can be claimed.';
+      whatIsItClaiming = 'Claims a prize is available after an upfront payment.';
+      whatDoesItWantTheUserToDo = 'Asks you to send or pay a fee to claim the prize.';
+      contextualReasoning = 'An upfront payment demand to obtain a claimed prize is a strong scam warning sign.';
+      authenticityStatus = 'SUSPICIOUS';
+      authenticityHeadline = 'Upfront Prize Fee Warning';
+      authenticityRationale = 'A reward claim is paired with a payment demand before receiving it.';
+      evidenceTraces.push({
+        id: 'trace_prize_fee_demand',
+        observation: 'A claimed prize is conditioned on paying a fee.',
+        evidence: [rawText],
+        interpretation: 'This rule-based payment pattern can indicate an advance-fee prize scam; sender identity is unverified.',
+        risk: 'Money or gift-card value sent to the requester may be lost.',
+        limitation: 'This is a text-pattern warning; the screenshot cannot establish sender identity or whether payment occurred.',
+        recommendation: 'Do not pay to claim the prize or share gift-card codes. Verify any promotion independently.',
+        severity: 'high',
+      });
+      recommendations.push('Do not pay the fee or share gift-card codes. Verify any promotion independently.');
+    }
     // =========================================================================
     // 1. WELLS FARGO / BANK LOCKOUT VISHING CASE
     // =========================================================================
-    if (
+    else if (
       (lower.includes('wells fargo') || lower.includes('chase') || lower.includes('bank of america') || lower.includes('citi')) &&
       (lower.includes('locked') || lower.includes('suspended') || lower.includes('suspicious activity')) &&
       (lower.includes('call us') || lower.includes('call') || lower.includes('verify your identity'))

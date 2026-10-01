@@ -1,0 +1,12 @@
+import { strict as assert } from 'node:assert';
+import { getToolFaqs } from '../../../data/toolFaqs';
+const redactor = getToolFaqs('screenshot-redactor').map(faq => faq.answer).join(' ');
+assert.match(redactor, /opaque solid blocks/i);
+assert.match(redactor, /original file is unchanged/i);
+assert.match(redactor, /inspect the exported copy/i);
+assert.doesNotMatch(redactor, /original pixel data is destroyed|permanently overwritten/i);
+const ocr = getToolFaqs('screenshot-ocr').map(faq => faq.answer).join(' ');
+assert.match(ocr, /DPI metadata alone does not/i);
+assert.match(ocr, /names and numbers/i);
+assert.doesNotMatch(ocr, /near-perfect|72 to 300 DPI/i);
+console.log('Redactor and OCR shared FAQ claim regressions passed');

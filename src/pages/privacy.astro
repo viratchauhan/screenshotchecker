@@ -5,9 +5,9 @@ import Footer from '../components/Footer.astro';
 
 const currentPath = '/privacy/';
 const canonicalUrl = 'https://screenshotchecker.com/privacy/';
-const pageTitle = 'Privacy Architecture & Policy – Zero Storage';
+const pageTitle = 'Privacy Policy & Browser-Local Processing';
 const pageDescription =
-  'Our zero-knowledge architecture ensures your screenshots and images are processed 100% locally in your browser. Zero cloud uploads.';
+  'How browser-local image processing, cross-tool session storage, analytics, resource downloads, and link submissions work on ScreenshotChecker.';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -50,19 +50,19 @@ const structuredData = {
         Privacy Policy & Local Architecture
       </h1>
       <p class="text-sm sm:text-base text-muted max-w-2xl mx-auto">
-        We believe your screenshots and personal documents belong solely to you. Here is exactly how our browser-local processing works.
+        How image processing differs from website requests and browser storage.
       </p>
     </div>
 
     <div class="space-y-10 text-sm text-body leading-relaxed">
       <!-- Section 1 -->
       <div class="feature-card !p-8 space-y-4">
-        <h2 class="font-serif text-2xl text-ink font-normal">1. 100% Client-Side Processing</h2>
+        <h2 class="font-serif text-2xl text-ink font-normal">1. Browser-Local Image Processing</h2>
         <p>
-          Unlike conventional image analysis and conversion websites that transmit uploaded files to remote servers or cloud storage buckets, Screenshot Checker executes <strong>entirely within your browser's local sandbox</strong>.
+          Screenshot analysis, OCR, and redaction process selected images <strong>inside your browser</strong>, rather than using an image-upload processing API.
         </p>
         <p>
-          When you select, drop, or paste an image, the file is read into your device's random-access memory (RAM) via standard HTML5 <code>FileReader</code> APIs. No binary data, pixel matrices, or extracted OCR text is transmitted over the internet to our servers or any third-party AI provider.
+          When you select, drop, or paste an image, browser APIs such as <code>FileReader</code> read it for local analysis. The application's screenshot, OCR, and redaction flows do not submit image bytes, extracted text, or original filenames to an analysis server. This describes those processing flows, not a promise that the whole website makes no network requests.
         </p>
       </div>
 
@@ -74,29 +74,52 @@ const structuredData = {
           <li><strong>Metadata & EXIF Inspection:</strong> Analyzes raw binary array buffers using pure JavaScript directly in the browser to extract camera and GPS tags.</li>
           <li><strong>Sensitive Information (PII) Scanning:</strong> Executes local regular expression pattern matching and Luhn checksum validation against OCR output in memory.</li>
           <li><strong>Image Forensics & Error Level Analysis (ELA):</strong> Computed on an offscreen HTML5 <code>&lt;canvas&gt;</code> element without server-side rendering.</li>
-          <li><strong>Redaction & Export:</strong> Renders pixel modifications (blur, pixelate, blackout) directly to canvas and exports a sanitized PNG/JPEG file without metadata.</li>
+          <li><strong>Redaction & Export:</strong> Renders masks to canvas and exports a new flattened PNG. Use opaque solid blocks; blur and pixelation can leave readable clues. Re-encoding does not copy the source metadata container, but the encoder may add its own metadata. Inspect the exported copy before sharing; the original file is unchanged.</li>
         </ul>
       </div>
 
       <!-- Section 3 -->
       <div class="feature-card !p-8 space-y-4">
-        <h2 class="font-serif text-2xl text-ink font-normal">3. No Accounts, No Tracking of Image Contents</h2>
+        <h2 class="font-serif text-2xl text-ink font-normal">3. Browser Storage and Cross-Tool Images</h2>
         <p>
-          Screenshot Checker requires no registration, login, or user account. We do not store cookies that profile your image analysis history, and we do not employ tracking scripts that capture canvas or file contents.
+          No account is required. When you choose to send an image to another tool, the original image is saved as a data URL in this site's <code>sessionStorage</code>, together with a source-tool label and timestamp. The receiving tool can read that copy within the same tab session.
+        </p>
+        <p>
+          Handoff data older than one hour is rejected and removed when read. This is an age check, not a scheduled deletion timer. A successful read or New Scan does not clear that saved copy. It may remain until it is replaced, an invalid or expired read clears it, or the browser ends or clears the tab session; browser session restoration can affect that lifetime. Use your browser's site-data controls to clear stored data when needed.
+        </p>
+        <p>
+          Language and theme choices are saved in <code>localStorage</code>. The standalone link checker also keeps up to ten recent URL results there, including the URL, classification, and check time. Use its Clear History control to remove that history, or clear this site's browser data. Browser-local storage is different from keeping data only in working memory.
+        </p>
+      </div>
+
+      <div class="feature-card !p-8 space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">4. Analytics and Resource Requests</h2>
+        <p>
+          Pages load the Google Analytics tag for website usage measurement. Analytics can send usage and device information to Google and use cookies. Our application does not add selected image bytes, extracted OCR text, or original filenames to its analytics calls. This is not a guarantee about every request made by third-party scripts. See <a href="https://support.google.com/analytics/answer/11593727?hl=en" class="underline">Google's data collection guidance</a>.
+        </p>
+        <p>
+          The browser also requests website assets, fonts, and OCR engine or language files. Those resource downloads are separate from uploading a selected image for processing. Local image processing does not mean offline operation or zero network activity.
+        </p>
+      </div>
+
+      <div class="feature-card !p-8 space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">5. Standalone Link Submissions</h2>
+        <p>
+          The standalone suspicious-link checker first sends the full trimmed URL or message you submit in a <code>POST</code> request to this site's <code>/api/check-link</code> endpoint, then falls back to browser-local dataset checks if that endpoint is unavailable. Do not submit confidential message text or private links. This is separate from local link scanning within screenshot analysis. The checker does not need to visit the submitted destination to compare it with the dataset.
         </p>
       </div>
 
       <!-- Section 4 -->
       <div class="feature-card !p-8 space-y-4">
-        <h2 class="font-serif text-2xl text-ink font-normal">4. Open Verification</h2>
+        <h2 class="font-serif text-2xl text-ink font-normal">6. Check Requests in Your Browser</h2>
         <p>
-          You can independently verify our privacy claims at any time:
+          Where your browser and organization allow inspection, use a synthetic image to review actual requests:
         </p>
         <ol class="list-decimal list-inside space-y-1.5 pl-2">
           <li>Open your browser's Developer Tools (<code>F12</code> or <code>Ctrl+Shift+I</code>).</li>
           <li>Navigate to the <strong>Network</strong> tab.</li>
           <li>Drop an image into Screenshot Checker and run the analysis.</li>
-          <li>Observe that zero <code>POST</code> requests or image payload uploads occur during the entire analysis workflow.</li>
+          <li>Inspect request destinations and payloads for image bytes, extracted text, or filenames. Analytics and resource downloads can create requests; the request method alone does not establish whether image content was uploaded.</li>
         </ol>
       </div>
     </div>

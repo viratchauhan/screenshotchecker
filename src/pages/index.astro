@@ -104,6 +104,7 @@ const structuredData = {
 <script>
   import { suggestedMasks } from '../lib/analyzer/privacyLocations';
   import { bindRedactionInput } from '../lib/utils/redactionInput';
+  import { bindRedactionExport } from '../lib/utils/redactionExport';
   import { escapeHtml, renderPrivacyFindings } from '../lib/utils/reportSafety';
   import { renderMetadataSummary } from "../lib/utils/metadataRenderer";
   import type { RedactionBox } from '../lib/analyzer/redactor';
@@ -152,17 +153,24 @@ const structuredData = {
   let currentTool: 'blur' | 'pixelate' | 'blackout' | 'whiteout' = 'blackout';
   let redactionBoxes: RedactionBox[] = [];
 
+  let analysisGeneration = 0;
   async function processImageFile(file: File) {
+    const generation = ++analysisGeneration;
+    invalidateRedactor();
+    currentResult = null; currentDataUrl = '';
+    dashboard?.classList.add('hidden');
     currentFile = file;
     const reader = new FileReader();
     reader.onload = async (e) => {
+      if (generation !== analysisGeneration) return;
       currentDataUrl = e.target?.result as string;
-      await executeAnalysis(file, currentDataUrl);
+      await executeAnalysis(file, currentDataUrl, generation);
     };
     reader.readAsDataURL(file);
   }
 
-  async function executeAnalysis(file: File, dataUrl: string) {
+  async function executeAnalysis(file: File, dataUrl: string, generation: number) {
+    if (generation !== analysisGeneration) return;
     if (!idleState || !progressState || !progressBarFill || !progressText) return;
     
     idleState.classList.add('hidden');
@@ -172,11 +180,14 @@ const structuredData = {
 
     try {
       const { runFullAnalysis } = await import('../lib/analyzer/pipeline');
+      if (generation !== analysisGeneration) return;
       const result = await runFullAnalysis(file, dataUrl, (pct, status) => {
+        if (generation !== analysisGeneration) return;
         progressBarFill.style.width = `${pct}%`;
         progressText.innerText = status;
       });
 
+      if (generation !== analysisGeneration) return;
       currentResult = result;
       redactionBoxes = []; renderVersion++;
       renderDashboard(result);
@@ -186,6 +197,7 @@ const structuredData = {
       dashboard?.classList.remove('hidden');
       dashboard?.scrollIntoView({ behavior: 'smooth' });
     } catch (err) {
+      if (generation !== analysisGeneration) return;
       console.error('Analysis failed', err);
       alert('An error occurred during local image analysis. Please ensure the file is a valid image.');
       progressState.classList.add('hidden');
@@ -629,6 +641,11 @@ const structuredData = {
   });
 
   document.getElementById('reset-analysis-btn')?.addEventListener('click', () => {
+    analysisGeneration++;
+    invalidateRedactor();
+    currentDataUrl = '';
+    progressState?.classList.add('hidden');
+    idleState?.classList.remove('hidden');
     dashboard?.classList.add('hidden');
     currentFile = null;
     currentResult = null;
@@ -692,16 +709,28 @@ const structuredData = {
   closeRedactorBtn?.addEventListener('click', closeRedactor);
   cancelRedactorBtn?.addEventListener('click', closeRedactor);
 
-  function closeRedactor() { (redactorModal as HTMLDialogElement)?.close(); redactorModal?.classList.add('hidden'); }
+  let redactorOpenGeneration = 0;
+  function closeRedactor() {
+    redactorOpenGeneration++; renderVersion++;
+    (redactorModal as HTMLDialogElement)?.close();
+    redactorModal?.classList.add('hidden');
+  }
   redactorModal?.addEventListener('cancel', event => { event.preventDefault(); closeRedactor(); });
 
   let redactorImage: HTMLImageElement | null = null;
+  function invalidateRedactor() {
+    closeRedactor();
+    redactorImage = null; redactionBoxes = []; renderVersion++;
+    if (redactorCanvas) { redactorCanvas.width = 0; redactorCanvas.height = 0; }
+  }
   async function initRedactorModal() {
     if (!currentResult || !redactorCanvas) return;
     const source = currentResult.dataUrl;
+    const generation = analysisGeneration;
+    const opening = ++redactorOpenGeneration;
     const image = new Image(); image.src = source;
     await image.decode();
-    if (currentResult?.dataUrl !== source) return;
+    if (opening !== redactorOpenGeneration || generation !== analysisGeneration || currentResult?.dataUrl !== source) return;
     redactorImage = image;
     redactorModal?.classList.remove('hidden');
     (redactorModal as HTMLDialogElement)?.showModal();
@@ -714,9 +743,12 @@ const structuredData = {
   let renderVersion = 0;
   async function redrawRedactorCanvas() {
     if (!redactorCanvas || !redactorImage) return;
-    const { renderRedactedImage } = await import('../lib/analyzer/redactor');
+    const image = redactorImage;
+    const boxes = redactionBoxes.map(box => ({ ...box }));
     const version = ++renderVersion;
-    renderRedactedImage(redactorImage, [...redactionBoxes]).then(({ dataUrl }) => {
+    const { renderRedactedImage } = await import('../lib/analyzer/redactor');
+    if (version !== renderVersion) return;
+    renderRedactedImage(image, boxes).then(({ dataUrl }) => {
       const img = new Image();
       img.onload = () => {
         if (version !== renderVersion) return;
@@ -764,18 +796,14 @@ const structuredData = {
     redrawRedactorCanvas();
   });
 
-  exportRedactedBtn?.addEventListener('click', async () => {
-    if (!redactorImage) return;
-    const { renderRedactedImage } = await import('../lib/analyzer/redactor');
-    const { blob } = await renderRedactedImage(redactorImage, redactionBoxes, 'image/png');
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `redacted-screenshot-${Date.now()}.png`;
-    a.click();
-    URL.revokeObjectURL(url);
-    closeRedactor();
-  });
+  bindRedactionExport(
+    exportRedactedBtn as HTMLButtonElement | null,
+    document.getElementById('redactor-status'),
+    () => redactorImage && (redactorModal as HTMLDialogElement)?.open
+      ? { image: redactorImage, boxes: redactionBoxes } : null,
+    'redacted-screenshot',
+    closeRedactor,
+  );
 
   (window as any).redactSpecificItem = async (val: string) => {
     await initRedactorModal();
