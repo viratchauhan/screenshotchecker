@@ -157,3 +157,34 @@ for (const host of ['www.w3.org', 'developer.android.com', 'support.apple.com'])
   assert.ok([...exifDoc.querySelectorAll('main a[href]')].some(link => link.hostname === host), `EXIF primary source linked: ${host}`);
 }
 console.log('PASS EXIF guide: FAQ/byline parity, privacy boundaries, checklist, primary sources and direct workflow links');
+
+// Task 17 discovery slice: inspect only the contextual card grid. Header/footer
+// navigation and article-body links must not mask a fallback to unrelated cards.
+function assertRelatedCards(doc, headingText, expectedPaths, label) {
+  const headings = [...doc.querySelectorAll('section h3')]
+    .filter(heading => heading.textContent.trim() === headingText);
+  assert.equal(headings.length, 1, `${label}: one contextual card heading`);
+  const grid = headings[0].nextElementSibling;
+  assert.ok(grid?.classList.contains('grid'), `${label}: contextual card grid exists`);
+  const cards = [...grid.querySelectorAll(':scope > a.feature-card')];
+  assert.deepEqual(cards.map(card => card.getAttribute('href').replace(/\/$/, '')),
+    expectedPaths, `${label}: exact contextual card targets and order`);
+  for (const card of cards) {
+    assert.ok(card.querySelector('h4')?.textContent.trim(), `${label}: named card`);
+    const pathname = card.getAttribute('href').replace(/^\//, '').replace(/\/$/, '');
+    assert.doesNotThrow(() => read(`${pathname}/index.html`), `${label}: card target resolves: ${pathname}`);
+  }
+}
+
+const toolsHeading = 'Recommended Investigation Tools';
+const articlesHeading = 'Related Forensic & Verification Guides';
+assertRelatedCards(exifDoc, toolsHeading,
+  ['/screenshot-metadata-checker', '/image-metadata-remover', '/screenshot-redactor'], 'EXIF guide tools');
+assertRelatedCards(redactionDoc, toolsHeading,
+  ['/screenshot-redactor', '/screenshot-metadata-checker', '/image-metadata-remover'], 'Redaction guide tools');
+for (const path of ['screenshot-privacy-checker', 'screenshot-redactor']) {
+  const doc = new JSDOM(read(`${path}/index.html`)).window.document;
+  assertRelatedCards(doc, articlesHeading,
+    ['/blog/redact-screenshot-before-sharing', '/blog/exif-metadata'], `${path} guides`);
+}
+console.log('PASS privacy discovery: exact contextual tool/guide cards, retained redactor guides and resolved targets');
