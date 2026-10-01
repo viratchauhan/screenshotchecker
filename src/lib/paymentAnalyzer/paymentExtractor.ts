@@ -1,3 +1,4 @@
+import { extractUnmarkedPaymentAmounts } from '../analyzer/paymentTextContext';
 import type { ExtractedPaymentFact } from './paymentTypes';
 
 export interface ExtractedPaymentData {
@@ -33,11 +34,9 @@ export function extractPaymentEntities(rawText: string): ExtractedPaymentData {
     }
   }
 
-  // Also check standalone currency numbers on receipt cards (e.g. "₹500.00")
-  if (rawAmounts.length === 0) {
-    const fallbackAmount = text.match(/₹\s*[\d,]+(?:\.\d{2})?/i);
-    if (fallbackAmount) rawAmounts.push(fallbackAmount[0]);
-  }
+  // OCR may lose a currency symbol. Preserve the visible value without inventing currency.
+  const inferredAmounts = rawAmounts.length === 0 ? extractUnmarkedPaymentAmounts(text) : [];
+  rawAmounts.push(...inferredAmounts);
 
   const primaryAmount = rawAmounts.length > 0 ? rawAmounts[0] : 'Not detected';
   if (primaryAmount !== 'Not detected') {
@@ -45,7 +44,7 @@ export function extractPaymentEntities(rawText: string): ExtractedPaymentData {
       label: 'Primary Amount',
       value: primaryAmount,
       source: 'OCR',
-      confidence: 95,
+      confidence: inferredAmounts.length ? 70 : 95,
     });
   }
 

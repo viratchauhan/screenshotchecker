@@ -1,3 +1,4 @@
+import { isDatasetShard, datasetUnavailable } from './datasetAvailability';
 import * as path from 'path';
 import * as fs from 'fs';
 import { normalizeUrl } from './urlNormalizer';
@@ -45,8 +46,10 @@ export async function loadShard(
       if (fs.existsSync(shardPath)) {
         const content = fs.readFileSync(shardPath, 'utf-8');
         const data = JSON.parse(content);
-        SHARD_CACHE.set(shardKey, data);
-        return data;
+        if (isDatasetShard(data)) {
+          SHARD_CACHE.set(shardKey, data);
+          return data;
+        }
       }
     }
   } catch {}
@@ -59,8 +62,10 @@ export async function loadShard(
       );
       if (res.ok) {
         const data = await res.json();
-        SHARD_CACHE.set(shardKey, data);
-        return data;
+        if (isDatasetShard(data)) {
+          SHARD_CACHE.set(shardKey, data);
+          return data;
+        }
       }
     }
   } catch {}
@@ -71,8 +76,10 @@ export async function loadShard(
       const res = await fetch(`/data/urldataIndex/shard_${shardKey}.json`);
       if (res.ok) {
         const data = await res.json();
-        SHARD_CACHE.set(shardKey, data);
-        return data;
+        if (isDatasetShard(data)) {
+          SHARD_CACHE.set(shardKey, data);
+          return data;
+        }
       }
     }
   } catch {}
@@ -149,7 +156,8 @@ export async function verifyUrlLocally(
   // 1. Check EXACT URL MATCH
   const urlShardKey = getShardKey(urlKey);
   const urlShard = await loadShard(urlShardKey, options);
-  if (urlShard && urlShard.urls && urlShard.urls[urlKey]) {
+  if (!urlShard) return datasetUnavailable(norm, source, now);
+  if (Object.hasOwn(urlShard.urls, urlKey)) {
     matched = true;
     matchLevel = 'EXACT_URL';
     matchedValue = urlKey;
@@ -160,7 +168,8 @@ export async function verifyUrlLocally(
   if (!matched && hostKey) {
     const hostShardKey = getShardKey(hostKey);
     const hostShard = await loadShard(hostShardKey, options);
-    if (hostShard && hostShard.hosts && hostShard.hosts[hostKey]) {
+    if (!hostShard) return datasetUnavailable(norm, source, now);
+    if (Object.hasOwn(hostShard.hosts, hostKey)) {
       matched = true;
       matchLevel = 'EXACT_HOSTNAME';
       matchedValue = hostKey;
@@ -172,7 +181,8 @@ export async function verifyUrlLocally(
   if (!matched && domainKey) {
     const domainShardKey = getShardKey(domainKey);
     const domainShard = await loadShard(domainShardKey, options);
-    if (domainShard && domainShard.domains && domainShard.domains[domainKey]) {
+    if (!domainShard) return datasetUnavailable(norm, source, now);
+    if (Object.hasOwn(domainShard.domains, domainKey)) {
       matched = true;
       matchLevel = 'REGISTRABLE_DOMAIN';
       matchedValue = domainKey;

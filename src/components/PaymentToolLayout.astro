@@ -150,7 +150,7 @@ const structuredData = {
               Upload UPI or Payment Screenshot
             </h3>
             <p class="font-sans text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
-              Check screenshots from PhonePe, Google Pay, Paytm, BHIM, and Pop UPI for typography flaws, altered amounts, and fake template artifacts.
+              Read payment details from PhonePe, Google Pay, Paytm, BHIM, and Pop UPI screenshots and review text/reference indicators. Fonts, layout and settled funds are not verified.
             </p>
           </div>
 
@@ -219,7 +219,7 @@ const structuredData = {
             Hints From a Fake Payment Screenshot
           </h2>
           <p class="text-xs sm:text-sm text-muted mt-2 leading-relaxed">
-            Fraudulent UPI payment generators and prank APKs often leave subtle structural defects behind. Here are the key indicators our engine analyzes:
+            These are manual review prompts alongside OCR text rules. The current text-rule engine does not measure font families, icon positions or pixel editing.
           </p>
         </div>
 
@@ -230,7 +230,7 @@ const structuredData = {
               <h3 class="font-serif text-lg text-ink font-normal">Typography & Font Family Inconsistency</h3>
             </div>
             <p class="text-xs text-body leading-relaxed">
-              Official UPI apps (Google Pay, PhonePe, Paytm) use proprietary, clean sans-serif fonts. Malicious APK templates often render specific lines (like <em>"Banking name:"</em> or bank titles) in default system serif fonts, creating a distinct visual mismatch.
+              Compare text appearance in the original image with an official receipt. The OCR label <em>"Banking name:"</em> does not establish a font mismatch or editing; this tool does not measure fonts.
             </p>
           </div>
 
@@ -240,7 +240,7 @@ const structuredData = {
               <h3 class="font-serif text-lg text-ink font-normal">Unusual Icon Placement Inside Text</h3>
             </div>
             <p class="text-xs text-body leading-relaxed">
-              In spoofed templates, bank icons or card glyphs are frequently inserted awkwardly inside the bank title text string (e.g. <em>"State 🏦 Bank of India"</em>) instead of appearing as a separate, properly padded vector element.
+              OCR can merge nearby symbols into bank-name text, such as <em>"State 🏦 Bank of India"</em>. Inspect the original image manually; extracted symbols do not establish icon misplacement or composite editing.
             </p>
           </div>
 
@@ -553,7 +553,7 @@ const structuredData = {
       if (result.riskFactors.length === 0) {
         issuesList.innerHTML = `
           <div class="p-4 rounded-xl bg-canvas border border-hairline text-xs text-muted italic">
-            ✓ No obvious typography inconsistencies, altered amounts, or misplaced icons identified.
+            No configured receipt-text issues matched. Fonts, layout and icon placement were not assessed.
           </div>
         `;
       } else {

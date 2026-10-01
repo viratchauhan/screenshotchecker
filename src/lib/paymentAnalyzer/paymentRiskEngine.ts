@@ -147,25 +147,25 @@ export function computePaymentRisk(
 
   // Determine Verdict
   let verdict: PaymentVerdict = 'LOW_RISK';
-  let verdictLabel = 'LOW RISK (Visually Consistent)';
+  let verdictLabel = 'LOW RISK (Few Text-Rule Matches)';
   let verdictDescription =
-    'No obvious visual manipulation or layout discrepancies detected on this payment screenshot.';
+    'Few configured receipt-text rules matched. This does not establish visual integrity, authenticity or settled funds.';
 
   if (riskScore >= 75) {
     verdict = 'HIGH_RISK';
-    verdictLabel = 'HIGH RISK (Multiple Inconsistencies)';
+    verdictLabel = 'HIGH RISK (Multiple Rule Indicators)';
     verdictDescription =
-      'Significant visual or structural discrepancies detected that match known spoofed UPI template patterns.';
+      'Several weighted receipt-text indicators matched. Review the cited OCR evidence and verify the payment independently.';
   } else if (riskScore >= 45) {
     verdict = 'SUSPICIOUS';
-    verdictLabel = 'SUSPICIOUS (Visual Inconsistencies Detected)';
+    verdictLabel = 'SUSPICIOUS (Text-Rule Indicators)';
     verdictDescription =
-      'One or more layout, typography, or reference anomalies were detected that warrant careful manual verification.';
+      'Receipt-text or reference-format rules matched. These rules do not measure fonts or layout and need manual verification.';
   } else if (riskScore >= 25) {
     verdict = 'CAUTION';
     verdictLabel = 'CAUTION (Minor Irregularities)';
     verdictDescription =
-      'Minor visual variations detected. Verify official records before confirming receipt of funds.';
+      'One or more receipt-text rules matched. Visual differences were not measured; verify official records before confirming receipt of funds.';
   }
 
   // Grounded What We Found summary
@@ -200,10 +200,10 @@ export function computePaymentRisk(
   const whatConcernsUs: string[] = [];
   if (riskFactors.length > 0) {
     for (const factor of riskFactors) {
-      whatConcernsUs.push(`[${factor.type}] ${factor.title}: ${factor.explanation}`);
+      whatConcernsUs.push(`${factor.title}: ${factor.explanation}`);
     }
   } else {
-    whatConcernsUs.push('No obvious digital tampering, font mismatch, or icon misalignment detected.');
+    whatConcernsUs.push('No configured receipt-text issues matched. Fonts, icon alignment and digital tampering were not assessed by these text rules.');
   }
 
   // Grounded Recommendations
@@ -258,7 +258,7 @@ export function computePaymentRisk(
     forensics: {
       compressionInconsistency: forensics.visualIntegrityStatus === 'NORMAL' ? 'Standard' : 'Elevated',
       noiseVarianceScore: riskScore,
-      notes: compressionNotes.length > 0 ? compressionNotes : ['Local image compression consistency evaluated.'],
+      notes: compressionNotes.length > 0 ? compressionNotes : ['Receipt-text rules evaluated; no pixel, font or layout measurement performed.'],
     },
   };
 }

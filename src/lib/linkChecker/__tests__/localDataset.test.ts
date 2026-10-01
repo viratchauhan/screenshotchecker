@@ -1,9 +1,22 @@
-import { describe, it } from 'node:test';
+import { after, before, describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { normalizeUrl, extractRegistrableDomain } from '../urlNormalizer';
 import { verifyUrlLocally, verifyMessageUrlsLocally } from '../localDatasetService';
 
 describe('Local Dataset URL Verification Suite (urldata.csv)', () => {
+  const originalFetch = globalThis.fetch;
+  const attemptedRequests: string[] = [];
+  before(() => {
+    globalThis.fetch = async input => {
+      attemptedRequests.push(String(input));
+      throw new Error('Network prohibited: dataset fixtures must resolve from local files');
+    };
+  });
+  after(() => {
+    globalThis.fetch = originalFetch;
+    assert.deepEqual(attemptedRequests, [], 'Local dataset fixtures must not make any network requests');
+  });
+
   it('1. Exact URL match identifies exact URL record from dataset', async () => {
     const report = await verifyUrlLocally('https://crackspider.us/toolbar/install.php?pack=exe');
     assert.equal(report.matched, true);

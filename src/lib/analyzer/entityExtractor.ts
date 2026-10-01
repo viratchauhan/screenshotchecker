@@ -1,3 +1,4 @@
+import { extractUnmarkedPaymentAmounts, labelledReferenceSpans, overlapsReference } from './paymentTextContext';
 import type {
   StructuredEntity,
   ParsedAmount,
@@ -162,6 +163,14 @@ export function extractEntitiesDetailed(
     }
   }
 
+  if (amounts.length === 0) {
+    for (const raw of extractUnmarkedPaymentAmounts(text)) {
+      const value = Number(raw.replace(/,/g, ''));
+      amounts.push({ raw, value, currency: 'Unknown', context: 'Payment-context amount; currency not detected' });
+      pushEntity('AMOUNT', raw, 'MEDIUM', 'Amount inferred from payment field context; currency unknown', value);
+    }
+  }
+
   // 3. UPI IDs
   const upiRegex = /\b[a-zA-Z0-9.\-_]{2,40}@(okhdfcbank|okaxis|oksbi|okicici|paytm|upi|ybl|axl|ibl|barodampay|fbl)\b/gi;
   while ((match = upiRegex.exec(text)) !== null) {
@@ -169,11 +178,20 @@ export function extractEntitiesDetailed(
     pushEntity('UPI_ID', match[0], 'HIGH', 'Virtual Payment Address / UPI format pattern');
   }
 
-  // 4. Transaction / Reference IDs
-  const txnRegex = /\b(?:UPI\s*Ref(?:\s*No)?|Txn\s*(?:ID|Ref|No)|Transaction\s*(?:ID|Ref|No|Number)|Ref\s*(?:ID|No|#)|Reference\s*(?:ID|No|#)|Auth\s*Code)[:\s-]*([A-Z0-9_-]{6,25})\b/gi;
+  const referenceSpans = labelledReferenceSpans(text);
+  for (const span of referenceSpans) {
+    const reference = text.slice(span.start, span.end);
+    transactionIds.push(reference);
+    pushEntity('TRANSACTION_ID', reference, 'HIGH', 'Financial reference or authorization identifier');
+  }
+
+  // 4. Other Transaction / Reference IDs
+  const txnRegex = /\b(?:UTR|RRN|UPI\s*Ref(?:\s*No)?|Txn\s*(?:ID|Ref|No)|Transaction\s*(?:ID|Ref|No|Number)|Ref\s*(?:ID|No|#)|Reference\s*(?:ID|No|#)|Auth\s*Code)[:\s-]*([A-Z0-9_-]{6,25})\b/gi;
   while ((match = txnRegex.exec(text)) !== null) {
-    transactionIds.push(match[0]);
-    pushEntity('TRANSACTION_ID', match[0], 'HIGH', 'Financial reference or authorization identifier');
+    if (!overlapsReference(match.index, match[0].length, referenceSpans)) {
+      transactionIds.push(match[0]);
+      pushEntity('TRANSACTION_ID', match[0], 'HIGH', 'Financial reference or authorization identifier');
+    }
   }
 
   // 5. Order / Invoice IDs
@@ -214,7 +232,12 @@ export function extractEntitiesDetailed(
   const phoneRegex = /(?:\+?1\s*(?:[.-]\s*)?)?(?:\(\s*\d{3}\s*\)|\d{3})[-.\s]?\d{3}[-.\s]?\d{4}\b|\b(?:\+91|0)?[6-9]\d{9}\b|\b\+?[0-9]{1,3}[-.\s]?(?:\(\d{2,4}\)|\d{2,4})[-.\s]?\d{3,4}[-.\s]?\d{3,4}\b/g;
   while ((match = phoneRegex.exec(text)) !== null) {
     const cleanDigits = match[0].replace(/\D/g, '');
-    if (cleanDigits.length >= 10 && cleanDigits.length <= 15) {
+    if (
+      cleanDigits.length >= 10 && cleanDigits.length <= 15 &&
+      !overlapsReference(match.index, match[0].length, referenceSpans) &&
+      !/\d/.test(text[match.index - 1] || '') &&
+      !/\d/.test(text[match.index + match[0].length] || '')
+    ) {
       phoneNumbers.push(match[0]);
       pushEntity('PHONE', match[0], 'HIGH', 'E.164 telecommunication phone sequence');
     }

@@ -9,7 +9,8 @@ export interface RedactionBox {
 
 /**
  * Applies redactions (blur, pixelate, blackout, whiteout) directly onto an image canvas
- * and returns the clean, metadata-free resulting dataUrl and Blob.
+ * and returns a new raster dataUrl and Blob without copying source metadata.
+ * The encoder may add ordinary format metadata such as resolution/color space.
  */
 export async function renderRedactedImage(
   img: HTMLImageElement,
@@ -86,15 +87,18 @@ export async function renderRedactedImage(
     }
   }
 
-  return new Promise((resolve, reject) => {
+  const blob = await new Promise<Blob>((resolve, reject) => {
     canvas.toBlob(
       (blob) => {
         if (!blob) return reject(new Error('Failed to create redacted image blob'));
-        const dataUrl = canvas.toDataURL(format, quality);
-        resolve({ dataUrl, blob });
+        resolve(blob);
       },
       format,
       quality
     );
   });
+  // Keep encoding outside the asynchronous callback so an exception rejects
+  // this async function instead of escaping and leaving its promise pending.
+  const dataUrl = canvas.toDataURL(format, quality);
+  return { dataUrl, blob };
 }

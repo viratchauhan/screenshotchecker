@@ -1,0 +1,13 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> screenshotchecker@0.0.1 test:blog-seo
+> node --import tsx scripts/verify-blog-seo.mjs
+
+PASS screenshot-checker-online: dates, sitemap, schema, canonical, heading, index and snippet metadata
+PASS screenshot-analyzer-online: dates, sitemap, schema, canonical, heading, index and snippet metadata
+PASS fake-upi-payment-screenshot: dates, sitemap, schema, canonical, heading, index and snippet metadata
+PASS ai-image-detector-online: dates, sitemap, schema, canonical, heading, index and snippet metadata
+PASS exif-metadata: dates, sitemap, schema, canonical, heading, index and snippet metadata
+PASS smishing-fake-sms: dates, sitemap, schema, canonical, heading, index and snippet metadata
+PASS suspicious-link-checker-online: dates, sitemap, schema, canonical, heading, index and snippet metadata
+PASS analyzer guide: visible/schema FAQ and author parity, synthetic labels, source links and internal targets

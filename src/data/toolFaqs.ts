@@ -45,18 +45,18 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
     },
     {
       question: 'What image resolutions provide the best OCR text accuracy?',
-      answer: 'Standard screenshot resolutions from smartphones and desktop displays (72 to 300 DPI) work reliably. Clear contrast between text and background produces near-perfect transcription.',
+      answer: 'OCR accuracy depends on text size in pixels, contrast, sharpness, language, and layout. DPI metadata alone does not establish readability. Review the extracted text, especially names and numbers, against the original image.',
     },
   ],
 
   'screenshot-redactor': [
     {
       question: 'What redaction methods are available for hiding sensitive information?',
-      answer: 'You can choose between heavy Gaussian blur, pixelation mosaic, solid blackout blocks, or subtle highlighter strokes to obscure phone numbers, emails, addresses, and financial account figures.',
+      answer: 'The editor offers blur, pixelation, black blocks, and white blocks. Use fully opaque solid blocks to cover sensitive information; blur, pixelation, and highlighting can leave readable clues.',
     },
     {
       question: 'Can redacted text be reversed or unmasked after export?',
-      answer: 'No. When you export a redacted image, the underlying pixels are permanently overwritten and re-rasterized onto a fresh HTML5 canvas. The original pixel data is destroyed upon export.',
+      answer: 'Export creates a separate flattened image; your original file is unchanged. Fully cover sensitive information with opaque solid blocks. Blur, pixelation, and highlighting can leave clues or readable text, so inspect the exported copy before sharing.',
     },
     {
       question: 'Is there any file upload required to redact screenshots?',

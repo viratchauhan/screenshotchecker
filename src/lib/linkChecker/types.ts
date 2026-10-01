@@ -13,6 +13,7 @@ export type LocalDatasetVerdict =
   | 'GOOD'
   | 'CONFLICTING'
   | 'NO_LOCAL_MATCH'
+  | 'DATASET_UNAVAILABLE'
   | 'INVALID_URL';
 
 export interface LocalVerificationReport {

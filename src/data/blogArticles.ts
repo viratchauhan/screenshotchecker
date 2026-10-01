@@ -26,6 +26,7 @@ export interface BlogArticle {
   category: 'Security' | 'Forensics' | 'AI & Forensics' | 'Privacy' | 'Threat Analysis';
   publishedAt: string;
   updatedAt?: string;
+  authorName?: string;
   readTime: string;
   excerpt: string;
   targetKeywords: string[];
@@ -178,108 +179,113 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   // ARTICLE 2: Screenshot Analyzer Online
   // =========================================================================
   {
-    slug: 'screenshot-analyzer-online',
-    title: 'Screenshot Analyzer Online: What Can It Actually Detect?',
-    seoTitle: 'Screenshot Analyzer Online: What Can It Actually Detect?',
-    metaDescription:
-      'Learn what online screenshot analyzers detect: editing signals, compression patterns, text inconsistencies, metadata, and visual forensics.',
-    category: 'Forensics',
-    publishedAt: '2026-08-22',
-    readTime: '5 min read',
-    excerpt:
-      'A practical guide to what screenshot analysis tools inspect: compression difference maps (ELA), text forensics, metadata structure, and the realistic limits of digital image forensics.',
-    targetKeywords: [
-      'screenshot analyzer online',
-      'screenshot analyzer free',
-      'screenshot analyzer',
-      'screenshot verification',
-      'image analysis',
-      'screenshot checker',
+    "slug": "screenshot-analyzer-online",
+    "title": "What Can a Screenshot Analyzer Actually Detect?",
+    "seoTitle": "Screenshot Analysis: OCR, Metadata and ELA Explained",
+    "metaDescription": "Understand screenshot OCR, metadata and ELA results, with fictional examples and practical next steps for missing, uncertain or failed checks.",
+    "category": "Forensics",
+    "publishedAt": "2026-08-22",
+    "updatedAt": "2026-10-01",
+    "readTime": "5 min read",
+    "authorName": "ScreenshotChecker",
+    "excerpt": "How to interpret extracted text, metadata, compression maps and incomplete checks without mistaking image clues for proof.",
+    "targetKeywords": [
+      "screenshot analysis",
+      "screenshot analyzer",
+      "OCR limitations",
+      "error level analysis"
     ],
-    keyTakeaway: {
-      title: 'Multi-Signal Forensic Convergence',
-      text: 'Reliable forensic analysis never relies on a single metric. Multi-signal inspection combines Error Level Analysis, OCR typography validation, EXIF inspection, and layout geometry to surface potential inconsistencies.',
+    "keyTakeaway": {
+      "title": "Start with the claim",
+      "text": "Decide what the screenshot is meant to establish. Image checks can help you investigate, but confirming a sender, payment or event requires evidence beyond the image."
     },
-    introduction:
-      'When you upload an image to an online screenshot analyzer, what is the software actually examining behind the scenes? Unlike human eyes that scan for obvious visual mistakes, forensic analyzers inspect pixel matrices, compression grids, frequency energy, and container metadata. Understanding what these tools detect—and what they cannot—helps you interpret analysis results accurately.',
-    contentSections: [
+    "introduction": "A screenshot analyzer can extract readable text, inspect available metadata and highlight changes caused by image recompression. These checks help identify questions to investigate. They cannot prove that a message was sent, a payment arrived or a screenshot is genuine. A failed check or missing result must remain unknown.",
+    "contentSections": [
       {
-        heading: 'What Screenshot Analysis Actually Means',
-        level: 'h2',
-        paragraphs: [
-          'Screenshot analysis is the process of examining a digital image container and its raster content to identify structural anomalies, compression inconsistencies, and signs of digital modification.',
-          'Rather than giving a simple "real or fake" label, a comprehensive analyzer provides itemized signals across multiple forensic domains so you can evaluate the evidence systematically.',
-        ],
+        "heading": "What does ScreenshotChecker examine?",
+        "paragraphs": [
+          "The <a href=\"/screenshot-analyzer\">screenshot analyzer</a> combines OCR, text-based risk patterns, sensitive-data suggestions, metadata inspection and compression analysis. Each result has a different scope: a copied amount is a transcription, a flagged phrase is a pattern match, and a bright image region is a pixel difference. None authenticates the underlying claim.",
+          "Keep the original file and record the question you want to answer. For a practical sequence from the initial claim to independent verification, use the <a href=\"/blog/screenshot-checker-online\">screenshot verification checklist</a>."
+        ]
       },
       {
-        heading: 'Core Forensic Techniques Used in Screenshot Analyzers',
-        level: 'h2',
-        paragraphs: [
-          '1. Error Level Analysis (ELA): When an image is saved as a JPEG, it undergoes lossy compression across 8x8 pixel blocks. If a portion of the image is edited or pasted in later, that modified area compresses at a different error rate than the surrounding original pixels. ELA highlights these compression disparities.',
-          '2. Typography and Character Analysis: Optical Character Recognition (OCR) extracts text to check for distorted character geometry, non-dictionary letter sequences, and baseline variations commonly seen in spliced edits or diffusion AI generations.',
-          '3. Container Metadata Inspection: Tools read EXIF, XMP, and PNG chunk tags to check for software stamps (such as Photoshop, Canva, or GIMP) and verify whether camera metadata exists or was stripped.',
-          '4. Texture & Frequency Spectrum Analysis: Natural sensor captures possess Poisson-Gaussian noise distribution, whereas synthetic graphics often feature unnatural over-smoothing or bimodal frequency spikes.',
-        ],
-        callout: {
-          type: 'info',
-          text: 'Error Level Analysis (ELA) highlights compression rate differences. It is an investigatory tool, not absolute proof of fraud.',
-        },
+        "heading": "OCR extracts text but does not measure typography",
+        "paragraphs": [
+          "Use the <a href=\"/screenshot-ocr\">OCR workspace</a> to read and copy text, then compare important names, amounts and status labels with the image. OCR output is not evidence that the software measured a font family, icon placement or baseline shift.",
+          "Tesseract documents recognition problems caused by noise, skew, borders and other input-quality issues. A missing decimal or confused character can be a transcription error rather than an edit. See <a href=\"https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html\">Tesseract’s input-quality guidance</a>. Do not interpret an OCR confidence score as the probability that a screenshot is authentic."
+        ]
       },
       {
-        heading: 'Why One Forensic Signal Is Never Enough',
-        level: 'h2',
-        paragraphs: [
-          'In digital forensics, a single anomaly can have legitimate explanations. For example, high contrast text on a solid white background naturally creates an elevated ELA response because sharp edges compress differently than flat gradients.',
-          'A reliable forensic assessment requires multi-signal convergence—such as finding editing software metadata, localized compression anomalies, and typographical alignment shifts all within the same image region.',
-        ],
+        "heading": "Metadata describes fields present in the file",
+        "paragraphs": [
+          "The <a href=\"/screenshot-metadata-checker\">metadata inspector</a> can display available tags. A software name may reflect an ordinary export. An empty result cannot establish whether tags never existed, were removed or could not be read. Preserve the file you received rather than resaving it before inspection.",
+          "Content Credentials are a separate provenance mechanism. The <a href=\"https://spec.c2pa.org/specifications/specifications/2.2/explainer/Explainer.html\">C2PA explainer</a> distinguishes verifiable provenance from whether depicted content is factual. A valid credential does not itself prove an event happened; missing credentials do not establish AI generation or manipulation."
+        ]
       },
       {
-        heading: 'Technical Boundaries and Real-World Limitations',
-        level: 'h2',
-        paragraphs: [
-          'Image analysis tools have inherent boundaries you should keep in mind:',
-          '• Repeated Re-compression: When an image is forwarded multiple times through WhatsApp or messaging platforms, the platform re-encodes the image at lower quality, which can smooth over or blur subtle forensic differences.',
-          '• Clean Template Generation: If a scammer generates a fake document entirely from scratch in a web canvas, the entire image shares a uniform compression layer without splicing boundaries.',
-          '• Lossless Formats: PNG files use lossless compression, meaning standard ELA re-compression checks must be interpreted differently than JPEG lossy matrices.',
-        ],
+        "heading": "ELA shows recompression differences rather than edited regions",
+        "paragraphs": [
+          "ScreenshotChecker’s compression analysis compares decoded pixels with a JPEG-resaved copy and amplifies the differences. The <a href=\"/image-manipulation-checker\">forensics workspace</a> exposes this view. Brightness depends on image content and recompression; it is not a label identifying fraud or the person who edited a region.",
+          "The maker of <a href=\"https://29a.ch/photo-forensics/#forensic-error-level-analysis\">Forensically explains ELA</a> as a comparison with a recompressed image and warns that results can mislead. With a PNG screenshot, the JPEG conversion introduces its own differences; the map cannot reconstruct a history of earlier edits. Ordinary resaving can change a map, and an evenly compressed fabrication may have no conspicuous boundary."
+        ]
       },
+      {
+        "heading": "How should you interpret an incomplete or quiet report?",
+        "paragraphs": [
+          "<strong>Check failed or unavailable:</strong> the check did not supply usable evidence. Retry with a readable original if appropriate, or use another verification route. Do not turn the failure into a clean result.",
+          "<strong>No match:</strong> a completed reference check found no matching record within its available coverage. It does not establish safety or authenticity. If coverage is unavailable or incomplete, that limitation must remain part of the conclusion.",
+          "<strong>Possible concern:</strong> inspect the specific text or region and consider innocent explanations. Several correlated clues can share one cause, such as resizing; counting them does not produce a calibrated fraud probability."
+        ]
+      },
+      {
+        "heading": "Three fictional examples and useful next steps",
+        "paragraphs": [
+          "These are synthetic teaching scenarios, not customer images, measured tool outputs or an accuracy benchmark.",
+          "<strong>A support screenshot with a missing decimal:</strong> the image reads 10.00 but the transcript reads 1000. Compare the digits at a readable zoom and correct the transcript. The discrepancy alone does not establish tampering.",
+          "<strong>A conversation with bright text edges:</strong> the compression map emphasizes a name on a plain background. Check the unprocessed image and surrounding conversation; do not treat brightness as proof that the name was pasted in.",
+          "<strong>A screenshot with no metadata and a failed text scan:</strong> both checks leave gaps. Ask for a clearer original and seek the source conversation or announcement independently. Record the claim as unverified if the original source is unavailable."
+        ]
+      },
+      {
+        "heading": "What to record before drawing a conclusion",
+        "paragraphs": [
+          "Note which checks completed, what each actually observed, and what remains unknown. Keep conclusions specific: “the transcript needs correction” or “the source is unavailable” is more defensible than an unsupported real-or-fake verdict.",
+          "For consequential claims, return to the original service or a trusted independent source. Preserve the original privately and review sensitive details before sharing a separate copy. This guide explains the checks; it does not certify an image or provide an accuracy percentage."
+        ]
+      }
     ],
-    faq: [
+    "faq": [
       {
-        question: 'What is Error Level Analysis (ELA)?',
-        answer:
-          'Error Level Analysis is a forensic method that resaves an image at a known quality level and calculates the difference matrix. Regions that were recently edited or spliced into the file typically display higher error contrast.',
+        "question": "Can a screenshot analyzer prove a screenshot is genuine?",
+        "answer": "No. It can extract text, inspect available metadata and highlight image differences, but it cannot authenticate the underlying sender, payment or event. Verify consequential claims independently."
       },
       {
-        question: 'What is the difference between a screenshot checker and a screenshot analyzer?',
-        answer:
-          'A screenshot checker quickly scans an image for scam indicators, suspicious links, and urgent fraud patterns. A screenshot analyzer dives into pixel-level forensics, compression levels, texture noise, and typography metrics.',
+        "question": "Does a bright ELA region prove that it was edited?",
+        "answer": "No. ELA compares pixels with a recompressed version. Ordinary image features and resaving can produce differences, while some fabricated images may have no conspicuous boundary."
       },
       {
-        question: 'Why do social media screenshots lack camera EXIF data?',
-        answer:
-          'Screenshots capture the device screen framebuffer rather than an optical camera sensor, so they naturally do not include camera hardware or lens tags. Messaging apps also strip metadata during transmission for user privacy.',
+        "question": "Does missing metadata mean a screenshot is fake?",
+        "answer": "No. An empty metadata result cannot establish whether fields never existed, were removed or could not be read. Missing fields leave uncertainty."
       },
       {
-        question: 'Can an image analyzer detect generative AI images?',
-        answer:
-          'Yes, analyzers inspect text distortion, unnatural surface smoothing, bimodal frequency energy, and cryptographic C2PA Content Credentials to detect generative AI characteristics.',
+        "question": "What should I do when a check fails or finds no match?",
+        "answer": "A failed or unavailable check leaves an evidence gap. A completed check with no match only describes its available reference coverage. Neither result establishes that the screenshot is safe or genuine."
       },
+      {
+        "question": "Do Content Credentials prove an image depicts the truth?",
+        "answer": "No. C2PA credentials provide verifiable provenance within their trust model. They do not by themselves establish that the depicted event occurred, and missing credentials do not establish AI generation."
+      }
     ],
-    peopleAlsoSearch: [
-      'Screenshot analyzer online',
-      'Screenshot analyzer free',
-      'Best screenshot analyzer',
-      'Screenshot analyzer software',
-      'Screenshot analyzer GitHub',
-      'Screenshot Scanner',
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "screenshot-checker-online",
+      "exif-metadata"
     ],
-    relatedSlugs: ['screenshot-checker-online', 'fake-upi-payment-screenshot', 'ai-image-detector-online'],
-    cta: {
-      label: 'Analyze Your Screenshot',
-      url: '/',
-      description: 'Run deep multi-signal analysis including ELA heatmaps, OCR typography, and container inspection.',
-    },
+    "cta": {
+      "label": "Inspect a Screenshot",
+      "url": "/screenshot-analyzer",
+      "description": "Review extracted text and available signals, then check the original source."
+    }
   },
 
   // =========================================================================

@@ -150,6 +150,7 @@ const heading = toolSlug === 'screenshot-privacy-checker'
 <script>
   import { suggestedMasks } from '../../lib/analyzer/privacyLocations';
   import { bindRedactionInput } from '../../lib/utils/redactionInput';
+  import { bindRedactionExport } from '../../lib/utils/redactionExport';
   import { escapeHtml } from '../../lib/utils/reportSafety';
   import { loadImageFromDataUrl } from '../../lib/analyzer/imageInfo';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
@@ -338,17 +339,12 @@ const heading = toolSlug === 'screenshot-privacy-checker'
     boxes = []; currentImage = null; currentDataUrl = ''; detectedPiiFindings = []; loadGeneration++;
   });
 
-  document.getElementById('redact-export-png')?.addEventListener('click', async () => {
-    if (!currentImage) return;
-    const { renderRedactedImage } = await import('../../lib/analyzer/redactor');
-    const { blob } = await renderRedactedImage(currentImage, boxes, 'image/png');
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `redacted-${Date.now()}.png`;
-    a.click();
-    URL.revokeObjectURL(url);
-  });
+  bindRedactionExport(
+    document.getElementById('redact-export-png') as HTMLButtonElement | null,
+    document.getElementById('redact-status'),
+    () => currentImage ? { image: currentImage, boxes } : null,
+    'redacted',
+  );
 
   // Cross-Tool Handoff
   document.getElementById('redact-go-ocr')?.addEventListener('click', (e) => {

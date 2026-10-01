@@ -1,0 +1,260 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> screenshotchecker@0.0.1 test:seo
+> node scripts/verify-seo.mjs
+
+Found 32 HTML files in dist/
+
+====================================================================================================
+AUDIT REPORT SUMMARY:
+====================================================================================================
+
+File: /404.html
+  Title (40 chars): "Page Not Found (404) — ScreenshotChecker"
+  Desc  (131 chars): "The page you requested could not be found. Return to ScreenshotChecker to inspec..."
+  Canonical: https://screenshotchecker.com/404/
+  Robots: noindex, nofollow
+  Schemas: [Organization]
+
+File: /500.html
+  Title (47 chars): "Internal Server Error (500) — ScreenshotChecker"
+  Desc  (138 chars): "An unexpected error occurred while processing the request. Return to ScreenshotC..."
+  Canonical: https://screenshotchecker.com/500/
+  Robots: noindex, nofollow
+  Schemas: [Organization]
+
+File: /about/index.html
+  Title (49 chars): "About ScreenshotChecker – Private Image Forensics"
+  Desc  (129 chars): "Learn about ScreenshotChecker's mission to provide 100% private, client-side ima..."
+  Canonical: https://screenshotchecker.com/about/
+  Robots: index, follow
+  Schemas: [BreadcrumbList, Organization]
+
+File: /ai-image-detector/index.html
+  Title (53 chars): "AI Image Detector – Check Synthetic &amp; Fake Images"
+  Desc  (136 chars): "Detect Midjourney, DALL-E, and generative AI images with C2PA credentials &amp; ..."
+  Canonical: https://screenshotchecker.com/ai-image-detector/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 5 <details> elements
+
+File: /blog/ai-image-detector-online/index.html
+  Title (50 chars): "AI Image Detector Online: How AI Media Is Detected"
+  Desc  (142 chars): "Learn how AI image detectors analyze visual patterns, metadata, C2PA Content Cre..."
+  Canonical: https://screenshotchecker.com/blog/ai-image-detector-online/
+  Robots: index, follow
+  Schemas: [BlogPosting, BreadcrumbList, FAQPage, Organization]
+
+File: /blog/exif-metadata/index.html
+  Title (50 chars): "What Is EXIF Metadata? What Your Photos Can Reveal"
+  Desc  (143 chars): "Learn what EXIF metadata is, what information photos can contain, and how camera..."
+  Canonical: https://screenshotchecker.com/blog/exif-metadata/
+  Robots: index, follow
+  Schemas: [BlogPosting, BreadcrumbList, FAQPage, Organization]
+
+File: /blog/fake-upi-payment-screenshot/index.html
+  Title (54 chars): "Fake UPI Payment Screenshots: Checks and Warning Signs"
+  Desc  (148 chars): "Review warning signs in UPI payment screenshots and learn why confirming the tra..."
+  Canonical: https://screenshotchecker.com/blog/fake-upi-payment-screenshot/
+  Robots: index, follow
+  Schemas: [BlogPosting, BreadcrumbList, FAQPage, Organization]
+
+File: /blog/index.html
+  Title (46 chars): "Screenshot Forensics &amp; Verification Guides"
+  Desc  (130 chars): "Expert guides to detecting fake screenshots, payment fraud, smishing SMS, and AI..."
+  Canonical: https://screenshotchecker.com/blog/
+  Robots: index, follow
+  Schemas: [BreadcrumbList, ItemList, Organization]
+
+File: /blog/screenshot-analyzer-online/index.html
+  Title (52 chars): "Screenshot Analysis: OCR, Metadata and ELA Explained"
+  Desc  (142 chars): "Understand screenshot OCR, metadata and ELA results, with fictional examples and..."
+  Canonical: https://screenshotchecker.com/blog/screenshot-analyzer-online/
+  Robots: index, follow
+  Schemas: [BlogPosting, BreadcrumbList, FAQPage, Organization]
+
+File: /blog/screenshot-checker-online/index.html
+  Title (59 chars): "Is This Screenshot Real or Edited? A Verification Checklist"
+  Desc  (138 chars): "Check a suspicious screenshot with a five-step checklist, payment and chat examp..."
+  Canonical: https://screenshotchecker.com/blog/screenshot-checker-online/
+  Robots: index, follow
+  Schemas: [BlogPosting, BreadcrumbList, FAQPage, Organization]
+
+File: /blog/smishing-fake-sms/index.html
+  Title (54 chars): "Smishing: How Fake SMS and WhatsApp Messages Trick You"
+  Desc  (134 chars): "Learn how fake bank, delivery, toll, job, and reward messages use urgency, suspi..."
+  Canonical: https://screenshotchecker.com/blog/smishing-fake-sms/
+  Robots: index, follow
+  Schemas: [BlogPosting, BreadcrumbList, FAQPage, Organization]
+
+File: /blog/suspicious-link-checker-online/index.html
+  Title (48 chars): "Suspicious Link Checker Online: Check URL Safety"
+  Desc  (157 chars): "Check suspicious links and domains online before clicking. Verify URLs against 4..."
+  Canonical: https://screenshotchecker.com/blog/suspicious-link-checker-online/
+  Robots: index, follow
+  Schemas: [BlogPosting, BreadcrumbList, FAQPage, Organization]
+
+File: /contact/index.html
+  Title (38 chars): "Contact Us – ScreenshotChecker Support"
+  Desc  (133 chars): "Have questions or feedback about ScreenshotChecker? Contact our team for assista..."
+  Canonical: https://screenshotchecker.com/contact/
+  Robots: index, follow
+  Schemas: [BreadcrumbList, Organization]
+
+File: /image-manipulation-checker/index.html
+  Title (51 chars): "Screenshot Forensics &amp; ELA Manipulation Checker"
+  Desc  (123 chars): "Spot edited screenshots with Error Level Analysis (ELA) and clone detection. 100..."
+  Canonical: https://screenshotchecker.com/image-manipulation-checker/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 3 <details> elements
+
+File: /image-metadata-remover/index.html
+  Title (50 chars): "Image Metadata Remover – Strip EXIF &amp; GPS Data"
+  Desc  (125 chars): "Remove GPS coordinates, camera tags, and hidden metadata before sharing photos. ..."
+  Canonical: https://screenshotchecker.com/image-metadata-remover/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 3 <details> elements
+
+File: /index.html
+  Title (46 chars): "Screenshot Checker – Verify Image Authenticity"
+  Desc  (111 chars): "Think a screenshot might be faked? Check it in seconds — free, private, 100% in-..."
+  Canonical: https://screenshotchecker.com/
+  Robots: index, follow
+  Schemas: [WebSite, WebPage, WebApplication, FAQPage, Organization]
+  Semantic FAQs: 8 <details> elements
+
+File: /payment-screenshot-checker/index.html
+  Title (50 chars): "Fake UPI Screenshot Checker – Verify Payment Slips"
+  Desc  (138 chars): "Verify PhonePe, Google Pay, Paytm, and UPI payment screenshots for visual tamper..."
+  Canonical: https://screenshotchecker.com/payment-screenshot-checker/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 10 <details> elements
+
+File: /privacy/index.html
+  Title (48 chars): "Privacy Architecture &amp; Policy – Zero Storage"
+  Desc  (131 chars): "Our zero-knowledge architecture ensures your screenshots and images are processe..."
+  Canonical: https://screenshotchecker.com/privacy/
+  Robots: index, follow
+  Schemas: [BreadcrumbList, Organization]
+
+File: /resources/index.html
+  Title (45 chars): "Screenshot Security &amp; Forensics Resources"
+  Desc  (129 chars): "Step-by-step security tutorials on safe screenshot sharing, removing GPS metadat..."
+  Canonical: https://screenshotchecker.com/resources/
+  Robots: index, follow
+  Schemas: [BreadcrumbList, Organization]
+
+File: /reverse-image-search/index.html
+  Title (46 chars): "Free Reverse Image Search — Find Image Sources"
+  Desc  (160 chars): "Reverse search a photo or screenshot with Google Lens, TinEye or Bing. Prepare y..."
+  Canonical: https://screenshotchecker.com/reverse-image-search/
+  Robots: index, follow
+  Schemas: [BreadcrumbList, WebApplication, FAQPage, Organization]
+  Semantic FAQs: 6 <details> elements
+
+File: /screenshot-analyzer/index.html
+  Title (60 chars): "Screenshot Analyzer – Verify Image Safety &amp; Authenticity"
+  Desc  (136 chars): "Need to verify a screenshot? Scan for visual edits, exposed personal data, scam ..."
+  Canonical: https://screenshotchecker.com/screenshot-analyzer/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 2 <details> elements
+
+File: /screenshot-comparison/index.html
+  Title (46 chars): "Screenshot Comparison Tool – Visual Image Diff"
+  Desc  (124 chars): "Compare two screenshots side-by-side with slider overlays and diff heatmaps. Fin..."
+  Canonical: https://screenshotchecker.com/screenshot-comparison/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 3 <details> elements
+
+File: /screenshot-detector/index.html
+  Title (41 chars): "Screenshot Detector: Screenshot or Photo?"
+  Desc  (147 chars): "Check whether an image has screenshot or camera-photo clues. Inspect metadata an..."
+  Canonical: https://screenshotchecker.com/screenshot-detector/
+  Robots: index, follow
+  Schemas: [WebApplication, FAQPage, Organization]
+  Semantic FAQs: 4 <details> elements
+
+File: /screenshot-metadata-checker/index.html
+  Title (49 chars): "Screenshot Metadata Checker – View EXIF &amp; GPS"
+  Desc  (124 chars): "Uncover hidden EXIF data, GPS location coordinates, camera models, and edit hist..."
+  Canonical: https://screenshotchecker.com/screenshot-metadata-checker/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 3 <details> elements
+
+File: /screenshot-ocr/index.html
+  Title (46 chars): "Screenshot OCR – Extract Text from Images Free"
+  Desc  (127 chars): "Extract text from any screenshot in seconds. Fast, client-side WebAssembly OCR t..."
+  Canonical: https://screenshotchecker.com/screenshot-ocr/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 3 <details> elements
+
+File: /screenshot-privacy-checker/index.html
+  Title (48 chars): "Screenshot Privacy Scanner – Find &amp; Mask PII"
+  Desc  (118 chars): "Accidentally sharing personal info? Scan screenshots for credit cards, emails, S..."
+  Canonical: https://screenshotchecker.com/screenshot-privacy-checker/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 3 <details> elements
+
+File: /screenshot-redactor/index.html
+  Title (52 chars): "Screenshot Redactor – Blur &amp; Hide Sensitive Info"
+  Desc  (125 chars): "Blur, pixelate, or black out sensitive info before sharing screenshots. Instant,..."
+  Canonical: https://screenshotchecker.com/screenshot-redactor/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 3 <details> elements
+
+File: /screenshot-scam-checker/index.html
+  Title (57 chars): "Screenshot Scam Checker – Detect Phishing &amp; SMS Fraud"
+  Desc  (124 chars): "Received a suspicious SMS, WhatsApp, or email capture? Detect phishing links, fa..."
+  Canonical: https://screenshotchecker.com/screenshot-scam-checker/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 2 <details> elements
+
+File: /screenshot-spam-checker/index.html
+  Title (46 chars): "Screenshot Spam Checker – Analyze Unwanted Ads"
+  Desc  (120 chars): "Audit message and email screenshots for spam triggers, deceptive marketing, and ..."
+  Canonical: https://screenshotchecker.com/screenshot-spam-checker/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 2 <details> elements
+
+File: /suspicious-link-checker/index.html
+  Title (50 chars): "Suspicious Link Checker – Check URLs &amp; Domains"
+  Desc  (157 chars): "Check suspicious URLs and domains against ScreenshotChecker's local URL intellig..."
+  Canonical: https://screenshotchecker.com/suspicious-link-checker/
+  Robots: index, follow
+  Schemas: [WebApplication, BreadcrumbList, FAQPage, Organization]
+  Semantic FAQs: 9 <details> elements
+
+File: /terms/index.html
+  Title (36 chars): "Terms of Service – ScreenshotChecker"
+  Desc  (117 chars): "Review the terms and conditions for using ScreenshotChecker's free client-side i..."
+  Canonical: https://screenshotchecker.com/terms/
+  Robots: index, follow
+  Schemas: [BreadcrumbList, Organization]
+
+File: /tools/index.html
+  Title (52 chars): "Free Screenshot Analysis Tools – Forensics &amp; OCR"
+  Desc  (133 chars): "Explore 12+ free browser tools for screenshot forensics, payment slip verificati..."
+  Canonical: https://screenshotchecker.com/tools/
+  Robots: index, follow
+  Schemas: [BreadcrumbList, Organization]
+
+====================================================================================================
+Total Pages: 32 | Errors: 0 | Warnings: 0
+====================================================================================================
+
+Sitemap checks:
+sitemap-index.xml exists: true
+sitemap.xml exists: true
+sitemap.xml size: 205 bytes
+sitemap.xml first 200 chars: <?xml version="1.0" encoding="UTF-8"?> <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">   <sitemap>     <loc>https://screenshotchecker.com/sitemap-0.xml</loc>   </sitemap> </sitemapi

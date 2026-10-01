@@ -651,6 +651,12 @@ const faqs = getToolFaqs('suspicious-link-checker');
         iconSvg = '⚠️';
         headingText = 'Conflicting Local Data';
         break;
+      case 'DATASET_UNAVAILABLE':
+        bannerBg = 'bg-amber-500/10 border-warning/30 text-warning';
+        tagClass = 'bg-warning text-white';
+        iconSvg = '⚠️';
+        headingText = 'Local Dataset Unavailable';
+        break;
       case 'INVALID_URL':
         bannerBg = 'bg-error/10 border-error/30 text-error';
         tagClass = 'bg-error text-white';

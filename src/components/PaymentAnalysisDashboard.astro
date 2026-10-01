@@ -10,7 +10,7 @@
       <div>
         <div class="flex items-center gap-3 mb-2">
           <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">
-            Payment Screenshot Forensic Report
+            Payment Screenshot Text Review
           </span>
           <span id="payment-receipt-type-pill" class="badge-pill text-[11px] font-sans">
             UPI Transfer
@@ -20,15 +20,16 @@
           Analyzing Screenshot...
         </h2>
         <p id="payment-verdict-subtext" class="text-xs sm:text-sm text-body mt-2 max-w-2xl leading-relaxed">
-          Forensic evaluation of layout structure, typography consistency, and transaction reference formatting.
+          Review of extracted receipt text and transaction-reference formatting; fonts and layout are not measured.
         </p>
       </div>
 
       <!-- Risk Score Indicator -->
       <div class="flex items-center gap-4 bg-canvas border border-hairline px-5 py-3.5 rounded-xl shrink-0">
         <div class="text-right">
-          <span class="text-[10px] uppercase tracking-wider text-muted font-bold block">Payment Risk</span>
+          <span class="text-[10px] uppercase tracking-wider text-muted font-bold block">Rule-Based Indicator</span>
           <span id="payment-risk-score" class="font-serif text-3xl font-normal text-ink">--</span>
+          <p id="payment-score-method" class="max-w-xs text-[11px] text-muted mt-1">A weighted OCR text-rule score, not a probability of fraud or authenticity. It cannot verify settled funds or measure fonts/layout.</p>
         </div>
         <div id="payment-risk-indicator-dot" class="w-3 h-3 rounded-full bg-muted animate-pulse"></div>
       </div>
@@ -143,7 +144,7 @@
       <div id="payment-anomalies-section" class="bg-surface-card border border-hairline rounded-2xl p-6 space-y-4">
         <div class="flex items-center justify-between pb-3 border-b border-hairline">
           <div class="flex items-center gap-2">
-            <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Forensic Findings</span>
+            <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">OCR Rule Findings</span>
             <span id="payment-issues-count-badge" class="badge-pill text-[10px]">0 Issues</span>
           </div>
           <span class="text-xs text-muted">WHAT • WHERE • WHY</span>

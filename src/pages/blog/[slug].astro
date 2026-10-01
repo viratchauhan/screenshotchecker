@@ -40,7 +40,7 @@ const articleSchema = {
   },
   author: {
     '@type': 'Organization',
-    name: 'Screenshot Checker Editorial Team',
+    name: article.authorName || 'Screenshot Checker Editorial Team',
     url: 'https://screenshotchecker.com/',
   },
   publisher: {
@@ -137,6 +137,8 @@ const combinedStructuredData = {
         <span>•</span>
         <span>{article.readTime}</span>
       </div>
+
+      {article.authorName && <p class="text-xs text-muted">By <a href="/about" rel="author" class="underline">{article.authorName}</a></p>}
 
       <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-ink font-normal leading-[1.15] tracking-tight">
         {article.title}
@@ -255,7 +257,7 @@ const combinedStructuredData = {
     </section>
 
     <!-- People Also Search For -->
-    <section class="pt-8 mb-12 border-t border-hairline space-y-4">
+    {article.peopleAlsoSearch.length > 0 && <section class="pt-8 mb-12 border-t border-hairline space-y-4">
       <div class="space-y-1">
         <span class="text-xs uppercase tracking-wider font-semibold text-muted font-mono block">Related Search Intent</span>
         <h2 class="font-serif text-xl sm:text-2xl text-ink font-normal">
@@ -270,7 +272,7 @@ const combinedStructuredData = {
           </span>
         ))}
       </div>
-    </section>
+    </section>}
 
     <!-- Contextual Internal Linking (Tools & Guides) -->
     <RelatedLinks currentPath={`/blog/${article.slug}`} articleSlugs={article.relatedSlugs} />
