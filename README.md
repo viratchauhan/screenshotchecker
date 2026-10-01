@@ -58,6 +58,7 @@ The checked Astro configuration builds a static site. Adapter source alone does 
 
 - Sample generation: `src/lib/samples/sampleData.ts`
 - Reference data: `src/data/fraud_sms_whatsapp_reference_dataset.txt`
+- URL dataset: [provenance, license evidence and limitations](docs/URL-DATASET-NOTICE.md) for `src/data/urldata.csv` and its generated indexes
 - Payment tests: `src/lib/paymentAnalyzer/__tests__/paymentAnalyzer.test.ts`
 - OCR tests: `src/lib/analyzer/__tests__/ocrCoordinates.test.ts`
 - Metadata and report safety: `src/lib/utils/__tests__`

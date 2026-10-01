@@ -310,3 +310,7 @@ For the authorized 1 October release, the new record now uses `publishedAt: 2026
 
 
 Independent final-date review accepted `9a243f3` with no blocking findings: exact-runtime 34/34 tests, 33-page build, SEO and all eight article checks pass; visible/index/BlogPosting dates and sitemap lastmod agree. Prior article records and exact PNG assets remain unchanged. Successor exact-head Preview and controlled production release remain pending.
+
+## 1 October 2026 — 10B dataset provenance documentation slice
+
+Added a dataset-specific notice and README link separating the verified 2017 public copy, August 2026 index generation, declared mirror license and unresolved acquisition details. Dataset and runtime behavior are unchanged. Verification is recorded in [audit/10B-dataset-provenance-2026-10-01.md](audit/10B-dataset-provenance-2026-10-01.md). Tasks 10B and 15 remain open; this slice is local only.
