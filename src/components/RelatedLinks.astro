@@ -135,6 +135,8 @@ const DEFAULT_TOOL_RELATIONS: Record<string, string[]> = {
   'suspicious-link-checker': ['screenshot-scam-checker', 'screenshot-ocr', 'screenshot-analyzer'],
   'blog/fake-upi-payment-screenshot': ['payment-screenshot-checker', 'image-manipulation-checker', 'screenshot-redactor'],
   'blog/suspicious-link-checker-online': ['suspicious-link-checker', 'screenshot-scam-checker', 'screenshot-ocr'],
+  'blog/exif-metadata': ['screenshot-metadata-checker', 'image-metadata-remover', 'screenshot-redactor'],
+  'blog/redact-screenshot-before-sharing': ['screenshot-redactor', 'screenshot-metadata-checker', 'image-metadata-remover'],
 };
 
 const DEFAULT_ARTICLE_RELATIONS: Record<string, string[]> = {
@@ -149,7 +151,7 @@ const DEFAULT_ARTICLE_RELATIONS: Record<string, string[]> = {
   'screenshot-spam-checker': ['smishing-fake-sms', 'suspicious-link-checker-online'],
   'screenshot-metadata-checker': ['exif-metadata', 'screenshot-checker-online'],
   'image-metadata-remover': ['exif-metadata', 'screenshot-analyzer-online'],
-  'screenshot-privacy-checker': ['screenshot-analyzer-online', 'exif-metadata'],
+  'screenshot-privacy-checker': ['redact-screenshot-before-sharing', 'exif-metadata'],
   'screenshot-comparison': ['screenshot-checker-online', 'fake-upi-payment-screenshot'],
   'suspicious-link-checker': ['suspicious-link-checker-online', 'smishing-fake-sms'],
 };
