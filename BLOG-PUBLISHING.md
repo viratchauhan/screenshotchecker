@@ -25,3 +25,19 @@ Before publication:
 
 Guidance: [Google's article dates](https://developers.google.com/search/docs/appearance/publication-dates)
 and [helpful content](https://developers.google.com/search/docs/fundamentals/creating-helpful-content).
+
+## Review-only articles and figures
+
+A new article may use `publishedAt: null` while its branch is under review. This
+renders an explicit pending-publication label and omits publication/modification
+dates from schema and sitemap, rather than claiming the test date was a release.
+Before an authorized production merge, replace null with the actual publication
+calendar date and rerun the build and SEO checks. Do not leave a pending label in
+an approved release, backdate it, or generate dates automatically on every build.
+
+For owned worked examples, use an optional section `figure` with a zero-based
+`afterParagraph` index, local public asset URL, descriptive `alt`, pixel `width`
+and `height`, and visible plain-text `caption`. Store images under an
+article-specific `public/images/blog/` directory. Use unchanged bytes when the
+article describes the exact inspected file; do not run those files through image
+optimization. Section `checklist` items render as a semantic unordered list.

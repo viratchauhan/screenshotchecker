@@ -66,7 +66,7 @@
 | 16D | UK scam examples and guide | S | 15,16A | Region-specific useful guide/examples with benign controls; no duplicate US guide with only brand substitutions | TODO |
 | 16E | Payment provider/region specification | S | 07,15 | Supported US/UK/India providers and currencies documented from primary sources; fixtures and unsupported states defined | TODO |
 | 16F | First global payment expansion | M | 16E | One provider/region slice implemented and tested; no UPI-only validation leaks into unrelated transfers; remaining providers queued separately | TODO |
-| 17 | Privacy/redaction content improvement | M | 04B,05A,15 | Existing pages have distinct jobs, owned before/after examples and verified instructions | TODO |
+| 17 | Privacy/redaction content improvement | M | 04B,05A,15 | Existing pages have distinct jobs, owned before/after examples and verified instructions | RELEASE READY: date review and pinned checks accepted; successor exact-head Preview and controlled production release pending |
 | 18 | Cold-scan performance | M | 04A,12 | Baseline measured; one dominant bottleneck improved (for example C2PA loading); no privacy/accuracy regression | TODO |
 | 19 | Search snippets and social cards | S | 13,14 | Priority titles/descriptions clarified; preview images work; no duplicate intent pages introduced | TODO |
 | 20A | Educational challenge prototype | M | 01B,12 | Small original edit dataset, labeled answers, accessible playable flow; existing game code reused where suitable | TODO |
@@ -278,3 +278,27 @@ Verified main production command versus nonproduction Preview command. Added onl
 ## 1 October 2026 — 09A privacy disclosure alignment
 
 The original draft PR/Preview is confirmed with unchanged production. Saved synthetic PNG pixel/Comment checks and narrow desktop layout passed; runtime network capture is blocked by organization policy. A source audit exposed blanket privacy guarantees that exceed existing analytics, handoff storage and URL-submission behavior. This bounded copy-only successor discloses those distinctions and adds focused source/FAQ-schema checks. No analytics, storage or image-processing behavior changed. Broader task 09 remains open. See audit/09A-privacy-disclosures-2026-10-01.md.
+
+
+## 1 October 2026 — task 17 worked redaction tutorial
+
+One original redaction tutorial is implemented on an isolated branch from released main `52c858d`. It uses the actual TypeScript article source, two byte-identical supplied PNGs, accessible figures/captions, a semantic sharing checklist, careful metadata/privacy limits and matching visible/structured FAQs. Redactor and verification-guide links provide contextual discovery. The explicit null publication date displays a pending label and omits fabricated schema/sitemap dates until the authorized release.
+
+Exact Node 26.9.0/npm 11.19.1 checks pass: 34/34 entrypoints, 33-page build, SEO and all eight blog checks. The example pixel/Comment check was reconfirmed; browser localhost access is blocked by `ERR_BLOCKED_BY_CLIENT`, so responsive visual QA stays a Preview gate. No browser restriction bypass, dependency, tool workflow, analytics, storage, settings, remote publication or production deployment. Independent review is pending. See `audit/17-redaction-tutorial-2026-10-01.md`. This advances existing task 17 only; task 15 and broader task 09 remain open.
+
+
+## 1 October 2026 — task 17 independent review and task 21 submission receipts
+
+Independent review accepted tutorial checkpoint `834c125` for nonproduction Preview with no blocking findings. The reviewer independently reran exact-runtime 34/34 tests, the 33-page build and both SEO checks, and verified authored-text retention, unchanged historical article dates/snippets, PNG hashes/chunks/CRC/pixels and intended links. This does not authorize production publication; actual release date and Preview visual checks remain explicit gates.
+
+Separately, existing task 21 records two authorized submissions on 1 October: The Free Tools Directory received ScreenshotChecker in its Security category at approximately 07:17 UTC (12:47 Asia/Kolkata); OSINT Newsletter Tools Library recorded one maker-disclosed response at approximately 07:21 UTC (12:51 Asia/Kolkata). Email/social fields were omitted. Both await editorial review; neither acceptance, published listing nor traffic is established. No duplicate submission or unrequested follow-up was made. This is a receipt checkpoint, not a new implementation task or outreach schedule.
+
+
+## 1 October 2026 — task 17 release-date finalization
+
+Draft PR #2 publishes the independently reviewed tutorial tree as `3e7c15b`; Cloudflare Preview `b8addd79-bcff-4a18-98f7-5922bf7afa03` passed build/deployment. Independent Preview checks passed wide and 485px layouts, both images/captions, checklist, FAQ, reciprocal links and unchanged earlier article dates. The authored example files remain byte-identical.
+
+For the authorized 1 October release, the new record now uses `publishedAt: 2026-10-01`; existing article dates are unchanged. This release-candidate checkpoint is not a claim that main is merged or production is updated. Final exact-runtime checks, independent date/schema review and the successor exact-head Preview precede the controlled production decision. If publication slips beyond 1 October, correct the release date before publishing. No unrelated content, analytics, storage or settings change.
+
+
+Independent final-date review accepted `9a243f3` with no blocking findings: exact-runtime 34/34 tests, 33-page build, SEO and all eight article checks pass; visible/index/BlogPosting dates and sitemap lastmod agree. Prior article records and exact PNG assets remain unchanged. Successor exact-head Preview and controlled production release remain pending.

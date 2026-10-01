@@ -31,7 +31,8 @@ async function runBlogSystemTests() {
       assert(/^\d{4}-\d{2}-\d{2}$/.test(date) && new Date(date).toISOString().slice(0, 10) === date, 'Valid ISO calendar date');
       assert(date <= new Date().toISOString().slice(0, 10), 'Publication date is not in the future');
     }
-    assert(!article.updatedAt || article.updatedAt >= article.publishedAt, 'Update does not precede publication');
+    assert(article.publishedAt === null || typeof article.publishedAt === 'string', 'Publication date is explicit, including review-only pending state');
+    assert(!article.updatedAt || (!!article.publishedAt && article.updatedAt >= article.publishedAt), 'Update does not precede publication');
     assert(article.relatedSlugs.every(s => s !== slug && getArticleBySlug(s)), 'Related links resolve to other articles');
     assert(article.readTime.includes('min read'), `Read time formatted properly: "${article.readTime}"`);
     assert(article.contentSections.length >= 3, `Has ${article.contentSections.length} content sections`);

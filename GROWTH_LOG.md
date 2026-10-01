@@ -23,3 +23,17 @@ Reproduced failed shard requests appearing as no-match and fixed client/service/
 - Local Canvas pixel/PNG verification passes; this is not production browser download or full-page network/privacy acceptance
 - 31/31 pinned-runtime test entrypoints, 32-page build, SEO and blog checks pass; no remote publication or settings change
 - Independent review reran the final aggregate and local pixel QA; details and limits: `audit/04B-export-qa-2026-10-01.md`
+
+
+## 1 October 2026 — task 17 tutorial and task 21 directory receipts
+
+- One original worked redaction tutorial is independently accepted at `834c125` for nonproduction Preview, with unchanged example PNGs and careful evidence/privacy limits
+- Exact pinned runtime: 34/34 tests, 33 pages, general SEO and all eight blog checks pass; responsive visual QA and an actual publication date remain release gates
+- The Free Tools Directory received one authorized Security-category submission at approximately 07:17 UTC; OSINT Newsletter Tools Library recorded one authorized maker-disclosed submission at approximately 07:21 UTC
+- Both directory submissions await editorial review. No acceptance, publication, referral traffic or measured acquisition improvement is claimed; no email/social contact details supplied
+- Existing `WORK-QUEUE.md` remains authoritative. No new outreach queue or automatic follow-up schedule was created
+
+
+## 1 October 2026 — task 17 release candidate after Preview
+
+Draft PR #2 and Cloudflare Preview for `3e7c15b` are verified. Independent wide/485px visual checks passed images, captions, checklist, FAQs, reciprocal links and unchanged historical dates. The new article is dated 1 October during release finalization; final exact-runtime checks, independent date/schema review and successor Preview remain gates before the production decision. No traffic/indexing improvement is claimed.
