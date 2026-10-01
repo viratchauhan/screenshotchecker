@@ -105,7 +105,7 @@ const structuredData = {
       <div class="feature-card !p-8 space-y-4">
         <h2 class="font-serif text-2xl text-ink font-normal">5. Standalone Link Submissions</h2>
         <p>
-          The standalone suspicious-link checker first sends the full trimmed URL or message you submit in a <code>POST</code> request to this site's <code>/api/check-link</code> endpoint, then falls back to browser-local dataset checks if that endpoint is unavailable. Do not submit confidential message text or private links. This is separate from local link scanning within screenshot analysis. The checker does not need to visit the submitted destination to compare it with the dataset.
+          The standalone suspicious-link checker extracts URLs from your submission and compares them with the dataset in your browser. It does not send the submitted URL or message text to an analysis endpoint or visit the submitted destination. It can request static dataset shards from this site; those request paths contain a shard identifier, not the submitted text. Resource and analytics requests described above can still occur. This is separate from local link scanning within screenshot analysis.
         </p>
       </div>
 

@@ -18,13 +18,13 @@ test('shared copy avoids whole-site zero-data or zero-storage guarantees', () =>
   assert.match(read('components/TrustPrivacy.astro'), /analytics.*downloads.*session storage/is);
 });
 
-test('policy separates processing, analytics, storage and explicit URL submission', () => {
+test('policy separates processing, analytics, storage and local URL lookup', () => {
   const policy = read('pages/privacy.astro');
   for (const text of ['Google Analytics', 'cookies', 'original image', 'sessionStorage',
     'source-tool label and timestamp', 'not a scheduled deletion timer',
     'successful read or New Scan does not clear', 'session restoration',
     'localStorage', 'ten recent URL results', 'Clear History',
-    'full trimmed URL or message', '/api/check-link', 'request method alone']) {
+    'does not send the submitted URL or message text', 'static dataset shards', 'request method alone']) {
     assert.ok(policy.includes(text), text);
   }
   assert.doesNotMatch(policy, /guaranteed deletion|deleted after one hour|only in (?:RAM|memory)/i);
@@ -39,7 +39,9 @@ test('shared OCR, redactor and scanner FAQs disclose storage and page requests',
     assert.doesNotMatch(answers, /completely in-memory|ever recorded or transmitted/, slug);
   }
   const linkFaq = getToolFaqs('suspicious-link-checker').map(faq => faq.answer).join(' ');
-  assert.match(linkFaq, /POSTs the full trimmed submission/);
+  assert.match(linkFaq, /without sending the submitted URL or message text/);
+  assert.match(linkFaq, /Static dataset shard requests can still occur/);
+  assert.doesNotMatch(linkFaq, /POSTs|fallback/);
   assert.match(linkFaq, /localStorage.*Clear History/);
 });
 

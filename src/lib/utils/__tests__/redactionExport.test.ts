@@ -158,7 +158,7 @@ test('all discovered redaction surfaces use the guarded export and accessible st
   const astroFiles = ['src/components', 'src/pages'].flatMap(directory =>
     readdirSync(directory, { recursive: true }).filter(file => file.endsWith('.astro')).map(file => `${directory}/${file}`));
   const discovered = astroFiles.filter(file => /<RedactorModal\b|id="redact-export-png"/.test(readFileSync(file, 'utf8')));
-  assert.deepEqual(discovered.sort(), surfaces.map(([file]) => file).sort(), 'every redaction exporter must be covered');
+  assert.deepEqual(discovered.map(file => file.replace(/\\/g, '/')).sort(), surfaces.map(([file]) => file).sort(), 'every redaction exporter must be covered');
   for (const [file, status] of surfaces) {
     const source = readFileSync(file, 'utf8');
     assert.match(source, /import \{ bindRedactionExport \}/);

@@ -67,7 +67,7 @@ export function extractUrls(input: string): string[] {
 }
 
 /**
- * Performs fast local URL verification directly against static shards or backend API.
+ * Performs fast local URL verification directly against static dataset shards in the browser.
  */
 export async function verifySingleUrl(rawInput: string): Promise<LocalVerificationReport> {
   const norm = normalizeUrl(rawInput);
@@ -243,32 +243,7 @@ export async function checkLink(rawInput: string): Promise<CheckLinkResult> {
     throw new Error('Please enter a valid URL or domain.');
   }
 
-  // 1. Try server-side /api/check-link if available
-  try {
-    const response = await fetch('/api/check-link', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: trimmed }),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      if (data.reports && Array.isArray(data.reports) && data.reports.length > 0) {
-        return {
-          single: data.single || data.reports[0],
-          reports: data.reports,
-        };
-      }
-      if (data.verdict) {
-        return {
-          single: data as LocalVerificationReport,
-          reports: [data as LocalVerificationReport],
-        };
-      }
-    }
-  } catch {}
-
-  // 2. Direct client-side shard resolution (handles astro dev, static export, and offline mode seamlessly)
+  // Resolve in the browser; fetch only static dataset shards, never submitted text.
   const extracted = extractUrls(trimmed);
 
   if (extracted.length > 1) {
