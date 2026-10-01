@@ -117,3 +117,43 @@ for (const host of ['bishopfox.com', 'tesseract-ocr.github.io', 'www.w3.org']) {
   assert.ok([...redactionDoc.querySelectorAll('main a[href]')].some(link => link.hostname === host), `Redaction primary source linked: ${host}`);
 }
 console.log('PASS redaction tutorial: FAQ/byline parity, figures/bytes/captions, checklist, source links and contextual internal links');
+
+// Task 17 EXIF slice: validate the built article and both direct workflow targets.
+const exif = getAllArticles().find(article => article.slug === 'exif-metadata');
+const exifDoc = new JSDOM(read(`blog/${exif.slug}/index.html`)).window.document;
+const exifSchemas = [...exifDoc.querySelectorAll('script[type="application/ld+json"]')]
+  .flatMap(script => { const value = JSON.parse(script.textContent); return value['@graph'] || [value]; });
+const exifFAQ = exifSchemas.find(value => value['@type'] === 'FAQPage');
+assert.equal(exifFAQ.mainEntity.length, exif.faq.length);
+for (const [index, faq] of exif.faq.entries()) {
+  assert.equal(exifFAQ.mainEntity[index].name, faq.question);
+  assert.equal(exifFAQ.mainEntity[index].acceptedAnswer.text, faq.answer);
+  const heading = [...exifDoc.querySelectorAll('h3')].find(node => node.textContent.trim() === faq.question);
+  assert.equal(heading?.nextElementSibling?.textContent.trim(), faq.answer, 'EXIF visible FAQ matches structured answer');
+}
+assert.equal(exifSchemas.find(value => value['@type'] === 'BlogPosting').author.name, exif.authorName);
+assert.equal(exifDoc.querySelector('[rel="author"]')?.textContent.trim(), exif.authorName);
+assert.equal(exifDoc.querySelector('title').textContent, exif.seoTitle);
+assert.equal(exifDoc.querySelector('meta[name="description"]').content, exif.metaDescription);
+assert.equal(exif.publishedAt, '2026-08-22', 'EXIF historical publication date retained');
+const exifText = exifDoc.querySelector('main').textContent.replace(/\s+/g, ' ');
+for (const phrase of ['Embedded metadata:', 'Visible pixels:', 'Information outside the file:',
+  'Missing parser data is not proof that all metadata is absent', 'not an EXIF-removal test',
+  'nor a test of the metadata remover’s export path', 'does not certify the current stripping behavior']) {
+  assert.ok(exifText.includes(phrase), `EXIF built evidence boundary: ${phrase}`);
+}
+assert.ok(!exifText.includes('People Also Search For'), 'EXIF keyword-only block is absent');
+assert.equal(exifDoc.querySelectorAll('.article-checklist li').length, 8);
+for (const path of ['/screenshot-metadata-checker/', '/image-metadata-remover/', '/blog/redact-screenshot-before-sharing/', '/privacy/']) {
+  assert.ok(exifDoc.querySelector(`main a[href="${path}"]`), `EXIF contextual link: ${path}`);
+}
+assert.ok([...exifDoc.querySelectorAll('main a[href]')].some(link =>
+  link.querySelector('span')?.textContent.trim() === exif.cta.label && link.getAttribute('href') === exif.cta.url), 'EXIF CTA goes directly to inspector');
+for (const link of exifDoc.querySelectorAll('main a[href^="/"]')) {
+  const pathname = link.getAttribute('href').split(/[?#]/)[0].replace(/^\//, '').replace(/\/$/, '');
+  assert.doesNotThrow(() => read(pathname ? `${pathname}/index.html` : 'index.html'), `EXIF internal link resolves: ${pathname}`);
+}
+for (const host of ['www.w3.org', 'developer.android.com', 'support.apple.com']) {
+  assert.ok([...exifDoc.querySelectorAll('main a[href]')].some(link => link.hostname === host), `EXIF primary source linked: ${host}`);
+}
+console.log('PASS EXIF guide: FAQ/byline parity, privacy boundaries, checklist, primary sources and direct workflow links');

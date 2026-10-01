@@ -1,5 +1,7 @@
 # ScreenshotChecker bounded work queue
 
+**Latest 1 October 2026 task 17 EXIF content slice:** Reworked the existing EXIF guide with source-backed PNG/EXIF limits, separate metadata/pixel/service-context checks and direct inspect/remove links. Original publication date retained; intended 1 October update date finalized for the release candidate, with production unchanged. Exact Node 26.9.0/npm 11.19.1: **37/37 entrypoints, 33-page build and both SEO checks pass**. See `audit/17-exif-privacy-guide-2026-10-01.md`. Local independent-review checkpoint only; broader task 17 remains open.
+
 **Latest 1 October 2026 task 10B privacy slice:** Removed the unnecessary standalone link-checker text POST after synthetic reproduction; the existing browser dataset lookup now runs directly. Related policy/FAQ wording and synthetic request/workflow regressions updated. Follow-up reproduced the unrelated redaction path-separator failure on clean main and normalized only its test comparison. Exact Node 26.9.0/npm 11.19.1: **35/35 entrypoints and 32-page build pass**, with SEO/blog and built privacy parity passing. See `audit/10B-local-link-privacy-2026-10-01.md`. Local review checkpoint only; no publication. Broader 09/10A/10B work stays open.
 
 **Latest 1 October 2026 privacy disclosure checkpoint:** Bounded task 09A corrects blanket zero-network/zero-storage claims and discloses existing analytics, cross-tool session storage and standalone URL submission/history. Application behavior is unchanged. Independent review accepted `a9da484`; 33/33 pinned test entrypoints, build, SEO/blog and built FAQ parity pass. See `audit/09A-privacy-disclosures-2026-10-01.md`; successor Preview validation follows before release consideration. Task 09 remains open for broader behavior/consent work.
@@ -68,7 +70,7 @@
 | 16D | UK scam examples and guide | S | 15,16A | Region-specific useful guide/examples with benign controls; no duplicate US guide with only brand substitutions | TODO |
 | 16E | Payment provider/region specification | S | 07,15 | Supported US/UK/India providers and currencies documented from primary sources; fixtures and unsupported states defined | TODO |
 | 16F | First global payment expansion | M | 16E | One provider/region slice implemented and tested; no UPI-only validation leaks into unrelated transfers; remaining providers queued separately | TODO |
-| 17 | Privacy/redaction content improvement | M | 04B,05A,15 | Existing pages have distinct jobs, owned before/after examples and verified instructions | RELEASE READY: date review and pinned checks accepted; successor exact-head Preview and controlled production release pending |
+| 17 | Privacy/redaction content improvement | M | 04B,05A,15 | Existing pages have distinct jobs, owned before/after examples and verified instructions | PARTIAL: redaction tutorial is on verified main; existing EXIF guide locally improved, independent review/Preview pending |
 | 18 | Cold-scan performance | M | 04A,12 | Baseline measured; one dominant bottleneck improved (for example C2PA loading); no privacy/accuracy regression | TODO |
 | 19 | Search snippets and social cards | S | 13,14 | Priority titles/descriptions clarified; preview images work; no duplicate intent pages introduced | TODO |
 | 20A | Educational challenge prototype | M | 01B,12 | Small original edit dataset, labeled answers, accessible playable flow; existing game code reused where suitable | TODO |
@@ -314,3 +316,8 @@ Independent final-date review accepted `9a243f3` with no blocking findings: exac
 ## 1 October 2026 — 10B dataset provenance documentation slice
 
 Added a dataset-specific notice and README link separating the verified 2017 public copy, August 2026 index generation, declared mirror license and unresolved acquisition details. Dataset and runtime behavior are unchanged. Verification is recorded in [audit/10B-dataset-provenance-2026-10-01.md](audit/10B-dataset-provenance-2026-10-01.md). Tasks 10B and 15 remain open; this slice is local only.
+
+
+## 1 October 2026 — task 17 existing EXIF privacy guide
+
+One bounded existing-guide rewrite from verified main `3af9a3e9`; its `/blog/exif-metadata/` URL and original publication date remain. Replaces categorical screenshot/EXIF and social-platform claims with verified primary sources, explicit parser uncertainty, separate embedded/visible/outside-file privacy checks, and direct inspector/remover/tutorial links. Every other article record is unchanged. Exact pinned aggregate passes 37/37 entrypoints and 33 pages, with both SEO checks passing. The intended 1 October update date is finalized and full checks rerun; independent review and Preview gates remain. Correct the update date before publication if release slips. No publication or next task started. See `audit/17-exif-privacy-guide-2026-10-01.md`.

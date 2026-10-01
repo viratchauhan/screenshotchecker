@@ -662,108 +662,130 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   // ARTICLE 5: EXIF Metadata
   // =========================================================================
   {
-    slug: 'exif-metadata',
-    title: 'What Is EXIF Metadata? What Your Photos Can Reveal',
-    seoTitle: 'What Is EXIF Metadata? What Your Photos Can Reveal',
-    metaDescription:
-      'Learn what EXIF metadata is, what information photos can contain, and how camera, location, software, and GPS metadata can affect your privacy.',
-    category: 'Privacy',
-    publishedAt: '2026-08-22',
-    readTime: '5 min read',
-    excerpt:
-      'Understanding camera hardware serials, embedded GPS coordinates, editing timestamps, and how to safely inspect and strip sensitive photo metadata.',
-    targetKeywords: [
-      'EXIF metadata',
-      'what is EXIF',
-      'photo metadata',
-      'image metadata',
-      'GPS photo metadata',
-      'remove EXIF metadata',
+    "slug": "exif-metadata",
+    "title": "What Is EXIF Metadata? Check Photos and Screenshots Before Sharing",
+    "seoTitle": "EXIF Metadata: Check Photos and Screenshots Before Sharing",
+    "metaDescription": "Learn what EXIF and PNG metadata can reveal, why screenshots still need review, and how to inspect, remove and recheck image data before sharing.",
+    "category": "Privacy",
+    "publishedAt": "2026-08-22",
+    "updatedAt": "2026-10-01",
+    "authorName": "ScreenshotChecker",
+    "readTime": "7 min read",
+    "excerpt": "Separate hidden image metadata from visible private details, inspect a sharing copy, and verify what remains after export.",
+    "targetKeywords": [
+      "EXIF metadata",
+      "screenshot metadata",
+      "photo location metadata",
+      "remove image metadata"
     ],
-    keyTakeaway: {
-      title: 'Digital Fingerprints in Photos',
-      text: 'Original camera photos often contain exact GPS coordinates, camera hardware serials, and timestamps. When sharing photos publicly, inspect and strip sensitive location tags to protect your privacy.',
+    "keyTakeaway": {
+      "title": "Check the file you will actually share",
+      "text": "Review both embedded metadata and visible details. Keep the original privately, make a separate sharing copy, and inspect that exact saved file after cleaning it. A missing GPS field or an empty metadata result is not a privacy guarantee."
     },
-    introduction:
-      'Every time you take a picture with a smartphone or digital camera, the device records far more than just visual pixels. Embedded inside the image file is a hidden digital identity tag called EXIF metadata. While EXIF data is invaluable for photographers organizing portfolios, it can also unintentionally expose your home address, daily routines, and device information if shared publicly.',
-    contentSections: [
+    "introduction": "EXIF metadata is information stored inside an image file, such as camera settings, timestamps and sometimes location coordinates. What is present depends on the device, permissions, software and export path. Screenshots need checking too: they may lack camera EXIF while still carrying other metadata or exposing private details in the pixels.",
+    "contentSections": [
       {
-        heading: 'What Is EXIF Metadata?',
-        level: 'h2',
-        paragraphs: [
-          'EXIF stands for Exchangeable Image File Format. It is an industry standard specification that stores technical shooting parameters and device data directly within JPEG, TIFF, HEIC, and WebP image containers.',
-          'When you snap a photo, your device automatically writes this data into the file header in fractions of a second.',
+        "heading": "EXIF is only one part of image privacy",
+        "paragraphs": [
+          "EXIF stands for Exchangeable Image File Format. It can describe how an image was captured, including camera make or model, exposure settings and a recorded date. Location fields may be present when the capture app has permission and writes them. Do not assume every image contains GPS, a device serial number or a complete editing history.",
+          "For sharing, separate three kinds of information. A metadata remover addresses the first; it does not automatically address the other two."
         ],
+        "checklist": [
+          "Embedded metadata: fields stored inside the image file, such as EXIF, XMP, IPTC or PNG text. Not every field is sensitive; dimensions and color information can be useful.",
+          "Visible pixels: names, messages, addresses, faces, maps, notifications and other details someone can read or recognize in the image.",
+          "Information outside the file: its filename, surrounding message, shared-album context and account or upload information a service may hold. Cleaning an image does not erase information already held elsewhere."
+        ]
       },
       {
-        heading: 'What Information Can Photos Reveal?',
-        level: 'h2',
-        paragraphs: [
-          'A standard unstripped photograph may contain over a hundred metadata fields, including:',
-          '• Geolocation (GPS): Exact latitude, longitude, altitude, and even the direction the camera was facing (compass heading).',
-          '• Hardware Identity: Camera make, phone model, lens model, firmware version, and camera serial number.',
-          '• Exact Timestamps: Date and time down to the second, including original creation time, modification time, and timezone.',
-          '• Technical Exposure Settings: ISO speed, aperture (f-stop), shutter speed, focal length, metering mode, and flash status.',
-          '• Software & Editing History: Software stamps from tools like Adobe Photoshop, Lightroom, Canva, or mobile retouching apps.',
-        ],
-        callout: {
-          type: 'warning',
-          text: 'Posting photos taken at home or private locations to forums or direct file shares can leak your exact geographic address through embedded GPS tags.',
-        },
+        "heading": "Do screenshots contain EXIF or location data?",
+        "paragraphs": [
+          "A screenshot records a display rather than taking a new camera exposure, so it may not have the camera or lens fields found in a photo. That is not a rule that screenshots contain no EXIF or GPS. The actual file can be changed, annotated or converted by software after capture.",
+          "PNG is not a metadata-free format. The <a href=\"https://www.w3.org/TR/png-3/#11eXIf\">W3C PNG specification defines an eXIf chunk</a>, and its <a href=\"https://www.w3.org/TR/png-3/#11textinfo\">text chunks</a> can carry comments and other descriptions. Android’s <a href=\"https://developer.android.com/reference/androidx/exifinterface/media/ExifInterface\">ExifInterface documentation</a> also lists PNG among the formats it can read and write EXIF tags in. These are format capabilities, not evidence that a particular phone writes those fields into every screenshot.",
+          "A screenshot of a map, delivery address or photo information panel can reveal location directly in the pixels. Removing a GPS tag would not hide those details. Conversely, a location field describes a recorded value; it does not establish where the sender is now or prove the image is genuine."
+        ]
       },
       {
-        heading: 'Do Social Media Platforms Remove Metadata?',
-        level: 'h2',
-        paragraphs: [
-          'Major social networks (such as Instagram, X/Twitter, and Facebook) and messaging apps like WhatsApp automatically strip EXIF metadata during compression to conserve bandwidth and protect user privacy.',
-          'However, sending photos as "Document" attachments, emailing original files, hosting files on cloud storage links (Google Drive, Dropbox), or uploading to public forums often preserves the full original EXIF data intact.',
-        ],
+        "heading": "1 Inspect the exact image file",
+        "paragraphs": [
+          "Keep the original separately, especially if it may be needed as evidence. Open the <a href=\"/screenshot-metadata-checker/\">screenshot metadata checker</a>, choose <strong>Select Image to Inspect</strong>, and select the file you intend to share. Check that the preview and filename identify the right copy.",
+          "Review the technical records for location coordinates, dates, device or software labels, author details and comments. A software label is a clue about a tool that wrote a field, not a complete edit log. Metadata can be changed, copied or removed; it cannot authenticate a payment or conversation.",
+          "Treat an empty result as inconclusive. The current checker can return empty records when data is absent, unsupported or fails to parse. Missing parser data is not proof that all metadata is absent. For a consequential disclosure, use an additional trusted tool that supports the file format, and do not share if the uncertainty matters.",
+          "The checker processes the image in your browser. The <a href=\"/privacy/\">privacy policy</a> separately explains website analytics, resource requests and browser storage, including image handoffs between tools. Browser-local image processing does not mean the whole website makes no network requests."
+        ]
       },
       {
-        heading: 'Do Screenshots Contain EXIF Data?',
-        level: 'h2',
-        paragraphs: [
-          'Screenshots capture the device display buffer rather than an optical sensor, meaning they almost never contain camera models, lens settings, or GPS coordinates.',
-          'Furthermore, EXIF data should not be viewed as absolute proof of authenticity because metadata fields can be easily modified or injected using simple command-line scripts.',
-        ],
+        "heading": "2 Make a separate copy without unwanted metadata",
+        "paragraphs": [
+          "Open the <a href=\"/image-metadata-remover/\">image metadata remover</a> and select the image. The checker and remover use the same metadata workspace. After the preview loads, choose <strong>Strip &amp; Clean Image</strong> to download a new PNG. This path redraws the decoded image into a canvas and encodes a new file rather than copying the source metadata fields.",
+          "Inspect the download before relying on it. Re-encoding is not a promise that the result contains no metadata of any kind; an encoder may write new technical fields. Check appearance, dimensions and the specific private fields you meant to remove. Keep the original unchanged.",
+          "For photos in Apple Photos, Apple documents a separate location-sharing control: choose Share, open Options and turn off Location on iPhone or iPad. Its <a href=\"https://support.apple.com/guide/personal-safety/manage-location-metadata-in-photos-ips0d7a5df82/web\">location metadata guide</a> also explains reviewing and removing recorded locations and limiting future Camera location access. These controls concern location information; they do not hide visible details or establish that every other metadata field is removed."
+        ]
       },
+      {
+        "heading": "3 Recheck metadata and visible details after export",
+        "paragraphs": [
+          "Reopen the downloaded PNG, then choose <strong>Change Image</strong> in the checker and select that downloaded file. Compare the fields you were concerned about with the original. Opening the original again would tell you nothing about whether the sharing copy was cleaned.",
+          "Review the full image at a readable zoom. If private text is visible, use the <a href=\"/blog/redact-screenshot-before-sharing/\">worked screenshot redaction tutorial</a> to apply solid masks and inspect the saved result. Metadata removal does not cover text, faces or location clues in the pixels.",
+          "That tutorial uses actual before-and-after files from one fictional PNG test. The source contained a deliberately added PNG Comment marker; the checked redaction export did not. The source contained no EXIF payload, so this was not an EXIF-removal test, nor a test of the metadata remover’s export path. It illustrates why the exact input, output and field checked matter; it does not establish universal removal across formats or tools.",
+          "If you resize, annotate or convert the copy later, review the resulting file again. Give it a non-sensitive filename and confirm that you attach the cleaned copy rather than the original."
+        ]
+      },
+      {
+        "heading": "Will a messaging or social app strip metadata for me?",
+        "paragraphs": [
+          "Do not base a privacy decision on a blanket platform rule. Processing can differ between a displayed image, an original-file attachment, a download and a sharing option, and behavior can change. This guide does not certify the current stripping behavior of any messaging or social service.",
+          "Prepare the sharing copy before uploading it. If the delivery path matters, test that path with a harmless sample and inspect the recipient-accessible download. A public copy with fewer fields does not establish what the service received or retained. Cleaning a file now also does not recall an original you already sent."
+        ]
+      },
+      {
+        "heading": "Before sharing a photo or screenshot",
+        "paragraphs": [],
+        "checklist": [
+          "Keep the original privately and identify the exact sharing copy.",
+          "Inspect embedded fields and treat missing or unreadable results as inconclusive.",
+          "Remove unwanted metadata and cover visible private details separately.",
+          "Reopen the final saved file and check it again after any further editing.",
+          "Check the filename, recipient, sharing context and attachment before sending."
+        ]
+      }
     ],
-    faq: [
+    "faq": [
       {
-        question: 'What does EXIF stand for?',
-        answer:
-          'EXIF stands for Exchangeable Image File Format, a standardized format for storing camera settings, device information, timestamps, and GPS coordinates inside image files.',
+        "question": "Do all photos contain GPS coordinates?",
+        "answer": "No. Location fields depend on capture permissions, device and app behavior, and later processing. When coordinates are present, they may reveal a recorded location. Their absence does not hide location clues visible in the image."
       },
       {
-        question: 'Can someone find my location from a photo I post?',
-        answer:
-          'If you share an original unstripped image file (via email, cloud drive, or direct file transfer), anyone can read the embedded GPS coordinates to find your exact location. Most major social media apps strip this data automatically.',
+        "question": "Can a PNG screenshot contain EXIF metadata?",
+        "answer": "Yes. PNG supports an eXIf chunk as well as text chunks. A screenshot may lack camera EXIF, but its filename or extension alone does not establish which fields are present. Inspect the actual file."
       },
       {
-        question: 'Do screenshots have EXIF camera data?',
-        answer:
-          'No. Screenshots record the pixels displayed on your screen rather than an optical camera sensor, so they lack camera hardware, lens, and GPS metadata.',
+        "question": "Does an empty metadata result mean an image is safe to share?",
+        "answer": "No. Data may be absent, unsupported or unreadable by that parser. Empty records are not proof that all metadata is absent, and the pixels can still expose private information."
       },
       {
-        question: 'How can I remove EXIF data from my photos?',
-        answer:
-          'You can strip EXIF metadata using built-in privacy tools on your phone (such as turning off location sharing before sending) or by using an online metadata remover before publishing images.',
+        "question": "Does removing metadata redact visible text?",
+        "answer": "No. Metadata removal and visible redaction are separate steps. Use solid masks for private details in the image, then inspect both the saved pixels and metadata before sharing."
       },
+      {
+        "question": "Does taking a screenshot guarantee that photo metadata is removed?",
+        "answer": "No. A new screenshot may omit source camera fields, but its own metadata and visible content still need review. Do not treat recapturing an image as a universal metadata-removal or privacy guarantee."
+      },
+      {
+        "question": "Can EXIF prove that an image is genuine?",
+        "answer": "No. Metadata can be changed, copied or removed. Use it as a clue and verify important claims at their source; neither the presence nor absence of EXIF authenticates a screenshot."
+      }
     ],
-    peopleAlsoSearch: [
-      'What is EXIF metadata',
-      'Photo metadata viewer online',
-      'Check GPS in photo',
-      'How to remove EXIF data',
-      'Image metadata reader',
-      'View photo details',
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "redact-screenshot-before-sharing",
+      "screenshot-analyzer-online",
+      "screenshot-checker-online"
     ],
-    relatedSlugs: ['ai-image-detector-online', 'screenshot-analyzer-online', 'screenshot-checker-online'],
-    cta: {
-      label: 'Inspect Image Metadata',
-      url: '/',
-      description: 'Check image container headers for EXIF hardware tags, software stamps, and timestamp data.',
-    },
+    "cta": {
+      "label": "Inspect your image metadata",
+      "url": "/screenshot-metadata-checker/",
+      "description": "Review available fields, make a separate sharing copy, and recheck the saved file before sending it."
+    }
   },
 
   // =========================================================================
