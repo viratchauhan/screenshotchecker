@@ -1,5 +1,7 @@
 # ScreenshotChecker bounded work queue
 
+**Latest 2 October 2026 UPI content slice:** Corrected the existing payment-verification guide with primary sources, an explicitly fictional ₹500 seller walkthrough, benign counterexamples and honest OCR/text-rule limits. Original URL/title/snippet/publication date remain; substantive update date is 2 October. Exact pinned aggregate **37/37**, 33-page build and both SEO checks pass. See `audit/UPI-verification-guide-2026-10-02.md`. Independent review and Preview remain; no publication in this checkpoint.
+
 **Latest 1 October 2026 task 17 discovery slice:** The EXIF and redaction guides now recommend their relevant inspector/remover/redactor tools, and the privacy scanner recommends the redaction tutorial plus EXIF guide. Existing redactor guide cards and all article records/dates are unchanged. Exact Node 26.9.0/npm 11.19.1: **37/37 entrypoints, 33-page build and both SEO checks pass**. See `audit/17-privacy-discovery-2026-10-01.md`. Local review checkpoint only; independent review and Preview remain before publication.
 
 **Latest 1 October 2026 task 17 EXIF content slice:** Reworked the existing EXIF guide with source-backed PNG/EXIF limits, separate metadata/pixel/service-context checks and direct inspect/remove links. Original publication date retained; intended 1 October update date finalized for the release candidate, with production unchanged. Exact Node 26.9.0/npm 11.19.1: **37/37 entrypoints, 33-page build and both SEO checks pass**. See `audit/17-exif-privacy-guide-2026-10-01.md`. Local independent-review checkpoint only; broader task 17 remains open.
@@ -327,3 +329,8 @@ One bounded existing-guide rewrite from verified main `3af9a3e9`; its `/blog/exi
 ## 1 October 2026 — task 17 contextual privacy discovery
 
 One bounded discovery fix from verified main `ddc7fca`: three relationship-map entries connect the two privacy guides to the appropriate tools and the privacy scanner to both guides. Generated-card checks inspect the specific recommendation grids rather than accepting links elsewhere in navigation; existing redactor guide cards are protected. Exact-runtime aggregate, build and both SEO checks pass. Article wording, dates, assets, runtime behavior, analytics and dependencies are unchanged. Local review checkpoint only; independent review and Preview remain. See `audit/17-privacy-discovery-2026-10-01.md`. Broader task 17 stays open.
+
+
+## 2 October 2026 — existing UPI verification guide correction
+
+One bounded correction to the existing payment-content cluster from verified main `0ee65995`. Keeps the URL, title, description and original publication date while replacing unsupported visual-measurement/accuracy claims, false certainty about balance screens and capture clocks, and universal reference/refund rules. Adds one explicitly fictional ₹500 verification walkthrough, benign controls, three primary-source links and six matching visible/schema FAQs. Seven other article records are unchanged. Exact Node 26.9.0/npm 11.19.1 aggregate passes 37/37 with 33-page build, both SEO checks and six targeted negative controls. Independent exact-checkpoint review and Preview are next; broader payment tool-page claims and runtime work remain open. See `audit/UPI-verification-guide-2026-10-02.md`. No remote publication or next task started.
