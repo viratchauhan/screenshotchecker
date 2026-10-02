@@ -436,14 +436,14 @@ export const SAMPLE_PRESETS: SamplePreset[] = [
 export const PAYMENT_SAMPLE_PRESETS: SamplePreset[] = [
   {
     id: 'fake_phonepe_sample',
-    name: 'PhonePe ₹500 (Typography & Icon Inconsistency)',
+    name: 'Fictional PhonePe-style ₹500 receipt',
     badge: 'Fake UPI Receipt',
     description: 'PhonePe ₹500 receipt with serif typography and embedded bank icon',
     generateDataUrl: createFakePhonePeSample,
   },
   {
     id: 'canara_bank_balance',
-    name: 'Canara Bank Balance Screen (No Proof)',
+    name: 'Fictional Canara-style balance screen',
     badge: 'Account Balance Only',
     description: 'Bank balance inquiry showing ₹3,884.63 with no transfer verification',
     generateDataUrl: createCanaraBankBalanceSample,
