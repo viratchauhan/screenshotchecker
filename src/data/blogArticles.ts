@@ -303,249 +303,143 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   // ARTICLE 3: Fake UPI Payment Screenshot
   // =========================================================================
   {
-    slug: 'fake-upi-payment-screenshot',
-    title: 'Fake UPI Payment Screenshot: How to Check If a Payment Is Real',
-    seoTitle: 'Fake UPI Payment Screenshots: Checks and Warning Signs',
-    metaDescription:
-      'Review warning signs in UPI payment screenshots and learn why confirming the transaction in your own bank or payment app matters more than an image.',
-    category: 'Security',
-    publishedAt: '2026-08-22',
-    updatedAt: '2026-08-30',
-    readTime: '7 min read',
-    excerpt:
-      'How fake UPI payment screenshot generators work, visual typography and layout red flags to look for on receipts, and why official bank verification is the only reliable proof.',
-    targetKeywords: [
-      'Fake UPI Screenshot Checker',
-      'fake UPI payment screenshot',
-      'fake payment screenshot checker',
-      'UPI screenshot checker',
-      'fake payment screenshot detector',
-      'fake PhonePe screenshot',
-      'fake Google Pay screenshot',
-      'fake GPay screenshot',
-      'fake Paytm screenshot',
-      'fake BHIM UPI screenshot',
-      'fake Pop UPI screenshot',
-      'payment screenshot verification',
-      'UPI payment verification',
-      'fake payment receipt',
-      'fake transaction screenshot',
-      'payment fraud detection',
-      'UPI payment fraud',
-      'fake payment confirmation',
+    "slug": "fake-upi-payment-screenshot",
+    "title": "Fake UPI Payment Screenshot: How to Check If a Payment Is Real",
+    "seoTitle": "Fake UPI Payment Screenshots: Checks and Warning Signs",
+    "metaDescription": "Review warning signs in UPI payment screenshots and learn why confirming the transaction in your own bank or payment app matters more than an image.",
+    "category": "Security",
+    "publishedAt": "2026-08-22",
+    "updatedAt": "2026-10-02",
+    "authorName": "ScreenshotChecker",
+    "readTime": "6 min read",
+    "excerpt": "Verify a claimed UPI payment against your own records, follow a fictional ₹500 seller example, and understand what screenshot text checks can and cannot establish.",
+    "targetKeywords": [
+      "fake UPI payment screenshot",
+      "fake payment screenshot checker",
+      "UPI payment verification",
+      "fake PhonePe screenshot",
+      "fake Google Pay screenshot",
+      "payment screenshot verification"
     ],
-    keyTakeaway: {
-      title: '🚨 The Golden Rule of Payment Verification',
-      text: 'If a payment is not showing up in your UPI App, check your Bank Statement through your official Bank App or directly with your Bank. A screenshot shows what someone claims happened; your bank records show whether payment actually reached your account. Never release goods, services, refunds, or money based only on a payment screenshot.',
+    "keyTakeaway": {
+      "title": "Confirm the credit in your own records",
+      "text": "A payment screenshot is a claim, not confirmation that you received money. Open your own official bank or payment app independently and match the incoming transaction. If you cannot find the credit, treat the payment as unconfirmed, not automatically fraudulent."
     },
-    introduction:
-      'Someone presents a payment screenshot on their smartphone. It displays a bright green checkmark alongside "Transaction Successful." The amount matches your bill, the recipient name displays your store, and the timestamp reads two minutes ago. The customer urgently asks you to hand over the product, package the shipment, or process a refund. But when you check your own UPI application, no incoming notification appears, and your bank account balance remains unchanged. What should you trust? The answer is simple and non-negotiable: always trust your own bank and UPI records, never a customer-presented screenshot.',
-    contentSections: [
+    "introduction": "To check whether a UPI payment reached you, start with your own transaction history and bank records. A success banner, familiar logo or plausible reference in someone else’s screenshot cannot confirm receipt. Screenshot analysis can help you review a claim, but it cannot access the banking network, authenticate a payment app or establish that a person is lying.",
+    "contentSections": [
       {
-        heading: 'Why a Payment Screenshot Is Not Proof of Payment',
-        level: 'h2',
-        paragraphs: [
-          'A digital screenshot is simply a static raster image made of pixels. It is not an official banking statement, nor is it a cryptographically authenticated receipt from the National Payments Corporation of India (NPCI). With modern photo editing apps and fake payment generator tools, creating an authentic-looking payment slip takes less than thirty seconds.',
-          'It is crucial to understand the fundamental difference between two separate questions:',
-          '<strong>Question A (Visual Analysis):</strong> "Does this screenshot image contain suspicious signs of visual manipulation, misplaced icons, or template errors?"',
-          '<strong>Question B (Payment Verification):</strong> "Did the funds actually clear the interbank payment switch and settle into my bank account?"',
-          'A forensic tool like our <a href="/payment-screenshot-checker/" class="text-primary font-medium underline hover:text-primary-active">Fake UPI Screenshot Checker</a> can assist you with Question A. However, Question B can only be answered by checking your own official bank statement or merchant portal.',
+        "heading": "How to Verify a UPI Payment: Start With Your Own Records",
+        "paragraphs": [
+          "Open the official app yourself rather than following a link supplied with the screenshot. <a href=\"https://www.phonepe.com/blog/trust-and-safety/heres-a-quick-guide-to-help-you-avoid-becoming-a-victim-of-fake-payment-screenshots-2/\" class=\"text-primary font-medium underline hover:text-primary-active\">PhonePe’s fake-screenshot guidance</a> recommends checking transaction history before providing goods or services.",
+          "<a href=\"https://support.google.com/pay/india/answer/16919844?hl=en\" class=\"text-primary font-medium underline hover:text-primary-active\">Google Pay’s bank-statement guide</a> explains how to compare the transaction date, ID and credit amount with official bank records. Use your bank’s own reference labels; a particular digit count is not an authenticity test."
         ],
-        callout: {
-          type: 'golden-rule',
-          text: `
-            <div class="space-y-3">
-              <div class="p-3.5 bg-amber-500/10 border border-warning/50 rounded-xl space-y-1.5">
-                <strong class="text-warning text-xs uppercase font-bold tracking-wider block">🚨 THE GOLDEN RULE OF PAYMENT VERIFICATION (ENGLISH)</strong>
-                <p class="text-xs sm:text-sm text-ink font-medium leading-relaxed">
-                  If a payment is not showing up in your UPI App, check your <strong>Bank Statement through your official Bank App or directly with your Bank</strong>. A screenshot shows what someone claims happened; your own bank records show whether the payment actually reached your account. Never release goods, services, refunds, or money based only on a payment screenshot.
-                </p>
-              </div>
-              <div class="p-3.5 bg-primary/10 border border-primary/40 rounded-xl space-y-1.5">
-                <strong class="text-primary text-xs uppercase font-bold tracking-wider block">🚨 भुगतान सत्यापन का सबसे जरूरी नियम (HINDI)</strong>
-                <p class="text-xs sm:text-sm text-ink font-medium leading-relaxed">
-                  अगर कोई भुगतान आपके UPI ऐप में दिखाई नहीं दे रहा है, तो <strong>अपने आधिकारिक बैंक ऐप से Bank Statement चेक करें या सीधे अपने बैंक से पुष्टि करें</strong>। Payment Screenshot केवल यह दिखाता है कि स्क्रीन पर क्या दिखाई दे रहा है। यह अपने आप यह साबित नहीं करता कि पैसा आपके खाते में आया है। केवल screenshot देखकर सामान, सेवा, refund या पैसे जारी न करें।
-                </p>
-              </div>
-            </div>
-          `,
-        },
+        "checklist": [
+          "Open your own bank app or payment/merchant app and locate incoming transaction history.",
+          "Find the claimed amount and date. Confirm that the recipient account or UPI ID is yours.",
+          "Compare the transaction reference with the corresponding entry in your official records, where available.",
+          "If the app history is unclear or no matching credit appears, check your bank statement or contact the bank through its official support channel.",
+          "Treat a missing or unresolved credit as unconfirmed. Keep goods, services or refunds on hold while it is checked."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Never release goods, services, refunds or money based only on a screenshot.</strong> A sender’s debit claim is not independent confirmation of a credit to you. केवल payment screenshot देखकर सामान, सेवा, refund या पैसे जारी न करें। अपने आधिकारिक बैंक ऐप या बैंक से पुष्टि करें।"
+        }
       },
       {
-        heading: 'What the Fake UPI Screenshot Checker Actually Checks',
-        level: 'h2',
-        paragraphs: [
-          'Our <a href="/payment-screenshot-checker/" class="text-primary font-medium underline hover:text-primary-active">Fake UPI Screenshot Checker</a> is a dedicated, domain-specific forensic tool. Unlike generic scam detectors that confuse receipts with phishing messages or job scams, the payment engine examines payment-specific indicators directly grounded in the uploaded image:',
-          '• <strong>Receipt Type Classification:</strong> Identifies whether the screen represents a successful payment, pending transfer, failed transaction, refund, collect request, or bank balance screen.',
-          '• <strong>Ecosystem & App Detection:</strong> Confirms interface characteristics from Google Pay (GPay), PhonePe, Paytm, BHIM UPI, and Pop UPI.',
-          '• <strong>Grounded Field Extraction:</strong> Extracts the exact amount, payee name, Virtual Payment Address (VPA / UPI ID), 12-digit UTR reference, transaction ID, and timestamp without hallucinating missing entities.',
-          '• <strong>Typography & Font Family Audits:</strong> Detects mismatched fonts (such as serif fonts appearing inside modern sans-serif UPI app layouts).',
-          '• <strong>Icon & Layout Alignment:</strong> Surfaces misplaced bank icons, embedded glyphs inside text strings, and irregular padding.',
-          '• <strong>Amount Consistency Checks:</strong> Flags conflicting numbers when the large summary amount differs from the debited breakdown row.',
-        ],
-        cta: {
-          label: 'Check a Payment Screenshot Now',
-          url: '/payment-screenshot-checker/',
-          description: 'Upload or paste a payment slip to inspect typography, 12-digit UTR numbers, and visual template anomalies.',
-        },
+        "heading": "Worked Example: A Fictional ₹500 Sale",
+        "paragraphs": [
+          "<strong>This is a fictional teaching example, not a real customer case or a checker accuracy test.</strong> A seller is waiting for ₹500 for an order. The buyer sends an image saying “Transaction Successful,” showing ₹500, the seller’s name and a transaction reference. Those are the screenshot’s claims; no payment has been verified yet.",
+          "<strong>Check 1: identify the claim.</strong> The seller notes the amount, payment date, intended recipient and reference from the image. They compare any OCR output with the image before using it, because a misread digit could lead to the wrong transaction.",
+          "<strong>Check 2: verify independently.</strong> The seller opens their own official payment history and bank records. They look for a ₹500 incoming credit on the claimed date, confirm the recipient account, and compare the reference where their records expose it. A different ₹500 payment from another order does not resolve this one.",
+          "<strong>Outcome A: a matching credit is found.</strong> The seller has evidence from their own records that the payment reached the intended account. The screenshot’s appearance was not what established this.",
+          "<strong>Outcome B: no matching credit is found.</strong> The payment remains unconfirmed. The seller pauses fulfilment and asks the buyer to check the transaction in their official app or with their bank. A processing delay or wrong recipient needs investigation; missing credit alone does not prove that the buyer forged the image."
+        ]
       },
       {
-        heading: 'Hints From a Fake Payment Screenshot (Visual Red Flags)',
-        level: 'h2',
-        paragraphs: [
-          'While fraudulent APK templates strive to mimic official apps, they frequently leave structural defects behind. When inspecting a screenshot, look for these key visual indicators:',
-          '<strong>1. Typography & Mismatched Fonts:</strong> Official payment apps use custom sans-serif typefaces (like Google Sans, Roboto, or Proxima Nova). Prank APKs often render secondary labels—such as <em>"Banking name:"</em> or bank titles—using default Android serif fonts (like Times New Roman or Droid Serif), creating an obvious stylistic contrast.',
-          '<strong>2. Awkward Icon Placement:</strong> In authentic apps, bank logos and merchant avatars sit in separate, padded layout containers. In spoofed screenshots, bank icons or card glyphs are frequently embedded awkwardly directly inside the text string (for example, <code>State 🏦 Bank of India - 2845</code>).',
-          '<strong>3. Spliced or Inconsistent Amounts:</strong> When scammers manually edit a genuine small transaction slip (e.g. ₹50) into a larger one (e.g. ₹5,000), they often update the header amount but forget the debited row, or create visible compression halo artifacts around the modified digits.',
-          '<strong>4. Timestamp & Clock Inconsistencies:</strong> Compare the timestamp on the transaction slip with the device clock in the top status bar. A transaction claiming to occur at 11:30 AM on a device clock showing 10:15 AM indicates an old or recycled screenshot.',
-          '<strong>5. Non-Standard 12-Digit UTR References:</strong> Every genuine UPI transfer in India generates a standard 12-digit numeric Unique Transaction Reference (UTR / RRN). Spoofed slips frequently display fewer than 12 digits, letters in place of numbers, or placeholder text.',
-          '<strong>6. Layout Alignment & Padding Flaws:</strong> Look for misaligned checkmarks, buttons overlapping text rows, and uneven margins across the transaction card boundaries.',
-          '<strong>7. Inaccurate Logos & Colors:</strong> Prank generators often use outdated bank logos, distorted vector aspect ratios, or incorrect brand color hex codes.',
-        ],
-        callout: {
-          type: 'warning',
-          text: 'Visual anomalies are warning signs that warrant investigation. However, even if a screenshot contains zero visible flaws, you must still verify the credit in your own bank records.',
-        },
+        "heading": "Benign Differences That Are Not Proof of Fraud",
+        "paragraphs": [
+          "<strong>A balance screen is a different kind of claim.</strong> Text such as “Bank balance fetched successfully” is not a receipt for this sale. Someone may have shared the wrong screen by mistake. The image also cannot authenticate the displayed balance or establish that those funds are currently available.",
+          "<strong>Capture time is not payment time.</strong> A receipt may be opened and captured later. A status-bar clock and a transaction timestamp can therefore differ without deception. Cropping, clock settings and missing date context further limit what that comparison can establish.",
+          "<strong>OCR can change the apparent evidence.</strong> A blurred digit may be read incorrectly, and a nearby graphic may become a symbol inside extracted bank-name text. Compare the original image before treating a text-rule warning as meaningful.",
+          "<strong>Not every number is the payment amount.</strong> A receipt can include an account balance, fee or another amount with a different label. Check what each value describes before interpreting an amount-mismatch warning. The checker can misclassify screens or fields."
+        ]
       },
       {
-        heading: 'Real Examples: Payment Receipts vs Bank Balance Screens',
-        level: 'h2',
-        paragraphs: [
-          'Understanding what type of screenshot you are looking at is just as important as checking for edits:',
-          '<strong>Example A: Fake PhonePe Payment Receipt</strong><br>A screenshot displaying "Transaction Successful", ₹500.00, "ReviewCraft Store", and "State Bank of India" may look like a complete payment slip. However, if the banking name uses a serif font or the bank icon is awkwardly inserted into the text, the screenshot exhibits clear signs of template manipulation.',
-          '<strong>Example B: Bank Account Balance Screen (No Payment Proof)</strong><br>A screenshot showing "Bank balance fetched successfully", "Canara Bank", and "₹ 3,884.63" represents an account balance check. It demonstrates that an account has funds, but provides <strong>zero proof</strong> that any money was sent or transferred to you. Scammers often flash balance screens to confuse busy merchants.',
+        "heading": "What the Payment Screenshot Checker Actually Does",
+        "paragraphs": [
+          "The <a href=\"/payment-screenshot-checker/\" class=\"text-primary font-medium underline hover:text-primary-active\">Payment Screenshot Checker</a> uses OCR to read text, then applies configured text rules. It attempts to classify the screen, extract payment fields and flag certain amount or reference-format patterns. Missing, unfamiliar or poorly read fields can be missed or misinterpreted.",
+          "Its app labels are inferred from text such as provider names or supported UPI handles. A PhonePe, Google Pay, Paytm, BHIM or Pop UPI label does not authenticate the app, certify its interface or establish that the receipt came from that provider.",
+          "<strong>The payment text rules do not measure font families, icon positions, logo accuracy or layout alignment.</strong> A “Banking name” label or symbol in OCR text is not a measured typography defect. The rules also do not contact your bank or validate a reference against a live transaction database.",
+          "A reference-format warning is a prompt to inspect the original and compare official records. A plausible-looking reference can be copied, while OCR can shorten or corrupt a genuine one. Neither matching a digit pattern nor failing it establishes whether money arrived."
         ],
+        "cta": {
+          "label": "Review a Payment Screenshot",
+          "url": "/payment-screenshot-checker/",
+          "description": "Inspect extracted receipt text and rule warnings, then verify the transaction independently."
+        }
       },
       {
-        heading: 'Which UPI Apps Can You Check?',
-        level: 'h2',
-        paragraphs: [
-          'Our <a href="/payment-screenshot-checker/" class="text-primary font-medium underline hover:text-primary-active">Payment Screenshot Checker</a> is tailored for all major payment ecosystems across India:',
-          '• <strong>Google Pay (GPay):</strong> Evaluates Google Sans typography, UPI transaction ID formatting, and amount alignment.',
-          '• <strong>PhonePe:</strong> Audits PhonePe success banners, merchant handle VPAs (@ybl, @axl, @ibl), and debited banking rows.',
-          '• <strong>Paytm:</strong> Analyzes Paytm payment confirmations, wallet/bank transfers, and reference number structures.',
-          '• <strong>BHIM UPI:</strong> Checks National Payments Corporation of India (NPCI) BHIM layout standards and 12-digit UTRs.',
-          '• <strong>Pop UPI & Bank Apps:</strong> Inspects confirmation receipts from emerging apps and native mobile banking interfaces.',
-        ],
+        "heading": "How to Interpret a Checker Result",
+        "paragraphs": [
+          "Labels such as LOW RISK, CAUTION, SUSPICIOUS and HIGH RISK summarize weighted rule matches. They are not calibrated probabilities that a screenshot is genuine or fraudulent. There is no validated accuracy percentage presented in this guide.",
+          "LOW RISK means few configured text rules matched; it does not mean the image was proved unedited. A higher-risk result means you should review the cited text and context, not accuse the sender based on the label.",
+          "A Payment Proof Strength label such as STRONG VISUAL describes the fields the classifier recognized. Despite that wording, it is not a measurement of visual authenticity or banking settlement. A balance, request, failed or unreadable screen is also not evidence that you received this payment.",
+          "If extraction fails or useful fields are absent, return to the original image and official records. An incomplete check must not be treated as a clean result. A convincing screenshot can still describe a different recipient or an older transaction."
+        ]
       },
       {
-        heading: 'How to Check a Payment Screenshot Safely (6-Step Workflow)',
-        level: 'h2',
-        paragraphs: [
-          'Follow this practical step-by-step procedure whenever a customer presents a payment screenshot:',
-          '<strong>Step 1: Never rely solely on the screenshot.</strong> Politely inform the buyer that store policy requires confirming incoming credit on the merchant system before handing over goods.',
-          '<strong>Step 2: Check your own UPI app independently.</strong> Open your PhonePe Business, Google Pay for Business, or Paytm merchant app and refresh the transaction history.',
-          '<strong>Step 3: Check your official bank statement.</strong> If the payment is not visible in your UPI app, log into your official mobile banking app and check your latest account statement or passbook.',
-          '<strong>Step 4: Analyze the screenshot with our tool.</strong> Upload the image to our <a href="/payment-screenshot-checker/" class="text-primary font-medium underline hover:text-primary-active">Fake UPI Screenshot Checker</a> to identify visual anomalies, typography defects, and reference format errors.',
-          '<strong>Step 5: Compare the key transaction details.</strong> Cross-check the claimed amount, recipient UPI ID handle, and 12-digit UTR with your own incoming credit records.',
-          '<strong>Step 6: If the payment does not reflect, do not release goods.</strong> Advise the sender to contact their issuing bank with their transaction reference number.',
-        ],
+        "heading": "What If the Sender Was Debited but You Have No Credit?",
+        "paragraphs": [
+          "Ask the sender to open the transaction details in their official app and confirm the recipient. Follow that provider’s guidance for the actual status, rather than using a screenshot to diagnose what happened.",
+          "<a href=\"https://support.google.com/pay/india/answer/16920039?hl=en-IN\" class=\"text-primary font-medium underline hover:text-primary-active\">Google Pay’s transaction-status guidance</a> distinguishes processing, failed and successful-but-not-received cases. It advises against repeating a payment while it is processing. Its stated timelines depend on the status; they are not a universal refund deadline for every UPI app or bank.",
+          "Keep the transaction reference for official support. Do not promise a reversal within a fixed number of hours or ask the buyer to pay again merely because a screenshot checker raised a warning. The receiving-side decision remains whether the claimed credit is confirmed in your own records."
+        ]
       },
       {
-        heading: 'What If the Buyer Claims "Money Has Already Been Debited"?',
-        level: 'h2',
-        paragraphs: [
-          'In many store situations, a buyer may genuinely show a debit SMS or debit screen from their bank while your account shows nothing. There are several possibilities:',
-          '1. <strong>Interbank Settlement Delay:</strong> During peak banking hours or server outages, transactions may be held in a "Pending" or "Processing" state between banking switches before reaching the destination account.',
-          '2. <strong>Failed or Auto-Reversed Transfer:</strong> The money was deducted from the sender\'s account but rejected by the beneficiary bank. In such cases, banking switches automatically reverse the funds to the sender within standard banking cycles (typically 24 to 48 hours).',
-          '3. <strong>Wrong Recipient VPA:</strong> The buyer accidentally sent funds to a different UPI ID or mobile number.',
-          '4. <strong>Fabricated Screenshot:</strong> The buyer is using a prank APK and was never debited at all.',
-          'Regardless of the reason, the rule remains unchanged: <strong>merchants must never hand over goods or process refunds until funds are confirmed in their own account</strong>.',
-        ],
-      },
-      {
-        heading: 'Visually Consistent Does Not Mean Verified',
-        level: 'h2',
-        paragraphs: [
-          'One of the most important concepts in digital image forensics is that <strong>visual consistency does not equal financial settlement</strong>.',
-          'A screenshot can be visually pristine, high-resolution, perfectly aligned, and completely free of digital editing artifacts. Yet, it could still be:',
-          '• A genuine screenshot of a transaction made to a completely different merchant.',
-          '• An old payment slip from three months ago with a cropped timestamp.',
-          '• A screenshot generated from a transaction that was subsequently disputed or cancelled.',
-          'For this reason, our tool clearly displays a <strong>Payment Proof Strength</strong> rating (such as <em>STRONG VISUAL</em>, <em>PARTIAL</em>, or <em>NONE</em>) alongside an explicit reminder that visual proof alone does not prove banking network settlement.',
-        ],
-      },
-      {
-        heading: 'How to Interpret Checker Results',
-        level: 'h2',
-        paragraphs: [
-          'When you analyze a payment slip with the <a href="/payment-screenshot-checker/" class="text-primary font-medium underline hover:text-primary-active">Fake UPI Screenshot Checker</a>, your report will include a calibrated verdict:',
-          '• <strong>LOW RISK (Visually Consistent):</strong> No obvious typography manipulation, icon insertion errors, or amount discrepancies were detected.',
-          '• <strong>CAUTION:</strong> Minor visual variations or unconfirmed reference fields detected. Manual verification is advised.',
-          '• <strong>SUSPICIOUS:</strong> Noticeable typography mismatches (e.g. serif fonts), misplaced icons, or invalid reference numbers detected.',
-          '• <strong>HIGH RISK:</strong> Multiple critical inconsistencies detected, such as conflicting amounts or clear template generator flaws.',
-          '• <strong>NO PAYMENT PROOF:</strong> The image represents a bank balance inquiry or non-payment screen rather than a transfer confirmation.',
-        ],
-      },
+        "heading": "Share Evidence Carefully and Escalate Through Official Support",
+        "paragraphs": [
+          "If you need help resolving the transaction, use the support route inside your bank or payment app. PhonePe’s linked safety guide includes its official reporting options. Preserve the original image and transaction details for that process; a checker result alone is not proof of a crime.",
+          "For a public post or discussion, make a separate copy with unnecessary names, UPI IDs and account details hidden. Follow the <a href=\"/blog/redact-screenshot-before-sharing/\" class=\"text-primary font-medium underline hover:text-primary-active\">worked redaction guide</a> and review the exported copy. Read the <a href=\"/privacy/\" class=\"text-primary font-medium underline hover:text-primary-active\">privacy policy</a> before using a tool with sensitive material."
+        ]
+      }
     ],
-    faq: [
+    "faq": [
       {
-        question: 'What is a Fake UPI Screenshot Checker?',
-        answer:
-          'A Fake UPI Screenshot Checker is a specialized digital forensic tool designed to analyze UPI payment receipts from PhonePe, Google Pay, Paytm, BHIM, and Pop UPI for visual inconsistencies, typography mismatches (serif vs sans-serif), embedded icon errors, and non-standard 12-digit UTR reference formatting.',
+        "question": "Can a payment screenshot prove that I received money?",
+        "answer": "No. Confirm the corresponding incoming credit in your own official bank or payment records. A screenshot and a sender’s debit claim cannot independently establish receipt."
       },
       {
-        question: 'Can a Fake UPI Screenshot Checker prove that I received a payment?',
-        answer:
-          'No. No screenshot analysis tool can prove that funds have settled into your bank account. The checker analyzes the image for signs of digital tampering and template defects, but you must always verify settled funds directly in your own bank app or UPI account.',
+        "question": "Can I check a PhonePe, Google Pay or Paytm screenshot?",
+        "answer": "You can use the checker to inspect readable receipt text and configured rule warnings. Provider labels are text-based guesses, not app authentication. Fonts, icons and logos are not verified by the payment text rules."
       },
       {
-        question: 'Can I check a fake PhonePe screenshot?',
-        answer:
-          'Yes. Fake PhonePe screenshots generated with spoofing apps frequently display detectable flaws, such as serif fonts in "Banking name:" labels, bank icons embedded inside bank title text strings, or malformed transaction IDs.',
+        "question": "Does a missing credit mean the screenshot is fake?",
+        "answer": "No. It means receipt of that payment is unconfirmed. Check the recipient and official transaction status, then use bank or provider support if needed. A delay, failed payment or wrong recipient can require investigation without proving deception."
       },
       {
-        question: 'Can I check a fake Google Pay (GPay) screenshot?',
-        answer:
-          'Yes. Our tool evaluates Google Pay receipts for Google Sans typography consistency, standard UPI transaction reference formatting, and amount alignment.',
+        "question": "Does a valid-looking UPI reference prove a payment is real?",
+        "answer": "No. A reference can be copied, and OCR can misread it. Compare it with your official transaction record. Digit-count or formatting checks do not authenticate the transaction."
       },
       {
-        question: 'Can I check a fake Paytm payment screenshot?',
-        answer:
-          'Yes. You can inspect Paytm payment screenshots for altered amount digits, mismatched header colors, and missing or non-standard reference codes.',
+        "question": "Why is a bank balance screenshot not payment proof?",
+        "answer": "It claims to show a balance, not a transfer to you. The screenshot does not authenticate that balance, prove current funds are available or confirm an incoming credit."
       },
       {
-        question: 'Does the tool support BHIM UPI and Pop UPI?',
-        answer:
-          'Yes. Confirmation screenshots from BHIM UPI, Pop UPI, and various Indian mobile banking apps can be analyzed for layout integrity and reference format consistency.',
-      },
-      {
-        question: 'What are the most common signs of a fake UPI screenshot?',
-        answer:
-          'Common red flags include font inconsistencies (mixing serif and sans-serif typefaces), bank icons placed inside bank name text, conflicting amounts on the same slip, missing or invalid 12-digit UTR numbers, timestamp conflicts with device status bars, and the absence of an audio soundbox alert or SMS on your own phone.',
-      },
-      {
-        question: 'What should I do if a payment screenshot looks real but money is not received?',
-        answer:
-          'Do not release goods, services, or refunds. Check your official Bank Statement via your Bank App or contact your Bank directly. If the transaction has not settled in your account, ask the sender to track the transfer with their bank using their 12-digit UTR reference.',
-      },
-      {
-        question: 'Why is an account balance screenshot not proof of payment?',
-        answer:
-          'An account balance screen (such as "Bank balance fetched successfully") only shows that a bank account holds funds. It does not prove that a transfer was initiated, sent, or credited to your account.',
-      },
-      {
-        question: 'Is screenshot analysis 100% accurate?',
-        answer:
-          'While forensic algorithms catch most template flaws and digital edits, sophisticated forged screenshots may look visually convincing. Always make bank account verification your primary security measure.',
-      },
+        "question": "How accurate is a fake payment screenshot checker?",
+        "answer": "This checker uses OCR and weighted text rules, not a calibrated authenticity test. It can miss problems or flag benign content. No risk label or proof-strength label replaces verification through your own bank records."
+      }
     ],
-    peopleAlsoSearch: [
-      'Fake UPI Screenshot Checker',
-      'Fake payment screenshot checker',
-      'Fake UPI payment screenshot',
-      'PhonePe fake payment detector',
-      'Fake Google Pay screenshot checker',
-      'Paytm spoof screenshot detector',
-      'Check UPI transaction screenshot',
-      'Fake payment proof online',
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "screenshot-checker-online",
+      "screenshot-analyzer-online",
+      "redact-screenshot-before-sharing"
     ],
-    relatedSlugs: ['screenshot-checker-online', 'screenshot-analyzer-online', 'smishing-fake-sms'],
-    cta: {
-      label: 'Inspect a Payment Screenshot with Fake UPI Checker',
-      url: '/payment-screenshot-checker/',
-      description: 'Analyze suspicious UPI receipts from PhonePe, Google Pay, Paytm, BHIM, and Pop UPI for visual inconsistencies.',
-    },
+    "cta": {
+      "label": "Review a Payment Screenshot",
+      "url": "/payment-screenshot-checker/",
+      "description": "Use OCR-based checks as an aid to review. Confirm any claimed payment through your own official records."
+    }
   },
 
   // =========================================================================

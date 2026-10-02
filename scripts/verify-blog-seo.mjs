@@ -188,3 +188,67 @@ for (const path of ['screenshot-privacy-checker', 'screenshot-redactor']) {
     ['/blog/redact-screenshot-before-sharing', '/blog/exif-metadata'], `${path} guides`);
 }
 console.log('PASS privacy discovery: exact contextual tool/guide cards, retained redactor guides and resolved targets');
+
+// UPI guide correction: protect bank-first verification and honest text-rule limits
+// in the generated page, including the same visible and structured FAQ answers.
+const upi = getAllArticles().find(article => article.slug === 'fake-upi-payment-screenshot');
+const upiDoc = new JSDOM(read(`blog/${upi.slug}/index.html`)).window.document;
+const upiText = upiDoc.querySelector('main').textContent.replace(/\s+/g, ' ');
+const upiSchemas = [...upiDoc.querySelectorAll('script[type="application/ld+json"]')]
+  .flatMap(script => { const value = JSON.parse(script.textContent); return value['@graph'] || [value]; });
+const upiFAQ = upiSchemas.find(value => value['@type'] === 'FAQPage');
+assert.equal(upiFAQ.mainEntity.length, 6, 'UPI: six substantive FAQ answers');
+assert.equal(upiFAQ.mainEntity.length, upi.faq.length);
+for (const [index, faq] of upi.faq.entries()) {
+  assert.equal(upiFAQ.mainEntity[index].name, faq.question);
+  assert.equal(upiFAQ.mainEntity[index].acceptedAnswer.text, faq.answer);
+  const headings = [...upiDoc.querySelectorAll('h3')].filter(node => node.textContent.trim() === faq.question);
+  assert.equal(headings.length, 1, 'UPI: one visible heading per FAQ');
+  assert.equal(headings[0].nextElementSibling?.textContent.trim(), faq.answer, 'UPI: visible/schema FAQ parity');
+}
+assert.equal(upi.publishedAt, '2026-08-22', 'UPI: original publication date retained');
+assert.equal(upi.updatedAt, '2026-10-02', 'UPI: substantive correction date');
+assert.equal(upi.title, 'Fake UPI Payment Screenshot: How to Check If a Payment Is Real');
+assert.equal(upiDoc.querySelector('title').textContent, 'Fake UPI Payment Screenshots: Checks and Warning Signs');
+assert.equal(upiDoc.querySelector('meta[name="description"]').content,
+  'Review warning signs in UPI payment screenshots and learn why confirming the transaction in your own bank or payment app matters more than an image.');
+assert.equal(upiSchemas.find(value => value['@type'] === 'BlogPosting').author.name, upi.authorName);
+assert.equal(upiDoc.querySelector('[rel="author"]')?.textContent.trim(), upi.authorName);
+const upiHeadings = [...upiDoc.querySelectorAll('main h2')].map(node => node.textContent.trim());
+const verificationHeading = upiHeadings.indexOf('How to Verify a UPI Payment: Start With Your Own Records');
+const toolHeading = upiHeadings.indexOf('What the Payment Screenshot Checker Actually Does');
+assert.ok(verificationHeading >= 0 && toolHeading > verificationHeading, 'UPI: verification precedes tool advice');
+assert.equal(upiDoc.querySelectorAll('.article-checklist li').length, 5, 'UPI: five verification steps');
+for (const phrase of [
+  'fictional teaching example, not a real customer case or a checker accuracy test',
+  'A seller is waiting for ₹500',
+  'amount, payment date, intended recipient and reference',
+  'opens their own official payment history and bank records',
+  'Outcome A: a matching credit is found.',
+  'Outcome B: no matching credit is found.',
+  'missing credit alone does not prove that the buyer forged the image',
+  'cannot authenticate the displayed balance',
+  'Capture time is not payment time',
+  'OCR can change the apparent evidence',
+  'payment text rules do not measure font families, icon positions, logo accuracy or layout alignment',
+  'not calibrated probabilities',
+  'not a measurement of visual authenticity or banking settlement',
+  'not a universal refund deadline',
+]) assert.ok(upiText.includes(phrase), `UPI: built evidence boundary: ${phrase}`);
+for (const retiredClaim of [
+  'Real Examples:', 'a calibrated verdict', 'catch most template flaws',
+  'typically 24 to 48 hours', 'Every genuine UPI transfer',
+  'Evaluates Google Sans typography', 'Typography & Font Family Audits',
+  'People Also Search For',
+]) assert.ok(!upiText.includes(retiredClaim), `UPI: retired claim stays absent: ${retiredClaim}`);
+for (const href of [
+  'https://www.phonepe.com/blog/trust-and-safety/heres-a-quick-guide-to-help-you-avoid-becoming-a-victim-of-fake-payment-screenshots-2/',
+  'https://support.google.com/pay/india/answer/16919844?hl=en',
+  'https://support.google.com/pay/india/answer/16920039?hl=en-IN',
+  '/payment-screenshot-checker/', '/blog/redact-screenshot-before-sharing/', '/privacy/',
+]) assert.ok(upiDoc.querySelector(`main a[href="${href}"]`), `UPI: relevant source/workflow link: ${href}`);
+for (const link of upiDoc.querySelectorAll('main a[href^="/"]')) {
+  const pathname = link.getAttribute('href').split(/[?#]/)[0].replace(/^\//, '').replace(/\/$/, '');
+  assert.doesNotThrow(() => read(pathname ? `${pathname}/index.html` : 'index.html'), `UPI: internal link resolves: ${pathname}`);
+}
+console.log('PASS UPI guide: preserved snippet/date, FAQ/byline parity, fictional verification example, benign controls, text-rule limits and sources');
