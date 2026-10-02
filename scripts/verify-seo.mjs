@@ -146,6 +146,22 @@ try {
   assert.match(app.description, /your own bank records/);
   assert.match(payment.querySelector('h1').closest('section').textContent, /cannot prove an image is genuine/);
 
+  const samples = [...payment.querySelectorAll('button.payment-sample-btn')];
+  assert.deepEqual(samples.map(button => button.dataset.sampleId), ['fake_phonepe_sample', 'canara_bank_balance'], 'payment sample IDs');
+  assert.deepEqual(samples.map(button => norm(button.textContent)), [
+    'Fictional PhonePe-style ₹500 receipt',
+    'Fictional Canara-style balance screen',
+  ], 'payment fictional sample labels');
+  const notice = payment.querySelector('#payment-pre-analysis-modal');
+  assert.equal(notice.getAttribute('role'), 'dialog', 'payment notice dialog remains present');
+  assert.match(norm(notice.textContent), /OCR\/text-rule clues cannot establish authenticity or bank settlement/);
+  assert.match(norm(notice.textContent), /Fonts, icons and layout are not measured/);
+  assert.match(norm(notice.textContent), /Financial screenshots are processed locally in your browser/);
+  assert.doesNotMatch(norm(notice.textContent), /detects graphic tampering|100% Client-Side|never leave your device/);
+  for (const id of ['close-payment-modal-btn', 'dismiss-payment-modal-btn', 'accept-payment-modal-btn']) {
+    assert.equal(notice.querySelector(`#${id}`).tagName, 'BUTTON', `payment notice control: ${id}`);
+  }
+
   const faqSchema = schemas.find(schema => schema['@type'] === 'FAQPage');
   const visibleFaqs = [...payment.querySelectorAll('#tool-faq-accordion details')];
   assert.equal(visibleFaqs.length, 10, 'payment visible FAQ count');
