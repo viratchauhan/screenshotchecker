@@ -117,7 +117,7 @@ const structuredData = {
         <svg class="w-4 h-4 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
-        <span>100% Client-Side Forensics. Financial screenshots never leave your browser.</span>
+        <span>In-browser OCR and text checks. Financial screenshots are processed locally.</span>
       </div>
     </section>
 
@@ -189,7 +189,7 @@ const structuredData = {
 
       <!-- Payment Test Samples -->
       <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-muted">
-        <span class="font-medium text-ink shrink-0">Try real-world payment cases:</span>
+        <span class="font-medium text-ink shrink-0">Try synthetic payment examples:</span>
         <div class="flex flex-wrap items-center justify-center gap-1.5">
           {PAYMENT_SAMPLE_PRESETS.map((preset) => (
             <button
@@ -210,13 +210,13 @@ const structuredData = {
     <!-- Dedicated Payment Analysis Dashboard -->
     <PaymentAnalysisDashboard />
 
-    <!-- Educational Section: Hints From a Fake Payment Screenshot -->
+    <!-- Educational Section: Manual Payment Screenshot Review -->
     <section class="py-16 bg-surface-soft border-y border-hairline">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-12">
-          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Forensic Guidance</span>
+          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Manual Review Guidance</span>
           <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
-            Hints From a Fake Payment Screenshot
+            Review Payment Screenshot Clues
           </h2>
           <p class="text-xs sm:text-sm text-muted mt-2 leading-relaxed">
             These are manual review prompts alongside OCR text rules. The current text-rule engine does not measure font families, icon positions or pixel editing.
@@ -227,7 +227,7 @@ const structuredData = {
           <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
             <div class="flex items-center gap-2.5">
               <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">01</span>
-              <h3 class="font-serif text-lg text-ink font-normal">Typography & Font Family Inconsistency</h3>
+              <h3 class="font-serif text-lg text-ink font-normal">Review Text Appearance Manually</h3>
             </div>
             <p class="text-xs text-body leading-relaxed">
               Compare text appearance in the original image with an official receipt. The OCR label <em>"Banking name:"</em> does not establish a font mismatch or editing; this tool does not measure fonts.
@@ -237,7 +237,7 @@ const structuredData = {
           <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
             <div class="flex items-center gap-2.5">
               <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">02</span>
-              <h3 class="font-serif text-lg text-ink font-normal">Unusual Icon Placement Inside Text</h3>
+              <h3 class="font-serif text-lg text-ink font-normal">Symbols in Extracted Text</h3>
             </div>
             <p class="text-xs text-body leading-relaxed">
               OCR can merge nearby symbols into bank-name text, such as <em>"State 🏦 Bank of India"</em>. Inspect the original image manually; extracted symbols do not establish icon misplacement or composite editing.
@@ -247,20 +247,20 @@ const structuredData = {
           <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
             <div class="flex items-center gap-2.5">
               <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">03</span>
-              <h3 class="font-serif text-lg text-ink font-normal">Spliced or Inconsistent Amounts</h3>
+              <h3 class="font-serif text-lg text-ink font-normal">Different Amounts Need Context</h3>
             </div>
             <p class="text-xs text-body leading-relaxed">
-              Scammers often modify a genuine small transaction by editing digits in image software. This leads to discrepancies between the large header amount and the breakdown row, as well as abnormal compression artifacts around numbers.
+              Compare each amount with its label in the original image. A fee or balance may legitimately differ from the payment amount, and OCR can misread digits. An amount-rule warning does not establish that pixels were edited.
             </p>
           </div>
 
           <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
             <div class="flex items-center gap-2.5">
               <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">04</span>
-              <h3 class="font-serif text-lg text-ink font-normal">Invalid or Shortened 12-Digit UTRs</h3>
+              <h3 class="font-serif text-lg text-ink font-normal">Compare References With Official Records</h3>
             </div>
             <p class="text-xs text-body leading-relaxed">
-              Every genuine Indian UPI transfer produces a standard 12-digit numeric Unique Transaction Reference (UTR / RRN). Fake receipts frequently display placeholder text, letters, or fewer than 12 digits.
+              Reference labels and formats can differ, and OCR may omit or misread characters. This checker applies configured format rules; it does not query a bank transaction database. A plausible reference can be copied, so digit count alone cannot authenticate a payment.
             </p>
           </div>
         </div>
@@ -295,12 +295,12 @@ const structuredData = {
     <section class="py-16 bg-surface-soft border-y border-hairline">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
         <div class="mb-10 text-center max-w-xl mx-auto">
-          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Ecosystem Support</span>
+          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Text Recognition Coverage</span>
           <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
-            Supported Indian UPI Apps
+            Indian UPI Receipt Text
           </h2>
           <p class="text-xs sm:text-sm text-muted mt-2">
-            Analyze payment screenshots from popular Indian UPI apps including Google Pay (GPay), PhonePe, Paytm, BHIM UPI and Pop UPI.
+            The classifier looks for names or supported handles associated with Google Pay, PhonePe, Paytm, BHIM and Pop UPI. Recognition is text-based and can be wrong.
           </p>
         </div>
 
@@ -331,11 +331,11 @@ const structuredData = {
             <div class="p-4 rounded-xl bg-canvas border border-warning/30 space-y-2 text-xs leading-relaxed">
               <strong class="text-warning block font-bold">🚨 HIGHLIGHT NOTE (ENGLISH):</strong>
               <p class="text-ink">
-                If a payment is not showing up in your UPI App, then <strong>Check your Bank Statement by Bank App or Through Bank</strong>. This is the Only Legit Method you should follow to verify a payment screenshot.
+                If a claimed payment is missing, <strong>check your own official bank statement or merchant transaction history</strong>. Confirm the matching incoming credit and use official bank or provider support if the status is unclear.
               </p>
               <strong class="text-primary block font-bold pt-2">🚨 महत्वपूर्ण सूचना (HINDI):</strong>
               <p class="text-ink">
-                अगर कोई भुगतान आपके UPI ऐप में नहीं दिख रहा है, तो <strong>अपने बैंक ऐप से Bank Statement चेक करें या सीधे बैंक से पुष्टि करें</strong>। भुगतान सत्यापित करने का केवल यही एकमात्र वैध तरीका है।
+                अगर बताए गए भुगतान की पुष्टि नहीं हो रही है, तो <strong>अपने आधिकारिक बैंक स्टेटमेंट या मर्चेंट ऐप का लेन-देन इतिहास देखें</strong>। मिलान करके प्राप्त राशि की पुष्टि करें। स्थिति स्पष्ट न हो तो बैंक या भुगतान सेवा के आधिकारिक सहायता चैनल से संपर्क करें।
               </p>
             </div>
 
@@ -344,12 +344,15 @@ const structuredData = {
                 <li>{lim}</li>
               ))}
             </ul>
+            <p class="text-xs text-body leading-relaxed">
+              Verification guidance: <a href="https://support.google.com/pay/india/answer/16919844?hl=en" class="text-primary underline">Google Pay's bank-statement checks</a> and <a href="https://www.phonepe.com/blog/trust-and-safety/heres-a-quick-guide-to-help-you-avoid-becoming-a-victim-of-fake-payment-screenshots-2/" class="text-primary underline">PhonePe's fake-screenshot precautions</a>.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 10 SEO-Rich FAQs -->
+    <!-- Payment Review FAQs -->
     <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-xl mx-auto mb-10">
         <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Questions & Answers</span>

@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import assert from 'node:assert/strict';
 import path from 'node:path';
 import { JSDOM } from 'jsdom';
 
@@ -131,6 +132,72 @@ try {
     }
   }
 } catch (error) { console.error('Sitemap validation failed:', error.message); errorCount++; }
+
+// Verify the generated payment landing copy and its shared FAQ/card source.
+// Keep these checks scoped to marketing sections, not unrelated runtime reports.
+try {
+  const payment = new JSDOM(fs.readFileSync(path.join(distDir, 'payment-screenshot-checker/index.html'), 'utf8')).window.document;
+  const norm = text => text.replace(/\s+/g, ' ').trim();
+  const schemas = [...payment.querySelectorAll('script[type="application/ld+json"]')]
+    .flatMap(script => { const data = JSON.parse(script.textContent); return data['@graph'] || [data]; });
+  const app = schemas.find(schema => schema['@type'] === 'WebApplication');
+  assert.equal(app.description, payment.querySelector('meta[name="description"]').content, 'payment metadata/schema description parity');
+  assert.match(app.description, /OCR-based checks/);
+  assert.match(app.description, /your own bank records/);
+  assert.match(payment.querySelector('h1').closest('section').textContent, /cannot prove an image is genuine/);
+
+  const faqSchema = schemas.find(schema => schema['@type'] === 'FAQPage');
+  const visibleFaqs = [...payment.querySelectorAll('#tool-faq-accordion details')];
+  assert.equal(visibleFaqs.length, 10, 'payment visible FAQ count');
+  assert.equal(faqSchema.mainEntity.length, visibleFaqs.length, 'payment schema FAQ count');
+  for (const [index, faq] of visibleFaqs.entries()) {
+    assert.equal(norm(faq.querySelector('summary').textContent), faqSchema.mainEntity[index].name, 'payment FAQ question parity');
+    assert.equal(norm(faq.querySelector('.tool-faq-answer').textContent), faqSchema.mainEntity[index].acceptedAnswer.text, 'payment FAQ answer parity');
+  }
+  const faqText = visibleFaqs.map(faq => norm(faq.textContent)).join(' ');
+  for (const phrase of [
+    'does not measure fonts, icons or layout',
+    'Reference labels and formats can differ',
+    'digit count alone is not an authenticity test',
+    'without proving that the image was forged',
+    'capture time can differ from payment time',
+    'missing SMS or soundbox alert alone does not establish a fake',
+    'not calibrated accuracy or fraud probabilities',
+    'incomplete or unreadable check is not a clean result',
+  ]) assert.ok(faqText.includes(phrase), `payment FAQ limit: ${phrase}`);
+
+  const sections = [...payment.querySelectorAll('main > section')];
+  const section = heading => sections.find(node => [...node.querySelectorAll('h2, h3')].some(h => norm(h.textContent) === heading));
+  const reviewText = norm(section('Review Payment Screenshot Clues').textContent);
+  assert.match(reviewText, /fee or balance may legitimately differ/);
+  assert.match(reviewText, /amount-rule warning does not establish that pixels were edited/);
+  assert.match(reviewText, /A plausible reference can be copied/);
+  const workflowText = norm(section('How It Works').textContent);
+  assert.match(workflowText, /Fonts, icon positions and layout alignment are not measured/);
+  assert.match(workflowText, /No checker result confirms receipt of funds/);
+  const limits = section('Technical Limitations & Essential Guidance');
+  assert.match(norm(limits.textContent), /STRONG VISUAL cannot establish that you received a payment/);
+  for (const url of [
+    'https://support.google.com/pay/india/answer/16919844?hl=en',
+    'https://www.phonepe.com/blog/trust-and-safety/heres-a-quick-guide-to-help-you-avoid-becoming-a-victim-of-fake-payment-screenshots-2/',
+  ]) assert.ok([...limits.querySelectorAll('a')].some(link => link.href === url), `payment primary-source link: ${url}`);
+  assert.doesNotMatch([app.description, faqText, reviewText, workflowText].join(' '), /Google Sans patterns|typography mismatches|font alignment anomalies|inspects font families|known fake APK patterns|every genuine Indian UPI transfer|non-12-digit UTR|standard 12-digit numeric/i);
+
+  const guide = new JSDOM(fs.readFileSync(path.join(distDir, 'blog/fake-upi-payment-screenshot/index.html'), 'utf8')).window.document;
+  const toolsHeading = [...guide.querySelectorAll('section h3')].find(heading => norm(heading.textContent) === 'Recommended Investigation Tools');
+  assert.ok(toolsHeading?.nextElementSibling?.classList.contains('grid'), 'UPI guide contextual tools grid');
+  const paymentCards = [...toolsHeading.nextElementSibling.querySelectorAll(':scope > a.feature-card')].filter(link => link.getAttribute('href')?.replace(/\/$/, '') === '/payment-screenshot-checker');
+  assert.equal(paymentCards.length, 1, 'one contextual payment card on UPI guide');
+  const cardText = norm(paymentCards[0].textContent);
+  assert.match(cardText, /Review UPI receipt text with OCR-based rules/);
+  assert.match(cardText, /confirm the claimed payment in your own official records/);
+  assert.match(cardText, /Review payment receipt text/);
+  assert.doesNotMatch(cardText, /PayPal|font alignment|layout|Verify payment receipt/);
+  console.log('PASS payment landing: OCR limits, benign controls, primary sources, FAQ/schema parity and shared card');
+} catch (error) {
+  console.error('Payment landing copy validation failed:', error.message);
+  errorCount++;
+}
 
 // Print report
 console.log('='.repeat(100));
