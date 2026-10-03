@@ -1,3 +1,4 @@
+import { isLabelledBalanceAmount } from './paymentAmountContext';
 import type { PaymentReceiptType, PaymentApp, PaymentProofStrength } from './paymentTypes';
 
 export interface ClassificationResult {
@@ -43,6 +44,24 @@ export function classifyPaymentScreenshot(rawText: string): ClassificationResult
     paymentApp = 'Bank UPI';
   }
 
+  // Explicit transfer statuses outrank incidental balance fields. Keep broad
+  // words such as "unsuccessful" / "waiting for bank" below the balance rule:
+  // those can describe the balance inquiry itself rather than a transfer.
+  const isExplicitFailure = /\b(?:payment failed|transaction failed|payment declined|transfer failed|(?:payment|transaction|transfer) unsuccessful)\b/i.test(lower);
+  const isExplicitPending = /\b(?:payment pending|transaction pending|processing payment|payment in progress)\b/i.test(lower);
+  const isExplicitSuccess = /\b(?:transaction successful|payment (?:of [^.\n]+ )?successful|payment successful|paid successfully|transfer successful|sent successfully|credited successfully|payment done|bill payment successful)\b/i.test(lower);
+  const hasExplicitTransferStatus = isExplicitFailure || isExplicitPending || isExplicitSuccess;
+
+  // A generic status remains conservative transfer evidence unless its direct
+  // same-line / preceding-line label identifies a balance inquiry. Never ignore
+  // it merely because another part of the screenshot contains a balance.
+  const hasNonBalanceStatus = (pattern: RegExp): boolean => [...lower.matchAll(pattern)].some(match => {
+    const before = lower.slice(0, match.index!);
+    const linePrefix = before.slice(before.lastIndexOf('\n') + 1).trim();
+    const context = linePrefix || before.trimEnd().split(/\r?\n/).at(-1) || '';
+    return !/\b(?:balance (?:check|inquiry|enquiry)|(?:check(?:ing)?|fetch(?:ing)?) (?:bank )?balance)(?: (?:is|was))?\s*[:=–-]?\s*$/i.test(context);
+  });
+
   // 1. RULE: BANK BALANCE SCREENSHOT
   // "Bank balance fetched successfully", "Available balance", "Canara Bank ₹3,884.63"
   const isBalanceScreen =
@@ -53,7 +72,7 @@ export function classifyPaymentScreenshot(rawText: string): ClassificationResult
       /(?:₹|rs\.?|inr)\s*[\d,]+(?:\.\d{1,2})?/i.test(lower) &&
       !/\b(?:paid to|transferred to|payment to|payment successful|transaction successful)\b/i.test(lower));
 
-  if (isBalanceScreen) {
+  if (isBalanceScreen && !hasExplicitTransferStatus) {
     return {
       isPaymentScreenshot: true,
       receiptType: 'BANK_BALANCE',
@@ -84,9 +103,7 @@ export function classifyPaymentScreenshot(rawText: string): ClassificationResult
   }
 
   // 3. RULE: PAYMENT FAILED / DECLINED
-  const isFailed = /\b(?:payment failed|transaction failed|payment declined|transfer failed|unsuccessful)\b/i.test(
-    lower
-  );
+  const isFailed = isExplicitFailure || hasNonBalanceStatus(/\bunsuccessful\b/gi);
   if (isFailed) {
     return {
       isPaymentScreenshot: true,
@@ -100,9 +117,7 @@ export function classifyPaymentScreenshot(rawText: string): ClassificationResult
   }
 
   // 4. RULE: PAYMENT PENDING / PROCESSING
-  const isPending = /\b(?:payment pending|transaction pending|processing payment|payment in progress|under processing|waiting for bank)\b/i.test(
-    lower
-  );
+  const isPending = isExplicitPending || hasNonBalanceStatus(/\b(?:under processing|waiting for bank)\b/gi);
   if (isPending) {
     return {
       isPaymentScreenshot: true,
@@ -118,9 +133,7 @@ export function classifyPaymentScreenshot(rawText: string): ClassificationResult
 
   // 5. RULE: PAYMENT SUCCESSFUL
   const isPaymentSuccess =
-    /\b(?:transaction successful|payment (?:of [^.\n]+ )?successful|payment successful|paid successfully|transfer successful|sent successfully|credited successfully|payment done|bill payment successful)\b/i.test(
-      lower
-    ) ||
+    isExplicitSuccess ||
     (/\b(?:paid|transferred|sent|credited|payment)\b/i.test(lower) &&
       /(?:₹|rs\.?|inr)\s*[\d,]+(?:\.\d{1,2})?/i.test(lower) &&
       (/\b(?:to|banking name|from|successful|completed)\b/i.test(lower) || lower.includes('@')) &&
@@ -128,7 +141,8 @@ export function classifyPaymentScreenshot(rawText: string): ClassificationResult
 
   if (isPaymentSuccess) {
     const hasUtrOrTxn = /\b(?:utr|txn|transaction id|reference no|rrn)\b/i.test(lower);
-    const hasAmount = /(?:₹|rs\.?|inr)\s*[\d,]+(?:\.\d{1,2})?/i.test(lower);
+    const hasAmount = [...lower.matchAll(/(?:₹|rs\.?|inr)\s*[\d,]+(?:\.\d{1,2})?/gi)]
+      .some(match => !isLabelledBalanceAmount(lower, match.index!, match.index! + match[0].length));
     const hasRecipient = /\b(?:paid to|transferred to|sent to|banking name|to:)\b/i.test(lower) || lower.includes('@');
 
     const proofStrength: PaymentProofStrength =
