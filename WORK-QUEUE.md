@@ -1,5 +1,7 @@
 # ScreenshotChecker bounded work queue
 
+**Latest 5 October 2026 AI detector recovery slice:** Owner-approved early decode/pixel validation, recoverable errors, actual stage progress, single-run/Stop/stale-result safeguards and keyboard-focus recovery. Existing OCR fallback, limits, scoring and payment behavior remain unchanged. Independent review accepted; exact pinned aggregate **40/40**, 33-page build and both SEO checks pass. Local browser failure/retry/Stop QA passes. See `audit/AI-detector-recovery-2026-10-05.md`. Automatic approval review blocks push pending direct authorization in the execution task; exact remote Preview QA remains. No production release. Broader task 18 remains open.
+
 **Latest 2 October 2026 payment example/notice slice:** Corrected only two payment sample-button labels and two pre-analysis notice tips to identify fictional examples and explain OCR/text-rule limits. Existing sample data, generators, controls, scoring and network behavior remain unchanged. Exact pinned aggregate **39/39**, 33-page build, both SEO checks and six focused negative controls pass. See `audit/08B-payment-example-copy-2026-10-02.md`. Independent review and Preview remain; broader task 08B stays open.
 
 **Latest 2 October 2026 payment landing-copy slice:** Corrected unsupported font/icon/layout, universal-reference and certainty claims in the existing payment landing page and its directly related shared card. OCR/text-rule limits, benign differences and receiving-side bank confirmation now match the released guide. Exact pinned aggregate **38/38**, 33-page build and both SEO checks pass; source/generated FAQ parity and six negative controls pass. See `audit/08B-payment-landing-copy-2026-10-02.md`. Independent review and Preview remain; task 08B runtime work stays open.
@@ -100,6 +102,10 @@ Task numbers are ordering guides, not calendar commitments. Task 06 may happen e
 - Regression checks are scoped to the change; a build alone is not a functional test.
 
 **Session log**
+
+### 2026-10-05 - AI detector recovery
+
+Diagnosed the live oversized-image loader failure with synthetic fixtures, then implemented the owner-approved bounded fix from main `71762a9` on a separate branch. Twelve regression tests cover failure/retry, dimension-vs-byte size, text-free fallback preservation, stage ordering, focus and concurrent/cancelled input. Final aggregate/build/SEO pass and independent review found no blocker. OCR retry reduction was deferred because accuracy preservation was not established. Private Cloudflare settings access was blocked by automatic review; public Preview receipts and repository operations guidance remain available. Draft branch publication and exact Preview QA are the next release-evidence steps; main and unrelated work are untouched.
 
 ### 2026-10-01 - task 10B local-only standalone link lookup
 
