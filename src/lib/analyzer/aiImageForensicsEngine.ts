@@ -4,6 +4,12 @@ import type { OCRResult } from './types';
 import { analyzeC2PA } from './c2pa/c2paService';
 import { extractC2PAForensicSignals } from './c2pa/c2paVerdict';
 import type { C2PANormalizedResult } from './c2pa/c2paTypes';
+import { imageProcessingScale } from './imageLimits';
+
+export interface AIForensicsOptions {
+  onProgress?: (stage: string) => void;
+  signal?: AbortSignal;
+}
 
 export type AIMetaVerdict =
   | 'LIKELY_AI_GENERATED'
@@ -554,18 +560,31 @@ export function determineVisualModality(
 
 export async function runFullAIForensics(
   file: File | Blob,
-  imgElement: HTMLImageElement
+  imgElement: HTMLImageElement,
+  options: AIForensicsOptions = {},
 ): Promise<AIForensicsReport> {
   const width = imgElement.naturalWidth || imgElement.width;
   const height = imgElement.naturalHeight || imgElement.height;
+  // Reject before initializing engines or allocating forensic working buffers.
+  imageProcessingScale(width, height);
+  const stage = async (message: string) => {
+    options.signal?.throwIfAborted();
+    options.onProgress?.(message);
+    // Give the browser an opportunity to display the current step before pixel work.
+    await new Promise<void>((resolve) => setTimeout(resolve, 0));
+    options.signal?.throwIfAborted();
+  };
 
   // 1. Real C2PA Content Credentials Inspection (Runs directly on original bytes)
+  await stage('Inspecting Content Credentials (first use may load the engine)...');
   const c2pa = await analyzeC2PA(file);
 
   // 2. Metadata / EXIF Provenance
+  await stage('Reading image metadata...');
   const provenance = await inspectProvenance(file);
 
   // 3. Canvas & Texture/Frequency Analysis
+  await stage('Analyzing noise and texture...');
   const canvas = document.createElement('canvas');
   canvas.width = Math.min(width, 1600);
   canvas.height = Math.min(height, 1600);
@@ -576,10 +595,13 @@ export async function runFullAIForensics(
   const texture = analyzeTextureFrequency(canvas);
 
   // 4. ELA Forensics
+  await stage('Computing Error Level Analysis (ELA)...');
   const ela = await computeELA(imgElement);
 
   // 5. OCR & Text Typography
+  await stage('Reading text (first use may load the OCR engine)...');
   const ocr = await runClientOCR(imgElement);
+  await stage('Combining evidence and preparing the report...');
   const textAnalysis = analyzeTextTypography(ocr);
 
   // 6. Modality
