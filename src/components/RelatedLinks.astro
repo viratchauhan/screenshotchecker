@@ -22,6 +22,13 @@ const TOOLS_CATALOG: Record<
   string,
   { name: string; href: string; desc: string; action: string; category: string }
 > = {
+  'reverse-image-search': {
+    name: 'Reverse Image Search',
+    href: '/reverse-image-search/',
+    desc: 'Find matching images through Google Lens, TinEye or Bing, then compare source pages and context.',
+    action: 'Find an image source',
+    category: 'Image search',
+  },
   'screenshot-analyzer': {
     name: 'Screenshot Analyzer',
     href: '/screenshot-analyzer',
@@ -128,10 +135,10 @@ const DEFAULT_TOOL_RELATIONS: Record<string, string[]> = {
   'screenshot-redactor': ['screenshot-privacy-checker', 'image-metadata-remover', 'screenshot-ocr'],
   'screenshot-scam-checker': ['suspicious-link-checker', 'screenshot-spam-checker', 'screenshot-privacy-checker'],
   'screenshot-spam-checker': ['screenshot-scam-checker', 'suspicious-link-checker', 'screenshot-ocr'],
-  'screenshot-metadata-checker': ['image-metadata-remover', 'image-manipulation-checker', 'screenshot-analyzer'],
+  'screenshot-metadata-checker': ['image-metadata-remover', 'image-manipulation-checker', 'reverse-image-search'],
   'image-metadata-remover': ['screenshot-metadata-checker', 'screenshot-privacy-checker', 'screenshot-redactor'],
   'screenshot-privacy-checker': ['screenshot-redactor', 'image-metadata-remover', 'screenshot-metadata-checker'],
-  'screenshot-comparison': ['image-manipulation-checker', 'payment-screenshot-checker', 'screenshot-analyzer'],
+  'screenshot-comparison': ['image-manipulation-checker', 'reverse-image-search', 'screenshot-analyzer'],
   'suspicious-link-checker': ['screenshot-scam-checker', 'screenshot-ocr', 'screenshot-analyzer'],
   'blog/fake-upi-payment-screenshot': ['payment-screenshot-checker', 'image-manipulation-checker', 'screenshot-redactor'],
   'blog/suspicious-link-checker-online': ['suspicious-link-checker', 'screenshot-scam-checker', 'screenshot-ocr'],

@@ -3,8 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { REVERSE_PROVIDERS as providers, REVERSE_FAQS as faqs } from '../data/reverseSearch';
-const title = 'Free Reverse Image Search — Find Image Sources';
-const description = 'Reverse search a photo or screenshot with Google Lens, TinEye or Bing. Prepare your image privately, find matching sources and compare results. Free, no signup.';
+const title = 'Free Reverse Image Search for Photos & Screenshots';
+const description = 'Find an image source from a screenshot. Prepare a search copy, choose Google Lens, TinEye or Bing, and learn how to compare matches. Free, no signup.';
 const url = 'https://screenshotchecker.com/reverse-image-search/';
 const structuredData = { '@context': 'https://schema.org', '@graph': [
   { '@type': 'BreadcrumbList', itemListElement: [
@@ -23,10 +23,16 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
     <header class="hero">
     <p class="eyebrow">FOLLOW THE IMAGE. FIND THE CONTEXT.</p>
     <h1>Free reverse image search</h1>
-    <p class="intro">Find where a picture appears online. Look for its source, compare matches, and check the story behind it.</p>
+    <p class="intro">Find an image source from a photo or screenshot. Prepare a search copy, choose a provider, and check where the picture appears online.</p>
     <ul class="benefits"><li>No signup</li><li>Local image preparation</li><li>Three search providers</li></ul>
     <p><strong>Results open on the provider’s site.</strong> This tool does not have its own image index or automatically submit your file.</p>
     </header>
+    <nav class="guide-nav" aria-label="Reverse image search guide">
+      <a href="#prepare-heading">Start searching</a>
+      <a href="#screenshot-search">Search a screenshot</a>
+      <a href="#phone-search">Phone instructions</a>
+      <a href="#no-matches">No matching results?</a>
+    </nav>
     <div class="workspace">
     <section class="panel" aria-labelledby="prepare-heading">
       <h2 id="prepare-heading">1. Prepare your image</h2>
@@ -55,7 +61,7 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
       <p>Download the copy above, or copy it if your browser supports image clipboard access. Open a provider and upload or paste there. Opening a link alone does not start a search or transfer the image.</p>
       <div class="providers">
         {providers.map(provider => <article class="panel">
-          <h3>{provider.name}</h3><p>{provider.instruction}</p>
+          <h3>{provider.name}</h3><p><strong>{provider.useCase}</strong></p><p>{provider.instruction}</p>
           <a class="provider-link" href={provider.url} target="_blank" rel="noopener noreferrer">Open {provider.name} ↗</a>
           <p><a href={provider.help} target="_blank" rel="noopener noreferrer">Provider instructions ↗</a></p>
         </article>)}
@@ -63,10 +69,34 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
       <p>Once you upload, paste or share, the receiving service processes your image under its own policies. Microsoft notes that submitted photos may be used to improve Bing’s image-processing services.</p>
     </section>
     </div>
+    <section aria-labelledby="screenshot-search">
+      <h2 id="screenshot-search">How to find an image source from a screenshot</h2>
+      <p>Reverse image search uses a picture as the search input. It can find matching copies or similar images in a provider’s index. To trace a screenshot, search the picture inside it, then open matching pages to compare their dates, captions and credits.</p>
+      <ol>
+        <li><strong>Keep the original.</strong> Save a separate search copy. If you crop it in your photo editor, remove app borders and unrelated text while keeping useful visual details. This page prepares a PNG; it does not crop your image.</li>
+        <li><strong>Choose a provider.</strong> Try TinEye for copies of the same image, or Google Lens and Bing for matching pages and visually similar results. Use the controls above to prepare a copy, then upload it on the provider’s site.</li>
+        <li><strong>Check the page behind the result.</strong> Compare landmarks, objects and image details. A similar-looking photo is not necessarily the same picture.</li>
+        <li><strong>Follow the credit.</strong> Look for a photographer, publisher or linked earlier source. An old search result is a lead, not proof of the first publication or permission to reuse the image.</li>
+      </ol>
+      <p class="source-note">Provider references: <a href="https://help.tineye.com/article/233-how-does-tineye-work">how TinEye matches images</a> and <a href="https://help.tineye.com/article/248-what-does-tineye-first-found-on-mean">what its first-found date means</a>.</p>
+    </section>
+    <section aria-labelledby="phone-search">
+      <h2 id="phone-search">Reverse image search on iPhone and Android</h2>
+      <div class="device-guides">
+        <article class="panel">
+          <h3>iPhone or iPad</h3>
+          <p>Open the Google app, tap Lens in the search bar, then use the photo picker to select your saved screenshot. Adjust the selected area to focus on the picture and review the results.</p>
+          <a href="https://support.google.com/websearch/answer/1325808?co=GENIE.Platform%3DiOS&amp;hl=en">Google’s iPhone instructions</a>
+        </article>
+        <article class="panel">
+          <h3>Android</h3>
+          <p>Open the Google app, tap Lens, then select a saved image from Screenshots. Drag the selection corners to focus on the relevant picture. Review the matching pages, not just the previews.</p>
+          <a href="https://support.google.com/websearch/answer/1325808?co=GENIE.Platform%3DAndroid&amp;hl=en">Google’s Android instructions</a>
+        </article>
+      </div>
+      <p>You can also use a provider’s browser upload control. If the PNG downloaded here is missing from your photo picker, look in Files or Downloads. Copy and app sharing depend on your browser; downloading is the fallback.</p>
+    </section>
     <section>
-      <h2>How to reverse search a photo or screenshot</h2>
-      <p>Choose your picture, save the prepared PNG, and open Google Lens, TinEye or Bing Images. Upload the saved copy using that provider’s image-search control. On a phone, choose the image from your downloads or photo picker. Results appear there, not inside this tool.</p>
-      <p>Use reverse image search to investigate a reused marketplace photo, find pages that credit a picture, or check whether a screenshot’s image appeared in an older story. Compare the matching pages before trusting a caption. A visual match alone cannot confirm a seller, a payment or someone’s identity.</p>
       <h2>3. Compare the results and check the context</h2>
       <ol>
         <li>Open the matching page, not only its thumbnail. Read the caption and surrounding text.</li>
@@ -75,8 +105,18 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
         <li>Keep the source links and note what remains uncertain. A matching image does not establish ownership or prove the claim attached to it.</li>
       </ol>
       <h3>Example: an old picture with a new claim</h3>
-      <p>A fictional message labels a street photo as an event from today. Reverse search finds the same scene on an older article. That is a reason to question the caption and investigate dates—not proof that the pixels were edited. If nothing matches, the image remains unverified.</p>
-      <p>For different questions, use the <a href="/screenshot-detector">screenshot-or-photo detector</a>, <a href="/screenshot-comparison">image comparison tool</a> or <a href="/blog/screenshot-checker-online">screenshot verification checklist</a>.</p>
+      <p>A fictional message labels a street photo as an event from today. Reverse search finds the same scene on an older article. That is a reason to question the caption and investigate dates. It does not show that the pixels were edited. If nothing matches, the image remains unverified.</p>
+      <p>For different questions, use the <a href="/screenshot-detector/">screenshot-or-photo detector</a>, <a href="/screenshot-comparison/">image comparison tool</a> or <a href="/blog/screenshot-checker-online/">screenshot verification checklist</a>.</p>
+    </section>
+    <section aria-labelledby="no-matches">
+      <h2 id="no-matches">No matches, or only similar pictures?</h2>
+      <dl class="troubleshooting">
+        <div><dt>Results show the wrong object</dt><dd>Try the original photo if available, or crop a separate copy around the relevant subject in your photo editor. Keep the uncropped original for context.</dd></div>
+        <div><dt>Every result is a similar product</dt><dd>Try TinEye for copies of the same image. Similar products alone do not establish where your particular photo came from.</dd></div>
+        <div><dt>No provider finds a match</dt><dd>The image may be new, private, unindexed or changed too much to match. Ask for the original source. No results do not prove that a picture is real, fake or AI-generated.</dd></div>
+        <div><dt>The screenshot is mostly text</dt><dd>Try <a href="/screenshot-ocr/">extracting the screenshot text</a> and searching a distinctive public phrase. Avoid pasting private messages or account details into a search engine.</dd></div>
+      </dl>
+      <p><a href="#prepare-heading">Try your image with another provider</a></p>
     </section>
     <section><h2>Reverse image search questions</h2>{faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</section>
   </main>
@@ -107,6 +147,14 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
   .hero > p:last-child { font-size:.75rem; color:var(--color-muted); max-width:37rem; margin:1rem auto; }
   .benefits { display:flex; flex-wrap:wrap; justify-content:center; gap:.4rem 1.4rem; list-style:none; padding:0; font-size:.76rem; }
   .benefits li::before { content:'✓'; margin-right:.4rem; color:var(--color-primary-active); }
+  .guide-nav { display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem 1.4rem; margin:0 0 1.5rem; font-size:.85rem; }
+  [id] { scroll-margin-top:6rem; }
+  .device-guides { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr)); gap:1rem; }
+  .device-guides .panel h3 { margin-top:0; }
+  .device-guides a,.source-note { font-size:.85rem; }
+  .troubleshooting > div { border-bottom:1px solid var(--color-hairline); padding:1rem 0; }
+  .troubleshooting dt { font-weight:600; color:var(--color-ink); }
+  .troubleshooting dd { margin:.35rem 0 0; }
   .workspace { display:grid; grid-template-columns:1.05fr 1fr; border:1px solid var(--color-hairline); border-radius:1.3rem; overflow:hidden; box-shadow:0 12px 40px #00000006; }
   .workspace > section { min-width:0; margin:0; padding:2rem; border:0; border-radius:0; }
   .workspace > section:first-child { background:var(--color-surface-soft); border-right:1px solid var(--color-hairline); }
