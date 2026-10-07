@@ -59,16 +59,16 @@ const faqs = getToolFaqs('ai-image-detector');
       </button>
     </div>
 
+    <p id="ai-error-message" role="alert" class="hidden text-sm text-error mb-4"></p>
+
     <!-- Progress / Loading State -->
     <div id="ai-loading-state" class="hidden bg-surface-card border border-hairline rounded-2xl p-10 text-center space-y-4 max-w-lg mx-auto mb-8 shadow-sm">
       <div class="w-10 h-10 border-3 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
-      <div>
-        <h4 id="ai-loading-step" class="font-serif text-lg text-ink font-medium">Reading original file bytes & inspecting C2PA credentials...</h4>
+      <div role="status" aria-live="polite" aria-atomic="true">
+        <h4 id="ai-loading-step" class="font-serif text-lg text-ink font-medium">Reading image...</h4>
         <p class="text-xs text-muted mt-1">Multi-signal cryptographic & visual forensic analysis in progress</p>
       </div>
-      <div class="w-full bg-surface-cream rounded-full h-1.5 overflow-hidden">
-        <div id="ai-loading-bar" class="bg-primary h-full transition-all duration-300" style="width: 25%"></div>
-      </div>
+      <button type="button" id="ai-cancel-btn" class="btn-secondary text-xs">Stop analysis</button>
     </div>
 
     <!-- Active AI Detector Dashboard -->
@@ -322,18 +322,22 @@ const faqs = getToolFaqs('ai-image-detector');
   import { escapeHtml } from '../../lib/utils/reportSafety';
   import { runFullAIForensics, type AIForensicsReport } from '../../lib/analyzer/aiImageForensicsEngine';
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
+  import { loadImageFromDataUrl } from '../../lib/analyzer/imageInfo';
 
   let currentFile: File | null = null;
   let currentDataUrl = '';
   let currentReport: AIForensicsReport | null = null;
   let activeTab: 'orig' | 'ela' = 'orig';
+  let activeRun: AbortController | null = null;
+  let inputRevision = 0;
 
   const dropZone = document.getElementById('ai-upload-container');
   const fileInput = document.getElementById('ai-file-input') as HTMLInputElement | null;
   const browseBtn = document.getElementById('ai-browse-btn');
   const loadingState = document.getElementById('ai-loading-state');
   const loadingStep = document.getElementById('ai-loading-step');
-  const loadingBar = document.getElementById('ai-loading-bar');
+  const errorMessage = document.getElementById('ai-error-message');
+  const cancelBtn = document.getElementById('ai-cancel-btn') as HTMLButtonElement | null;
   const dashboard = document.getElementById('ai-active-dashboard');
 
   const previewImg = document.getElementById('ai-preview-img') as HTMLImageElement | null;
@@ -394,9 +398,8 @@ const faqs = getToolFaqs('ai-image-detector');
   const limitationsList = document.getElementById('ai-limitations-list');
   const debugPanel = document.getElementById('ai-debug-panel');
 
-  function updateLoading(stepText: string, pct: number) {
+  function updateLoading(stepText: string) {
     if (loadingStep) loadingStep.innerText = stepText;
-    if (loadingBar) loadingBar.style.width = `${pct}%`;
   }
 
   function resetState() {
@@ -422,42 +425,68 @@ const faqs = getToolFaqs('ai-image-detector');
     handoffBtn?.classList.add('hidden');
   }
 
-  async function processImage(file: File, dataUrl: string) {
-    currentFile = file;
-    currentDataUrl = dataUrl;
-
+  async function processImage(file: File, suppliedDataUrl?: string) {
+    // Hold the lock until the current engine call settles, even after Stop.
+    // Tesseract is shared; starting another recognition while it is active is unsafe.
+    if (activeRun) return;
+    inputRevision++;
+    const run = new AbortController();
+    activeRun = run;
+    resetState();
+    errorMessage?.classList.add('hidden');
+    if (fileInput) fileInput.disabled = true;
+    if (cancelBtn) cancelBtn.disabled = false;
     dropZone?.classList.add('hidden');
-    dashboard?.classList.add('hidden');
     loadingState?.classList.remove('hidden');
-    updateLoading('Reading original file bytes & inspecting C2PA Content Credentials...', 25);
-
-    const img = new Image();
-    img.src = dataUrl;
-    await new Promise((resolve) => {
-      img.onload = resolve;
-    });
-
-    updateLoading('Analyzing noise, texture & frequency spectrum...', 50);
-    await new Promise((r) => setTimeout(r, 60));
-
-    updateLoading('Computing Error Level Analysis (ELA)...', 75);
-    await new Promise((r) => setTimeout(r, 60));
-
-    updateLoading('Fusing cryptographic C2PA provenance with visual forensics...', 90);
-    // Note: file (original File bytes) is preserved and passed directly to runFullAIForensics
-    const report = await runFullAIForensics(file, img);
-    currentReport = report;
-
-    updateLoading('Finalizing report...', 100);
-    await new Promise((r) => setTimeout(r, 60));
-
-    loadingState?.classList.add('hidden');
-    dashboard?.classList.remove('hidden');
-    newImageBtn?.classList.remove('hidden');
-    toggleElaBtn?.classList.remove('hidden');
-    handoffBtn?.classList.remove('hidden');
-
-    renderReport(report, dataUrl);
+    updateLoading('Reading image and checking dimensions...');
+    try {
+      const dataUrl = suppliedDataUrl ?? await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = () => reject(new Error('Could not read this file. Please select it again.'));
+        reader.onabort = () => reject(new Error('Image reading was interrupted. Please select it again.'));
+        reader.readAsDataURL(file);
+      });
+      run.signal.throwIfAborted();
+      // Shared decoder handles invalid images and the existing 4 MP / 8192 px limits.
+      const img = await loadImageFromDataUrl(dataUrl);
+      run.signal.throwIfAborted();
+      const report = await runFullAIForensics(file, img, {
+        signal: run.signal,
+        onProgress: (message) => {
+          if (activeRun === run && !run.signal.aborted) updateLoading(message);
+        },
+      });
+      if (activeRun !== run || run.signal.aborted) return;
+      renderReport(report, dataUrl);
+      currentFile = file;
+      currentDataUrl = dataUrl;
+      currentReport = report;
+      dashboard?.classList.remove('hidden');
+      newImageBtn?.classList.remove('hidden');
+      toggleElaBtn?.classList.remove('hidden');
+      handoffBtn?.classList.remove('hidden');
+      verdictTitle?.setAttribute('tabindex', '-1');
+      verdictTitle?.focus();
+    } catch (error) {
+      if (activeRun !== run) return;
+      resetState();
+      if (!run.signal.aborted && errorMessage) {
+        errorMessage.textContent = error instanceof Error
+          ? `${error.message} Select another image or try again.`
+          : 'Analysis could not complete. Select another image or try again.';
+        errorMessage.classList.remove('hidden');
+      }
+    } finally {
+      if (activeRun === run) {
+        if (run.signal.aborted) resetState();
+        activeRun = null;
+        loadingState?.classList.add('hidden');
+        if (fileInput) { fileInput.disabled = false; fileInput.value = ''; }
+        if (cancelBtn) cancelBtn.disabled = false;
+        if (!currentReport) browseBtn?.focus();
+      }
+    }
   }
 
   function renderReport(report: AIForensicsReport, dataUrl: string) {
@@ -770,23 +799,19 @@ const faqs = getToolFaqs('ai-image-detector');
 
   fileInput?.addEventListener('change', () => {
     if (fileInput.files?.[0]) {
-      const file = fileInput.files[0];
-      const reader = new FileReader();
-      reader.onload = (e) => processImage(file, e.target?.result as string);
-      reader.readAsDataURL(file);
+      void processImage(fileInput.files[0]);
     }
   });
 
   document.addEventListener('paste', (e) => {
+    if (activeRun) return;
     const items = e.clipboardData?.items;
     if (!items) return;
     for (let i = 0; i < items.length; i++) {
       if (items[i].type.startsWith('image/')) {
         const file = items[i].getAsFile();
         if (file) {
-          const reader = new FileReader();
-          reader.onload = (ev) => processImage(file, ev.target?.result as string);
-          reader.readAsDataURL(file);
+          void processImage(file);
           break;
         }
       }
@@ -807,10 +832,7 @@ const faqs = getToolFaqs('ai-image-detector');
     e.preventDefault();
     dropZone.classList.remove('border-primary');
     if (e.dataTransfer?.files?.[0]) {
-      const file = e.dataTransfer.files[0];
-      const reader = new FileReader();
-      reader.onload = (ev) => processImage(file, ev.target?.result as string);
-      reader.readAsDataURL(file);
+      void processImage(e.dataTransfer.files[0]);
     }
   });
 
@@ -821,7 +843,15 @@ const faqs = getToolFaqs('ai-image-detector');
   });
 
   newImageBtn?.addEventListener('click', () => {
+    if (activeRun) return;
     resetState();
+  });
+
+  cancelBtn?.addEventListener('click', () => {
+    if (!activeRun) return;
+    activeRun.abort();
+    if (cancelBtn) cancelBtn.disabled = true;
+    updateLoading('Stopping after the current step finishes...');
   });
 
   handoffBtn?.addEventListener('click', () => {
@@ -833,9 +863,11 @@ const faqs = getToolFaqs('ai-image-detector');
 
   const handoff = getHandoffImage();
   if (handoff?.dataUrl) {
+    const handoffRevision = inputRevision;
     fetch(handoff.dataUrl)
       .then((res) => res.blob())
       .then((blob) => {
+        if (inputRevision !== handoffRevision) return;
         const file = new File([blob], 'inspected_visual.png', { type: blob.type });
         processImage(file, handoff.dataUrl);
       })
