@@ -75,8 +75,9 @@ export function evaluatePaymentVisualForensics(
   // =========================================================================
   // 3. AMOUNT CONSISTENCY CHECK
   // =========================================================================
-  // Parse numeric values from all amounts
-  const numericAmounts = extracted.allAmounts
+  // Compare payment candidates only; labelled balance values stay in the report
+  // but are not conflicting transfer amounts.
+  const numericAmounts = extracted.paymentAmounts
     .map((a) => {
       const match = a.replace(/,/g, '').match(/[\d.]+/);
       return match ? parseFloat(match[0]) : null;

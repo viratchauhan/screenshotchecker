@@ -407,17 +407,47 @@ const structuredData = {
   const closeModalBtn = document.getElementById('close-payment-modal-btn');
   const dismissModalBtn = document.getElementById('dismiss-payment-modal-btn');
   const acceptModalBtn = document.getElementById('accept-payment-modal-btn');
+  const modalBody = document.getElementById('payment-modal-body');
+  let modalReturnFocus: HTMLElement | null = null;
+  let previousBodyOverflow = '';
+  let modalBackground: Array<{ element: HTMLElement; wasInert: boolean }> = [];
+
+  const modalIsOpen = () => modal && !modal.classList.contains('hidden');
+  const modalControls = () => [closeModalBtn, modalBody, dismissModalBtn, acceptModalBtn]
+    .filter((element): element is HTMLElement => element !== null &&
+      !element.matches(':disabled') && !element.closest('[hidden], .hidden, [inert]'));
 
   function showModal() {
-    if (!modal) return;
+    if (!modal || modalIsOpen()) return;
+    const activeElement = document.activeElement;
+    modalReturnFocus = activeElement instanceof HTMLElement && activeElement !== document.body
+      ? activeElement : browseBtn;
+    previousBodyOverflow = document.body.style.overflow;
+    // Keep every branch outside the dialog inert, including header/footer links.
+    for (let branch: HTMLElement | null = modal; branch?.parentElement; branch = branch.parentElement) {
+      for (const sibling of branch.parentElement.children) {
+        if (sibling !== branch && sibling instanceof HTMLElement) {
+          modalBackground.push({ element: sibling, wasInert: sibling.hasAttribute('inert') });
+          sibling.setAttribute('inert', '');
+        }
+      }
+      if (branch.parentElement === document.body) break;
+    }
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+    closeModalBtn?.focus();
   }
 
   function hideModal() {
-    if (!modal) return;
+    if (!modal || !modalIsOpen()) return;
     modal.classList.add('hidden');
-    document.body.style.overflow = '';
+    for (const { element, wasInert } of modalBackground) {
+      if (!wasInert) element.removeAttribute('inert');
+    }
+    modalBackground = [];
+    document.body.style.overflow = previousBodyOverflow;
+    if (modalReturnFocus?.isConnected) modalReturnFocus.focus();
+    modalReturnFocus = null;
   }
 
   closeModalBtn?.addEventListener('click', hideModal);
@@ -428,8 +458,24 @@ const structuredData = {
   });
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+    if (!modalIsOpen()) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
       hideModal();
+    } else if (e.key === 'Tab') {
+      const controls = modalControls();
+      if (!controls.length) return;
+      e.preventDefault();
+      const currentIndex = controls.indexOf(document.activeElement as HTMLElement);
+      const nextIndex = currentIndex < 0 ? (e.shiftKey ? controls.length - 1 : 0)
+        : (currentIndex + (e.shiftKey ? -1 : 1) + controls.length) % controls.length;
+      controls[nextIndex].focus();
+    }
+  });
+
+  document.addEventListener('focusin', (e) => {
+    if (modalIsOpen() && e.target instanceof Node && !modal?.contains(e.target)) {
+      modalControls()[0]?.focus();
     }
   });
 
@@ -457,6 +503,8 @@ const structuredData = {
     progressState.classList.remove('hidden');
     progressBarFill.style.width = '15%';
     progressText.innerText = 'Loading image for payment forensics...';
+    progressText.tabIndex = -1;
+    progressText.focus();
 
     try {
       const { runPaymentAnalysis } = await import('../lib/paymentAnalyzer/paymentPipeline');
@@ -468,15 +516,23 @@ const structuredData = {
       currentResult = result;
       renderPaymentDashboard(result);
 
+      const moveProgressFocus = document.activeElement === progressText;
       progressState.classList.add('hidden');
       idleState.classList.remove('hidden');
       dashboard?.classList.remove('hidden');
+      if (moveProgressFocus) {
+        const resultHeading = document.getElementById('payment-verdict-headline');
+        resultHeading?.setAttribute('tabindex', '-1');
+        resultHeading?.focus({ preventScroll: true });
+      }
       dashboard?.scrollIntoView({ behavior: 'smooth' });
     } catch (err) {
       console.error('Payment analysis error:', err);
       alert('An error occurred during payment screenshot analysis. Please ensure the file is a valid image.');
+      const moveProgressFocus = document.activeElement === progressText;
       progressState.classList.add('hidden');
       idleState.classList.remove('hidden');
+      if (moveProgressFocus) browseBtn?.focus();
     }
   }
 
