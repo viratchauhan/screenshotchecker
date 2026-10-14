@@ -148,6 +148,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
   const kpiAnomalies = document.getElementById('forensics-kpi-anomalies');
 
   async function processForensics(dataUrl: string) {
+    (window as any).scTrack?.('analysis_completed', { result: 'forensics' });
     currentDataUrl = dataUrl;
     dropZone?.classList.add('hidden');
     workspace?.classList.remove('hidden');

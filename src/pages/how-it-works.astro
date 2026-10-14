@@ -1,0 +1,129 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const canonicalUrl = 'https://screenshotchecker.com/how-it-works/';
+const pageTitle = 'How ScreenshotChecker Works and What Leaves Your Device';
+const pageDescription =
+  'What runs in your browser, which network requests the site makes, what is stored, and what each check can and cannot tell you. Open source to verify.';
+
+const requests = [
+  ['OCR engine and English language data', 'cdn.jsdelivr.net', 'Downloaded the first time a tool reads text (Tesseract.js worker, WebAssembly core and language model). Your image is not sent.'],
+  ['URL dataset shards', 'screenshotchecker.com', 'The link checker downloads small JSON files named by a hash bucket. The request path contains a shard ID, never the link you typed.'],
+  ['Google Analytics', 'googletagmanager.com, google-analytics.com', 'Page views and usage events such as "analysis completed", with the tool name and coarse labels (verdict category, number of warning signs). Never image bytes, extracted text, filenames or the links you check.'],
+  ['Fonts', 'fonts.googleapis.com, fonts.gstatic.com', 'Typefaces for the page design.'],
+  ['Microsoft Clarity (if enabled)', 'clarity.ms', 'Heatmaps on guide and information pages only. Never loaded on tool pages.'],
+  ['Reverse image search', 'Google Lens, Bing, TinEye', 'Nothing is sent automatically. The helper prepares a copy; you open a provider and submit it yourself.'],
+];
+
+const storage = [
+  ['sessionStorage', 'When you move an image between tools, a copy is kept for that tab session so the next tool can open it. Expired copies (over one hour) are rejected and removed when read.'],
+  ['Cache Storage', 'Only when you share an image to the installed app from your phone’s Share menu. The homepage deletes it as soon as it reads it.'],
+  ['localStorage', 'Language and theme choices, and up to ten recent results in the standalone link checker (with a Clear History control).'],
+];
+
+const checks = [
+  ['Text (OCR)', 'Reads the words and their positions with Tesseract.js.', 'Can misread small, blurred or stylised text. Check extracted text against the image.'],
+  ['Scam and spam signals', 'Matches the text against rules for urgency, payment or code requests, prizes, impersonation phrasing and suspicious links.', 'Rule-based. It can miss a new scam and flag a harmless message. The 0-100 risk score is a weighted count of matched rules, not a probability.'],
+  ['UPI receipt text', 'Extracts amounts, references, dates and app names from Indian UPI receipts and applies consistency rules.', 'Does not measure fonts, icon positions or layout, and cannot confirm money reached you. Check your own bank or UPI app.'],
+  ['Metadata', 'Shows EXIF, XMP and other file metadata that survived saving and sharing.', 'Missing metadata is normal for screenshots and shared images. It is not evidence of editing.'],
+  ['Content credentials (C2PA)', 'Reads an embedded provenance manifest if one is present. The library runs inside the page.', 'Most images have none. No credentials does not mean fake; having them does not make a story true.'],
+  ['Error level analysis', 'Re-compresses the image and shows where compression differs.', 'Text edges, resizing and resaving also light up. Careful edits or fully generated images may show nothing.'],
+  ['Comparison', 'Shows text and pixel differences between two versions.', 'Different phones, themes and compression create harmless differences.'],
+  ['Link checker', 'Looks a URL up in a historical labelled dataset of about 400,000 URLs (a public corpus documented in our repository).', 'Labels are historical. No match does not mean safe, and a match does not prove a site is harmful today.'],
+  ['Redactor', 'Covers areas with solid masks and exports a new PNG without the original metadata.', 'Automatic suggestions miss things. Reopen the exported file and check it before sharing.'],
+];
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://screenshotchecker.com/' },
+        { '@type': 'ListItem', position: 2, name: 'How it works', item: canonicalUrl },
+      ],
+    },
+    { '@type': 'WebPage', '@id': `${canonicalUrl}#webpage`, url: canonicalUrl, name: pageTitle, description: pageDescription, inLanguage: 'en' },
+  ],
+};
+---
+
+<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} structuredData={structuredData}>
+  <Header currentPath="/how-it-works" />
+
+  <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-12 sm:py-16 w-full">
+    <div class="max-w-2xl mb-12">
+      <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block mb-2">Transparency</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink tracking-tight mb-5">How ScreenshotChecker works</h1>
+      <p class="text-base text-body leading-relaxed">
+        Your image is analysed inside your browser and is not uploaded for processing. The site still makes some network requests, listed below, and every result is a set of warning signs for you to verify, not proof. The code is open source under the MIT licence, so you can check all of this yourself.
+      </p>
+    </div>
+
+    <div class="space-y-12 text-body">
+      <section class="space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">Network requests the site makes</h2>
+        <p class="text-sm leading-relaxed">None of these requests contain your image, the text read from it, its filename or the links you check.</p>
+        <div class="overflow-x-auto border border-hairline rounded-xl">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-surface-card text-ink">
+              <tr><th class="p-3 font-semibold">What</th><th class="p-3 font-semibold">Where</th><th class="p-3 font-semibold">What is sent</th></tr>
+            </thead>
+            <tbody>
+              {requests.map(([what, where, detail]) => (
+                <tr class="border-t border-hairline align-top"><td class="p-3 text-ink font-medium">{what}</td><td class="p-3 font-mono text-xs">{where}</td><td class="p-3">{detail}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">What is stored in your browser</h2>
+        <ul class="space-y-3 text-sm leading-relaxed">
+          {storage.map(([where, detail]) => (
+            <li><code class="text-ink">{where}</code>: {detail}</li>
+          ))}
+        </ul>
+        <p class="text-sm leading-relaxed">You can clear all of it with your browser's site-data controls. Full details are in the <a href="/privacy/" class="underline">privacy policy</a>.</p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">What each check does, and its limits</h2>
+        <div class="overflow-x-auto border border-hairline rounded-xl">
+          <table class="w-full text-sm text-left">
+            <thead class="bg-surface-card text-ink">
+              <tr><th class="p-3 font-semibold">Check</th><th class="p-3 font-semibold">What it does</th><th class="p-3 font-semibold">What it cannot tell you</th></tr>
+            </thead>
+            <tbody>
+              {checks.map(([name, does, limit]) => (
+                <tr class="border-t border-hairline align-top"><td class="p-3 text-ink font-medium">{name}</td><td class="p-3">{does}</td><td class="p-3">{limit}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm leading-relaxed">There is no trained fraud model and no published accuracy figure, because we do not yet have a labelled benchmark. WhatsApp and other apps recompress images, which removes much of the evidence these checks rely on.</p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="font-serif text-2xl text-ink font-normal">The step no tool can replace</h2>
+        <ul class="space-y-2 text-sm leading-relaxed list-disc pl-5">
+          <li><strong class="text-ink">Payments:</strong> open your own bank, UPI or payment app and confirm the money arrived.</li>
+          <li><strong class="text-ink">Messages and posts:</strong> find them at the source, or ask to see them live in the app.</li>
+          <li><strong class="text-ink">Senders:</strong> contact the person or company through a channel you already trust.</li>
+        </ul>
+      </section>
+
+      <section class="bg-canvas border border-hairline rounded-2xl p-6 sm:p-8 space-y-3">
+        <h2 class="font-serif text-xl text-ink font-normal">Check it yourself</h2>
+        <p class="text-sm leading-relaxed">
+          Open your browser's developer tools, go to the Network tab, and run an analysis. You will see the requests listed above and no upload of your image. The full source is on <a href="https://github.com/viratchauhan/screenshotchecker" class="underline">GitHub</a>; if you find something that does not match this page, please open an issue.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

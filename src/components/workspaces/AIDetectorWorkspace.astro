@@ -459,6 +459,7 @@ const faqs = getToolFaqs('ai-image-detector');
       });
       if (activeRun !== run || run.signal.aborted) return;
       renderReport(report, dataUrl);
+      (window as any).scTrack?.('analysis_completed', { result: report.verdict });
       currentFile = file;
       currentDataUrl = dataUrl;
       currentReport = report;

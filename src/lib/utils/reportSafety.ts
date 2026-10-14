@@ -26,7 +26,7 @@ export function renderPrivacyFindings(
     const row = doc.createElement('div');
     row.className = 'bg-canvas border border-hairline rounded-lg p-3 flex items-center justify-between gap-3 text-xs';
     const content = doc.createElement('div');
-    content.className = 'space-y-0.5';
+    content.className = 'space-y-0.5 min-w-0';
     const heading = doc.createElement('div');
     heading.className = 'flex items-center gap-2';
     const label = doc.createElement('span');

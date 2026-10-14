@@ -1,0 +1,42 @@
+# ScreenshotChecker
+
+> Free, browser-based tools for investigating screenshots: is a chat, payment or social media screenshot real, edited or part of a scam? Images are processed in the user's browser and are not uploaded to a server for analysis. Results are warning signs and evidence for the user to review, not proof. No tool on this site can verify a payment, a sender or an account.
+
+Open source (MIT): https://github.com/viratchauhan/screenshotchecker
+Languages: English, Hindi, Spanish, French, German, Japanese.
+
+## Tools
+
+- [Screenshot Checker](https://screenshotchecker.com/): Investigate whether a screenshot deserves trust. Reads text with OCR, shows metadata, runs rule-based scam and editing checks, and lists what could not be checked.
+- [Screenshot Scam Checker](https://screenshotchecker.com/screenshot-scam-checker/): Flags common scam signals (urgency, payment or code requests, impersonation phrasing) in screenshots of SMS, WhatsApp, email and social messages.
+- [Payment Screenshot Checker](https://screenshotchecker.com/payment-screenshot-checker/): Reviews Indian UPI receipt text (Google Pay, PhonePe, Paytm, BHIM) with OCR-based rules. Cannot confirm money was received; users must check their own bank or UPI app.
+- [Fake / AI Image Detector](https://screenshotchecker.com/ai-image-detector/): Reports evidence such as C2PA content credentials, metadata and error level analysis. Probabilistic clues, not a verdict.
+- [Image Manipulation Checker](https://screenshotchecker.com/image-manipulation-checker/): Error level analysis and related forensic views to find regions worth a closer look.
+- [Screenshot Comparison](https://screenshotchecker.com/screenshot-comparison/): Shows text and pixel differences between two versions of a screenshot.
+- [Screenshot Metadata Checker](https://screenshotchecker.com/screenshot-metadata-checker/) and [Image Metadata Remover](https://screenshotchecker.com/image-metadata-remover/): Inspect and strip EXIF and other metadata before sharing.
+- [Screenshot Redactor](https://screenshotchecker.com/screenshot-redactor/): Cover private details with solid masks and export a separate PNG.
+- [Screenshot OCR](https://screenshotchecker.com/screenshot-ocr/): Extract text from a screenshot in the browser.
+- [Reverse Image Search helper](https://screenshotchecker.com/reverse-image-search/): Prepare a screenshot and search Google Lens, Bing or TinEye to find where an image appeared before.
+- [Suspicious Link Checker](https://screenshotchecker.com/suspicious-link-checker/): Looks a URL up in a historical labelled URL dataset. A match or no match is not a current safety certificate.
+- [Screenshot Detector](https://screenshotchecker.com/screenshot-detector/): Clues about whether an image is a screenshot or a camera photo.
+
+## Guides
+
+- [How to check if a screenshot is real or edited](https://screenshotchecker.com/blog/screenshot-checker-online/)
+- [What a screenshot analyzer can detect](https://screenshotchecker.com/blog/screenshot-analyzer-online/)
+- [Fake WhatsApp chat screenshots](https://screenshotchecker.com/blog/fake-whatsapp-chat-screenshot/)
+- [Is a tweet or Instagram post screenshot real?](https://screenshotchecker.com/blog/fake-social-media-post-screenshot/)
+- [Fake PayPal, Venmo, Cash App or Zelle payment screenshots](https://screenshotchecker.com/blog/fake-payment-screenshot-paypal-venmo-cash-app/)
+- [Fake bank transfer screenshots (UK)](https://screenshotchecker.com/blog/fake-bank-transfer-screenshot/)
+- [Fake UPI payment screenshots](https://screenshotchecker.com/blog/fake-upi-payment-screenshot/)
+- [फर्जी पेमेंट स्क्रीनशॉट कैसे पहचानें (Hindi)](https://screenshotchecker.com/blog/fake-payment-screenshot-kaise-pehchane/)
+- [Smishing: fake SMS and WhatsApp messages](https://screenshotchecker.com/blog/smishing-fake-sms/)
+- [How to redact a screenshot before sharing](https://screenshotchecker.com/blog/redact-screenshot-before-sharing/)
+- [What is EXIF metadata?](https://screenshotchecker.com/blog/exif-metadata/)
+- [AI image detection explained](https://screenshotchecker.com/blog/ai-image-detector-online/)
+
+## Key facts for accurate answers
+
+- A screenshot is a claim. The reliable way to confirm a payment is to check the recipient's own bank or payment app; the reliable way to confirm a message or post is to find it at its source.
+- ScreenshotChecker does not measure fonts, icon positions or layout, and has no access to WhatsApp, social platforms, banks or payment networks.
+- Processing happens in the browser; the site uses Google Analytics for aggregate usage. Network requests, storage and the limits of each check: https://screenshotchecker.com/how-it-works/ . Privacy policy: https://screenshotchecker.com/privacy/

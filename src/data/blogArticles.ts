@@ -55,6 +55,8 @@ export interface BlogArticle {
     url: string;
     description: string;
   };
+  /** Content language; defaults to English. */
+  lang?: 'en' | 'hi';
 }
 
 export const BLOG_ARTICLES: BlogArticle[] = [
@@ -174,11 +176,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "Screenshot metadata limitations",
       "How to check screenshot text"
     ],
-    "relatedSlugs": [
-      "screenshot-analyzer-online",
-      "exif-metadata",
-      "smishing-fake-sms"
-    ],
+    "relatedSlugs": ["screenshot-analyzer-online", "fake-whatsapp-chat-screenshot", "fake-social-media-post-screenshot", "exif-metadata", "smishing-fake-sms"],
     "cta": {
       "label": "Inspect a Screenshot",
       "url": "/screenshot-analyzer",
@@ -288,10 +286,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
-      "screenshot-checker-online",
-      "exif-metadata"
-    ],
+    "relatedSlugs": ["screenshot-checker-online", "fake-whatsapp-chat-screenshot", "exif-metadata"],
     "cta": {
       "label": "Inspect a Screenshot",
       "url": "/screenshot-analyzer",
@@ -430,11 +425,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
-      "screenshot-checker-online",
-      "screenshot-analyzer-online",
-      "redact-screenshot-before-sharing"
-    ],
+    "relatedSlugs": ["fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
     "cta": {
       "label": "Review a Payment Screenshot",
       "url": "/payment-screenshot-checker/",
@@ -544,7 +535,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'AI image detector remover',
       'Winston AI image detector',
     ],
-    relatedSlugs: ['exif-metadata', 'screenshot-analyzer-online', 'screenshot-checker-online'],
+    relatedSlugs: ["fake-social-media-post-screenshot", "exif-metadata", "screenshot-analyzer-online", "screenshot-checker-online"],
     cta: {
       label: 'Analyze an Image',
       url: '/ai-image-detector',
@@ -787,7 +778,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Report phishing SMS',
       'Fraud SMS detector',
     ],
-    relatedSlugs: ['suspicious-link-checker-online', 'fake-upi-payment-screenshot', 'screenshot-checker-online'],
+    relatedSlugs: ["suspicious-link-checker-online", "fake-whatsapp-chat-screenshot", "fake-upi-payment-screenshot", "screenshot-checker-online"],
     cta: {
       label: 'Check a Suspicious Message',
       url: '/',
@@ -1089,6 +1080,761 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Open the screenshot redactor",
       "url": "/screenshot-redactor/",
       "description": "Apply solid masks, export a sharing copy, and inspect the exact saved file before sending it."
+    }
+  },
+  // Growth push October 2026: long-tail guide
+  {
+    "slug": "fake-whatsapp-chat-screenshot",
+    "title": "How to Tell If a WhatsApp Chat Screenshot Is Fake or Edited",
+    "seoTitle": "Fake WhatsApp Chat Screenshot? How to Check It",
+    "metaDescription": "Check a WhatsApp chat screenshot the reliable way: treat visual clues as hints, then verify the message live on the phone, with the sender or in your own chat.",
+    "category": "Forensics",
+    "publishedAt": "2026-10-14",
+    "authorName": "ScreenshotChecker",
+    "readTime": "8 min read",
+    "excerpt": "Why chat screenshots are easy to fake, which visual clues are worth a second look, and how to verify a disputed WhatsApp message at its source, with a fictional example.",
+    "targetKeywords": [
+      "fake whatsapp chat screenshot",
+      "how to tell if a whatsapp screenshot is fake",
+      "edited whatsapp screenshot",
+      "is this whatsapp screenshot real",
+      "whatsapp chat screenshot checker",
+      "verify whatsapp message"
+    ],
+    "keyTakeaway": {
+      "title": "Check the chat, not the picture of the chat",
+      "text": "A WhatsApp screenshot is a claim about what a conversation contains. The reliable test is to see the message in the app itself: on the other person's phone, in your own copy of the chat, or confirmed by the supposed sender through a separate call. Visual oddities are reasons to ask, not verdicts."
+    },
+    "introduction": "You usually cannot tell from the image alone whether a WhatsApp chat screenshot is fake, because convincing chat images can be built or edited without leaving obvious marks. The dependable check is independent: ask to see the message live in the app, compare it with your own copy of the conversation, or confirm with the supposed sender through a different channel. Visual inconsistencies and image-analysis results are useful clues for deciding what to ask, but they cannot prove a screenshot genuine or fake.",
+    "contentSections": [
+      {
+        "heading": "Why WhatsApp Screenshots Are Easy to Fake",
+        "paragraphs": [
+          "A screenshot is just an image of a screen. Websites and apps that generate chat-style images let anyone choose the contact name, profile photo, timestamps, tick marks and message text. The result can look like a normal capture because it was designed to, and it has no hidden link back to any real WhatsApp conversation.",
+          "Real conversations can be altered too. WhatsApp Web runs in a desktop browser, and browser developer tools let a user change the text of a page on the fly. <a href=\"https://developer.chrome.com/docs/devtools/dom\">Chrome's DevTools documentation</a> shows how to double-click an element and type new text. That changes what one browser displays; it does not change any message that was sent, but a screenshot taken afterwards will show the altered text.",
+          "Genuine screenshots can mislead as well. A crop can remove the message that changes the meaning, a reply can come from a different chat, and a contact name is simply whatever the phone owner saved. None of this requires any editing software."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "<strong>A clean-looking screenshot is not evidence that it is genuine.</strong> An image produced by a chat generator has no editing seams to find, because nothing was pasted into a real capture."
+        }
+      },
+      {
+        "heading": "How to Verify a WhatsApp Message: Go to the Source",
+        "paragraphs": [
+          "Before you study the pixels, try to see the message where it actually lives. Each of the steps below checks the conversation itself rather than a picture of it. Use whichever ones are practical and safe for your situation.",
+          "If a screenshot comes with a request for money, a code or urgent action, treat the request as the thing to verify. <a href=\"https://www.actionfraud.police.uk/alert/friendinneed\">Action Fraud's friend-in-need alert</a> advises phoning the person to confirm it is really them before acting on an unusual WhatsApp request."
+        ],
+        "checklist": [
+          "Ask to see the message live on the device. Watch the person open WhatsApp, find the chat and scroll to the message, rather than accepting another image.",
+          "Check that the chat belongs to the phone number you expect. A saved contact name can be anything the phone owner typed.",
+          "Read the messages before and after it. A single cropped bubble can lose the context that explains it.",
+          "Compare with your own copy of the conversation if you were part of it. Look for the same message at the same point in the thread.",
+          "Contact the supposed sender through a separate channel, such as a phone call or in person, and ask them directly. Do not rely on replying inside the chat that is in dispute.",
+          "If neither copy can be checked, record the screenshot as unverified. That is not the same as proving it was faked."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Do not send money, share codes, end a relationship or make a public accusation on the strength of a screenshot alone.</strong> Confirm the message in the app or with the person first."
+        }
+      },
+      {
+        "heading": "WhatsApp Features That Help, and What They Cannot Show",
+        "paragraphs": [
+          "<strong>Message info and tick marks.</strong> According to <a href=\"https://whatsapp.com/faq/en/iphone/28041116\">WhatsApp's read receipts help page</a>, one grey tick means sent, two grey ticks mean delivered and two blue ticks mean read, while a clock icon means the message has not been sent yet. For a message you sent, pressing and holding it and choosing Info shows when it was delivered and read. This only works on the sender's own device, which is why seeing the app live matters more than seeing a picture of the ticks.",
+          "<strong>Missing blue ticks are not suspicious on their own.</strong> The same page lists ordinary reasons read receipts may not appear, including read receipts switched off in privacy settings, a recipient who has not opened the chat, connection problems and incorrect date or time settings. In groups, ticks turn blue only once every member has read the message.",
+          "<strong>The \"Forwarded\" label.</strong> WhatsApp <a href=\"https://blog.whatsapp.com/labeling-forwarded-messages\">introduced a Forwarded label</a> to mark messages that were forwarded rather than typed by the sender. If someone forwards you a message they received, the label tells you it is a forward, but it does not name the person who originally wrote it.",
+          "<strong>The \"edited\" label.</strong> WhatsApp <a href=\"https://blog.whatsapp.com/now-you-can-edit-your-whatsapp-messages\">lets people edit a sent message</a> for up to 15 minutes, and the message is then marked as edited without showing the earlier wording. A screenshot taken before an edit can therefore differ from the current chat without anyone faking anything. Look for the edited marker in the live chat.",
+          "<strong>Export chat.</strong> WhatsApp's <a href=\"https://whatsapp.com/faq/en/android/23756533\">export guide</a> explains that a chat can be exported as a text file, with or without recent media. An export is more complete than a cropped image, but it is still a file that someone can alter after exporting, so it supports a conversation with the other person rather than replacing one."
+        ]
+      },
+      {
+        "heading": "Visual Warning Signs: Worth a Second Look, Not Proof",
+        "paragraphs": [
+          "<strong>Timestamps out of order.</strong> Messages normally appear in time order within a thread. A reply stamped earlier than the message it answers deserves a question. Remember that the status-bar clock shows when the screenshot was taken, not when the messages were sent, so a gap between the two is normal.",
+          "<strong>Tick states that do not fit the story.</strong> Blue ticks on a message the other person says they never received, or ticks on messages the screenshot owner supposedly received, are worth asking about. As noted above, read receipt settings, group chats and connectivity can all explain unexpected ticks.",
+          "<strong>Status bar and interface oddities.</strong> A mix of 12-hour and 24-hour times, a language that does not match the rest of the screen, or a layout unlike the version of WhatsApp the person uses can be clues. Phone models, app versions, themes, font-size settings and regional settings also change how a genuine screen looks.",
+          "<strong>Cropping that hides context.</strong> A screenshot that shows only one bubble, cuts off the chat header or omits the date divider makes the claim harder to check. Ask for a wider view or, better, the live chat.",
+          "<strong>Hard-to-read or resized images.</strong> Heavy compression, re-screenshotting and resizing can blur edges and smear text. These change how an image looks but say nothing reliable about whether the content is true."
+        ],
+        "callout": {
+          "type": "info",
+          "text": "Each sign above has innocent explanations. Several odd details can share one ordinary cause, such as a screenshot of a screenshot. Use them to decide what to ask, then verify at the source."
+        }
+      },
+      {
+        "heading": "Worked Example: A Fictional Disputed Message Between Two Friends",
+        "paragraphs": [
+          "<strong>This is a fictional teaching example. The people, amounts and messages are invented and do not describe a real case or test the accuracy of any tool.</strong> Riya and Tom shared a rented flat. After moving out, Tom posts a screenshot in their friends' group chat. It shows a message from \"Riya\" reading \"Fine, I'll pay the whole £300 cleaning fee.\" Riya does not remember agreeing to that.",
+          "<strong>Step 1: check her own copy.</strong> Riya scrolls to that week in her own WhatsApp chat with Tom. She finds a similar message, but in her copy it continues with a second bubble: \"...if the landlord actually charges it.\" The screenshot ends just above that line.",
+          "<strong>Step 2: see the live chat.</strong> Rather than trading more images, they meet and Tom opens the chat on his phone. The conversation is linked to Riya's number, and both bubbles are there, matching Riya's copy.",
+          "<strong>Step 3: use tools to focus the conversation, not to decide it.</strong> Before they met, Riya had run the screenshot through the <a href=\"/\">screenshot checker</a> to pull out the text and metadata. The image she received carried no useful metadata, which on its own proves nothing. She also compared Tom's screenshot with her own capture of the same section using <a href=\"/screenshot-comparison/\">Screenshot Comparison</a>. The difference view drew attention to the missing second bubble, but some highlighted areas came only from their phones' different screen sizes and themes.",
+          "<strong>Outcome A: the message exists but was cropped.</strong> This is what happened here. The screenshot was a real capture that lost its context. Nobody needed to prove anything about pixels; the live chat settled it.",
+          "<strong>Outcome B: the message cannot be found.</strong> If Tom had been unable to find the message in his live chat, the screenshot would remain unverified. It might have come from another conversation, been deleted, or been fabricated. Riya could say she cannot confirm it, without claiming to have proved a forgery."
+        ]
+      },
+      {
+        "heading": "What ScreenshotChecker Can and Cannot Do Here",
+        "paragraphs": [
+          "The <a href=\"/\">main screenshot checker</a> uses OCR to read the text in an image, shows available metadata and applies rule-based checks for common scam phrasing. It may label an image as a chat because of text it reads, such as typical chat phrases. That label describes the text it found; it does not authenticate the image as coming from WhatsApp.",
+          "The <a href=\"/image-manipulation-checker/\">Image Manipulation Checker</a> shows Error Level Analysis and related forensic signals. A region that stands out can be a reason to look closer, but text edges, resizing and resaving also produce bright areas. An image made from scratch by a chat generator may show no boundary at all.",
+          "<a href=\"/screenshot-comparison/\">Screenshot Comparison</a> places two versions side by side or as a difference map. It is most useful when you have your own capture of the same part of the chat, because it points to where the two images differ. It cannot say which version is true.",
+          "<strong>What these tools cannot do:</strong> they have no access to WhatsApp, cannot look up a phone number or account, cannot confirm that a message was sent or received, and do not measure fonts, icon positions or layout. No result from them proves that a screenshot is genuine or fake. Compare any extracted text with the image itself, because OCR can misread names, numbers and times."
+        ],
+        "cta": {
+          "label": "Analyze a chat screenshot",
+          "url": "/",
+          "description": "Extract the text and metadata, review warning signs, then confirm the message in the app or with the sender."
+        }
+      },
+      {
+        "heading": "If You Need to Share or Report the Screenshot",
+        "paragraphs": [
+          "Keep the original file you received, unchanged, along with a note of who sent it and when. Avoid re-screenshotting it, because each new capture loses detail.",
+          "If you share the screenshot with friends, a landlord or an employer, hide phone numbers and unrelated messages first. The <a href=\"/blog/redact-screenshot-before-sharing/\">redaction guide</a> walks through using solid masks and checking the saved copy. If the screenshot is part of a scam, such as a fake message used to request money, read the <a href=\"/blog/smishing-fake-sms/\">guide to fake SMS and WhatsApp messages</a> and use the reporting options offered by your bank and local fraud authorities."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can you tell if a WhatsApp screenshot is fake just by looking at it?",
+        "answer": "Not reliably. Chat generator sites and simple text edits can produce images that look normal. Visual oddities are worth asking about, but the dependable check is to see the message in the live app or confirm it with the supposed sender."
+      },
+      {
+        "question": "Can ScreenshotChecker prove a WhatsApp chat is real?",
+        "answer": "No. It can extract text with OCR, show available metadata and highlight image-forensics clues such as ELA differences. It has no access to WhatsApp and cannot confirm that any message was sent, received or written by a particular person."
+      },
+      {
+        "question": "What is the best way to check a disputed WhatsApp message?",
+        "answer": "Ask to see the message live on the phone where it was received, check the chat belongs to the expected number, read the surrounding messages and compare them with your own copy. If possible, ask the supposed sender directly by phone or in person."
+      },
+      {
+        "question": "Do grey ticks instead of blue ticks mean a screenshot is fake?",
+        "answer": "No. WhatsApp says read receipts can be missing because they are turned off, the recipient has not opened the chat, there are connection problems or the phone's date and time are wrong. In groups, ticks only turn blue once everyone has read the message."
+      },
+      {
+        "question": "Why does a screenshot show different wording from my copy of the chat?",
+        "answer": "There are innocent and suspicious explanations. WhatsApp lets senders edit a message for a short time after sending, so a screenshot taken before the edit can differ from the current chat, which shows an edited marker. The screenshot might also come from a different chat or have been altered, so check the live conversation."
+      },
+      {
+        "question": "Is an exported WhatsApp chat better evidence than a screenshot?",
+        "answer": "An export usually includes more of the conversation than a cropped image, but it is still a text file that can be changed after it is exported. Treat it as a fuller record to discuss, and check important messages in the app itself."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "screenshot-checker-online",
+      "screenshot-analyzer-online",
+      "smishing-fake-sms"
+    ],
+    "cta": {
+      "label": "Check a WhatsApp screenshot",
+      "url": "/",
+      "description": "Review the text, metadata and warning signs as clues, then verify the message in the app or with the person who supposedly sent it."
+    }
+  },
+  // Growth push October 2026: long-tail guide
+  {
+    "slug": "fake-social-media-post-screenshot",
+    "title": "Is This Tweet or Instagram Screenshot Real? How to Check a Social Media Post",
+    "seoTitle": "Is That Tweet Screenshot Real? How to Check Social Posts",
+    "metaDescription": "Check a screenshot of an X post, tweet or Instagram post by finding the original, confirming the account, and treating badges and image clues as hints.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-10-14",
+    "authorName": "ScreenshotChecker",
+    "readTime": "8 min read",
+    "excerpt": "How to trace a screenshot of a celebrity, politician or brand post back to its source, why paid badges and image details settle little, and a fictional CEO post example.",
+    "targetKeywords": [
+      "fake tweet screenshot",
+      "is this tweet real",
+      "fake Instagram post screenshot",
+      "how to check if a screenshot of a post is real",
+      "fake X post screenshot",
+      "verify social media screenshot"
+    ],
+    "keyTakeaway": {
+      "title": "Find the original post, not a better-looking copy",
+      "text": "A screenshot of a post is a claim that someone published something. The strongest check is locating that post on the real account, or a reliable record of it. If you cannot find it, treat the claim as unconfirmed and avoid sharing it as fact. Fonts, timestamps and like counts in the image are only hints."
+    },
+    "introduction": "To check whether a screenshot of a tweet, X post or Instagram post is real, look for the original post on the account it is attributed to, and confirm that the account is the genuine one. If the post is not on the account, in platform search, in search engines or in web archives, treat the screenshot as unconfirmed rather than true. How the image looks cannot settle the question, because convincing fake posts are easy to make and real posts can be deleted.",
+    "contentSections": [
+      {
+        "heading": "Why screenshots of posts are a common misinformation format",
+        "paragraphs": [
+          "A screenshot strips a post of everything that would let you check it: the link, the live account, the replies and any later correction. What remains is a picture of text next to a familiar name and profile photo. That is why invented quotes from celebrities, politicians and brands often travel as screenshots rather than as links.",
+          "Fake post generator websites and apps exist that let anyone type a name, handle, message and engagement numbers into a template styled like a social network. Ordinary image editors can also change a real post's wording. Some fabricated screenshots are labelled as parody when first made and lose that label once reshared.",
+          "None of this means a particular screenshot is fake. Real posts get captured and shared constantly, sometimes because they were later deleted. The point is that the image alone does not tell you which situation you are in. <strong>A screenshot is a claim, not proof.</strong>"
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Check the source, not the styling.</strong> A screenshot that looks pixel perfect can still be invented, and a blurry, cropped one can still show a real post. Your goal is to find the post itself or a trustworthy record of it."
+        }
+      },
+      {
+        "heading": "Step 1: Find the original post",
+        "paragraphs": [
+          "Start with the account named in the screenshot. Open the platform yourself, search for the account, and scroll to the date shown in the image. If the screenshot includes a post link or visible URL, type the address yourself rather than tapping a link someone sent you.",
+          "On X, <a href=\"https://help.x.com/en/using-x/x-advanced-search\">advanced search</a> lets you narrow results to posts from a particular account, an exact phrase and a date range. X's help page describes it for logged-in users on x.com. Search for a distinctive phrase from the screenshot, limited to that account and a few days around the claimed date.",
+          "Next, search the exact wording in quotation marks with a general search engine such as Google. A real post from a well-known account that caused a stir often leaves traces: quote posts, replies, news coverage or a statement from the person or company. If the only results are copies of the same image, that tells you the claim has spread, not that it is true.",
+          "Web archives can show what a public page looked like at an earlier date. The Internet Archive's <a href=\"https://help.archive.org/help/using-the-wayback-machine/\">Wayback Machine guide</a> explains how to look up the history of a URL by pasting it into the search box. It also notes that many pages are never captured and that archived copies can be incomplete, so a missing capture is not evidence either way. Social media pages that rely heavily on scripts may not archive well.",
+          "Private messages are different. A DM screenshot has no public original to find, so these steps cannot confirm it. Ask the people in the conversation directly, through a channel you already trust, and do not treat a DM screenshot as settled because it looks authentic. If you hold two versions of the same capture, the <a href=\"/screenshot-comparison/\">screenshot comparison tool</a> can highlight where their pixels differ."
+        ]
+      },
+      {
+        "heading": "Step 2: Confirm it is the real account",
+        "paragraphs": [
+          "Finding a matching post is only useful if it sits on the right account. Impersonators copy profile photos and pick handles one character away from the real one. Compare the handle letter by letter, and reach the account from a source you trust, such as the person's or company's official website, rather than from the screenshot.",
+          "Do not treat a checkmark as proof of who runs an account. According to <a href=\"https://help.x.com/en/rules-and-policies/profile-labels\">X's guide to profile labels</a>, a blue checkmark means the account has an active paid X subscription and meets X's eligibility requirements. X uses a gold checkmark for official organisations through its business offering and a grey one for government or multilateral bodies and officials.",
+          "On Instagram, Meta describes <a href=\"https://help.instagram.com/2419286908233223/\">Meta Verified</a> as a paid subscription for eligible profiles, with requirements that include a government ID matching the profile name and photo. A verified badge can therefore reflect a subscription and an identity check for that profile. It does not tell you that the profile belongs to the famous person whose name appears in a screenshot, and a screenshot can show a badge the real account never had.",
+          "Useful signs that you have the genuine account include links to it from the official website, a long posting history consistent with the person or brand, and coverage by reputable outlets that names the handle. These still call for judgement; none is a guarantee on its own."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "Badge rules change and differ by platform. Check the platform's current help pages rather than relying on what a checkmark meant a few years ago."
+        }
+      },
+      {
+        "heading": "Step 3: Allow for deleted posts",
+        "paragraphs": [
+          "Not finding a post does not prove it never existed. People delete posts after a backlash, and accounts get suspended or made private. <a href=\"https://help.x.com/en/using-x/delete-posts\">X's help page on deleting posts</a> says a deleted post is removed from the author's profile, followers' timelines and X search. It also says X cannot remove copies held on other websites, apps or search engines, and that other people's quote posts with their own comments are not removed.",
+          "That gives you places to look. Search for quote posts and replies from the time, reports that mention the deletion, and archive captures of the account page from around the claimed date. A widely seen real post usually leaves some independent record. A screenshot with no independent trace at all deserves more doubt, though that alone does not establish it was fabricated.",
+          "If the person or company has publicly said they did not write the post, weigh that statement too, while remembering that a denial is also a claim. When the evidence stays thin, the honest conclusion is \"unconfirmed\", and that is a good reason not to reshare it."
+        ]
+      },
+      {
+        "heading": "Step 4: Use reverse image search and fact-checkers",
+        "paragraphs": [
+          "A <a href=\"/reverse-image-search/\">reverse image search</a> can show where the same screenshot appeared before. Older copies, a first appearance on a parody or meme page, or an earlier version with different wording are all strong leads. A match is a starting point to open and read, not proof of where the image originated.",
+          "Check whether fact-checkers have already examined the claim. Google's <a href=\"https://newsinitiative.withgoogle.com/resources/lessons/google-fact-check-tools/\">Fact Check Explorer guide</a> describes a search engine for published fact checks that accepts keywords and also lets you upload an image to see whether it has been checked. No result simply means no listed fact-checker has covered it yet.",
+          "Clues inside the image are worth noting but are only hints: a date that cannot exist, a time that does not match the account's usual time zone, engagement numbers that look implausible for the account, odd wording or spacing, or an interface that resembles an older version of the app. Real screenshots can look strange because of app updates, dark mode, translation, cropping or compression, and good fakes can avoid every one of these tells."
+        ]
+      },
+      {
+        "heading": "Worked example: a fictional CEO post goes viral",
+        "paragraphs": [
+          "<strong>This is a fictional teaching example. The company, people, handle and post are invented and do not refer to any real business or case.</strong> A screenshot spreads in group chats showing a post said to be from Dana Okafor, chief executive of the fictional coffee chain Juniper Lane. It reads: \"From Monday, Juniper Lane will charge a £2 fee to customers who pay by card.\" The image shows the handle @DanaOkafor_JL, a blue checkmark, 48,000 reposts and a date of 14 March 2026.",
+          "<strong>Find the original.</strong> A reader searches X and finds that Juniper Lane's official website links to the handle @DanaOkaforJL, without the underscore. Advanced search for posts from that account between 12 and 16 March shows nothing about card fees. Searching the exact wording on Google returns only reshares of the image and a few posts asking whether it is real.",
+          "<strong>Allow for deletion.</strong> If a post with 48,000 reposts had existed and been deleted, the reader would expect quote posts, news stories or an archived capture to mention it. They find none. They do find a statement on Juniper Lane's own newsroom page saying no card fee is planned.",
+          "<strong>Trace the image.</strong> A reverse image search turns up an earlier copy on a meme forum, where the poster described it as a joke made with a post generator. The badge and the impressive repost count in the screenshot added nothing: both are just pixels in the image.",
+          "<strong>Conclusion.</strong> The reader cannot prove who made the image, but the claim fails every source check, and the earliest copy is labelled as a joke. They treat it as unsupported, do not share it, and reply in the group chat with the link to the company statement. If the original post had turned up on the official account, the conclusion would have reversed, regardless of how the screenshot looked."
+        ]
+      },
+      {
+        "heading": "What ScreenshotChecker can and cannot tell you",
+        "paragraphs": [
+          "The <a href=\"/\">screenshot checker</a> reads text with OCR, inspects available metadata, applies rule-based warning signs and runs some image forensics checks such as error level analysis. If the extracted text contains words like followers, repost or a platform name, it may label the image as a social media capture. That label is a guess from text, not a confirmation of which app produced the image.",
+          "It does not connect to X, Instagram or any other platform, so it cannot look up whether a post exists, who owns an account or whether a badge is current. It does not measure fonts, icon positions or layout. Screenshots are often saved, resaved and cropped, which limits what metadata and forensics signals can show. Error level analysis on the <a href=\"/image-manipulation-checker/\">image manipulation checker</a> may highlight regions worth a closer look, and it can also flag edits that are harmless or miss edits that were made carefully.",
+          "Use these results as clues that tell you where to look next. The answer to whether a post is real comes from the platform, the account and independent records, as described above."
+        ],
+        "cta": {
+          "label": "Check the screenshot",
+          "url": "/",
+          "description": "Read the text, metadata and warning signs in a screenshot, then verify the post at its source."
+        }
+      },
+      {
+        "heading": "Checklist before you share a screenshot of a post",
+        "paragraphs": [],
+        "checklist": [
+          "Find the account yourself, ideally through a link on the person's or organisation's official website.",
+          "Compare the handle character by character with the one in the screenshot.",
+          "Search the platform for the post, using the account, an exact phrase and the claimed date.",
+          "Search the exact wording with a search engine and look for quote posts, replies and news coverage.",
+          "Look up archived captures of the account page around the claimed date, remembering that many pages are never archived.",
+          "Run a reverse image search to find earlier copies of the screenshot.",
+          "Check Google Fact Check Explorer for existing fact checks.",
+          "Treat badges, fonts, timestamps and engagement numbers as hints only.",
+          "If you cannot find the original or a reliable record of it, call it unconfirmed and do not share it as fact."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can I tell if a tweet screenshot is fake?",
+        "answer": "Look for the original post on the real account, using X search, a search engine and web archives. If it is not there and no independent record of it exists, treat the screenshot as unconfirmed. Details in the image can raise doubts but cannot settle the question."
+      },
+      {
+        "question": "Does a blue checkmark mean the account is real?",
+        "answer": "Not on its own. X says its blue checkmark reflects an active paid subscription plus eligibility requirements, and Instagram's Meta Verified is a paid subscription with an ID check. A badge says little about whether a screenshot shows the account you think it does, and a badge can be added to a fake image."
+      },
+      {
+        "question": "What if the post was deleted?",
+        "answer": "A missing post is not proof it never existed. Look for quote posts and replies from the time, news reports and archived captures of the account page. A real post that many people saw usually leaves some independent trace, but the absence of one is still not conclusive."
+      },
+      {
+        "question": "Can I verify a screenshot of an Instagram DM or private message?",
+        "answer": "There is no public original to look up, so source checks do not apply. Ask the people in the conversation through a channel you already trust. Image analysis can point out warning signs but cannot confirm who sent a private message or what it said."
+      },
+      {
+        "question": "Can ScreenshotChecker prove a social media screenshot is real or fake?",
+        "answer": "No. It reads text, metadata and some image forensics signals and flags warning signs. It has no access to social media platforms, does not measure fonts or layout, and its results are clues rather than proof. Verify the post at its source."
+      },
+      {
+        "question": "Are fake tweet generators illegal?",
+        "answer": "That depends on where you are and how an image is used, so this guide cannot give legal advice. For checking a screenshot, what matters is that such tools exist and make convincing images easy to produce, so appearance alone is never enough."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "screenshot-checker-online",
+      "screenshot-analyzer-online",
+      "ai-image-detector-online"
+    ],
+    "cta": {
+      "label": "Check a social media screenshot",
+      "url": "/",
+      "description": "Review text, metadata and warning signs as clues, then confirm the post on the real account."
+    }
+  },
+  // Growth push October 2026: long-tail guide
+  {
+    "slug": "fake-payment-screenshot-paypal-venmo-cash-app",
+    "title": "Fake PayPal, Venmo, Cash App or Zelle Payment Screenshot? How Sellers Confirm They Were Paid",
+    "seoTitle": "Fake Venmo, PayPal or Zelle Payment? How Sellers Check",
+    "metaDescription": "A buyer's PayPal, Venmo, Cash App or Zelle screenshot is not payment. Open your own app, confirm the money is there, and spot overpayment and upgrade scams.",
+    "category": "Security",
+    "publishedAt": "2026-10-14",
+    "authorName": "ScreenshotChecker",
+    "readTime": "8 min read",
+    "excerpt": "For US marketplace sellers: why a payment screenshot or email proves nothing, how to confirm money in your own PayPal, Venmo, Cash App or bank app, and how overpayment and fake upgrade scams work.",
+    "targetKeywords": [
+      "fake payment screenshot",
+      "fake Venmo payment screenshot",
+      "fake Zelle payment email",
+      "fake Cash App payment screenshot",
+      "PayPal fake payment email seller",
+      "Facebook Marketplace overpayment scam"
+    ],
+    "keyTakeaway": {
+      "title": "The only proof is money in your own account",
+      "text": "A screenshot or email from a buyer is a claim, not a payment. Open PayPal, Venmo, Cash App or your bank app yourself, without using any link the buyer or an email gave you, and confirm the money appears in your balance or activity before you hand over anything. If it is not there, you have not been paid."
+    },
+    "introduction": "You cannot tell from a screenshot whether a buyer really paid you, and you do not need to. Close the chat, open your own PayPal, Venmo, Cash App or banking app (for Zelle) directly, and check whether the money shows in your balance or activity. If it is not there, treat the sale as unpaid, no matter how convincing the image or email looks.",
+    "contentSections": [
+      {
+        "heading": "How to Confirm You Were Paid: Check Your Own Account",
+        "paragraphs": [
+          "Every major provider points sellers back to the same habit: go to the source yourself. PayPal's <a href=\"https://www.paypal.com/us/security/learn-about-fake-messages\">guide to fake messages</a> says to check your account status or activity by opening the PayPal app or typing paypal.com into a new browser window, rather than following links in a message. Cash App's <a href=\"https://cash.app/learn/protect-your-money/how-to-spot-and-avoid-scams\">scam guide</a> likewise tells you to open the app directly and look at your balance, noting that genuine alerts appear inside the app.",
+          "Zelle works a little differently. According to <a href=\"https://www.zelle.com/digital-payment-education\">Zelle's payment education page</a>, money sent with Zelle goes directly into the recipient's enrolled bank account. So for Zelle, the place to look is your own bank's app or website, not an email that mentions Zelle.",
+          "Do this check before the buyer leaves with the item, and do it on your own phone. A buyer holding up their screen, forwarding an email or sending a screenshot is showing you their claim, not your money."
+        ],
+        "checklist": [
+          "Close the chat or email. Do not tap any link, button or phone number in it.",
+          "Open the official PayPal, Venmo or Cash App app yourself, or your bank's own app for a Zelle payment.",
+          "Find the incoming payment in your activity or balance. Check the amount, the sender and that it went to your account.",
+          "If nothing is there, the sale is unpaid. Keep the item and tell the buyer you will release it once the money shows in your account.",
+          "If anything about the payment is unclear, contact the provider through the help section inside its app or its official website, not through details supplied by the buyer."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Never release goods, refund money or pay a fee because of a screenshot or email.</strong> The only confirmation that counts is the payment appearing in your own account, which you opened yourself."
+        }
+      },
+      {
+        "heading": "Why a Screenshot or Payment Email Is Not Proof",
+        "paragraphs": [
+          "A screenshot is just an image. It can be edited, generated from a template, reused from an old transaction, or show a payment that went to someone else. Nothing about how polished it looks tells you whether money reached your account.",
+          "Fake payment emails work the same way. <a href=\"https://help.venmo.com/cs/articles/common-scams-on-venmo-vhel167\">Venmo's common scams page</a> warns that scammers send screenshots of emails made to look as if you were paid when you were not, and says Venmo only emails you from addresses ending in venmo.com. Zelle's <a href=\"https://www.zelle.com/videos/how-avoid-online-marketplace-scam\">marketplace scam guidance</a> says its only email domains are zelle.com and zellepay.com, and that a Zelle logo in a profile picture does not make an email genuine.",
+          "PayPal lists signs of a phishing message such as generic greetings, pressure to act fast and odd web addresses. Those signs are useful, but a message without them is not proof either. A screenshot of an email hides the real sender address entirely, so you cannot check it at all. That is why opening your own account matters more than studying the message.",
+          "The FTC describes this exact pattern in its <a href=\"https://consumer.ftc.gov/consumer-alerts/2022/07/selling-stuff-online-heres-how-avoid-scam\">advice for people selling online</a>: a buyer insists on a payment app, sends a fake payment notification, and hopes you ship or hand over the item before you notice nothing arrived."
+        ],
+        "callout": {
+          "type": "info",
+          "text": "Venmo also notes that a real payment made with stolen card or bank details can be removed later if the rightful owner reports it. Seeing money arrive is necessary, but with strangers it is not a guarantee. The FTC suggests local, in-person sales and cash where possible, and not accepting mobile payments from people you do not know."
+        }
+      },
+      {
+        "heading": "The Overpayment Refund Scam",
+        "paragraphs": [
+          "In this version, the buyer claims they paid you more than the price, by accident or for a made-up reason such as covering a mover, and asks you to send back the difference. The FTC names this bogus refund request as a common seller scam. If the original payment never existed, any refund you send is your own money.",
+          "Cash App's guide warns that in these schemes the original payment is usually fraudulent and gets reversed, so you lose whatever you returned, and it advises holding off on any refund until the original payment has fully cleared. Venmo describes a related trick where a stranger pays you, says it was a mistake and asks you to send the money back as a new payment. Venmo recommends contacting its support so it can help reverse the original payment instead.",
+          "The check version follows the same logic. The FTC's <a href=\"https://www.consumer.ftc.gov/consumer-alerts/2025/02/fake-check-scam-targets-online-car-sellers\">fake check alert for car sellers</a> explains that an overpaying check can appear in your account and only later be found to be fake, at which point the bank reverses the deposit. Its advice is simple: do not accept a check for more than the selling price, and never send money back to someone who says they overpaid."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "An overpayment followed by a request to send money back is a red flag on its own. Do not refund from your own funds, and do not buy gift cards, money orders or crypto for the buyer."
+        }
+      },
+      {
+        "heading": "\"Payment Pending\" Until You Upgrade, Pay a Fee or Ship",
+        "paragraphs": [
+          "Some fake emails claim the buyer's payment is waiting and will be released only after you take an extra step. A common one tells the seller to send money to upgrade their account. Zelle addresses this directly: it says no one can upgrade your Zelle account because there are no upgrades, and advises not clicking links in such emails and reporting them to your email provider.",
+          "Another version says the money will appear only after you ship the item and add a tracking number. Venmo states that holding a payment until tracking is uploaded is not a feature it offers.",
+          "Whatever the wording, the test is the same. If the message asks you to pay something, ship first, or log in through a link before you can see your money, stop and open your own app. If the payment is not already in your balance or activity, there is nothing waiting to be released."
+        ]
+      },
+      {
+        "heading": "Worked Example: A Fictional Bike Sale",
+        "paragraphs": [
+          "<strong>This scenario is fictional. The names, amounts, messages and apps described are invented for teaching and do not describe a real case or a test of any tool.</strong>",
+          "Maya lists a used road bike for $180 on a local marketplace. A buyer called \"Jordan\" says they cannot meet today and want a friend to collect it. Jordan sends a screenshot of an email headed with a Zelle logo saying $280 has been sent and is pending. A second screenshot says the payment will be released once Maya sends $100 to complete an account upgrade, and Jordan adds that the extra money was for the friend's gas, so Maya should send the difference back.",
+          "<strong>Step 1: treat the images as claims.</strong> Maya notes what they say: $280, pending, upgrade needed, refund requested. She does not tap anything in the chat.",
+          "<strong>Step 2: check her own account.</strong> Zelle payments land in the recipient's bank account, so Maya opens her bank's app herself. There is no incoming $280, and no pending Zelle credit of any amount.",
+          "<strong>Step 3: compare with official guidance.</strong> Zelle says there are no account upgrades. The FTC and Cash App both describe overpayment refund requests as a scam pattern. The screenshot also hides the sender address, so it cannot be checked against Zelle's official domains.",
+          "<strong>Outcome.</strong> Maya keeps the bike, sends no money, and replies that she will release it once payment appears in her own account. She reports the listing conversation to the marketplace. Note that she reached this decision without needing to prove the screenshot was edited. The missing money in her own account was enough."
+        ]
+      },
+      {
+        "heading": "What ScreenshotChecker Can and Cannot Do Here",
+        "paragraphs": [
+          "ScreenshotChecker has no connection to PayPal, Venmo, Cash App, Zelle or any bank. It cannot see your balance, look up a transaction or confirm that anyone paid you. Nothing it reports replaces opening your own account.",
+          "Our <a href=\"/payment-screenshot-checker/\">payment screenshot checker</a> is designed around Indian UPI receipt text (Google Pay, PhonePe, Paytm and BHIM). It does not have specific support for PayPal, Venmo, Cash App, Zelle or US bank-transfer receipts, so do not rely on it for these.",
+          "What can help is reviewing the buyer's messages for scam patterns. If you screenshot the chat or the forwarded email, the <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads the text and flags signals such as urgency, refund or upgrade demands and requests to send money. The <a href=\"/\">main screenshot checker</a> combines extracted text, any available metadata and some image-forensics signals. These are rule-based clues that can miss a scam or flag a harmless message. They are not proof that an image is fake or genuine, and they cannot verify who sent it.",
+          "If you want to share the conversation with a friend or post a warning, hide your own name, email and account details first with the <a href=\"/screenshot-redactor/\">screenshot redactor</a>."
+        ],
+        "cta": {
+          "label": "Check a buyer's message for scam signals",
+          "url": "/screenshot-scam-checker/",
+          "description": "Flag pressure tactics and refund or upgrade requests in a screenshot, then confirm any payment in your own account."
+        }
+      },
+      {
+        "heading": "If You Were Targeted: Report It",
+        "paragraphs": [
+          "Report the buyer through the marketplace's own reporting tools, and keep the original screenshots and messages. If you sent money or shared login details, contact your payment provider or bank straight away using its app, its official website or the number on your card.",
+          "Fake emails and scams can be reported to the FTC at <a href=\"https://reportfraud.ftc.gov/\">ReportFraud.ftc.gov</a>. Zelle's marketplace guidance also points to forwarding phishing emails to reportphishing@apwg.org and fake texts to 7726 (SPAM). Venmo users can reach support in the app through the settings menu's help section."
+        ],
+        "checklist": [
+          "Do not reply with codes, passwords or personal details.",
+          "Report the buyer and listing conversation on the marketplace.",
+          "Contact your provider or bank through the official app if money or login details were involved.",
+          "Report the scam at ReportFraud.ftc.gov and forward fake emails as described above."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can a payment screenshot prove a buyer paid me?",
+        "answer": "No. A screenshot is an image the buyer controls. The only confirmation is the payment appearing in your own PayPal, Venmo or Cash App activity, or in your bank account for Zelle, which you open yourself."
+      },
+      {
+        "question": "I got an email saying I was paid. Is that enough?",
+        "answer": "No. Fake payment emails are a known seller scam. Do not use links in the email. Open the official app or type the provider's website address yourself and check your balance or activity."
+      },
+      {
+        "question": "The buyer overpaid and wants the difference back. What should I do?",
+        "answer": "Treat it as a scam warning. Do not send money from your own funds. Providers such as Cash App and Venmo describe this pattern, and the FTC says never to send money back to someone who claims to have overpaid you."
+      },
+      {
+        "question": "Zelle says my payment is pending until I upgrade my account. Is that real?",
+        "answer": "Zelle says there are no account upgrades and no one can upgrade your account. Do not click links or send money. Zelle payments go into your bank account, so check your bank app directly."
+      },
+      {
+        "question": "Can ScreenshotChecker verify a PayPal, Venmo, Cash App or Zelle payment?",
+        "answer": "No. It has no access to any payment provider or bank, and its payment checker is designed for Indian UPI receipts. The scam checker can flag warning signs in a screenshot of a buyer's message, but only your own account can show whether you were paid."
+      },
+      {
+        "question": "If the money shows in my account, am I completely safe?",
+        "answer": "It is the necessary first check, but Venmo notes that payments made with stolen cards or bank details can be removed later. With strangers, the FTC suggests meeting locally and accepting cash where possible."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "screenshot-checker-online",
+      "fake-upi-payment-screenshot",
+      "smishing-fake-sms"
+    ],
+    "cta": {
+      "label": "Check a buyer's message for scam signals",
+      "url": "/screenshot-scam-checker/",
+      "description": "Review a screenshot of a buyer's chat or email for scam patterns. Then confirm any payment by opening your own account."
+    }
+  },
+  // Growth push October 2026: long-tail guide
+  {
+    "slug": "fake-bank-transfer-screenshot",
+    "title": "Fake Bank Transfer Screenshot: How to Check the Money Really Arrived",
+    "seoTitle": "Fake Bank Transfer Screenshot? How to Check Payment",
+    "metaDescription": "Got a bank transfer screenshot? Why pending or scheduled screens are not payment, how to confirm funds in your own account, and where to report fraud in the UK.",
+    "category": "Security",
+    "publishedAt": "2026-10-14",
+    "authorName": "ScreenshotChecker",
+    "readTime": "8 min read",
+    "excerpt": "A UK-first guide for freelancers, landlords and sellers: why a transfer screenshot is only a claim, how to confirm a credit in your own account, and what to do about overpayment requests.",
+    "targetKeywords": [
+      "fake bank transfer screenshot",
+      "how to check if a bank transfer is real",
+      "fake payment confirmation screenshot",
+      "bank transfer pending scam",
+      "faster payment not received",
+      "overpayment scam refund"
+    ],
+    "keyTakeaway": {
+      "title": "Your own account is the only confirmation",
+      "text": "A screenshot of a bank transfer shows what someone claims happened on their screen. It does not move money. Log in to your own bank app or statement and look for the matching credit. Until it is there, treat the payment as unconfirmed and hold goods, files, keys or refunds."
+    },
+    "introduction": "You know a bank transfer was actually sent when the money appears as a credit in your own bank account, not when someone shows you a screenshot. Open your banking app or statement yourself and look for the exact amount from the expected payer. A \"scheduled\", \"pending\" or \"processing\" screen is not a completed payment, and no image checker can confirm a transfer, because none has access to the banking system.",
+    "contentSections": [
+      {
+        "heading": "How to Confirm a Bank Transfer Really Arrived",
+        "paragraphs": [
+          "A banking-app screenshot is a picture of a screen. Banking screens are simple to recreate or edit, and a genuine screenshot can still describe a payment to the wrong account, an old transfer or one that was later stopped. The only evidence that settles the question on your side is a matching credit in your own records.",
+          "Open your banking app or online banking directly, not through any link the payer sends you. Look at your transaction list rather than relying on a notification alone, and check the details listed below."
+        ],
+        "checklist": [
+          "Log in to your own bank app or online banking independently and open the account the money should have reached.",
+          "Find an incoming credit for the exact amount, on or after the date claimed, showing the expected payer name or reference.",
+          "Make sure it is a completed credit in your transaction history, not a figure you have only seen in someone else's image.",
+          "If nothing matches, treat the payment as unconfirmed. Ask the payer to check the status in their own banking app or with their bank.",
+          "Hold goods, final files, keys or any refund until the credit appears. Do not let a deadline or a sob story change that order."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Never release goods, services, deposits or refunds based only on a screenshot.</strong> The payer's screen is their claim. A credit in your own account is your confirmation."
+        }
+      },
+      {
+        "heading": "\"Scheduled\", \"Pending\" and \"Processing\" Are Not Paid",
+        "paragraphs": [
+          "Many people send a screenshot taken before a payment completed. A screen that says a payment is scheduled, pending or processing tells you, at best, that something was set up. It does not tell you the money has left their account, let alone reached yours. A scheduled payment can usually be changed or cancelled by the sender before it goes, so treat it as a promise, not a payment.",
+          "In the UK, most one-off bank transfers between personal and business accounts travel over the Faster Payment System. According to <a href=\"https://www.wearepay.uk/what-we-do/payment-systems/faster-payment-system/types-of-faster-payment-transactions/\" class=\"text-primary font-medium underline hover:text-primary-active\">Pay.UK's description of Faster Payment transaction types</a>, funds from a single immediate payment usually arrive almost immediately, though occasionally it can take up to two hours. Pay.UK also says that a forward-dated payment is sent on the date the customer arranged in advance, and that standing orders go out on working days only.",
+          "That timing gives you a useful benchmark. If a payer insists that a transfer has been \"pending\" for days, that is a reason for extra caution and for checking your account again, not a reason to hand over goods. It is still not proof of fraud on its own: some accounts and banks take longer, payments can be held for checks, and people make honest mistakes with sort codes and account numbers. Let the credit in your account decide, rather than the explanation."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "A common pressure line is \"the bank is holding the money until you send the item\" or \"until you refund the difference\". Your release of goods or money should never be the thing that unlocks a payment. If you hear this, stop and confirm in your own account."
+        }
+      },
+      {
+        "heading": "Worked Example: A Freelance Designer's Invoice (Fictional)",
+        "paragraphs": [
+          "<strong>This is a fictional teaching scenario. The names, amounts and app content are invented and do not describe a real person, business, bank or customer case.</strong> Maya, a freelance designer, sends a new client called \"Harbour Lane Studio\" an invoice for £1,200 for a logo package. She has agreed to send the final files once payment is received.",
+          "<strong>The screenshot.</strong> The client replies with an image of a banking app showing £1,200 to Maya's name, her sort code and account number, and the status \"Payment processing\". The message says the bank has put the transfer on hold for security checks for three working days, and asks Maya to send the files today so the client can hit a launch deadline.",
+          "<strong>Check 1: what does the image actually claim?</strong> Maya notes the amount, the payee details and the status. \"Processing\" means the screen itself does not claim a completed payment. She also notices the request to release work before any money arrives, which is exactly the order she agreed to avoid.",
+          "<strong>Check 2: her own records.</strong> Maya opens her business bank app herself. There is no incoming £1,200 credit from the client. She checks again later that day and the following morning. Still nothing.",
+          "<strong>Check 3: the twist.</strong> The next day the client sends a second screenshot showing £2,200 \"sent by mistake\" and asks Maya to return £1,000 straight away to a different account belonging to their \"finance partner\". Maya's account still shows no credit at all.",
+          "<strong>Outcome.</strong> Maya does not send files or money. She replies politely that she releases work once funds show in her account and that any refund will only ever go back to the account it came from, after the original payment has cleared. The client stops replying. Maya keeps the messages and screenshots and reports the contact. Notice what decided this: not how convincing the screenshot looked, but the absence of a credit in Maya's own account and a request to send money to a third party.",
+          "<strong>An alternative ending.</strong> If £1,200 had appeared in Maya's transaction history from the client, that credit, not the screenshot, would have been her confirmation. A genuine client who sends a processing screen by mistake loses nothing by waiting for the money to land."
+        ]
+      },
+      {
+        "heading": "Overpayment and Refund Requests: The Classic Follow-Up",
+        "paragraphs": [
+          "A fake screenshot is often only the opening move. The overpayment version goes like this: the \"buyer\" claims to have paid more than you asked, then urgently requests the difference back, often to another account. If the original payment never arrived, or is later reversed, the money you sent is your own.",
+          "<a href=\"https://www.ulsterbank.co.uk/business/insights/technology/fraud/overpayment-fraud-be-wary-of-new-customers-that-are-too-good-to-be-true.html\" class=\"text-primary font-medium underline hover:text-primary-active\">Ulster Bank's guidance on overpayment fraud</a> describes the same pattern for businesses and lists warning signs such as a buyer offering to pay more than the asking price, a sudden request to cancel and refund, or a claim that funds are on hold until you return the overpayment. Its advice includes never sending money to a third party, refunding card payments only to the original card, and confirming the original payment has cleared and cannot be reversed before refunding anything.",
+          "For landlords, the same pattern can appear as an overpaid deposit or rent. For marketplace sellers, it can be a buyer who \"paid extra for courier fees\". The safe response is the same: wait until the full amount is in your account, then refund only the genuine excess, only to the account it came from, and only if you are comfortable doing so."
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "A refund request for a payment you cannot see in your own account is not a refund. It is a request for you to send new money."
+        }
+      },
+      {
+        "heading": "What ScreenshotChecker Can and Cannot Tell You",
+        "paragraphs": [
+          "<strong>ScreenshotChecker has no access to any bank, banking app or payment network.</strong> It cannot confirm that a transfer happened, that it reached you, or that a screenshot is genuine or fake. It can help you look more carefully at an image, and the results are clues for your own review, not proof.",
+          "The <a href=\"/payment-screenshot-checker/\" class=\"text-primary font-medium underline hover:text-primary-active\">Payment Screenshot Checker</a> is designed for Indian UPI receipt text from apps such as Google Pay, PhonePe, Paytm and BHIM. It does not have specific support for UK bank transfer screens, so its rules are not a good fit for a Faster Payment screenshot.",
+          "For a UK bank transfer screenshot, the <a href=\"/\" class=\"text-primary font-medium underline hover:text-primary-active\">main screenshot analyzer</a> can read the visible text with OCR, show any metadata the file still carries, list rule-based warning signs and run image-forensics checks such as error level analysis. OCR can misread digits, so compare its output with the image. The analysis does not measure fonts, icon positions or screen layout, and a low-risk result does not mean the image is unedited.",
+          "If a payer sends two versions of the \"same\" confirmation, the <a href=\"/screenshot-comparison/\" class=\"text-primary font-medium underline hover:text-primary-active\">screenshot comparison tool</a> can show where the images differ. A difference tells you to ask questions; it cannot tell you which version, if either, reflects a real payment. The <a href=\"/screenshot-metadata-checker/\" class=\"text-primary font-medium underline hover:text-primary-active\">metadata checker</a> shows what file data remains, but metadata is often missing or changed when an image is re-saved or shared, so its absence is not a warning sign by itself. If the conversation also pushes urgency or odd payment instructions, the <a href=\"/screenshot-scam-checker/\" class=\"text-primary font-medium underline hover:text-primary-active\">scam checker</a> can highlight common pressure patterns in the message text."
+        ],
+        "cta": {
+          "label": "Look for clues in a screenshot",
+          "url": "/",
+          "description": "Review OCR text, metadata and warning signs, then confirm any payment in your own bank account."
+        }
+      },
+      {
+        "heading": "If You Think You Have Been Targeted: Reporting in the UK",
+        "paragraphs": [
+          "<strong>Authorised push payment (APP) fraud</strong> is the term used when someone is tricked into sending money to a fraudster posing as a genuine payee. In a fake-screenshot overpayment scam, the refund you were pressured into sending can fall into this category. The <a href=\"https://www.psr.org.uk/our-work/app-scams/\" class=\"text-primary font-medium underline hover:text-primary-active\">Payment Systems Regulator's APP scams page</a> explains that people paying by Faster Payments or CHAPS between UK accounts are covered by reimbursement rules. If you sent money, contact your bank as soon as possible and ask about this.",
+          "To reach your bank safely, use the number on your card or the bank's official website or app, not a number from a message. In the UK you can also call 159: <a href=\"https://www.stopscamsuk.org.uk/159\" class=\"text-primary font-medium underline hover:text-primary-active\">Stop Scams UK explains</a> that this short number connects you to your bank if it takes part in the scheme, and lists the participating banks.",
+          "To report the fraud to police in England, Wales or Northern Ireland, use Report Fraud. It replaced Action Fraud as the national reporting service in December 2025, according to <a href=\"https://www.gov.uk/government/news/report-fraud-new-service-from-city-of-london-police\" class=\"text-primary font-medium underline hover:text-primary-active\">the government announcement of the new service</a>. Its <a href=\"https://www.reportfraud.police.uk/reporting-a-fraud/\" class=\"text-primary font-medium underline hover:text-primary-active\">reporting page</a> offers an online report at reportfraud.police.uk and directs people in Scotland to contact Police Scotland on 101. Call 999 if a crime is happening now and someone is in danger.",
+          "Also report the account or listing on the marketplace or platform where you met the payer, and keep the original screenshots, messages, invoice and any bank references. If you share evidence publicly, hide unnecessary personal and account details first using the <a href=\"/blog/redact-screenshot-before-sharing/\" class=\"text-primary font-medium underline hover:text-primary-active\">redaction guide</a>."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can a bank transfer screenshot prove I have been paid?",
+        "answer": "No. A screenshot shows the payer's screen and can be edited or describe a different payment. Confirm a matching incoming credit in your own bank app or statement before releasing goods, services or refunds."
+      },
+      {
+        "question": "How long does a UK bank transfer usually take to arrive?",
+        "answer": "Pay.UK says single immediate Faster Payments usually arrive almost immediately and occasionally take up to two hours. Forward-dated payments go on the arranged date and standing orders go out on working days. A transfer described as pending for days deserves extra caution, but it is not proof of fraud by itself."
+      },
+      {
+        "question": "Is a payment pending or scheduled screenshot the same as payment?",
+        "answer": "No. Scheduled, pending or processing screens show a payment that has not completed. Wait until the money appears as a credit in your own account."
+      },
+      {
+        "question": "Someone overpaid me and wants the difference back. What should I do?",
+        "answer": "Check your own account first. If the full amount has not arrived, there is nothing to refund. If it has, consider refunding only the genuine excess, only to the account it came from, after confirming the original payment has cleared. Never send money on to a third party."
+      },
+      {
+        "question": "Can ScreenshotChecker verify a bank transfer?",
+        "answer": "No. It has no access to banks or payment systems. The analyzer, comparison and metadata tools can surface clues such as text, file data and image differences, but they cannot confirm a payment or prove a screenshot is real or fake."
+      },
+      {
+        "question": "Where do I report a fake payment scam in the UK?",
+        "answer": "Contact your bank straight away if you sent money, using its official number or 159. Report the fraud to Report Fraud, which replaced Action Fraud, if you are in England, Wales or Northern Ireland, or to Police Scotland on 101 if you are in Scotland. Also report the account on the platform where you met the payer."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-upi-payment-screenshot",
+      "screenshot-checker-online",
+      "screenshot-analyzer-online"
+    ],
+    "cta": {
+      "label": "Analyze a payment screenshot for clues",
+      "url": "/",
+      "description": "Use OCR, metadata and warning signs as an aid to review. Confirm any bank transfer in your own account."
+    }
+  },
+  // Growth push October 2026: long-tail guide
+  {
+    "lang": "hi",
+    "slug": "fake-payment-screenshot-kaise-pehchane",
+    "title": "फर्जी पेमेंट स्क्रीनशॉट कैसे पहचानें: दुकान पर पैसा सच में आया या नहीं, ऐसे चेक करें",
+    "seoTitle": "नकली पेमेंट स्क्रीनशॉट कैसे पहचानें? दुकानदार ऐसे चेक करें",
+    "metaDescription": "ग्राहक ने पेमेंट स्क्रीनशॉट दिखाया? सामान देने से पहले अपना UPI ऐप और बैंक रिकॉर्ड देखें। pending बहाना, ज़्यादा पैसे लौटाओ धोखा और शिकायत का तरीका जानें।",
+    "category": "Security",
+    "publishedAt": "2026-10-14",
+    "authorName": "ScreenshotChecker",
+    "readTime": "8 min read",
+    "excerpt": "किराना दुकान, छोटे विक्रेता और OLX/Instagram पर सामान बेचने वालों के लिए आसान गाइड: ग्राहक का स्क्रीनशॉट नहीं, अपना UPI ऐप और बैंक रिकॉर्ड देखकर ही सामान दें। ₹1,850 का एक काल्पनिक उदाहरण भी शामिल है।",
+    "targetKeywords": [
+      "fake payment screenshot kaise pehchane",
+      "nakli payment screenshot",
+      "फर्जी पेमेंट स्क्रीनशॉट",
+      "नकली पेमेंट स्क्रीनशॉट कैसे पहचानें",
+      "payment aaya ya nahi kaise check kare",
+      "fake payment app se dhokha"
+    ],
+    "keyTakeaway": {
+      "title": "स्क्रीनशॉट नहीं, अपना खाता देखें",
+      "text": "ग्राहक के फ़ोन की स्क्रीन या भेजा गया स्क्रीनशॉट सिर्फ़ एक दावा है, पैसा मिलने का सबूत नहीं। सामान देने से पहले अपने UPI ऐप की history, बैंक ऐप या बैंक स्टेटमेंट में वही रकम आई हुई देखें। पैसा न दिखे तो सामान रोक कर रखें। इसका मतलब यह नहीं कि ग्राहक ने पक्का धोखा दिया, बस पेमेंट अभी पक्की नहीं हुई।"
+    },
+    "introduction": "ग्राहक ने पेमेंट का स्क्रीनशॉट दिखाया है तो सबसे पहले अपना UPI ऐप या बैंक ऐप खोलें और देखें कि उतनी ही रकम आपके खाते में आई है या नहीं। अगर आपके अपने रिकॉर्ड में पैसा नहीं दिख रहा, तो सामान न दें, चाहे स्क्रीन पर 'Payment Successful' कितना भी असली क्यों न लगे। नकली पेमेंट स्क्रीन बनाने वाले ऐप और एडिट किए गए स्क्रीनशॉट मौजूद हैं, इसलिए दुकान के काउंटर पर भरोसे लायक जांच सिर्फ़ आपके अपने खाते की है। यह गाइड किराना दुकानदारों, छोटे विक्रेताओं और OLX या Instagram पर सामान बेचने वालों के लिए है।",
+    "contentSections": [
+      {
+        "heading": "पहला नियम: सामान देने से पहले अपने फ़ोन में पैसा देखें",
+        "paragraphs": [
+          "ग्राहक का फ़ोन आपके हाथ में नहीं, उसके हाथ में है। उसकी स्क्रीन पर जो दिख रहा है, वह कुछ भी हो सकता है: सही पेमेंट, पुरानी पेमेंट, किसी और को भेजी गई पेमेंट, या पूरी तरह नकली स्क्रीन। इसलिए जांच हमेशा अपनी तरफ़ से करें। पश्चिम बंगाल सरकार के <a href=\"https://cscoe.itewb.gov.in/upload/advisory-n/Advisory_Money_Transfer_Prank.pdf\">Cyber Security Centre of Excellence की advisory</a> भी दुकानदारों को यही सलाह देती है कि ग्राहक को जाने देने से पहले पक्का करें कि पैसा खाते में पहुंच गया है।",
+          "अगर बैंक स्टेटमेंट से मिलान करना हो, तो <a href=\"https://support.google.com/pay/india/answer/16919844?hl=en\">Google Pay की बैंक स्टेटमेंट गाइड</a> बताती है कि तारीख, UPI transaction ID और credit वाले हिस्से में रकम मिलानी चाहिए। आपके बैंक में नाम या फ़ॉर्मेट थोड़ा अलग हो सकता है, इसलिए अपने बैंक के ही रिकॉर्ड को आधार मानें।",
+          "OLX, Instagram या WhatsApp पर बेचने वालों के लिए भी नियम वही है: पैसा अपने खाते में दिखने से पहले सामान पैक या भेजें नहीं।"
+        ],
+        "checklist": [
+          "अपना UPI ऐप या merchant ऐप खुद खोलें, ग्राहक के दिए किसी link से नहीं।",
+          "History में देखें कि उतनी ही रकम, आज की तारीख में, आपके खाते में credit हुई है।",
+          "शक हो तो बैंक ऐप में balance या passbook देखें, या बैंक के आधिकारिक नंबर से आया SMS मिलाएं।",
+          "बड़ी रकम हो और फिर भी साफ़ न हो, तो बैंक स्टेटमेंट या बैंक की आधिकारिक सहायता से पूछें।",
+          "पैसा न दिखे तो सामान काउंटर पर रोक कर रखें, विनम्रता से कहें कि पैसा आते ही दे देंगे।"
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>सिर्फ़ स्क्रीनशॉट देखकर सामान, पैसे या refund कभी न दें।</strong> ग्राहक के खाते से पैसा कटने का दावा, आपके खाते में पैसा आने का सबूत नहीं है। अपना ऐप, अपना बैंक, अपनी जांच।"
+        }
+      },
+      {
+        "heading": "नकली पेमेंट स्क्रीन कैसे बनती है",
+        "paragraphs": [
+          "कुछ 'prank' या नकली पेमेंट ऐप ऐसी स्क्रीन दिखाते हैं जो बिल्कुल असली पेमेंट जैसी लगती है। ऊपर बताई गई <a href=\"https://cscoe.itewb.gov.in/upload/advisory-n/Advisory_Money_Transfer_Prank.pdf\">सरकारी advisory</a> के अनुसार ऐसे ऐप में transaction ID और तारीख-समय भी अपनी मर्ज़ी से भरे जा सकते हैं, जबकि दुकानदार के खाते में असल में कोई पैसा नहीं जाता। ठग स्क्रीन दिखाकर कहता है कि पैसा थोड़ी देर में आ जाएगा, और निकल जाता है।",
+          "दूसरा तरीका है असली स्क्रीनशॉट को एडिट करना: रकम, नाम या तारीख बदल देना। तीसरा, किसी पुरानी असली पेमेंट का स्क्रीनशॉट दोबारा दिखा देना। इन तीनों में स्क्रीन पर हरा tick, logo और 'Successful' सब दिख सकता है।",
+          "इसलिए स्क्रीनशॉट को 'असली लग रहा है या नहीं' देखकर फ़ैसला करना भरोसेमंद नहीं है। देखने में अच्छा स्क्रीनशॉट भी गलत हो सकता है, और थोड़ा अजीब दिखने वाला स्क्रीनशॉट भी सच्चा हो सकता है। फ़ैसला आपके खाते की entry से होना चाहिए।"
+        ]
+      },
+      {
+        "heading": "Soundbox और SMS: कितना भरोसा करें?",
+        "paragraphs": [
+          "बहुत सी दुकानों में soundbox लगा होता है जो पेमेंट आने पर बोलकर बताता है। यह काम की चीज़ है, क्योंकि आवाज़ आपके अपने device से आती है, ग्राहक के फ़ोन से नहीं। ऊपर वाली advisory भी soundbox को एक उपयोगी उपाय बताती है। ध्यान रखें कि आवाज़ आपके soundbox से ही आई हो; ग्राहक के फ़ोन से आई कोई आवाज़ आपका सबूत नहीं है।",
+          "<strong>Soundbox न बोले, तो भी यह अकेले सबूत नहीं कि स्क्रीनशॉट नकली है।</strong> नेटवर्क, बिजली, बैटरी या device की setting की वजह से alert छूट सकता है। ऐसे में ग्राहक पर इल्ज़ाम लगाने के बजाय अपना ऐप खोलकर history देखें।",
+          "SMS के साथ भी सावधानी रखें। किसी अनजान नंबर से आया 'आपके खाते में पैसा जमा हुआ' वाला मैसेज बैंक का नहीं भी हो सकता। ऐसे नकली मैसेज पहचानने के लिए हमारी <a href=\"/blog/smishing-fake-sms/\">fake SMS गाइड</a> पढ़ें। शक हो तो SMS के बजाय सीधे बैंक ऐप में balance और history देखें।"
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "भीड़ के समय सबसे आसान आदत: हर UPI पेमेंट के बाद एक सेकंड के लिए अपने फ़ोन में history देख लें। बड़ी रकम पर यह आदत ज़रूर रखें।"
+        }
+      },
+      {
+        "heading": "\"पैसा pending है, आ जाएगा\" वाला बहाना",
+        "paragraphs": [
+          "कभी-कभी सच में पेमेंट अटक जाती है। <a href=\"https://support.google.com/pay/india/answer/16920039?hl=en-IN\">Google Pay की transaction status गाइड</a> के अनुसार processing वाली पेमेंट का status बाद में Success या Failed में बदलता है, और इसमें बैंक को कुछ कामकाजी दिन लग सकते हैं। यही गाइड भेजने वाले को सलाह देती है कि processing के दौरान दोबारा पेमेंट न करे।",
+          "दुकानदार के लिए इसका सीधा मतलब है: <strong>pending या hold का मतलब है कि पैसा अभी आपके पास नहीं आया।</strong> ग्राहक ईमानदार भी हो सकता है, फिर भी पैसा आने तक सामान देना आपकी जोखिम है। ठग यही बहाना इस्तेमाल करते हैं क्योंकि यह सुनने में सामान्य लगता है।",
+          "आप ग्राहक से कह सकते हैं कि थोड़ी देर रुक जाएं, नकद दे दें, या पैसा आने के बाद सामान ले जाएं। अगर ग्राहक दूसरे तरीके से पेमेंट कर दे और बाद में पहली पेमेंट भी आपके खाते में आ जाए, तो दूसरी रकम तभी लौटाएं जब दोनों entry आपके अपने रिकॉर्ड में साफ़ दिखें।"
+        ]
+      },
+      {
+        "heading": "\"गलती से ज़्यादा पैसे चले गए, वापस कर दो\" वाला धोखा",
+        "paragraphs": [
+          "एक आम चाल यह है: ग्राहक ₹1,000 के सामान के लिए ऐसा स्क्रीनशॉट दिखाता है जिसमें ₹10,000 लिखा है, फिर कहता है कि गलती हो गई, बाकी ₹9,000 वापस भेज दो। अगर असल में कोई पैसा आया ही नहीं, तो आप सामान भी देते हैं और अपनी जेब से पैसे भी।",
+          "नियम वही है: पहले अपने खाते में देखें कि कितनी रकम सच में आई है। जितना दिख रहा है, उससे ज़्यादा का कोई हिसाब न करें। अगर सच में ज़्यादा पैसा आया है, तो भी किसी के कहने पर नए नंबर या नए UPI ID पर न भेजें; अपने बैंक या UPI ऐप की आधिकारिक सहायता से सही तरीका पूछें।",
+          "कुछ ठग 'refund' या 'बाकी पैसे' भेजने के नाम पर QR code scan करवाते हैं या UPI PIN डलवाते हैं। <a href=\"https://npci.org.in/what-we-do/upi/upi-safety-shield\">NPCI की UPI Safety Shield</a> साफ़ कहती है कि UPI PIN सिर्फ़ पैसे कटवाने के लिए डाला जाता है, पैसे लेने के लिए नहीं, और QR code सिर्फ़ पेमेंट करने के लिए scan करें। <a href=\"https://support.google.com/pay/india/answer/9851787?hl=en\">Google Pay की fraud गाइड</a> भी यही बताती है कि पैसा पाने के लिए PIN की ज़रूरत नहीं होती।"
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "<strong>पैसा लेने के लिए कभी QR code scan न करें और कभी UPI PIN न डालें।</strong> अगर कोई कहे कि PIN डालोगे तभी पैसा आएगा, तो समझ जाइए कि पैसा आपके खाते से जाने वाला है।"
+        }
+      },
+      {
+        "heading": "काल्पनिक उदाहरण: किराना दुकान पर ₹1,850 की खरीदारी",
+        "paragraphs": [
+          "<strong>यह एक काल्पनिक उदाहरण है। दुकान, लोग और रकम सब समझाने के लिए गढ़े गए हैं; यह कोई असली घटना या checker की जांच का नतीजा नहीं है।</strong> 'गुप्ता जनरल स्टोर' के मालिक सुनील शाम की भीड़ में हैं। एक ग्राहक आटा, तेल और कुछ सामान लेता है, बिल बनता है ₹1,850। ग्राहक अपना फ़ोन दिखाता है जिस पर लिखा है 'Payment Successful ₹1,850' और सुनील की दुकान का नाम।",
+          "<strong>जांच 1: soundbox।</strong> सुनील का soundbox कुछ नहीं बोला। वह ग्राहक पर शक नहीं जताते, क्योंकि alert कई कारणों से छूट सकता है। लेकिन वह सामान का थैला काउंटर पर ही रखते हैं।",
+          "<strong>जांच 2: अपना ऐप।</strong> सुनील अपना UPI ऐप खोलकर history देखते हैं। पिछले दस मिनट में ₹1,850 की कोई entry नहीं है। एक ₹1,850 की entry है, पर वह सुबह किसी और ग्राहक की है, इसलिए उससे यह पेमेंट पक्की नहीं होती।",
+          "<strong>जांच 3: बहाना।</strong> ग्राहक कहता है, 'pending होगा, आ जाएगा, मुझे जल्दी है।' सुनील विनम्रता से कहते हैं कि पैसा दिखते ही सामान दे देंगे, या ग्राहक नकद दे सकता है।",
+          "<strong>नतीजा A: पांच मिनट बाद ₹1,850 की entry आ जाती है।</strong> सुनील सामान दे देते हैं। ध्यान दें, फ़ैसला स्क्रीनशॉट से नहीं, उनके अपने ऐप की entry से हुआ।",
+          "<strong>नतीजा B: पैसा नहीं आता और ग्राहक कहता है 'मैंने तो ₹2,850 भेज दिए थे, ₹1,000 वापस कर दो'।</strong> सुनील के खाते में कोई रकम आई ही नहीं है, इसलिए वह न सामान देते हैं, न कोई पैसा लौटाते हैं। पैसा न आना अपने आप में यह साबित नहीं करता कि ग्राहक ने स्क्रीनशॉट बनाया, लेकिन 'वापस भेजो' की मांग पर सुनील सतर्क हो जाते हैं और ज़रूरत लगे तो नीचे बताए तरीके से शिकायत कर सकते हैं।"
+        ]
+      },
+      {
+        "heading": "ScreenshotChecker का payment checker क्या करता है, क्या नहीं",
+        "paragraphs": [
+          "अगर ग्राहक ने स्क्रीनशॉट WhatsApp पर भेजा है और आप उसे ध्यान से देखना चाहते हैं, तो <a href=\"/payment-screenshot-checker/\">Payment Screenshot Checker</a> मदद कर सकता है। यह OCR से रसीद पर लिखा text पढ़ता है, जैसे रकम, नाम और reference, और फिर तय नियमों से कुछ चेतावनी वाले संकेत दिखाता है, जैसे रकम में गड़बड़ी या अजीब reference। यह भारतीय UPI रसीदों (Google Pay, PhonePe, Paytm, BHIM) के text के लिए बनाया गया है।",
+          "<strong>यह checker यह पक्का नहीं कर सकता कि पैसा आपके खाते में आया।</strong> इसका आपके बैंक या UPI ऐप से कोई संपर्क नहीं है। यह font, icon की जगह या screen का layout नहीं मापता, और यह साबित नहीं कर सकता कि स्क्रीनशॉट असली है या नकली। OCR कभी-कभी कोई अंक गलत पढ़ सकता है, इसलिए नतीजे को हमेशा मूल स्क्रीनशॉट से मिलाकर देखें।",
+          "'LOW RISK' का मतलब यह नहीं कि पैसा मिल गया, और 'HIGH RISK' का मतलब यह नहीं कि ग्राहक ठग है। दोनों सूरतों में आख़िरी फ़ैसला आपके UPI ऐप या बैंक की entry से ही करें। ज़्यादा जानकारी के लिए हमारी <a href=\"/blog/fake-upi-payment-screenshot/\">UPI payment screenshot गाइड</a> देखें।"
+        ],
+        "cta": {
+          "label": "पेमेंट स्क्रीनशॉट जांचें",
+          "url": "/payment-screenshot-checker/",
+          "description": "रसीद का text और चेतावनी के संकेत देखें, फिर पैसा अपने खाते में खुद पक्का करें।"
+        }
+      },
+      {
+        "heading": "धोखा हो जाए तो कहां शिकायत करें",
+        "paragraphs": [
+          "अगर आपके साथ पैसों का साइबर धोखा हुआ है, तो देर न करें। <a href=\"https://financialservices.gov.in/beta/page/csft\">वित्तीय सेवा विभाग (भारत सरकार) के पेज</a> के अनुसार आप National Cybercrime Helpline <strong>1930</strong> पर कॉल करके शिकायत दर्ज करा सकते हैं, और SMS पर मिले acknowledgement नंबर से 24 घंटे के अंदर <a href=\"https://cybercrime.gov.in/\">cybercrime.gov.in</a> पर पूरी शिकायत दर्ज करनी होती है। यह तरीका बदल सकता है, इसलिए शिकायत से पहले आधिकारिक पोर्टल पर ताज़ा जानकारी देख लें।",
+          "अपने बैंक और UPI ऐप को भी बताएं। <a href=\"https://support.google.com/pay/india/answer/9851787?hl=en\">Google Pay की fraud गाइड</a> बैंक को transaction की जानकारी देने और ऐप के अंदर वाले Help/Support से ही मदद लेने की सलाह देती है, इंटरनेट पर मिले किसी अनजान 'customer care' नंबर से नहीं।",
+          "शिकायत के लिए स्क्रीनशॉट, ग्राहक का नंबर या UPI ID, समय और रकम संभाल कर रखें। अगर आप यह स्क्रीनशॉट किसी WhatsApp group या social media पर लोगों को सावधान करने के लिए डालना चाहते हैं, तो पहले अपना नाम, खाता नंबर और UPI ID छिपा दें। इसके लिए <a href=\"/blog/redact-screenshot-before-sharing/\">स्क्रीनशॉट redact करने की गाइड</a> देखें।"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "क्या पेमेंट का स्क्रीनशॉट पैसा मिलने का सबूत है?",
+        "answer": "नहीं। स्क्रीनशॉट सिर्फ़ यह दिखाता है कि किसी फ़ोन की स्क्रीन पर क्या था। पैसा मिला या नहीं, यह अपने UPI ऐप की history, बैंक ऐप या बैंक स्टेटमेंट में entry देखकर ही पक्का करें।"
+      },
+      {
+        "question": "Soundbox नहीं बोला तो क्या स्क्रीनशॉट नकली है?",
+        "answer": "ज़रूरी नहीं। नेटवर्क, बिजली या setting की वजह से alert छूट सकता है। Soundbox न बोले तो ग्राहक पर इल्ज़ाम लगाने के बजाय अपना ऐप खोलकर देखें कि रकम आई है या नहीं।"
+      },
+      {
+        "question": "ग्राहक कहे कि पैसा pending है तो क्या करें?",
+        "answer": "Pending का मतलब है कि पैसा अभी आपके खाते में नहीं आया। सामान रोक कर रखें और पैसा दिखने का इंतज़ार करें, या ग्राहक से नकद या दूसरा तरीका पूछें। दोनों पेमेंट आ जाएं तो एक रकम तभी लौटाएं जब दोनों आपके रिकॉर्ड में साफ़ दिखें।"
+      },
+      {
+        "question": "पैसा लेने के लिए UPI PIN डालना पड़ता है क्या?",
+        "answer": "नहीं। NPCI के अनुसार UPI PIN सिर्फ़ पैसे भेजने या कटवाने के लिए डाला जाता है, पैसे लेने के लिए नहीं। QR code भी सिर्फ़ पेमेंट करने के लिए scan करें। कोई PIN या QR scan से पैसा देने की बात करे तो सावधान हो जाएं।"
+      },
+      {
+        "question": "क्या ScreenshotChecker बता सकता है कि पैसा आया या नहीं?",
+        "answer": "नहीं। Payment Screenshot Checker रसीद का text OCR से पढ़कर कुछ चेतावनी वाले संकेत दिखाता है। इसका बैंक से कोई संपर्क नहीं है और यह font, icon या layout नहीं मापता। पैसा आया या नहीं, यह अपने खाते में ही देखें।"
+      },
+      {
+        "question": "नकली पेमेंट से धोखा हो जाए तो शिकायत कहां करें?",
+        "answer": "National Cybercrime Helpline 1930 पर कॉल करें और cybercrime.gov.in पर शिकायत दर्ज करें। अपने बैंक और UPI ऐप की आधिकारिक सहायता को भी बताएं। स्क्रीनशॉट, समय, रकम और ग्राहक का नंबर या UPI ID संभाल कर रखें।"
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-upi-payment-screenshot",
+      "smishing-fake-sms",
+      "screenshot-checker-online"
+    ],
+    "cta": {
+      "label": "पेमेंट स्क्रीनशॉट जांचें",
+      "url": "/payment-screenshot-checker/",
+      "description": "OCR से रसीद का text और चेतावनी के संकेत देखें। पैसा मिला या नहीं, यह हमेशा अपने UPI ऐप या बैंक में पक्का करें।"
     }
   },
 ];

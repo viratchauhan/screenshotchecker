@@ -15,9 +15,9 @@ import Footer from '../components/Footer.astro';
 import { HOMEPAGE_FAQS } from '../data/homepageFaqs';
 
 const canonicalUrl = 'https://screenshotchecker.com/';
-const pageTitle = 'Screenshot Checker – Verify Image Authenticity';
+const pageTitle = 'Screenshot Checker: Is This Screenshot Real or Fake?';
 const pageDescription =
-  'Think a screenshot might be faked? Check it in seconds — free, private, 100% in-browser. No uploads, no signup.';
+  'Free fake screenshot detector. Test chat, payment and social media screenshots for signs of editing and scams, privately in your browser. No upload, no signup.';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -87,6 +87,12 @@ const structuredData = {
   <main class="flex-1">
     <Hero />
     <Uploader />
+    <div id="install-app-banner" hidden class="max-w-3xl mx-auto px-4 sm:px-6 mt-4">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-surface-card border border-hairline rounded-xl px-4 py-3">
+        <p class="text-sm text-body"><strong class="text-ink">Check screenshots straight from WhatsApp.</strong> Install ScreenshotChecker, then use Share &gt; ScreenshotChecker on any screenshot. The image stays on your device.</p>
+        <button id="install-app-btn" type="button" class="btn-primary text-xs sm:text-sm h-9 shrink-0">Install app</button>
+      </div>
+    </div>
     <p style="text-align:center;padding:0 1rem;margin:1rem auto;max-width:48rem">Trying to tell whether an image is a screenshot or photo? <a href="/screenshot-detector" style="text-decoration:underline">Inspect screenshot source clues</a>.</p>
     <AnalysisDashboard />
     <RedactorModal />
@@ -191,6 +197,7 @@ const structuredData = {
       currentResult = result;
       redactionBoxes = []; renderVersion++;
       renderDashboard(result);
+      (window as any).scTrack?.('analysis_completed', { result: result.fraudAnalysis && result.fraudAnalysis.risk_score >= 60 ? 'high_risk' : result.authenticity.status, warning_count: result.fraudAnalysis?.signals.length ?? 0 });
 
       progressState.classList.add('hidden');
       idleState.classList.remove('hidden');
@@ -639,6 +646,47 @@ const structuredData = {
       }
     }
   });
+
+  // Chrome extension hand-off (extension/content.js posts the chosen image).
+  window.addEventListener('message', async (event) => {
+    if (event.source !== window || event.origin !== location.origin) return;
+    const data = event.data;
+    if (!data || data.source !== 'screenshotchecker-extension') return;
+    if (data.type === 'ping') {
+      window.postMessage({ source: 'screenshotchecker-page', type: 'ready' }, location.origin);
+      return;
+    }
+    if (data.type === 'error' && typeof data.message === 'string') {
+      alert(data.message.slice(0, 300));
+      return;
+    }
+    if (data.type !== 'image' || typeof data.dataUrl !== 'string') return;
+    if (!/^data:image\/(png|jpeg|webp|gif);base64,/i.test(data.dataUrl) || data.dataUrl.length > 15_000_000) return;
+    try {
+      const blob = await (await fetch(data.dataUrl)).blob();
+      const ext = blob.type.split('/')[1]?.replace('jpeg', 'jpg') || 'png';
+      (window as any).scTrack?.('screenshot_uploaded', { method: data.method === 'page_capture' ? 'extension_capture' : 'extension_image', file_kind: 'image' });
+      dropZone?.scrollIntoView({ behavior: 'smooth' });
+      await processImageFile(new File([blob], `extension-image.${ext}`, { type: blob.type }));
+    } catch {
+      alert('The image from the extension could not be opened. Please upload it instead.');
+    }
+  });
+  window.postMessage({ source: 'screenshotchecker-page', type: 'ready' }, location.origin);
+
+  // Android share target: "Share > ScreenshotChecker" opens /?shared=1
+  (async () => {
+    const { takeSharedImage, bindInstallPrompt } = await import('../lib/utils/pwa');
+    bindInstallPrompt(document.getElementById('install-app-banner'), document.getElementById('install-app-btn') as HTMLButtonElement | null);
+    const shared = await takeSharedImage();
+    if (shared.status === 'ok') {
+      (window as any).scTrack?.('screenshot_uploaded', { method: 'share_target', file_kind: 'image' });
+      dropZone?.scrollIntoView({ behavior: 'smooth' });
+      await processImageFile(shared.file);
+    } else if (shared.status === 'error') {
+      alert(shared.message);
+    }
+  })();
 
   document.getElementById('reset-analysis-btn')?.addEventListener('click', () => {
     analysisGeneration++;

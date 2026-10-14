@@ -6,8 +6,8 @@
   "nav.directory": "Tools Directory →",
   
   "hero.badge": "Privacy-First Image Intelligence",
-  "hero.title": "Screenshot Checker – Analyze Screenshots for Digital Evidence",
-  "hero.subtitle": "Upload a screenshot or image to investigate what may be hidden inside it. ScreenshotChecker analyzes visible content, text, metadata, editing signals, and suspicious patterns to help you understand whether an image deserves a closer look.",
+  "hero.title": "Screenshot Checker: Is This Screenshot Real or Fake?",
+  "hero.subtitle": "Add a chat, payment or social media screenshot. ScreenshotChecker reads its text, metadata and pixels in your browser, then shows warning signs of editing or scams and what it could not check. Results are clues, not proof.",
   "hero.privacy_pill": "Image processing in your browser",
 
   "uploader.drop_title": "Upload a screenshot to analyze it",

@@ -55,6 +55,9 @@ export function bindRedactionExport(
       }
       if (status) status.textContent = 'Download requested. Open the PNG and inspect every sensitive area before sharing.';
       onDownloadRequested?.();
+      try {
+        (globalThis as unknown as { scTrack?: (n: string, p?: Record<string, unknown>) => void }).scTrack?.('redaction_exported', { warning_count: boxes.length });
+      } catch { /* analytics must never affect export */ }
     } catch {
       // No original-image fallback, sensitive error details, or success claim.
       if (status) status.textContent = 'Export failed. Your image and masks are still here. Please try again.';

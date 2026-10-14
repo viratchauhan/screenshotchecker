@@ -315,6 +315,7 @@ const structuredData = {
       currentResult = result;
       redactionBoxes = []; renderVersion++;
       renderDashboard(result);
+      (window as any).scTrack?.('analysis_completed', { result: result.fraudAnalysis && result.fraudAnalysis.risk_score >= 60 ? 'high_risk' : result.authenticity.status, warning_count: result.fraudAnalysis?.signals.length ?? 0 });
 
       progressState.classList.add('hidden');
       idleState.classList.remove('hidden');

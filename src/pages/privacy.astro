@@ -88,6 +88,12 @@ const structuredData = {
           Handoff data older than one hour is rejected and removed when read. This is an age check, not a scheduled deletion timer. A successful read or New Scan does not clear that saved copy. It may remain until it is replaced, an invalid or expired read clears it, or the browser ends or clears the tab session; browser session restoration can affect that lifetime. Use your browser's site-data controls to clear stored data when needed.
         </p>
         <p>
+          If you install ScreenshotChecker as an app and use your phone's Share menu, the shared image is received by this site's service worker in your browser and kept in the browser's Cache Storage only until the homepage opens it. The homepage deletes that copy when it reads it, and ignores a copy older than ten minutes. The service worker does not send the image to a server and does not cache pages.
+        </p>
+        <p>
+          The optional ScreenshotChecker Chrome extension reads only the image you right-click, or captures the visible tab when you ask it to, and hands it to a ScreenshotChecker tab through the extension's session storage. That copy is deleted when the tab collects it, when the tab closes, or after five minutes.
+        </p>
+        <p>
           Language and theme choices are saved in <code>localStorage</code>. The standalone link checker also keeps up to ten recent URL results there, including the URL, classification, and check time. Use its Clear History control to remove that history, or clear this site's browser data. Browser-local storage is different from keeping data only in working memory.
         </p>
       </div>
@@ -95,7 +101,7 @@ const structuredData = {
       <div class="feature-card !p-8 space-y-4">
         <h2 class="font-serif text-2xl text-ink font-normal">4. Analytics and Resource Requests</h2>
         <p>
-          Pages load the Google Analytics tag for website usage measurement. Analytics can send usage and device information to Google and use cookies. Our application does not add selected image bytes, extracted OCR text, or original filenames to its analytics calls. This is not a guarantee about every request made by third-party scripts. See <a href="https://support.google.com/analytics/answer/11593727?hl=en" class="underline">Google's data collection guidance</a>.
+          Pages load the Google Analytics tag for website usage measurement. Analytics can send usage and device information to Google and use cookies. Our application does not add selected image bytes, extracted OCR text, or original filenames to its analytics calls. It does send usage events such as an image being added, an analysis finishing, an export or a result being shared, with the tool name and coarse labels (for example the verdict category or the number of warning signs). Optional Microsoft Clarity heatmaps, when enabled, load only on guide and information pages, not on tool pages. This is not a guarantee about every request made by third-party scripts. See <a href="https://support.google.com/analytics/answer/11593727?hl=en" class="underline">Google's data collection guidance</a>.
         </p>
         <p>
           The browser also requests website assets, fonts, and OCR engine or language files. Those resource downloads are separate from uploading a selected image for processing. Local image processing does not mean offline operation or zero network activity.
