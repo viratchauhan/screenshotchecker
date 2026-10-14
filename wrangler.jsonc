@@ -5,5 +5,12 @@
   "assets": {
     "directory": "./dist"
   },
-  "previews": {}
+  // Serve only on the real domains. No *.workers.dev address and no
+  // per-branch/per-version preview URLs.
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "screenshotchecker.com", "custom_domain": true },
+    { "pattern": "www.screenshotchecker.com", "custom_domain": true }
+  ]
 }
