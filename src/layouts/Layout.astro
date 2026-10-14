@@ -12,20 +12,28 @@ interface Props {
   siteName?: string;
   structuredData?: object;
   robots?: string;
+  lang?: string;
 }
 
 const {
-  title = "Screenshot Checker – Verify Image Authenticity",
-  description = "Think a screenshot might be faked? Check it in seconds — free, private, 100% in-browser. No uploads, no signup.",
+  title = "Screenshot Checker: Is This Screenshot Real or Fake?",
+  description = "Free screenshot checker and fake screenshot detector. Test any chat, payment or social media screenshot for edits and scam signs, privately in your browser. No upload, no signup.",
   canonicalUrl: propCanonicalUrl,
   ogType = "website",
   ogTitle,
   ogDescription,
-  ogImage = "https://screenshotchecker.com/web-app-manifest-512x512.png",
+  ogImage = "https://screenshotchecker.com/og-image.png",
   siteName = "ScreenshotChecker",
   structuredData,
   robots = "index, follow",
+  lang = "en",
 } = Astro.props;
+
+// Microsoft Clarity (heatmaps). Off unless PUBLIC_CLARITY_ID is set at build time.
+// Only content pages load it: tool pages can display text extracted from private screenshots.
+const clarityId = (import.meta.env.PUBLIC_CLARITY_ID || '').trim();
+const clarityPathAllowed = /^\/(blog|resources|tools|about|contact)(\/|$)/.test(Astro.url.pathname);
+const loadClarity = /^[a-z0-9]{6,20}$/i.test(clarityId) && clarityPathAllowed;
 
 // Standardize canonical URL with trailing slash matching sitemap format
 const pathname = Astro.url.pathname;
@@ -92,7 +100,7 @@ if (structuredData) {
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <!-- Google tag (gtag.js) - Non-blocking idle init -->
     <script is:inline>
@@ -126,6 +134,7 @@ if (structuredData) {
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#faf9f5" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="generator" content={Astro.generator} />
@@ -186,8 +195,28 @@ if (structuredData) {
     {finalStructuredData && (
       <script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)} />
     )}
+
+    {loadClarity && (
+      <script is:inline define:vars={{ clarityId }}>
+        (function (c, l, a, r, i) {
+          c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+          const start = () => {
+            const t = l.createElement(r); t.async = true; t.src = 'https://www.clarity.ms/tag/' + i;
+            const y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+          };
+          if ('requestIdleCallback' in window) requestIdleCallback(start, { timeout: 4000 });
+          else window.addEventListener('load', () => setTimeout(start, 1500));
+        })(window, document, 'clarity', 'script', clarityId);
+      </script>
+    )}
   </head>
   <body class="bg-canvas text-body selection:bg-surface-cream-strong selection:text-ink min-h-screen flex flex-col">
     <slot />
+    <script>
+      import { bindGlobalAnalytics } from '../lib/utils/analytics';
+      import { registerServiceWorker } from '../lib/utils/pwa';
+      bindGlobalAnalytics();
+      registerServiceWorker();
+    </script>
   </body>
 </html>

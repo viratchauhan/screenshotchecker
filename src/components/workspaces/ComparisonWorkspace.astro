@@ -822,6 +822,7 @@ const faqs = getToolFaqs('screenshot-comparison');
 
   // Sidebar Renderer
   function renderSidebarAnalysis(res: ComparisonAnalysisResult) {
+    (window as any).scTrack?.('analysis_completed', { result: 'comparison' });
     const simBadge = document.getElementById('sidebar-similarity-badge');
     const totalDiffs = document.getElementById('stat-total-diffs');
     const noiseFiltered = document.getElementById('stat-noise-filtered');

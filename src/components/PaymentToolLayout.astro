@@ -467,6 +467,7 @@ const structuredData = {
 
       currentResult = result;
       renderPaymentDashboard(result);
+      (window as any).scTrack?.('analysis_completed', { result: 'payment_review' });
 
       progressState.classList.add('hidden');
       idleState.classList.remove('hidden');

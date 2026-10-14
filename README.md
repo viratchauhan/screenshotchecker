@@ -1,8 +1,36 @@
 # ScreenshotChecker
 
-ScreenshotChecker is a browser-based digital-safety toolkit for reviewing screenshots, UPI/payment receipts and images. It combines OCR, metadata inspection, manipulation indicators, scam and link signals, and privacy redaction. Reports support investigation; they do not prove image authenticity or confirm payment settlement.
+**Is this screenshot real or fake?** ScreenshotChecker is a free, open-source, browser-based toolkit for checking screenshots of chats, payments and social media posts for signs of editing and scams, and for cleaning them up before you share them. Images are processed in your browser. Reports are evidence to review, not proof: they do not prove authenticity or confirm that a payment arrived.
 
-- Live prototype: https://screenshotchecker.com
+[![ScreenshotChecker: Is this screenshot real or fake?](public/og-image.png)](https://screenshotchecker.com)
+
+**Try it:** https://screenshotchecker.com · no signup · English, हिन्दी, Español, Français, Deutsch, 日本語
+
+## Tools
+
+| Tool | What it does |
+| --- | --- |
+| [Screenshot checker](https://screenshotchecker.com/) | OCR, metadata, rule-based scam and editing checks, with a list of what could not be checked |
+| [Scam checker](https://screenshotchecker.com/screenshot-scam-checker/) | Flags urgency, payment or code requests and impersonation in SMS, WhatsApp, email and DM screenshots |
+| [UPI payment screenshot checker](https://screenshotchecker.com/payment-screenshot-checker/) | Reviews Google Pay, PhonePe, Paytm and BHIM receipt text with OCR-based rules |
+| [Fake / AI image detector](https://screenshotchecker.com/ai-image-detector/) | C2PA content credentials, metadata and error level analysis as evidence |
+| [Image manipulation checker](https://screenshotchecker.com/image-manipulation-checker/) | Error level analysis views |
+| [Screenshot comparison](https://screenshotchecker.com/screenshot-comparison/) | Text and pixel differences between two versions |
+| [Metadata checker](https://screenshotchecker.com/screenshot-metadata-checker/) / [remover](https://screenshotchecker.com/image-metadata-remover/) | Inspect and strip EXIF and other metadata |
+| [Redactor](https://screenshotchecker.com/screenshot-redactor/) | Solid masks and a clean PNG export |
+| [OCR](https://screenshotchecker.com/screenshot-ocr/) | Extract text from screenshots |
+| [Reverse image search helper](https://screenshotchecker.com/reverse-image-search/) | Prepare a screenshot for Google Lens, Bing or TinEye |
+| [Suspicious link checker](https://screenshotchecker.com/suspicious-link-checker/) | Look a URL up in a historical labelled dataset |
+
+**Use it where the screenshots are:**
+- **Android:** install the site as an app, then use *Share > ScreenshotChecker* from WhatsApp, Gallery or any app. The image stays in the browser.
+- **Chrome:** the extension in [`extension/`](extension/) adds *Check this image with ScreenshotChecker* to the right-click menu.
+- **Share a result:** the result card shows only the verdict and number of warning signs, never your screenshot.
+
+Contributions, bug reports and labelled test examples (synthetic only, please) are welcome via issues and pull requests.
+
+## About this project
+
 - Repository: https://github.com/viratchauhan/screenshotchecker
 - Hack for Social Cause team: Team CyberSuraksha, HSC|UP|00001
 - Developer: Virat Chauhan, sole team member

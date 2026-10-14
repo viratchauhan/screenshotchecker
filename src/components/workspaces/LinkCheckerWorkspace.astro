@@ -576,6 +576,7 @@ const faqs = getToolFaqs('suspicious-link-checker');
       if (!report) {
         throw new Error('Could not verify the URL against the local dataset.');
       }
+      (window as any).scTrack?.('link_checked', { result: report.label, warning_count: multiReports.length });
 
       // If multiple URLs were found in message, display multi-URL picker tabs
       if (multiReports.length > 1 && multiUrlBar && multiUrlButtons) {

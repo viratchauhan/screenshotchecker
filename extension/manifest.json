@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "ScreenshotChecker: Is This Screenshot Real?",
+  "short_name": "ScreenshotChecker",
+  "version": "1.0.0",
+  "description": "Right-click any image or page to check it for signs of editing and scams with ScreenshotChecker. Runs in your browser.",
+  "homepage_url": "https://screenshotchecker.com/",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Check a screenshot",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["contextMenus", "activeTab", "scripting", "storage"],
+  "host_permissions": ["https://screenshotchecker.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://screenshotchecker.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

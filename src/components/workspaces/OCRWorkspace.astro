@@ -107,10 +107,10 @@ const faqs = getToolFaqs('screenshot-ocr');
                 </svg>
                 <span>Copy Text</span>
               </button>
-              <button id="ocr-download-btn" class="btn-secondary text-xs h-8 px-3 cursor-pointer">
+              <button id="ocr-download-btn" data-track-download="ocr_text" class="btn-secondary text-xs h-8 px-3 cursor-pointer">
                 <span>.TXT</span>
               </button>
-              <button id="ocr-download-json-btn" class="btn-secondary text-xs h-8 px-3 cursor-pointer">
+              <button id="ocr-download-json-btn" data-track-download="ocr_json" class="btn-secondary text-xs h-8 px-3 cursor-pointer">
                 <span>.JSON</span>
               </button>
             </div>
@@ -191,6 +191,7 @@ const faqs = getToolFaqs('screenshot-ocr');
       }, selectedLang);
 
       lastOcrResult = result;
+      (window as any).scTrack?.('analysis_completed', { result: 'ocr' });
       processing?.classList.add('hidden');
       workspace?.classList.remove('hidden');
       prepBadge?.classList.remove('hidden');

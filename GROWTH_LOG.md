@@ -37,3 +37,16 @@ Reproduced failed shard requests appearing as no-match and fixed client/service/
 ## 1 October 2026 — task 17 release candidate after Preview
 
 Draft PR #2 and Cloudflare Preview for `3e7c15b` are verified. Independent wide/485px visual checks passed images, captions, checklist, FAQs, reciprocal links and unchanged historical dates. The new article is dated 1 October during release finalization; final exact-runtime checks, independent date/schema review and successor Preview remain gates before the production decision. No traffic/indexing improvement is claimed.
+
+## 14 October 2026 - growth push (owner-requested "implement all")
+
+Baseline from the owner's accounts, last 28 days: GA4 470 sessions (Organic 228, Direct 180, AI Assistant 58, Unassigned 4, Referral 1, Social 0), no key events. Search Console 157 clicks, 2.43k impressions, average position 9.2; homepage 135 of 157 clicks; CTR leaks on "check screenshot" (pos 3.5, 3.3%), "screenshot tester" and "give me a test on this screenshot" (0 clicks); conversational queries ranking 1-2 suggest AI Mode/Gemini citations.
+
+Branch `growth/marketing-push-2026-10`:
+- GA4 events: screenshot_uploaded, analysis_completed, link_checked, redaction_exported, download_requested, result_shared, install_prompt, app_installed (coarse labels only, no content). Optional Clarity via PUBLIC_CLARITY_ID, content pages only.
+- New titles/descriptions for home, detector, payment, link, reverse search, scam, AI image pages; answer-first hero; llms.txt; 1200x630 og-image.
+- Five review-only guides (publishedAt null): WhatsApp chat, social post, US P2P payments, UK bank transfer, Hindi shop-counter payment guide.
+- Android share target (PWA + service worker, image stays in browser), install banner, shareable verdict-only result card, Chrome extension source in `extension/`.
+- Privacy policy updated for the above. README rewritten for GitHub discovery.
+
+Not done here (owner accounts or public posting): mark GA4 key events, Bing Webmaster import, Cloudflare Crawler Hints, Clarity project, Chrome Web Store submission, launch posts. No traffic change measured yet.

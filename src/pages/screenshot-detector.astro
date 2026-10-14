@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-const title = 'Screenshot Detector: Screenshot or Photo?';
+const title = 'Screenshot Detector Online: Screenshot or Photo?';
 const description = 'Check whether an image has screenshot or camera-photo clues. Inspect metadata and dimensions locally, with clear evidence and inconclusive results.';
 const canonicalUrl = 'https://screenshotchecker.com/screenshot-detector/';
 const faqs = [
@@ -106,6 +106,7 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
         const li = document.createElement('li'); li.textContent = text; return li;
       }));
       document.getElementById('source-limitation')!.textContent = report.limitation;
+      (window as any).scTrack?.('analysis_completed', { result: 'source_check' });
       result.hidden = false; status.textContent = 'Inspection complete. Review the clues and limitations below.';
       document.getElementById('source-verdict')!.focus();
     } catch (error) {
