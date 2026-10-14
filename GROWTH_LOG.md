@@ -50,3 +50,7 @@ Branch `growth/marketing-push-2026-10`:
 - Privacy policy updated for the above. README rewritten for GitHub discovery.
 
 Not done here (owner accounts or public posting): mark GA4 key events, Bing Webmaster import, Cloudflare Crawler Hints, Clarity project, Chrome Web Store submission, launch posts. No traffic change measured yet.
+
+## 14 October 2026 - release
+
+Owner asked to deploy to screenshotchecker.com. Added /how-it-works/, internal links to the new guides, fixed a 7px mobile overflow in privacy findings and dashboard button wrapping, set the five guides' publication date to 2026-10-14. Cloudflare Crawler Hints enabled. Bing Webmaster Tools was already verified with sitemaps (Aug 2026). Merged PR #12 to main for the production build.

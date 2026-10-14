@@ -1082,14 +1082,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "description": "Apply solid masks, export a sharing copy, and inspect the exact saved file before sending it."
     }
   },
-  // Growth push October 2026: long-tail guide (review-only until release date is set)
+  // Growth push October 2026: long-tail guide
   {
     "slug": "fake-whatsapp-chat-screenshot",
     "title": "How to Tell If a WhatsApp Chat Screenshot Is Fake or Edited",
     "seoTitle": "Fake WhatsApp Chat Screenshot? How to Check It",
     "metaDescription": "Check a WhatsApp chat screenshot the reliable way: treat visual clues as hints, then verify the message live on the phone, with the sender or in your own chat.",
     "category": "Forensics",
-    "publishedAt": null,
+    "publishedAt": "2026-10-14",
     "authorName": "ScreenshotChecker",
     "readTime": "8 min read",
     "excerpt": "Why chat screenshots are easy to fake, which visual clues are worth a second look, and how to verify a disputed WhatsApp message at its source, with a fictional example.",
@@ -1233,14 +1233,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "description": "Review the text, metadata and warning signs as clues, then verify the message in the app or with the person who supposedly sent it."
     }
   },
-  // Growth push October 2026: long-tail guide (review-only until release date is set)
+  // Growth push October 2026: long-tail guide
   {
     "slug": "fake-social-media-post-screenshot",
     "title": "Is This Tweet or Instagram Screenshot Real? How to Check a Social Media Post",
     "seoTitle": "Is That Tweet Screenshot Real? How to Check Social Posts",
     "metaDescription": "Check a screenshot of an X post, tweet or Instagram post by finding the original, confirming the account, and treating badges and image clues as hints.",
     "category": "Threat Analysis",
-    "publishedAt": null,
+    "publishedAt": "2026-10-14",
     "authorName": "ScreenshotChecker",
     "readTime": "8 min read",
     "excerpt": "How to trace a screenshot of a celebrity, politician or brand post back to its source, why paid badges and image details settle little, and a fictional CEO post example.",
@@ -1386,14 +1386,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "description": "Review text, metadata and warning signs as clues, then confirm the post on the real account."
     }
   },
-  // Growth push October 2026: long-tail guide (review-only until release date is set)
+  // Growth push October 2026: long-tail guide
   {
     "slug": "fake-payment-screenshot-paypal-venmo-cash-app",
     "title": "Fake PayPal, Venmo, Cash App or Zelle Payment Screenshot? How Sellers Confirm They Were Paid",
     "seoTitle": "Fake Venmo, PayPal or Zelle Payment? How Sellers Check",
     "metaDescription": "A buyer's PayPal, Venmo, Cash App or Zelle screenshot is not payment. Open your own app, confirm the money is there, and spot overpayment and upgrade scams.",
     "category": "Security",
-    "publishedAt": null,
+    "publishedAt": "2026-10-14",
     "authorName": "ScreenshotChecker",
     "readTime": "8 min read",
     "excerpt": "For US marketplace sellers: why a payment screenshot or email proves nothing, how to confirm money in your own PayPal, Venmo, Cash App or bank app, and how overpayment and fake upgrade scams work.",
@@ -1540,14 +1540,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "description": "Review a screenshot of a buyer's chat or email for scam patterns. Then confirm any payment by opening your own account."
     }
   },
-  // Growth push October 2026: long-tail guide (review-only until release date is set)
+  // Growth push October 2026: long-tail guide
   {
     "slug": "fake-bank-transfer-screenshot",
     "title": "Fake Bank Transfer Screenshot: How to Check the Money Really Arrived",
     "seoTitle": "Fake Bank Transfer Screenshot? How to Check Payment",
     "metaDescription": "Got a bank transfer screenshot? Why pending or scheduled screens are not payment, how to confirm funds in your own account, and where to report fraud in the UK.",
     "category": "Security",
-    "publishedAt": null,
+    "publishedAt": "2026-10-14",
     "authorName": "ScreenshotChecker",
     "readTime": "8 min read",
     "excerpt": "A UK-first guide for freelancers, landlords and sellers: why a transfer screenshot is only a claim, how to confirm a credit in your own account, and what to do about overpayment requests.",
@@ -1681,7 +1681,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "description": "Use OCR, metadata and warning signs as an aid to review. Confirm any bank transfer in your own account."
     }
   },
-  // Growth push October 2026: long-tail guide (review-only until release date is set)
+  // Growth push October 2026: long-tail guide
   {
     "lang": "hi",
     "slug": "fake-payment-screenshot-kaise-pehchane",
@@ -1689,7 +1689,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "seoTitle": "नकली पेमेंट स्क्रीनशॉट कैसे पहचानें? दुकानदार ऐसे चेक करें",
     "metaDescription": "ग्राहक ने पेमेंट स्क्रीनशॉट दिखाया? सामान देने से पहले अपना UPI ऐप और बैंक रिकॉर्ड देखें। pending बहाना, ज़्यादा पैसे लौटाओ धोखा और शिकायत का तरीका जानें।",
     "category": "Security",
-    "publishedAt": null,
+    "publishedAt": "2026-10-14",
     "authorName": "ScreenshotChecker",
     "readTime": "8 min read",
     "excerpt": "किराना दुकान, छोटे विक्रेता और OLX/Instagram पर सामान बेचने वालों के लिए आसान गाइड: ग्राहक का स्क्रीनशॉट नहीं, अपना UPI ऐप और बैंक रिकॉर्ड देखकर ही सामान दें। ₹1,850 का एक काल्पनिक उदाहरण भी शामिल है।",
