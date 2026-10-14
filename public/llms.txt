@@ -39,4 +39,4 @@ Languages: English, Hindi, Spanish, French, German, Japanese.
 
 - A screenshot is a claim. The reliable way to confirm a payment is to check the recipient's own bank or payment app; the reliable way to confirm a message or post is to find it at its source.
 - ScreenshotChecker does not measure fonts, icon positions or layout, and has no access to WhatsApp, social platforms, banks or payment networks.
-- Processing happens in the browser; the site uses Google Analytics for aggregate usage. See https://screenshotchecker.com/privacy/
+- Processing happens in the browser; the site uses Google Analytics for aggregate usage. Network requests, storage and the limits of each check: https://screenshotchecker.com/how-it-works/ . Privacy policy: https://screenshotchecker.com/privacy/

@@ -176,11 +176,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "Screenshot metadata limitations",
       "How to check screenshot text"
     ],
-    "relatedSlugs": [
-      "screenshot-analyzer-online",
-      "exif-metadata",
-      "smishing-fake-sms"
-    ],
+    "relatedSlugs": ["screenshot-analyzer-online", "fake-whatsapp-chat-screenshot", "fake-social-media-post-screenshot", "exif-metadata", "smishing-fake-sms"],
     "cta": {
       "label": "Inspect a Screenshot",
       "url": "/screenshot-analyzer",
@@ -290,10 +286,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
-      "screenshot-checker-online",
-      "exif-metadata"
-    ],
+    "relatedSlugs": ["screenshot-checker-online", "fake-whatsapp-chat-screenshot", "exif-metadata"],
     "cta": {
       "label": "Inspect a Screenshot",
       "url": "/screenshot-analyzer",
@@ -432,11 +425,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
-      "screenshot-checker-online",
-      "screenshot-analyzer-online",
-      "redact-screenshot-before-sharing"
-    ],
+    "relatedSlugs": ["fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
     "cta": {
       "label": "Review a Payment Screenshot",
       "url": "/payment-screenshot-checker/",
@@ -546,7 +535,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'AI image detector remover',
       'Winston AI image detector',
     ],
-    relatedSlugs: ['exif-metadata', 'screenshot-analyzer-online', 'screenshot-checker-online'],
+    relatedSlugs: ["fake-social-media-post-screenshot", "exif-metadata", "screenshot-analyzer-online", "screenshot-checker-online"],
     cta: {
       label: 'Analyze an Image',
       url: '/ai-image-detector',
@@ -789,7 +778,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Report phishing SMS',
       'Fraud SMS detector',
     ],
-    relatedSlugs: ['suspicious-link-checker-online', 'fake-upi-payment-screenshot', 'screenshot-checker-online'],
+    relatedSlugs: ["suspicious-link-checker-online", "fake-whatsapp-chat-screenshot", "fake-upi-payment-screenshot", "screenshot-checker-online"],
     cta: {
       label: 'Check a Suspicious Message',
       url: '/',
