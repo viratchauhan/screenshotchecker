@@ -54,3 +54,12 @@ Not done here (owner accounts or public posting): mark GA4 key events, Bing Webm
 ## 14 October 2026 - release
 
 Owner asked to deploy to screenshotchecker.com. Added /how-it-works/, internal links to the new guides, fixed a 7px mobile overflow in privacy findings and dashboard button wrapping, set the five guides' publication date to 2026-10-14. Cloudflare Crawler Hints enabled. Bing Webmaster Tools was already verified with sitemaps (Aug 2026). Merged PR #12 to main for the production build.
+
+## 15 October 2026 - improvement pass
+
+- Day 1: all five new guides indexed by Google. analysis_completed marked as a GA4 key event; redaction_exported and result_shared registered with one setup_test event each (to be marked 16 Oct).
+- Build step normalises internal links to trailing-slash URLs (1,532 links previously redirected; root cause of "Page with redirect" exclusions).
+- Homepage copy/FAQs corrected: no claims of font or alignment detection. Added quick screenshot test section and screenshot-tester FAQs. AI detector page: fake-photo guidance and FAQs.
+- New /spot-the-fake/ quiz (10 fictional rounds, score-only sharing, quiz events).
+- 32 per-page share images; WCAG AA button contrast; heading order fix. Mobile Lighthouse 92-97 performance, SEO 100.
+- Requested indexing for /spot-the-fake/ (Google, Bing) and resubmitted homepage and AI detector to Bing. Google daily inspection quota reached.
