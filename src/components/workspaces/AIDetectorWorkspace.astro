@@ -309,6 +309,19 @@ const faqs = getToolFaqs('ai-image-detector');
     </div>
   </main>
 
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 py-14 text-body leading-relaxed space-y-6 border-t border-hairline/80">
+    <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal tracking-tight">How to tell if a photo is fake or AI-generated</h2>
+    <p>A fake image is not always an AI image. It can be a real photo that was edited, a real photo shown with the wrong story, or a fully generated picture. Each needs a different check, so work through them in this order.</p>
+    <ol class="list-decimal list-inside space-y-2 text-sm">
+      <li><strong class="text-ink">Find the source.</strong> Use <a href="/reverse-image-search/" class="text-primary underline hover:text-primary-active">reverse image search</a> to look for earlier copies, the original photographer or a fact check. An old photo resurfacing with a new caption is one of the most common fakes, and no pixel test can catch it.</li>
+      <li><strong class="text-ink">Check Content Credentials.</strong> Some cameras, editors and AI tools attach a C2PA manifest saying how the image was made. If it is present, the detector above reads it. Most images have none, and missing credentials do not mean fake.</li>
+      <li><strong class="text-ink">Look for generator tells.</strong> Garbled lettering on signs, warped hands or jewellery, mismatched earrings, impossible shadows and reflections, and backgrounds that melt into patterns. Newer models avoid many of these, so their absence proves little.</li>
+      <li><strong class="text-ink">Look for edits.</strong> The <a href="/image-manipulation-checker/" class="text-primary underline hover:text-primary-active">error level analysis view</a> can highlight areas saved differently from the rest, and the <a href="/screenshot-metadata-checker/" class="text-primary underline hover:text-primary-active">metadata checker</a> shows editing software tags that survived. Resaving and social media compression weaken both.</li>
+      <li><strong class="text-ink">Weigh it together.</strong> One signal is a reason to look closer. Several independent signals, plus no credible source, is a reason not to share it.</li>
+    </ol>
+    <p>The detector reports each signal with its evidence instead of a single "AI score", because a confident percentage would claim more than any detector can know. For screenshots of posts that may be fake, see <a href="/blog/fake-social-media-post-screenshot/" class="text-primary underline hover:text-primary-active">how to check a tweet or Instagram screenshot</a>.</p>
+  </section>
+
   <!-- FAQ Section -->
   <FaqSection faqs={faqs} heading="Frequently Asked Questions About AI Image Detection" />
 

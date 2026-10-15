@@ -7,7 +7,7 @@ export const HOMEPAGE_FAQS: FaqItem[] = [
   {
     question: "What is a screenshot checker?",
     answer:
-      "A screenshot checker is an online tool designed to examine screenshots and digital images for visible content, readable text, embedded metadata, visual inconsistencies, and potential signs of editing. Users rely on screenshot checking to investigate suspicious messages, inspect transaction receipts, review privacy risks, and extract text without uploading sensitive data to remote servers.",
+      "A screenshot checker is an online tool that examines a screenshot for readable text, embedded metadata, scam warning signs and possible signs of editing. People use it to investigate suspicious messages, review payment receipts, check what a screenshot reveals before sharing it, and extract text. ScreenshotChecker does this in your browser without uploading the image.",
   },
   {
     question: "Can I check a screenshot online for free?",
@@ -17,7 +17,7 @@ export const HOMEPAGE_FAQS: FaqItem[] = [
   {
     question: "Can a screenshot checker detect edited images?",
     answer:
-      "A screenshot checker can identify visual editing signals such as compression differences across image regions, font inconsistencies, unnatural alignment, and altered metadata. However, automated analysis detects potential manipulation indicators rather than offering an absolute guarantee that an image has or has not been modified.",
+      "It can surface some signals: regions where compression differs (error level analysis), metadata left by editing software, and text that contradicts itself or matches scam patterns. It does not measure fonts or layout, and a carefully made or fully generated fake may show no signal at all. Results are clues to investigate, not a guarantee either way.",
   },
   {
     question: "What is the difference between a screenshot checker and screenshot analyzer?",
@@ -27,7 +27,7 @@ export const HOMEPAGE_FAQS: FaqItem[] = [
   {
     question: "Can a screenshot checker verify a payment screenshot?",
     answer:
-      "A screenshot checker can inspect payment receipts, bank transfer slips, and UPI screenshots for visual consistency, typography irregularities, and tampered digits. However, an image check cannot prove that money was actually deposited or cleared. Always verify transactions directly in your bank account or payment provider app.",
+      "It can read the receipt text and flag details worth questioning, such as amounts, dates or reference text that do not fit together. The dedicated payment checker is built for Indian UPI receipts. No image check can prove money was deposited or cleared: always confirm the credit in your own bank or payment app before handing over goods.",
   },
   {
     question: "Can screenshots contain metadata?",
@@ -43,5 +43,15 @@ export const HOMEPAGE_FAQS: FaqItem[] = [
     question: "Is screenshot analysis 100% accurate?",
     answer:
       "No automated screenshot analysis is 100% accurate. Image compression, platform resizing, low resolution, and legitimate photo adjustments can obscure or mimic manipulation signals. Screenshot analysis provides helpful digital evidence and risk indicators to assist human evaluation, not unquestionable proof.",
+  },
+  {
+    question: "How do I test if a screenshot is real or fake?",
+    answer:
+      "Start at the source: ask to see the message, post or payment live in the app, or check it yourself in your own account. Then add the screenshot to ScreenshotChecker to read its text, flag scam wording and contradictions, show metadata and highlight regions saved differently. No screenshot test can prove an image is genuine, but these steps tell you what to verify.",
+  },
+  {
+    question: "Is there a free screenshot tester online?",
+    answer:
+      "Yes. ScreenshotChecker is a free screenshot tester that runs in your browser with no signup. Add or paste a screenshot to get extracted text, warning signs, metadata and an error level analysis view, each with a note on what it cannot tell you.",
   },
 ];

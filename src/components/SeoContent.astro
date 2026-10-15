@@ -26,7 +26,7 @@
         What Is a Screenshot Checker?
       </h2>
       <p>
-        A <strong>screenshot checker</strong> is a specialized software tool that inspects screenshots and images for underlying evidence, readable text, metadata, and potential signals of editing. Rather than treating an image as a simple flat picture, a screenshot checker investigates structural elements inside—including font alignment, typography consistency, compression boundaries, and embedded technical data.
+        A <strong>screenshot checker</strong> is a specialized software tool that inspects screenshots and images for underlying evidence, readable text, metadata, and potential signals of editing. Rather than treating an image as a simple flat picture, ScreenshotChecker reads the text in it, checks that text for scam and consistency warning signs, shows the file's metadata, and highlights regions where compression differs.
       </p>
       <p>
         People use a <strong>screenshot checker online</strong> for everyday situations: an urgent SMS warning that an account is locked, a transaction slip for a money transfer, or a captured social media thread. Because screenshots can be created quickly, cropped easily, or edited with basic graphics software, they can sometimes present misleading or selective representations.
@@ -110,16 +110,36 @@
         A <strong>fake screenshot checker</strong> can identify signals that may indicate manipulation, but no automated software can guarantee that every screenshot is authentic or counterfeit.
       </p>
       <p>
-        When screenshots are edited, they often contain subtle inconsistencies:
+        Edited screenshots can leave clues. Some you can spot by eye; some a tool can surface:
       </p>
       <ul class="list-disc list-inside space-y-1.5 text-sm pl-1">
-        <li><strong>Inconsistent Fonts and Weights:</strong> Spliced text often exhibits mismatched typefaces, unnatural letter spacing, or uneven anti-aliasing.</li>
-        <li><strong>Unusual Alignment and Spacing:</strong> Inserted text or numbers may align poorly with surrounding UI borders.</li>
+        <li><strong>By eye: fonts, spacing and alignment.</strong> Zoom in on amounts, names and times and compare them with the text around them. ScreenshotChecker does not measure fonts or layout, so this step is yours.</li>
+        <li><strong>Text that does not add up:</strong> OCR reads the words, and rules flag amounts, dates, references or wording that contradict each other or match common scam patterns.</li>
         <li><strong>Localized Compression Inconsistencies:</strong> Modifying a portion of an image and resaving can produce varying JPEG compression rates between modified and original regions.</li>
         <li><strong>Contradictory Metadata:</strong> Internal EXIF tags or editor software fingerprints may contradict visible timestamps.</li>
       </ul>
       <p>
         ScreenshotChecker does not claim to always tell if a screenshot is fake. Instead, it identifies signals that may indicate manipulation and helps you investigate the image further.
+      </p>
+    </section>
+
+    <!-- 4b. Is this screenshot real? -->
+    <section class="space-y-4">
+      <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal tracking-tight">
+        Is This Screenshot Real? A Quick Screenshot Test
+      </h2>
+      <p>
+        If you want to test a screenshot right now, run these five checks. The first two settle most cases; the tool helps with the rest.
+      </p>
+      <ol class="list-decimal list-inside space-y-1.5 text-sm pl-1">
+        <li><strong>Find it at the source.</strong> Ask to see the message, post or payment live in the app, or look it up yourself. A real post is still on the account; a real payment is in your own bank or UPI app.</li>
+        <li><strong>Ask for the original file.</strong> A forwarded or re-saved copy loses metadata and detail. The original is better evidence.</li>
+        <li><strong>Read the text carefully.</strong> Add the screenshot above: OCR pulls out the words, and rules flag scam wording and details that contradict each other.</li>
+        <li><strong>Look for edited regions.</strong> The <a href="/image-manipulation-checker/" class="text-primary underline hover:text-primary-active">error level analysis view</a> can highlight areas that were saved differently. Treat a bright patch as a reason to look closer, not proof.</li>
+        <li><strong>Compare versions.</strong> If you have two copies, the <a href="/screenshot-comparison/" class="text-primary underline hover:text-primary-active">comparison tool</a> shows exactly what changed.</li>
+      </ol>
+      <p>
+        Guides for common cases: <a href="/blog/fake-whatsapp-chat-screenshot/" class="text-primary underline hover:text-primary-active">WhatsApp chats</a>, <a href="/blog/fake-social-media-post-screenshot/" class="text-primary underline hover:text-primary-active">tweets and Instagram posts</a>, <a href="/blog/fake-upi-payment-screenshot/" class="text-primary underline hover:text-primary-active">UPI payments</a>, <a href="/blog/fake-payment-screenshot-paypal-venmo-cash-app/" class="text-primary underline hover:text-primary-active">PayPal, Venmo and Cash App</a> and <a href="/blog/fake-bank-transfer-screenshot/" class="text-primary underline hover:text-primary-active">bank transfers</a>.
       </p>
     </section>
 
@@ -151,9 +171,9 @@
         With our <a href="/payment-screenshot-checker" class="text-primary underline hover:text-primary-active">Payment Screenshot Review</a> tool, you can check transaction captures for:
       </p>
       <ul class="list-disc list-inside space-y-1.5 text-sm pl-1">
-        <li>Digit alignment anomalies around currency amounts and fees.</li>
-        <li>Inconsistent font weights on sender and recipient fields.</li>
-        <li>Compression artifacts around edited timestamps and transaction IDs.</li>
+        <li>Amounts, dates and reference text that contradict each other or break the rules for that receipt type.</li>
+        <li>Missing or unusual transaction reference text.</li>
+        <li>Scam wording around the receipt, such as refund or "sent by mistake" requests.</li>
         <li>Exposed financial data that should be redacted before sharing.</li>
       </ul>
       <p>

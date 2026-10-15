@@ -7,7 +7,7 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
   'ai-image-detector': [
     {
       question: 'How does this AI image detector identify synthetic images?',
-      answer: 'Our detector combines C2PA Content Credentials provenance checking with visual artifact inspection, including Error Level Analysis (ELA), frequency domain noise variance, and typographic anomalies common in AI generation models like Midjourney, DALL-E, and Stable Diffusion.',
+      answer: 'It combines several independent signals: C2PA Content Credentials if the file carries them, metadata, Error Level Analysis (ELA), texture and frequency statistics, and malformed words in any text OCR can read (garbled signage is common in generated images). Each signal is shown with its evidence. None of them alone proves an image is AI-generated or real.',
     },
     {
       question: 'Is any AI image detection tool 100% accurate?',
@@ -16,6 +16,14 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
     {
       question: 'Are my images uploaded to external cloud servers for AI detection?',
       answer: 'No. All forensic checks, C2PA manifest parsing, and image analysis execute entirely inside your local web browser sandbox using client-side WebAssembly and JavaScript.',
+    },
+    {
+      question: 'How can I tell if a photo is fake?',
+      answer: 'Look for where it came from first. Run a reverse image search to find earlier or original copies, check whether a trusted outlet or the person shown published it, and look for fact checks. Then inspect the file: Content Credentials, metadata and ELA can add clues. Visual tells such as warped hands, impossible reflections or garbled text help, but newer generators avoid many of them.',
+    },
+    {
+      question: 'Is a fake image detector the same as an AI image detector?',
+      answer: 'Not quite. A fake can be a real photo that was edited, cropped or shown out of context, as well as a fully generated image. AI-detection signals cover generated images; ELA and comparison help with edits; and only source checks, such as reverse image search, catch a real photo used in the wrong context.',
     },
   ],
 
