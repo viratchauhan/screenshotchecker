@@ -1,0 +1,245 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { QUIZ_ROUNDS, QUIZ_TIERS } from '../data/spotTheFake';
+
+const canonicalUrl = 'https://screenshotchecker.com/spot-the-fake/';
+const pageTitle = 'Spot the Fake Screenshot: Free Scam Quiz (10 Rounds)';
+const pageDescription =
+  'Can you tell a scam text, fake payment or edited chat from the real thing? Ten quick fictional rounds, an explanation after each, and a score to share.';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://screenshotchecker.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Spot the Fake quiz', item: canonicalUrl },
+      ],
+    },
+    {
+      '@type': 'Quiz',
+      '@id': `${canonicalUrl}#quiz`,
+      name: 'Spot the Fake Screenshot',
+      description: pageDescription,
+      url: canonicalUrl,
+      educationalLevel: 'Beginner',
+      about: ['Phishing', 'Scam messages', 'Fake payment screenshots', 'Edited screenshots'],
+      inLanguage: 'en',
+      isAccessibleForFree: true,
+    },
+  ],
+};
+---
+
+<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} structuredData={structuredData}>
+  <Header currentPath="/spot-the-fake" />
+
+  <main class="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+    <div class="text-center mb-8">
+      <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block mb-2">Quiz · 10 rounds · about 3 minutes</span>
+      <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink tracking-tight mb-4">Spot the fake screenshot</h1>
+      <p class="text-base text-body leading-relaxed max-w-xl mx-auto">
+        Scam texts, fake payments and edited chats. For each screenshot, decide whether it looks normal or shows a red flag. Every brand, name and number here is made up.
+      </p>
+    </div>
+
+    <section id="quiz" class="space-y-5 scroll-mt-24" aria-live="polite">
+      <div class="flex items-center justify-between text-xs font-mono text-muted">
+        <span id="quiz-progress">Round 1 of {QUIZ_ROUNDS.length}</span>
+        <span id="quiz-score">Score: 0</span>
+      </div>
+      <div class="h-1.5 rounded-full bg-surface-card overflow-hidden" aria-hidden="true">
+        <div id="quiz-bar" class="h-full bg-primary transition-all" style="width:0%"></div>
+      </div>
+
+      <div id="quiz-card" class="space-y-4"></div>
+
+      <div id="quiz-choices" class="grid grid-cols-2 gap-3">
+        <button type="button" data-choice="trust" class="btn-secondary !h-12 !text-sm">Looks normal</button>
+        <button type="button" data-choice="flag" class="btn-primary !h-12 !text-sm">Red flag</button>
+      </div>
+
+      <div id="quiz-feedback" hidden class="rounded-xl border border-hairline bg-surface-card p-5 space-y-3">
+        <p id="quiz-verdict" class="font-serif text-xl text-ink"></p>
+        <ul id="quiz-why" class="list-disc pl-5 space-y-1.5 text-sm text-body"></ul>
+        <p class="text-sm text-body"><strong class="text-ink">What to do:</strong> <span id="quiz-next"></span></p>
+        <button type="button" id="quiz-continue" class="btn-primary w-full !h-11">Next round</button>
+      </div>
+    </section>
+
+    <section id="quiz-result" hidden class="text-center space-y-5 py-6 scroll-mt-24">
+      <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block">Your result</span>
+      <p class="font-serif text-6xl text-ink" id="result-score">0/10</p>
+      <p class="font-serif text-2xl text-ink" id="result-title"></p>
+      <p class="text-body max-w-md mx-auto" id="result-text"></p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <button type="button" id="result-share" class="btn-primary !h-11">Share my score</button>
+        <button type="button" id="result-retry" class="btn-secondary !h-11">Try again</button>
+      </div>
+      <p id="result-share-status" class="text-xs text-muted min-h-[1rem]" role="status"></p>
+      <div class="rounded-2xl border border-hairline bg-surface-card p-6 text-left space-y-3 mt-6">
+        <h2 class="font-serif text-xl text-ink">Got a real screenshot you are unsure about?</h2>
+        <p class="text-sm text-body">Check it for scam wording, contradictions, metadata and signs of editing. It runs in your browser and the image is not uploaded.</p>
+        <a href="/" class="btn-primary inline-flex !h-11">Check a screenshot</a>
+      </div>
+    </section>
+
+    <section class="mt-14 space-y-4 text-body leading-relaxed border-t border-hairline pt-10">
+      <h2 class="font-serif text-2xl text-ink">The habits behind every round</h2>
+      <ul class="list-disc pl-5 space-y-2 text-sm">
+        <li><strong class="text-ink">Hurry is a tactic.</strong> Deadlines of minutes or hours exist to stop you checking.</li>
+        <li><strong class="text-ink">Check at the source.</strong> Open the app or website yourself, or call the number on your card. Never use links or numbers from the message.</li>
+        <li><strong class="text-ink">A screenshot is a claim.</strong> Payments are confirmed in your own account; posts and messages are confirmed where they were published.</li>
+        <li><strong class="text-ink">Codes and PINs are yours alone.</strong> Nobody legitimate needs your OTP, and you never need a UPI PIN to receive money.</li>
+      </ul>
+      <p class="text-sm">More detail: <a href="/blog/smishing-fake-sms/" class="text-primary underline">fake SMS and WhatsApp messages</a>, <a href="/blog/fake-whatsapp-chat-screenshot/" class="text-primary underline">edited WhatsApp chats</a>, <a href="/blog/fake-upi-payment-screenshot/" class="text-primary underline">fake UPI payments</a> and <a href="/blog/fake-payment-screenshot-paypal-venmo-cash-app/" class="text-primary underline">PayPal, Venmo and Cash App scams</a>.</p>
+    </section>
+  </main>
+
+  <Footer />
+<script define:vars={{ rounds: QUIZ_ROUNDS, tiers: QUIZ_TIERS }} is:inline>
+  window.__SC_QUIZ__ = { rounds, tiers };
+</script>
+
+<script>
+  type Round = (typeof import('../data/spotTheFake'))['QUIZ_ROUNDS'][number];
+  type Tier = (typeof import('../data/spotTheFake'))['QUIZ_TIERS'][number];
+  const { rounds, tiers } = (window as unknown as { __SC_QUIZ__: { rounds: Round[]; tiers: Tier[] } }).__SC_QUIZ__;
+  const track = (name: string, params: Record<string, unknown> = {}) =>
+    (window as unknown as { scTrack?: (n: string, p?: Record<string, unknown>) => void }).scTrack?.(name, params);
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const card = $('quiz-card');
+  const choices = $('quiz-choices');
+  const feedback = $('quiz-feedback');
+  let index = 0;
+  let score = 0;
+  let started = false;
+
+  const esc = (t: string) => t.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+  // [[clue]] -> plain text before answering, highlighted after.
+  const clue = (t: string, reveal: boolean) =>
+    esc(t).replace(/\[\[(.+?)\]\]/g, (_, inner) => (reveal ? `<mark class="clue">${inner}</mark>` : inner));
+
+  function renderRound(reveal: boolean) {
+    const r = rounds[index];
+    const head = `<div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-hairline">
+        <div class="min-w-0"><p class="font-semibold text-ink truncate">${esc(r.sender)}</p>${r.senderNote ? `<p class="text-[11px] text-muted">${esc(r.senderNote)}</p>` : ''}</div>
+        <span class="text-[11px] font-mono text-muted shrink-0">${esc(r.kind === 'receipt' ? 'Payment screenshot' : r.kind.toUpperCase())}${r.time ? ' · ' + esc(r.time) : ''}</span>
+      </div>`;
+    let body = '';
+    if (r.body) {
+      body = `<div class="p-4"><div class="${r.kind === 'sms' ? 'bubble-them' : ''} text-sm leading-relaxed text-ink">${clue(r.body, reveal)}</div></div>`;
+    } else if (r.chat) {
+      body = `<div class="p-4 space-y-2">${r.chat.map((l) => `<div class="flex ${l.from === 'me' ? 'justify-end' : 'justify-start'}"><div class="${l.from === 'me' ? 'bubble-me' : 'bubble-them'} text-sm leading-relaxed text-ink max-w-[85%]">${clue(l.text, reveal)}<span class="block text-[10px] text-muted text-right mt-1 font-mono">${clue(l.time, reveal)}</span></div></div>`).join('')}</div>`;
+    } else if (r.receipt) {
+      const x = r.receipt;
+      body = `<div class="p-5 text-center space-y-2">
+          <p class="text-xs font-mono text-muted">${esc(x.app)}</p>
+          <p class="text-success font-semibold">✓ ${esc(x.status)}</p>
+          <p class="font-serif text-4xl text-ink">${clue(x.amount, reveal)}</p>
+          ${x.amountWords ? `<p class="text-xs text-body">${clue(x.amountWords, reveal)}</p>` : ''}
+          <div class="text-left text-xs text-body border-t border-hairline pt-3 mt-3 space-y-1">
+            <p><span class="text-muted">Paid to:</span> ${esc(x.to)}</p><p><span class="text-muted">Ref:</span> ${esc(x.ref)}</p><p><span class="text-muted">Date:</span> ${esc(x.date)}</p>
+          </div></div>`;
+    }
+    card.innerHTML = `<p class="text-xs text-muted">Fictional example · ${esc(r.region)}</p>
+      <div class="mock-screen rounded-2xl border border-hairline bg-canvas shadow-sm overflow-hidden">${head}${body}</div>`;
+  }
+
+  function updateHeader() {
+    $('quiz-progress').textContent = `Round ${Math.min(index + 1, rounds.length)} of ${rounds.length}`;
+    $('quiz-score').textContent = `Score: ${score}`;
+    $('quiz-bar').style.width = `${(index / rounds.length) * 100}%`;
+  }
+
+  function answer(choice: 'trust' | 'flag') {
+    if (!started) { started = true; track('quiz_started'); }
+    const r = rounds[index];
+    const correct = choice === r.answer;
+    if (correct) score++;
+    renderRound(true);
+    choices.hidden = true;
+    feedback.hidden = false;
+    $('quiz-verdict').textContent = `${correct ? 'Correct.' : 'Not quite.'} ${r.verdict}`;
+    $('quiz-why').innerHTML = r.why.map((w) => `<li>${esc(w)}</li>`).join('');
+    $('quiz-next').textContent = r.doNext;
+    $('quiz-continue').textContent = index === rounds.length - 1 ? 'See my score' : 'Next round';
+    $('quiz-score').textContent = `Score: ${score}`;
+    ($('quiz-continue') as HTMLButtonElement).focus();
+  }
+
+  function next() {
+    index++;
+    if (index >= rounds.length) return finish();
+    feedback.hidden = true;
+    choices.hidden = false;
+    renderRound(false);
+    updateHeader();
+    (choices.querySelector('button') as HTMLButtonElement).focus();
+  }
+
+  function finish() {
+    $('quiz').hidden = true;
+    $('quiz-result').hidden = false;
+    const tier = tiers.find((t) => score >= t.min)!;
+    $('result-score').textContent = `${score}/${rounds.length}`;
+    $('result-title').textContent = tier.title;
+    $('result-text').textContent = tier.text;
+    track('quiz_completed', { result: `score_${score}`, warning_count: score });
+    $('quiz-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function restart() {
+    index = 0; score = 0; started = false;
+    $('quiz').hidden = false;
+    $('quiz-result').hidden = true;
+    feedback.hidden = true;
+    choices.hidden = false;
+    $('result-share-status').textContent = '';
+    renderRound(false);
+    updateHeader();
+    $('quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  async function share() {
+    const url = 'https://screenshotchecker.com/spot-the-fake/?utm_source=quiz_share&utm_medium=social';
+    const text = `I scored ${score}/${rounds.length} on Spot the Fake Screenshot. Can you tell a scam from the real thing?`;
+    const status = $('result-share-status');
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: 'Spot the Fake Screenshot', text, url });
+        track('result_shared', { share_method: 'quiz_native', result: `score_${score}` });
+        status.textContent = 'Shared. Thanks!';
+        return;
+      }
+      await navigator.clipboard.writeText(`${text} ${url}`);
+      track('result_shared', { share_method: 'quiz_copy', result: `score_${score}` });
+      status.textContent = 'Copied your score and link. Paste it anywhere.';
+    } catch (error) {
+      if ((error as DOMException)?.name !== 'AbortError') status.textContent = `Copy this link: ${url}`;
+    }
+  }
+
+  choices.addEventListener('click', (e) => {
+    const btn = (e.target as Element).closest('button[data-choice]');
+    if (btn) answer(btn.getAttribute('data-choice') as 'trust' | 'flag');
+  });
+  $('quiz-continue').addEventListener('click', next);
+  $('result-retry').addEventListener('click', restart);
+  $('result-share').addEventListener('click', share);
+
+  renderRound(false);
+  updateHeader();
+</script>
+</Layout>
+
+
+<style is:global>
+  .mock-screen .bubble-them { background: var(--color-surface-card); border: 1px solid var(--color-hairline); border-radius: 14px 14px 14px 4px; padding: 10px 12px; display: inline-block; }
+  .mock-screen .bubble-me { background: color-mix(in srgb, var(--color-accent-teal) 22%, var(--color-canvas)); border-radius: 14px 14px 4px 14px; padding: 10px 12px; display: inline-block; }
+  .mock-screen mark.clue { background: color-mix(in srgb, var(--color-warning) 35%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; }
+</style>

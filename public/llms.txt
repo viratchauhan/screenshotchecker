@@ -20,6 +20,11 @@ Languages: English, Hindi, Spanish, French, German, Japanese.
 - [Suspicious Link Checker](https://screenshotchecker.com/suspicious-link-checker/): Looks a URL up in a historical labelled URL dataset. A match or no match is not a current safety certificate.
 - [Screenshot Detector](https://screenshotchecker.com/screenshot-detector/): Clues about whether an image is a screenshot or a camera photo.
 
+## Learn
+
+- [Spot the Fake Screenshot quiz](https://screenshotchecker.com/spot-the-fake/): Ten fictional scam, legitimate and edited screenshots with an explanation after each.
+- [How it works](https://screenshotchecker.com/how-it-works/): Network requests, storage and the limits of each check.
+
 ## Guides
 
 - [How to check if a screenshot is real or edited](https://screenshotchecker.com/blog/screenshot-checker-online/)
