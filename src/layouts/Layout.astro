@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 interface Props {
   title?: string;
@@ -22,7 +24,7 @@ const {
   ogType = "website",
   ogTitle,
   ogDescription,
-  ogImage = "https://screenshotchecker.com/og-image.png",
+  ogImage: ogImageProp,
   siteName = "ScreenshotChecker",
   structuredData,
   robots = "index, follow",
@@ -52,6 +54,10 @@ const fullTitle =
 
 const effectiveOgTitle = ogTitle || fullTitle;
 const effectiveOgDescription = ogDescription || description;
+// Per-page share image: public/og/<path-with-dashes>.png when it exists, else the site default.
+const ogSlug = Astro.url.pathname.replace(/^\/|\/$/g, '').replace(/\//g, '-');
+const ogImage = ogImageProp
+  || (ogSlug && existsSync(join(process.cwd(), 'public', 'og', `${ogSlug}.png`)) ? `/og/${ogSlug}.png` : 'https://screenshotchecker.com/og-image.png');
 const effectiveOgImage = ogImage.startsWith('http') ? ogImage : `https://screenshotchecker.com${ogImage.startsWith('/') ? ogImage : '/' + ogImage}`;
 
 // Site-wide Organization JSON-LD Schema
@@ -164,6 +170,9 @@ if (structuredData) {
     <meta property="og:description" content={effectiveOgDescription} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={effectiveOgImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={siteName} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
