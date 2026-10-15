@@ -25,7 +25,7 @@ for (const article of getAllArticles()) {
     const time = doc.querySelector(`time[datetime="${date}"]`);
     assert.equal(time?.textContent, formatArticleDate(date), `${article.slug}: visible and machine dates agree`);
   }
-  const link = [...index.querySelectorAll('a')].find(a => a.getAttribute('href') === `/blog/${article.slug}`);
+  const link = [...index.querySelectorAll('a')].find(a => a.getAttribute('href').replace(/\/$/, '') === `/blog/${article.slug}`);
   assert.ok(link, `${article.slug}: index link`);
   if (article.publishedAt) {
     assert.ok(link.querySelector(`time[datetime="${article.publishedAt}"]`), `${article.slug}: index date`);

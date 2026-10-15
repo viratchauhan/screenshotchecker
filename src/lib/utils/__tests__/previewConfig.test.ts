@@ -2,17 +2,22 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 
-test('branch Preview opts in without changing the reviewed production configuration', () => {
+test('production serves only the custom domains, with no workers.dev or preview URLs', () => {
   const config = JSON.parse(readFileSync('wrangler.jsonc', 'utf8'));
-  const { previews, ...production } = config;
-  assert.deepEqual(previews, {});
-  // Exact production fields from the reviewed 8678ae3 checkpoint. In particular,
-  // do not activate the unused Worker backend or add production data bindings.
-  assert.deepEqual(production, {
+  // Owner decision 14 Oct 2026: deploy only to screenshotchecker.com (and www),
+  // close the *.workers.dev and per-branch preview addresses. Do not activate the
+  // unused Worker backend or add production data bindings.
+  assert.deepEqual(config, {
     $schema: 'node_modules/wrangler/config-schema.json',
     name: 'screenshotchecker',
     compatibility_date: '2026-08-20',
     assets: { directory: './dist' },
+    workers_dev: false,
+    preview_urls: false,
+    routes: [
+      { pattern: 'screenshotchecker.com', custom_domain: true },
+      { pattern: 'www.screenshotchecker.com', custom_domain: true },
+    ],
   });
 });
 

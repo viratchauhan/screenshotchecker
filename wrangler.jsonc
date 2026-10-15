@@ -5,8 +5,6 @@
   "assets": {
     "directory": "./dist"
   },
-  // Serve only on the real domains. No *.workers.dev address and no
-  // per-branch/per-version preview URLs.
   "workers_dev": false,
   "preview_urls": false,
   "routes": [

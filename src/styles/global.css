@@ -107,7 +107,8 @@
 
 /* Custom Design System Components following DESIGN.md */
 .btn-primary {
-  background-color: var(--color-primary);
+  /* Slightly deeper than --color-primary so white text meets WCAG AA (4.8:1). */
+  background-color: #ad5b40;
   color: var(--color-on-primary);
   font-family: var(--font-sans);
   font-size: 14px;
@@ -126,7 +127,7 @@
   text-decoration: none;
 }
 .btn-primary:hover, .btn-primary:active {
-  background-color: var(--color-primary-active);
+  background-color: #934a32;
 }
 .btn-primary:disabled {
   background-color: var(--color-primary-disabled);

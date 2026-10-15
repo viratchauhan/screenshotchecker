@@ -290,7 +290,7 @@ const faqs = getToolFaqs('screenshot-ocr');
   document.getElementById('ocr-redact-btn')?.addEventListener('click', () => {
     if (currentDataUrl) {
       if (!setHandoffImage(currentDataUrl, 'ocr')) return;
-      window.location.href = '/screenshot-redactor';
+      window.location.href = '/screenshot-redactor/';
     }
   });
 

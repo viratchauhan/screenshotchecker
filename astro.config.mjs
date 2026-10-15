@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
+import trailingSlashLinks from './integrations/trailing-slash-links.mjs';
 import { getAllArticles } from './src/data/blogArticles.ts';
 
 // https://astro.build/config
@@ -14,6 +15,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [
+    trailingSlashLinks(),
     sitemap({
       filter: (page) =>
         !page.includes('/404') &&
