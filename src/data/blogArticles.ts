@@ -701,7 +701,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       text: 'Never click links, download attachments, or call phone numbers contained in unsolicited SMS or WhatsApp messages. Always verify claims through official banking apps or verified websites directly.',
     },
     introduction:
-      'Smishing—short for SMS phishing—is one of the fastest-growing cyber threats worldwide. Fraudsters send deceptive text messages and WhatsApp notifications designed to create panic, urgency, or excitement. By posing as trusted institutions like banks, postal couriers, toll agencies, or government departments, attackers trick recipients into disclosing passwords, paying fake fees, or installing malware.',
+      'Smishing (short for SMS phishing) is one of the fastest-growing cyber threats worldwide. Fraudsters send deceptive text messages and WhatsApp notifications designed to create panic, urgency, or excitement. By posing as trusted institutions like banks, postal couriers, toll agencies, or government departments, attackers trick recipients into disclosing passwords, paying fake fees, or installing malware.',
     contentSections: [
       {
         heading: 'What Is Smishing?',
@@ -716,9 +716,10 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         level: 'h2',
         paragraphs: [
           '1. Bank KYC & Account Lockout Threats: Messages claiming your bank account or debit card will be blocked unless you complete immediate ReKYC verification. Scammers often attach an APK file or direct you to a lookalike phishing login page.',
-          '2. Missed Delivery & Parcel Reschedule Scams: Notifications claiming a package from UPS, FedEx, or USPS could not be delivered due to an incorrect address or unpaid ₹35 / $2 redelivery fee.',
-          '3. Toll Violation & DMV License Threats: Messages claiming outstanding toll balances (SunPass, E-ZPass) with aggressive threats of driver\'s license non-renewal and legal fines.',
-          '4. WhatsApp Job & Review Tasks: Unsolicited job recruitment messages offering unrealistic compensation (e.g. $10 per review) for writing Google reviews or rating products.',
+          '2. Missed Delivery & Parcel Reschedule Scams: Notifications claiming a package from UPS, FedEx, or USPS could not be delivered due to an incorrect address or unpaid ₹35 / $2 redelivery fee. In India these often impersonate India Post: see <a href="/blog/india-post-courier-sms-scam/">how to check an India Post or courier address SMS</a>.',
+          '3. Toll Violation & DMV License Threats: Messages claiming outstanding toll balances (SunPass, E-ZPass) with aggressive threats of driver\'s license non-renewal and legal fines. More detail: <a href="/blog/unpaid-toll-text-scam/">unpaid toll text scams</a>.',
+          '4. WhatsApp Job & Review Tasks: Unsolicited job recruitment messages offering unrealistic compensation (e.g. $10 per review) for writing Google reviews or rating products. These usually end with a deposit request: see <a href="/blog/whatsapp-telegram-task-job-scam/">WhatsApp and Telegram task job scams</a>.',
+          'Electricity Disconnection Threats: SMS or WhatsApp messages claiming your power will be cut tonight unless you call an "electricity officer" or pay through a link. See <a href="/blog/electricity-bill-disconnection-sms-scam/">electricity bill disconnection SMS scams</a>.',
           '5. Fake Gift Cards & Lottery Rewards: Unsolicited notifications claiming you won a $500 Target or Amazon gift card requiring a link click to claim.',
         ],
         callout: {
@@ -778,7 +779,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Report phishing SMS',
       'Fraud SMS detector',
     ],
-    relatedSlugs: ["suspicious-link-checker-online", "fake-whatsapp-chat-screenshot", "fake-upi-payment-screenshot", "screenshot-checker-online"],
+    relatedSlugs: ["india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
     cta: {
       label: 'Check a Suspicious Message',
       url: '/',
@@ -872,7 +873,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
           '• Exact URL Match: The most specific match level. Identifies when the complete web address (including path and parameter payload) exists verbatim in our threat intelligence dataset.',
           '• Exact Hostname Match: Matches the specific host or server name (e.g. login.example.com).',
           '• Registrable Domain Match: Evaluates the parent root domain (e.g. example.com). If a root domain has a known bad classification, any subdomains branching from it inherit that high-risk designation.',
-          'What does "No Local Match" mean? If a URL returns No Local Match, it means the address is not currently listed in the local dataset. It is vital to remember that No Match does NOT guarantee that a link is safe—newly registered scam domains may not yet be cataloged.',
+          'What does "No Local Match" mean? If a URL returns No Local Match, it means the address is not currently listed in the local dataset. It is vital to remember that No Match does NOT guarantee that a link is safe, because newly registered scam domains may not yet be cataloged.',
         ],
       },
       {
@@ -945,7 +946,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Link checker safe',
       'VirusTotal link checker',
     ],
-    relatedSlugs: ['smishing-fake-sms', 'fake-upi-payment-screenshot', 'screenshot-checker-online'],
+    relatedSlugs: ['smishing-fake-sms', 'india-post-courier-sms-scam', 'unpaid-toll-text-scam'],
     cta: {
       label: 'Verify a Suspicious Link Now',
       url: '/suspicious-link-checker',
@@ -1223,8 +1224,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     ],
     "peopleAlsoSearch": [],
     "relatedSlugs": [
+      "whatsapp-telegram-task-job-scam",
       "screenshot-checker-online",
-      "screenshot-analyzer-online",
       "smishing-fake-sms"
     ],
     "cta": {
@@ -1835,6 +1836,631 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "पेमेंट स्क्रीनशॉट जांचें",
       "url": "/payment-screenshot-checker/",
       "description": "OCR से रसीद का text और चेतावनी के संकेत देखें। पैसा मिला या नहीं, यह हमेशा अपने UPI ऐप या बैंक में पक्का करें।"
+    }
+  },
+  {
+    "slug": "india-post-courier-sms-scam",
+    "title": "India Post or Courier SMS Saying Your Address Is Incomplete? How to Check",
+    "seoTitle": "India Post Address Update SMS: Real or Scam?",
+    "metaDescription": "Got an SMS saying your India Post or courier parcel is held for an incomplete address? Learn the red flags, how to check safely and where to report it.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-10-16",
+    "authorName": "ScreenshotChecker",
+    "readTime": "8 min read",
+    "excerpt": "Why the 'parcel held, update your address' text is a common smishing pattern in India, how to check your parcel without the link, what to do if you already paid, and how to report the SMS on Chakshu.",
+    "targetKeywords": [
+      "india post sms scam",
+      "india post address update sms fake",
+      "parcel held incomplete address sms",
+      "fake courier delivery sms india",
+      "india post redelivery fee scam",
+      "report fraud sms chakshu"
+    ],
+    "keyTakeaway": {
+      "title": "Never update your address from an SMS link",
+      "text": "Treat any text that says your parcel is held because of an incomplete address, and asks you to tap a link, as suspicious. Close the message, then check your order through the shop's own app or by typing the official India Post or courier website yourself. Never pay a redelivery fee or enter card, UPI or OTP details on a page you reached from that SMS."
+    },
+    "introduction": "Almost certainly not, if it came with a link asking you to update your address. The PIB Fact Check unit has called this kind of India Post message fake and said India Post does not send messages asking people to update their address to get an article delivered. Do not tap the link: check your order in the shop's or courier's own app, or type the official India Post website yourself, and if you already entered card or UPI details, call your bank and the 1930 helpline straight away.",
+    "contentSections": [
+      {
+        "heading": "How the Fake Parcel Address SMS Works",
+        "paragraphs": [
+          "The message usually pretends to come from India Post or a courier. It says a parcel is waiting at a warehouse or hub but cannot be delivered because the address is incomplete or wrong. A deadline follows, often 24 or 48 hours, after which the parcel will supposedly be returned. The fix is always the same: tap a link and update your details.",
+          "The timing makes it convincing. Many people in India have an online order or a document on the way at any given moment, so a delivery problem feels plausible. The message rarely names what was sent or who sent it, because the sender does not know.",
+          "The link opens a page dressed up to look like a postal or courier site. It may ask for your name, address and phone number first, then for a small redelivery or address-correction fee. Paying that fee is where card numbers, expiry dates, CVVs, UPI PINs or one-time passwords get typed into a form controlled by the sender. The small amount is the bait; the details you enter are the real target.",
+          "According to <a href=\"https://www.newsonair.gov.in/govt-debunks-sms-from-india-post-asking-people-to-update-their-address\">a News on AIR report of the PIB Fact Check</a>, the Fact Check unit labelled an India Post message asking people to update their address as fake, said India Post does not send such messages to deliver articles, and advised people not to click links in them."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "<strong>A tiny fee is not a sign of safety.</strong> A ₹25 or ₹50 charge feels harmless, but the payment form can capture full card or UPI details. Do not pay any amount on a page you opened from a delivery SMS."
+        }
+      },
+      {
+        "heading": "How to Check Whether Your Parcel Is Really Held",
+        "paragraphs": [
+          "Verify the parcel through a route you chose yourself, not one the message chose for you. That one habit protects you however convincing the SMS looks.",
+          "If you are expecting an online order, open the shopping app or website where you bought it and look at the order's own tracking page. It will usually name the courier and show a consignment or AWB number. For India Post items, type <a href=\"https://www.indiapost.gov.in/\">indiapost.gov.in</a> into your browser yourself and use its tracking option with the number from your receipt or order page. For a private courier, use that courier's official app or the site you reach by typing its name yourself, not a search ad or a link from the SMS.",
+          "If the official tracking shows a genuine delivery problem, contact the seller or the courier through the support channel listed in your order, or visit your local post office with the receipt. A real address issue can be resolved without paying a stranger through a link."
+        ],
+        "checklist": [
+          "Do not tap the link, reply, or call any number given in the SMS.",
+          "Ask yourself whether you are actually expecting a parcel, and from whom.",
+          "Open the shop's own app or website and check that order's tracking status.",
+          "For India Post items, type indiapost.gov.in yourself and track using the number from your receipt or order page.",
+          "For a private courier, use its official app or a site you typed yourself.",
+          "If tracking shows a real problem, use the support contact listed in your order or visit the post office."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Type the address yourself.</strong> Close the SMS, open the official app or type the official website, and check from there. If the problem is real, it will show up in your own tracking."
+        }
+      },
+      {
+        "heading": "Red Flags in the Message and the Link",
+        "paragraphs": [
+          "No single clue settles it, but several together should stop you. These are the signs worth looking for before you do anything else.",
+          "<strong>The sender is an ordinary mobile number.</strong> A delivery message from a personal-looking ten-digit number, or a number with a foreign country code, deserves extra caution. A named business sender is not proof of anything, though, so use this only as one clue among several.",
+          "<strong>The link does not lead to the official domain.</strong> India Post's site ends in .gov.in. Watch for lookalikes that add words such as update, redeliver or track to the brand name, use endings like .top, .xyz, .com or .org, or hide behind a shortened link. A brand name somewhere inside the address does not make it official.",
+          "<strong>The message manufactures urgency.</strong> Phrases like update within 24 hours, final notice or parcel will be returned are designed to make you act before you think.",
+          "<strong>It asks for money or payment details to release a parcel.</strong> A redelivery or address-correction fee requested through a text link is the step that turns a fake message into a financial loss.",
+          "<strong>It is vague about the parcel.</strong> No sender name, no order reference, no item description. Genuine tracking pages for your own orders usually tell you exactly what is coming and from whom."
+        ]
+      },
+      {
+        "heading": "Worked Example: A Fictional Noida Order",
+        "paragraphs": [
+          "<strong>This is a fictional example. The names, numbers, link and amounts are invented for teaching and do not describe a real case or a test of any tool.</strong> Meera lives in Sector 62, Noida, and is waiting for a pair of headphones she ordered online two days ago.",
+          "On Tuesday evening she receives an SMS from a ten-digit number starting +91 7XXXX: \"IndiaPost: Your parcel is held at our hub because the address is incomplete. Update within 24 hours or it will be returned: indiapost-redelivery.example/in. Redelivery fee Rs 25.\"",
+          "<strong>Step 1: pause and compare.</strong> Meera notices four things: a mobile-number sender, a link that is not indiapost.gov.in, a 24-hour deadline and a fee. She does not tap the link.",
+          "<strong>Step 2: check her own records.</strong> She opens the shopping app where she placed the order. The order page shows a private courier, not India Post, with the status shipped and an expected delivery date of Thursday. Nothing mentions an address problem.",
+          "<strong>Step 3: gather clues safely.</strong> She takes a screenshot of the SMS and uploads it to the scam checker to see which warning-sign rules it raises, and pastes the link text into the link checker without opening it. Whatever those tools return, her decision rests on step 2: her real order tracking shows no problem.",
+          "<strong>Step 4: report and delete.</strong> She reports the SMS through Chakshu on Sanchar Saathi, then deletes it. On Thursday the headphones arrive as scheduled.",
+          "<strong>A different ending.</strong> Suppose her neighbour received the same SMS and paid the ₹25 by card before realising. He should call his bank's official helpline at once to block the card and dispute the payment, call 1930, and file a complaint on cybercrime.gov.in. Reporting the SMS on Chakshu is useful too, but it does not replace a fraud complaint."
+        ]
+      },
+      {
+        "heading": "How ScreenshotChecker Can Help (and Where It Stops)",
+        "paragraphs": [
+          "ScreenshotChecker cannot tell you whether India Post or a courier really sent a message. It has no access to postal systems, courier databases, your bank or your phone's message records. What it can do is give you clues to weigh alongside your own checks.",
+          "The <a href=\"/screenshot-scam-checker/\">Screenshot Scam Checker</a> reads the text in a screenshot of the SMS with OCR and applies rule-based checks for common scam patterns, such as deadline pressure, parcel or delivery bait and requests for codes. Its results are warning signs, not a verdict. A fresh variation of the wording may raise few or no signals, OCR can misread small or cropped text, and a genuine urgent notice can also trigger a rule.",
+          "The <a href=\"/suspicious-link-checker/\">Suspicious Link Checker</a> compares a pasted link against a historical, labelled dataset of URLs in your browser, without visiting the site. A match tells you that address or domain appears in those past records with a label. <strong>No match does not mean the link is safe.</strong> Scam domains are often new and short-lived, so a link created last week may simply not be in the dataset. For a delivery SMS, the more useful question is simpler: is this the official domain? If it is not indiapost.gov.in or the courier's own site, do not open it.",
+          "If you want to share a screenshot of the scam with family or a group to warn them, consider hiding your own phone number and any personal details first with the <a href=\"/screenshot-redactor/\">screenshot redactor</a>."
+        ],
+        "cta": {
+          "label": "Check a Suspicious SMS Screenshot",
+          "url": "/screenshot-scam-checker/",
+          "description": "Review scam warning signs in the message text, then verify your parcel through the official app or website."
+        }
+      },
+      {
+        "heading": "What to Do If You Already Entered Card or UPI Details",
+        "paragraphs": [
+          "Act quickly. Call your bank's official helpline, from the number on your card or in your banking app, and ask them to block the card or UPI access and to raise a dispute for any payment you did not authorise. The RBI's <a href=\"https://rbi.org.in/Scripts/NotificationUser.aspx?Id=11040\">customer protection circular on unauthorised electronic transactions</a> tells customers to report such transactions to their bank as early as possible, warns that delay increases the risk of loss, and requires banks to provide round-the-clock reporting channels.",
+          "If money has left your account, or you shared card, UPI or OTP details, report it as financial cyber fraud. The <a href=\"https://sancharsaathi.gov.in/sfc/\">Sanchar Saathi Chakshu page</a> itself directs people who have already been defrauded to the cyber crime helpline 1930 or to <a href=\"https://cybercrime.gov.in/\">cybercrime.gov.in</a>, rather than to Chakshu.",
+          "Keep the SMS, a screenshot of it, the sender number, the link text, the time you received it, and any transaction reference or bank SMS about the payment. These details help your bank and the police. Do not share an OTP or PIN with anyone who calls offering to help reverse the payment."
+        ],
+        "checklist": [
+          "Call your bank's official helpline and block the card or UPI access.",
+          "Ask the bank to dispute any payment you did not authorise.",
+          "Call 1930 and file a complaint on cybercrime.gov.in.",
+          "Change any password you typed on the fake page, and check for unfamiliar UPI mandates.",
+          "Save the SMS, sender number, link text and transaction references."
+        ],
+        "callout": {
+          "type": "info",
+          "text": "<strong>Entered details but did not pay?</strong> Still call your bank. A card number with its expiry date and CVV can be misused later, so ask whether the card should be blocked and reissued."
+        }
+      },
+      {
+        "heading": "Report the Fake SMS on Chakshu",
+        "paragraphs": [
+          "If you did not lose money, report the message through Chakshu, the Department of Telecommunications' facility on the <a href=\"https://sancharsaathi.gov.in/\">Sanchar Saathi portal</a> for suspected fraud calls, SMS and WhatsApp messages. The Sanchar Saathi site describes reaching it through its citizen services section or the Sanchar Saathi app, choosing the medium and category, entering the details, optionally attaching a screenshot and verifying your mobile number with an OTP. Check the portal for the current steps, as the layout can change.",
+          "After reporting, delete the message and block the sender. If you have older relatives who shop online or receive post, show them what this message looks like; a familiar example is often the best warning.",
+          "Want to practise spotting messages like this one? Try the <a href=\"/spot-the-fake/\">Spot the Fake quiz</a>, ten rounds of fictional scam and legitimate messages."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Does India Post send SMS asking you to update your address?",
+        "answer": "The PIB Fact Check unit has said India Post does not send messages asking people to update their address for delivery, and labelled such a message fake. Treat any SMS with a link to update your address as suspicious and check your parcel through the official India Post website or your order page instead."
+      },
+      {
+        "question": "Is the small redelivery fee in a parcel SMS real?",
+        "answer": "Do not pay it. A fee requested through a link in a delivery text is a common way to collect card or UPI details. If you think a parcel is genuinely stuck, check the official tracking and contact the seller, courier or post office through a channel you found yourself."
+      },
+      {
+        "question": "I clicked the link but did not enter anything. What should I do?",
+        "answer": "Close the page and do not return to it. Do not download anything it offers. If you did not enter details or install anything, report the SMS on Chakshu and delete it. If you are unsure what you entered, call your bank to be safe."
+      },
+      {
+        "question": "I paid the fee by card or UPI. Can I get the money back?",
+        "answer": "Call your bank's official helpline immediately to block the card or UPI access and dispute the transaction, then call 1930 and file a complaint on cybercrime.gov.in. Recovery is not guaranteed, but reporting quickly gives your bank and the authorities the best chance to act."
+      },
+      {
+        "question": "Where do I report a fake India Post or courier SMS?",
+        "answer": "If you did not lose money, report it through Chakshu on the Sanchar Saathi portal or app. If you lost money or shared payment details, call 1930 or report on cybercrime.gov.in, and contact your bank."
+      },
+      {
+        "question": "Can ScreenshotChecker tell me if the delivery SMS is genuine?",
+        "answer": "No. The scam checker looks for common warning signs in the message text and the link checker compares a link with a historical labelled dataset. Both give clues, not proof, and a link with no match is not necessarily safe. Confirm your parcel through the official app or website."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "smishing-fake-sms",
+      "suspicious-link-checker-online",
+      "screenshot-checker-online"
+    ],
+    "cta": {
+      "label": "Check a Suspicious SMS Screenshot",
+      "url": "/screenshot-scam-checker/",
+      "description": "See which scam warning signs appear in the message text. Then verify your parcel through the official India Post or courier app or website."
+    }
+  },
+  {
+    "slug": "electricity-bill-disconnection-sms-scam",
+    "title": "Electricity Disconnection Tonight SMS: Is It a Scam?",
+    "seoTitle": "Electricity Disconnection SMS Scam: How to Check It",
+    "metaDescription": "Got an SMS saying your power will be cut tonight and to call an electricity officer? Learn the scam pattern, how to check your bill and what to do if you paid.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-10-16",
+    "authorName": "ScreenshotChecker",
+    "readTime": "7 min read",
+    "excerpt": "How fake power-cut messages lead to a phone call, a screen-sharing app or a payment link, how to check your bill through official channels, and what to do if you already responded.",
+    "targetKeywords": [
+      "electricity bill scam message",
+      "electricity disconnection SMS scam",
+      "electricity officer call scam",
+      "electricity bill not updated message",
+      "fake electricity bill SMS India",
+      "bijli bill fraud message"
+    ],
+    "keyTakeaway": {
+      "title": "Check the bill yourself, never through the message",
+      "text": "Treat a message that threatens a power cut tonight and gives a mobile number to call as a likely scam. Do not call, click or install anything it suggests. Open your discom's official app or website, or look at your latest bill, and contact the discom only through the helpline it publishes there."
+    },
+    "introduction": "Very likely, yes. A message warning that your electricity will be disconnected tonight because your bill is \"not updated\", and asking you to call an \"electricity officer\" on a mobile number, matches a fraud pattern that electricity distribution companies have publicly warned about. Do not call the number, click any link or install any app it mentions. Check your bill status yourself in your discom's official app or website, or on your latest bill, and use only the helpline printed there.",
+    "contentSections": [
+      {
+        "heading": "How the Electricity Disconnection Scam Works",
+        "paragraphs": [
+          "The message usually arrives by SMS or WhatsApp. It says the power supply will be cut tonight, often at a specific time, because last month's payment was not recorded. It ends with a 10-digit mobile number and an instruction to contact an officer immediately. The deadline is the hook: it leaves little time to stop and check.",
+          "Delhi discom Tata Power-DDL described this pattern in a <a href=\"https://tatapower-ddl.com/pr-details/199/2169686/fraud-alert-advisory---tata-power-delhi-distribution-limited-warns-its-customers-against-frauds\">fraud alert advisory</a>: messages claiming disconnection because a bill payment was not updated, requests to call or WhatsApp an unofficial number, pressure to install third-party apps, and demands for money towards a supposedly pending bill.",
+          "Once you call, the \"officer\" typically offers to fix the problem on the spot. Two common routes follow. In one, you are asked to install an app that lets the caller see or control your screen, supposedly to update your payment. In the other, you are sent a link or a private UPI ID or account to pay an amount that will \"update\" the bill. <a href=\"https://www.kotak.bank.in/en/safe-banking/safe-banking-articles/the-electricity-sms-fraud.html\">Kotak Mahindra Bank's safety guide</a> explains how the caller can then use the access or the details you shared to debit your bank account."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "<strong>Never install a screen-sharing or remote-access app because a caller asks you to.</strong> With that app open, someone can watch you type a UPI PIN, read an OTP as it arrives or operate your banking apps. No genuine bill correction requires a stranger to see your phone screen."
+        }
+      },
+      {
+        "heading": "Red Flags in a Fake Power-Cut Message",
+        "paragraphs": [
+          "No single sign settles the question, but this scam tends to stack several of them together. Tata Power-DDL's <a href=\"https://tatapower-ddl.com/pr-details/199/2065686/advisory---tata-power-delhi-distribution-limited-warns-customers-against-cyber-frauds\">earlier advisory</a> lists an urgent tone, suspicious links, requests for account or payment details, and messages from a personal number or an unusual sender ID. It also says the company does not ask customers to call unknown numbers or download third-party apps for these matters. Nagaland's Department of Power stated in a <a href=\"https://ipr.nagaland.gov.in/node/8992\">2022 public notice</a> that it does not send disconnection messages via WhatsApp.",
+          "Those statements come from specific discoms. Check what your own distribution company says about its official sender IDs, apps and helplines, rather than assuming every discom works the same way."
+        ],
+        "checklist": [
+          "A deadline of tonight or within hours, often with an exact clock time.",
+          "A vague reason such as \"previous month bill not updated\" with no bill amount, consumer number or due date you can match.",
+          "An instruction to call or WhatsApp a personal 10-digit mobile number instead of the helpline on your bill.",
+          "A sender that is a personal number, or a sender ID that does not match the discom name on your bill.",
+          "A caller who asks you to install an app (especially from a link), share your screen, read out an OTP or pay into a private account.",
+          "Spelling or grammar errors, or a message signed by a generic \"electricity office\" or \"power officer\"."
+        ]
+      },
+      {
+        "heading": "How to Verify Your Electricity Bill Safely",
+        "paragraphs": [
+          "Leave the message alone and go to a source you already trust. Your latest paper or PDF bill shows your consumer or account number, the amount due, the due date and the discom's official customer care number. Your discom's official app or website, opened by typing the address yourself or installing it from your phone's app store, shows whether a payment is outstanding.",
+          "If your last payment was made through a bank or UPI app, open that app's transaction history to confirm it went through, and keep the reference. If the discom's records and your payment history disagree, raise it through the discom's published helpline or app. Do not use any number supplied in the warning message, even if the caller sounds official.",
+          "Kotak's guide makes the same point for both sides: look up your bank's and utility's official contact details on their own websites before sharing anything. A genuine overdue bill will still be visible through these official channels tomorrow morning."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Verify through the bill or the official app, never through the message.</strong> Phone numbers, links and \"officers\" supplied by a disconnection warning are part of the claim you are trying to check, so they cannot be used to check it."
+        }
+      },
+      {
+        "heading": "Worked Example: A Fictional Greater Noida Household",
+        "paragraphs": [
+          "<strong>This is a fictional teaching scenario. The names, number, amounts and message are invented, and it is not a real case or a test of any tool's accuracy.</strong> At 7:40 pm, Meera Sharma in Greater Noida receives an SMS from a 10-digit mobile number: \"Dear consumer, your electricity will be disconnected tonight at 9:30 pm because your last bill is not updated. Call electricity officer 98XXXXXX21 immediately.\"",
+          "<strong>Step 1: pause and identify the claim.</strong> Meera notes what the message asserts: an unpaid or unrecorded bill and a cut-off at 9:30 pm. It contains no consumer number and no amount. Her father, Rajesh, suggests calling the number \"just to ask\". They decide not to, because the call is exactly what the sender wants.",
+          "<strong>Step 2: check independently.</strong> Meera takes last month's bill from the drawer. It shows her consumer number and an amount of ₹2,340 due on a date that has not yet passed. She opens the discom's official app, which she had installed from the Play Store months ago, and sees the same bill with no overdue amount. Her UPI app also shows last month's ₹2,180 payment as successful.",
+          "<strong>Step 3: review the screenshot as a clue.</strong> Meera takes a screenshot of the SMS and uploads it to the <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a>. The result lists urgency wording, a power-cut threat and a mobile number paired with an instruction to call. She treats these as reasons for caution that agree with what she already found, not as a verdict.",
+          "<strong>Outcome.</strong> Meera's official records show nothing overdue. She does not call or reply, reports the message through Chakshu, blocks the sender and warns her neighbours' society group. If her app had shown a genuine overdue amount, the safe next step would have been to pay it through the discom's own app or website, still without using the number in the SMS."
+        ]
+      },
+      {
+        "heading": "What ScreenshotChecker Can and Cannot Tell You",
+        "paragraphs": [
+          "The <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads the text in your screenshot with OCR and compares it against configured warning-sign rules. For this kind of message, it can flag urgency phrases such as a disconnection tonight, threats of a power cut, references to an \"electricity office\" or \"power officer\", phone numbers presented with an instruction to call, and mentions of remote-access apps such as AnyDesk or TeamViewer.",
+          "<strong>These are clues, not proof.</strong> The checker does not contact your discom, look up your bill, or know who owns a phone number. A genuine reminder from your discom can contain some of the same words, and a reworded scam can avoid the configured phrases. OCR can also misread a blurred or cropped image. A low-risk result does not mean a message is safe, and a high-risk label is not a confirmed finding of fraud.",
+          "If the message includes a link, do not open it on your phone. You can paste it into the <a href=\"/suspicious-link-checker/\">suspicious link checker</a>, which compares it with a historical labelled dataset; a match or no-match is not a safety certificate. Before posting the screenshot in a group, hide your consumer number and address with the <a href=\"/screenshot-redactor/\">screenshot redactor</a>. To practise spotting these patterns, try the <a href=\"/spot-the-fake/\">Spot the Fake quiz</a>."
+        ],
+        "cta": {
+          "label": "Check a Suspicious Message",
+          "url": "/screenshot-scam-checker/",
+          "description": "Upload a screenshot to see which urgency, threat and callback-number patterns were flagged, then verify through your discom's official channels."
+        }
+      },
+      {
+        "heading": "Already Called, Paid or Installed an App? Act Now",
+        "paragraphs": [
+          "Speed matters if money or access may be involved. The <a href=\"https://ps.keralapolice.gov.in/ernakulamruralcyber-ps/notifications/National-Cyber-Crime-Reporting-Helpline-No-1930-3338\">Kerala Police cyber police station notice</a> says that the 1930 helpline runs 24 hours a day and that complaints, including financial fraud, can be filed and tracked on the National Cyber Crime Reporting Portal at cybercrime.gov.in. It stresses reporting promptly so evidence can be collected before it is lost.",
+          "If you only received the message and did not respond, you can still report it. The DoT's <a href=\"https://sancharsaathi.gov.in/sfc/\">Chakshu facility on Sanchar Saathi</a> accepts reports of suspected fraud calls, SMS and WhatsApp messages, and lists electricity bill messages among its examples. It is meant for suspected fraud communication; if you have already lost money, it directs you to 1930 or cybercrime.gov.in instead.",
+          "The steps below are general precautions. Follow your bank's instructions where they differ."
+        ],
+        "checklist": [
+          "If you installed a screen-sharing or remote-access app, turn off mobile data and Wi-Fi, then uninstall the app.",
+          "Call your bank on the number printed on your card, passbook or official app, report the fraud and ask it to block your cards, UPI or net banking as needed.",
+          "Call 1930 and file a complaint at cybercrime.gov.in, especially if money left your account. Note the complaint reference.",
+          "From a device you trust, change your UPI PIN, net banking password and any password you typed while the app was running.",
+          "Keep the original SMS or WhatsApp message, the caller's number, call times and transaction references as evidence.",
+          "If you only received the message, report it through Chakshu on Sanchar Saathi and block the sender."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Do electricity companies send SMS messages about disconnection?",
+        "answer": "Some do. Tata Power-DDL, for example, says its official SMS come from a sender ID containing its name, so a message about your bill is not automatically fake. The warning signs are a deadline of tonight, a personal mobile number to call and requests to install apps or pay through a link. Check your bill status in your discom's official app, website or latest bill."
+      },
+      {
+        "question": "Is it safe to call the electricity officer number in the message?",
+        "answer": "No. Use only the customer care number printed on your bill or published on your discom's official website or app. A number supplied by an unexpected disconnection warning is part of the claim you are trying to verify."
+      },
+      {
+        "question": "Why does the caller ask me to install AnyDesk or another app?",
+        "answer": "Screen-sharing and remote-access apps can let the caller see or control your phone, including OTPs, UPI PIN entry and banking apps. Discom advisories such as Tata Power-DDL's tell customers not to install such apps at a caller's request."
+      },
+      {
+        "question": "I paid a small amount through the link. What should I do?",
+        "answer": "Contact your bank immediately through its official number, call 1930 and file a complaint at cybercrime.gov.in. Change your UPI PIN and banking passwords from a trusted device, and keep the message, number and transaction reference as evidence."
+      },
+      {
+        "question": "Can ScreenshotChecker tell me if the message is a scam?",
+        "answer": "It can flag warning signs in the text of a screenshot, such as urgency, power-cut threats and a phone number with an instruction to call. These are clues, not proof. It cannot see your bill, contact your discom or identify who owns a number."
+      },
+      {
+        "question": "Where do I report the message if I did not lose money?",
+        "answer": "You can report suspected fraud calls, SMS and WhatsApp messages through the Chakshu facility on the Sanchar Saathi portal. You can also tell your discom through its official helpline so it is aware of the scam."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "smishing-fake-sms",
+      "suspicious-link-checker-online",
+      "redact-screenshot-before-sharing"
+    ],
+    "cta": {
+      "label": "Check a Suspicious Message",
+      "url": "/screenshot-scam-checker/",
+      "description": "Review urgency, threat and callback-number warning signs in a screenshot as clues, then confirm your bill through official discom channels."
+    }
+  },
+  {
+    "slug": "whatsapp-telegram-task-job-scam",
+    "title": "WhatsApp or Telegram Task Job Scam: Paid to Like Videos, Now Asked to Deposit?",
+    "seoTitle": "WhatsApp Task Job Scam: Paid to Like, Now Asked to Pay?",
+    "metaDescription": "Paid small amounts to like videos or rate hotels, now asked to deposit for prepaid tasks? It is a task scam. Stop paying, save evidence and report it fast.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-10-16",
+    "authorName": "ScreenshotChecker",
+    "readTime": "8 min read",
+    "excerpt": "How WhatsApp and Telegram task scams build trust with small payouts, why the earnings screenshots in the group prove nothing, and what to do in India, the US and the UK once they ask for a deposit.",
+    "targetKeywords": [
+      "whatsapp task scam",
+      "telegram task scam",
+      "youtube like job scam",
+      "prepaid task scam",
+      "hotel rating job scam",
+      "part time job scam whatsapp",
+      "task scam how to get money back"
+    ],
+    "keyTakeaway": {
+      "title": "A job that asks you to pay is not a job",
+      "text": "Once a 'part-time job' asks you to deposit your own money to unlock tasks, upgrade a level or release your earnings, treat it as a task scam. Stop paying, keep every chat and transaction record, and report it quickly through official channels. Paying again to 'unfreeze' a balance usually only increases the loss."
+    },
+    "introduction": "Yes. A job that pays you small amounts for liking YouTube videos or rating hotels, then asks you to deposit money for \"prepaid\" or \"merchant\" tasks, matches the pattern of a task scam. The early payouts are bait to win your trust; the balance shown in the app or group is not money you can withdraw. Stop paying now, save the evidence, and report it: in India call 1930 or file at cybercrime.gov.in, in the US use ReportFraud.ftc.gov, and in England, Wales and Northern Ireland use Report Fraud.",
+    "contentSections": [
+      {
+        "heading": "How a WhatsApp or Telegram task scam works",
+        "paragraphs": [
+          "Task scams follow a script. Indian and US authorities describe the same stages, even though the tasks and the vocabulary change from one wave to the next.",
+          "<strong>1. An unexpected offer.</strong> A message arrives on WhatsApp, Telegram, SMS or social media offering easy money from home. The <a href=\"https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=1982936&reg=48&lang=2\">Ministry of Home Affairs release on task-based part-time job frauds</a> says these campaigns were promoted through targeted online ads with phrases like \"ghar baithe job\" and then handed over to an agent on WhatsApp or Telegram.",
+          "<strong>2. Simple tasks and a small genuine payout.</strong> You are asked to like or subscribe to videos, rate places on a map or review hotels and products. A small amount really does arrive in your account. The <a href=\"https://consumer.ftc.gov/consumer-alerts/2025/08/how-spot-avoid-task-scams\">FTC's guide to spotting task scams</a> describes the same move: a modest payment early on to build trust, while an app or platform shows rising \"earnings\".",
+          "<strong>3. The Telegram group and the \"prepaid task\".</strong> You are added to a group or given a \"mentor\" or \"receptionist\". Now the tasks need money first: deposit an amount, complete a \"merchant\" or \"prepaid\" task and get it back with a commission. The first one or two may pay out to keep you going.",
+          "<strong>4. Rising deposits.</strong> The next task needs a bigger deposit, or a \"combo\" task appears that can only be finished by paying more. The MHA release describes victims being pushed to invest larger sums after the first commissions, with the money then frozen.",
+          "<strong>5. Withdrawal blocked.</strong> When you try to withdraw, a new obstacle appears: a \"tax\", an \"unfreezing fee\", a low \"credit score\" or a \"wrong operation\" penalty. The FTC notes that even people who deposit as told still cannot get the displayed earnings out, and the money they paid in is gone."
+        ]
+      },
+      {
+        "heading": "Red flags of a task job scam",
+        "paragraphs": [
+          "Any one of these is a reason to stop and check. Several together are the scam pattern itself."
+        ],
+        "checklist": [
+          "The job offer came out of the blue on WhatsApp, Telegram, SMS or Instagram, from someone you never applied to.",
+          "The work is trivially easy (likes, subscribes, map ratings, hotel or product reviews) but the pay per task is high.",
+          "There is no interview, no written contract and no verifiable employer, only a chat handle, a group and an app or website link.",
+          "You are asked to deposit money to unlock tasks, reach a new \"level\", finish a \"prepaid\", \"merchant\" or \"combo\" task, or release your balance.",
+          "Payouts come from different personal bank accounts or UPI IDs each time, not from a company.",
+          "Group members post constant screenshots of big earnings and \"payment received\" messages, and anyone who asks questions is removed.",
+          "Withdrawal is blocked by a fee, tax, penalty or score that you must pay to fix.",
+          "You are pressured to act fast: a task \"expires\", a bonus ends tonight, or your account will be \"frozen\"."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Never pay to get a job or to get paid.</strong> The FTC's task scam guide gives the same advice and warns against trusting anyone who offers to pay you for likes or positive ratings."
+        }
+      },
+      {
+        "heading": "Why the earnings screenshots in the group prove nothing",
+        "paragraphs": [
+          "Task scam groups are full of screenshots: dashboards showing large balances, UPI or bank receipts captioned \"withdrawal received\", and chats where a \"senior member\" thanks the mentor. Many of the other members may be the scammers' own accounts. A screenshot is a claim, not proof. Anyone can type a number into an app they control, crop a real receipt from an unrelated payment, or edit a chat image, as our guide on <a href=\"/blog/fake-whatsapp-chat-screenshot/\">fake WhatsApp chat screenshots</a> explains.",
+          "Even a genuine receipt only shows that someone sent someone money once. It does not show that the platform lets people withdraw, and small real payouts are part of the script. The <a href=\"https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=1982936&reg=48&lang=2\">MHA release</a> advises checking the receiver's name in your UPI app before paying, since a random individual's name can indicate a mule account, and asking where your initial commission actually came from.",
+          "The only balance that matters is the one in your own bank or UPI app. The number on the task website is whatever the operators choose to display."
+        ]
+      },
+      {
+        "heading": "Worked example: a fictional Delhi college student",
+        "paragraphs": [
+          "<strong>This scenario is fictional. The names, amounts, group and messages are invented for teaching and do not describe a real case.</strong>",
+          "Kabir, a second-year student in Delhi, gets a WhatsApp message from an unknown number: \"Hi, part-time job, earn ₹2,000 to ₹5,000 daily, just like YouTube videos.\" He likes three videos, sends screenshots, and receives ₹150 by UPI. The next day he earns ₹210 more. It feels real because the money is in his account.",
+          "He is moved to a Telegram group called \"Star Hotel Rating Team 27\" with a \"receptionist\" who explains \"prepaid merchant tasks\": deposit ₹1,000, rate five hotels, get ₹1,300 back. It works once. Then a task asks for ₹5,000, and the next is a \"combo task\" that needs ₹18,000 before anything can be withdrawn. Kabir borrows from a friend. The website now shows a balance of ₹31,400.",
+          "When he tries to withdraw, the receptionist says his \"credit score\" dropped because of a wrong operation and he must pay ₹25,000 to restore it. Meanwhile the group fills with screenshots of other members' withdrawals.",
+          "<strong>What Kabir does next.</strong> He stops paying. He notices that every payment he made went to a different person's name in his UPI app. He screenshots the WhatsApp chat, the Telegram group, the task website and every UPI transaction, notes the UTR numbers, and writes down the usernames and phone numbers. He calls 1930 the same evening and then files a complaint at cybercrime.gov.in. He also tells his bank. He does not reply to a stranger who later messages him offering to \"recover\" the money for a fee.",
+          "<strong>What his screenshots can and cannot do.</strong> Running the receptionist's messages through a scam-signal check may highlight wording such as a part-time job paid per task or a prepaid task demand. That supports his decision to stop, but the complaint rests on his own transaction records, not on any checker result."
+        ]
+      },
+      {
+        "heading": "Why you should not pay more to recover your money",
+        "paragraphs": [
+          "Once you have paid in, it is tempting to pay one more fee to release the balance. That is the point of the final stage. The fee is not a step towards withdrawal; it is the next deposit. If you pay the \"tax\", a \"processing charge\" or a \"security deposit\" usually follows.",
+          "The balance on the site was never real money held for you. Treat what you have already sent as the loss to report, and do not add to it."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "<strong>Stop sending money today, even if you are told your account will be frozen or your earnings forfeited.</strong> Those threats are designed to make you pay again."
+        }
+      },
+      {
+        "heading": "What to do now: report it and keep the evidence",
+        "paragraphs": [
+          "Speed matters, especially in India. The <a href=\"https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2042130&reg=48&lang=2\">Home Ministry's note on the Citizen Financial Cyber Fraud Reporting and Management System</a> explains that the 1930 helpline and immediate reporting of financial fraud exist so that funds can be stopped before they are moved on. There is no guarantee of recovery, but a quick report gives the best chance.",
+          "<strong>India:</strong> call the toll-free helpline 1930 and file a complaint on the National Cyber Crime Reporting Portal at cybercrime.gov.in. The <a href=\"https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=1982936&reg=48&lang=2\">MHA release</a> also asks citizens to report the phone numbers and social media handles used by fraudsters there. Inform your bank through its official app or helpline.",
+          "<strong>United States:</strong> report to the FTC at ReportFraud.ftc.gov, as the <a href=\"https://consumer.ftc.gov/consumer-alerts/2025/08/how-spot-avoid-task-scams\">FTC task scam guide</a> recommends, and contact your bank or the payment app you used.",
+          "<strong>United Kingdom:</strong> <a href=\"https://www.reportfraud.police.uk/news/report-fraud-service-goes-live/\">Report Fraud replaced Action Fraud on 4 December 2025</a> for England, Wales and Northern Ireland. Report at reportfraud.police.uk or call 0300 123 2040. In Scotland, contact Police Scotland on 101. Tell your bank as well."
+        ],
+        "checklist": [
+          "Stop all payments and do not send any more \"fees\", \"taxes\" or deposits.",
+          "Screenshot the full WhatsApp and Telegram chats, the group, member list, task website and your \"balance\", including usernames and phone numbers.",
+          "Save every transaction record from your bank or UPI app: date, amount, receiver name or UPI ID, and the UTR or reference number.",
+          "Note the website or app link, but do not keep logging in or click new links they send.",
+          "Report quickly: 1930 and cybercrime.gov.in in India, ReportFraud.ftc.gov in the US, Report Fraud (or Police Scotland on 101) in the UK.",
+          "Tell your bank through its official app or number, and change any passwords or PINs you shared.",
+          "Then block the contacts and leave the group, after your evidence is saved."
+        ]
+      },
+      {
+        "heading": "Beware \"recovery agents\" who contact you afterwards",
+        "paragraphs": [
+          "People who have lost money to a scam are often targeted again. Someone may message you claiming to be a lawyer, a cyber cell officer, a \"fund recovery\" firm or even the original platform, promising to get your money back for a fee.",
+          "The <a href=\"https://consumer.ftc.gov/articles/refund-and-recovery-scams\">FTC's page on refund and recovery scams</a> warns that government agencies and legitimate organisations do not charge you to help get a refund, and do not guarantee you will get money back. Anyone who asks for an upfront \"retainer\", \"processing fee\" or \"tax\" to recover your loss is a warning sign. Work only through the official reporting channels above and the police officers handling your complaint."
+        ]
+      },
+      {
+        "heading": "How ScreenshotChecker can help, and what it cannot do",
+        "paragraphs": [
+          "If you are unsure about a job offer before you pay anything, the <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> can read the text in a chat screenshot and look for scam wording. Its rule lists include phrases common in task scams, such as part-time jobs paid per task, easy daily earnings and prepaid task demands, alongside other pressure tactics. It explains which phrases it flagged and why.",
+          "It works only on the text it can read from the image and on patterns it knows. It has no access to WhatsApp, Telegram, your bank or the scammers' accounts, so it cannot confirm who sent a message or whether any payment happened. A flagged phrase is a warning sign, not proof of fraud, and if it finds no reliable match it says so rather than calling the message safe. A cleverly worded offer can slip past the rules.",
+          "For the earnings and \"payment received\" screenshots posted in the group, no tool can turn a screenshot into proof of a withdrawal. Check your own bank or UPI records instead. To practise recognising these messages, try the <a href=\"/spot-the-fake/\">Spot the Fake quiz</a>, ten rounds of fictional scam and legitimate messages."
+        ],
+        "cta": {
+          "label": "Check a chat screenshot for scam signals",
+          "url": "/screenshot-scam-checker/",
+          "description": "Flag task scam wording in a WhatsApp or Telegram screenshot. Treat results as warning signs and verify through official channels."
+        }
+      }
+    ],
+    "faq": [
+      {
+        "question": "They really paid me at the start. How can it be a scam?",
+        "answer": "Small genuine payouts are part of the script. They build trust so that you agree to deposit larger amounts later. Both the FTC and India's Ministry of Home Affairs describe early commissions followed by demands for bigger deposits that cannot be withdrawn."
+      },
+      {
+        "question": "Should I pay the tax or fee to withdraw my balance?",
+        "answer": "No. The withdrawal fee, tax or credit score repair charge is the next deposit, not a step towards getting paid. Stop paying, save your evidence and report the scam."
+      },
+      {
+        "question": "Can I get my money back from a task scam?",
+        "answer": "There is no guarantee, but reporting quickly gives the best chance. In India, call 1930 and file at cybercrime.gov.in as soon as possible, since fast reports can help stop funds being moved on. Also tell your bank. In the US report at ReportFraud.ftc.gov, and in England, Wales and Northern Ireland use Report Fraud."
+      },
+      {
+        "question": "Is liking YouTube videos or rating hotels for money a real job?",
+        "answer": "Treat any unsolicited offer to pay you for likes, subscribes or ratings as a scam. The FTC advises not to trust anyone offering payment for positive ratings or likes, and real employers do not recruit through random WhatsApp or Telegram messages."
+      },
+      {
+        "question": "Someone says they can recover my lost money for a fee. Should I trust them?",
+        "answer": "No. Recovery scams target people who have already lost money. The FTC says government agencies and legitimate organisations do not ask for money to help you get a refund. Use only official reporting channels and the police handling your case."
+      },
+      {
+        "question": "Can a scam checker prove the earnings screenshots in the group are fake?",
+        "answer": "No. A scam checker reads text and flags warning signs. It cannot prove that a screenshot is genuine or fake or confirm that a payment happened. What matters is that you cannot withdraw, and the only balance you can trust is in your own bank or UPI app."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-whatsapp-chat-screenshot",
+      "smishing-fake-sms",
+      "fake-upi-payment-screenshot"
+    ],
+    "cta": {
+      "label": "Check a chat screenshot for scam signals",
+      "url": "/screenshot-scam-checker/",
+      "description": "Look for task scam wording in a WhatsApp or Telegram screenshot, then stop paying and report through official channels."
+    }
+  },
+  {
+    "slug": "unpaid-toll-text-scam",
+    "title": "Unpaid Toll Text Scam: Is That E-ZPass, SunPass or FasTrak Message Real?",
+    "seoTitle": "Unpaid Toll Text? How to Tell If It's a Scam",
+    "metaDescription": "Got a text saying you owe an E-ZPass, SunPass or FasTrak toll? Don't tap the link. Check your account on the agency's own site, then report the text.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-10-16",
+    "authorName": "ScreenshotChecker",
+    "readTime": "7 min read",
+    "excerpt": "Why unpaid toll texts are a common smishing lure, what the FBI, FTC and toll agencies advise, how to check your real account, and what to do if you already paid.",
+    "targetKeywords": [
+      "unpaid toll text scam",
+      "E-ZPass text scam",
+      "SunPass text message scam",
+      "FasTrak scam text",
+      "toll smishing",
+      "is the unpaid toll text real"
+    ],
+    "keyTakeaway": {
+      "title": "Check the toll account yourself, never through the text",
+      "text": "Do not tap the link or reply. Type the toll agency's website into your browser yourself, or call the number on your statement or the back of your transponder paperwork, and look for a balance there. If your real account shows nothing owed, the text was not a bill. If you already paid through the link, call your card issuer right away and report the text."
+    },
+    "introduction": "Probably not. A text that says you owe a small unpaid toll and must pay at a link to avoid a late fee matches a widespread smishing scam that the FBI and FTC have both warned about, and NJ E-ZPass, SunPass and FasTrak have each said they do not collect payment that way. The safe check is to ignore the link, open the toll agency's real website or call its official number yourself, and see whether your account actually shows a balance. If you already paid, contact your card issuer and report the text.",
+    "contentSections": [
+      {
+        "heading": "What the unpaid toll text usually looks like",
+        "paragraphs": [
+          "The message is short and specific. It names a toll service, states a small balance, sets a deadline and offers a link to pay. In its <a href=\"https://www.ic3.gov/PSA/2024/PSA240412\">public service announcement on toll smishing (I-041224-PSA)</a>, the FBI's Internet Crime Complaint Center described texts claiming an outstanding toll of $12.51 with a threatened $50.00 late fee, a link to a site posing as the state toll service, and sending phone numbers that changed from state to state.",
+          "The FTC's <a href=\"https://consumer.ftc.gov/consumer-alerts/2025/01/got-text-about-unpaid-tolls-its-probably-scam\">January 2025 consumer alert</a> says these texts reach people whether or not they have driven on a toll road, and that the link leads to a page asking for card or bank details. The alert adds that scammers may also try to collect personal details such as a driver's license number, which can feed identity theft.",
+          "The small amount is the point. A $6 or $12 charge feels too minor to question, and the late fee threat pushes you to pay now rather than check. The link is usually a lookalike: a web address that mixes a toll brand or the words toll, pay or turnpike into a domain the agency does not use. The FBI's example was myturnpiketollservices.com, which sounds official but is not a toll agency's site."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "The toll agencies are real. E-ZPass, SunPass and FasTrak are genuine toll programs, which is exactly why scammers borrow their names. A text using a real agency's name, colors or wording is not evidence that the agency sent it."
+        }
+      },
+      {
+        "heading": "What toll agencies themselves say about these texts",
+        "paragraphs": [
+          "<strong>New Jersey E-ZPass.</strong> The New Jersey Turnpike Authority published a <a href=\"https://www.njta.gov/newsroom/reminder-new-jersey-e-zpass-does-not-send-unsolicited-text-messages-to-collect-payments/\">reminder in April 2025</a> that NJ E-ZPass does not send unsolicited texts to collect payments, and it urged customers not to click links in suspicious payment texts. The same notice explains one exception: accounts that have been sent to its collection agency may get texts from that agency. That is a good reason to confirm any claimed debt through your own account rather than through a link.",
+          "<strong>SunPass (Florida).</strong> A <a href=\"https://floridasturnpike.com/wp-content/uploads/2025/04/Phishing_Alert_Message.pdf\">SunPass smishing alert</a> says it does not send texts demanding immediate payment for unpaid tolls, advises against clicking links, replying (even with STOP) or calling unfamiliar numbers, and points customers to sunpass.com. The alert also lists the email addresses and text short code SunPass uses when it does contact customers, so check that alert on the official site rather than trusting contact details in a message.",
+          "<strong>FasTrak (San Francisco Bay Area).</strong> In an <a href=\"https://www.bayareafastrak.org/en/cms/news-detail-article28.shtml\">April 2024 fraud alert</a>, Bay Area FasTrak said it does not request payment by text with a link to a website, and asked customers to do FasTrak business only through bayareafastrak.org or its customer service line.",
+          "Other toll agencies have their own policies, and they can change. If your text names a different agency, look up that agency's own website by typing its address yourself or searching for it, and read its current guidance. Do not assume any agency's rules from this guide, and do not rely on a policy quoted inside the text itself."
+        ]
+      },
+      {
+        "heading": "How to check whether you really owe a toll",
+        "paragraphs": [
+          "The FBI and FTC give the same core advice: verify through a channel you already trust, not the one in the message. The <a href=\"https://www.ic3.gov/PSA/2024/PSA240412\">FBI PSA</a> recommends checking your account on the toll service's legitimate website and calling its official customer service number. Follow these steps in order."
+        ],
+        "checklist": [
+          "Do not tap the link, reply or call any number in the text. Leave it unopened while you check.",
+          "Take a screenshot of the message, including the sender number and the full link, so you can report it later.",
+          "Type the toll agency's website address into your browser yourself, or open its official app if you already use one. Do not copy the address from the text.",
+          "Log in to your account and look at your balance, recent trips and any notices. If you pay tolls by mail, check the paper invoice for the agency's details.",
+          "If you are unsure, call the customer service number printed on your statement, invoice or account paperwork, not one supplied in the text.",
+          "If your account shows nothing owed, treat the text as a scam. If it does show a real balance, pay through the official site or phone line, not the link."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "<strong>Pay tolls only through a website or phone number you found yourself.</strong> Even if you do owe a toll, paying through the link in an unexpected text sends your card details to whoever controls that link."
+        }
+      },
+      {
+        "heading": "Red flags in an unpaid toll text",
+        "paragraphs": [
+          "No single sign settles it, and a scam text can avoid all of them. Treat these as reasons to stop and verify, not as a scoring system."
+        ],
+        "checklist": [
+          "You did not expect a bill, or you have not driven on a toll road recently.",
+          "A small balance paired with a much larger late fee, a fine or a deadline of a day or two.",
+          "Threats about your license, registration or court action if you do not pay right away.",
+          "A link whose domain is not the agency's official website, often with extra words like pay, toll, service or a state name added.",
+          "The sender is an ordinary phone number or email-style address rather than a channel your agency says it uses.",
+          "The text asks for card details, a driver's license number or other personal data on a web page.",
+          "The message names a toll agency from a state you have not visited."
+        ]
+      },
+      {
+        "heading": "Fictional worked example: a New Jersey commuter",
+        "paragraphs": [
+          "<strong>This scenario is fictional. The person, amounts, phone number and link are invented for teaching and do not describe a real case or a test of any tool's accuracy.</strong>",
+          "Dana, a commuter who drives the Garden State Parkway most weekdays, gets a text from an unfamiliar ten-digit number: \"NJ E-ZPass: Your outstanding toll balance is $6.85. Pay by tomorrow to avoid a $45.00 late fee: ezpassnj-tollbalance.example/pay\". Because Dana really does use toll roads, the message feels plausible.",
+          "<strong>Step 1: pause.</strong> Dana does not tap the link. Dana screenshots the text so the sender number and full link are kept.",
+          "<strong>Step 2: look for clues.</strong> Dana uploads the screenshot to the ScreenshotChecker scam checker. It reads the text and flags warning signs such as the toll balance wording, the late fee threat, the short deadline and the presence of a payment link. Dana also types the link text into the suspicious link checker, which reports no match in its dataset. Dana notes that a no-match result says nothing about safety, because a newly registered scam domain may simply not be listed.",
+          "<strong>Step 3: verify independently.</strong> Dana types ezpassnj.com into the browser, logs in and finds no balance due and no notices. That account check, not the scam checker result, is what answers the question.",
+          "<strong>Step 4: report and delete.</strong> Dana files a complaint at ic3.gov including the sender number and link, forwards the text to 7726, uses the phone's report junk option and then deletes the message.",
+          "<strong>Alternative outcome.</strong> If Dana's account had shown a real unpaid toll, Dana would pay it through the official site. The text would still not become trustworthy: a scammer can guess correctly that a commuter uses toll roads."
+        ]
+      },
+      {
+        "heading": "How ScreenshotChecker can give you clues (and what it cannot do)",
+        "paragraphs": [
+          "The <a href=\"/screenshot-scam-checker/\">Screenshot Scam Checker</a> reads the text in a screenshot with OCR and applies rule-based checks for common scam patterns, including toll balance and late fee wording, urgency, threats and payment links. It explains which phrases triggered each warning. Those warnings are clues to help you decide whether to slow down. They are not a verdict, and a clean result does not mean the message is genuine.",
+          "The <a href=\"/suspicious-link-checker/\">Suspicious Link Checker</a> lets you paste or type a web address without opening it and compares it with a historical, labelled URL dataset. A match tells you that the address or its domain appears in that dataset with a past label. <strong>No match does not mean the link is safe:</strong> toll scam domains are often new, and a fresh domain will not be listed yet.",
+          "Neither tool has any access to E-ZPass, SunPass, FasTrak or any other toll account, so neither can tell you whether you owe money or confirm who sent a text. Only the agency's own website, app, statement or customer service line can do that. If you want to practise spotting these patterns, the <a href=\"/spot-the-fake/\">Spot the Fake quiz</a> mixes fictional scam and legitimate messages."
+        ],
+        "cta": {
+          "label": "Check a Toll Text Screenshot",
+          "url": "/screenshot-scam-checker/",
+          "description": "See which scam warning signs appear in the message text, then verify your balance on the toll agency's own site."
+        }
+      },
+      {
+        "heading": "What to do if you clicked, entered details or paid",
+        "paragraphs": [
+          "Act quickly but calmly. The <a href=\"https://www.ic3.gov/PSA/2024/PSA240412\">FBI PSA</a> advises anyone who clicked a link or entered information to secure their personal information and financial accounts and to dispute any charges they do not recognize. <a href=\"https://www.bayareafastrak.org/en/cms/news-detail-article28.shtml\">FasTrak</a> likewise tells customers who paid a fraudulent site to contact their bank or card company right away.",
+          "Reporting helps investigators and carriers. The FBI asks people to file a complaint at ic3.gov with the sending phone number and the website from the text. The FTC accepts reports at ReportFraud.ftc.gov, and its <a href=\"https://consumer.ftc.gov/articles/how-recognize-and-report-spam-text-messages\">guide to spam texts</a> explains how to copy the message and forward it to 7726 (SPAM) so your wireless carrier can block similar texts."
+        ],
+        "checklist": [
+          "If you paid or entered card details: call the number on the back of your card, report a fraudulent charge and ask about blocking or replacing the card.",
+          "If you entered bank details: contact your bank through its official app or the number on your statement.",
+          "If you entered a password: change it, and change it anywhere else you reused it.",
+          "If you shared your Social Security number: visit IdentityTheft.gov, the FTC's identity theft site, for next steps.",
+          "Watch your card and bank statements for unfamiliar charges over the following weeks and dispute any you find.",
+          "Report the text at ic3.gov and ReportFraud.ftc.gov, forward it to 7726, then delete it."
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "Keep your screenshot before deleting the text. It preserves the sender number and link for your card issuer and your reports. If you share it publicly, hide your own phone number and any account details first with the <a href=\"/screenshot-redactor/\">screenshot redactor</a>."
+        }
+      }
+    ],
+    "faq": [
+      {
+        "question": "Do toll agencies ever send real text messages?",
+        "answer": "Some do contact customers by text in specific situations. SunPass lists the short code it uses, and NJ E-ZPass says accounts in collections may get texts from its collection agency. NJ E-ZPass, SunPass and FasTrak have each said they do not use unsolicited texts with payment links to collect tolls. Because a real message and a fake one can look similar, check any claimed balance by logging in to your account on the agency's site yourself."
+      },
+      {
+        "question": "I have never driven on a toll road. Why did I get an unpaid toll text?",
+        "answer": "The FTC says these texts are sent whether or not the recipient has used a toll road. Scammers send them in bulk to many numbers, so receiving one says nothing about your driving history."
+      },
+      {
+        "question": "I tapped the link but did not enter anything. What should I do?",
+        "answer": "Close the page without entering any details. The FBI advises anyone who clicked a link to secure their personal and financial accounts, so keep your phone's software updated, watch your statements for unfamiliar charges and report the text to ic3.gov and ReportFraud.ftc.gov."
+      },
+      {
+        "question": "Should I reply STOP to the toll text?",
+        "answer": "No. The FTC advises not replying to unexpected texts, and SunPass's alert specifically says not to reply even with STOP. Report it as junk, forward it to 7726 and delete it."
+      },
+      {
+        "question": "Can ScreenshotChecker tell me whether the toll text is real?",
+        "answer": "No. The scam checker flags warning signs in the message text and the link checker compares a web address with a historical dataset. Both give clues only. Neither can see your toll account or confirm who sent a message, and a no-match link result does not mean the link is safe."
+      },
+      {
+        "question": "Where do I report an unpaid toll scam text?",
+        "answer": "File a complaint with the FBI's Internet Crime Complaint Center at ic3.gov, including the sender number and link, and report it to the FTC at ReportFraud.ftc.gov. You can also forward the text to 7726 and use your phone's report junk option. If you paid, contact your card issuer or bank first."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "smishing-fake-sms",
+      "suspicious-link-checker-online",
+      "screenshot-checker-online"
+    ],
+    "cta": {
+      "label": "Check a Suspicious Toll Text",
+      "url": "/screenshot-scam-checker/",
+      "description": "Review scam warning signs in a screenshot of the message, then confirm any balance on the toll agency's official website."
     }
   },
 ];
