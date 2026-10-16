@@ -22,7 +22,7 @@ Languages: English, Hindi, Spanish, French, German, Japanese.
 
 ## Learn
 
-- [Spot the Fake Screenshot quiz](https://screenshotchecker.com/spot-the-fake/): Ten fictional scam, legitimate and edited screenshots with an explanation after each.
+- [Spot the Fake Screenshot quiz](https://screenshotchecker.com/spot-the-fake/): Ten fictional scam, legitimate and edited screenshots with an explanation after each. Hindi version: https://screenshotchecker.com/spot-the-fake/hindi/
 - [How it works](https://screenshotchecker.com/how-it-works/): Network requests, storage and the limits of each check.
 
 ## Guides

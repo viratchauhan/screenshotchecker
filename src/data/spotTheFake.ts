@@ -215,3 +215,74 @@ export const QUIZ_TIERS: Array<{ min: number; title: string; text: string }> = [
   { min: 5, title: 'Getting there', text: 'Scammers rely on hurry and surprise. Slowing down and checking at the source beats any single clue.' },
   { min: 0, title: 'Worth a second look', text: 'These tricks fool a lot of people. Read the explanations, then try again.' },
 ];
+
+export interface QuizUi {
+  kicker: string;
+  title: string;
+  intro: string;
+  roundLabel: string;
+  scoreLabel: string;
+  buttonTrust: string;
+  buttonFlag: string;
+  correct: string;
+  notQuite: string;
+  whatToDo: string;
+  next: string;
+  seeScore: string;
+  resultLabel: string;
+  share: string;
+  retry: string;
+  shareTitle: string;
+  shareText: string;
+  copied: string;
+  shared: string;
+  copyFallback: string;
+  ctaTitle: string;
+  ctaText: string;
+  ctaButton: string;
+  habitsTitle: string;
+  habits: Array<{ title: string; text: string }>;
+  fictional: string;
+  paymentScreenshot: string;
+  paidTo: string;
+  refLabel: string;
+  dateLabel: string;
+}
+
+export const QUIZ_UI_EN: QuizUi = {
+  kicker: 'Quiz · 10 rounds · about 3 minutes',
+  title: 'Spot the fake screenshot',
+  intro: 'Scam texts, fake payments and edited chats. For each screenshot, decide whether it looks normal or shows a red flag. Every brand, name and number here is made up.',
+  roundLabel: 'Round {n} of {total}',
+  scoreLabel: 'Score',
+  buttonTrust: 'Looks normal',
+  buttonFlag: 'Red flag',
+  correct: 'Correct.',
+  notQuite: 'Not quite.',
+  whatToDo: 'What to do:',
+  next: 'Next round',
+  seeScore: 'See my score',
+  resultLabel: 'Your result',
+  share: 'Share my score',
+  retry: 'Try again',
+  shareTitle: 'Spot the Fake Screenshot',
+  shareText: 'I scored {score}/{total} on Spot the Fake Screenshot. Can you tell a scam from the real thing?',
+  copied: 'Copied your score and link. Paste it anywhere.',
+  shared: 'Shared. Thanks!',
+  copyFallback: 'Copy this link:',
+  ctaTitle: 'Got a real screenshot you are unsure about?',
+  ctaText: 'Check it for scam wording, contradictions, metadata and signs of editing. It runs in your browser and the image is not uploaded.',
+  ctaButton: 'Check a screenshot',
+  habitsTitle: 'The habits behind every round',
+  habits: [
+    { title: 'Hurry is a tactic.', text: 'Deadlines of minutes or hours exist to stop you checking.' },
+    { title: 'Check at the source.', text: 'Open the app or website yourself, or call the number on your card. Never use links or numbers from the message.' },
+    { title: 'A screenshot is a claim.', text: 'Payments are confirmed in your own account; posts and messages are confirmed where they were published.' },
+    { title: 'Codes and PINs are yours alone.', text: 'Nobody legitimate needs your OTP, and you never need a UPI PIN to receive money.' },
+  ],
+  fictional: 'Fictional example',
+  paymentScreenshot: 'Payment screenshot',
+  paidTo: 'Paid to:',
+  refLabel: 'Ref:',
+  dateLabel: 'Date:',
+};

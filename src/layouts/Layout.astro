@@ -218,6 +218,7 @@ if (structuredData) {
         })(window, document, 'clarity', 'script', clarityId);
       </script>
     )}
+    <slot name="head" />
   </head>
   <body class="bg-canvas text-body selection:bg-surface-cream-strong selection:text-ink min-h-screen flex flex-col">
     <slot />

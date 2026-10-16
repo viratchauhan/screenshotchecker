@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import SpotTheFakeQuiz from '../../components/SpotTheFakeQuiz.astro';
+import { QUIZ_ROUNDS_HI, QUIZ_TIERS_HI, QUIZ_UI_HI } from '../../data/spotTheFakeHi';
+
+const canonicalUrl = 'https://screenshotchecker.com/spot-the-fake/hindi/';
+const pageTitle = 'नकली स्क्रीनशॉट पहचानें: मुफ़्त स्कैम क्विज़ (10 राउंड)';
+const pageDescription =
+  'क्या आप स्कैम मैसेज, नकली पेमेंट स्क्रीनशॉट और एडिट की गई चैट पहचान सकते हैं? 10 काल्पनिक राउंड, हर जवाब के बाद समझाइश, और शेयर करने लायक स्कोर।';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://screenshotchecker.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Spot the Fake quiz', item: 'https://screenshotchecker.com/spot-the-fake/' },
+        { '@type': 'ListItem', position: 3, name: 'हिंदी', item: canonicalUrl },
+      ],
+    },
+    {
+      '@type': 'Quiz',
+      '@id': `${canonicalUrl}#quiz`,
+      name: 'नकली स्क्रीनशॉट पहचानें',
+      description: pageDescription,
+      url: canonicalUrl,
+      educationalLevel: 'Beginner',
+      inLanguage: 'hi',
+      isAccessibleForFree: true,
+    },
+  ],
+};
+---
+
+<Layout title={pageTitle} description={pageDescription} canonicalUrl={canonicalUrl} structuredData={structuredData} lang="hi">
+  <link slot="head" rel="alternate" hreflang="hi" href={canonicalUrl} />
+  <link slot="head" rel="alternate" hreflang="en" href="https://screenshotchecker.com/spot-the-fake/" />
+  <Header currentPath="/spot-the-fake" />
+
+  <main class="flex-1 w-full max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+    <p class="text-center text-sm mb-4"><a href="/spot-the-fake/" lang="en" class="text-primary underline">Play in English</a></p>
+    <SpotTheFakeQuiz
+      rounds={QUIZ_ROUNDS_HI}
+      tiers={QUIZ_TIERS_HI}
+      ui={QUIZ_UI_HI}
+      shareUrl="https://screenshotchecker.com/spot-the-fake/hindi/?utm_source=quiz_share&utm_medium=social"
+    >
+      <p class="text-sm">और जानें: <a href="/blog/fake-payment-screenshot-kaise-pehchane/" class="text-primary underline">फर्जी पेमेंट स्क्रीनशॉट कैसे पहचानें</a>, <a href="/blog/smishing-fake-sms/" class="text-primary underline">fake SMS और WhatsApp मैसेज</a> (English)।</p>
+    </SpotTheFakeQuiz>
+  </main>
+
+  <Footer />
+</Layout>

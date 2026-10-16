@@ -1,0 +1,213 @@
+---
+import type { QuizRound, QuizUi } from '../data/spotTheFake';
+
+interface Props {
+  rounds: QuizRound[];
+  tiers: Array<{ min: number; title: string; text: string }>;
+  ui: QuizUi;
+  shareUrl: string;
+}
+
+const { rounds, tiers, ui, shareUrl } = Astro.props;
+const firstRound = ui.roundLabel.replace('{n}', '1').replace('{total}', String(rounds.length));
+---
+
+<div class="text-center mb-8">
+  <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block mb-2">{ui.kicker}</span>
+  <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink tracking-tight mb-4">{ui.title}</h1>
+  <p class="text-base text-body leading-relaxed max-w-xl mx-auto">{ui.intro}</p>
+</div>
+
+<section id="quiz" class="space-y-5 scroll-mt-24" aria-live="polite">
+  <div class="flex items-center justify-between text-xs font-mono text-muted">
+    <span id="quiz-progress">{firstRound}</span>
+    <span id="quiz-score">{ui.scoreLabel}: 0</span>
+  </div>
+  <div class="h-1.5 rounded-full bg-surface-card overflow-hidden" aria-hidden="true">
+    <div id="quiz-bar" class="h-full bg-primary transition-all" style="width:0%"></div>
+  </div>
+
+  <div id="quiz-card" class="space-y-4"></div>
+
+  <div id="quiz-choices" class="grid grid-cols-2 gap-3">
+    <button type="button" data-choice="trust" class="btn-secondary !h-12 !text-sm">{ui.buttonTrust}</button>
+    <button type="button" data-choice="flag" class="btn-primary !h-12 !text-sm">{ui.buttonFlag}</button>
+  </div>
+
+  <div id="quiz-feedback" hidden class="rounded-xl border border-hairline bg-surface-card p-5 space-y-3">
+    <p id="quiz-verdict" class="font-serif text-xl text-ink"></p>
+    <ul id="quiz-why" class="list-disc pl-5 space-y-1.5 text-sm text-body"></ul>
+    <p class="text-sm text-body"><strong class="text-ink">{ui.whatToDo}</strong> <span id="quiz-next"></span></p>
+    <button type="button" id="quiz-continue" class="btn-primary w-full !h-11">{ui.next}</button>
+  </div>
+</section>
+
+<section id="quiz-result" hidden class="text-center space-y-5 py-6 scroll-mt-24">
+  <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block">{ui.resultLabel}</span>
+  <p class="font-serif text-6xl text-ink" id="result-score">0/{rounds.length}</p>
+  <p class="font-serif text-2xl text-ink" id="result-title"></p>
+  <p class="text-body max-w-md mx-auto" id="result-text"></p>
+  <div class="flex flex-wrap justify-center gap-3">
+    <button type="button" id="result-share" class="btn-primary !h-11">{ui.share}</button>
+    <button type="button" id="result-retry" class="btn-secondary !h-11">{ui.retry}</button>
+  </div>
+  <p id="result-share-status" class="text-xs text-muted min-h-[1rem]" role="status"></p>
+  <div class="rounded-2xl border border-hairline bg-surface-card p-6 text-left space-y-3 mt-6">
+    <h2 class="font-serif text-xl text-ink">{ui.ctaTitle}</h2>
+    <p class="text-sm text-body">{ui.ctaText}</p>
+    <a href="/" class="btn-primary inline-flex !h-11">{ui.ctaButton}</a>
+  </div>
+</section>
+
+<section class="mt-14 space-y-4 text-body leading-relaxed border-t border-hairline pt-10">
+  <h2 class="font-serif text-2xl text-ink">{ui.habitsTitle}</h2>
+  <ul class="list-disc pl-5 space-y-2 text-sm">
+    {ui.habits.map((h) => <li><strong class="text-ink">{h.title}</strong> {h.text}</li>)}
+  </ul>
+  <slot />
+</section>
+
+<script define:vars={{ rounds, tiers, ui, shareUrl }} is:inline>
+  window.__SC_QUIZ__ = { rounds, tiers, ui, shareUrl };
+</script>
+
+<script>
+  import type { QuizRound, QuizUi } from '../data/spotTheFake';
+  type Tier = { min: number; title: string; text: string };
+  const { rounds, tiers, ui, shareUrl } = (window as unknown as {
+    __SC_QUIZ__: { rounds: QuizRound[]; tiers: Tier[]; ui: QuizUi; shareUrl: string };
+  }).__SC_QUIZ__;
+  const lang = document.documentElement.lang || 'en';
+  const track = (name: string, params: Record<string, unknown> = {}) =>
+    (window as unknown as { scTrack?: (n: string, p?: Record<string, unknown>) => void }).scTrack?.(name, { method: `lang_${lang}`, ...params });
+  const fill = (t: string, vars: Record<string, string | number>) => t.replace(/\{(\w+)\}/g, (_, k) => String(vars[k] ?? ''));
+
+  const $ = (id: string) => document.getElementById(id)!;
+  const card = $('quiz-card');
+  const choices = $('quiz-choices');
+  const feedback = $('quiz-feedback');
+  let index = 0;
+  let score = 0;
+  let started = false;
+
+  const esc = (t: string) => t.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]!));
+  // [[clue]] -> plain text before answering, highlighted after.
+  const clue = (t: string, reveal: boolean) =>
+    esc(t).replace(/\[\[(.+?)\]\]/g, (_, inner) => (reveal ? `<mark class="clue">${inner}</mark>` : inner));
+
+  function renderRound(reveal: boolean) {
+    const r = rounds[index];
+    const head = `<div class="flex items-center justify-between gap-3 px-4 py-3 border-b border-hairline">
+        <div class="min-w-0"><p class="font-semibold text-ink truncate">${esc(r.sender)}</p>${r.senderNote ? `<p class="text-[11px] text-muted">${esc(r.senderNote)}</p>` : ''}</div>
+        <span class="text-[11px] font-mono text-muted shrink-0">${esc(r.kind === 'receipt' ? ui.paymentScreenshot : r.kind.toUpperCase())}${r.time ? ' · ' + esc(r.time) : ''}</span>
+      </div>`;
+    let body = '';
+    if (r.body) {
+      body = `<div class="p-4"><div class="${r.kind === 'sms' ? 'bubble-them' : ''} text-sm leading-relaxed text-ink">${clue(r.body, reveal)}</div></div>`;
+    } else if (r.chat) {
+      body = `<div class="p-4 space-y-2">${r.chat.map((l) => `<div class="flex ${l.from === 'me' ? 'justify-end' : 'justify-start'}"><div class="${l.from === 'me' ? 'bubble-me' : 'bubble-them'} text-sm leading-relaxed text-ink max-w-[85%]">${clue(l.text, reveal)}<span class="block text-[10px] text-muted text-right mt-1 font-mono">${clue(l.time, reveal)}</span></div></div>`).join('')}</div>`;
+    } else if (r.receipt) {
+      const x = r.receipt;
+      body = `<div class="p-5 text-center space-y-2">
+          <p class="text-xs font-mono text-muted">${esc(x.app)}</p>
+          <p class="text-success font-semibold">✓ ${esc(x.status)}</p>
+          <p class="font-serif text-4xl text-ink">${clue(x.amount, reveal)}</p>
+          ${x.amountWords ? `<p class="text-xs text-body">${clue(x.amountWords, reveal)}</p>` : ''}
+          <div class="text-left text-xs text-body border-t border-hairline pt-3 mt-3 space-y-1">
+            <p><span class="text-muted">${esc(ui.paidTo)}</span> ${esc(x.to)}</p><p><span class="text-muted">${esc(ui.refLabel)}</span> ${esc(x.ref)}</p><p><span class="text-muted">${esc(ui.dateLabel)}</span> ${esc(x.date)}</p>
+          </div></div>`;
+    }
+    card.innerHTML = `<p class="text-xs text-muted">${esc(ui.fictional)} · ${esc(r.region)}</p>
+      <div class="mock-screen rounded-2xl border border-hairline bg-canvas shadow-sm overflow-hidden">${head}${body}</div>`;
+  }
+
+  function updateHeader() {
+    $('quiz-progress').textContent = fill(ui.roundLabel, { n: Math.min(index + 1, rounds.length), total: rounds.length });
+    $('quiz-score').textContent = `${ui.scoreLabel}: ${score}`;
+    $('quiz-bar').style.width = `${(index / rounds.length) * 100}%`;
+  }
+
+  function answer(choice: 'trust' | 'flag') {
+    if (!started) { started = true; track('quiz_started'); }
+    const r = rounds[index];
+    const correct = choice === r.answer;
+    if (correct) score++;
+    renderRound(true);
+    choices.hidden = true;
+    feedback.hidden = false;
+    $('quiz-verdict').textContent = `${correct ? ui.correct : ui.notQuite} ${r.verdict}`;
+    $('quiz-why').innerHTML = r.why.map((w) => `<li>${esc(w)}</li>`).join('');
+    $('quiz-next').textContent = r.doNext;
+    $('quiz-continue').textContent = index === rounds.length - 1 ? ui.seeScore : ui.next;
+    $('quiz-score').textContent = `${ui.scoreLabel}: ${score}`;
+    ($('quiz-continue') as HTMLButtonElement).focus();
+  }
+
+  function next() {
+    index++;
+    if (index >= rounds.length) return finish();
+    feedback.hidden = true;
+    choices.hidden = false;
+    renderRound(false);
+    updateHeader();
+    (choices.querySelector('button') as HTMLButtonElement).focus();
+  }
+
+  function finish() {
+    $('quiz').hidden = true;
+    $('quiz-result').hidden = false;
+    const tier = tiers.find((t) => score >= t.min)!;
+    $('result-score').textContent = `${score}/${rounds.length}`;
+    $('result-title').textContent = tier.title;
+    $('result-text').textContent = tier.text;
+    track('quiz_completed', { result: `score_${score}`, warning_count: score });
+    $('quiz-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function restart() {
+    index = 0; score = 0; started = false;
+    $('quiz').hidden = false;
+    $('quiz-result').hidden = true;
+    feedback.hidden = true;
+    choices.hidden = false;
+    $('result-share-status').textContent = '';
+    renderRound(false);
+    updateHeader();
+    $('quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  async function share() {
+    const text = fill(ui.shareText, { score, total: rounds.length });
+    const status = $('result-share-status');
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: ui.shareTitle, text, url: shareUrl });
+        track('result_shared', { share_method: 'quiz_native', result: `score_${score}` });
+        status.textContent = ui.shared;
+        return;
+      }
+      await navigator.clipboard.writeText(`${text} ${shareUrl}`);
+      track('result_shared', { share_method: 'quiz_copy', result: `score_${score}` });
+      status.textContent = ui.copied;
+    } catch (error) {
+      if ((error as DOMException)?.name !== 'AbortError') status.textContent = `${ui.copyFallback} ${shareUrl}`;
+    }
+  }
+
+  choices.addEventListener('click', (e) => {
+    const btn = (e.target as Element).closest('button[data-choice]');
+    if (btn) answer(btn.getAttribute('data-choice') as 'trust' | 'flag');
+  });
+  $('quiz-continue').addEventListener('click', next);
+  $('result-retry').addEventListener('click', restart);
+  $('result-share').addEventListener('click', share);
+
+  renderRound(false);
+  updateHeader();
+</script>
+
+<style is:global>
+  .mock-screen .bubble-them { background: var(--color-surface-card); border: 1px solid var(--color-hairline); border-radius: 14px 14px 14px 4px; padding: 10px 12px; display: inline-block; }
+  .mock-screen .bubble-me { background: color-mix(in srgb, var(--color-accent-teal) 22%, var(--color-canvas)); border-radius: 14px 14px 4px 14px; padding: 10px 12px; display: inline-block; }
+  .mock-screen mark.clue { background: color-mix(in srgb, var(--color-warning) 35%, transparent); color: inherit; border-radius: 3px; padding: 0 2px; }
+</style>
