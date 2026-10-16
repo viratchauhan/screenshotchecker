@@ -77,3 +77,10 @@ Search Console and Bing Webmaster Tools both show 0 external links before this w
 | OSINT Newsletter Tools Library (1 Oct) | Maker-disclosed submission | Pending, no listing found |
 
 Directory listings (AlternativeTo, SaaSHub, Peerlist, Product Hunt) need the owner to create accounts first.
+
+## 16 October 2026 - scam guides and Hindi quiz
+
+- /spot-the-fake/hindi/ (Hindi version of the quiz, hreflang pair with the English page).
+- Four guides on high-volume scam searches, each with primary sources and a fictional worked example: india-post-courier-sms-scam, electricity-bill-disconnection-sms-scam, whatsapp-telegram-task-job-scam, unpaid-toll-text-scam. Linked from the smishing guide, related cards on the scam, spam and link checkers, and llms.txt.
+- Indexing requested in Google Search Console for all four; submitted the four plus the updated smishing guide to Bing.
+- The three awesome-list PRs are still open with no maintainer comments.
