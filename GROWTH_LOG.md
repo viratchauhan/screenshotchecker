@@ -63,3 +63,17 @@ Owner asked to deploy to screenshotchecker.com. Added /how-it-works/, internal l
 - New /spot-the-fake/ quiz (10 fictional rounds, score-only sharing, quiz events).
 - 32 per-page share images; WCAG AA button contrast; heading order fix. Mobile Lighthouse 92-97 performance, SEO 100.
 - Requested indexing for /spot-the-fake/ (Google, Bing) and resubmitted homepage and AI detector to Bing. Google daily inspection quota reached.
+
+## 16 October 2026 - backlink submissions
+
+Search Console and Bing Webmaster Tools both show 0 external links before this work.
+
+| Where | What | Status |
+| --- | --- | --- |
+| https://github.com/jivoi/awesome-osint/pull/1315 | Image Analysis entry, maker disclosed | PR open, awaiting maintainer |
+| https://github.com/one-aalam/awesome-astro/pull/152 | Built with Astro entry, maker disclosed | PR open, awaiting maintainer |
+| https://github.com/The-Osint-Toolbox/Fact-Checking-Verification/pull/8 | Image Verification entry, maker disclosed | PR open, awaiting maintainer |
+| The Free Tools Directory (1 Oct) | Security category submission | Pending editorial review, no listing found |
+| OSINT Newsletter Tools Library (1 Oct) | Maker-disclosed submission | Pending, no listing found |
+
+Directory listings (AlternativeTo, SaaSHub, Peerlist, Product Hunt) need the owner to create accounts first.
