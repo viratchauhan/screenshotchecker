@@ -1,9 +1,12 @@
 import { extractUnmarkedPaymentAmounts } from '../analyzer/paymentTextContext';
 import type { ExtractedPaymentFact } from './paymentTypes';
+import { classifyPaymentScreenshot } from './paymentClassifier';
+import { isLabelledBalanceAmount } from './paymentAmountContext';
 
 export interface ExtractedPaymentData {
   primaryAmount: string;
   allAmounts: string[];
+  paymentAmounts: string[];
   recipientName: string;
   upiId: string;
   bankName: string;
@@ -25,6 +28,7 @@ export function extractPaymentEntities(rawText: string): ExtractedPaymentData {
   // Matches: ₹500.00, ₹ 500, Rs. 500.00, INR 500, 500.00 (in payment context)
   const amountRegex = /(?:₹|rs\.?|inr)\s*([\d,]+(?:\.\d{1,2})?)/gi;
   const rawAmounts: string[] = [];
+  const paymentAmounts: string[] = [];
   let match: RegExpExecArray | null;
 
   while ((match = amountRegex.exec(text)) !== null) {
@@ -32,13 +36,20 @@ export function extractPaymentEntities(rawText: string): ExtractedPaymentData {
     if (!rawAmounts.includes(rawVal)) {
       rawAmounts.push(rawVal);
     }
+    if (!isLabelledBalanceAmount(text, match.index, amountRegex.lastIndex) && !paymentAmounts.includes(rawVal)) {
+      paymentAmounts.push(rawVal);
+    }
   }
 
   // OCR may lose a currency symbol. Preserve the visible value without inventing currency.
-  const inferredAmounts = rawAmounts.length === 0 ? extractUnmarkedPaymentAmounts(text) : [];
-  rawAmounts.push(...inferredAmounts);
+  const inferredAmounts = paymentAmounts.length === 0 ? extractUnmarkedPaymentAmounts(text) : [];
+  for (const amount of inferredAmounts) if (!rawAmounts.includes(amount)) rawAmounts.push(amount);
+  paymentAmounts.push(...inferredAmounts);
 
-  const primaryAmount = rawAmounts.length > 0 ? rawAmounts[0] : 'Not detected';
+  // A balance is a useful primary value only for an actual balance-only screen.
+  // Explicit transfer text with no transfer amount must not borrow its balance.
+  const primaryAmount = paymentAmounts[0] ||
+    (classifyPaymentScreenshot(text).receiptType === 'BANK_BALANCE' ? rawAmounts[0] : undefined) || 'Not detected';
   if (primaryAmount !== 'Not detected') {
     groundedFacts.push({
       label: 'Primary Amount',
@@ -198,6 +209,7 @@ export function extractPaymentEntities(rawText: string): ExtractedPaymentData {
   return {
     primaryAmount,
     allAmounts: rawAmounts,
+    paymentAmounts,
     recipientName,
     upiId,
     bankName,
