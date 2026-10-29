@@ -87,6 +87,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "contentSections": [
       {
         "heading": "1. Write down the claim before opening an image tool",
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/screenshot-checker-online/fictional-example.png",
+          "alt": "Fictional payment screenshot showing $250.00 sent to Jordan Example, with three numbered notes on what the image cannot prove.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional example. Every field is text in an image; the claim it makes has to be checked in the receiver's own account."
+        },
         "level": "h2",
         "paragraphs": [
           "Ask one specific question: did a buyer pay me, did this person send this message, or did an organisation publish this notice? These are different questions from whether someone edited the image. A genuine screenshot can show a pending payment, an old message or the wrong account.",
@@ -212,6 +220,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "contentSections": [
       {
         "heading": "What does ScreenshotChecker examine?",
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/screenshot-analyzer-online/fictional-example.png",
+          "alt": "Fictional forwarded chat screenshot with numbered notes showing what OCR, metadata and ELA can and cannot read.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional example of what each check looks at. Quiet results are normal for forwarded screenshots."
+        },
         "paragraphs": [
           "The <a href=\"/screenshot-analyzer\">screenshot analyzer</a> combines OCR, text-based risk patterns, sensitive-data suggestions, metadata inspection and compression analysis. Each result has a different scope: a copied amount is a transcription, a flagged phrase is a pattern match, and a bright image region is a pixel difference. None authenticates the underlying claim.",
           "Keep the original file and record the question you want to answer. For a practical sequence from the initial claim to independent verification, use the <a href=\"/blog/screenshot-checker-online\">screenshot verification checklist</a>."
@@ -342,6 +358,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "Worked Example: A Fictional ₹500 Sale",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-upi-payment-screenshot/fictional-example.png",
+          "alt": "Fictional UPI receipt for ₹500 to Sharma General Store with status Processing, annotated with four checks.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. The fictional ₹500 sale. The seller confirms the credit in their own UPI app, not on the buyer's phone."
+        },
         "paragraphs": [
           "<strong>This is a fictional teaching example, not a real customer case or a checker accuracy test.</strong> A seller is waiting for ₹500 for an order. The buyer sends an image saying “Transaction Successful,” showing ₹500, the seller’s name and a transaction reference. Those are the screenshot’s claims; no payment has been verified yet.",
           "<strong>Check 1: identify the claim.</strong> The seller notes the amount, payment date, intended recipient and reference from the image. They compare any OCR output with the image before using it, because a misread digit could lead to the wrong transaction.",
@@ -472,6 +496,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         heading: 'Key Visual Indicators in Synthetic Images',
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/ai-image-detector-online/fictional-example.png",
+          "alt": "Fictional AI image detector report listing four signals: no content credentials, no camera metadata, smooth texture and garbled sign text.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional report. Each signal is weighed separately; together they point to checking where the image came from."
+        },
         level: 'h2',
         paragraphs: [
           '1. Typographic Rendering Anomalies: Generative diffusion models often struggle with complex letterforms and background signage, producing distorted characters, non-dictionary consonant clusters, or illegible logos.',
@@ -583,6 +615,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "Do screenshots contain EXIF or location data?",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/exif-metadata/fictional-example.png",
+          "alt": "Fictional EXIF table for a camera photo showing device model, capture time, GPS coordinates and editing software.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. Fictional EXIF fields from a camera photo. A screenshot of the same photo would not carry them."
+        },
         "paragraphs": [
           "A screenshot records a display rather than taking a new camera exposure, so it may not have the camera or lens fields found in a photo. That is not a rule that screenshots contain no EXIF or GPS. The actual file can be changed, annotated or converted by software after capture.",
           "PNG is not a metadata-free format. The <a href=\"https://www.w3.org/TR/png-3/#11eXIf\">W3C PNG specification defines an eXIf chunk</a>, and its <a href=\"https://www.w3.org/TR/png-3/#11textinfo\">text chunks</a> can carry comments and other descriptions. Android’s <a href=\"https://developer.android.com/reference/androidx/exifinterface/media/ExifInterface\">ExifInterface documentation</a> also lists PNG among the formats it can read and write EXIF tags in. These are format capabilities, not evidence that a particular phone writes those fields into every screenshot.",
@@ -729,6 +769,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         heading: 'Key Red Flags to Spot in Suspicious Messages',
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/smishing-fake-sms/fictional-example.png",
+          "alt": "Fictional smishing text claiming a bank account is suspended, with a lookalike link and a request for a code, annotated with red flags.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional smishing text. Urgency, a lookalike link and a request for a code are the three signs to look for."
+        },
         level: 'h2',
         paragraphs: [
           '• High-Pressure Urgency: Phrases like "Urgently Required," "Final Warning," or "Account Blocked Today" are designed to bypass critical thinking.',
@@ -851,6 +899,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         heading: 'The Anatomy of a Deceptive URL: 5 Red Flags to Watch For',
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/suspicious-link-checker-online/fictional-example.png",
+          "alt": "A fictional deceptive URL broken into four labelled parts: http, a brand name used as a subdomain, the real registrable domain and a login path.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. Reading a fictional deceptive link. The real owner is example-secure.top, not the brand named at the start."
+        },
         level: 'h2',
         paragraphs: [
           'Even before running an online link check, understanding how deceptive URLs are structured can help you spot dangerous links instantly:',
@@ -1151,6 +1207,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "Visual Warning Signs: Worth a Second Look, Not Proof",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-whatsapp-chat-screenshot/fictional-example.png",
+          "alt": "Fictional chat screenshot with a cropped header and no timestamps, in which Sam promises to pay back $400, annotated with what to check.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional disputed chat. Crops and a name-only header are worth a second look, but the real check is the chat itself."
+        },
         "paragraphs": [
           "<strong>Timestamps out of order.</strong> Messages normally appear in time order within a thread. A reply stamped earlier than the message it answers deserves a question. Remember that the status-bar clock shows when the screenshot was taken, not when the messages were sent, so a gap between the two is normal.",
           "<strong>Tick states that do not fit the story.</strong> Blue ticks on a message the other person says they never received, or ticks on messages the screenshot owner supposedly received, are worth asking about. As noted above, read receipt settings, group chats and connectivity can all explain unexpected ticks.",
@@ -1273,6 +1337,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "Step 1: Find the original post",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-social-media-post-screenshot/fictional-example.png",
+          "alt": "Fictional social media post screenshot from a lookalike handle announcing school closures, annotated with four checks.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional post screenshot. Find the original on the platform before believing or sharing it."
+        },
         "paragraphs": [
           "Start with the account named in the screenshot. Open the platform yourself, search for the account, and scroll to the date shown in the image. If the screenshot includes a post link or visible URL, type the address yourself rather than tapping a link someone sent you.",
           "On X, <a href=\"https://help.x.com/en/using-x/x-advanced-search\">advanced search</a> lets you narrow results to posts from a particular account, an exact phrase and a date range. X's help page describes it for logged-in users on x.com. Search for a distinctive phrase from the screenshot, limited to that account and a few days around the claimed date.",
@@ -1458,6 +1530,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "\"Payment Pending\" Until You Upgrade, Pay a Fee or Ship",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-payment-screenshot-paypal-venmo-cash-app/fictional-example.png",
+          "alt": "Fictional payment email from a lookalike sender claiming $1,200 is pending until the seller ships and refunds an extra $200, annotated with red flags.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional fake payment email. The money is never in the seller's own balance."
+        },
         "paragraphs": [
           "Some fake emails claim the buyer's payment is waiting and will be released only after you take an extra step. A common one tells the seller to send money to upgrade their account. Zelle addresses this directly: it says no one can upgrade your Zelle account because there are no upgrades, and advises not clicking links in such emails and reporting them to your email provider.",
           "Another version says the money will appear only after you ship the item and add a tracking number. Venmo states that holding a payment until tracking is uploaded is not a feature it offers.",
@@ -1586,6 +1666,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "\"Scheduled\", \"Pending\" and \"Processing\" Are Not Paid",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-bank-transfer-screenshot/fictional-example.png",
+          "alt": "Fictional UK bank app screenshot showing a scheduled £850 payment, annotated with what scheduled means and what to check.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional scheduled transfer. Only your own account shows whether the money arrived."
+        },
         "paragraphs": [
           "Many people send a screenshot taken before a payment completed. A screen that says a payment is scheduled, pending or processing tells you, at best, that something was set up. It does not tell you the money has left their account, let alone reached yours. A scheduled payment can usually be changed or cancelled by the sender before it goes, so treat it as a promise, not a payment.",
           "In the UK, most one-off bank transfers between personal and business accounts travel over the Faster Payment System. According to <a href=\"https://www.wearepay.uk/what-we-do/payment-systems/faster-payment-system/types-of-faster-payment-transactions/\" class=\"text-primary font-medium underline hover:text-primary-active\">Pay.UK's description of Faster Payment transaction types</a>, funds from a single immediate payment usually arrive almost immediately, though occasionally it can take up to two hours. Pay.UK also says that a forward-dated payment is sent on the date the customer arranged in advance, and that standing orders go out on working days only.",
@@ -1729,6 +1817,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "नकली पेमेंट स्क्रीन कैसे बनती है",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-payment-screenshot-kaise-pehchane/fictional-example.png",
+          "alt": "₹1,850 की काल्पनिक UPI रसीद, जिस पर चार निशान बताते हैं कि दुकानदार क्या जांचे।",
+          "width": 1200,
+          "height": 760,
+          "caption": "चित्र 1. काल्पनिक उदाहरण। पैसा आया या नहीं, यह सिर्फ़ आपके अपने UPI ऐप या बैंक से पता चलता है।"
+        },
         "paragraphs": [
           "कुछ 'prank' या नकली पेमेंट ऐप ऐसी स्क्रीन दिखाते हैं जो बिल्कुल असली पेमेंट जैसी लगती है। ऊपर बताई गई <a href=\"https://cscoe.itewb.gov.in/upload/advisory-n/Advisory_Money_Transfer_Prank.pdf\">सरकारी advisory</a> के अनुसार ऐसे ऐप में transaction ID और तारीख-समय भी अपनी मर्ज़ी से भरे जा सकते हैं, जबकि दुकानदार के खाते में असल में कोई पैसा नहीं जाता। ठग स्क्रीन दिखाकर कहता है कि पैसा थोड़ी देर में आ जाएगा, और निकल जाता है। नकली और असली स्क्रीनशॉट में फ़र्क पहचानने का अभ्यास करना हो, तो हमारी <a href=\"/spot-the-fake/hindi/\">10 सवालों वाली हिंदी क्विज़</a> खेलें।",
           "दूसरा तरीका है असली स्क्रीनशॉट को एडिट करना: रकम, नाम या तारीख बदल देना। तीसरा, किसी पुरानी असली पेमेंट का स्क्रीनशॉट दोबारा दिखा देना। इन तीनों में स्क्रीन पर हरा tick, logo और 'Successful' सब दिख सकता है।",
@@ -1897,6 +1993,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "Red Flags in the Message and the Link",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/india-post-courier-sms-scam/fictional-example.png",
+          "alt": "Fictional SMS claiming a parcel is held for an incomplete address, with a lookalike link and a ₹25 fee, annotated with red flags.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional parcel scam text. The deadline, the unofficial link and the small fee are the giveaways."
+        },
         "paragraphs": [
           "No single clue settles it, but several together should stop you. These are the signs worth looking for before you do anything else.",
           "<strong>The sender is an ordinary mobile number.</strong> A delivery message from a personal-looking ten-digit number, or a number with a foreign country code, deserves extra caution. A named business sender is not proof of anything, though, so use this only as one clue among several.",
@@ -2036,6 +2140,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "Red Flags in a Fake Power-Cut Message",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/electricity-bill-disconnection-sms-scam/fictional-example.png",
+          "alt": "Fictional SMS threatening electricity disconnection tonight and asking the reader to call a mobile number and install an app, annotated with red flags.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional power-cut scam text. Real notices do not ask you to call a mobile number or install an app."
+        },
         "paragraphs": [
           "No single sign settles the question, but this scam tends to stack several of them together. Tata Power-DDL's <a href=\"https://tatapower-ddl.com/pr-details/199/2065686/advisory---tata-power-delhi-distribution-limited-warns-customers-against-cyber-frauds\">earlier advisory</a> lists an urgent tone, suspicious links, requests for account or payment details, and messages from a personal number or an unusual sender ID. It also says the company does not ask customers to call unknown numbers or download third-party apps for these matters. Nagaland's Department of Power stated in a <a href=\"https://ipr.nagaland.gov.in/node/8992\">2022 public notice</a> that it does not send disconnection messages via WhatsApp.",
           "Those statements come from specific discoms. Check what your own distribution company says about its official sender IDs, apps and helplines, rather than assuming every discom works the same way."
@@ -2197,6 +2309,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "heading": "Why the earnings screenshots in the group prove nothing",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/whatsapp-telegram-task-job-scam/fictional-example.png",
+          "alt": "Fictional group chat from a task job scam showing a small payout, a profit screenshot and a VIP deposit request, annotated with red flags.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional task-scam group. The earnings screenshots prove nothing; the deposit request is the scam."
+        },
         "paragraphs": [
           "Task scam groups are full of screenshots: dashboards showing large balances, UPI or bank receipts captioned \"withdrawal received\", and chats where a \"senior member\" thanks the mentor. Many of the other members may be the scammers' own accounts. A screenshot is a claim, not proof. Anyone can type a number into an app they control, crop a real receipt from an unrelated payment, or edit a chat image, as our guide on <a href=\"/blog/fake-whatsapp-chat-screenshot/\">fake WhatsApp chat screenshots</a> explains.",
           "Even a genuine receipt only shows that someone sent someone money once. It does not show that the platform lets people withdraw, and small real payouts are part of the script. The <a href=\"https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=1982936&reg=48&lang=2\">MHA release</a> advises checking the receiver's name in your UPI app before paying, since a random individual's name can indicate a mule account, and asking where your initial commission actually came from.",
@@ -2328,6 +2448,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "contentSections": [
       {
         "heading": "What the unpaid toll text usually looks like",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/unpaid-toll-text-scam/fictional-example.png",
+          "alt": "Fictional unpaid toll text from an email-style sender asking for $4.35 with a $50 late fee threat and a lookalike link, annotated with red flags.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional unpaid toll text. Check any balance in your own toll account, never through the message."
+        },
         "paragraphs": [
           "The message is short and specific. It names a toll service, states a small balance, sets a deadline and offers a link to pay. In its <a href=\"https://www.ic3.gov/PSA/2024/PSA240412\">public service announcement on toll smishing (I-041224-PSA)</a>, the FBI's Internet Crime Complaint Center described texts claiming an outstanding toll of $12.51 with a threatened $50.00 late fee, a link to a site posing as the state toll service, and sending phone numbers that changed from state to state.",
           "The FTC's <a href=\"https://consumer.ftc.gov/consumer-alerts/2025/01/got-text-about-unpaid-tolls-its-probably-scam\">January 2025 consumer alert</a> says these texts reach people whether or not they have driven on a toll road, and that the link leads to a page asking for card or bank details. The alert adds that scammers may also try to collect personal details such as a driver's license number, which can feed identity theft.",
