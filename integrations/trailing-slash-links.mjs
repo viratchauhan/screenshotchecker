@@ -36,6 +36,21 @@ export default function trailingSlashLinks() {
           if (next !== html) { await writeFile(file, next); changed++; }
         }
         logger.info(`normalised internal links in ${changed} HTML files`);
+
+        // Static assets answer /about with a 307 to /about/. Add a permanent 301 for every
+        // built page so links without the slash pass their full value.
+        const pages = [];
+        for await (const file of htmlFiles(root)) {
+          const rel = '/' + file.slice(root.length).replace(/\\/g, '/').replace(/^\//, '');
+          if (!rel.endsWith('/index.html') || rel === '/index.html') continue;
+          pages.push(rel.slice(0, -'/index.html'.length));
+        }
+        pages.sort();
+        const redirectsFile = join(root, '_redirects');
+        const existing = await readFile(redirectsFile, 'utf8').catch(() => '');
+        const lines = pages.map((page) => `${page}    ${page}/    301`);
+        await writeFile(redirectsFile, `${existing.trimEnd()}\n\n# Missing trailing slash (generated at build)\n${lines.join('\n')}\n`);
+        logger.info(`added ${lines.length} trailing-slash redirects`);
       },
     },
   };

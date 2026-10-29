@@ -1,6 +1,2 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://screenshotchecker.com/sitemap.xml
+# Cloudflare prepends its managed rules (User-agent: * with Content-Signal, and the AI training crawler blocks).
 Sitemap: https://screenshotchecker.com/sitemap-index.xml
-

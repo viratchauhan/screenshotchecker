@@ -2,6 +2,7 @@
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
 import FaqSection from '../FaqSection.astro';
+import ToolGuide from '../ToolGuide.astro';
 import RelatedLinks from '../RelatedLinks.astro';
 import { getToolFaqs } from '../../data/toolFaqs';
 
@@ -141,6 +142,7 @@ const faqs = getToolFaqs('screenshot-ocr');
   </main>
 
   <!-- FAQ Section -->
+  <ToolGuide slug="screenshot-ocr" />
   <FaqSection faqs={faqs} heading="Frequently Asked Questions About Screenshot OCR" />
 
   <!-- Contextual Internal Linking -->

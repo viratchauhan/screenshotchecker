@@ -1,0 +1,11 @@
+# Security headers for every response served from static assets.
+# CSP is limited to directives that cannot block the site's own scripts, workers or WASM
+# (OCR, C2PA, analytics); script-src can be tightened later behind a report-only trial.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cross-Origin-Opener-Policy: same-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  Content-Security-Policy: base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests

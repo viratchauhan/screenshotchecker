@@ -2,6 +2,7 @@
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
 import FaqSection from '../FaqSection.astro';
+import ToolGuide from '../ToolGuide.astro';
 import RelatedLinks from '../RelatedLinks.astro';
 import { getToolFaqs } from '../../data/toolFaqs';
 
@@ -117,6 +118,7 @@ const heading = toolSlug === 'image-metadata-remover'
   </main>
 
   <!-- FAQ Section -->
+  <ToolGuide slug={toolSlug} />
   <FaqSection faqs={faqs} heading={heading} />
 
   <!-- Contextual Internal Linking -->

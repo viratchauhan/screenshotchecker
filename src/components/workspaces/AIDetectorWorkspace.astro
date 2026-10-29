@@ -2,6 +2,7 @@
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
 import FaqSection from '../FaqSection.astro';
+import ToolGuide from '../ToolGuide.astro';
 import RelatedLinks from '../RelatedLinks.astro';
 import { getToolFaqs } from '../../data/toolFaqs';
 
@@ -323,6 +324,7 @@ const faqs = getToolFaqs('ai-image-detector');
   </section>
 
   <!-- FAQ Section -->
+  <ToolGuide slug="ai-image-detector" />
   <FaqSection faqs={faqs} heading="Frequently Asked Questions About AI Image Detection" />
 
   <!-- Contextual Internal Linking -->

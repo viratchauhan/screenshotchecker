@@ -133,6 +133,18 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
     icon: 'exclamation-triangle',
   },
   {
+    id: 'spam-screenshot-checker',
+    name: 'Screenshot Spam Checker',
+    slug: 'screenshot-spam-checker',
+    category: 'Screenshot & Security',
+    description: 'Check message and email screenshots for spam triggers, deceptive marketing and pushy calls to action.',
+    route: '/screenshot-spam-checker',
+    keywords: ['spam', 'promotional', 'marketing', 'spam triggers', 'email', 'sms'],
+    aliases: ['is this spam', 'spam check', 'spam message checker'],
+    workspaceType: 'intelligence',
+    icon: 'envelope',
+  },
+  {
     id: 'suspicious-link-checker',
     name: 'Suspicious Link Checker',
     slug: 'suspicious-link-checker',

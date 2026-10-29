@@ -4,6 +4,8 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import RelatedLinks from '../../components/RelatedLinks.astro';
 import { getAllArticles, formatArticleDate, getRelatedArticles, type BlogArticle } from '../../data/blogArticles';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 export async function getStaticPaths() {
   const articles = getAllArticles();
@@ -25,6 +27,13 @@ if (!article) {
 
 const relatedArticles = getRelatedArticles(article.slug);
 const canonicalUrl = `https://screenshotchecker.com/blog/${article.slug}/`;
+// Article images: every in-article figure plus the post's share card.
+const articleImages = [
+  ...article.contentSections.flatMap((section) => section.figure ? [`https://screenshotchecker.com${section.figure.src}`] : []),
+  ...(existsSync(join(process.cwd(), 'public', 'og', `blog-${article.slug}.png`))
+    ? [`https://screenshotchecker.com/og/blog-${article.slug}.png`]
+    : ['https://screenshotchecker.com/og-image.png']),
+];
 
 // 1. Article / BlogPosting Schema
 const articleSchema = {
@@ -32,6 +41,7 @@ const articleSchema = {
   '@id': `${canonicalUrl}#article`,
   headline: article.title,
   description: article.metaDescription,
+  image: articleImages,
   ...(article.publishedAt ? {
     datePublished: article.publishedAt,
     dateModified: article.updatedAt || article.publishedAt,
@@ -51,7 +61,7 @@ const articleSchema = {
     url: 'https://screenshotchecker.com/',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://screenshotchecker.com/favicon.svg',
+      url: 'https://screenshotchecker.com/web-app-manifest-512x512.png',
     },
   },
   keywords: article.targetKeywords.join(', '),

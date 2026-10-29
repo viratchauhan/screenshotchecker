@@ -2,13 +2,20 @@
 import { TOOLS_REGISTRY } from '../data/tools';
 
 const topTools = TOOLS_REGISTRY.slice(0, 6);
+const footerGuides = [
+  { href: '/blog/screenshot-checker-online/', label: 'Is this screenshot real?' },
+  { href: '/blog/fake-payment-screenshot-paypal-venmo-cash-app/', label: 'Fake payment screenshots' },
+  { href: '/blog/fake-whatsapp-chat-screenshot/', label: 'Fake WhatsApp chats' },
+  { href: '/blog/smishing-fake-sms/', label: 'Smishing: fake SMS' },
+  { href: '/blog/fake-upi-payment-screenshot/', label: 'Fake UPI screenshots' },
+];
 ---
 
 <footer class="bg-surface-dark text-on-dark border-t border-hairline/20 mt-auto transition-colors">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-white/10">
       <!-- Brand column (5 cols) -->
-      <div class="md:col-span-5 space-y-4">
+      <div class="md:col-span-4 space-y-4">
         <a href="/" class="flex items-center gap-2.5 text-on-dark">
           <div class="w-8 h-8 rounded-lg bg-surface-dark-elevated border border-white/10 flex items-center justify-center text-on-dark">
             <svg class="w-5 h-5 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -31,8 +38,8 @@ const topTools = TOOLS_REGISTRY.slice(0, 6);
         </div>
       </div>
 
-      <!-- Quick Tools (4 cols) -->
-      <div class="md:col-span-4 space-y-3">
+      <!-- Quick Tools (3 cols) -->
+      <div class="md:col-span-3 space-y-3">
         <span class="text-xs font-semibold uppercase tracking-wider text-on-dark font-mono block">
           Specialized Workspaces
         </span>
@@ -53,8 +60,27 @@ const topTools = TOOLS_REGISTRY.slice(0, 6);
         </ul>
       </div>
 
-      <!-- Platform Links (3 cols) -->
+      <!-- Guides (3 cols) -->
       <div class="md:col-span-3 space-y-3">
+        <span class="text-xs font-semibold uppercase tracking-wider text-on-dark font-mono block">
+          Guides
+        </span>
+        <ul class="space-y-2 text-xs text-on-dark-soft">
+          {footerGuides.map((g) => (
+            <li><a href={g.href} class="hover:text-on-dark transition-colors">{g.label}</a></li>
+          ))}
+          <li><a href="/resources/" class="hover:text-on-dark transition-colors">Resources</a></li>
+          <li class="pt-1">
+            <a href="/blog/" class="text-primary hover:text-primary-active font-semibold flex items-center gap-1">
+              <span>All guides</span>
+              <span>→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Platform Links (2 cols) -->
+      <div class="md:col-span-2 space-y-3">
         <span class="text-xs font-semibold uppercase tracking-wider text-on-dark font-mono block">
           Platform
         </span>
@@ -65,6 +91,7 @@ const topTools = TOOLS_REGISTRY.slice(0, 6);
           <li><a href="/about" class="hover:text-on-dark transition-colors">About</a></li>
           <li><a href="/how-it-works/" class="hover:text-on-dark transition-colors">How It Works</a></li>
           <li><a href="/spot-the-fake/" class="hover:text-on-dark transition-colors">Spot the Fake Quiz</a></li>
+          <li><a href="/spot-the-fake/hindi/" lang="hi" class="hover:text-on-dark transition-colors">क्विज़ हिंदी में</a></li>
           <li><a href="/contact" class="hover:text-on-dark transition-colors">Contact</a></li>
           <li><a href="/privacy" class="hover:text-on-dark transition-colors">Privacy Policy</a></li>
           <li><a href="/terms" class="hover:text-on-dark transition-colors">Terms of Use</a></li>

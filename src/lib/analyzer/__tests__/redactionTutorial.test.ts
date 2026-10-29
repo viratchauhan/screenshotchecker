@@ -62,5 +62,5 @@ test('tutorial retains careful evidence boundaries, matching controls and contex
   assert.equal(article.contentSections.find(section => section.heading === 'Before you share')?.checklist?.length, 5);
   assert.equal(article.faq.length, 5);
   assert.ok(getArticleBySlug('screenshot-checker-online')!.contentSections.some(section => section.paragraphs.some(p => p.includes(`/blog/${article.slug}/`))));
-  assert.match(read('src/components/RelatedLinks.astro').toString(), /'screenshot-redactor': \['redact-screenshot-before-sharing', 'exif-metadata'\]/);
+  assert.match(read('src/components/RelatedLinks.astro').toString(), /'screenshot-redactor': \['redact-screenshot-before-sharing', 'exif-metadata'[,\]]/);
 });

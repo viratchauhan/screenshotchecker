@@ -2,6 +2,7 @@
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
 import FaqSection from '../FaqSection.astro';
+import ToolGuide from '../ToolGuide.astro';
 import RelatedLinks from '../RelatedLinks.astro';
 import { getToolFaqs } from '../../data/toolFaqs';
 
@@ -412,6 +413,7 @@ const faqs = getToolFaqs('screenshot-comparison');
   </main>
 
   <!-- FAQ Section -->
+  <ToolGuide slug="screenshot-comparison" />
   <FaqSection faqs={faqs} heading="Frequently Asked Questions About Image & Screenshot Comparison" />
 
   <!-- Contextual Internal Linking -->

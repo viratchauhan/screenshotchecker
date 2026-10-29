@@ -2,6 +2,7 @@
 import Header from '../Header.astro';
 import Footer from '../Footer.astro';
 import FaqSection from '../FaqSection.astro';
+import ToolGuide from '../ToolGuide.astro';
 import RelatedLinks from '../RelatedLinks.astro';
 import { getToolFaqs } from '../../data/toolFaqs';
 
@@ -120,6 +121,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
   </main>
 
   <!-- FAQ Section -->
+  <ToolGuide slug="image-manipulation-checker" />
   <FaqSection faqs={faqs} heading="Frequently Asked Questions About Image Forensics & ELA" />
 
   <!-- Contextual Internal Linking -->

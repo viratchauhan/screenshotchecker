@@ -3,7 +3,7 @@
 > Free, browser-based tools for investigating screenshots: is a chat, payment or social media screenshot real, edited or part of a scam? Images are processed in the user's browser and are not uploaded to a server for analysis. Results are warning signs and evidence for the user to review, not proof. No tool on this site can verify a payment, a sender or an account.
 
 Open source (MIT): https://github.com/viratchauhan/screenshotchecker
-Languages: English, Hindi, Spanish, French, German, Japanese.
+Interface languages: English, Hindi, Spanish, French, German, Japanese (a language switch on the tools). Page text is in English, plus a Hindi quiz and a Hindi payment guide.
 
 ## Tools
 
@@ -19,6 +19,9 @@ Languages: English, Hindi, Spanish, French, German, Japanese.
 - [Reverse Image Search helper](https://screenshotchecker.com/reverse-image-search/): Prepare a screenshot and search Google Lens, Bing or TinEye to find where an image appeared before.
 - [Suspicious Link Checker](https://screenshotchecker.com/suspicious-link-checker/): Looks a URL up in a historical labelled URL dataset. A match or no match is not a current safety certificate.
 - [Screenshot Detector](https://screenshotchecker.com/screenshot-detector/): Clues about whether an image is a screenshot or a camera photo.
+- [Screenshot Spam Checker](https://screenshotchecker.com/screenshot-spam-checker/): Rule-based spam and promotion signals in the text of a message screenshot.
+- [Screenshot Privacy Checker](https://screenshotchecker.com/screenshot-privacy-checker/): Finds text patterns that look like emails, phone numbers, card numbers, addresses or tokens before you share a screenshot, then opens the redactor.
+- [All tools](https://screenshotchecker.com/tools/) and [resources](https://screenshotchecker.com/resources/)
 
 ## Learn
 
@@ -43,6 +46,7 @@ Languages: English, Hindi, Spanish, French, German, Japanese.
 - [How to redact a screenshot before sharing](https://screenshotchecker.com/blog/redact-screenshot-before-sharing/)
 - [What is EXIF metadata?](https://screenshotchecker.com/blog/exif-metadata/)
 - [AI image detection explained](https://screenshotchecker.com/blog/ai-image-detector-online/)
+- [How to check a suspicious link](https://screenshotchecker.com/blog/suspicious-link-checker-online/)
 
 ## Key facts for accurate answers
 

@@ -182,10 +182,15 @@ assertRelatedCards(exifDoc, toolsHeading,
   ['/screenshot-metadata-checker', '/image-metadata-remover', '/screenshot-redactor'], 'EXIF guide tools');
 assertRelatedCards(redactionDoc, toolsHeading,
   ['/screenshot-redactor', '/screenshot-metadata-checker', '/image-metadata-remover'], 'Redaction guide tools');
-for (const path of ['screenshot-privacy-checker', 'screenshot-redactor']) {
+// The redaction tutorial and EXIF guide stay first; two topical guides follow.
+const privacyGuideCards = {
+  'screenshot-privacy-checker': ['/blog/fake-bank-transfer-screenshot', '/blog/whatsapp-telegram-task-job-scam'],
+  'screenshot-redactor': ['/blog/fake-whatsapp-chat-screenshot', '/blog/fake-upi-payment-screenshot'],
+};
+for (const [path, extra] of Object.entries(privacyGuideCards)) {
   const doc = new JSDOM(read(`${path}/index.html`)).window.document;
   assertRelatedCards(doc, articlesHeading,
-    ['/blog/redact-screenshot-before-sharing', '/blog/exif-metadata'], `${path} guides`);
+    ['/blog/redact-screenshot-before-sharing', '/blog/exif-metadata', ...extra], `${path} guides`);
 }
 console.log('PASS privacy discovery: exact contextual tool/guide cards, retained redactor guides and resolved targets');
 

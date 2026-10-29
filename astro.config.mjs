@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import trailingSlashLinks from './integrations/trailing-slash-links.mjs';
 import { getAllArticles } from './src/data/blogArticles.ts';
+import { PAGE_UPDATED_AT } from './src/data/pageDates.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,6 +32,9 @@ export default defineConfig({
           if (dateStr) {
             item.lastmod = `${dateStr}T00:00:00.000Z`;
           }
+        } else {
+          const pageDate = PAGE_UPDATED_AT[new URL(item.url).pathname];
+          if (pageDate) item.lastmod = `${pageDate}T00:00:00.000Z`;
         }
         return item;
       },

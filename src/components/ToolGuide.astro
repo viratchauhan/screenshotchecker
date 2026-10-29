@@ -1,0 +1,41 @@
+---
+import { getToolGuide } from '../data/toolGuides';
+
+interface Props {
+  slug: string;
+}
+
+const guide = getToolGuide(Astro.props.slug);
+---
+
+{guide && (
+  <article class="py-16 max-w-4xl mx-auto px-4 sm:px-6 text-body font-sans leading-relaxed border-t border-hairline/80">
+    <h2 class="font-serif text-3xl sm:text-4xl text-ink font-normal tracking-tight mb-4">{guide.heading}</h2>
+    <p class="text-base sm:text-lg mb-10">{guide.intro}</p>
+    <div class="space-y-10">
+      {guide.sections.map((section) => (
+        <section class="space-y-4">
+          <h3 class="font-serif text-2xl text-ink font-normal tracking-tight">{section.heading}</h3>
+          {section.paragraphs.map((paragraph) => <p class="tool-guide-copy" set:html={paragraph} />)}
+          {section.list && (
+            <ul class="list-disc pl-6 space-y-2">
+              {section.list.map((item) => <li class="tool-guide-copy" set:html={item} />)}
+            </ul>
+          )}
+        </section>
+      ))}
+    </div>
+  </article>
+)}
+
+<style>
+  .tool-guide-copy :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .tool-guide-copy :global(strong) {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+</style>
