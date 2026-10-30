@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_AUTHOR, authorSchema } from '../../data/author';
+import { getAllArticles, formatArticleDate } from '../../data/blogArticles';
+
+const canonicalUrl = SITE_AUTHOR.url;
+const pageTitle = 'Virat Chauhan, Founder of ScreenshotChecker';
+const pageDescription =
+  'Virat Chauhan builds ScreenshotChecker and writes its scam, payment and privacy guides from bank, payment-app and government advice.';
+
+const articles = getAllArticles()
+  .filter((article) => article.publishedAt)
+  .sort((a, b) => (b.updatedAt || b.publishedAt || '').localeCompare(a.updatedAt || a.publishedAt || ''));
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfilePage',
+      '@id': `${canonicalUrl}#page`,
+      url: canonicalUrl,
+      name: pageTitle,
+      mainEntity: { '@id': authorSchema['@id'] },
+    },
+    authorSchema,
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://screenshotchecker.com/' },
+        { '@type': 'ListItem', position: 2, name: 'About', item: 'https://screenshotchecker.com/about/' },
+        { '@type': 'ListItem', position: 3, name: SITE_AUTHOR.name, item: canonicalUrl },
+      ],
+    },
+  ],
+};
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  canonicalUrl={canonicalUrl}
+  ogType="profile"
+  structuredData={structuredData}
+>
+  <Header currentPath="/author/virat-chauhan" />
+
+  <main class="flex-1 max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-20 text-body">
+    <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block mb-2">Author</span>
+    <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink tracking-tight mb-3">{SITE_AUTHOR.name}</h1>
+    <p class="text-sm text-muted mb-10">{SITE_AUTHOR.jobTitle}</p>
+
+    <section class="space-y-4 leading-relaxed mb-12">
+      <p>
+        Virat Chauhan founded ScreenshotChecker for a simple reason: a single screenshot is often treated as proof of a payment, a
+        promise in a chat, or a message from a bank, and it rarely is. He builds and maintains every tool on the site, from the OCR, metadata and Error Level
+        Analysis checks to the redactor and the link lookup, and keeps them running in the browser so people can check a screenshot
+        without handing it to a server.
+      </p>
+      <p>
+        He also writes and updates the guides. Each one is based on published advice from banks, payment apps, toll agencies and
+        government cyber-safety teams, linked in the text, and every worked example is clearly marked as fictional. When that advice
+        changes, or when a tool's behaviour changes, the guide is revised and its updated date is shown at the top.
+      </p>
+      <p>
+        The guides follow one rule: a screenshot is a claim, not proof. They explain what each check can show, what it cannot, and
+        where the real answer lives, which is usually your own bank or payment app, or the original conversation.
+      </p>
+      <p>
+        ScreenshotChecker is open source under the MIT licence, so anyone can read the code behind each check on
+        <a href="https://github.com/viratchauhan/screenshotchecker" class="underline" rel="noopener">GitHub</a>.
+        Spotted a mistake in a guide? <a href="/contact/" class="underline">Get in touch</a>.
+      </p>
+      <p class="text-sm">
+        Elsewhere: <a href={SITE_AUTHOR.sameAs[0]} class="underline" rel="me noopener">LinkedIn</a> ·
+        <a href={SITE_AUTHOR.sameAs[1]} class="underline" rel="me noopener">GitHub</a>
+      </p>
+    </section>
+
+    <section>
+      <h2 class="font-serif text-2xl text-ink font-normal mb-4">Guides by Virat Chauhan</h2>
+      <ul class="space-y-3">
+        {articles.map((article) => (
+          <li class="border-b border-hairline pb-3">
+            <a href={`/blog/${article.slug}/`} class="text-ink hover:text-primary underline-offset-4 hover:underline" lang={article.lang || 'en'}>{article.title}</a>
+            <span class="block text-xs text-muted mt-1">
+              {article.updatedAt ? `Updated ${formatArticleDate(article.updatedAt)}` : `Published ${formatArticleDate(article.publishedAt!)}`}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

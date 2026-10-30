@@ -6,6 +6,7 @@ import PaymentPreAnalysisModal from './PaymentPreAnalysisModal.astro';
 import PaymentAnalysisDashboard from './PaymentAnalysisDashboard.astro';
 import RelatedLinks from './RelatedLinks.astro';
 import { PAYMENT_SAMPLE_PRESETS } from '../lib/samples/sampleData';
+import { PAYMENT_COPY_EN, type PaymentToolCopy } from '../data/paymentToolCopy';
 
 interface Props {
   title: string;
@@ -17,6 +18,11 @@ interface Props {
   examples: Array<{ title: string; desc: string }>;
   limitations: string[];
   faqs: Array<{ question: string; answer: string }>;
+  /** Page language; the copy below should match it. */
+  lang?: 'en' | 'hi';
+  copy?: PaymentToolCopy;
+  /** hreflang alternates, including this page. */
+  alternates?: Array<{ hreflang: string; href: string }>;
 }
 
 const {
@@ -29,7 +35,12 @@ const {
   examples,
   limitations,
   faqs,
+  lang = 'en',
+  copy = PAYMENT_COPY_EN,
+  alternates = [],
 } = Astro.props;
+const c = copy;
+const otherLanguage = alternates.find((alt) => alt.hreflang !== lang && alt.hreflang !== 'x-default');
 
 const currentPath = Astro.url.pathname;
 const canonicalUrl = `https://screenshotchecker.com${currentPath.endsWith('/') ? currentPath : currentPath + '/'}`;
@@ -57,7 +68,7 @@ const structuredData = {
         {
           '@type': 'ListItem',
           position: 1,
-          name: 'Home',
+          name: lang === 'hi' ? 'होम' : 'Home',
           item: 'https://screenshotchecker.com/',
         },
         {
@@ -94,7 +105,8 @@ const structuredData = {
 };
 ---
 
-<Layout title={title} description={metaDescription} canonicalUrl={canonicalUrl} structuredData={structuredData}>
+<Layout title={title} description={metaDescription} canonicalUrl={canonicalUrl} structuredData={structuredData} lang={lang}>
+  {alternates.map((alt) => <link slot="head" rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
   <Header currentPath={currentPath} />
 
   <main class="flex-1">
@@ -117,8 +129,15 @@ const structuredData = {
         <svg class="w-4 h-4 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
-        <span>In-browser OCR and text checks. Financial screenshots are processed locally.</span>
+        <span>{c.privacyPill}</span>
       </div>
+      {otherLanguage && (
+        <p class="mt-4 text-sm">
+          <a href={otherLanguage.href.replace('https://screenshotchecker.com', '')} hreflang={otherLanguage.hreflang} lang={otherLanguage.hreflang} class="text-primary underline underline-offset-4">
+            {otherLanguage.hreflang === 'hi' ? 'यह टूल हिंदी में देखें' : 'Use this checker in English'}
+          </a>
+        </p>
+      )}
     </section>
 
     <!-- Uploader Section -->
@@ -128,7 +147,7 @@ const structuredData = {
         class="relative group bg-surface-card border-2 border-dashed border-hairline hover:border-primary/60 rounded-2xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-sm"
         tabindex="0"
         role="button"
-        aria-label="Upload or drop a payment screenshot for analysis"
+        aria-label={c.dropZoneLabel}
       >
         <input
           type="file"
@@ -147,10 +166,10 @@ const structuredData = {
 
           <div class="space-y-1.5">
             <h3 class="font-serif text-xl sm:text-2xl text-ink font-normal">
-              Upload UPI or Payment Screenshot
+              {c.uploadTitle}
             </h3>
             <p class="font-sans text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed">
-              Read payment details from PhonePe, Google Pay, Paytm, BHIM, and Pop UPI screenshots and review text/reference indicators. Fonts, layout and settled funds are not verified.
+              {c.uploadText}
             </p>
           </div>
 
@@ -160,15 +179,15 @@ const structuredData = {
               id="browse-btn"
               class="btn-primary text-xs sm:text-sm"
             >
-              Select Payment Screenshot
+              {c.selectButton}
             </button>
             <span class="text-xs text-muted font-mono hidden sm:inline">
-              or press <kbd class="px-2 py-1 bg-surface-cream-strong rounded border border-hairline font-mono text-[11px]">Ctrl+V</kbd>
+              {c.pasteHint} <kbd class="px-2 py-1 bg-surface-cream-strong rounded border border-hairline font-mono text-[11px]">Ctrl+V</kbd>
             </span>
           </div>
 
           <p class="text-[11px] text-muted-soft font-mono pt-2">
-            Supports PNG, JPG, WebP & BMP up to 25MB
+            {c.formats}
           </p>
         </div>
 
@@ -177,7 +196,7 @@ const structuredData = {
           <div class="w-12 h-12 mx-auto rounded-full border-3 border-primary/20 border-t-primary animate-spin"></div>
           <div>
             <h4 class="font-serif text-xl text-ink font-normal" id="progress-status-text">
-              Reading payment details...
+              {c.progress}
             </h4>
             <p class="text-xs text-muted mt-1 font-mono">100% In-Browser Isolation</p>
           </div>
@@ -189,7 +208,7 @@ const structuredData = {
 
       <!-- Payment Test Samples -->
       <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2 text-xs text-muted">
-        <span class="font-medium text-ink shrink-0">Try synthetic payment examples:</span>
+        <span class="font-medium text-ink shrink-0">{c.samplesLabel}</span>
         <div class="flex flex-wrap items-center justify-center gap-1.5">
           {PAYMENT_SAMPLE_PRESETS.map((preset) => (
             <button
@@ -202,6 +221,7 @@ const structuredData = {
           ))}
         </div>
       </div>
+      {c.reportNote && <p class="mt-3 text-center text-xs text-muted">{c.reportNote}</p>}
     </section>
 
     <!-- Bilingual Pre-Analysis Warning Modal -->
@@ -214,55 +234,25 @@ const structuredData = {
     <section class="py-16 bg-surface-soft border-y border-hairline">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
         <div class="text-center max-w-2xl mx-auto mb-12">
-          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Manual Review Guidance</span>
+          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">{c.guidanceEyebrow}</span>
           <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
-            Review Payment Screenshot Clues
+            {c.guidanceTitle}
           </h2>
           <p class="text-xs sm:text-sm text-muted mt-2 leading-relaxed">
-            These are manual review prompts alongside OCR text rules. The current text-rule engine does not measure font families, icon positions or pixel editing.
+            {c.guidanceIntro}
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">01</span>
-              <h3 class="font-serif text-lg text-ink font-normal">Review Text Appearance Manually</h3>
+          {c.guidanceCards.map((card, idx) => (
+            <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
+              <div class="flex items-center gap-2.5">
+                <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">{String(idx + 1).padStart(2, '0')}</span>
+                <h3 class="font-serif text-lg text-ink font-normal">{card.title}</h3>
+              </div>
+              <p class="text-xs text-body leading-relaxed" set:html={card.html} />
             </div>
-            <p class="text-xs text-body leading-relaxed">
-              Compare text appearance in the original image with an official receipt. The OCR label <em>"Banking name:"</em> does not establish a font mismatch or editing; this tool does not measure fonts.
-            </p>
-          </div>
-
-          <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">02</span>
-              <h3 class="font-serif text-lg text-ink font-normal">Symbols in Extracted Text</h3>
-            </div>
-            <p class="text-xs text-body leading-relaxed">
-              OCR can merge nearby symbols into bank-name text, such as <em>"State 🏦 Bank of India"</em>. Inspect the original image manually; extracted symbols do not establish icon misplacement or composite editing.
-            </p>
-          </div>
-
-          <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">03</span>
-              <h3 class="font-serif text-lg text-ink font-normal">Different Amounts Need Context</h3>
-            </div>
-            <p class="text-xs text-body leading-relaxed">
-              Compare each amount with its label in the original image. A fee or balance may legitimately differ from the payment amount, and OCR can misread digits. An amount-rule warning does not establish that pixels were edited.
-            </p>
-          </div>
-
-          <div class="bg-canvas border border-hairline rounded-xl p-6 space-y-3">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-full bg-primary/10 text-primary flex items-center justify-center text-xs font-bold font-mono">04</span>
-              <h3 class="font-serif text-lg text-ink font-normal">Compare References With Official Records</h3>
-            </div>
-            <p class="text-xs text-body leading-relaxed">
-              Reference labels and formats can differ, and OCR may omit or misread characters. This checker applies configured format rules; it does not query a bank transaction database. A plausible reference can be copied, so digit count alone cannot authenticate a payment.
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>
@@ -270,9 +260,9 @@ const structuredData = {
     <!-- How It Works Section -->
     <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-xl mx-auto mb-12">
-        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Workflow</span>
+        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">{c.workflowEyebrow}</span>
         <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
-          How It Works
+          {c.workflowTitle}
         </h2>
       </div>
 
@@ -295,12 +285,12 @@ const structuredData = {
     <section class="py-16 bg-surface-soft border-y border-hairline">
       <div class="max-w-4xl mx-auto px-4 sm:px-6">
         <div class="mb-10 text-center max-w-xl mx-auto">
-          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Text Recognition Coverage</span>
+          <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">{c.coverageEyebrow}</span>
           <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
-            Indian UPI Receipt Text
+            {c.coverageTitle}
           </h2>
           <p class="text-xs sm:text-sm text-muted mt-2">
-            The classifier looks for names or supported handles associated with Google Pay, PhonePe, Paytm, BHIM and Pop UPI. Recognition is text-based and can be wrong.
+            {c.coverageIntro}
           </p>
         </div>
 
@@ -325,7 +315,7 @@ const structuredData = {
             </svg>
           </div>
           <div class="space-y-3">
-            <h3 class="font-serif text-xl text-ink font-normal">Technical Limitations & Essential Guidance</h3>
+            <h3 class="font-serif text-xl text-ink font-normal">{c.limitationsTitle}</h3>
             
             <!-- Bilingual Highlight Note Box -->
             <div class="p-4 rounded-xl bg-canvas border border-warning/30 space-y-2 text-xs leading-relaxed">
@@ -344,9 +334,7 @@ const structuredData = {
                 <li>{lim}</li>
               ))}
             </ul>
-            <p class="text-xs text-body leading-relaxed">
-              Verification guidance: <a href="https://support.google.com/pay/india/answer/16919844?hl=en" class="text-primary underline">Google Pay's bank-statement checks</a> and <a href="https://www.phonepe.com/blog/trust-and-safety/heres-a-quick-guide-to-help-you-avoid-becoming-a-victim-of-fake-payment-screenshots-2/" class="text-primary underline">PhonePe's fake-screenshot precautions</a>.
-            </p>
+            <p class="text-xs text-body leading-relaxed" set:html={c.sourcesHtml} />
           </div>
         </div>
       </div>
@@ -355,9 +343,9 @@ const structuredData = {
     <!-- Payment Review FAQs -->
     <section class="py-16 max-w-4xl mx-auto px-4 sm:px-6">
       <div class="text-center max-w-xl mx-auto mb-10">
-        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">Questions & Answers</span>
+        <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono">{c.faqEyebrow}</span>
         <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">
-          Frequently Asked Questions
+          {c.faqTitle}
         </h2>
       </div>
 

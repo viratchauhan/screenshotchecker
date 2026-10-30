@@ -6,6 +6,7 @@ import RelatedLinks from '../../components/RelatedLinks.astro';
 import { getAllArticles, formatArticleDate, getRelatedArticles, type BlogArticle } from '../../data/blogArticles';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { SITE_AUTHOR, authorSchema } from '../../data/author';
 
 export async function getStaticPaths() {
   const articles = getAllArticles();
@@ -50,11 +51,9 @@ const articleSchema = {
     '@type': 'WebPage',
     '@id': canonicalUrl,
   },
-  author: {
-    '@type': 'Organization',
-    name: article.authorName || 'Screenshot Checker Editorial Team',
-    url: 'https://screenshotchecker.com/',
-  },
+  author: article.authorName && article.authorName !== SITE_AUTHOR.name
+    ? { '@type': 'Person', name: article.authorName }
+    : authorSchema,
   publisher: {
     '@type': 'Organization',
     name: 'Screenshot Checker',
@@ -154,7 +153,7 @@ const combinedStructuredData = {
         <span>{article.readTime}</span>
       </div>
 
-      {article.authorName && <p class="text-xs text-muted">By <a href="/about" rel="author" class="underline">{article.authorName}</a></p>}
+      <p class="text-xs text-muted">By <a href={SITE_AUTHOR.path} rel="author" class="underline">{article.authorName || SITE_AUTHOR.name}</a></p>
 
       <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-ink font-normal leading-[1.15] tracking-tight">
         {article.title}

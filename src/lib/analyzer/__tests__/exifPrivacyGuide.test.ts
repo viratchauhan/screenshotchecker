@@ -10,7 +10,7 @@ const read = (path: string) => readFileSync(new URL(`../../../../${path}`, impor
 test('EXIF guide keeps its existing identity and provides task-specific next steps', () => {
   assert.equal(getAllArticles().filter(value => value.slug === 'exif-metadata').length, 1);
   assert.equal(article.publishedAt, '2026-08-22', 'Historical publication date is preserved');
-  assert.equal(article.authorName, 'ScreenshotChecker');
+  assert.equal(article.authorName, 'Virat Chauhan');
   assert.equal(article.cta.url, '/screenshot-metadata-checker/');
   assert.deepEqual(article.peopleAlsoSearch, [], 'No keyword-only block');
   for (const path of ['/screenshot-metadata-checker/', '/image-metadata-remover/', '/blog/redact-screenshot-before-sharing/', '/privacy/']) {

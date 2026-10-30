@@ -3,7 +3,7 @@
 // Update the date when a page's visible content changes (not for layout or code-only edits).
 export const PAGE_UPDATED_AT: Record<string, string> = {
   '/': '2026-10-15',
-  '/about/': '2026-10-01',
+  '/about/': '2026-10-30',
   '/ai-image-detector/': '2026-10-29',
   '/blog/': '2026-10-16',
   '/contact/': '2026-08-27',
@@ -11,6 +11,8 @@ export const PAGE_UPDATED_AT: Record<string, string> = {
   '/image-manipulation-checker/': '2026-10-29',
   '/image-metadata-remover/': '2026-10-29',
   '/payment-screenshot-checker/': '2026-10-14',
+  '/payment-screenshot-checker/hindi/': '2026-10-30',
+  '/author/virat-chauhan/': '2026-10-30',
   '/privacy/': '2026-10-14',
   '/resources/': '2026-08-27',
   '/reverse-image-search/': '2026-10-14',

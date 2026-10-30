@@ -78,7 +78,8 @@ try {
     assert.match(source, /not a probability/i);
     assert.match(source, /rule-based/i);
   }
-  const paymentLayout = readFileSync(new URL('../../../components/PaymentToolLayout.astro', import.meta.url), 'utf8');
+  const paymentLayout = readFileSync(new URL('../../../components/PaymentToolLayout.astro', import.meta.url), 'utf8')
+    + readFileSync(new URL('../../../data/paymentToolCopy.ts', import.meta.url), 'utf8');
   assert.doesNotMatch(paymentLayout, /for typography flaws, altered amounts, and fake template artifacts/);
   assert.match(paymentLayout, /Fonts, layout and settled funds are not verified/);
   console.log('Q3 presentation/agent regressions passed; unchanged scores, synthetic image/OCR boundary, no live requests');

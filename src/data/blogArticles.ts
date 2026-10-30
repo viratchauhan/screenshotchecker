@@ -204,7 +204,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "publishedAt": "2026-08-22",
     "updatedAt": "2026-10-01",
     "readTime": "5 min read",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "excerpt": "How to interpret extracted text, metadata, compression maps and incomplete checks without mistaking image clues for proof.",
     "targetKeywords": [
       "screenshot analysis",
@@ -321,7 +321,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "category": "Security",
     "publishedAt": "2026-08-22",
     "updatedAt": "2026-10-02",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "6 min read",
     "excerpt": "Verify a claimed UPI payment against your own records, follow a fictional ₹500 seller example, and understand what screenshot text checks can and cannot establish.",
     "targetKeywords": [
@@ -586,7 +586,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "category": "Privacy",
     "publishedAt": "2026-08-22",
     "updatedAt": "2026-10-01",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "7 min read",
     "excerpt": "Separate hidden image metadata from visible private details, inspect a sharing copy, and verify what remains after export.",
     "targetKeywords": [
@@ -1017,7 +1017,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Redact a screenshot with opaque masks, then check the saved PNG and metadata. Follow a fictional before-and-after example and a practical sharing checklist.",
     "category": "Privacy",
     "publishedAt": "2026-10-01",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "6 min read",
     "excerpt": "A worked example of solid-mask redaction, checking the exported PNG, and reviewing metadata before sharing a screenshot.",
     "targetKeywords": [
@@ -1147,7 +1147,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Check a WhatsApp chat screenshot the reliable way: treat visual clues as hints, then verify the message live on the phone, with the sender or in your own chat.",
     "category": "Forensics",
     "publishedAt": "2026-10-14",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "Why chat screenshots are easy to fake, which visual clues are worth a second look, and how to verify a disputed WhatsApp message at its source, with a fictional example.",
     "targetKeywords": [
@@ -1306,7 +1306,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Check a screenshot of an X post, tweet or Instagram post by finding the original, confirming the account, and treating badges and image clues as hints.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-14",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "How to trace a screenshot of a celebrity, politician or brand post back to its source, why paid badges and image details settle little, and a fictional CEO post example.",
     "targetKeywords": [
@@ -1467,7 +1467,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "A buyer's PayPal, Venmo, Cash App or Zelle screenshot is not payment. Open your own app, confirm the money is there, and spot overpayment and upgrade scams.",
     "category": "Security",
     "publishedAt": "2026-10-14",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "For US marketplace sellers: why a payment screenshot or email proves nothing, how to confirm money in your own PayPal, Venmo, Cash App or bank app, and how overpayment and fake upgrade scams work.",
     "targetKeywords": [
@@ -1629,7 +1629,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Got a bank transfer screenshot? Why pending or scheduled screens are not payment, how to confirm funds in your own account, and where to report fraud in the UK.",
     "category": "Security",
     "publishedAt": "2026-10-14",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "A UK-first guide for freelancers, landlords and sellers: why a transfer screenshot is only a claim, how to confirm a credit in your own account, and what to do about overpayment requests.",
     "targetKeywords": [
@@ -1779,7 +1779,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "ग्राहक ने पेमेंट स्क्रीनशॉट दिखाया? सामान देने से पहले अपना UPI ऐप और बैंक रिकॉर्ड देखें। pending बहाना, ज़्यादा पैसे लौटाओ धोखा और शिकायत का तरीका जानें।",
     "category": "Security",
     "publishedAt": "2026-10-14",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "किराना दुकान, छोटे विक्रेता और OLX/Instagram पर सामान बेचने वालों के लिए आसान गाइड: ग्राहक का स्क्रीनशॉट नहीं, अपना UPI ऐप और बैंक रिकॉर्ड देखकर ही सामान दें। ₹1,850 का एक काल्पनिक उदाहरण भी शामिल है।",
     "targetKeywords": [
@@ -1877,7 +1877,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       {
         "heading": "ScreenshotChecker का payment checker क्या करता है, क्या नहीं",
         "paragraphs": [
-          "अगर ग्राहक ने स्क्रीनशॉट WhatsApp पर भेजा है और आप उसे ध्यान से देखना चाहते हैं, तो <a href=\"/payment-screenshot-checker/\">Payment Screenshot Checker</a> मदद कर सकता है। यह OCR से रसीद पर लिखा text पढ़ता है, जैसे रकम, नाम और reference, और फिर तय नियमों से कुछ चेतावनी वाले संकेत दिखाता है, जैसे रकम में गड़बड़ी या अजीब reference। यह भारतीय UPI रसीदों (Google Pay, PhonePe, Paytm, BHIM) के text के लिए बनाया गया है।",
+          "अगर ग्राहक ने स्क्रीनशॉट WhatsApp पर भेजा है और आप उसे ध्यान से देखना चाहते हैं, तो <a href=\"/payment-screenshot-checker/hindi/\">Payment Screenshot Checker (हिंदी)</a> मदद कर सकता है। यह OCR से रसीद पर लिखा text पढ़ता है, जैसे रकम, नाम और reference, और फिर तय नियमों से कुछ चेतावनी वाले संकेत दिखाता है, जैसे रकम में गड़बड़ी या अजीब reference। यह भारतीय UPI रसीदों (Google Pay, PhonePe, Paytm, BHIM) के text के लिए बनाया गया है।",
           "<strong>यह checker यह पक्का नहीं कर सकता कि पैसा आपके खाते में आया।</strong> इसका आपके बैंक या UPI ऐप से कोई संपर्क नहीं है। यह font, icon की जगह या screen का layout नहीं मापता, और यह साबित नहीं कर सकता कि स्क्रीनशॉट असली है या नकली। OCR कभी-कभी कोई अंक गलत पढ़ सकता है, इसलिए नतीजे को हमेशा मूल स्क्रीनशॉट से मिलाकर देखें।",
           "'LOW RISK' का मतलब यह नहीं कि पैसा मिल गया, और 'HIGH RISK' का मतलब यह नहीं कि ग्राहक ठग है। दोनों सूरतों में आख़िरी फ़ैसला आपके UPI ऐप या बैंक की entry से ही करें। ज़्यादा जानकारी के लिए हमारी <a href=\"/blog/fake-upi-payment-screenshot/\">UPI payment screenshot गाइड</a> देखें।"
         ],
@@ -1941,7 +1941,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Got an SMS saying your India Post or courier parcel is held for an incomplete address? Learn the red flags, how to check safely and where to report it.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "Why the 'parcel held, update your address' text is a common smishing pattern in India, how to check your parcel without the link, what to do if you already paid, and how to report the SMS on Chakshu.",
     "targetKeywords": [
@@ -2109,7 +2109,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Got an SMS saying your power will be cut tonight and to call an electricity officer? Learn the scam pattern, how to check your bill and what to do if you paid.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "7 min read",
     "excerpt": "How fake power-cut messages lead to a phone call, a screen-sharing app or a payment link, how to check your bill through official channels, and what to do if you already responded.",
     "targetKeywords": [
@@ -2258,7 +2258,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Paid small amounts to like videos or rate hotels, now asked to deposit for prepaid tasks? It is a task scam. Stop paying, save evidence and report it fast.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "How WhatsApp and Telegram task scams build trust with small payouts, why the earnings screenshots in the group prove nothing, and what to do in India, the US and the UK once they ask for a deposit.",
     "targetKeywords": [
@@ -2429,7 +2429,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Got a text saying you owe an E-ZPass, SunPass or FasTrak toll? Don't tap the link. Check your account on the agency's own site, then report the text.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
-    "authorName": "ScreenshotChecker",
+    "authorName": "Virat Chauhan",
     "readTime": "7 min read",
     "excerpt": "Why unpaid toll texts are a common smishing lure, what the FBI, FTC and toll agencies advise, how to check your real account, and what to do if you already paid.",
     "targetKeywords": [

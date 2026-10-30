@@ -3,13 +3,13 @@
 > Free, browser-based tools for investigating screenshots: is a chat, payment or social media screenshot real, edited or part of a scam? Images are processed in the user's browser and are not uploaded to a server for analysis. Results are warning signs and evidence for the user to review, not proof. No tool on this site can verify a payment, a sender or an account.
 
 Open source (MIT): https://github.com/viratchauhan/screenshotchecker
-Interface languages: English, Hindi, Spanish, French, German, Japanese (a language switch on the tools). Page text is in English, plus a Hindi quiz and a Hindi payment guide.
+Interface languages: English, Hindi, Spanish, French, German, Japanese (a language switch on the tools). Page text is in English, plus a Hindi payment checker page, a Hindi quiz and a Hindi payment guide.
 
 ## Tools
 
 - [Screenshot Checker](https://screenshotchecker.com/): Investigate whether a screenshot deserves trust. Reads text with OCR, shows metadata, runs rule-based scam and editing checks, and lists what could not be checked.
 - [Screenshot Scam Checker](https://screenshotchecker.com/screenshot-scam-checker/): Flags common scam signals (urgency, payment or code requests, impersonation phrasing) in screenshots of SMS, WhatsApp, email and social messages.
-- [Payment Screenshot Checker](https://screenshotchecker.com/payment-screenshot-checker/): Reviews Indian UPI receipt text (Google Pay, PhonePe, Paytm, BHIM) with OCR-based rules. Cannot confirm money was received; users must check their own bank or UPI app.
+- [Payment Screenshot Checker](https://screenshotchecker.com/payment-screenshot-checker/): Reviews Indian UPI receipt text (Google Pay, PhonePe, Paytm, BHIM) with OCR-based rules. Cannot confirm money was received; users must check their own bank or UPI app. Hindi version: https://screenshotchecker.com/payment-screenshot-checker/hindi/
 - [Fake / AI Image Detector](https://screenshotchecker.com/ai-image-detector/): Reports evidence such as C2PA content credentials, metadata and error level analysis. Probabilistic clues, not a verdict.
 - [Image Manipulation Checker](https://screenshotchecker.com/image-manipulation-checker/): Error level analysis and related forensic views to find regions worth a closer look.
 - [Screenshot Comparison](https://screenshotchecker.com/screenshot-comparison/): Shows text and pixel differences between two versions of a screenshot.
@@ -27,6 +27,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 
 - [Spot the Fake Screenshot quiz](https://screenshotchecker.com/spot-the-fake/): Ten fictional scam, legitimate and edited screenshots with an explanation after each. Hindi version: https://screenshotchecker.com/spot-the-fake/hindi/
 - [How it works](https://screenshotchecker.com/how-it-works/): Network requests, storage and the limits of each check.
+- [About the author](https://screenshotchecker.com/author/virat-chauhan/): Virat Chauhan builds the tools and writes the guides.
 
 ## Guides
 

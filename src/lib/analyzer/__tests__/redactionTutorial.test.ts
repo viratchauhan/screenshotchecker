@@ -45,7 +45,7 @@ test('one distinct redaction tutorial preserves the supplied example bytes and P
 });
 
 test('tutorial retains careful evidence boundaries, matching controls and contextual links', () => {
-  assert.equal(article.authorName, 'ScreenshotChecker');
+  assert.equal(article.authorName, 'Virat Chauhan');
   const controls = read('src/components/workspaces/RedactorWorkspace.astro').toString()
     + read('src/lib/utils/redactionInput.ts').toString();
   for (const label of ['Select Image to Redact', 'Blackout', 'Whiteout', 'Add mask', 'Auto-Mask All', 'Export Clean PNG', 'Undo']) {

@@ -40,7 +40,7 @@ test('FAQs preserve uncertainties and provider limits without universal referenc
 });
 
 test('static review cards explain benign differences and source the verification guidance', () => {
-  const staticLayout = layout.split('<script>')[0];
+  const staticLayout = layout.split('<script>')[0] + read('../../../data/paymentToolCopy.ts');
   assert.doesNotMatch(staticLayout, unsupported);
   assert.match(staticLayout, /Try synthetic payment examples/);
   assert.match(staticLayout, /fee or balance may legitimately differ/);

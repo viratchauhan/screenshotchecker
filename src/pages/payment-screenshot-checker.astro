@@ -2,6 +2,11 @@
 import PaymentToolLayout from '../components/PaymentToolLayout.astro';
 
 const props = {
+  alternates: [
+    { hreflang: "en", href: "https://screenshotchecker.com/payment-screenshot-checker/" },
+    { hreflang: "hi", href: "https://screenshotchecker.com/payment-screenshot-checker/hindi/" },
+    { hreflang: "x-default", href: "https://screenshotchecker.com/payment-screenshot-checker/" },
+  ],
   title: "Fake Payment Screenshot Checker: UPI, GPay, PhonePe",
   metaDescription: "Got a payment screenshot? Review UPI, PhonePe, Google Pay and Paytm receipts with OCR-based checks for warning signs, then confirm it in your own bank records.",
   badge: "Fake UPI Screenshot Checker",

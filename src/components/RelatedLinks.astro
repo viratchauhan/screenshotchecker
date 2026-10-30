@@ -129,6 +129,7 @@ const DEFAULT_TOOL_RELATIONS: Record<string, string[]> = {
   '': ['screenshot-analyzer', 'payment-screenshot-checker', 'image-manipulation-checker'],
   'screenshot-analyzer': ['payment-screenshot-checker', 'image-manipulation-checker', 'screenshot-scam-checker'],
   'payment-screenshot-checker': ['screenshot-analyzer', 'image-manipulation-checker', 'screenshot-redactor'],
+  'payment-screenshot-checker/hindi': ['payment-screenshot-checker', 'screenshot-scam-checker', 'screenshot-redactor'],
   'image-manipulation-checker': ['screenshot-comparison', 'ai-image-detector', 'payment-screenshot-checker'],
   'ai-image-detector': ['image-manipulation-checker', 'screenshot-analyzer', 'screenshot-metadata-checker'],
   'screenshot-ocr': ['screenshot-redactor', 'suspicious-link-checker', 'screenshot-analyzer'],
@@ -149,6 +150,7 @@ const DEFAULT_TOOL_RELATIONS: Record<string, string[]> = {
 const DEFAULT_ARTICLE_RELATIONS: Record<string, string[]> = {
   '': ['fake-whatsapp-chat-screenshot', 'fake-social-media-post-screenshot', 'fake-payment-screenshot-paypal-venmo-cash-app', 'fake-upi-payment-screenshot'],
   'screenshot-analyzer': ['screenshot-checker-online', 'screenshot-analyzer-online', 'fake-whatsapp-chat-screenshot', 'fake-social-media-post-screenshot'],
+  'payment-screenshot-checker/hindi': ['fake-payment-screenshot-kaise-pehchane', 'fake-upi-payment-screenshot', 'smishing-fake-sms', 'redact-screenshot-before-sharing'],
   'payment-screenshot-checker': ['fake-upi-payment-screenshot', 'fake-payment-screenshot-kaise-pehchane', 'fake-payment-screenshot-paypal-venmo-cash-app', 'fake-bank-transfer-screenshot'],
   'image-manipulation-checker': ['screenshot-checker-online', 'ai-image-detector-online', 'fake-whatsapp-chat-screenshot', 'fake-social-media-post-screenshot'],
   'ai-image-detector': ['ai-image-detector-online', 'fake-social-media-post-screenshot', 'exif-metadata', 'screenshot-checker-online'],
