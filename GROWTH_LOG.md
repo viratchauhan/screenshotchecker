@@ -84,3 +84,23 @@ Directory listings (AlternativeTo, SaaSHub, Peerlist, Product Hunt) need the own
 - Four guides on high-volume scam searches, each with primary sources and a fictional worked example: india-post-courier-sms-scam, electricity-bill-disconnection-sms-scam, whatsapp-telegram-task-job-scam, unpaid-toll-text-scam. Linked from the smishing guide, related cards on the scam, spam and link checkers, and llms.txt.
 - Indexing requested in Google Search Console for all four; submitted the four plus the updated smishing guide to Bing.
 - The three awesome-list PRs are still open with no maintainer comments.
+
+## 29 October 2026 - SEO audit fixes (claude-seo audit, owner-approved release)
+
+Owner ran a claude-seo v2.5.0 audit (health score 83/100, no critical issues) and asked for every finding to be fixed and deployed. Released to production from main `5a45030` on 29 October (Cloudflare version before release: `466ded5b`, the rollback point).
+
+- Security headers in `public/_headers`: HSTS, nosniff, X-Frame-Options, referrer policy, COOP, permissions policy, base CSP with frame-ancestors.
+- Missing trailing slash now answers 301 (was 307) for every page; the build writes the rules into `dist/_redirects`.
+- robots.txt lists only sitemap-index.xml (Cloudflare's managed block still supplies the groups). Sitemap lastmod on all URLs via `src/data/pageDates.ts`.
+- Explainer sections under eight thin tool pages (`src/data/toolGuides.ts`), checked against each tool's code. Word counts roughly doubled (for example metadata remover 370 to 773).
+- Footer guides column, resources and Hindi quiz links; spam checker in the tools directory; four related guides per tool page.
+- Labelled fictional example figures (no real brands) in the 16 guides that had no image; listed as BlogPosting images.
+- Schema: BlogPosting image, raster publisher logo, Screenshot Detector breadcrumbs, quiz x-default. llms.txt languages line corrected.
+- Verified live: headers, 301s, sitemap (43 URLs, all dated), pages, sample analysis with no console errors. Sitemap index resubmitted in Search Console on 30 October; Google read it the same day.
+
+## 30 October 2026 - author, Hindi payment checker, strict CSP
+
+- Virat Chauhan is the byline and BlogPosting author (Person) on every guide, with an author page at /author/virat-chauhan/ (ProfilePage schema), linked from About.
+- /payment-screenshot-checker/hindi/: the real payment checker with Hindi page text and FAQ, hreflang en/hi/x-default both ways. The analysis report itself stays English, and the page says so. PaymentToolLayout now takes a copy object; English text moved unchanged to `src/data/paymentToolCopy.ts`.
+- Strict CSP via Astro `security.csp`: hashed inline scripts and styles, scripts only from self, jsDelivr, Google Tag Manager and Clarity, wasm-unsafe-eval for OCR/C2PA, GA4 hosts allowed. Inline onload/onclick handlers and the quiz's inline data script replaced. Every tool exercised locally under wrangler with the policy enforced: no violations.
+- No traffic or ranking change is claimed yet; check Search Console Pages and Performance in two to three weeks.
