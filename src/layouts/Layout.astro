@@ -192,8 +192,18 @@ if (structuredData) {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       media="print"
-      onload="this.media='all'"
+      id="google-fonts-css"
     />
+    <!-- Applies the font stylesheet once loaded (an inline onload handler would be blocked by the CSP) -->
+    <script is:inline>
+      (function () {
+        const link = document.getElementById('google-fonts-css');
+        if (!link) return;
+        const apply = () => { link.media = 'all'; };
+        if (link.sheet) apply();
+        else link.addEventListener('load', apply, { once: true });
+      })();
+    </script>
     <noscript>
       <link
         rel="stylesheet"

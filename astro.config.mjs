@@ -12,6 +12,40 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
+  // Content-Security-Policy <meta> on every page. Astro hashes each inline script and style; anything else
+  // must come from the hosts below. frame-ancestors and the other header-only directives are in public/_headers.
+  security: {
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "connect-src 'self' data: blob: https://cdn.jsdelivr.net https://www.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com https://www.google.co.in https://*.clarity.ms",
+        "img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com https://www.google.co.in https://*.clarity.ms",
+        "font-src 'self' data: https://fonts.gstatic.com",
+        "worker-src 'self' blob:",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+      ],
+      scriptDirective: {
+        resources: [
+          "'self'",
+          "'wasm-unsafe-eval'",
+          'https://cdn.jsdelivr.net',
+          'https://www.googletagmanager.com',
+          'https://www.clarity.ms',
+          'https://scripts.clarity.ms',
+        ],
+      },
+      styleDirective: {
+        resources: [
+          "'self'",
+          'https://fonts.googleapis.com',
+          // style="" attributes in markup and in rendered report templates
+          { resource: "'unsafe-inline'", kind: 'attribute' },
+        ],
+      },
+    },
+  },
   vite: {
     plugins: [tailwindcss()],
   },

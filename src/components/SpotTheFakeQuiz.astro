@@ -67,16 +67,15 @@ const firstRound = ui.roundLabel.replace('{n}', '1').replace('{total}', String(r
   <slot />
 </section>
 
-<script define:vars={{ rounds, tiers, ui, shareUrl }} is:inline>
-  window.__SC_QUIZ__ = { rounds, tiers, ui, shareUrl };
-</script>
+<!-- Quiz data as JSON (not executed, so the CSP does not need a hash for it) -->
+<script type="application/json" id="sc-quiz-data" set:html={JSON.stringify({ rounds, tiers, ui, shareUrl }).replace(/</g, '\\u003c')} />
 
 <script>
   import type { QuizRound, QuizUi } from '../data/spotTheFake';
   type Tier = { min: number; title: string; text: string };
-  const { rounds, tiers, ui, shareUrl } = (window as unknown as {
-    __SC_QUIZ__: { rounds: QuizRound[]; tiers: Tier[]; ui: QuizUi; shareUrl: string };
-  }).__SC_QUIZ__;
+  const { rounds, tiers, ui, shareUrl } = JSON.parse(document.getElementById('sc-quiz-data')!.textContent || '{}') as {
+    rounds: QuizRound[]; tiers: Tier[]; ui: QuizUi; shareUrl: string;
+  };
   const lang = document.documentElement.lang || 'en';
   const track = (name: string, params: Record<string, unknown> = {}) =>
     (window as unknown as { scTrack?: (n: string, p?: Record<string, unknown>) => void }).scTrack?.(name, { method: `lang_${lang}`, ...params });
