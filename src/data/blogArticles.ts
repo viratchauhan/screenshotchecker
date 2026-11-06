@@ -701,7 +701,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["how-to-tell-if-a-photo-is-a-screenshot", 
       "redact-screenshot-before-sharing",
       "screenshot-analyzer-online",
       "screenshot-checker-online"
@@ -827,7 +827,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Report phishing SMS',
       'Fraud SMS detector',
     ],
-    relatedSlugs: ["india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
+    relatedSlugs: ["usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
     cta: {
       label: 'Check a Suspicious Message',
       url: '/',
@@ -2411,7 +2411,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["fake-crypto-profit-screenshots", 
       "fake-whatsapp-chat-screenshot",
       "smishing-fake-sms",
       "fake-upi-payment-screenshot"
@@ -2580,7 +2580,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["usps-redelivery-text-scam", 
       "smishing-fake-sms",
       "suspicious-link-checker-online",
       "screenshot-checker-online"
@@ -2589,6 +2589,454 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check a Suspicious Toll Text",
       "url": "/screenshot-scam-checker/",
       "description": "Review scam warning signs in a screenshot of the message, then confirm any balance on the toll agency's official website."
+    }
+  },
+  {
+    "slug": "how-to-tell-if-a-photo-is-a-screenshot",
+    "title": "How to Tell If an Image Is a Screenshot or a Photo",
+    "seoTitle": "Is It a Screenshot or a Photo? How to Tell",
+    "metaDescription": "Learn the clues that separate a screenshot from a camera photo: status bars, screen sizes, metadata and moiré, plus what the answer can and cannot prove.",
+    "category": "Forensics",
+    "publishedAt": "2026-11-06",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "The visible and file-level clues that show whether an image was captured from a screen or taken with a camera, a worked marketplace example, and why the answer is a clue rather than a verdict.",
+    "targetKeywords": [
+      "how to tell if a photo is a screenshot",
+      "screenshot or photo",
+      "is this image a screenshot",
+      "screenshot detector",
+      "how to tell if a picture was taken with a camera",
+      "photo of a screen vs screenshot"
+    ],
+    "keyTakeaway": {
+      "title": "Screenshot or photo is a question about source, not truth",
+      "text": "Status bars, screen-sized dimensions and missing camera metadata point to a screenshot; perspective, glare, moiré and camera fields point to a photo. None of these is proof on its own, and neither answer tells you whether the content is genuine."
+    },
+    "introduction": "Someone sends you a picture and says they just took it. Maybe it is a used bike for sale, a receipt, a parking ticket or a message on their screen. Whether that image is a screenshot or a photo can matter: a \"fresh photo\" that turns out to be a screenshot may have been copied from somewhere else. This guide covers the clues you can see in the picture, the clues stored in the file, a fictional worked example, and the limits of what the answer tells you.",
+    "contentSections": [
+      {
+        "heading": "Why it matters whether an image is a screenshot",
+        "paragraphs": [
+          "A screenshot records what was on a screen. A photo records what was in front of a camera. When someone claims they photographed something themselves, a screenshot is a mismatch worth asking about: it could be a capture of another person's listing, a post, or an old image saved from a chat.",
+          "The reverse also comes up. A photo of a screen, taken with a second phone, is sometimes used to dodge screenshot notifications or to make an edited screen look more \"real\". Knowing which kind of image you have helps you decide what to check next."
+        ],
+        "callout": {
+          "type": "info",
+          "text": "This is a different question from whether an image is fake. A genuine screenshot can show a doctored message, and a genuine photo can show a staged scene. For authenticity, use the <a href=\"/blog/screenshot-checker-online/\">screenshot verification checklist</a>."
+        }
+      },
+      {
+        "heading": "Clues you can see in the picture",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/how-to-tell-if-a-photo-is-a-screenshot/fictional-example.png",
+          "alt": "Fictional image check listing four clues: a status bar with time and battery, screen-sized dimensions, no camera fields and no moiré or glare.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional check. Each clue points towards a screenshot, but none of them proves where the image came from."
+        },
+        "paragraphs": [
+          "Start with your eyes. Screenshots usually carry the phone or computer's own interface, and they are perfectly flat: every pixel came straight from the screen.",
+          "Photos of real objects show depth, lighting and lens effects. Photos of a screen show something in between: screen content plus the physical marks of a camera pointed at glass."
+        ],
+        "checklist": [
+          "Status bar: a clock, battery, signal or Wi-Fi icon along the top edge suggests a phone screenshot. Its absence proves little, because it is easy to crop out.",
+          "Interface edges: navigation bars, app headers, rounded screen corners or a notch outline are screen elements.",
+          "Perfectly straight, sharp text with no perspective usually means a screenshot.",
+          "Moiré (wavy rainbow patterns), glare, reflections, visible pixels or a tilted screen edge suggest a photo of a screen.",
+          "Depth of field, shadows and natural noise in dark areas suggest a camera photo of a real scene."
+        ]
+      },
+      {
+        "heading": "Clues stored in the file",
+        "paragraphs": [
+          "The file itself can add evidence, as long as you have the original rather than a copy saved from a chat app. Messaging and social apps commonly resize images and remove metadata when they are sent, which wipes out several of these clues.",
+          "<strong>Dimensions.</strong> Screenshots are usually exactly the size of the screen that took them, such as a tall phone-shaped rectangle. Photos from phone cameras use the camera's sensor shape, commonly 4:3 or 16:9. Dimensions overlap across devices and change when an image is resized, so treat a match as a hint.",
+          "<strong>Metadata.</strong> Camera photos often store EXIF fields such as the device make and model, exposure settings, the capture time and sometimes GPS coordinates. Screenshots usually lack camera exposure fields, and some name the capture software instead. Missing metadata is common for any shared image and is not evidence on its own. Read <a href=\"/blog/exif-metadata/\">what EXIF metadata is</a> for the details.",
+          "<strong>File type.</strong> Many systems save screenshots as PNG files and camera photos as JPEG or HEIC, but settings, apps and sharing all change formats. A JPEG screenshot or a PNG photo is entirely possible."
+        ],
+        "cta": {
+          "label": "Check an Image's Source Clues",
+          "url": "/screenshot-detector/",
+          "description": "Read dimensions and metadata in your browser, with clear evidence and an honest \"inconclusive\" when the clues conflict."
+        }
+      },
+      {
+        "heading": "Worked example: a fictional bike sale",
+        "paragraphs": [
+          "Sam is buying a used road bike from a stranger online. Sam asks for a photo of the bike with today's newspaper next to it. The seller sends an image of the bike, says they just took it, and asks for a deposit.",
+          "Sam opens the original file in the <a href=\"/screenshot-detector/\">screenshot detector</a>. The image is a tall phone-screen shape, it has no camera make, model or exposure fields, and there is a thin strip of a status bar at the top edge. There is no newspaper in the picture.",
+          "None of that proves a scam: the seller might have screenshotted their own photo by mistake. But it no longer matches \"I just took this\". Sam runs a <a href=\"/reverse-image-search/\">reverse image search</a> and finds the same bike in an older listing from another city.",
+          "Sam asks for a live video call showing the bike, and stops when the seller refuses and pushes for the deposit again. The decision came from the mismatch plus the source check, not from any single clue."
+        ]
+      },
+      {
+        "heading": "What the answer cannot tell you",
+        "paragraphs": [
+          "Knowing that an image is a screenshot does not tell you whether the content on that screen was real. Message apps, payment screens and social posts can all be edited before a screenshot is taken, or built with prank generators.",
+          "Knowing that an image is a photo does not tell you it is recent, unedited or of the thing described. Camera metadata can be removed, copied or written by software, and a convincing camera model or date is a clue, not proof.",
+          "Conflicting clues are normal. A cropped screenshot exported from an editor can look like a graphic; a photo saved through several apps can lose every camera field. An honest result is often \"inconclusive\", and that is a useful answer: it tells you to verify at the source."
+        ]
+      },
+      {
+        "heading": "A quick routine for checking an image's source",
+        "paragraphs": [
+          "Use these steps in order. Stop as soon as you have what you need to make your decision."
+        ],
+        "checklist": [
+          "Ask for the original file, not a copy saved from a chat or social app.",
+          "Look for status bars, interface edges, moiré, glare and perspective.",
+          "Check the dimensions and metadata with the screenshot detector or the metadata checker.",
+          "Compare what you find with what you were told about the image.",
+          "Search for earlier copies with reverse image search.",
+          "For anything involving money, verify the claim itself: a live video call, your own bank or payment app, or the original account."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can I tell if a photo is actually a screenshot?",
+        "answer": "Look for a status bar, app interface or screen-shaped dimensions, then check the original file's metadata. Camera photos usually carry camera fields such as make, model and exposure; screenshots usually do not. These are clues, not proof, because cropping and sharing can remove them."
+      },
+      {
+        "question": "Does missing EXIF data mean an image is a screenshot?",
+        "answer": "No. Messaging and social apps commonly strip metadata, and graphics and edited exports may have none. Missing EXIF is normal for shared images and should not be treated as evidence of a screenshot on its own."
+      },
+      {
+        "question": "How do I tell a photo of a screen from a real screenshot?",
+        "answer": "A photo of a screen usually shows moiré patterns, glare, reflections, visible pixels, a tilted or curved screen edge, and camera metadata in the original file. A real screenshot is perfectly flat and sharp, with no lighting effects."
+      },
+      {
+        "question": "Can screenshot dimensions identify the exact phone?",
+        "answer": "No. Many devices share screen sizes, and images are often resized when shared or edited. Dimensions can support a hypothesis such as \"this looks like a phone screenshot\", but they cannot name a device."
+      },
+      {
+        "question": "If an image is a screenshot, does that mean it is fake?",
+        "answer": "No. Screenshot or photo is a question about where an image came from. Whether its content is genuine is a separate question that needs other checks, ideally confirming the claim at its source."
+      },
+      {
+        "question": "Is the screenshot detector private?",
+        "answer": "Image bytes are inspected in your browser without uploading the file. The site still uses analytics; see the privacy policy for details on network requests and storage."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "exif-metadata",
+      "screenshot-checker-online",
+      "fake-social-media-post-screenshot"
+    ],
+    "cta": {
+      "label": "Is It a Screenshot or a Photo?",
+      "url": "/screenshot-detector/",
+      "description": "Inspect an image's dimensions and metadata locally, with every clue explained and no forced verdict."
+    }
+  },
+  {
+    "slug": "usps-redelivery-text-scam",
+    "title": "USPS Redelivery Text Scam: How to Tell If That Package Text Is Fake",
+    "seoTitle": "USPS Package Text Scam? How to Check If It's Real",
+    "metaDescription": "Got a text saying USPS can't deliver your package? USPS doesn't send unrequested texts with links. Here's how to check a real delivery and report the scam.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-11-06",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "What the fake USPS delivery text looks like, what the Postal Inspection Service says about real USPS texts, how to check your parcel safely, and what to do if you clicked or paid.",
+    "targetKeywords": [
+      "USPS text scam",
+      "USPS redelivery scam",
+      "USPS package text message scam",
+      "is the USPS text real",
+      "USPS smishing",
+      "USPS incomplete address text"
+    ],
+    "keyTakeaway": {
+      "title": "USPS does not text you a link you never asked for",
+      "text": "According to the U.S. Postal Inspection Service, USPS sends tracking texts only after you request them with a tracking number, and those texts contain no links. Check a parcel by typing usps.com yourself, then forward the scam text to 7726."
+    },
+    "introduction": "Almost certainly not. A text saying your package is on hold because of an incomplete address, and asking you to update it or pay a small redelivery fee at a link, matches one of the most common smishing scams in the United States. Here is what the real USPS says, how to check a genuine delivery without touching the link, and what to do if you already did.",
+    "contentSections": [
+      {
+        "heading": "What the fake USPS text usually looks like",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/usps-redelivery-text-scam/fictional-example.png",
+          "alt": "Fictional text claiming a USPS package is held for an incomplete address, with a lookalike link and a small redelivery fee, annotated with red flags.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional fake delivery text. An unrequested link, a deadline and a small fee are the giveaways."
+        },
+        "paragraphs": [
+          "The wording changes, but the pattern rarely does: a package problem, a short deadline and a link. Many versions arrive from an email address or an unfamiliar number rather than a short code.",
+          "The link leads to a convincing copy of a USPS page. It asks you to confirm your address, then to pay a fee of a dollar or two by card. The real goal is your card number, and often your name, address, date of birth or other details that can be used for identity theft."
+        ]
+      },
+      {
+        "heading": "What USPS itself says about these texts",
+        "paragraphs": [
+          "The <a href=\"https://www.uspis.gov/news/scam-article/smishing-package-tracking-text-scams\">U.S. Postal Inspection Service</a>, the law enforcement arm of USPS, says USPS will not send you text messages or emails without you first requesting the service with a tracking number, and that those messages will not contain a link.",
+          "USPS has also said, in its <a href=\"https://news.usps.com/2024/06/26/dont-get-smished/\">\"Don't get smished\" warning</a>, that it does not charge fees for redelivery. A text asking you to pay to reschedule a delivery is a red flag on its own.",
+          "So if you did not sign up for text tracking for a specific parcel, a USPS-branded text with a link is not from USPS."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "Never use a link in a delivery text to check a delivery. Open usps.com by typing it yourself, or use the official USPS app, and enter the tracking number you got from the sender."
+        }
+      },
+      {
+        "heading": "How to check whether a USPS package is really waiting",
+        "paragraphs": [
+          "Go to the source rather than the message. If you are expecting a parcel, the retailer or sender gave you a tracking number in your order confirmation. Type usps.com into your browser and enter that number in USPS Tracking.",
+          "If USPS tried to deliver and could not, the carrier normally leaves a paper notice at your address explaining how to arrange redelivery or pick-up. Redelivery is arranged on usps.com or by phone, and USPS does not charge for it.",
+          "If you are not expecting anything, there is nothing to check. Scam texts are sent in bulk to huge lists of numbers, so receiving one says nothing about your mail."
+        ]
+      },
+      {
+        "heading": "Red flags in the message and the link",
+        "paragraphs": [
+          "Any one of these is reason enough to stop. Most scam texts have several."
+        ],
+        "checklist": [
+          "You never signed up for USPS text tracking for this parcel.",
+          "The text contains a link. Requested USPS tracking texts do not.",
+          "It asks for a fee to redeliver, release or update a package.",
+          "It sets a short deadline, such as 12 or 24 hours, or threatens to return the parcel.",
+          "The sender is an email address, a long unfamiliar number or a foreign number.",
+          "The link's domain is not usps.com, even if \"usps\" appears somewhere in the address.",
+          "It asks you to reply with Y, or to copy the link into your browser, to make the link work."
+        ],
+        "cta": {
+          "label": "Check a Link Without Opening It",
+          "url": "/suspicious-link-checker/",
+          "description": "Paste the address from the text to compare it with a historical labelled URL dataset, without visiting the site."
+        }
+      },
+      {
+        "heading": "Worked example: a fictional parcel in Chicago",
+        "paragraphs": [
+          "Maya, a fictional renter in Chicago, has ordered a phone case online. That evening she gets a text from an email-style sender: her package \"could not be delivered due to incomplete address information\" and she must update it within 12 hours at a link. A $0.30 redelivery fee applies.",
+          "The timing feels right, which is exactly why the scam works: millions of people are expecting a parcel on any given day. Maya does not tap the link. She opens her order confirmation email from the shop, copies the tracking number and types usps.com into her browser.",
+          "USPS Tracking shows the parcel in transit, with no delivery attempt and no address problem. Maya takes a screenshot of the text, forwards the message to 7726, reports it to the Postal Inspection Service and deletes it. Her phone case arrives two days later."
+        ]
+      },
+      {
+        "heading": "What ScreenshotChecker can and cannot tell you",
+        "paragraphs": [
+          "The <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads the text in a screenshot of the message and flags common scam patterns, such as urgency, fees and requests to tap a link. The <a href=\"/suspicious-link-checker/\">suspicious link checker</a> compares a web address with a historical labelled dataset without opening it.",
+          "Neither tool can see USPS systems or your mail. A clean result does not mean a text is genuine, and a match in the dataset is historical, not a live safety rating. Only usps.com, the USPS app or USPS customer service can tell you about a real parcel."
+        ]
+      },
+      {
+        "heading": "What to do if you clicked, entered details or paid",
+        "paragraphs": [
+          "Act quickly. If you only opened the page and entered nothing, close it and keep your phone's software up to date. If you entered information, assume it is in a scammer's hands and protect the accounts it affects.",
+          "The Postal Inspection Service asks people to forward USPS-themed scam texts to 7726 (SPAM) and to email the text and a screenshot to spam@uspis.gov. You can also report the scam to the FTC at ReportFraud.ftc.gov and to the FBI at ic3.gov, especially if you lost money."
+        ],
+        "checklist": [
+          "Card details entered or a fee paid: call the number on the back of your card, report the charge and ask for a replacement card.",
+          "Bank details entered: contact your bank through its official app or the number on your statement.",
+          "Social Security number or date of birth entered: visit IdentityTheft.gov for a recovery plan and consider a credit freeze.",
+          "Password entered: change it, and anywhere else you reused it.",
+          "Report the text to 7726 and spam@uspis.gov, then delete it."
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "Similar texts imitate UPS, FedEx, DHL and other couriers. The rule is the same for all of them: check on the courier's own website with the tracking number from your order. Readers in India can see our guide to <a href=\"/blog/india-post-courier-sms-scam/\">India Post and courier SMS scams</a>."
+        }
+      }
+    ],
+    "faq": [
+      {
+        "question": "Does USPS send text messages about packages?",
+        "answer": "Only if you request text tracking for a specific parcel with its tracking number. According to the U.S. Postal Inspection Service, those texts do not contain links, and USPS does not send unrequested texts or emails about delivery problems."
+      },
+      {
+        "question": "Does USPS charge a fee for redelivery?",
+        "answer": "No. USPS has said it does not charge for redelivery. A text asking you to pay even a small amount to reschedule a delivery is a scam."
+      },
+      {
+        "question": "I tapped the link but didn't enter anything. Am I safe?",
+        "answer": "Close the page without entering details, keep your phone's operating system updated and watch your accounts. The main risk comes from information you type into the fake site, so if you entered nothing, the exposure is limited."
+      },
+      {
+        "question": "Should I reply STOP to the USPS text?",
+        "answer": "No. Replying confirms that your number is active. Forward the message to 7726, report it to spam@uspis.gov and delete it."
+      },
+      {
+        "question": "How do I report a fake USPS text?",
+        "answer": "Forward it to 7726 and email the message plus a screenshot to spam@uspis.gov. If you lost money or shared personal information, also report it to the FTC at ReportFraud.ftc.gov and the FBI at ic3.gov."
+      },
+      {
+        "question": "Can ScreenshotChecker tell me if a USPS text is real?",
+        "answer": "No. It can flag scam warning signs in the text and look up a link in a historical dataset, but it has no access to USPS. Check any real parcel on usps.com or in the official USPS app."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "smishing-fake-sms",
+      "unpaid-toll-text-scam",
+      "suspicious-link-checker-online"
+    ],
+    "cta": {
+      "label": "Check a Suspicious Delivery Text",
+      "url": "/screenshot-scam-checker/",
+      "description": "See which scam warning signs appear in the message, then check any real parcel on usps.com yourself."
+    }
+  },
+  {
+    "slug": "fake-crypto-profit-screenshots",
+    "title": "Fake Crypto Profit Screenshots: How Investment Scams Use Them",
+    "seoTitle": "Fake Crypto Profit Screenshots and Investment Scams",
+    "metaDescription": "Screenshots of huge crypto gains are a core tool of investment scams. Learn how the scam works, why profit screenshots prove nothing, and what to do.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-11-06",
+    "authorName": "Virat Chauhan",
+    "readTime": "8 min read",
+    "excerpt": "How crypto investment scams use profit screenshots and fake trading dashboards to build trust, the withdrawal-fee trap, recovery scams that follow, and where to report.",
+    "targetKeywords": [
+      "fake crypto profit screenshots",
+      "crypto investment scam",
+      "pig butchering scam",
+      "fake trading platform",
+      "crypto withdrawal fee scam",
+      "is this crypto investment real"
+    ],
+    "keyTakeaway": {
+      "title": "A profit screenshot is a picture, not proof of profit",
+      "text": "Anyone can show a screenshot of huge gains, and in many investment scams the trading site itself is run by the scammer, so even your own balance is just a number on their page. If you cannot withdraw freely, or must pay a fee or tax first, stop and report it."
+    },
+    "introduction": "A friendly stranger, a group chat or a new online match shares screenshots of crypto trades that doubled overnight, then offers to show you how. The screenshots look real, and some may even be genuine screenshots of a real-looking website. That is the trap. This guide explains how these investment scams use screenshots, why the numbers prove nothing, and what the FBI and FTC advise if you are already involved.",
+    "contentSections": [
+      {
+        "heading": "How the crypto investment scam works",
+        "paragraphs": [
+          "The FBI describes a common pattern in its <a href=\"https://www.ic3.gov/PSA/2022/psa221003\">public service announcement on cryptocurrency investment fraud</a>. Contact starts on a dating app, social media, a messaging group or a \"wrong number\" text. The scammer builds trust over days or weeks, then starts talking about investing.",
+          "Next come the screenshots: trades, wallet balances, profit charts and messages from \"other members\" celebrating gains. Then you are guided to a trading website or app. The FBI notes that these fake platforms let victims watch their balances appear to grow quickly, which encourages larger deposits.",
+          "The scale is large. The FBI's <a href=\"https://www.ic3.gov/AnnualReport/Reports/2024_IC3Report.pdf\">2024 Internet Crime Report</a> lists more than 41,000 complaints about cryptocurrency investment fraud, with reported losses of about $5.8 billion in that year alone."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/fake-crypto-profit-screenshots/fictional-example.png",
+          "alt": "Fictional investment group chat showing a profit screenshot, a mentor's tip and a 20 percent withdrawal fee demand, annotated with red flags.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional investment group. The profit screenshots build trust; the withdrawal fee is where the scam shows itself."
+        }
+      },
+      {
+        "heading": "Why profit screenshots prove nothing",
+        "paragraphs": [
+          "A screenshot shows what was on a screen. On a scam platform, everything on that screen is controlled by the scammer: the balance, the trade history and the profit chart. The screenshot can be completely unedited and still show money that does not exist.",
+          "Screenshots shared by \"other members\" are no better. Group chats in these scams can be filled with accounts run by the same people, and images are easy to reuse or edit. A screenshot cannot show who owns an account, whether a withdrawal ever reached a bank, or whether the platform is a registered business.",
+          "This is why checking the image itself, with tools like error level analysis or metadata, rarely settles anything here. The useful question is not \"is this screenshot edited?\" but \"can this money actually be withdrawn to my own bank, and is this platform real?\""
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "Your own dashboard on a scam site is not proof either. If the platform is fake, the balance you see is just a number on a web page that the scammer controls."
+        }
+      },
+      {
+        "heading": "The withdrawal trap: fees, taxes and frozen accounts",
+        "paragraphs": [
+          "Many victims are allowed a small early withdrawal. It feels like proof, and it encourages a much larger deposit. When they later try to withdraw the larger balance, the platform suddenly needs a \"tax\", \"verification fee\", \"anti-money-laundering deposit\" or \"unlock fee\" first, often a percentage of the balance.",
+          "Paying does not release the money. It is simply more money sent to the scammer, and the next demand usually follows. Being told to pay before you can withdraw your own money is one of the clearest signs of this fraud.",
+          "Real, regulated exchanges do not make you send fresh money before you can take out your balance, and they do not charge tax on your behalf through a support chat."
+        ]
+      },
+      {
+        "heading": "Red flags of a crypto investment scam",
+        "paragraphs": [
+          "Watch for these together, not one by one. Scams combine several."
+        ],
+        "checklist": [
+          "Someone you have never met in person brings up investing, often after a period of friendly chat.",
+          "You are shown profit screenshots or told about a \"mentor\", \"insider\" or \"signal group\".",
+          "Returns are high, steady and described as guaranteed or low-risk.",
+          "You are asked to use a specific website or app you had not heard of, sometimes with a link sent in chat.",
+          "You are told to move money through a crypto ATM, a new wallet or a third party.",
+          "Withdrawals need a fee, tax or deposit first, or support suddenly stops answering.",
+          "You are pressured to keep the investment secret from family or your bank."
+        ]
+      },
+      {
+        "heading": "Worked example: a fictional \"mentor\" group",
+        "paragraphs": [
+          "Alex, a fictional nurse in Manchester, is added to a messaging group called \"Daily Crypto Signals\". A friendly member messages Alex privately, shares screenshots of her account growing from £2,000 to £9,400 in a month, and introduces a \"mentor\" who posts trade tips.",
+          "Alex signs up on the website the mentor recommends and deposits £500. The dashboard shows it growing to £820 in a week, and a £100 withdrawal arrives in Alex's bank. Encouraged, Alex adds £6,000. The balance climbs to £11,300.",
+          "When Alex asks to withdraw, support replies that a 20% \"capital gains tax\" of £2,260 must be paid first. Alex searches the platform's name and finds it is not registered with any financial regulator, and that its domain was created two months earlier.",
+          "Alex stops, does not pay the \"tax\", saves the chat and transaction records, and reports to the bank and to the police fraud reporting service. The early £100 withdrawal was the bait, not proof."
+        ]
+      },
+      {
+        "heading": "Beware the second scam: crypto recovery services",
+        "paragraphs": [
+          "After a loss, victims are often contacted by people offering to get the money back for a fee: \"recovery experts\", \"blockchain investigators\", law firms or even people claiming to work with the FBI.",
+          "The <a href=\"https://consumer.ftc.gov/consumer-alerts/2022/11/worried-about-crypto-exchange-losses-dont-pay-money-help-recovering-money\">FTC warns</a> that anyone promising to recover crypto losses for a fee is running a scam. The FBI's <a href=\"https://www.ic3.gov/PSA/2025/PSA250813\">2025 alert on fake law firms</a> says no law firms are officially authorized partners of U.S. government agencies, and the IC3 states that it does not work with non-law-enforcement firms to recover funds."
+        ]
+      },
+      {
+        "heading": "How ScreenshotChecker can help, and where it stops",
+        "paragraphs": [
+          "The <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads chat screenshots and flags investment-scam language, such as guaranteed returns, urgency and payment requests. The <a href=\"/suspicious-link-checker/\">suspicious link checker</a> looks up a platform's address in a historical labelled dataset without opening it. <a href=\"/reverse-image-search/\">Reverse image search</a> can show whether the same profit screenshot has appeared elsewhere.",
+          "None of these tools can tell you whether a trading platform is legitimate or whether money can be withdrawn. Check that with your country's financial regulator and your own bank."
+        ],
+        "cta": {
+          "label": "Check an Investment Chat Screenshot",
+          "url": "/screenshot-scam-checker/",
+          "description": "See which scam warning signs appear in the conversation, then verify the platform with a financial regulator."
+        }
+      },
+      {
+        "heading": "What to do if you have already invested",
+        "paragraphs": [
+          "Stop sending money, including any fee, tax or deposit requested to unlock a withdrawal. Do not let anyone install remote-access apps on your phone or computer.",
+          "Collect evidence before anything disappears: chat screenshots, the platform's web address, wallet addresses, transaction IDs (hashes), amounts and dates. The FBI asks victims to include these details when filing a complaint."
+        ],
+        "checklist": [
+          "Contact your bank or card issuer immediately about any transfers.",
+          "Report to the FBI at ic3.gov (United States) and the FTC at ReportFraud.ftc.gov, or to your country's police fraud reporting service.",
+          "Report the platform to your financial regulator, and the account to the messaging or dating app.",
+          "Ignore anyone who contacts you offering to recover the money for a fee.",
+          "Talk to someone you trust. Scammers rely on secrecy and shame."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can a crypto profit screenshot be fake even if it isn't edited?",
+        "answer": "Yes. If the trading platform is run by scammers, an unedited screenshot faithfully shows numbers they control. The screenshot can be genuine while the profits are not."
+      },
+      {
+        "question": "What is a pig butchering scam?",
+        "answer": "It is a common name for long-con investment scams where the scammer builds a relationship over weeks before steering the victim into a fake crypto platform, then takes larger and larger deposits. The FBI describes these as cryptocurrency investment fraud."
+      },
+      {
+        "question": "I made a small withdrawal successfully. Does that mean the platform is real?",
+        "answer": "No. Small early withdrawals are a common tactic to build trust before a larger deposit. The test is whether you can withdraw your full balance without paying any new fee, tax or deposit."
+      },
+      {
+        "question": "The platform says I must pay tax before withdrawing. Should I pay?",
+        "answer": "No. Being asked to pay money before you can withdraw your own funds is a sign of fraud. Paying usually leads to further demands. Stop and report it."
+      },
+      {
+        "question": "Can someone recover my lost crypto for a fee?",
+        "answer": "Be extremely cautious. The FTC says anyone who promises to recover crypto losses for a fee is a scammer, and the FBI says the IC3 does not work with private firms to recover funds. Report to law enforcement instead."
+      },
+      {
+        "question": "Can ScreenshotChecker tell me if an investment platform is legitimate?",
+        "answer": "No. It can flag scam language in chat screenshots and look up a web address in a historical dataset, but it cannot verify a business. Check the platform with your country's financial regulator."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "whatsapp-telegram-task-job-scam",
+      "fake-social-media-post-screenshot",
+      "suspicious-link-checker-online"
+    ],
+    "cta": {
+      "label": "Check a Suspicious Investment Chat",
+      "url": "/screenshot-scam-checker/",
+      "description": "Flag scam warning signs in a screenshot of the conversation, then check the platform with a financial regulator."
     }
   },
 ];

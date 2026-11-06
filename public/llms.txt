@@ -48,6 +48,9 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [What is EXIF metadata?](https://screenshotchecker.com/blog/exif-metadata/)
 - [AI image detection explained](https://screenshotchecker.com/blog/ai-image-detector-online/)
 - [How to check a suspicious link](https://screenshotchecker.com/blog/suspicious-link-checker-online/)
+- [Is it a screenshot or a photo?](https://screenshotchecker.com/blog/how-to-tell-if-a-photo-is-a-screenshot/)
+- [USPS redelivery text scams](https://screenshotchecker.com/blog/usps-redelivery-text-scam/)
+- [Fake crypto profit screenshots and investment scams](https://screenshotchecker.com/blog/fake-crypto-profit-screenshots/)
 
 ## Key facts for accurate answers
 

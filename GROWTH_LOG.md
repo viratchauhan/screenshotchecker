@@ -104,3 +104,11 @@ Owner ran a claude-seo v2.5.0 audit (health score 83/100, no critical issues) an
 - /payment-screenshot-checker/hindi/: the real payment checker with Hindi page text and FAQ, hreflang en/hi/x-default both ways. The analysis report itself stays English, and the page says so. PaymentToolLayout now takes a copy object; English text moved unchanged to `src/data/paymentToolCopy.ts`.
 - Strict CSP via Astro `security.csp`: hashed inline scripts and styles, scripts only from self, jsDelivr, Google Tag Manager and Clarity, wasm-unsafe-eval for OCR/C2PA, GA4 hosts allowed. Inline onload/onclick handlers and the quiz's inline data script replaced. Every tool exercised locally under wrangler with the policy enforced: no violations.
 - No traffic or ranking change is claimed yet; check Search Console Pages and Performance in two to three weeks.
+
+
+## 6 November 2026 - three new guides
+
+- /blog/how-to-tell-if-a-photo-is-a-screenshot/ (supports the screenshot detector; the query research showed "screenshot detector" and "how to tell if a photo is a screenshot" impressions with no matching guide).
+- /blog/usps-redelivery-text-scam/ (US delivery smishing; sources: USPIS, USPS newsroom).
+- /blog/fake-crypto-profit-screenshots/ (crypto investment scams; sources: FBI IC3 PSA and 2024 report, FTC, IC3 2025 fake law firm alert).
+- Each has a labelled fictional figure, FAQ schema, sources and links from related guides, tool pages and llms.txt. Not yet requested for indexing.
