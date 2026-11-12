@@ -9,7 +9,7 @@ import { SAMPLE_PRESETS } from '../lib/samples/sampleData';
     class="relative group bg-surface-card border-2 border-dashed border-hairline hover:border-primary/60 rounded-2xl p-8 sm:p-12 text-center transition-all duration-200 cursor-pointer shadow-sm"
     tabindex="0"
     role="button"
-    aria-label="Upload or drop an image file for analysis"
+    aria-labelledby="drop-zone-title"
   >
     <input
       type="file"
@@ -27,7 +27,7 @@ import { SAMPLE_PRESETS } from '../lib/samples/sampleData';
       </div>
 
       <div class="space-y-1.5">
-        <h2 class="font-serif text-xl sm:text-2xl text-ink font-normal" data-i18n="uploader.drop_title">
+        <h2 id="drop-zone-title" class="font-serif text-xl sm:text-2xl text-ink font-normal" data-i18n="uploader.drop_title">
           Upload a screenshot to analyze it
         </h2>
         <p class="font-sans text-xs sm:text-sm text-muted max-w-md mx-auto leading-relaxed" data-i18n="uploader.drop_subtitle">

@@ -18,7 +18,7 @@ export default defineConfig({
     csp: {
       directives: [
         "default-src 'self'",
-        "connect-src 'self' data: blob: https://cdn.jsdelivr.net https://www.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com https://www.google.co.in https://*.clarity.ms",
+        "connect-src 'self' data: blob: https://cdn.jsdelivr.net https://www.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com https://www.google.co.in https://*.clarity.ms https://cloudflareinsights.com",
         "img-src 'self' data: blob: https://www.googletagmanager.com https://*.google-analytics.com https://analytics.google.com https://*.analytics.google.com https://*.g.doubleclick.net https://www.google.com https://www.google.co.in https://*.clarity.ms",
         "font-src 'self' data: https://fonts.gstatic.com",
         "worker-src 'self' blob:",
@@ -34,6 +34,8 @@ export default defineConfig({
           'https://www.googletagmanager.com',
           'https://www.clarity.ms',
           'https://scripts.clarity.ms',
+          // Cloudflare Web Analytics beacon, injected at the edge
+          'https://static.cloudflareinsights.com',
         ],
       },
       styleDirective: {
