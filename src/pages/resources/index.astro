@@ -1,4 +1,5 @@
 ---
+import { getArticleBySlug } from '../../data/blogArticles';
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -33,44 +34,17 @@ const structuredData = {
   ],
 };
 
+// Real guides, pulled from the blog data so titles, summaries and read times stay accurate.
 const guides = [
-  {
-    title: 'How to Check If a Screenshot Contains Personal Information',
-    category: 'Privacy & Security',
-    readTime: '4 min read',
-    desc: 'Learn how to audit chat captures, invoices, and bug reports for exposed email addresses, phone numbers, API keys, and credit cards before sharing.',
-  },
-  {
-    title: 'How to Remove EXIF & GPS Metadata from an Image',
-    category: 'Metadata & Privacy',
-    readTime: '3 min read',
-    desc: 'Step-by-step guide on how photos capture latitude, longitude, and device serial numbers, and how to safely sanitize them in your browser.',
-  },
-  {
-    title: 'How to Spot Scam Messages & Fake Urgency in Screenshots',
-    category: 'Scam Prevention',
-    readTime: '5 min read',
-    desc: 'Explore the most common social engineering triggers used in SMS and DM phishing, from fake bank lockouts to 24-hour penalty threats.',
-  },
-  {
-    title: 'How to Safely Share Screenshots Online Without Data Leaks',
-    category: 'Best Practices',
-    readTime: '4 min read',
-    desc: 'Essential redaction techniques: why drawing over text with semi-transparent brushes fails and how solid canvas redaction protects your identity.',
-  },
-  {
-    title: 'Understanding Error Level Analysis (ELA) for Image Forensics',
-    category: 'Image Forensics',
-    readTime: '6 min read',
-    desc: 'A technical deep-dive into how JPEG compression error gradients reveal spliced text, altered numbers, and overlaid graphics.',
-  },
-  {
-    title: 'Why Automated AI-Image Detection Is Not Definitive',
-    category: 'AI & Verification',
-    readTime: '5 min read',
-    desc: 'Understand why re-encoding, cropping, and screenshotting destroy high-frequency diffusion artifacts and why human review remains vital.',
-  },
-];
+  'redact-screenshot-before-sharing',
+  'exif-metadata',
+  'smishing-fake-sms',
+  'screenshot-checker-online',
+  'how-to-tell-if-a-photo-is-edited',
+  'ai-image-detector-online',
+]
+  .map((slug) => getArticleBySlug(slug))
+  .filter((article): article is NonNullable<typeof article> => Boolean(article));
 ---
 
 <Layout
@@ -104,15 +78,15 @@ const guides = [
               <span>{guide.readTime}</span>
             </div>
             <h2 class="font-serif text-xl text-ink font-normal mb-2.5 leading-snug">
-              {guide.title}
+              <a href={`/blog/${guide.slug}/`} class="hover:text-primary transition-colors">{guide.title}</a>
             </h2>
             <p class="text-xs sm:text-sm text-body leading-relaxed">
-              {guide.desc}
+              {guide.excerpt}
             </p>
           </div>
           <div class="mt-6 pt-4 border-t border-hairline flex items-center justify-between">
-            <a href="/#uploader-section" class="text-xs font-medium text-primary hover:text-primary-active inline-flex items-center gap-1">
-              <span>Scan screenshot now</span>
+            <a href={`/blog/${guide.slug}/`} class="text-xs font-medium text-primary hover:text-primary-active inline-flex items-center gap-1">
+              <span>Read the guide</span>
               <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
             </a>
           </div>
