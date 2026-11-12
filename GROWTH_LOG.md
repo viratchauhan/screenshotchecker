@@ -122,3 +122,16 @@ Search Console (28 days): /payment-screenshot-checker/ 4,983 impressions at posi
 - /blog/payment-failed-screenshot-scam/ for "bank error screenshot", "payment failed screenshot" queries (RBI failed-transaction TAT, NPCI UPI Safety Shield).
 - /blog/reverse-image-search-screenshot/ for the "search by screenshot" / "reverse image search screenshot" cluster (Google Lens help pages).
 - Compare CTR for the rewritten pages after 28 days.
+
+
+## 12-13 November 2026 - overnight SEO session
+
+Search Console (28 days): /ai-image-detector/ position 20.6, top query "fake image detector" (292 impressions); /blog/whatsapp-telegram-task-job-scam/ position 8.2 with "prepaid task" / "merchant task" queries; "processing payment screenshot", "what is this screenshot from", "photo manipulation detector" had impressions but no matching page.
+
+- New guides: where-is-this-screenshot-from, how-to-tell-if-a-photo-is-edited, ai-generated-screenshot, scam-statistics (UPI fraud by year from the Lok Sabha reply of 15 Dec 2025, 1930/CFCFRMS savings, FTC and FBI IC3 2025 losses; chart), digital-arrest-scam, e-challan-sms-scam, and Hindi digital-arrest-kya-hai, fake-challan-message-kaise-pehchane.
+- Expanded: payment-failed guide (processing/pending screens), task scam guide (prepaid/merchant tasks, typical messages), PayPal/Venmo guide (refund screenshots).
+- Titles matched to queries: fake image detector, photo manipulation detector, screenshot scam checker.
+- Fix: the strict CSP had blocked the Cloudflare Web Analytics beacon since 30 Oct (Cloudflare analytics undercounted from then); static.cloudflareinsights.com and cloudflareinsights.com are now allowed.
+- IndexNow: key file at the site root, `node scripts/indexnow.mjs <paths without leading slash> | --all` (posts to Bing). All URLs pinged.
+- Google indexing requested for the new guides and retitled tool pages.
+- Lighthouse mobile (homepage): performance 69 (lab only; no CrUX field data yet), accessibility 100, SEO 92 (only Cloudflare's managed robots.txt Content-Signal line is flagged; Google ignores it).
