@@ -1775,7 +1775,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["payment-failed-screenshot-scam", 
+    "relatedSlugs": ["fake-receipt-ai-generated", "payment-failed-screenshot-scam", 
       "fake-upi-payment-screenshot",
       "screenshot-checker-online",
       "screenshot-analyzer-online"
@@ -3633,7 +3633,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "reverse-image-search-screenshot",
       "exif-metadata"
@@ -3752,7 +3752,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "how-to-tell-if-a-photo-is-edited",
       "fake-whatsapp-chat-screenshot"
@@ -4373,6 +4373,137 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "संदिग्ध लिंक चेक करें",
       "url": "/suspicious-link-checker/",
       "description": "मैसेज में आए लिंक को खोले बिना उसके ख़तरे के संकेत देखें।"
+    }
+  },
+  {
+    "slug": "fake-receipt-ai-generated",
+    "title": "How to Spot a Fake Receipt, Including AI-Generated Receipts",
+    "seoTitle": "Fake Receipt? How to Spot AI-Generated and Edited Receipts",
+    "metaDescription": "AI can now make realistic receipts in seconds. How to check a receipt: the merchant, totals, tax, card digits and photo clues, and the checks that settle it.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "Fake receipts used to need an editing app or a template site; now an AI image tool makes one from a sentence. A practical checklist for expense reviewers, small businesses and anyone handed a receipt as proof.",
+    "targetKeywords": [
+      "fake receipt",
+      "how to spot a fake receipt",
+      "ai generated receipt",
+      "fake receipt detector",
+      "ai receipt fraud",
+      "how to tell if a receipt is fake"
+    ],
+    "keyTakeaway": {
+      "title": "Check the transaction, not the picture",
+      "text": "A receipt image, however realistic, is only a claim. Confirm the purchase another way: the card statement line, the merchant's own records, the booking or order confirmation, or the payment in your own account. Visual checks help you decide which receipts deserve that closer look."
+    },
+    "introduction": "Receipts are proof in everyday life: for expense claims, warranty returns, rent and deposits, marketplace sales and insurance. They have always been forged, but generative AI has made it fast and cheap. Expense software company AppZen reported that AI-generated receipts made up about 14% of the fraudulent documents it flagged in September 2025, up from none a year earlier, according to <a href=\"https://www.techradar.com/pro/security/workers-are-scamming-their-employers-using-ai-generated-fake-expense-receipts\">TechRadar</a>. This guide explains what to look for and, more importantly, how to confirm a receipt is real.",
+    "contentSections": [
+      {
+        "heading": "Where fake receipts show up",
+        "paragraphs": [
+          "Most fake receipts fall into a few patterns. Knowing which one you are dealing with tells you what to check."
+        ],
+        "checklist": [
+          "Expense claims: meals, taxis, hotels or supplies that never happened, or real purchases with inflated amounts.",
+          "Proof of payment: a \"receipt\" or invoice shown to a seller, landlord or freelancer instead of real money. Our <a href=\"/blog/fake-upi-payment-screenshot/\">UPI</a> and <a href=\"/blog/fake-bank-transfer-screenshot/\">bank transfer</a> guides cover these.",
+          "Returns and warranty claims: a receipt for an item bought elsewhere, second-hand or not at all.",
+          "Marketplace and resale: \"original receipts\" offered to make a used or counterfeit item look genuine."
+        ]
+      },
+      {
+        "heading": "What to check on the receipt itself",
+        "paragraphs": [
+          "A forged receipt has to get many small details right at once. Go through them one by one; a single error is often enough to justify asking for proof."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-receipt-ai-generated/fictional-example.png",
+          "alt": "Fictional restaurant receipt with numbered checks: a merchant that cannot be found, items that don't add up to the total, a tax rate that doesn't match, a card number with too many digits and a time when the shop was closed.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional receipt with typical errors. Each one is a reason to check the transaction another way."
+        },
+        "checklist": [
+          "Merchant: does the business exist at that address? Check the name, address and phone number against its website or map listing.",
+          "Arithmetic: do the item prices add up to the subtotal, and do tax, tip and total follow correctly?",
+          "Tax: is the rate right for that place and item? A GST, VAT or sales tax rate that doesn't match is a common slip.",
+          "Date and time: was the shop open then? Was the person actually in that city?",
+          "Payment line: card type and last four digits that match the card used; a transaction or authorisation number in the usual format.",
+          "Formatting: consistent fonts, alignment and spacing; real thermal receipts have a fixed-width print style.",
+          "Repeats: the same receipt number, amount or layout appearing in several claims."
+        ]
+      },
+      {
+        "heading": "Clues that a receipt image was generated or edited",
+        "paragraphs": [
+          "AI image tools can now render readable text, so obvious gibberish is less common than it was. Still, generated and edited receipts often show signs worth noticing, especially when you compare them with real receipts from the same merchant."
+        ],
+        "checklist": [
+          "A receipt photo that looks too perfect, or creased and lit in a way that looks staged rather than accidental.",
+          "Logos that are slightly wrong, blurry or a different style from the merchant's real receipts.",
+          "Text that changes size or sharpness within a line, or numbers that look pasted in.",
+          "Missing details real receipts carry, such as a GST or tax number, store number, terminal ID or return policy.",
+          "File clues: an editor or AI tool named in the metadata, or Content Credentials that say the image was generated. Their absence proves nothing."
+        ],
+        "callout": {
+          "type": "info",
+          "text": "The <a href=\"/screenshot-metadata-checker/\">metadata checker</a>, <a href=\"/ai-image-detector/\">fake image detector</a> and <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> show these clues in your browser. They can flag a receipt for review; they cannot prove one is genuine."
+        }
+      },
+      {
+        "heading": "The checks that settle it",
+        "paragraphs": [
+          "A real purchase leaves traces outside the receipt. These checks are more reliable than any visual inspection."
+        ],
+        "checklist": [
+          "Ask for the card or bank statement line showing the same merchant, date and amount.",
+          "For hotels, flights and rides, ask for the booking confirmation from the provider's app or email, or check with the provider.",
+          "For returns, look the transaction up in your own point-of-sale system by receipt number, date or card.",
+          "For payments to you, check your own bank or payment app for the money. A receipt is never a substitute.",
+          "For high-value claims, contact the merchant directly using contact details you find yourself."
+        ]
+      },
+      {
+        "heading": "For businesses: lowering the risk",
+        "paragraphs": [
+          "Expense fraud is easier to stop with process than with detection. Paying through company cards or direct billing means there is a transaction record for every claim. Requiring itemised receipts and card statement matching for claims above a set amount removes most of the incentive to fake one.",
+          "Spot checks also deter. Reviewing a random sample of claims, and every claim with round numbers, duplicate amounts or merchants that cannot be found, catches more than inspecting every image closely. If you suspect deliberate fraud, follow your HR and legal process rather than confronting someone with a detector score."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can you tell if a receipt is fake?",
+        "answer": "Check that the merchant exists, the items add up, the tax rate and date make sense and the card details match. Then confirm the purchase another way, such as the card statement or the merchant's own records."
+      },
+      {
+        "question": "Can AI make fake receipts?",
+        "answer": "Yes. Current image generators can produce realistic receipts with readable text from a short prompt, and expense software companies have reported a sharp rise in AI-generated receipts among the fakes they catch."
+      },
+      {
+        "question": "Is there a fake receipt detector?",
+        "answer": "Tools can flag clues such as editing traces, metadata and Content Credentials, and expense platforms use their own checks. None can prove a receipt is genuine, so pair any tool with a check of the actual transaction."
+      },
+      {
+        "question": "Is a receipt proof of payment?",
+        "answer": "Not on its own. A receipt or screenshot is a claim. Payment is proven when the money appears in the receiving account or the transaction appears on the payer's statement."
+      },
+      {
+        "question": "What should I do if an employee submits a fake receipt?",
+        "answer": "Keep the claim and the evidence, ask for supporting records such as the card statement, and follow your company's HR and legal process. Avoid accusing someone based only on how an image looks."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "ai-generated-screenshot",
+      "how-to-tell-if-a-photo-is-edited",
+      "fake-bank-transfer-screenshot"
+    ],
+    "cta": {
+      "label": "Check an image for edits",
+      "url": "/image-manipulation-checker/",
+      "description": "Look for editing traces in a receipt photo or screenshot, processed in your browser."
     }
   },
 ];
