@@ -25,6 +25,10 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
       question: 'Is a fake image detector the same as an AI image detector?',
       answer: 'Not quite. A fake can be a real photo that was edited, cropped or shown out of context, as well as a fully generated image. AI-detection signals cover generated images; ELA and comparison help with edits; and only source checks, such as reverse image search, catch a real photo used in the wrong context.',
     },
+    {
+      question: 'Can I check whether an image was made with Google AI or ChatGPT?',
+      answer: 'Sometimes. Google adds an invisible SynthID watermark to images made or edited with its AI, and the Gemini app can check for it, but only for Google AI content. Some generators also attach Content Credentials, which this detector reads when present. Most other images carry no such mark, and screenshots or re-saved copies usually lose it, so a missing mark proves nothing.',
+    },
   ],
 
   'image-manipulation-checker': [
@@ -39,6 +43,10 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
     {
       question: 'Does this manipulation checker run privately on my device?',
       answer: 'Yes. ELA computation and visual diffing run 100% locally in your browser canvas. No image bytes or personal documents are transmitted to any server.',
+    },
+    {
+      question: 'How can I tell if a picture is photoshopped?',
+      answer: 'Start by searching for an earlier copy with a reverse image search: an older version that differs is the clearest proof of an edit. Then zoom in on shadows, edges, repeated patterns and straight lines that bend near people, and use this ELA map as a supporting clue for JPEG photos. A clean map does not prove a photo is genuine.',
     },
   ],
 

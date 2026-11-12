@@ -209,7 +209,7 @@ export const TOOL_GUIDES: Record<string, ToolGuide> = {
       {
         heading: 'Use ELA as one clue among several',
         paragraphs: [
-          'If an area looks suspicious, compare it with another copy of the image in the <a href="/screenshot-comparison/">screenshot comparison tool</a>, check the file\'s <a href="/screenshot-metadata-checker/">metadata</a>, and look for the image online with <a href="/reverse-image-search/">reverse image search</a>. For a payment or chat screenshot, the decisive check is still the source: your own bank or payment app, or the original conversation. The <a href="/blog/screenshot-checker-online/">verification checklist</a> puts these steps in order.',
+          'If an area looks suspicious, compare it with another copy of the image in the <a href="/screenshot-comparison/">screenshot comparison tool</a>, check the file\'s <a href="/screenshot-metadata-checker/">metadata</a>, and look for the image online with <a href="/reverse-image-search/">reverse image search</a>. For a payment or chat screenshot, the decisive check is still the source: your own bank or payment app, or the original conversation. The <a href="/blog/screenshot-checker-online/">verification checklist</a> puts these steps in order. For photos, the <a href="/blog/how-to-tell-if-a-photo-is-edited/">guide to spotting edited photos</a> explains what each check can prove.',
         ],
       },
     ],
@@ -234,7 +234,7 @@ export const TOOL_GUIDES: Record<string, ToolGuide> = {
       {
         heading: 'Checking a viral image',
         paragraphs: [
-          'Start with where the image came from: run a <a href="/reverse-image-search/">reverse image search</a> to find earlier copies, and look for the original post or a fact check. Then use the detector\'s signals as supporting evidence. The <a href="/blog/ai-image-detector-online/">guide to AI image detection</a> explains each signal and its blind spots in more detail.',
+          'Start with where the image came from: run a <a href="/reverse-image-search/">reverse image search</a> to find earlier copies, and look for the original post or a fact check. Then use the detector\'s signals as supporting evidence. The <a href="/blog/ai-image-detector-online/">guide to AI image detection</a> explains each signal and its blind spots in more detail. For a step-by-step routine, see <a href="/blog/how-to-tell-if-a-photo-is-edited/">how to tell if a photo is edited or fake</a> and <a href="/blog/ai-generated-screenshot/">how to tell if a screenshot is AI-generated</a>.',
         ],
       },
     ],
