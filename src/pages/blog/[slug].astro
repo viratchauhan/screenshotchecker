@@ -28,6 +28,21 @@ if (!article) {
 
 const relatedArticles = getRelatedArticles(article.slug);
 const canonicalUrl = `https://screenshotchecker.com/blog/${article.slug}/`;
+
+// English and Hindi versions of the same guide: hreflang both ways plus a visible switch.
+const TRANSLATION_PAIRS: Array<[string, string]> = [
+  ['digital-arrest-scam', 'digital-arrest-kya-hai'],
+  ['e-challan-sms-scam', 'fake-challan-message-kaise-pehchane'],
+];
+const pair = TRANSLATION_PAIRS.find(([en, hi]) => en === article.slug || hi === article.slug);
+const alternates = pair
+  ? [
+      { hreflang: 'en', href: `https://screenshotchecker.com/blog/${pair[0]}/` },
+      { hreflang: 'hi', href: `https://screenshotchecker.com/blog/${pair[1]}/` },
+      { hreflang: 'x-default', href: `https://screenshotchecker.com/blog/${pair[0]}/` },
+    ]
+  : [];
+const otherVersion = pair ? (article.slug === pair[0] ? { lang: 'hi', slug: pair[1], label: 'यह गाइड हिंदी में पढ़ें' } : { lang: 'en', slug: pair[0], label: 'Read this guide in English' }) : null;
 // Article images: every in-article figure plus the post's share card.
 const articleImages = [
   ...article.contentSections.flatMap((section) => section.figure ? [`https://screenshotchecker.com${section.figure.src}`] : []),
@@ -120,6 +135,7 @@ const combinedStructuredData = {
   structuredData={combinedStructuredData}
   lang={article.lang || 'en'}
 >
+  {alternates.map((alt) => <link slot="head" rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
   <Header currentPath="/blog" />
 
   <main class="flex-1 max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-14 w-full">
@@ -154,6 +170,9 @@ const combinedStructuredData = {
       </div>
 
       <p class="text-xs text-muted">By <a href={SITE_AUTHOR.path} rel="author" class="underline">{article.authorName || SITE_AUTHOR.name}</a></p>
+      {otherVersion && (
+        <p class="text-sm"><a href={`/blog/${otherVersion.slug}/`} hreflang={otherVersion.lang} lang={otherVersion.lang} class="text-primary underline underline-offset-4">{otherVersion.label}</a></p>
+      )}
 
       <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl text-ink font-normal leading-[1.15] tracking-tight">
         {article.title}
