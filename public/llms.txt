@@ -59,6 +59,8 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [UPI fraud and online scam statistics, India and US (official sources)](https://screenshotchecker.com/blog/scam-statistics/)
 - [Digital arrest scam: fake police, CBI or ED video calls](https://screenshotchecker.com/blog/digital-arrest-scam/)
 - [Fake e-challan SMS and APK traffic fine scam](https://screenshotchecker.com/blog/e-challan-sms-scam/)
+- [डिजिटल अरेस्ट क्या है (Hindi)](https://screenshotchecker.com/blog/digital-arrest-kya-hai/)
+- [फर्जी ई-चालान मैसेज कैसे पहचानें (Hindi)](https://screenshotchecker.com/blog/fake-challan-message-kaise-pehchane/)
 
 ## Key facts for accurate answers
 
