@@ -25,7 +25,7 @@ test('payment landing copy describes OCR/text rules and independent credit check
 });
 
 test('FAQs preserve uncertainties and provider limits without universal reference claims', () => {
-  assert.equal(props.faqs.length, 10);
+  assert.equal(props.faqs.length, 13);
   const answers = props.faqs.map(faq => faq.answer).join(' ');
   assert.match(answers, /does not measure fonts, icons or layout/);
   assert.match(answers, /text-based guess/);

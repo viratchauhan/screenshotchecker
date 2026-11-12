@@ -164,7 +164,7 @@ try {
 
   const faqSchema = schemas.find(schema => schema['@type'] === 'FAQPage');
   const visibleFaqs = [...payment.querySelectorAll('#tool-faq-accordion details')];
-  assert.equal(visibleFaqs.length, 10, 'payment visible FAQ count');
+  assert.equal(visibleFaqs.length, 13, 'payment visible FAQ count');
   assert.equal(faqSchema.mainEntity.length, visibleFaqs.length, 'payment schema FAQ count');
   for (const [index, faq] of visibleFaqs.entries()) {
     assert.equal(norm(faq.querySelector('summary').textContent), faqSchema.mainEntity[index].name, 'payment FAQ question parity');
