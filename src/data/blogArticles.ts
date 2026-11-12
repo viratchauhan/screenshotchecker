@@ -449,7 +449,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["payment-failed-screenshot-scam", "fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
+    "relatedSlugs": ["scam-statistics", "payment-failed-screenshot-scam", "fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
     "cta": {
       "label": "Review a Payment Screenshot",
       "url": "/payment-screenshot-checker/",
@@ -827,7 +827,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Report phishing SMS',
       'Fraud SMS detector',
     ],
-    relatedSlugs: ["usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
+    relatedSlugs: ["scam-statistics", "usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
     cta: {
       label: 'Check a Suspicious Message',
       url: '/',
@@ -3179,7 +3179,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["scam-statistics", 
       "fake-upi-payment-screenshot",
       "fake-payment-screenshot-kaise-pehchane",
       "fake-bank-transfer-screenshot"
@@ -3716,6 +3716,129 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check a screenshot's clues",
       "url": "/ai-image-detector/",
       "description": "See Content Credentials, metadata, texture and ELA signals for an image, processed in your browser."
+    }
+  },
+  {
+    "slug": "scam-statistics",
+    "title": "UPI Fraud and Online Scam Statistics (2026 Update): India and the US",
+    "seoTitle": "UPI Fraud and Online Scam Statistics 2026: India and US",
+    "metaDescription": "UPI fraud cases and losses by year, India's cyber fraud complaints and money saved via 1930, and US FTC and FBI scam losses for 2025, with official sources.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "The key numbers on UPI fraud, cyber financial fraud in India and consumer scams in the United States, taken from parliamentary answers and official agency releases, with what they mean for anyone handed a payment screenshot.",
+    "targetKeywords": [
+      "upi fraud statistics",
+      "upi fraud cases 2024-25",
+      "online scam statistics 2026",
+      "cyber fraud statistics india",
+      "ftc fraud losses 2025",
+      "scam statistics"
+    ],
+    "keyTakeaway": {
+      "title": "The numbers in one paragraph",
+      "text": "India recorded 12.64 lakh UPI fraud cases worth ₹981 crore in FY 2024-25, down slightly from the FY 2023-24 peak of 13.42 lakh cases and ₹1,087 crore. In the United States, the FTC received about 3 million fraud reports with a record $15.9 billion in losses in 2025, and the FBI logged $20.9 billion in internet crime losses. Reported figures are only a fraction of real losses, because many victims never report."
+    },
+    "introduction": "Fake payment screenshots, fake delivery texts and fake investment dashboards all feed into the same official numbers: reported fraud. This page collects the most useful figures from government sources in India and the United States, explains what each one measures, and is updated when new official data is published. Every figure links to its source, so you can quote it with confidence.",
+    "contentSections": [
+      {
+        "heading": "UPI fraud in India, year by year",
+        "paragraphs": [
+          "The Ministry of Finance gave the Lok Sabha these figures for domestic UPI fraud in a written reply on 15 December 2025, reported by <a href=\"https://yourstory.com/2025/12/upi-frauds-peak-in-fy24-show-signs-of-decline-parliament-data\">YourStory</a> and other outlets. Cases are incidents reported to banks and payment providers; amounts are the money involved.",
+          "Fraud rose quickly as UPI grew, peaked in FY 2023-24, and fell slightly in FY 2024-25. Up to November 2025, FY 2025-26 had already recorded 10.64 lakh cases worth ₹805 crore."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/scam-statistics/upi-fraud-by-year.png",
+          "alt": "Bar chart of reported UPI fraud in India: ₹242 crore in FY 2021-22, ₹573 crore in FY 2022-23, ₹1,087 crore in FY 2023-24 and ₹981 crore in FY 2024-25.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. Reported UPI fraud by financial year. Source: Ministry of Finance reply in the Lok Sabha, 15 December 2025."
+        },
+        "checklist": [
+          "FY 2021-22: 4.07 lakh cases, ₹242 crore.",
+          "FY 2022-23: 7.25 lakh cases, ₹573 crore.",
+          "FY 2023-24: 13.42 lakh cases, ₹1,087 crore (the peak so far).",
+          "FY 2024-25: 12.64 lakh cases, ₹981 crore.",
+          "FY 2025-26, April to November 2025: 10.64 lakh cases, ₹805 crore."
+        ],
+        "callout": {
+          "type": "info",
+          "text": "The same reply said only about 6% of fraud chargebacks were recovered, according to YourStory's report of the answer. Money that leaves through a scam is rarely returned, which is why checking before you hand over goods matters more than complaining afterwards."
+        }
+      },
+      {
+        "heading": "Cyber financial fraud and the 1930 helpline",
+        "paragraphs": [
+          "UPI is only one channel. Complaints about all kinds of online financial fraud go to the National Cyber Crime Reporting Portal (cybercrime.gov.in) and the 1930 helpline, run by the Indian Cyber Crime Coordination Centre (I4C) under the Ministry of Home Affairs.",
+          "Reporting fast makes a real difference. When a complaint arrives quickly, banks can put a hold on the money before it is moved on. In a written reply to the Rajya Sabha on 17 December 2025, the government said more than ₹7,000 crore had been saved in more than 23 lakh complaints through this system since 2021 (<a href=\"https://newsonair.gov.in/over-rs-7000-crore-saved-through-citizen-financial-cyber-fraud-reporting-and-management-system/\">Akashvani News</a>). By June 2026 the figure had passed ₹11,158 crore across more than 32 lakh complaints, as reported by <a href=\"https://www.outlookmoney.com/retirement/cyber-fraud-rs-11158-crore-saved-across-328-million-complaints-how-to-report-financial-fraud-on-cybercrime-portal\">Outlook Money</a>."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "Lost money to an online fraud in India? Call 1930 or report at cybercrime.gov.in as soon as possible. The earlier the report, the better the chance the money can be frozen."
+        }
+      },
+      {
+        "heading": "Scam losses in the United States",
+        "paragraphs": [
+          "The Federal Trade Commission collects consumer fraud reports through its Consumer Sentinel Network. In June 2026 the <a href=\"https://www.ftc.gov/news-events/news/press-releases/2026/06/ftc-data-show-people-reported-losing-3-point-5-billion-imposter-scams-2025\">FTC reported</a> that about $16 billion was reported lost to fraud in 2025, the highest on record and about 25% more than in 2024. Its earlier congressional testimony put the figure at $15.9 billion from about 3 million fraud reports.",
+          "The FBI's Internet Crime Complaint Center (IC3) counts internet-enabled crime separately. Its 2025 annual report recorded more than 1 million complaints and $20.9 billion in reported losses, a 26% rise on 2024, with people aged 60 and over reporting $7.7 billion of that, according to <a href=\"https://www.aarp.org/money/scams-fraud/fbi-ftc-report-2025-losses/\">AARP's summary of both reports</a>."
+        ],
+        "checklist": [
+          "FTC, 2025: about 3 million fraud reports and $15.9 billion (rounded to $16 billion) in reported losses.",
+          "FTC, 2025: $3.5 billion lost to imposter scams, the most reported fraud category, with nearly $1 billion to business impersonators and about $920 million to government impersonators.",
+          "FBI IC3, 2025: more than 1 million complaints and $20.9 billion in reported losses.",
+          "FBI IC3, 2025: $7.7 billion reported lost by people aged 60 and over."
+        ]
+      },
+      {
+        "heading": "What these numbers mean for a payment screenshot",
+        "paragraphs": [
+          "Behind many of these reports is a moment of trust: a seller who accepted a screenshot as proof, a customer who believed a \"failed payment\" story, or an investor who trusted a profit dashboard. Screenshots are easy to fake, and AI tools now make them even faster to produce.",
+          "The defence is the same everywhere: confirm the money in your own bank or payment app before acting. Our guides cover the most common versions: <a href=\"/blog/fake-upi-payment-screenshot/\">fake UPI payment screenshots</a>, <a href=\"/blog/payment-failed-screenshot-scam/\">payment failed or processing screens</a>, <a href=\"/blog/fake-payment-screenshot-paypal-venmo-cash-app/\">PayPal, Venmo, Cash App and Zelle screenshots</a> and <a href=\"/blog/fake-crypto-profit-screenshots/\">fake crypto profit screenshots</a>."
+        ]
+      },
+      {
+        "heading": "How to read scam statistics",
+        "paragraphs": [
+          "Each source counts something different. UPI figures come from banks and payment providers; cyber fraud complaints come from victims who report to the police portal; FTC and FBI data come from consumers who choose to report. A case can appear in more than one dataset, and many never appear in any.",
+          "All of these are reported figures, so they understate the real total. Changes from year to year can also reflect better reporting, not only more crime. When you quote a figure, name the source and the period, as this page does."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How many UPI fraud cases were there in 2024-25?",
+        "answer": "12.64 lakh UPI fraud cases involving ₹981 crore were reported in FY 2024-25, according to the Ministry of Finance's reply in the Lok Sabha on 15 December 2025. That was slightly lower than the FY 2023-24 peak of 13.42 lakh cases and ₹1,087 crore."
+      },
+      {
+        "question": "Is UPI fraud increasing?",
+        "answer": "It rose sharply from FY 2021-22 to a peak in FY 2023-24, then fell slightly in FY 2024-25. FY 2025-26 had 10.64 lakh cases worth ₹805 crore up to November 2025, so fraud remains high even though growth has slowed."
+      },
+      {
+        "question": "How much money was lost to scams in the US in 2025?",
+        "answer": "Consumers reported losing $15.9 billion (about $16 billion) to fraud in 2025 according to the FTC, a record. The FBI's IC3 separately recorded $20.9 billion in internet crime losses."
+      },
+      {
+        "question": "What should I do if I lose money to an online fraud in India?",
+        "answer": "Call the 1930 helpline or report at cybercrime.gov.in immediately, and inform your bank. Quick reports let banks hold the money; the government says more than ₹11,000 crore has been saved this way since 2021."
+      },
+      {
+        "question": "Can I use these statistics in my article or presentation?",
+        "answer": "Yes. Please cite the original government source listed next to each figure, and you are welcome to link to this page as a summary."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-upi-payment-screenshot",
+      "payment-failed-screenshot-scam",
+      "smishing-fake-sms"
+    ],
+    "cta": {
+      "label": "Check a payment screenshot",
+      "url": "/payment-screenshot-checker/",
+      "description": "Look for warning signs in a UPI, GPay, PhonePe or Paytm screenshot, then confirm the money in your own bank app."
     }
   },
 ];

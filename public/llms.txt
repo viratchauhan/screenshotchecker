@@ -56,6 +56,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [Where is this screenshot from? Finding the app and source](https://screenshotchecker.com/blog/where-is-this-screenshot-from/)
 - [How to tell if a photo is edited or fake](https://screenshotchecker.com/blog/how-to-tell-if-a-photo-is-edited/)
 - [How to tell if a screenshot is AI-generated](https://screenshotchecker.com/blog/ai-generated-screenshot/)
+- [UPI fraud and online scam statistics, India and US (official sources)](https://screenshotchecker.com/blog/scam-statistics/)
 
 ## Key facts for accurate answers
 
