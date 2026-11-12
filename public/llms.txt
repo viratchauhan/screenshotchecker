@@ -53,6 +53,9 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [Fake crypto profit screenshots and investment scams](https://screenshotchecker.com/blog/fake-crypto-profit-screenshots/)
 - [Payment failed or bank error screenshots](https://screenshotchecker.com/blog/payment-failed-screenshot-scam/)
 - [How to reverse image search a screenshot](https://screenshotchecker.com/blog/reverse-image-search-screenshot/)
+- [Where is this screenshot from? Finding the app and source](https://screenshotchecker.com/blog/where-is-this-screenshot-from/)
+- [How to tell if a photo is edited or fake](https://screenshotchecker.com/blog/how-to-tell-if-a-photo-is-edited/)
+- [How to tell if a screenshot is AI-generated](https://screenshotchecker.com/blog/ai-generated-screenshot/)
 
 ## Key facts for accurate answers
 

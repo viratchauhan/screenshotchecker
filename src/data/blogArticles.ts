@@ -567,7 +567,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'AI image detector remover',
       'Winston AI image detector',
     ],
-    relatedSlugs: ["fake-social-media-post-screenshot", "exif-metadata", "screenshot-analyzer-online", "screenshot-checker-online"],
+    relatedSlugs: ["how-to-tell-if-a-photo-is-edited", "fake-social-media-post-screenshot", "exif-metadata", "screenshot-analyzer-online", "screenshot-checker-online"],
     cta: {
       label: 'Analyze an Image',
       url: '/ai-image-detector',
@@ -701,7 +701,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-tell-if-a-photo-is-a-screenshot", 
+    "relatedSlugs": ["how-to-tell-if-a-photo-is-edited", "how-to-tell-if-a-photo-is-a-screenshot", 
       "redact-screenshot-before-sharing",
       "screenshot-analyzer-online",
       "screenshot-checker-online"
@@ -1287,7 +1287,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["ai-generated-screenshot", 
       "whatsapp-telegram-task-job-scam",
       "screenshot-checker-online",
       "smishing-fake-sms"
@@ -1448,7 +1448,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["reverse-image-search-screenshot", 
+    "relatedSlugs": ["where-is-this-screenshot-from", "reverse-image-search-screenshot", 
       "screenshot-checker-online",
       "screenshot-analyzer-online",
       "ai-image-detector-online"
@@ -3042,14 +3042,16 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     "slug": "payment-failed-screenshot-scam",
     "title": "\"Payment Failed but Money Debited\" Screenshot: Scam or Real?",
-    "seoTitle": "Payment Failed Screenshot or Bank Error: Scam or Real?",
-    "metaDescription": "A customer shows a payment failed, pending or bank error screenshot? Learn what really happens to failed UPI payments, the scam tricks, and what to do.",
+    "seoTitle": "Payment Failed or Processing Screenshot: Scam or Real?",
+    "metaDescription": "A customer shows a payment failed, processing or bank error screenshot? What really happens to failed UPI payments, the scam tricks, and what to do.",
     "category": "Security",
     "publishedAt": "2026-11-12",
     "authorName": "Virat Chauhan",
     "readTime": "7 min read",
     "excerpt": "What a failed, pending or bank error payment screenshot really means, how RBI rules handle money stuck in a failed UPI payment, the tricks scammers build around these screens, and what sellers and payers should do.",
     "targetKeywords": [
+      "payment processing screenshot",
+      "gpay processing screenshot",
       "payment failed screenshot",
       "bank error screenshot",
       "money debited but payment failed",
@@ -3088,6 +3090,18 @@ export const BLOG_ARTICLES: BlogArticle[] = [
           "The Reserve Bank of India sets time limits for fixing failed digital payments in its <a href=\"https://www.rbi.org.in/commonman/English/scripts/Notification.aspx?Id=3074\">framework on turnaround time for failed transactions</a>. For a UPI transfer where the payer's account was debited but the receiver's account was not credited, the receiving bank must reverse the money automatically by the next day (T+1). For payments to a merchant where the debit happened but the merchant did not get confirmation, the limit is five days (T+5).",
           "If banks miss these limits, the framework sets compensation of ₹100 per day of delay. These are outer limits; most failed payments are reversed much sooner.",
           "The key point for sellers: in a genuine failure, the money goes back to the payer, not forward to you. A failed payment never turns into your money later. So there is nothing for you to \"wait for\" except a fresh, successful payment."
+        ]
+      },
+      {
+        "heading": "Processing or pending screenshots",
+        "paragraphs": [
+          "A screen that says \"processing\", \"pending\" or \"payment in progress\" is not a completed payment. It means the payer's app has not yet received a final answer from the banks. Most of these settle within minutes as either a success or a failure, and some take longer.",
+          "Until your own app or bank shows the credit, treat a processing screenshot exactly like a failed one: the money has not reached you. A genuine payer can wait with you for the final status, or pay again once the first attempt is confirmed as failed. Someone who insists you hand over goods on a processing screen, or shows a processing screen that never updates, is a reason to stop."
+        ],
+        "checklist": [
+          "Ask the payer to refresh their app and show the final status, not a saved screenshot.",
+          "Check your own UPI app or bank for the credit and the UTR or reference number.",
+          "If the first attempt fails, accept a fresh payment only after it shows in your account."
         ]
       },
       {
@@ -3318,7 +3332,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["where-is-this-screenshot-from", 
       "fake-social-media-post-screenshot",
       "how-to-tell-if-a-photo-is-a-screenshot",
       "ai-image-detector-online"
@@ -3327,6 +3341,381 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Reverse Image Search a Screenshot",
       "url": "/reverse-image-search/",
       "description": "Make a clean copy of your cropped screenshot locally, then search it with Google Lens, Bing or TinEye."
+    }
+  },
+  {
+    "slug": "where-is-this-screenshot-from",
+    "title": "Where Is This Screenshot From? How to Find the App and the Original Source",
+    "seoTitle": "Where Is This Screenshot From? Find the App and Source",
+    "metaDescription": "Got a screenshot with no context? Learn to identify the app from its layout, find the original post with text and image search, and check if it is real.",
+    "category": "Forensics",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "A step-by-step method for tracing a screenshot back to the app it was taken in and the post, chat or page it shows: read the interface, search the exact words, search the picture, and confirm at the source.",
+    "targetKeywords": [
+      "where is this screenshot from",
+      "what is this screenshot from",
+      "what app is this screenshot from",
+      "find source of screenshot",
+      "find original post from screenshot",
+      "screenshot source finder"
+    ],
+    "keyTakeaway": {
+      "title": "Trace the words first, then the picture",
+      "text": "Most screenshots can be traced by searching their exact text in quotes and the visible account name, then running a reverse image search on any picture inside. A screenshot is only confirmed when you find the original post, page or message and it says the same thing."
+    },
+    "introduction": "Screenshots travel without their context. A post is cropped, forwarded into a group, reposted with a new caption, and soon nobody knows where it came from or whether it was ever real. Finding the source answers both questions at once: which app or site the screenshot shows, and whether the original still exists and matches. This guide walks through the method, from reading the interface to searching the text and the image.",
+    "contentSections": [
+      {
+        "heading": "Step 1: read the interface for clues",
+        "paragraphs": [
+          "Before searching anything, look at the parts of the screenshot that are not the message itself. Apps have recognisable layouts: the position of the profile picture, the shape of message bubbles, where the time and reply buttons sit, the icons along the bottom, and the colour of links and verification badges.",
+          "Write down everything that can be searched: the display name and @handle, any date or time, hashtags, a group or page name, a website address in a browser bar, and unusual words or spelling. These small details are usually what leads to the original."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/where-is-this-screenshot-from/fictional-example.png",
+          "alt": "Fictional screenshot of a social post with numbered clues: the handle, the exact sentence, the date, the picture inside and the app layout.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional post. Each numbered clue is something you can search: the handle, an exact sentence, the date and the picture inside."
+        },
+        "checklist": [
+          "Layout: bubble shapes, button icons and where the name sits usually identify the app.",
+          "Status bar: the clock, carrier and battery style can show iPhone or Android, which narrows the app version.",
+          "Language and currency: a regional language, ₹, $ or £ hints at where it was posted.",
+          "Watermarks: reposting apps and editing tools often leave a small logo or username in a corner."
+        ]
+      },
+      {
+        "heading": "Step 2: search the exact words",
+        "paragraphs": [
+          "Pick the most unusual sentence in the screenshot and search for it in quotation marks, for example \"we will refund every customer by Friday\". Quotation marks ask the search engine for that exact phrase. If the full sentence finds nothing, try a shorter, distinctive part of it, because screenshots are often retyped with small changes.",
+          "Add the account name or the platform to narrow the results, such as the handle plus two or three key words. Then search inside the platform itself: most social apps have their own search, and some let you filter by account and date. If the account name is visible, open that profile and scroll to the date shown in the screenshot.",
+          "Can't copy the text? The <a href=\"/screenshot-ocr/\">screenshot OCR tool</a> reads the words from the image in your browser so you can paste them into a search box."
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "If the post was deleted, search the exact sentence together with the word \"archive\", or look up the profile or page address in the Internet Archive's Wayback Machine at web.archive.org. Many public pages were saved before they disappeared."
+        }
+      },
+      {
+        "heading": "Step 3: search the picture inside it",
+        "paragraphs": [
+          "If the screenshot contains a photo, a meme, a product image or a profile picture, crop to that picture and run a reverse image search. Cropping away the app's buttons and text helps the engine match the image itself rather than the screen around it.",
+          "Use more than one engine. Google Lens is good at recognising places, products and objects; TinEye can sort exact copies by date, which helps you find the earliest one; Bing Visual Search sometimes finds pages the others miss. The <a href=\"/blog/reverse-image-search-screenshot/\">guide to reverse image searching a screenshot</a> has step-by-step instructions for iPhone, Android and computer, and the <a href=\"/reverse-image-search/\">reverse image search helper</a> prepares a clean copy and opens each engine for you."
+        ]
+      },
+      {
+        "heading": "Step 4: confirm at the source",
+        "paragraphs": [
+          "When you find a likely original, compare it with the screenshot carefully. Check the account is the real one (the exact handle, not a lookalike with an extra letter), the date matches, and the wording is identical. A post can be real but taken out of context, such as an old announcement shared as if it were new.",
+          "If you find the original and the screenshot differs, you have found an edit. You can line the two images up in the <a href=\"/screenshot-comparison/\">screenshot comparison tool</a> to see exactly which words or numbers were changed."
+        ]
+      },
+      {
+        "heading": "When you cannot find the source",
+        "paragraphs": [
+          "Private chats, stories that expire, closed groups and deleted posts often leave nothing to find. No result does not prove the screenshot is fake, but it does mean you cannot confirm it, so treat it as unverified, especially if it is being used to make you angry, scared or in a hurry to act.",
+          "For a chat screenshot, the only real proof is the conversation on the original phone; the <a href=\"/blog/fake-whatsapp-chat-screenshot/\">fake WhatsApp chat guide</a> explains why. For a payment screenshot, check your own bank or UPI app instead of the image. For a viral claim, look for a fact check: Google's Fact Check Explorer lets you search published fact checks by keyword or image."
+        ],
+        "checklist": [
+          "Search the exact text in quotes, then shorter parts of it.",
+          "Open the visible account and scroll to the date shown.",
+          "Reverse image search any picture inside, with two engines.",
+          "Check web archives for deleted public posts.",
+          "Look for a fact check on viral claims.",
+          "Still nothing? Treat it as unverified, not as true."
+        ]
+      },
+      {
+        "heading": "Can a tool tell which app a screenshot is from?",
+        "paragraphs": [
+          "Image files carry some technical clues. A screenshot's size often matches a particular phone screen, and some files keep metadata such as the software that saved them. The <a href=\"/screenshot-detector/\">screenshot detector</a> and <a href=\"/screenshot-metadata-checker/\">metadata checker</a> show these details locally in your browser.",
+          "These clues describe the device and file, not the content. Metadata is usually stripped when a screenshot is sent through chat apps or social media, so the interface and the search steps above are more useful for finding where it came from."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How do I find out where a screenshot is from?",
+        "answer": "Search the most unusual sentence in quotation marks, add the account name if one is visible, and reverse image search any picture inside the screenshot. Then open the original post or page and check it matches."
+      },
+      {
+        "question": "How can I tell what app a screenshot was taken in?",
+        "answer": "Look at the layout: message bubble shapes, button icons, where the name and time sit, and the colour of links and badges. Each app has a recognisable design, and small logos or watermarks in a corner often name the app or reposting tool."
+      },
+      {
+        "question": "Can Google Lens find the source of a screenshot?",
+        "answer": "It can often find the picture inside a screenshot. Crop away the app interface first so Lens matches the image itself, and try TinEye or Bing as well, since each engine finds different copies."
+      },
+      {
+        "question": "What if the original post was deleted?",
+        "answer": "Search the exact text with the word archive, check the Wayback Machine for the profile or page address, and look for reposts or news coverage that quoted it. Without an original you cannot confirm the screenshot."
+      },
+      {
+        "question": "If I can't find the source, is the screenshot fake?",
+        "answer": "Not necessarily. Private chats and expired stories leave nothing to search. It means the screenshot is unverified, so do not act on it or share it as fact."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "reverse-image-search-screenshot",
+      "fake-social-media-post-screenshot",
+      "screenshot-checker-online"
+    ],
+    "cta": {
+      "label": "Read the text in a screenshot",
+      "url": "/screenshot-ocr/",
+      "description": "Copy the exact words out of a screenshot in your browser, ready to search in quotation marks."
+    }
+  },
+  {
+    "slug": "how-to-tell-if-a-photo-is-edited",
+    "title": "Is This Photo Edited or Fake? How to Check Any Image",
+    "seoTitle": "Is This Photo Edited or Fake? How to Check Any Image",
+    "metaDescription": "How to tell if a photo is edited, photoshopped or AI-made: find earlier copies, read metadata and Content Credentials, look for visual clues and use ELA.",
+    "category": "Forensics",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "8 min read",
+    "excerpt": "A practical order of checks for a suspicious photo: where it came from, earlier copies, Content Credentials and metadata, visual clues, and forensic tools such as Error Level Analysis, with what each one can and cannot prove.",
+    "targetKeywords": [
+      "how to tell if a photo is edited",
+      "is this photo fake",
+      "fake photo detector",
+      "photo manipulation detector",
+      "how to tell if an image is photoshopped",
+      "edited image detector"
+    ],
+    "keyTakeaway": {
+      "title": "The source beats every detector",
+      "text": "Finding an earlier, unedited copy of a photo, or the original from a trusted source, is the strongest evidence you can get. Metadata, visual clues and forensic maps are useful hints, but none of them can prove on its own that a photo is real or fake."
+    },
+    "introduction": "Editing a photo has never been easier: phone apps remove people, change text and swap backgrounds in seconds, and AI tools can create a convincing picture from a sentence. That makes \"is this photo real?\" a fair question for almost anything that surprises you online. There is no single button that answers it, but a short sequence of checks will settle most cases. This guide gives that sequence, starting with the checks that prove the most.",
+    "contentSections": [
+      {
+        "heading": "1. Find out where the photo came from",
+        "paragraphs": [
+          "Ask who first posted the image and when. A photo shared by a news agency or the person who took it, with a date and place, is far easier to check than one forwarded with no name attached. If you can, ask the sender where they got it.",
+          "Be wary of the classic signs of a misleading photo: no source, a caption that pushes a strong emotion, and a request to share quickly. Many \"fake\" photos are real pictures with a false caption: an old flood photo shared as today's, or a picture from another country presented as local."
+        ]
+      },
+      {
+        "heading": "2. Look for earlier copies",
+        "paragraphs": [
+          "A reverse image search with Google Lens, TinEye or Bing Visual Search shows where else the picture appears. If you find an older version, compare them: a missing person, a changed sign or a different background in one copy reveals the edit straight away. TinEye's option to sort results by date is especially helpful for finding the earliest copy.",
+          "The <a href=\"/reverse-image-search/\">reverse image search helper</a> makes a clean copy of your image in your browser and opens each engine. When you have two versions, the <a href=\"/screenshot-comparison/\">comparison tool</a> highlights exactly which pixels differ."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/how-to-tell-if-a-photo-is-edited/fictional-example.png",
+          "alt": "Fictional checklist for a suspicious photo: earlier copy found, Content Credentials, metadata, visual clues, ELA map, with notes on how much each proves.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional set of results. An earlier copy that differs is strong evidence; the other checks are supporting clues."
+        }
+      },
+      {
+        "heading": "3. Check Content Credentials and metadata",
+        "paragraphs": [
+          "Some cameras, editing apps and AI generators attach Content Credentials, a signed record based on the C2PA standard that describes how the file was made and edited. You can upload an image at <a href=\"https://contentcredentials.org/verify\">contentcredentials.org/verify</a>, and the <a href=\"/ai-image-detector/\">fake image detector</a> also looks for them. Valid credentials are strong evidence of a file's history, but most images do not carry them and social apps often remove them, so their absence proves nothing.",
+          "Ordinary metadata (EXIF) can include the camera model, the date taken, the editing software and sometimes the location. The <a href=\"/screenshot-metadata-checker/\">metadata checker</a> reads it locally. An editing program's name is a hint that the file was opened in an editor, which is normal for many genuine photos. Metadata is also easy to change or delete, so treat it as a clue, not a verdict."
+        ]
+      },
+      {
+        "heading": "4. Look closely for visual clues",
+        "paragraphs": [
+          "Zoom in and check the details that edits and generators often get wrong. None of these is proof alone, because compression and camera processing create odd artefacts too, but several together deserve suspicion."
+        ],
+        "checklist": [
+          "Shadows and light: do shadows fall the same way for every person and object?",
+          "Edges: blurry halos, cut-out outlines or hair that melts into the background.",
+          "Repeated patterns: the same cloud, brick pattern or face appearing twice, a sign of cloning.",
+          "Text and signs: warped letters, misspelt words or fonts that don't match the rest of the scene.",
+          "Reflections: mirrors, windows and water that don't show what they should.",
+          "Hands, ears, teeth and jewellery: common trouble spots for AI images.",
+          "Straight lines: door frames and walls that bend near a person can mean a body was reshaped."
+        ]
+      },
+      {
+        "heading": "5. Use forensic tools, and know their limits",
+        "paragraphs": [
+          "Error Level Analysis (ELA) re-saves a JPEG and shows how much each area changes. A pasted object or retouched region can respond differently from the rest of the photo and stand out. The <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> runs ELA in your browser; its guide explains how to read the map.",
+          "ELA works best on JPEG photos saved only a few times. Text and sharp edges always look bright, and an image resized or re-sent through a chat app loses most of the differences. A clean ELA map does not mean a photo is genuine, and a bright patch does not mean it is fake."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "No online detector is 100% accurate. AI detectors in particular give probabilities and can be fooled by resizing, filters or screenshots of the image. Use them as one clue among several, never as the only evidence."
+        }
+      },
+      {
+        "heading": "6. Is it AI-generated or edited?",
+        "paragraphs": [
+          "AI-generated images and edited photos are checked in similar ways, with a few extra tools. Google's Gemini app can check images for SynthID, an invisible watermark Google adds to images made or edited with its own AI tools; according to <a href=\"https://support.google.com/gemini/answer/16722517\">Google's help page</a>, this only identifies Google AI content, not images from other generators.",
+          "The <a href=\"/blog/ai-image-detector-online/\">guide to AI image detection</a> covers the signals in more depth, and <a href=\"/blog/ai-generated-screenshot/\">how to tell if a screenshot is AI-generated</a> deals with fake chats and receipts made by AI."
+        ]
+      },
+      {
+        "heading": "7. Decide what you can say",
+        "paragraphs": [
+          "After these checks, most photos fall into one of three groups. Confirmed: you found the original from a trusted source and it matches. Fake or misleading: you found an earlier version that differs, or proof the caption is wrong. Unverified: nothing conclusive either way. Unverified is a perfectly honest answer, and it means you should not share the photo as fact.",
+          "If a photo of you has been edited or faked and shared without permission, keep copies and links, report it on the platform, and in India you can report it at cybercrime.gov.in or by calling 1930."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can I tell if a photo has been edited?",
+        "answer": "Search for earlier copies with a reverse image search, check its Content Credentials and metadata, zoom in on shadows, edges, text and reflections, and use Error Level Analysis as a supporting clue. An earlier version that differs is the clearest proof."
+      },
+      {
+        "question": "Is there a free fake photo detector?",
+        "answer": "Yes. ScreenshotChecker's fake image detector and photo manipulation checker are free and run in your browser. They list clues such as Content Credentials, metadata, texture statistics and ELA, but no detector can give a guaranteed verdict."
+      },
+      {
+        "question": "Can metadata prove a photo is real?",
+        "answer": "No. Metadata such as the camera model and date can be edited or deleted with free tools, and most social apps strip it. It can support other evidence but cannot prove a photo is genuine."
+      },
+      {
+        "question": "How do I know if a picture is photoshopped?",
+        "answer": "Look for mismatched shadows, cut-out edges, repeated patterns and bent straight lines, then compare it with any earlier copy you can find online. ELA can highlight areas with a different saving history in JPEG photos."
+      },
+      {
+        "question": "Can AI images be detected reliably?",
+        "answer": "Not always. Watermarks like SynthID and Content Credentials can confirm some AI images, and detectors estimate probabilities, but resizing, filters and screenshots weaken all of these. Finding the source is still the most reliable check."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "ai-image-detector-online",
+      "reverse-image-search-screenshot",
+      "exif-metadata"
+    ],
+    "cta": {
+      "label": "Check a photo for edits",
+      "url": "/image-manipulation-checker/",
+      "description": "Run Error Level Analysis and clone checks on a photo in your browser, then weigh the results with the other clues."
+    }
+  },
+  {
+    "slug": "ai-generated-screenshot",
+    "title": "Is This Screenshot AI-Generated? How to Check Fake Chats, Receipts and Posts",
+    "seoTitle": "Is This Screenshot AI-Generated? How to Check It",
+    "metaDescription": "AI can now fake chats, receipts and posts with clean text. How to tell if a screenshot is AI-generated, what detectors can and cannot do, and what to check.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "AI image tools can now draw convincing chat screenshots, payment receipts and social posts with readable text. Here is how to check one: the clues that still give AI away, what watermarks and detectors can tell you, and why the source is the real test.",
+    "targetKeywords": [
+      "how to tell if a screenshot is ai generated",
+      "ai generated screenshot",
+      "ai screenshot detector",
+      "fake screenshot ai",
+      "ai fake chat screenshot",
+      "ai generated receipt"
+    ],
+    "keyTakeaway": {
+      "title": "Assume a screenshot can be generated",
+      "text": "Modern AI tools can produce a believable screenshot with clean text in seconds, so looking real is no longer evidence. Check the claim at its source: the real account, the original chat on the phone, or your own bank app. Use AI detectors and watermarks only as supporting clues."
+    },
+    "introduction": "For years, fake screenshots were made with editing apps or fake chat generators. Now AI image tools can create them from a single sentence: \"a WhatsApp chat where my boss agrees to a raise\", \"a bank receipt for ₹50,000\", \"a tweet from a famous actor\". Older AI images gave themselves away with garbled text, but newer models write clean, readable words. This guide explains which clues still help, what detection tools can and cannot do, and how to check an AI-made screenshot properly.",
+    "contentSections": [
+      {
+        "heading": "Why AI screenshots are harder to spot now",
+        "paragraphs": [
+          "Early image generators were poor at text. Signs, labels and chat messages came out as nonsense letters, which made AI screenshots easy to catch. Recent models have largely fixed this: they can render a full chat thread, a receipt with amounts and a reference number, or a social post with a username and timestamp.",
+          "That does not make them perfect, but it does mean \"the text looks fine\" no longer proves anything. The right mindset is the same one you would use for a screenshot made with an editing app: any screenshot can be fake until it is checked against its source."
+        ]
+      },
+      {
+        "heading": "Clues that can still give AI away",
+        "paragraphs": [
+          "Generators draw a picture of a screen; they do not run the real app. That leaves small inconsistencies that are worth checking, especially if you have a genuine screenshot from the same app to compare with."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/ai-generated-screenshot/fictional-example.png",
+          "alt": "Fictional AI-made chat screenshot with numbered clues: a time that runs backwards, mismatched icons, a slightly wrong font and a too-perfect layout.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional chat screenshot with typical clues. Each one is a reason to check further, not proof by itself."
+        },
+        "checklist": [
+          "Timestamps that run out of order, or a status bar time that doesn't fit the messages.",
+          "Icons, ticks and buttons that are close to the real app but not quite the same shape or position.",
+          "Fonts that are slightly off: wrong weight, uneven spacing or letters that change size within a line.",
+          "Numbers that don't add up, such as a total that differs from the items or a balance that doesn't change.",
+          "An unusually smooth, clean look, with no compression noise or uneven lighting from a real phone screen.",
+          "Odd details at the edges: half-drawn icons, repeated words, or text that fades into a blur."
+        ],
+        "callout": {
+          "type": "info",
+          "text": "Apps change their design often. A detail that looks wrong may just be a newer or older version, or a different phone. Compare with a screenshot you took yourself from the same app before deciding."
+        }
+      },
+      {
+        "heading": "What watermarks and detectors can tell you",
+        "paragraphs": [
+          "Some AI tools mark what they create. Google adds an invisible SynthID watermark to images made or edited with its AI, and its Gemini app can check for it; Google's <a href=\"https://support.google.com/gemini/answer/16722517\">help page</a> notes this only identifies Google AI content. Some generators also attach Content Credentials, which you can check at <a href=\"https://contentcredentials.org/verify\">contentcredentials.org/verify</a>.",
+          "These marks are useful when you find one, but missing marks prove nothing: many tools don't add them, and taking a screenshot of an image, cropping it or re-sending it can remove metadata-based credentials. General AI detectors, including the <a href=\"/ai-image-detector/\">fake image detector</a>, look at texture, noise and other statistics. Screenshots are mostly flat colour and text, which gives these statistics little to work with, so treat any score as a weak signal."
+        ]
+      },
+      {
+        "heading": "The checks that actually settle it",
+        "paragraphs": [
+          "Whether a fake screenshot was made by AI, an editing app or a fake chat generator, it is caught the same way: by checking the claim outside the image."
+        ],
+        "checklist": [
+          "A payment or bank receipt: open your own bank or UPI app and look for the credit. No credit means no payment.",
+          "A chat: ask to see the conversation on the person's phone, or check your own copy of the chat.",
+          "A social post: open the real account and look for the post on that date; search its exact words in quotes.",
+          "A company notice or offer: check the company's official website or app, not a link in the message.",
+          "A news screenshot: look for the story on the outlet's own site or in a fact check."
+        ]
+      },
+      {
+        "heading": "Where AI screenshots are used in scams",
+        "paragraphs": [
+          "AI-generated screenshots appear in the same scams as edited ones, just faster and more polished: fake payment receipts sent to sellers, fake profit dashboards in <a href=\"/blog/fake-crypto-profit-screenshots/\">investment scams</a>, invented chats used to blackmail or embarrass someone, and fake posts from public figures promoting a product or scheme.",
+          "If an image is pushing you to pay, share or act quickly, slow down. The <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads the text in a screenshot and flags common pressure tactics, and the <a href=\"/blog/screenshot-checker-online/\">verification checklist</a> walks through the full routine."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can you tell if a screenshot is AI-generated?",
+        "answer": "Look for out-of-order timestamps, icons and fonts that don't quite match the real app, numbers that don't add up and an unnaturally clean look. Then confirm the claim at its source, because modern AI can avoid most visual flaws."
+      },
+      {
+        "question": "Can AI make fake chat screenshots?",
+        "answer": "Yes. Current image generators can draw a convincing chat, receipt or social post with readable text from a short prompt. A screenshot looking real is no longer evidence that the conversation happened."
+      },
+      {
+        "question": "Do AI detectors work on screenshots?",
+        "answer": "Only weakly. Screenshots are mostly flat colours and text, which gives texture-based detectors little to analyse, and re-saving or cropping weakens them further. Use a detector's score as one clue, not a verdict."
+      },
+      {
+        "question": "Can Gemini tell if an image is AI-generated?",
+        "answer": "The Gemini app can check for SynthID, the watermark Google adds to images made or edited with Google AI. It cannot reliably identify images from other AI generators."
+      },
+      {
+        "question": "What should I do with a suspicious AI screenshot?",
+        "answer": "Don't act on it. Check the claim at the source, such as your bank app, the real account or the original chat. If it is part of a scam or harassment, keep a copy, report it on the platform, and in India report it at cybercrime.gov.in or 1930."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "ai-image-detector-online",
+      "how-to-tell-if-a-photo-is-edited",
+      "fake-whatsapp-chat-screenshot"
+    ],
+    "cta": {
+      "label": "Check a screenshot's clues",
+      "url": "/ai-image-detector/",
+      "description": "See Content Credentials, metadata, texture and ELA signals for an image, processed in your browser."
     }
   },
 ];
