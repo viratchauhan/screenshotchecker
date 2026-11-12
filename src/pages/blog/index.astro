@@ -6,10 +6,36 @@ import { getAllArticles, formatArticleDate } from '../../data/blogArticles';
 
 const articles = getAllArticles();
 
+// Topic sections for the index; any guide not listed lands in "More guides".
+const TOPICS = [
+  { id: 'payments', title: 'Payment screenshots', intro: 'UPI, bank transfer, PayPal, Venmo and failed-payment screenshots: why a screenshot never proves payment and how to confirm money really arrived.',
+    slugs: ['fake-upi-payment-screenshot', 'payment-failed-screenshot-scam', 'fake-bank-transfer-screenshot', 'fake-payment-screenshot-paypal-venmo-cash-app', 'fake-crypto-profit-screenshots'] },
+  { id: 'scam-messages', title: 'Scam texts, calls and messages', intro: 'Delivery, toll, electricity, traffic fine, task job and digital arrest scams: what the messages look like and what to do.',
+    slugs: ['digital-arrest-scam', 'e-challan-sms-scam', 'whatsapp-telegram-task-job-scam', 'smishing-fake-sms', 'india-post-courier-sms-scam', 'electricity-bill-disconnection-sms-scam', 'usps-redelivery-text-scam', 'unpaid-toll-text-scam', 'suspicious-link-checker-online'] },
+  { id: 'verify', title: 'Checking chats, posts and screenshots', intro: 'How to verify a screenshot: find its source, check chats and social posts, and run a full verification routine.',
+    slugs: ['screenshot-checker-online', 'where-is-this-screenshot-from', 'fake-whatsapp-chat-screenshot', 'fake-social-media-post-screenshot', 'reverse-image-search-screenshot', 'how-to-tell-if-a-photo-is-a-screenshot', 'screenshot-analyzer-online'] },
+  { id: 'ai-forensics', title: 'AI images and photo forensics', intro: 'Edited photos, AI-generated images and screenshots, metadata and what forensic tools can and cannot prove.',
+    slugs: ['how-to-tell-if-a-photo-is-edited', 'ai-generated-screenshot', 'ai-image-detector-online', 'exif-metadata'] },
+  { id: 'privacy', title: 'Privacy and safe sharing', intro: 'Hide personal details before you share a screenshot or photo.', slugs: ['redact-screenshot-before-sharing'] },
+  { id: 'data', title: 'Scam data and statistics', intro: 'Official figures on UPI fraud and online scams, with sources.', slugs: ['scam-statistics'] },
+];
+const bySlug = new Map(articles.map((a) => [a.slug, a]));
+const hindi = articles.filter((a) => a.lang === 'hi');
+const placed = new Set(hindi.map((a) => a.slug));
+const sections = TOPICS.map((t) => {
+  const list = t.slugs.map((s) => bySlug.get(s)).filter((a) => a && !placed.has(a.slug));
+  list.forEach((a) => placed.add(a.slug));
+  return { id: t.id, title: t.title, intro: t.intro, lang: 'en', articles: list };
+});
+const rest = articles.filter((a) => !placed.has(a.slug));
+if (rest.length) sections.push({ id: 'more', title: 'More guides', intro: 'Other guides from ScreenshotChecker.', lang: 'en', articles: rest });
+sections.push({ id: 'hindi', title: 'हिंदी गाइड', intro: 'पेमेंट स्क्रीनशॉट, डिजिटल अरेस्ट और फर्जी चालान से जुड़ी गाइड हिंदी में।', lang: 'hi', articles: hindi });
+const featured = bySlug.get('scam-statistics') ?? articles[articles.length - 1];
+
 const canonicalUrl = 'https://screenshotchecker.com/blog/';
-const pageTitle = 'Screenshot Forensics & Verification Guides';
+const pageTitle = 'Scam and Fake Screenshot Guides: Payments, Texts, Photos';
 const pageDescription =
-  'Expert guides to detecting fake screenshots, payment fraud, smishing SMS, and AI-generated media. Free forensic analysis insights.';
+  'Plain-language guides to fake payment screenshots, scam texts and calls, edited and AI-generated photos, with official sources. English and Hindi.';
 
 // Structured data for Blog Index
 const structuredData = {
@@ -62,35 +88,42 @@ const structuredData = {
     <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
       <span class="text-xs uppercase tracking-wider font-semibold text-primary font-mono block mb-2">Editorial Hub</span>
       <h1 class="font-serif text-3xl sm:text-5xl font-normal text-ink tracking-tight mb-4">
-        Guides & Investigations
+        Scam and Screenshot Guides
       </h1>
       <p class="text-sm sm:text-base text-body leading-relaxed">
-        Insights into digital visual trust, screenshot security, privacy protection, and image forensics.
+        How to check payment screenshots, scam messages, chats, posts and photos before you trust them, in plain language with official sources.
       </p>
     </div>
 
-    <!-- Featured Top Article -->
-    {articles.length > 0 && (
-      <div class="mb-10">
+    <!-- Jump links to each topic -->
+    <nav aria-label="Guide topics" class="flex flex-wrap justify-center gap-2 mb-10">
+      {sections.map((section) => (
+        <a href={`#${section.id}`} class="badge-pill !text-xs hover:text-primary transition-colors">{section.title}</a>
+      ))}
+    </nav>
+
+    <!-- Featured Article -->
+    {featured && (
+      <div class="mb-12">
         <a
-          href={`/blog/${articles[0].slug}`}
+          href={`/blog/${featured.slug}/`}
           class="feature-card flex flex-col md:flex-row justify-between gap-6 hover:border-primary/50 transition-all text-left group p-6 sm:p-8 bg-surface-card rounded-2xl border border-hairline block"
         >
           <div class="space-y-3 max-w-2xl">
             <div class="flex items-center gap-3 text-xs text-muted font-mono">
-              <span class="badge-pill !text-[10px] font-semibold">{articles[0].category}</span>
+              <span class="badge-pill !text-[10px] font-semibold">{featured.category}</span>
               <span>•</span>
-              {articles[0].publishedAt ? <time datetime={articles[0].publishedAt}>{formatArticleDate(articles[0].publishedAt)}</time> : <span>Publication pending</span>}
+              {featured.publishedAt ? <time datetime={featured.publishedAt}>{formatArticleDate(featured.publishedAt)}</time> : <span>Publication pending</span>}
               <span>•</span>
-              <span>{articles[0].readTime}</span>
+              <span>{featured.readTime}</span>
               <span>•</span>
               <span class="text-primary font-medium">Featured Guide</span>
             </div>
             <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal group-hover:text-primary transition-colors leading-snug">
-              {articles[0].title}
+              {featured.title}
             </h2>
             <p class="text-xs sm:text-sm text-body leading-relaxed line-clamp-3">
-              {articles[0].excerpt}
+              {featured.excerpt}
             </p>
           </div>
           <div class="md:self-end pt-4 md:pt-0 shrink-0">
@@ -103,32 +136,41 @@ const structuredData = {
       </div>
     )}
 
-    <!-- Articles Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-      {articles.slice(1).map((article) => (
-        <a
-          href={`/blog/${article.slug}`}
-          class="feature-card flex flex-col justify-between hover:border-primary/50 transition-all text-left group p-6 bg-surface-card rounded-2xl border border-hairline"
-        >
-          <div>
-            <div class="flex items-center justify-between text-xs text-muted font-mono mb-3">
-              <span class="badge-pill !text-[10px] font-semibold">{article.category}</span>
-              <span>{article.publishedAt ? <time datetime={article.publishedAt}>{formatArticleDate(article.publishedAt)}</time> : <span>Publication pending</span>} · {article.readTime}</span>
-            </div>
-            <h2 class="font-serif text-xl sm:text-2xl text-ink font-normal group-hover:text-primary transition-colors mb-3 leading-snug">
-              {article.title}
-            </h2>
-            <p class="text-xs sm:text-sm text-muted leading-relaxed line-clamp-3">
-              {article.excerpt}
-            </p>
-          </div>
-          <div class="mt-6 pt-4 border-t border-hairline flex items-center justify-between text-xs text-primary font-medium">
-            <span>Read guide</span>
-            <span class="group-hover:translate-x-1 transition-transform">→</span>
-          </div>
-        </a>
-      ))}
-    </div>
+    <!-- Guides grouped by topic -->
+    {sections.map((section) => (
+      <section id={section.id} aria-labelledby={`${section.id}-title`} class="mb-14 scroll-mt-24">
+        <div class="mb-6 max-w-3xl">
+          <h2 id={`${section.id}-title`} class="font-serif text-2xl sm:text-3xl text-ink font-normal mb-2" lang={section.lang}>{section.title}</h2>
+          <p class="text-sm text-body leading-relaxed" lang={section.lang}>{section.intro}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {section.articles.map((article) => (
+            <a
+              href={`/blog/${article.slug}/`}
+              lang={article.lang || 'en'}
+              class="feature-card flex flex-col justify-between hover:border-primary/50 transition-all text-left group p-6 bg-surface-card rounded-2xl border border-hairline"
+            >
+              <div>
+                <div class="flex items-center justify-between text-xs text-muted font-mono mb-3">
+                  <span class="badge-pill !text-[10px] font-semibold">{article.category}</span>
+                  <span>{article.publishedAt ? <time datetime={article.publishedAt}>{formatArticleDate(article.publishedAt)}</time> : <span>Publication pending</span>} · {article.readTime}</span>
+                </div>
+                <h3 class="font-serif text-xl sm:text-2xl text-ink font-normal group-hover:text-primary transition-colors mb-3 leading-snug">
+                  {article.title}
+                </h3>
+                <p class="text-xs sm:text-sm text-muted leading-relaxed line-clamp-3">
+                  {article.excerpt}
+                </p>
+              </div>
+              <div class="mt-6 pt-4 border-t border-hairline flex items-center justify-between text-xs text-primary font-medium">
+                <span>Read guide</span>
+                <span class="group-hover:translate-x-1 transition-transform">→</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    ))}
   </main>
 
   <Footer />
