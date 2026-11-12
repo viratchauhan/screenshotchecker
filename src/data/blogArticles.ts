@@ -449,7 +449,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
+    "relatedSlugs": ["payment-failed-screenshot-scam", "fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
     "cta": {
       "label": "Review a Payment Screenshot",
       "url": "/payment-screenshot-checker/",
@@ -1143,8 +1143,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     "slug": "fake-whatsapp-chat-screenshot",
     "title": "How to Tell If a WhatsApp Chat Screenshot Is Fake or Edited",
-    "seoTitle": "Fake WhatsApp Chat Screenshot? How to Check It",
-    "metaDescription": "Check a WhatsApp chat screenshot the reliable way: treat visual clues as hints, then verify the message live on the phone, with the sender or in your own chat.",
+    "seoTitle": "Fake WhatsApp Chat Screenshot? How to Spot a Fake",
+    "metaDescription": "Spot a fake WhatsApp chat screenshot: the visual clues worth a second look, why apps can fake any chat, and the reliable test: the message on the real phone.",
     "category": "Forensics",
     "publishedAt": "2026-10-14",
     "authorName": "Virat Chauhan",
@@ -1302,8 +1302,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     "slug": "fake-social-media-post-screenshot",
     "title": "Is This Tweet or Instagram Screenshot Real? How to Check a Social Media Post",
-    "seoTitle": "Is That Tweet Screenshot Real? How to Check Social Posts",
-    "metaDescription": "Check a screenshot of an X post, tweet or Instagram post by finding the original, confirming the account, and treating badges and image clues as hints.",
+    "seoTitle": "Fake Tweet or Instagram Screenshot? How to Check It",
+    "metaDescription": "Is that screenshot of a tweet, X post or Instagram post real? Find the original post, confirm the account, and treat badges and image clues as hints.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-14",
     "authorName": "Virat Chauhan",
@@ -1448,7 +1448,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["reverse-image-search-screenshot", 
       "screenshot-checker-online",
       "screenshot-analyzer-online",
       "ai-image-detector-online"
@@ -1625,8 +1625,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     "slug": "fake-bank-transfer-screenshot",
     "title": "Fake Bank Transfer Screenshot: How to Check the Money Really Arrived",
-    "seoTitle": "Fake Bank Transfer Screenshot? How to Check Payment",
-    "metaDescription": "Got a bank transfer screenshot? Why pending or scheduled screens are not payment, how to confirm funds in your own account, and where to report fraud in the UK.",
+    "seoTitle": "Fake Bank Transfer Screenshot? Check It Before You Act",
+    "metaDescription": "Got a bank transfer, pending or bank error screenshot? None of them prove payment. Here is how to confirm the money in your own account and report fraud.",
     "category": "Security",
     "publishedAt": "2026-10-14",
     "authorName": "Virat Chauhan",
@@ -1759,7 +1759,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["payment-failed-screenshot-scam", 
       "fake-upi-payment-screenshot",
       "screenshot-checker-online",
       "screenshot-analyzer-online"
@@ -1775,8 +1775,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "lang": "hi",
     "slug": "fake-payment-screenshot-kaise-pehchane",
     "title": "फर्जी पेमेंट स्क्रीनशॉट कैसे पहचानें: दुकान पर पैसा सच में आया या नहीं, ऐसे चेक करें",
-    "seoTitle": "नकली पेमेंट स्क्रीनशॉट कैसे पहचानें? दुकानदार ऐसे चेक करें",
-    "metaDescription": "ग्राहक ने पेमेंट स्क्रीनशॉट दिखाया? सामान देने से पहले अपना UPI ऐप और बैंक रिकॉर्ड देखें। pending बहाना, ज़्यादा पैसे लौटाओ धोखा और शिकायत का तरीका जानें।",
+    "seoTitle": "Fake Payment Screenshot कैसे पहचानें? GPay, PhonePe चेक",
+    "metaDescription": "Google Pay या PhonePe का पेमेंट स्क्रीनशॉट असली है या नकली? सामान देने से पहले अपना UPI ऐप चेक करें। नकली स्क्रीनशॉट के संकेत और शिकायत का तरीका।",
     "category": "Security",
     "publishedAt": "2026-10-14",
     "authorName": "Virat Chauhan",
@@ -1937,8 +1937,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     "slug": "india-post-courier-sms-scam",
     "title": "India Post or Courier SMS Saying Your Address Is Incomplete? How to Check",
-    "seoTitle": "India Post Address Update SMS: Real or Scam?",
-    "metaDescription": "Got an SMS saying your India Post or courier parcel is held for an incomplete address? Learn the red flags, how to check safely and where to report it.",
+    "seoTitle": "India Post SMS Scam: Parcel Held, Update Address Link?",
+    "metaDescription": "India Post or courier SMS saying your parcel is held for an incomplete address? Do not tap the link. Red flags, how to track safely and where to report.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
     "authorName": "Virat Chauhan",
@@ -2105,8 +2105,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     "slug": "electricity-bill-disconnection-sms-scam",
     "title": "Electricity Disconnection Tonight SMS: Is It a Scam?",
-    "seoTitle": "Electricity Disconnection SMS Scam: How to Check It",
-    "metaDescription": "Got an SMS saying your power will be cut tonight and to call an electricity officer? Learn the scam pattern, how to check your bill and what to do if you paid.",
+    "seoTitle": "Electricity Bill SMS Scam: Power Cut Tonight Message?",
+    "metaDescription": "Got an SMS saying your electricity will be cut tonight unless you call an officer? It is a scam. How to check your real bill, and what to do if you paid.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
     "authorName": "Virat Chauhan",
@@ -2721,7 +2721,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["reverse-image-search-screenshot", 
       "exif-metadata",
       "screenshot-checker-online",
       "fake-social-media-post-screenshot"
@@ -3037,6 +3037,296 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check a Suspicious Investment Chat",
       "url": "/screenshot-scam-checker/",
       "description": "Flag scam warning signs in a screenshot of the conversation, then check the platform with a financial regulator."
+    }
+  },
+  {
+    "slug": "payment-failed-screenshot-scam",
+    "title": "\"Payment Failed but Money Debited\" Screenshot: Scam or Real?",
+    "seoTitle": "Payment Failed Screenshot or Bank Error: Scam or Real?",
+    "metaDescription": "A customer shows a payment failed, pending or bank error screenshot? Learn what really happens to failed UPI payments, the scam tricks, and what to do.",
+    "category": "Security",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "What a failed, pending or bank error payment screenshot really means, how RBI rules handle money stuck in a failed UPI payment, the tricks scammers build around these screens, and what sellers and payers should do.",
+    "targetKeywords": [
+      "payment failed screenshot",
+      "bank error screenshot",
+      "money debited but payment failed",
+      "gpay payment failed screenshot",
+      "phonepe payment failed screenshot",
+      "fake payment error screenshot"
+    ],
+    "keyTakeaway": {
+      "title": "A failed or pending screen means you have not been paid",
+      "text": "If your own UPI app or bank shows no credit, you have not received the money, whatever the customer's screen says. Genuine failed UPI payments are reversed to the payer by the banks, so you never need to hand over goods, refund a difference or scan a QR code to settle it."
+    },
+    "introduction": "A customer holds up their phone: \"Payment failed, but the money has been debited. It will come to you, please give me the goods.\" Or someone sends a \"bank error\" screenshot and asks you to pay a fee or send the money back. Real payment failures happen every day, and so do scams built around them. This guide explains what really happens when a UPI payment fails, the tricks to watch for, and what to do whether you are the seller or the payer.",
+    "contentSections": [
+      {
+        "heading": "Two very different situations behind the same screen",
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/payment-failed-screenshot-scam/fictional-example.png",
+          "alt": "Fictional UPI payment failed screen for ₹1,200 saying money debited will be refunded, annotated with what the seller should check.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional failed payment screen. Whatever it says, only the seller's own app shows whether money arrived."
+        },
+        "paragraphs": [
+          "Sometimes a payment genuinely fails: the bank server times out, the network drops, or the payment gets stuck in processing. The payer may even see money leave their account for a while. This is frustrating for everyone, but nobody is lying.",
+          "Other times the screen is the trick. Prank apps and edited screenshots can show a payment error that never happened, and a failed payment is a convenient story: \"the money is on its way, so let me take the goods now\", or \"the bank made an error, so send me back the extra\"."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "Either way, the seller's answer is the same: check your own UPI app or bank. No credit means no payment yet, and the customer can pay again once their failed payment is sorted."
+        }
+      },
+      {
+        "heading": "What really happens to a failed UPI payment",
+        "paragraphs": [
+          "The Reserve Bank of India sets time limits for fixing failed digital payments in its <a href=\"https://www.rbi.org.in/commonman/English/scripts/Notification.aspx?Id=3074\">framework on turnaround time for failed transactions</a>. For a UPI transfer where the payer's account was debited but the receiver's account was not credited, the receiving bank must reverse the money automatically by the next day (T+1). For payments to a merchant where the debit happened but the merchant did not get confirmation, the limit is five days (T+5).",
+          "If banks miss these limits, the framework sets compensation of ₹100 per day of delay. These are outer limits; most failed payments are reversed much sooner.",
+          "The key point for sellers: in a genuine failure, the money goes back to the payer, not forward to you. A failed payment never turns into your money later. So there is nothing for you to \"wait for\" except a fresh, successful payment."
+        ]
+      },
+      {
+        "heading": "Tricks built around failed and error screens",
+        "paragraphs": [
+          "These patterns come up again and again. Each one asks you to act on the customer's screen instead of your own records."
+        ],
+        "checklist": [
+          "\"Money is debited, it will reach you in a few hours, let me take the goods.\" A failed payment is reversed to the payer, not delivered to you later.",
+          "\"The bank made an error and sent you double, return the extra.\" Check your own account; if nothing extra arrived, there is nothing to return.",
+          "\"Scan this QR code or enter your PIN to receive the refund.\" <a href=\"https://npci.org.in/what-we-do/upi/upi-safety-shield\">NPCI's UPI Safety Shield</a> says the UPI PIN is only for paying and QR codes are only for paying, never for receiving money.",
+          "A \"bank error\" screenshot sent by a stranger asking you to pay a fee to release a payment. Real banks do not charge release fees through chat.",
+          "Pressure and drama: a long queue, an angry tone or a story about an emergency, so you skip checking your phone."
+        ]
+      },
+      {
+        "heading": "Worked example: a fictional bakery order",
+        "paragraphs": [
+          "Riya runs a small bakery in Pune. A customer collecting a ₹1,200 cake shows a screen that says \"Payment failed. Money debited will be refunded within 3–5 working days\" and asks to take the cake now and pay later.",
+          "Riya opens her own UPI app. There is no ₹1,200 credit. She explains that if the payment failed, his bank will return the money to him, and asks him to pay again now, by UPI or cash.",
+          "If he is genuine, he pays again or comes back later; his first payment will be reversed to his account. If he argues, leaves without paying or asks her to scan a QR code to \"receive the refund\", Riya has lost nothing, because she checked her own records before handing over the cake."
+        ],
+        "cta": {
+          "label": "Check a Payment Screenshot's Text",
+          "url": "/payment-screenshot-checker/",
+          "description": "Read the status, amount and reference on a payment screenshot and see warning signs, then confirm the credit in your own app."
+        }
+      },
+      {
+        "heading": "If you are the payer and your payment failed",
+        "paragraphs": [
+          "Open the transaction in your UPI app and check its status. Processing payments usually settle as Success or Failed on their own, so avoid paying again until the status is clear, unless the seller confirms they have not received anything.",
+          "If money left your account and the payment failed, wait for the automatic reversal. If it does not arrive within the time limits, raise a complaint from the transaction in your UPI app or with your bank. If your bank does not resolve it, the RBI's <a href=\"https://cms.rbi.org.in/\">complaint management system</a> is the next step.",
+          "Use only the help options inside your UPI app or your bank's official app. Search results and social media are full of fake \"customer care\" numbers that exist to take more money."
+        ]
+      },
+      {
+        "heading": "What ScreenshotChecker can and cannot tell you",
+        "paragraphs": [
+          "The <a href=\"/payment-screenshot-checker/\">payment screenshot checker</a> reads the text of a UPI receipt with OCR, including status words such as Failed or Pending, and flags warning signs in the amount and reference. There is also a <a href=\"/payment-screenshot-checker/hindi/\">Hindi version</a>.",
+          "It cannot see your bank account, contact a bank or confirm that money moved. A clean result is not proof of payment, and a warning is not proof of fraud. Your own UPI app or bank statement is the only answer. For the full routine, see our guides on <a href=\"/blog/fake-upi-payment-screenshot/\">fake UPI payment screenshots</a> and <a href=\"/blog/fake-payment-screenshot-kaise-pehchane/\">नकली पेमेंट स्क्रीनशॉट कैसे पहचानें</a>."
+        ]
+      },
+      {
+        "heading": "Outside India: pending and error screens elsewhere",
+        "paragraphs": [
+          "The same trick appears with other payment apps. A buyer shows a \"pending\" or \"error\" screen from a bank or payment app and asks you to ship or refund a difference. The rule does not change: check your own account. Our guides to <a href=\"/blog/fake-payment-screenshot-paypal-venmo-cash-app/\">PayPal, Venmo, Cash App and Zelle screenshots</a> and <a href=\"/blog/fake-bank-transfer-screenshot/\">bank transfer screenshots</a> cover the details."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "The customer's screen says payment failed but money debited. Will I get the money?",
+        "answer": "No. In a genuine failure, the banks reverse the money to the payer. Under RBI's framework this should happen by the next day for UPI transfers. Ask the customer to pay again once you confirm nothing arrived in your own app."
+      },
+      {
+        "question": "How long does a failed UPI refund take?",
+        "answer": "RBI's turnaround framework says money debited for a UPI transfer that did not reach the receiver should be reversed by T+1, and within T+5 for merchant payments, with ₹100 per day compensation for delays beyond that. Most reversals happen much sooner."
+      },
+      {
+        "question": "Someone sent me a bank error screenshot and asked me to return extra money. What should I do?",
+        "answer": "Check your own bank or UPI app. If no extra money arrived, there is nothing to return. If something did arrive, contact your bank rather than sending money back to a number from a chat, because reversing a real error is the bank's job."
+      },
+      {
+        "question": "Do I need to scan a QR code or enter my PIN to receive a refund?",
+        "answer": "No. NPCI says the UPI PIN is only needed to pay money and QR codes are only scanned to pay. Anyone asking you to scan or enter your PIN to receive money is trying to take it."
+      },
+      {
+        "question": "Can a payment failed screenshot be fake?",
+        "answer": "Yes. Prank apps and edited images can show any status. That is why the status on someone else's screen does not matter; only the credit in your own account does."
+      },
+      {
+        "question": "Can ScreenshotChecker confirm whether a payment failed?",
+        "answer": "No. It reads the text on the screenshot and flags warning signs, but it has no access to banks. Check your own UPI app or bank statement."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-upi-payment-screenshot",
+      "fake-payment-screenshot-kaise-pehchane",
+      "fake-bank-transfer-screenshot"
+    ],
+    "cta": {
+      "label": "Check a Payment Screenshot",
+      "url": "/payment-screenshot-checker/",
+      "description": "See the status, amount and reference read from the screenshot, then confirm the credit in your own UPI app or bank."
+    }
+  },
+  {
+    "slug": "reverse-image-search-screenshot",
+    "title": "How to Reverse Image Search a Screenshot (iPhone, Android, PC)",
+    "seoTitle": "How to Reverse Image Search a Screenshot on Any Device",
+    "metaDescription": "Reverse image search a screenshot on iPhone, Android or a computer with Google Lens, Bing or TinEye. Crop it first, then read results like an investigator.",
+    "category": "Forensics",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "Step-by-step ways to search the web with a screenshot on iPhone, Android and desktop, why cropping first matters, how to read matches, and what a search cannot tell you.",
+    "targetKeywords": [
+      "reverse image search screenshot",
+      "search by screenshot",
+      "can you reverse image search a screenshot",
+      "find image from screenshot",
+      "screenshot image search",
+      "how to image search a screenshot"
+    ],
+    "keyTakeaway": {
+      "title": "Crop to the picture, search two engines, look for the earliest copy",
+      "text": "Yes, you can reverse image search a screenshot. Crop away the phone's interface first, search with Google Lens and one other engine such as TinEye or Bing, then look for the oldest and most original copy. No match is not proof that an image is new or genuine."
+    },
+    "introduction": "You can reverse image search a screenshot just like any photo. It is one of the quickest ways to find where a picture came from: the original post behind a viral image, the real owner of a profile photo, or an older listing reusing the same product photo. The trick is to prepare the screenshot first, so the search engine looks at the picture rather than your phone's buttons and text. Here is how to do it on every device, and how to read what you find.",
+    "contentSections": [
+      {
+        "heading": "Why search with a screenshot at all",
+        "paragraphs": [
+          "Screenshots are how images travel today: a picture inside a chat, a post, an ad or a dating profile. When you cannot get the original file, a screenshot is often the only copy you have.",
+          "A reverse image search can show you where else the picture appears, when it was first posted, and in what context. That is often enough to spot a stolen profile photo, a reused product picture or an old image presented as news."
+        ]
+      },
+      {
+        "heading": "Step 1: crop the screenshot first",
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/reverse-image-search-screenshot/fictional-example.png",
+          "alt": "Fictional checklist for searching with a screenshot: crop to the picture, remove status bar and captions, search two engines, look for the earliest copy.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional preparation checklist. Cropping to the picture itself gives search engines the best chance of a match."
+        },
+        "paragraphs": [
+          "A full screenshot contains a status bar, app buttons, usernames, captions and other text around the picture. Search engines may try to match all of that, and they may also see private details you did not mean to share.",
+          "Crop to the picture itself before searching; your phone's built-in photo editor can do it. The <a href=\"/reverse-image-search/\">reverse image search helper</a> can then make a clean copy in your browser, without the file's hidden metadata, and open each search engine for you."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "Searching sends the image to the search provider. Crop out names, phone numbers, faces of people who did not agree and anything else private before you upload."
+        }
+      },
+      {
+        "heading": "Step 2: search from an iPhone",
+        "paragraphs": [
+          "Google's help pages describe a few ways to search with an image on iPhone. The steps can change between app versions, so look for the Lens icon (a small camera) if a menu has moved."
+        ],
+        "checklist": [
+          "Google app: tap the Lens (camera) icon in the search bar, then pick the screenshot from your photos. Drag the corners of the box to the part you want.",
+          "Chrome: open the three-dot menu and choose Search Screen with Google Lens to search what is currently on screen, without saving a screenshot first.",
+          "Google Photos: open the screenshot, tap More, then Google Lens.",
+          "TinEye or Bing: open tineye.com or bing.com/visualsearch in Safari and upload the cropped screenshot."
+        ]
+      },
+      {
+        "heading": "Step 3: search from an Android phone",
+        "paragraphs": [
+          "Android has Google Lens built into several apps, and some phones can search directly from the screen."
+        ],
+        "checklist": [
+          "Google app: tap the Lens icon, then choose the image from your screenshots and adjust the selection box.",
+          "Chrome: tap the Lens icon in the search bar and upload the screenshot from your images.",
+          "Google Photos: open the screenshot and tap the Lens button.",
+          "Some phones offer Circle to Search, which lets you circle part of the screen to search it.",
+          "TinEye or Bing Visual Search work in any mobile browser with an upload."
+        ]
+      },
+      {
+        "heading": "Step 4: search from a computer",
+        "paragraphs": [
+          "On a computer, the quickest route is usually drag and drop."
+        ],
+        "checklist": [
+          "Google: go to images.google.com, click the camera icon (Search by image), then upload the file or drag it in.",
+          "Chrome: right-click an image on a web page and choose Search with Google Lens to see results in a side panel.",
+          "Bing: open bing.com/visualsearch and drop the image in.",
+          "TinEye: upload at tineye.com. TinEye is useful for finding exact copies and sorting results by date."
+        ],
+        "cta": {
+          "label": "Prepare a Screenshot for Searching",
+          "url": "/reverse-image-search/",
+          "description": "Make a clean copy of your cropped screenshot in your browser, then open Google Lens, Bing or TinEye."
+        }
+      },
+      {
+        "heading": "How to read the results",
+        "paragraphs": [
+          "Look for the earliest and most original copy, not the most popular one. The first upload, the highest-resolution version or a post by the person or organisation shown is usually closest to the source.",
+          "Compare the context. If a photo described as \"today's flood\" first appeared years ago in another country, or a \"seller's own photo\" appears on a shop's website, the claim around the image is wrong even if the picture is real.",
+          "Search more than one engine. Google Lens is strong for objects, places and products; TinEye is good at exact copies and dates; Bing sometimes finds pages the others miss."
+        ]
+      },
+      {
+        "heading": "Worked example: a fictional recruiter profile",
+        "paragraphs": [
+          "Jordan gets a message from a \"recruiter\" offering remote work that pays per task. The recruiter's profile photo looks professional. Jordan screenshots the profile, crops to the photo and searches it with Google Lens and TinEye.",
+          "TinEye finds the same photo on a stock image site from 2019, and Google Lens shows it on several unrelated profiles with different names. The recruiter is not the person in the photo. Jordan stops replying and reads up on <a href=\"/blog/whatsapp-telegram-task-job-scam/\">task job scams</a>."
+        ]
+      },
+      {
+        "heading": "When the search finds nothing",
+        "paragraphs": [
+          "No match does not mean an image is original, recent or genuine. Many pictures come from private chats, closed groups or new photos that have never been indexed, and heavily cropped or edited copies can be hard to match.",
+          "If the search is empty, try a different crop, another engine, or a different frame from a video. Then move on to other checks: ask for the original file, check its <a href=\"/blog/how-to-tell-if-a-photo-is-a-screenshot/\">screenshot or photo clues</a>, or look at <a href=\"/blog/exif-metadata/\">metadata</a>. For anything involving money, verify the claim itself rather than the picture."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can you reverse image search a screenshot?",
+        "answer": "Yes. Screenshots work like any other image in Google Lens, Bing Visual Search and TinEye. Crop away the phone interface and text first so the engine focuses on the picture."
+      },
+      {
+        "question": "How do I search by screenshot on iPhone?",
+        "answer": "Open the Google app, tap the Lens camera icon and choose the screenshot from your photos, or open it in Google Photos and tap More then Google Lens. In Chrome you can also use Search Screen with Google Lens from the three-dot menu."
+      },
+      {
+        "question": "How do I search with a screenshot on Android?",
+        "answer": "Use the Lens icon in the Google app or Chrome and pick the screenshot from your images, or open it in Google Photos and tap Lens. Some phones also offer Circle to Search."
+      },
+      {
+        "question": "Which reverse image search is best for screenshots?",
+        "answer": "Use more than one. Google Lens is strong for objects, places and products; TinEye is good for finding exact copies and sorting by date; Bing Visual Search sometimes finds different pages."
+      },
+      {
+        "question": "Is it private to reverse image search a screenshot?",
+        "answer": "The image is sent to the search provider you choose. Crop out names, numbers, faces and other private details first. ScreenshotChecker's helper makes a clean copy without hidden metadata in your browser, and you upload it to the provider yourself."
+      },
+      {
+        "question": "No results came up. Does that mean the image is real?",
+        "answer": "No. Private, new or heavily edited images often have no matches. An empty result simply means the engines did not find a copy; use other checks before trusting the image."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-social-media-post-screenshot",
+      "how-to-tell-if-a-photo-is-a-screenshot",
+      "ai-image-detector-online"
+    ],
+    "cta": {
+      "label": "Reverse Image Search a Screenshot",
+      "url": "/reverse-image-search/",
+      "description": "Make a clean copy of your cropped screenshot locally, then search it with Google Lens, Bing or TinEye."
     }
   },
 ];

@@ -112,3 +112,13 @@ Owner ran a claude-seo v2.5.0 audit (health score 83/100, no critical issues) an
 - /blog/usps-redelivery-text-scam/ (US delivery smishing; sources: USPIS, USPS newsroom).
 - /blog/fake-crypto-profit-screenshots/ (crypto investment scams; sources: FBI IC3 PSA and 2024 report, FTC, IC3 2025 fake law firm alert).
 - Each has a labelled fictional figure, FAQ schema, sources and links from related guides, tool pages and llms.txt. Not yet requested for indexing.
+
+
+## 12 November 2026 - snippet rewrites and two new guides
+
+Search Console (28 days): /payment-screenshot-checker/ 4,983 impressions at position 5.8; top query "fake payment screenshot detector" 2,942 impressions at 4.1. Low CTR at positions 5-7 on fake-bank-transfer-screenshot (3,938 impressions, 1.6%), kaise-pehchane (2,148, 0.8%), fake-whatsapp-chat (1,105, 3.2%), electricity (607, 0.5%), india-post (398, 0.3%), social posts (514, 1%), screenshot-analyzer (435, 1.6%).
+
+- New titles and descriptions on those pages; payment checker title now uses "Detector" to match the top query.
+- /blog/payment-failed-screenshot-scam/ for "bank error screenshot", "payment failed screenshot" queries (RBI failed-transaction TAT, NPCI UPI Safety Shield).
+- /blog/reverse-image-search-screenshot/ for the "search by screenshot" / "reverse image search screenshot" cluster (Google Lens help pages).
+- Compare CTR for the rewritten pages after 28 days.

@@ -51,6 +51,8 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [Is it a screenshot or a photo?](https://screenshotchecker.com/blog/how-to-tell-if-a-photo-is-a-screenshot/)
 - [USPS redelivery text scams](https://screenshotchecker.com/blog/usps-redelivery-text-scam/)
 - [Fake crypto profit screenshots and investment scams](https://screenshotchecker.com/blog/fake-crypto-profit-screenshots/)
+- [Payment failed or bank error screenshots](https://screenshotchecker.com/blog/payment-failed-screenshot-scam/)
+- [How to reverse image search a screenshot](https://screenshotchecker.com/blog/reverse-image-search-screenshot/)
 
 ## Key facts for accurate answers
 
