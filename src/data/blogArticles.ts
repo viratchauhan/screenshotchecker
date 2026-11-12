@@ -449,7 +449,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["scam-statistics", "payment-failed-screenshot-scam", "fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
+    "relatedSlugs": ["qr-code-scam", "scam-statistics", "payment-failed-screenshot-scam", "fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
     "cta": {
       "label": "Review a Payment Screenshot",
       "url": "/payment-screenshot-checker/",
@@ -1002,7 +1002,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Link checker safe',
       'VirusTotal link checker',
     ],
-    relatedSlugs: ['smishing-fake-sms', 'india-post-courier-sms-scam', 'unpaid-toll-text-scam'],
+    relatedSlugs: ["qr-code-scam", 'smishing-fake-sms', 'india-post-courier-sms-scam', 'unpaid-toll-text-scam'],
     cta: {
       label: 'Verify a Suspicious Link Now',
       url: '/suspicious-link-checker',
@@ -1939,7 +1939,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["digital-arrest-kya-hai", 
+    "relatedSlugs": ["qr-code-scam", "digital-arrest-kya-hai", 
       "fake-upi-payment-screenshot",
       "smishing-fake-sms",
       "screenshot-checker-online"
@@ -3224,7 +3224,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["scam-statistics", 
+    "relatedSlugs": ["qr-code-scam", "scam-statistics", 
       "fake-upi-payment-screenshot",
       "fake-payment-screenshot-kaise-pehchane",
       "fake-bank-transfer-screenshot"
@@ -4504,6 +4504,122 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check an image for edits",
       "url": "/image-manipulation-checker/",
       "description": "Look for editing traces in a receipt photo or screenshot, processed in your browser."
+    }
+  },
+  {
+    "slug": "qr-code-scam",
+    "title": "QR Code Scams: \"Scan to Receive Money\", Fake Shop QR Stickers and Parking Codes",
+    "seoTitle": "QR Code Scam: Scan to Receive Money? It's a Trap",
+    "metaDescription": "Asked to scan a QR code to receive money, a refund or a prize? Scanning only ever pays. How QR code scams work in India and the US, and how to stay safe.",
+    "category": "Security",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "The \"scan this QR to receive payment\" trick used on OLX and marketplace sellers, fake QR stickers pasted over a shop's real code, and fake parking-meter codes that lead to phishing sites, with the one rule that stops most of them.",
+    "targetKeywords": [
+      "qr code scam",
+      "scan qr code to receive money",
+      "upi qr code fraud",
+      "fake qr code sticker",
+      "parking meter qr code scam",
+      "quishing"
+    ],
+    "keyTakeaway": {
+      "title": "Scanning a QR code never brings money in",
+      "text": "With UPI, scanning a QR code and entering your PIN only ever sends money out of your account. NPCI says plainly that a PIN is not needed to receive money. Anyone asking you to scan, approve or enter a PIN to receive a payment, refund or prize is stealing from you."
+    },
+    "introduction": "QR codes are everywhere: shop counters, restaurant tables, parking meters, parcels and messages. That convenience is exactly what scammers exploit. A QR code is just a link or a payment request you can't read with your eyes, so you have to trust where it came from. This guide covers the three most common QR code scams and how to avoid each one.",
+    "contentSections": [
+      {
+        "heading": "Scam 1: \"Scan this QR code to receive your payment\"",
+        "paragraphs": [
+          "You are selling something online, perhaps a sofa on OLX or a phone on Facebook Marketplace. A buyer agrees to your price without bargaining and says they will pay right away, but first you must scan a QR code they send \"to receive the money\". When you scan it, your UPI app shows a payment screen with an amount. You enter your PIN and the money leaves your account.",
+          "Variations include a fake \"refund\" from customer care, a \"cashback\" or prize, or an army officer or company that \"can only pay by QR\". Some send a screenshot of a successful payment first to build trust; see our guide to <a href=\"/blog/fake-upi-payment-screenshot/\">fake UPI payment screenshots</a>."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/qr-code-scam/fictional-example.png",
+          "alt": "Fictional chat with a marketplace buyer who sends a QR code to receive payment, numbered: no bargaining, the QR code, a request to enter the UPI PIN and a pay screen showing money leaving.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional scan-to-receive scam. The app's own screen says Pay, because scanning a QR code sends money."
+        },
+        "callout": {
+          "type": "golden-rule",
+          "text": "NPCI's UPI safety advice: the UPI PIN is only for sending money and is never needed to receive it, and scanning a QR code is only for making a payment (<a href=\"https://npci.org.in/what-we-do/upi/upi-safety-shield\">NPCI UPI Safety Shield</a>)."
+        }
+      },
+      {
+        "heading": "Scam 2: fake QR stickers on a shop's counter",
+        "paragraphs": [
+          "Some fraudsters paste their own QR code sticker over a shop's real one, at a counter, a fuel station or a donation box. Customers pay as usual, but the money goes to the fraudster, and the shop owner only notices when payments stop arriving.",
+          "For customers, the check is simple: after scanning, look at the name your UPI app shows before you enter your PIN. It should match the shop. For shop owners, check your QR stand regularly, use the sound box or payment alerts from your bank or app, and confirm each payment in your own app rather than looking at the customer's screen."
+        ]
+      },
+      {
+        "heading": "Scam 3: QR codes that lead to fake websites",
+        "paragraphs": [
+          "Not every QR code is a payment. Many simply open a website, and scammers use them to send people to phishing pages, sometimes called quishing. The US Federal Trade Commission has <a href=\"https://consumer.ftc.gov/consumer-alerts/2023/12/scammers-hide-harmful-links-qr-codes-steal-your-information\">warned</a> about scammers covering the QR codes on parking meters with their own, and sending QR codes in emails and texts that claim there is a problem with a delivery or an account.",
+          "These pages copy a real parking app, bank or courier and ask for card details or a login. Some try to install a malicious app."
+        ],
+        "checklist": [
+          "Before opening, read the web address your camera shows. Misspellings, extra words or an unfamiliar domain are warning signs.",
+          "On a parking meter or poster, check whether the QR code is a sticker stuck over something. When in doubt, use the official app or pay at the machine.",
+          "Don't scan QR codes in unexpected emails, texts or letters. Go to the company's website or app yourself.",
+          "Never install an app from a QR code on a poster, parcel or message unless you trust the source."
+        ]
+      },
+      {
+        "heading": "How to scan any QR code safely",
+        "paragraphs": [],
+        "checklist": [
+          "Know which direction the money goes: scanning pays; to receive money you share your own QR code or UPI ID, nothing more.",
+          "Check the name or website shown after scanning, before you pay or log in.",
+          "Never enter a UPI PIN, card PIN or OTP because someone told you to on a call or chat.",
+          "Ignore deals that are too generous, like buyers who don't bargain and \"refunds\" you didn't ask for.",
+          "Can't read a QR code from a screenshot without scanning it? Paste the link into the <a href=\"/suspicious-link-checker/\">suspicious link checker</a> instead of opening it."
+        ]
+      },
+      {
+        "heading": "If you scanned and lost money",
+        "paragraphs": [
+          "In India, call the cybercrime helpline 1930 or report at cybercrime.gov.in straight away, and inform your bank or UPI app through its official help section. Quick reports let banks try to hold the money. Keep the chat, the QR code image, the buyer's profile and the transaction reference.",
+          "In the US, contact your bank or card issuer, then report the scam at ReportFraud.ftc.gov. If you entered a password on a fake site, change it and turn on two-step verification."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can I receive money by scanning a QR code?",
+        "answer": "No. With UPI, scanning a QR code and entering your PIN always sends money from your account. To receive money, you only share your own QR code or UPI ID."
+      },
+      {
+        "question": "Do I need to enter my UPI PIN to receive money?",
+        "answer": "Never. NPCI says the UPI PIN is only for sending money. Anyone asking for your PIN to receive a payment, refund or prize is a scammer."
+      },
+      {
+        "question": "How do I know if a shop's QR code is fake?",
+        "answer": "After scanning, check that the name your UPI app shows matches the shop before you enter your PIN. If the name is different or the sticker looks pasted over another one, ask the shopkeeper."
+      },
+      {
+        "question": "What is quishing?",
+        "answer": "Quishing is phishing through QR codes: a code on a poster, parking meter, email or parcel that opens a fake website to steal card details or logins, or to install a harmful app."
+      },
+      {
+        "question": "What should I do if I scanned a scam QR code?",
+        "answer": "If money left your account, call 1930 or report at cybercrime.gov.in in India, or contact your bank and ReportFraud.ftc.gov in the US. If you entered a password, change it right away."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-upi-payment-screenshot",
+      "payment-failed-screenshot-scam",
+      "suspicious-link-checker-online"
+    ],
+    "cta": {
+      "label": "Check a suspicious link",
+      "url": "/suspicious-link-checker/",
+      "description": "See warning signs in a link, including one from a QR code, without opening it."
     }
   },
 ];
