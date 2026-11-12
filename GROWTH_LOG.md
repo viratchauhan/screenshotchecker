@@ -128,10 +128,12 @@ Search Console (28 days): /payment-screenshot-checker/ 4,983 impressions at posi
 
 Search Console (28 days): /ai-image-detector/ position 20.6, top query "fake image detector" (292 impressions); /blog/whatsapp-telegram-task-job-scam/ position 8.2 with "prepaid task" / "merchant task" queries; "processing payment screenshot", "what is this screenshot from", "photo manipulation detector" had impressions but no matching page.
 
-- New guides: where-is-this-screenshot-from, how-to-tell-if-a-photo-is-edited, ai-generated-screenshot, scam-statistics (UPI fraud by year from the Lok Sabha reply of 15 Dec 2025, 1930/CFCFRMS savings, FTC and FBI IC3 2025 losses; chart), digital-arrest-scam, e-challan-sms-scam, and Hindi digital-arrest-kya-hai, fake-challan-message-kaise-pehchane.
+- New guides: where-is-this-screenshot-from, how-to-tell-if-a-photo-is-edited, ai-generated-screenshot, scam-statistics (UPI fraud by year from the Lok Sabha reply of 15 Dec 2025, 1930/CFCFRMS savings, FTC and FBI IC3 2025 losses; chart), digital-arrest-scam, e-challan-sms-scam, fake-receipt-ai-generated, qr-code-scam, trai-sim-block-call-scam, fake-customer-care-number-scam, and Hindi digital-arrest-kya-hai, fake-challan-message-kaise-pehchane, qr-code-fraud-se-kaise-bache, task-job-scam-se-kaise-bache (14 in all). English/Hindi pairs carry hreflang en/hi/x-default and a visible language link.
+- Site structure: blog index grouped into topic sections with jump links; footer guide links updated; Resources page cards now link to real guides (they were dead-end cards); payment checker FAQs +3 (confirming a UPI credit, fake credit SMS, no QR or PIN to receive); image tool FAQs +2; Organization schema names its founder.
 - Expanded: payment-failed guide (processing/pending screens), task scam guide (prepaid/merchant tasks, typical messages), PayPal/Venmo guide (refund screenshots).
 - Titles matched to queries: fake image detector, photo manipulation detector, screenshot scam checker.
 - Fix: the strict CSP had blocked the Cloudflare Web Analytics beacon since 30 Oct (Cloudflare analytics undercounted from then); static.cloudflareinsights.com and cloudflareinsights.com are now allowed.
 - IndexNow: key file at the site root, `node scripts/indexnow.mjs <paths without leading slash> | --all` (posts to Bing). All URLs pinged.
-- Google indexing requested for the new guides and retitled tool pages.
+- Google indexing requested for every new guide and the retitled tool pages; sitemap index resubmitted.
+- Deploys: the Cloudflare Git auto-build stopped picking up pushes after f0f5b49; later releases were deployed with `npm run deploy` (wrangler). Check Workers Builds in the Cloudflare dashboard.
 - Lighthouse mobile (homepage): performance 69 (lab only; no CrUX field data yet), accessibility 100, SEO 92 (only Cloudflare's managed robots.txt Content-Signal line is flagged; Google ignores it).
