@@ -1464,13 +1464,17 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "slug": "fake-payment-screenshot-paypal-venmo-cash-app",
     "title": "Fake PayPal, Venmo, Cash App or Zelle Payment Screenshot? How Sellers Confirm They Were Paid",
     "seoTitle": "Fake Venmo, PayPal or Zelle Payment? How Sellers Check",
-    "metaDescription": "A buyer's PayPal, Venmo, Cash App or Zelle screenshot is not payment. Open your own app, confirm the money is there, and spot overpayment and upgrade scams.",
+    "metaDescription": "A PayPal, Venmo, Cash App or Zelle screenshot from a buyer is not payment, and neither is a refund screenshot. Check your own app and spot overpayment scams.",
     "category": "Security",
     "publishedAt": "2026-10-14",
+    "updatedAt": "2026-11-12",
     "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "For US marketplace sellers: why a payment screenshot or email proves nothing, how to confirm money in your own PayPal, Venmo, Cash App or bank app, and how overpayment and fake upgrade scams work.",
     "targetKeywords": [
+      "paypal refund screenshot",
+      "venmo refund screenshot",
+      "fake venmo receipt",
       "fake payment screenshot",
       "fake Venmo payment screenshot",
       "fake Zelle payment email",
@@ -1568,6 +1572,18 @@ export const BLOG_ARTICLES: BlogArticle[] = [
           "url": "/screenshot-scam-checker/",
           "description": "Flag pressure tactics and refund or upgrade requests in a screenshot, then confirm any payment in your own account."
         }
+      },
+      {
+        "heading": "Refund Screenshots: \"I Already Refunded You\"",
+        "paragraphs": [
+          "Refund screenshots run the same trick in reverse. A seller who never shipped sends a PayPal or Venmo \"refund issued\" screen to make you drop a dispute. Or a buyer claims they were charged twice and shows a screenshot of a \"refund\" they say you owe, hoping you send money back before checking.",
+          "A refund is only real when it appears in your own PayPal, Venmo, Cash App or bank activity. PayPal refunds show as a separate refund entry linked to the original payment; card refunds can take several business days to reach your statement, so a screenshot that says the money is back today while your account shows nothing is a reason to wait. Keep a payment dispute open until you see the refund yourself, and never send money to \"correct\" a refund someone else says they made."
+        ],
+        "checklist": [
+          "Open your own app and look for the refund entry, not the other person's screen.",
+          "Do not close a dispute or chargeback on the strength of a screenshot.",
+          "Never send money back for a duplicate charge or refund you cannot see in your account."
+        ]
       },
       {
         "heading": "If You Were Targeted: Report It",
@@ -2254,14 +2270,18 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   {
     "slug": "whatsapp-telegram-task-job-scam",
     "title": "WhatsApp or Telegram Task Job Scam: Paid to Like Videos, Now Asked to Deposit?",
-    "seoTitle": "WhatsApp Task Job Scam: Paid to Like, Now Asked to Pay?",
-    "metaDescription": "Paid small amounts to like videos or rate hotels, now asked to deposit for prepaid tasks? It is a task scam. Stop paying, save evidence and report it fast.",
+    "seoTitle": "WhatsApp, Telegram Task Job Scam: Prepaid Tasks Explained",
+    "metaDescription": "Paid to like videos, then asked to deposit for a prepaid or merchant task? It is a task scam. How it works, the messages they send and what to do now.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
+    "updatedAt": "2026-11-12",
     "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "How WhatsApp and Telegram task scams build trust with small payouts, why the earnings screenshots in the group prove nothing, and what to do in India, the US and the UK once they ask for a deposit.",
     "targetKeywords": [
+      "prepaid task scam",
+      "merchant prepaid task",
+      "telegram prepaid task",
       "whatsapp task scam",
       "telegram task scam",
       "youtube like job scam",
@@ -2288,6 +2308,17 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         ]
       },
       {
+        "heading": "What is a \"prepaid task\" or \"merchant task\"?",
+        "paragraphs": [
+          "After a few small, real payments for liking videos or rating hotels, the scammers move you to \"prepaid tasks\", sometimes called merchant tasks, combination tasks or VIP tasks. You are told to pay money first, for example to \"buy\" a product, \"boost\" a merchant or \"complete an order\", and that the deposit will come back with a large commission.",
+          "The first prepaid task often does pay out, to build trust. Then the amounts grow, and the dashboard starts showing a balance you cannot withdraw: a task is \"incomplete\", an account is \"frozen\" or a \"tax\" or \"unlock fee\" is due. There is no real merchant and no real task. A prepaid task is simply a request to send the scammers money."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "A real job never asks you to pay to work or to pay to get your earnings out. Any \"prepaid\", \"merchant\" or \"deposit\" task is the scam itself."
+        }
+      },
+      {
         "heading": "Red flags of a task job scam",
         "paragraphs": [
           "Any one of these is a reason to stop and check. Several together are the scam pattern itself."
@@ -2306,6 +2337,20 @@ export const BLOG_ARTICLES: BlogArticle[] = [
           "type": "golden-rule",
           "text": "<strong>Never pay to get a job or to get paid.</strong> The FTC's task scam guide gives the same advice and warns against trusting anyone who offers to pay you for likes or positive ratings."
         }
+      },
+      {
+        "heading": "Messages these scams send",
+        "paragraphs": [
+          "People often search the exact words they received. If a message you got looks like one of these, you are dealing with the same scam pattern. The wording changes, but the steps stay the same."
+        ],
+        "checklist": [
+          "The opening: \"Part-time job, ₹1,000 to ₹5,000 a day from home. Just like our YouTube videos and send a screenshot.\"",
+          "The first task: \"The job is very simple: watch our videos and like them. We pay you for each video you like.\"",
+          "Moving you on: \"Join our Telegram group to receive your daily tasks and salary from the receptionist.\"",
+          "The trap: \"Today's prepaid merchant task: deposit ₹2,000, get ₹2,800 back in 10 minutes.\"",
+          "The lock: \"You haven't completed the task yet. Please do it exactly as described,\" or \"Your account is frozen; pay the remaining amount to withdraw.\"",
+          "The last squeeze: a \"tax\", \"credit score\" or \"unlock\" fee before you can take out your balance."
+        ]
       },
       {
         "heading": "Why the earnings screenshots in the group prove nothing",
