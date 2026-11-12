@@ -58,6 +58,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [How to tell if a screenshot is AI-generated](https://screenshotchecker.com/blog/ai-generated-screenshot/)
 - [How to spot a fake or AI-generated receipt](https://screenshotchecker.com/blog/fake-receipt-ai-generated/)
 - [QR code scams: scan to receive money, fake stickers, parking codes](https://screenshotchecker.com/blog/qr-code-scam/)
+- [Fake TRAI call: your SIM will be blocked](https://screenshotchecker.com/blog/trai-sim-block-call-scam/)\n- [Fake customer care number scam](https://screenshotchecker.com/blog/fake-customer-care-number-scam/)
 - [UPI fraud and online scam statistics, India and US (official sources)](https://screenshotchecker.com/blog/scam-statistics/)
 - [Digital arrest scam: fake police, CBI or ED video calls](https://screenshotchecker.com/blog/digital-arrest-scam/)
 - [Fake e-challan SMS and APK traffic fine scam](https://screenshotchecker.com/blog/e-challan-sms-scam/)

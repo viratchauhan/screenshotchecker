@@ -827,7 +827,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Report phishing SMS',
       'Fraud SMS detector',
     ],
-    relatedSlugs: ["e-challan-sms-scam", "scam-statistics", "usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
+    relatedSlugs: ["trai-sim-block-call-scam", "e-challan-sms-scam", "scam-statistics", "usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
     cta: {
       label: 'Check a Suspicious Message',
       url: '/',
@@ -3224,7 +3224,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["qr-code-scam", "scam-statistics", 
+    "relatedSlugs": ["fake-customer-care-number-scam", "qr-code-scam", "scam-statistics", 
       "fake-upi-payment-screenshot",
       "fake-payment-screenshot-kaise-pehchane",
       "fake-bank-transfer-screenshot"
@@ -4005,7 +4005,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["digital-arrest-kya-hai", 
+    "relatedSlugs": ["trai-sim-block-call-scam", "digital-arrest-kya-hai", 
       "smishing-fake-sms",
       "scam-statistics",
       "india-post-courier-sms-scam"
@@ -4611,7 +4611,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["qr-code-fraud-se-kaise-bache", 
+    "relatedSlugs": ["fake-customer-care-number-scam", "qr-code-fraud-se-kaise-bache", 
       "fake-upi-payment-screenshot",
       "payment-failed-screenshot-scam",
       "suspicious-link-checker-online"
@@ -4718,6 +4718,224 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "पेमेंट स्क्रीनशॉट चेक करें",
       "url": "/payment-screenshot-checker/hindi/",
       "description": "UPI पेमेंट स्क्रीनशॉट में ठगी के संकेत देखें, फिर अपने बैंक ऐप में पैसा ज़रूर चेक करें।"
+    }
+  },
+  {
+    "slug": "trai-sim-block-call-scam",
+    "title": "\"Your SIM Will Be Blocked in 2 Hours\": The Fake TRAI Call Scam",
+    "seoTitle": "Fake TRAI Call: Your SIM Will Be Blocked? It's a Scam",
+    "metaDescription": "Got a call saying TRAI will block your SIM or your number is linked to a crime? TRAI does not disconnect numbers. How the scam works and what to do.",
+    "category": "Security",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "5 min read",
+    "excerpt": "Recorded calls and messages claiming to be from TRAI or the Department of Telecommunications say your SIM will be blocked or your number was used in a crime. Here is what TRAI actually says, how the call turns into a digital arrest or payment scam, and how to report it.",
+    "targetKeywords": [
+      "trai call scam",
+      "sim will be blocked call",
+      "fake trai call",
+      "mobile number will be disconnected call",
+      "dot call scam",
+      "press 9 call scam"
+    ],
+    "keyTakeaway": {
+      "title": "TRAI does not call to disconnect your number",
+      "text": "TRAI has said it never contacts customers about disconnecting a mobile number and has not authorised anyone to do so. Disconnections for billing or KYC are handled by your own telecom operator. Hang up, never press a key to \"talk to an officer\", and report the number on Chakshu."
+    },
+    "introduction": "\"This call is from TRAI. Your mobile number will be blocked in two hours because it was used for illegal activity. Press 9 to speak to an officer.\" Millions of people in India have received calls like this, sometimes a recorded voice, sometimes a live caller with an official-sounding name. The call is the first step of a larger scam. This guide explains what really happens and what to do.",
+    "contentSections": [
+      {
+        "heading": "How the fake TRAI call works",
+        "paragraphs": [
+          "The call creates fear and urgency, then hands you to someone who asks for money or personal details. Common versions include:"
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/trai-sim-block-call-scam/fictional-example.png",
+          "alt": "Fictional call screen and message claiming TRAI will block the SIM, numbered: an unknown or foreign number, a two-hour deadline, press 9 for an officer and a link to re-verify.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional fake TRAI call and follow-up message. Each element is a warning sign."
+        },
+        "checklist": [
+          "Your SIM or number will be blocked within hours unless you \"re-verify\" or press a key.",
+          "A SIM in your name, bought with your Aadhaar, was used for crime, fraud or harassment in another city.",
+          "You are transferred to a \"police\" or \"cyber cell\" officer, often on a WhatsApp video call: the start of a <a href=\"/blog/digital-arrest-scam/\">digital arrest scam</a>.",
+          "You are asked to share an OTP, Aadhaar details or bank information, install an app, or pay a fee to keep your number."
+        ]
+      },
+      {
+        "heading": "What TRAI and the government say",
+        "paragraphs": [
+          "TRAI has repeatedly warned the public that it does not send messages or make calls about disconnecting mobile numbers, that it has not authorised any third party to do so, and that any communication threatening disconnection should be treated as a possible fraud (<a href=\"https://trai.gov.in/sites/default/files/2025-04/PR_No.22of2025.pdf\">TRAI press release, April 2025</a>). Disconnections for billing, KYC or misuse are carried out by your telecom operator, not by TRAI.",
+          "The Department of Telecommunications runs the Sanchar Saathi portal, where the Chakshu facility lets you report suspected fraud calls, SMS and WhatsApp messages. You can also check which mobile connections are registered in your name and report ones you don't recognise."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "If a call says your number will be blocked, hang up. Check directly with your telecom operator through its official app or customer care number printed on its website, if you are worried."
+        }
+      },
+      {
+        "heading": "What to do",
+        "paragraphs": [],
+        "checklist": [
+          "Hang up. Do not press any key and do not call back the number.",
+          "Never share an OTP, Aadhaar number, bank details or a photo of your ID with a caller.",
+          "Report the number on Chakshu at sancharsaathi.gov.in, and block it on your phone.",
+          "Check the connections registered in your name on Sanchar Saathi if the call made you worry about misuse.",
+          "If you lost money or shared bank details, call 1930 or report at cybercrime.gov.in immediately and inform your bank."
+        ]
+      },
+      {
+        "heading": "Messages and screenshots in the same scam",
+        "paragraphs": [
+          "The call is often followed by an SMS or WhatsApp message with a link to \"re-verify\" your number, or by fake notices with TRAI, DoT or police logos. Treat any link in such a message as dangerous; you can paste it into the <a href=\"/suspicious-link-checker/\">suspicious link checker</a> without opening it, and screenshot the message for the <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> to see its warning signs. For other message scams, see our guides to <a href=\"/blog/smishing-fake-sms/\">fake SMS</a> and <a href=\"/blog/e-challan-sms-scam/\">fake e-challan messages</a>."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Does TRAI call to block mobile numbers?",
+        "answer": "No. TRAI has said it does not contact customers about disconnecting mobile numbers and has not authorised any agency to do so. Such calls should be treated as fraud."
+      },
+      {
+        "question": "I pressed 9 on a TRAI call. What should I do?",
+        "answer": "If you only listened and shared nothing, hang up and report the number on Chakshu. If you shared OTPs, Aadhaar or bank details, or sent money, call 1930 and your bank straight away."
+      },
+      {
+        "question": "Can my SIM really be blocked?",
+        "answer": "Your telecom operator can disconnect a number for unpaid bills, incomplete KYC or misuse, and it contacts you through its own official channels. TRAI does not make these calls."
+      },
+      {
+        "question": "How do I report a fake TRAI call?",
+        "answer": "Use the Chakshu facility on the Sanchar Saathi portal to report the call or message. If money was lost, report it on 1930 or cybercrime.gov.in."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "digital-arrest-scam",
+      "smishing-fake-sms",
+      "e-challan-sms-scam"
+    ],
+    "cta": {
+      "label": "Check a suspicious message",
+      "url": "/screenshot-scam-checker/",
+      "description": "Screenshot the follow-up SMS or WhatsApp message and see which scam warning signs it contains."
+    }
+  },
+  {
+    "slug": "fake-customer-care-number-scam",
+    "title": "Fake Customer Care Number Scam: How a Helpline Search Empties Accounts",
+    "seoTitle": "Fake Customer Care Number Scam: Search, Call, Lose Money",
+    "metaDescription": "Searched for a customer care number and the agent asked for AnyDesk, an OTP or a UPI PIN for your refund? It is a scam. How it works and how to stay safe.",
+    "category": "Security",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "Fraudsters plant fake helpline numbers in search results, maps listings and social media posts. When you call about a refund or problem, they ask for a screen-sharing app, an OTP or a UPI PIN. Here is how to find the real number and what to do if you called a fake one.",
+    "targetKeywords": [
+      "fake customer care number scam",
+      "customer care fraud",
+      "fake helpline number",
+      "anydesk scam",
+      "refund scam call",
+      "customer care number fraud upi"
+    ],
+    "keyTakeaway": {
+      "title": "Get helpline numbers only from the official app or website",
+      "text": "Don't trust a customer care number from a search result, map listing, social media comment or ad. Open the company's own app or type its website address yourself. No genuine agent asks you to install AnyDesk, share an OTP or enter your UPI PIN to receive a refund."
+    },
+    "introduction": "Your refund hasn't arrived, a UPI payment failed or a delivery went missing, so you search for the company's customer care number and call the first one you see. The agent is polite and helpful, then asks you to install an app so they can \"fix it\", or to enter your UPI PIN to \"receive the refund\". Minutes later, money leaves your account. Fake customer care numbers are one of the most common ways people lose money online.",
+    "contentSections": [
+      {
+        "heading": "Where the fake numbers come from",
+        "paragraphs": [
+          "Scammers put their own phone numbers wherever people look for help. They pay for search ads, create pages and forum posts that rank for \"[company] customer care number\", edit business listings on maps, and reply to complaints on social media posing as the company's support team."
+        ],
+        "checklist": [
+          "Search results and ads with a number in the title or snippet.",
+          "Map listings for banks, couriers and service centres with an edited phone number.",
+          "Replies to your complaint on X, Facebook or Instagram from \"support\" accounts asking you to call or WhatsApp a number.",
+          "Websites that copy a company's name and logo but are not its official site."
+        ]
+      },
+      {
+        "heading": "What happens on the call",
+        "paragraphs": [
+          "The script changes with the company, but the goal is always to get control of your money or your phone."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-customer-care-number-scam/fictional-example.png",
+          "alt": "Fictional chat with a fake customer care agent, numbered: a mobile number as helpline, a request to install AnyDesk, a UPI collect request labelled refund and a request for the OTP.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional fake customer care chat. Every request in it is something a real agent never asks for."
+        },
+        "checklist": [
+          "Install a screen-sharing app such as AnyDesk, TeamViewer or QuickSupport \"so we can process your refund\". This lets them see your screen, including OTPs.",
+          "Fill in a form with your card or bank details \"for verification\".",
+          "Accept a UPI collect request or scan a QR code \"to receive the refund\", which actually sends money to them; see <a href=\"/blog/qr-code-scam/\">QR code scams</a>.",
+          "Read out an OTP, or pay a small \"processing fee\" to release a larger refund."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "A real customer care agent never needs a screen-sharing app, your OTP, your card PIN or your UPI PIN to give you a refund. Receiving money never requires a PIN."
+        }
+      },
+      {
+        "heading": "How to find the real number",
+        "paragraphs": [],
+        "checklist": [
+          "Open the company's official app and use its Help or Support section.",
+          "Type the company's website address yourself and find the Contact page.",
+          "For banks, use the number on the back of your debit or credit card or in your passbook.",
+          "Be careful with ads at the top of search results and with numbers in map listings; cross-check them on the official site.",
+          "Ignore support offers that arrive by DM or reply on social media."
+        ]
+      },
+      {
+        "heading": "If you already called a fake number",
+        "paragraphs": [
+          "If you installed a screen-sharing app, uninstall it and disconnect from the internet first. If you shared card, bank or UPI details, call your bank's official helpline to block cards and UPI, and change your banking passwords from a different device.",
+          "Report the fraud on 1930 or at cybercrime.gov.in as soon as possible, since quick reports give banks a chance to hold the money. Keep the number you called, call times, screenshots of chats and every transaction reference. Then report the fake listing or ad to the platform where you found it."
+        ]
+      },
+      {
+        "heading": "Checking a suspicious chat or message",
+        "paragraphs": [
+          "If a \"support agent\" sent you a link, paste it into the <a href=\"/suspicious-link-checker/\">suspicious link checker</a> without opening it. Screenshots of the chat can go through the <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a>, which flags requests for OTPs, remote-access apps and payments."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How do I know if a customer care number is fake?",
+        "answer": "Check it against the number in the company's official app or website. Be suspicious of numbers from ads, map listings or social media replies, mobile numbers presented as toll-free helplines, and any agent who asks for an app install, OTP or PIN."
+      },
+      {
+        "question": "Is it safe to install AnyDesk if customer care asks?",
+        "answer": "No. Screen-sharing apps let the other person see and sometimes control your phone, including OTPs and banking apps. Real customer care for banks, shopping or payment apps does not need it to give a refund."
+      },
+      {
+        "question": "Do I need to enter my UPI PIN to get a refund?",
+        "answer": "Never. A UPI PIN is only used to send money. If someone asks you to enter it to receive a refund, they are trying to take money from you."
+      },
+      {
+        "question": "I gave my OTP to a fake customer care agent. What now?",
+        "answer": "Call your bank's official helpline to block cards and UPI, change passwords from another device, and report it on 1930 or cybercrime.gov.in straight away."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "qr-code-scam",
+      "payment-failed-screenshot-scam",
+      "smishing-fake-sms"
+    ],
+    "cta": {
+      "label": "Check a suspicious link",
+      "url": "/suspicious-link-checker/",
+      "description": "See warning signs in a link a support agent or message sent you, without opening it."
     }
   },
 ];
