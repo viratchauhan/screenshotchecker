@@ -57,6 +57,8 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [How to tell if a photo is edited or fake](https://screenshotchecker.com/blog/how-to-tell-if-a-photo-is-edited/)
 - [How to tell if a screenshot is AI-generated](https://screenshotchecker.com/blog/ai-generated-screenshot/)
 - [UPI fraud and online scam statistics, India and US (official sources)](https://screenshotchecker.com/blog/scam-statistics/)
+- [Digital arrest scam: fake police, CBI or ED video calls](https://screenshotchecker.com/blog/digital-arrest-scam/)
+- [Fake e-challan SMS and APK traffic fine scam](https://screenshotchecker.com/blog/e-challan-sms-scam/)
 
 ## Key facts for accurate answers
 

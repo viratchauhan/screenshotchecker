@@ -827,7 +827,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Report phishing SMS',
       'Fraud SMS detector',
     ],
-    relatedSlugs: ["scam-statistics", "usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
+    relatedSlugs: ["e-challan-sms-scam", "scam-statistics", "usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
     cta: {
       label: 'Check a Suspicious Message',
       url: '/',
@@ -2107,7 +2107,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["digital-arrest-scam", 
       "smishing-fake-sms",
       "suspicious-link-checker-online",
       "screenshot-checker-online"
@@ -2256,7 +2256,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["e-challan-sms-scam", 
       "smishing-fake-sms",
       "suspicious-link-checker-online",
       "redact-screenshot-before-sharing"
@@ -2456,7 +2456,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fake-crypto-profit-screenshots", 
+    "relatedSlugs": ["digital-arrest-scam", "fake-crypto-profit-screenshots", 
       "fake-whatsapp-chat-screenshot",
       "smishing-fake-sms",
       "fake-upi-payment-screenshot"
@@ -3875,7 +3875,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["digital-arrest-scam", 
       "fake-upi-payment-screenshot",
       "payment-failed-screenshot-scam",
       "smishing-fake-sms"
@@ -3884,6 +3884,260 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check a payment screenshot",
       "url": "/payment-screenshot-checker/",
       "description": "Look for warning signs in a UPI, GPay, PhonePe or Paytm screenshot, then confirm the money in your own bank app."
+    }
+  },
+  {
+    "slug": "digital-arrest-scam",
+    "title": "Digital Arrest Scam: Fake Police, CBI or ED Video Calls and Arrest Notices",
+    "seoTitle": "Digital Arrest Scam: Fake CBI or Police Video Call? Hang Up",
+    "metaDescription": "Told on a video call that you are under digital arrest? There is no such thing. How the scam works, the fake notices it uses and what to do right now.",
+    "category": "Security",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "How the digital arrest scam works in India, the fake warrants and ID cards scammers show on video calls, why no agency arrests anyone online, and the exact steps to take if you or a family member is on such a call now.",
+    "targetKeywords": [
+      "digital arrest scam",
+      "digital arrest",
+      "fake cbi call",
+      "fake police video call",
+      "fake arrest warrant whatsapp",
+      "ed notice scam"
+    ],
+    "keyTakeaway": {
+      "title": "There is no such thing as a digital arrest",
+      "text": "Police, CBI, ED, customs, RBI and judges do not arrest people over video calls or ask for money to clear a case. Anyone who says you are under digital arrest is a scammer. End the call, do not pay, and report it on 1930 or cybercrime.gov.in."
+    },
+    "introduction": "The call starts with a courier or telecom problem: a parcel in your name with drugs inside, or a SIM card linked to a crime. Within minutes you are on a video call with someone in a police uniform, shown an arrest warrant with your name on it, and told you are under \"digital arrest\": you must stay on camera, tell no one, and transfer money to \"verify\" your accounts. It feels official and terrifying, and it is entirely fake. This guide explains how the scam works and what to do.",
+    "contentSections": [
+      {
+        "heading": "How a digital arrest scam unfolds",
+        "paragraphs": [
+          "The scripts vary, but most follow the same steps. Each one is designed to frighten you, isolate you and rush you into paying before you can think or ask anyone."
+        ],
+        "checklist": [
+          "A first call, often a recorded message, claims to be from a courier company, the telecom regulator or a bank: a parcel in your name was seized, or your number or Aadhaar is linked to a crime.",
+          "You are \"transferred\" to a police station, the CBI, ED, narcotics bureau or customs, and asked to join a video call on WhatsApp or Skype.",
+          "The \"officer\" appears in uniform, sometimes in a set made to look like a police station, and shows an ID card, an FIR, an arrest warrant or a court order with your name.",
+          "You are told you are under digital arrest: stay on camera, stay in your room, and tell no family member, because they are \"also under investigation\".",
+          "Finally you are told to move your money to a \"safe\" or \"RBI verification\" account to prove it is clean, with a promise that it will be returned after the case is cleared. It never is."
+        ]
+      },
+      {
+        "heading": "What the authorities say",
+        "paragraphs": [
+          "The Indian Cyber Crime Coordination Centre (I4C) under the Ministry of Home Affairs issued a public advisory in October 2024 stating that the CBI, police, customs, ED and judges do not arrest people through video calls, and calling digital arrests a scam (<a href=\"https://theprint.in/india/cbi-ed-police-dont-arrest-people-through-video-calls-indian-cyber-crime-coordination-centre/2299608\">ThePrint</a>). Police awareness material makes the same point: Indian law has no concept of a digital arrest.",
+          "Real legal processes are different. A genuine notice is served in person or by post and gives you time to respond, usually with a lawyer. No agency asks you to stay on a video call, keep it secret from your family, or transfer money to an account to prove your innocence."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "If anyone says you are under digital arrest, hang up. No real officer will ever arrest you on a call or ask you to send money to clear your name."
+        }
+      },
+      {
+        "heading": "The fake documents and screenshots they show",
+        "paragraphs": [
+          "Scammers rely on official-looking images: arrest warrants with the Supreme Court or CBI emblem, FIR copies, ED summons, \"RBI\" letters and police ID cards, sent on WhatsApp or held up on camera. These are made with ordinary editing tools or AI and often reuse real logos and the names of real officers."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/digital-arrest-scam/fictional-example.png",
+          "alt": "Fictional WhatsApp message with a fake arrest warrant, numbered: an official emblem, a demand to stay on video, a secrecy instruction and a transfer to a verification account.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional example of the messages sent during a digital arrest scam. Every element is a warning sign."
+        },
+        "checklist": [
+          "A warrant or summons sent over WhatsApp rather than served in person.",
+          "Instructions to keep the matter secret or stay on camera.",
+          "Any mention of transferring money, buying gift cards or crypto, or \"RBI verification\".",
+          "Spelling and grammar mistakes, mixed fonts or stretched emblems on an \"official\" document.",
+          "Phone numbers that are mobile numbers, often with a foreign country code."
+        ]
+      },
+      {
+        "heading": "If you or someone at home is on such a call now",
+        "paragraphs": [
+          "Scammers often keep victims on a call for hours, even days. If you suspect a family member is in a digital arrest, interrupt them: elderly people living alone and professionals with savings are frequent targets."
+        ],
+        "checklist": [
+          "End the call. You are not legally required to stay on any video call.",
+          "Do not transfer any money, share OTPs or install any app they suggest.",
+          "Tell a family member or friend straight away; the secrecy is part of the scam.",
+          "Call the national cybercrime helpline 1930 or report at cybercrime.gov.in, especially if any money was sent; quick reports let banks freeze it.",
+          "If you are worried a case is real, visit your local police station in person or call 112. Never use a number the caller gave you."
+        ]
+      },
+      {
+        "heading": "If you already paid",
+        "paragraphs": [
+          "Call 1930 immediately, and your bank's official helpline, with the transaction details. The faster you report, the better the chance the money can be held before it is moved. Save the call log, numbers, screenshots of the video call, documents sent to you and every transaction reference.",
+          "Expect follow-up scams: people claiming to be lawyers, \"cyber cell officers\" or recovery agents who promise to get your money back for a fee. Genuine police do not charge to recover money."
+        ]
+      },
+      {
+        "heading": "Checking a document someone sent you",
+        "paragraphs": [
+          "ScreenshotChecker's <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads the text in a screenshot or document photo and flags pressure tactics, threats and requests for money. The <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> can show signs that an image was edited. These tools give clues, not verdicts. The real answer is simpler: no genuine agency arrests anyone on a video call, so any digital arrest is a scam regardless of how real the paperwork looks."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is digital arrest real?",
+        "answer": "No. Indian law has no concept of digital arrest, and the I4C has stated that police, CBI, ED, customs and judges do not arrest people through video calls. Anyone claiming to digitally arrest you is a scammer."
+      },
+      {
+        "question": "What should I do if I get a call saying a parcel in my name contains drugs?",
+        "answer": "Hang up. Courier companies and police do not handle seizures this way. If you are worried, contact the courier through its official website or visit your local police station in person."
+      },
+      {
+        "question": "Can the police or CBI send an arrest warrant on WhatsApp?",
+        "answer": "A warrant shared on WhatsApp during a call that demands money is a scam. Real legal notices are served through proper channels and never come with instructions to transfer money or keep the matter secret."
+      },
+      {
+        "question": "Where do I report a digital arrest scam?",
+        "answer": "Call the cybercrime helpline 1930 or file a complaint at cybercrime.gov.in. You can also report suspicious numbers on the Chakshu facility of the Sanchar Saathi portal."
+      },
+      {
+        "question": "Will I get my money back after a digital arrest scam?",
+        "answer": "It depends on how quickly you report. Call 1930 at once so banks can try to freeze the money. Ignore anyone who offers to recover it for a fee."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "smishing-fake-sms",
+      "scam-statistics",
+      "india-post-courier-sms-scam"
+    ],
+    "cta": {
+      "label": "Check a suspicious message",
+      "url": "/screenshot-scam-checker/",
+      "description": "Upload a screenshot of a threatening message or document to see which scam warning signs it contains."
+    }
+  },
+  {
+    "slug": "e-challan-sms-scam",
+    "title": "Fake e-Challan SMS Scam: Traffic Fine Link or APK? Check It Safely",
+    "seoTitle": "Fake e-Challan SMS or WhatsApp? How to Check a Traffic Fine",
+    "metaDescription": "Got an e-challan SMS or WhatsApp with a link or APK file? Do not open it. How the fake traffic fine scam works and how to check a challan on Parivahan.",
+    "category": "Security",
+    "publishedAt": "2026-11-12",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "Fake traffic challan messages send a link or an APK file that steals OTPs and banking details. Here is what they look like, how to check a real challan on the official Parivahan portal, and what to do if you installed the file.",
+    "targetKeywords": [
+      "fake e challan sms",
+      "e challan scam",
+      "traffic challan apk scam",
+      "rto challan apk",
+      "fake challan message whatsapp",
+      "how to check e challan"
+    ],
+    "keyTakeaway": {
+      "title": "Check challans only on the official portal",
+      "text": "Never tap a challan link or install an APK sent by SMS or WhatsApp. Type echallan.parivahan.gov.in into your browser yourself, or use the official app from the Play Store or App Store, and enter your vehicle or challan number there."
+    },
+    "introduction": "\"Your vehicle has a pending traffic challan of ₹500. Pay today to avoid court action.\" The message arrives by SMS or WhatsApp with a link or a file called something like RTO Challan.apk. Real e-challans exist, which is why this scam works so well. But the fake versions are built to install malware or steal your card details. This guide shows how to tell them apart and check any challan safely.",
+    "contentSections": [
+      {
+        "heading": "How the fake e-challan scam works",
+        "paragraphs": [
+          "The message copies the style of a genuine challan: your vehicle number (sometimes guessed or bought from leaked data), an amount, a deadline and a threat of licence suspension or court action. It then pushes you to one of two traps."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/e-challan-sms-scam/fictional-example.png",
+          "alt": "Fictional WhatsApp message about a traffic challan, numbered: an urgent deadline, an APK file attachment, a lookalike payment link and a threat of court action.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional fake e-challan message. The APK file and the lookalike link are the dangerous parts."
+        },
+        "checklist": [
+          "An APK file: an Android app that, once installed, can read your SMS (including bank OTPs), show fake screens over your banking apps and send itself to your contacts.",
+          "A lookalike website: a page copying the Parivahan design that asks for card details, UPI PIN or net banking login to pay the fine."
+        ]
+      },
+      {
+        "heading": "What officials have warned",
+        "paragraphs": [
+          "The Press Information Bureau's fact check unit has warned that fake e-challan messages sent by SMS and WhatsApp carry links, APK files and PDFs that look like RTO notices and can expose OTPs and bank details, and has advised checking challans only on the official Parivahan portal (<a href=\"https://www.outlookmoney.com/news/fake-traffic-e-challan-messages-can-expose-otps-trigger-unauthorised-bank-transactions-pib-warns\">Outlook Money</a>). State police and motor vehicle departments, including in Kerala and Delhi, have issued similar warnings about APK files sent in challan messages (<a href=\"https://theprint.in/india/keralam-police-warn-of-malicious-apk-scam-via-fake-e-challan-sms/3053993/\">ThePrint</a>)."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "Government departments do not send apps as APK files over WhatsApp or SMS. Any challan message with an APK attachment is a scam."
+        }
+      },
+      {
+        "heading": "How to check a real challan",
+        "paragraphs": [
+          "If you think you might really have a fine, check it yourself without using anything from the message."
+        ],
+        "checklist": [
+          "Type echallan.parivahan.gov.in into your browser's address bar yourself.",
+          "Choose to check challan status and enter your vehicle number, challan number or driving licence number.",
+          "Pay only on that official portal or through your state traffic police's official site, never through a link in a message.",
+          "Alternatively, use the official mParivahan or your state's traffic police app, installed from the Google Play Store or Apple App Store.",
+          "No challan on the portal? Then the message was fake, whatever it says."
+        ]
+      },
+      {
+        "heading": "Red flags in a challan message",
+        "paragraphs": [],
+        "checklist": [
+          "An attachment ending in .apk, or a request to install an app.",
+          "A link to a site that is not parivahan.gov.in, including lookalikes with extra words or misspellings.",
+          "A sender that is an ordinary mobile number, especially on WhatsApp.",
+          "Threats of immediate licence cancellation, vehicle seizure or court action unless you pay today.",
+          "A request for card details, UPI PIN or OTP to pay a fine."
+        ]
+      },
+      {
+        "heading": "If you opened the link or installed the APK",
+        "paragraphs": [
+          "Act quickly. Turn on airplane mode to cut the app off, then uninstall it from your settings (check Settings, Apps for anything you don't recognise, and remove its device administrator access if it asks). If you entered card or bank details, call your bank's official number to block the card and UPI, and change your banking passwords from a different, clean device.",
+          "Report the fraud on 1930 or cybercrime.gov.in, especially if money left your account, and report the message as spam. Save a screenshot of the message, the file name and the sender number. You can paste the link into ScreenshotChecker's <a href=\"/suspicious-link-checker/\">suspicious link checker</a> to see its warning signs without opening it."
+        ]
+      },
+      {
+        "heading": "Similar scams to know",
+        "paragraphs": [
+          "The same trick is used with electricity bills, courier parcels and toll fees. See our guides to <a href=\"/blog/electricity-bill-disconnection-sms-scam/\">electricity bill SMS scams</a>, <a href=\"/blog/india-post-courier-sms-scam/\">India Post and courier SMS scams</a> and, for drivers in the US, <a href=\"/blog/unpaid-toll-text-scam/\">unpaid toll texts</a>. The <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> flags common warning signs in any message you screenshot."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How do I know if an e-challan message is real?",
+        "answer": "Ignore the link and check on echallan.parivahan.gov.in by typing the address yourself and entering your vehicle number. If the challan is not listed there, the message is fake."
+      },
+      {
+        "question": "Is the RTO challan APK safe to install?",
+        "answer": "No. Government departments do not send apps as APK files over SMS or WhatsApp. These files are malware that can read your OTPs and take over your banking apps."
+      },
+      {
+        "question": "I installed the challan APK. What should I do?",
+        "answer": "Turn on airplane mode, uninstall the app, call your bank to block cards and UPI, change banking passwords from another device and report it on 1930 or cybercrime.gov.in."
+      },
+      {
+        "question": "Can I pay a traffic challan through a WhatsApp link?",
+        "answer": "Do not. Pay only on the official Parivahan e-challan portal or your state traffic police's official website or app."
+      },
+      {
+        "question": "Where can I report a fake challan message?",
+        "answer": "Report fraud on 1930 or cybercrime.gov.in, and suspicious messages on the Chakshu facility of the Sanchar Saathi portal. Also mark the message as spam in your messaging app."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "smishing-fake-sms",
+      "electricity-bill-disconnection-sms-scam",
+      "india-post-courier-sms-scam"
+    ],
+    "cta": {
+      "label": "Check a suspicious link",
+      "url": "/suspicious-link-checker/",
+      "description": "See warning signs in a link from a message without opening it."
     }
   },
 ];
