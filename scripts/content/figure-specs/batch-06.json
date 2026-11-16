@@ -1,0 +1,40 @@
+[
+  {
+    "slug": "digital-arrest-kya-hai", "lang": "hi",
+    "banner": "काल्पनिक उदाहरण · ScreenshotChecker",
+    "app": "+91 9XXXX XXX21", "sub": "WhatsApp · \"साइबर क्राइम पुलिस\"",
+    "callout_title": "हर लाइन एक चेतावनी",
+    "blocks": [
+      {"type": "big", "text": "गिरफ़्तारी वारंट", "sub": "[निशान] · आपका नाम · केस नंबर", "badge": 1, "tone": "bad"},
+      {"type": "bubble", "side": "in", "text": "आप डिजिटल अरेस्ट में हैं। जाँच ख़त्म होने तक वीडियो कॉल पर रहें।", "badge": 2},
+      {"type": "bubble", "side": "in", "text": "परिवार को कुछ न बताएँ। उन पर भी नज़र है।", "badge": 3},
+      {"type": "bubble", "side": "in", "text": "पैसा RBI वेरिफ़िकेशन खाते में भेजें। 24 घंटे में वापस मिलेगा।", "badge": 4}
+    ],
+    "callouts": [
+      "असली वारंट WhatsApp पर नहीं आते।",
+      "भारतीय क़ानून में डिजिटल अरेस्ट नहीं है।",
+      "चुप रखवाना ठगों का तरीक़ा है।",
+      "बेगुनाही साबित करने के लिए कोई पैसा नहीं माँगता।",
+      "कॉल काटें और 1930 पर कॉल करें।"
+    ]
+  },
+  {
+    "slug": "fake-challan-message-kaise-pehchane", "lang": "hi",
+    "banner": "काल्पनिक उदाहरण · ScreenshotChecker",
+    "app": "+91 7XXXX XXX09", "sub": "WhatsApp मैसेज",
+    "callout_title": "क्या देखें",
+    "blocks": [
+      {"type": "bubble", "side": "in", "text": "आपकी गाड़ी पर ₹500 का चालान बाकी है। कोर्ट से बचने के लिए आज ही भरें।", "badge": 1},
+      {"type": "row", "k": "RTO_Challan.apk", "v": "2.4 MB फ़ाइल", "badge": 2},
+      {"type": "bubble", "side": "in", "link": true, "text": "echallan-parivahan-pay.example", "badge": 3},
+      {"type": "note", "text": "24 घंटे में लाइसेंस रद्द होगा", "badge": 4}
+    ],
+    "callouts": [
+      "आज की आख़िरी तारीख़ दबाव बनाने का तरीक़ा है।",
+      "मैसेज से आई APK कभी इंस्टॉल न करें।",
+      "यह parivahan.gov.in नहीं, नकली साइट है।",
+      "धमकी इसलिए ताकि आप चेक न करें।",
+      "ख़ुद echallan.parivahan.gov.in लिखकर चेक करें।"
+    ]
+  }
+]

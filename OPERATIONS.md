@@ -1,5 +1,11 @@
 # ScreenshotChecker operations inventory
 
+## Current verification — 6 October 2026
+
+This section supersedes the historical 30 September checkpoint below. Clean local checkout fast-forwarded to GitHub main `c659b9a4484627e1e2d5d359eb672abcdf715e6f`. Cloudflare's authenticated deployment listing shows version `86ff44d0-ee0d-41f0-9b33-cf805c59a291` at 100%, created 5 October 2026 11:19:32 UTC; previous version `48786d6e-d60a-478b-a6b0-ae9cc75a5c6b`. CLI metadata does not establish a Git-to-binary mapping. All 31 indexable live pages' main text matches the freshly built current GitHub main; this is not whole-bundle identity verification.
+
+Windows build: 33 pages. SEO and blog checks pass. No full regression rerun or deployment occurred in this audit. Both Search Console sitemaps show Success, 31 discovered pages, last read 2 October. Detailed account metrics remain in excluded local audit notes. Owner requested a bounded backlink session using the supplied master guide: Journalist's Toolbox editorial submission received, publication unconfirmed. Existing two directory submissions were not repeated. See `audit/STATUS-2026-10-06.md` and the local-only `audit/backlink-ledger.local.json` for follow-up evidence; no automatic schedule created.
+
 Checkpoint: 30 September 2026 (Asia/Kolkata). Owner: Virat Chauhan. Incident contact: owner in the existing assistant conversation; no third-party contact authorized here.
 
 ## Source and execution

@@ -1,0 +1,21 @@
+[
+  {
+    "slug": "fake-receipt-ai-generated",
+    "app": "The Green Spoon Café", "sub": "Fictional receipt · 14 Main Road",
+    "blocks": [
+      {"type": "row", "k": "Merchant", "v": "no listing found", "badge": 1},
+      {"type": "row", "k": "2 × Lunch 450", "v": "Subtotal ₹1,150", "badge": 2},
+      {"type": "row", "k": "GST 12%", "v": "₹138", "badge": 3},
+      {"type": "row", "k": "VISA ****48213", "v": "Total ₹1,288", "badge": 4},
+      {"type": "row", "k": "Sun 11:52 PM", "v": "café shuts 10 PM", "badge": 5},
+      {"type": "note", "text": "Ask for the card statement line"}
+    ],
+    "callouts": [
+      "Look the business up yourself: name, address, phone.",
+      "2 × 450 is 900, not 1,150: the maths is wrong.",
+      "Restaurant GST is usually 5%, not 12%.",
+      "Five digits after the stars: real receipts show four.",
+      "Opening hours and travel dates should fit."
+    ]
+  }
+]

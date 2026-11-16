@@ -1,5 +1,17 @@
 # ScreenshotChecker growth and product log
 
+## 6 October 2026 additional owner-requested submission batch
+
+Owner requested at least five links and more natural writing without long dashes. Five new relevant submissions received: OSINT4ALL and OSINT R. for screenshot comparison; The Tool Directory, public.tools and Nexo Hub for screenshot redaction. Each uses specific workflow copy, accurate limitations and ownership disclosure. No fake testimonials, paid placement, reciprocal badge or newsletter opt-in. Receipts verified in browser and saved locally. These are five pending submissions, not five published links or measured SEO gains. OSINT Radar was excluded following the owner's correction that it was already done. See `audit/OUTREACH-2026-10-06.md`. No schedule created.
+
+## 6 October 2026 — status verification and bounded task 21 outreach
+
+- Reconciled stale release notes with current GitHub main and authenticated Cloudflare deployment; no push or deploy performed. Build and SEO checks pass; 31 live indexable pages have matching main text, correct canonicals, one H1 and no noindex directives.
+- Read the owner's supplied `ScreenshotChecker_Master_Backlink_Strategy_2026.md` and applied relevant editorial selection, accurate claims, owner disclosure and receipt tracking. This does not create an autonomous campaign or install a permanent skill.
+- Journalist's Toolbox's official site-submission form confirmed receipt of the screenshot redactor recommendation on 6 October. Intended relevant resource: Digital security | safety. Publication, link attributes, referrals and acceptance remain unverified. Two earlier directory submissions remain pending; no duplicates submitted.
+- Refreshed private Search Console baseline, including Google generative-AI visibility. Rolling comparison periods overlap; no causal growth attribution or total-session claim. Sitemap processing succeeds, while the older aggregate indexing report and an unindexed but live-indexable article remain open observations.
+- Single local-only outreach ledger: `audit/backlink-ledger.local.json`. Existing WORK-QUEUE remains the task queue; next owner-requested slice can address the outstanding article's usefulness/discovery or verify editorial outcomes. No automatic follow-up or additional batch started.
+
 ## 30 September 2026 — task 07A, local checkpoint
 
 Payment-context/labelled-reference regressions repaired locally. Separate OCR/redactor FAQ claims corrected. See `audit/07A-2026-09-30.md` for evidence, checks and limitations. Work remains unshipped; no acquisition or accuracy improvement has been measured. Existing authoritative queue is `WORK-QUEUE.md`; deployment and analytics unknowns are recorded in `OPERATIONS.md`.
@@ -137,3 +149,11 @@ Search Console (28 days): /ai-image-detector/ position 20.6, top query "fake ima
 - Google indexing requested for every new guide and the retitled tool pages; sitemap index resubmitted.
 - Deploys: the Cloudflare Git auto-build stopped picking up pushes after f0f5b49; later releases were deployed with `npm run deploy` (wrangler). Check Workers Builds in the Cloudflare dashboard.
 - Lighthouse mobile (homepage): performance 69 (lab only; no CrUX field data yet), accessibility 100, SEO 92 (only Cloudflare's managed robots.txt Content-Signal line is flagged; Google ignores it).
+
+## 6 October 2026: reverse image search content and discovery
+
+Implemented screenshot-source intent, mobile instructions, provider fit, troubleshooting and contextual links. Private Search Console baseline recorded separately. All focused checks pass; local only. No new image index, automatic provider upload, ranking guarantee or AI citation claim. Details: audit/REVERSE-SEARCH-2026-10-06.md.
+
+## 6 October 2026: reverse search published
+
+Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55bfcd-2a02-44d0-b3c6-31d7b26da914 at owner request. All three changed live pages return 200 and match the built main HTML; reverse-search sitemap inclusion verified. Previous production version 86ff44d0-ee0d-41f0-9b33-cf805c59a291 remains the rollback reference. Rankings have not yet been reassessed.

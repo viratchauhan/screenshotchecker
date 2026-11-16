@@ -1,3 +1,7 @@
+# ScreenshotChecker
+
+**Starting fresh (new computer or new session)? Read `HANDOFF.md` first:** current state, owner rules, how to add a guide, how to deploy, and next steps. Private files (backlink ledger, receipts, outreach kit) are on the owner's Google Drive, not in this public repo.
+
 ## Development
 
 When starting the dev server, use background mode:

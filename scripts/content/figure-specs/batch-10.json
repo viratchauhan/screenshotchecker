@@ -1,0 +1,36 @@
+[
+  {
+    "slug": "trai-sim-block-call-scam",
+    "app": "+XX XXX XXX XX41", "sub": "International number · call, then SMS",
+    "blocks": [
+      {"type": "row", "k": "Caller", "v": "\"TRAI Department\"", "badge": 1},
+      {"type": "bubble", "side": "in", "text": "Your mobile number will be blocked in 2 hours due to illegal activity.", "badge": 2},
+      {"type": "bubble", "side": "in", "text": "Press 9 to speak to the officer.", "badge": 3},
+      {"type": "bubble", "side": "in", "link": true, "text": "trai-reverify.example/kyc", "badge": 4}
+    ],
+    "callouts": [
+      "An unknown or foreign number posing as TRAI.",
+      "A short deadline is meant to panic you.",
+      "Pressing a key connects you to the scammer.",
+      "TRAI never sends re-verification links.",
+      "Hang up and report it on Chakshu."
+    ]
+  },
+  {
+    "slug": "fake-customer-care-number-scam",
+    "app": "\"Customer Support\"", "sub": "+91 8XXXX XXX56 · from a search result",
+    "blocks": [
+      {"type": "bubble", "side": "in", "text": "Sir, refund is stuck. Please install AnyDesk and share the code.", "badge": 1},
+      {"type": "row", "k": "UPI request", "v": "₹4,999 \"refund\"", "badge": 2},
+      {"type": "bubble", "side": "in", "text": "Approve the request with your UPI PIN to receive the refund.", "badge": 3},
+      {"type": "bubble", "side": "in", "text": "Now tell me the OTP you received.", "badge": 4}
+    ],
+    "callouts": [
+      "Screen-sharing apps let them see your OTPs.",
+      "A collect request takes money, it never pays you.",
+      "A PIN is only for sending money.",
+      "No real agent asks for an OTP.",
+      "Find helplines only in the official app or site."
+    ]
+  }
+]

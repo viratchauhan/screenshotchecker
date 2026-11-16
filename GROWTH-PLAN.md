@@ -1,5 +1,7 @@
 # ScreenshotChecker: product and growth plan
 
+> Current state and next steps (Nov 2026): see `HANDOFF.md`. Dated history: `GROWTH_LOG.md`.
+
 Prepared 22 September 2026. Based on the repository/live-site audit in `audit/PROJECT-AUDIT.md` and a focused public research pass. Execution queue: `WORK-QUEUE.md`.
 
 **Goal and working agreement**

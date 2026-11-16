@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "how-to-tell-if-a-photo-is-a-screenshot",
+    "app": "Image check", "sub": "Fictional example",
+    "blocks": [
+      {"type": "row", "k": "Top edge", "v": "9:41 · battery · Wi-Fi", "badge": 1},
+      {"type": "row", "k": "Dimensions", "v": "1170 × 2532 px", "badge": 2},
+      {"type": "row", "k": "Camera fields", "v": "none", "badge": 3},
+      {"type": "row", "k": "Moiré / glare", "v": "none, perfectly flat", "badge": 4},
+      {"type": "note", "text": "Points to a screenshot. Not proof."}
+    ],
+    "callouts": [
+      "A status bar is a screen element, but it is easy to crop out.",
+      "A phone-screen shape is a hint; sizes overlap and resizing changes them.",
+      "No camera make, model or exposure; also normal for any shared image.",
+      "A photo of a screen usually shows wavy patterns, glare or tilt.",
+      "Then check the claim itself: where did this image come from?"
+    ]
+  },
+  {
+    "slug": "usps-redelivery-text-scam",
+    "app": "usps.notice@example-mail.top", "sub": "Text message · Today 7:42 PM",
+    "blocks": [
+      {"type": "bubble", "side": "in", "text": "USPS: Your package could not be delivered due to incomplete address information. Update within 12 hours or it will be returned:", "badge": 1},
+      {"type": "bubble", "side": "in", "text": "https://usps.redelivery-help.example-track.top", "badge": 2, "link": true},
+      {"type": "bubble", "side": "in", "text": "A redelivery fee of $0.30 applies.", "badge": 3}
+    ],
+    "callouts": [
+      "An unrequested delivery text with a deadline.",
+      "A link: requested USPS tracking texts have none, and this domain is not usps.com.",
+      "USPS does not charge for redelivery.",
+      "Type usps.com yourself and enter the tracking number from your order."
+    ]
+  },
+  {
+    "slug": "fake-crypto-profit-screenshots",
+    "app": "Daily Crypto Signals 📈", "sub": "Group · 1,284 members",
+    "blocks": [
+      {"type": "bubble", "side": "in", "text": "[screenshot] Balance: 9,400 USDT · +370% this month 🚀", "badge": 1},
+      {"type": "bubble", "side": "in", "text": "Mentor tip: today's guaranteed signal, use the platform link only", "badge": 2},
+      {"type": "bubble", "side": "in", "text": "Support: withdrawal approved after 20% capital gains tax is paid", "badge": 3}
+    ],
+    "callouts": [
+      "Profit screenshots show numbers a scam platform controls.",
+      "Guaranteed returns and a platform you must reach through their link.",
+      "Paying to withdraw your own money is the scam itself.",
+      "Stop paying, keep records and report to your bank and the police."
+    ]
+  }
+]

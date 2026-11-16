@@ -41,3 +41,8 @@ and `height`, and visible plain-text `caption`. Store images under an
 article-specific `public/images/blog/` directory. Use unchanged bytes when the
 article describes the exact inspected file; do not run those files through image
 optimization. Section `checklist` items render as a semantic unordered list.
+
+## Tools for new guides (November 2026)
+
+`scripts/content/` holds the figure renderer (`render-figures.py`, specs in `figure-specs/`), the statistics chart
+(`render-upi-chart.py`) and the article inserter (`insert-articles.cjs`). The step-by-step routine is in `HANDOFF.md`.

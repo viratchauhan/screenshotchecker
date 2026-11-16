@@ -1,0 +1,36 @@
+[
+  {
+    "slug": "payment-failed-screenshot-scam",
+    "app": "UPI app", "sub": "Customer's phone",
+    "blocks": [
+      {"type": "big", "text": "✕ Payment failed", "sub": "₹1,200 to Riya's Bakery", "badge": 1, "tone": "bad"},
+      {"type": "bubble", "side": "in", "text": "Money debited will be refunded within 3–5 working days", "badge": 2},
+      {"type": "row", "k": "Customer says", "v": "\"Take it now, I'll pay later\"", "badge": 3},
+      {"type": "note", "text": "Riya's own app: no ₹1,200 credit"}
+    ],
+    "callouts": [
+      "A failed payment means the seller has not been paid.",
+      "Banks reverse failed money to the payer, not forward to you.",
+      "Pressure to hand over goods first is the risk.",
+      "Check your own app, then ask for a fresh payment."
+    ]
+  },
+  {
+    "slug": "reverse-image-search-screenshot",
+    "app": "Search with a screenshot", "sub": "Fictional checklist",
+    "blocks": [
+      {"type": "row", "k": "Crop", "v": "to the picture only", "badge": 1},
+      {"type": "row", "k": "Remove", "v": "status bar, names, captions", "badge": 2},
+      {"type": "row", "k": "Search", "v": "Lens + TinEye or Bing", "badge": 3},
+      {"type": "row", "k": "Look for", "v": "the earliest copy", "badge": 4},
+      {"type": "note", "text": "No match ≠ original or genuine"}
+    ],
+    "callouts": [
+      "Engines match the picture best without app buttons around it.",
+      "Cropping also keeps private details out of your upload.",
+      "Engines find different copies; use at least two.",
+      "The oldest, highest-resolution copy is usually nearest the source.",
+      "Empty results: try another crop, then verify the claim another way."
+    ]
+  }
+]

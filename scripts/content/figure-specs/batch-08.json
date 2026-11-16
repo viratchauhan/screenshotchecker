@@ -1,0 +1,19 @@
+[
+  {
+    "slug": "qr-code-scam",
+    "app": "Buyer (marketplace)", "sub": "Fictional chat about a sofa",
+    "blocks": [
+      {"type": "bubble", "side": "in", "text": "Ok ₹8,000 fine, no problem. I'll pay now.", "badge": 1},
+      {"type": "big", "text": "[ QR code ]", "sub": "\"Scan this to receive ₹8,000\"", "badge": 2},
+      {"type": "bubble", "side": "in", "text": "Enter your UPI PIN to accept the money.", "badge": 3},
+      {"type": "row", "k": "Your UPI app", "v": "Pay ₹8,000 →", "badge": 4}
+    ],
+    "callouts": [
+      "No bargaining at all is a classic warning sign.",
+      "Scanning a QR code is only for paying.",
+      "A PIN is never needed to receive money.",
+      "The app itself says Pay: the money leaves you.",
+      "To receive, share your own QR or UPI ID only."
+    ]
+  }
+]

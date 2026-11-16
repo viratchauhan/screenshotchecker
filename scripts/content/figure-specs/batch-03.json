@@ -1,0 +1,59 @@
+[
+  {
+    "slug": "where-is-this-screenshot-from",
+    "app": "Social app", "sub": "Forwarded screenshot",
+    "callout_title": "What to search",
+    "blocks": [
+      {"type": "row", "k": "@cityfoods_offic1al", "v": "City Foods", "badge": 1},
+      {"type": "bubble", "side": "in", "text": "\"We will refund every customer by Friday.\"", "badge": 2},
+      {"type": "row", "k": "Posted", "v": "3 Mar · 9:14 AM", "badge": 3},
+      {"type": "big", "text": "[ photo ]", "sub": "picture inside the post", "badge": 4},
+      {"type": "note", "text": "No source given by the sender"}
+    ],
+    "callouts": [
+      "Search the exact handle; note the 1 in place of an i.",
+      "Search the sentence in quotation marks.",
+      "Open the account and scroll to this date.",
+      "Crop the picture and reverse image search it.",
+      "No original found? Treat it as unverified."
+    ]
+  },
+  {
+    "slug": "how-to-tell-if-a-photo-is-edited",
+    "app": "Photo check", "sub": "Fictional results",
+    "callout_title": "How much it proves",
+    "blocks": [
+      {"type": "row", "k": "Earlier copy", "v": "found, sign differs", "badge": 1},
+      {"type": "row", "k": "Credentials", "v": "none attached", "badge": 2},
+      {"type": "row", "k": "Metadata", "v": "editor name only", "badge": 3},
+      {"type": "row", "k": "Shadows", "v": "two directions", "badge": 4},
+      {"type": "row", "k": "ELA map", "v": "one bright patch", "badge": 5},
+      {"type": "note", "text": "Verdict: edited (earlier copy)"}
+    ],
+    "callouts": [
+      "Strong: an older version that differs shows the edit.",
+      "Missing credentials prove nothing either way.",
+      "An editor name is common in genuine photos too.",
+      "Mismatched light is a clue worth checking further.",
+      "A supporting hint only; text and edges glow too."
+    ]
+  },
+  {
+    "slug": "ai-generated-screenshot",
+    "app": "Chat", "sub": "Fictional AI-made screenshot",
+    "blocks": [
+      {"type": "bubble", "side": "in", "text": "Ok, approved. Transfer done ✓"},
+      {"type": "row", "k": "10:42 → 10:37", "v": "times out of order", "badge": 1},
+      {"type": "bubble", "side": "out", "text": "Thank you sir!! ✓✓", "badge": 2},
+      {"type": "row", "k": "Font", "v": "slightly too wide", "badge": 3},
+      {"type": "note", "text": "Clean, noise-free, too perfect", "badge": 4}
+    ],
+    "callouts": [
+      "Timestamps that run backwards between messages.",
+      "Ticks and icons close to the real app, not the same.",
+      "Letter shapes and spacing that don't match the app.",
+      "No compression noise or screen glare at all.",
+      "Settle it at the source: the real chat or bank app."
+    ]
+  }
+]
