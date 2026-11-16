@@ -103,6 +103,9 @@ source alongside GA4 and Clarity.
   analytics beacon (analytics undercounted from 30 Oct to 12 Nov). Indexing requested for every new page.
 - Top page: `/payment-screenshot-checker/` (about 5,000 impressions per 28 days, position about 5.7; top query
   "fake payment screenshot detector" around position 4). `/ai-image-detector/` was around position 20.
+- 16 Nov: payment checker CTR rose to 17.7% at position 4.4 (7 days) after the 12 Nov title change; new guides
+  already rank around 5-9. Image tools still rank 20-32 for competitive queries: on-page and internal links are done,
+  they now need backlinks. H1s were aligned with target queries on 16 Nov.
 - Backlinks: 8 directory/editorial submissions from 1 and 6 Oct are pending editorial review (see the ledger);
   none verified as published.
 

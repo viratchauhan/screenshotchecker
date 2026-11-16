@@ -157,3 +157,11 @@ Implemented screenshot-source intent, mobile instructions, provider fit, trouble
 ## 6 October 2026: reverse search published
 
 Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55bfcd-2a02-44d0-b3c6-31d7b26da914 at owner request. All three changed live pages return 200 and match the built main HTML; reverse-search sitemap inclusion verified. Previous production version 86ff44d0-ee0d-41f0-9b33-cf805c59a291 remains the rollback reference. Rankings have not yet been reassessed.
+
+
+## 16 November 2026 - handoff and first results
+
+- Search Console, last 7 days: 506 clicks, 8.02k impressions, CTR 6.3%. /payment-screenshot-checker/ 287 clicks at 17.7% CTR, position 4.4 (28-day CTR before the 12 Nov title change: 9.8%). The new guides are already appearing (for example trai-sim-block-call-scam at position 5.3, task-job-scam-se-kaise-bache 5.5, fake-challan-message-kaise-pehchane 5.9). Weak: /ai-image-detector/ 22.9, /image-manipulation-checker/ 31.8, how-to-tell-if-a-photo-is-edited 26.6, fake-receipt-ai-generated 43, unpaid-toll-text-scam 48.7.
+- payment-failed and task-scam guides show 0.4% CTR: their queries are mostly people looking for failed-payment or task screenshots to use, so low CTR is expected there.
+- H1s now match each tool's target query (fake image detector, photo manipulation detector, screenshot analyzer, search by screenshot), and the hidden AI detector result panel no longer ships a static "Likely AI-Generated" verdict in the HTML. Recrawl requested for both image tools.
+- HANDOFF.md added for the move to a new computer; guide tools moved to scripts/content; the old checkout's 6 Oct notes merged.
