@@ -1,0 +1,115 @@
+---
+// Cross-promotion banner for doMahan, the owner's free Android planner app (domahan.com).
+// Use it with:  import DomahanBanner from '../components/DomahanBanner.astro';  then  <DomahanBanner />
+// Show it once per page. It is self-contained: no images, fonts or libraries, and every class starts with "dmb-".
+// Android and desktop visitors go to Google Play (with a tracking tag), iPhone visitors go to the waitlist page.
+// A click sends the GA4 event "domahan_banner_click". The X hides it for the rest of the browser tab's session.
+// Tested on 16 Nov 2026 in a local build, placed after <AnalysisDashboard /> in ToolLayout.astro: no CSP errors
+// (Astro hashes the style and script), fine in light and dark theme, 80 px tall on desktop, about 70 px on phones.
+---
+<aside class="dmb" id="dmb" aria-label="doMahan, a free planner app by the maker of this site">
+  <a class="dmb-link" id="dmb-link" href="https://play.google.com/store/apps/details?id=com.domahan.app&amp;referrer=utm_source%3Dscreenshotchecker%26utm_medium%3Dbanner%26utm_campaign%3Dcross_promo" target="_blank" rel="noopener">
+    <span class="dmb-stack" aria-hidden="true"><span class="dmb-back dmb-b1"></span><span class="dmb-back dmb-b2"></span><span class="dmb-note dmb-n1"><b>Call mom</b><i>6 pm</i><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#15963C" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></svg></span><span class="dmb-note dmb-n2"><b>Pay rent</b><i>today</i><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#15963C" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></svg></span><span class="dmb-note dmb-n3"><b>Gym</b><i>7 am</i><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#15963C" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/></svg></span></span>
+    <span class="dmb-text">
+      <span class="dmb-kicker"><svg class="dmb-icon" width="44" height="44" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="16 16 76 76"><g transform="translate(54 54) scale(0.92) translate(-54 -54)"><g transform="translate(-3 3) rotate(-22 54 54)"><path d="M34.5,31.0h39.0a3.5,3.5 0 0 1 3.5,3.5v39.0a3.5,3.5 0 0 1 -3.5,3.5h-39.0a3.5,3.5 0 0 1 -3.5,-3.5v-39.0a3.5,3.5 0 0 1 3.5,-3.5z" transform="translate(0 1.4)" fill="#000000" fill-opacity="0.220"/><path d="M34.5,31.0h39.0a3.5,3.5 0 0 1 3.5,3.5v39.0a3.5,3.5 0 0 1 -3.5,3.5h-39.0a3.5,3.5 0 0 1 -3.5,-3.5v-39.0a3.5,3.5 0 0 1 3.5,-3.5z" fill="#B5A9F6" fill-opacity="1.000"/></g><g transform="translate(-2 1) rotate(-11 54 54)"><path d="M34.5,31.0h39.0a3.5,3.5 0 0 1 3.5,3.5v39.0a3.5,3.5 0 0 1 -3.5,3.5h-39.0a3.5,3.5 0 0 1 -3.5,-3.5v-39.0a3.5,3.5 0 0 1 3.5,-3.5z" transform="translate(0 1.4)" fill="#000000" fill-opacity="0.220"/><path d="M34.5,31.0h39.0a3.5,3.5 0 0 1 3.5,3.5v39.0a3.5,3.5 0 0 1 -3.5,3.5h-39.0a3.5,3.5 0 0 1 -3.5,-3.5v-39.0a3.5,3.5 0 0 1 3.5,-3.5z" fill="#FA9B9B" fill-opacity="1.000"/></g><g transform="translate(2 0) rotate(9 54 54)"><path d="M34.5,31.0h39.0a3.5,3.5 0 0 1 3.5,3.5v39.0a3.5,3.5 0 0 1 -3.5,3.5h-39.0a3.5,3.5 0 0 1 -3.5,-3.5v-39.0a3.5,3.5 0 0 1 3.5,-3.5z" transform="translate(0 1.4)" fill="#000000" fill-opacity="0.220"/><path d="M34.5,31.0h39.0a3.5,3.5 0 0 1 3.5,3.5v39.0a3.5,3.5 0 0 1 -3.5,3.5h-39.0a3.5,3.5 0 0 1 -3.5,-3.5v-39.0a3.5,3.5 0 0 1 3.5,-3.5z" fill="#80E5DC" fill-opacity="1.000"/></g><path d="M34.5,31.0h39.0a3.5,3.5 0 0 1 3.5,3.5v39.0a3.5,3.5 0 0 1 -3.5,3.5h-39.0a3.5,3.5 0 0 1 -3.5,-3.5v-39.0a3.5,3.5 0 0 1 3.5,-3.5z" transform="translate(0 1.4)" fill="#000000" fill-opacity="0.251"/><path d="M34.5,31.0h39.0a3.5,3.5 0 0 1 3.5,3.5v39.0a3.5,3.5 0 0 1 -3.5,3.5h-39.0a3.5,3.5 0 0 1 -3.5,-3.5v-39.0a3.5,3.5 0 0 1 3.5,-3.5z" fill="#FDE66C" fill-opacity="1.000"/><path d="M69,77 L77,69 L77,73.5 Q77,77 73.5,77 Z" fill="#E9C94A" fill-opacity="1.000"/><path d="M38.8,55.6 Q42,58.4 45,62.2 Q47.6,64.4 49,61.6 Q52.8,54.6 57.6,49.4" fill="none" stroke="#1E1B18" stroke-width="4.0" stroke-linecap="round" stroke-linejoin="round"/><g transform="translate(58.0 50.4) rotate(-50) scale(1.14)"><path d="M9.5,-3.3 L24.5,-3.3 A3.0,3.0 0 0 1 27.5,-0.2999999999999998 L27.5,0.2999999999999998 A3.0,3.0 0 0 1 24.5,3.3 L9.5,3.3 Z" fill="#000000" fill-opacity="0.271"/><path d="M11,-3.3 L26,-3.3 L26,-1.9 L11,-1.9 Z" fill="#000000" fill-opacity="0.271"/><path d="M9.5,-3.3 L11.6,-3.3 L11.6,3.3 L9.5,3.3 Z" fill="#000000" fill-opacity="0.271"/><path d="M6.2,-2.6 L9.6,-2.9 L9.6,2.9 L6.2,2.6 Z" fill="#000000" fill-opacity="0.271"/><path d="M0,0 Q3.2,-2.9 6.4,-2.7 L6.4,2.7 Q3.2,2.9 0,0 Z" fill="#000000" fill-opacity="0.271"/><path d="M14,-4.6 L24.5,-4.6 Q25.6,-4.6 25.6,-3.5 L25.6,-3.3 L14,-3.3 Z" fill="#000000" fill-opacity="0.271"/></g><g transform="translate(58.0 48.8) rotate(-50) scale(1.14)"><path d="M9.5,-3.3 L24.5,-3.3 A3.0,3.0 0 0 1 27.5,-0.2999999999999998 L27.5,0.2999999999999998 A3.0,3.0 0 0 1 24.5,3.3 L9.5,3.3 Z" fill="#F2665D" fill-opacity="1.000"/><path d="M11,-3.3 L26,-3.3 L26,-1.9 L11,-1.9 Z" fill="#FF968C" fill-opacity="1.000"/><path d="M9.5,-3.3 L11.6,-3.3 L11.6,3.3 L9.5,3.3 Z" fill="#2A2420" fill-opacity="1.000"/><path d="M6.2,-2.6 L9.6,-2.9 L9.6,2.9 L6.2,2.6 Z" fill="#F5C451" fill-opacity="1.000"/><path d="M0,0 Q3.2,-2.9 6.4,-2.7 L6.4,2.7 Q3.2,2.9 0,0 Z" fill="#2E2823" fill-opacity="1.000"/><path d="M0.4,0 L4.4,0" stroke="#F5C451" stroke-width="0.6" stroke-linecap="round"/><path d="M14,-4.6 L24.5,-4.6 Q25.6,-4.6 25.6,-3.5 L25.6,-3.3 L14,-3.3 Z" fill="#D9D2C5" fill-opacity="1.000"/><circle cx="4.6" cy="0" r="0.75" fill="#F5C451"/></g></g></svg><span>doMahan <em>by the maker of this site</em></span></span>
+      <strong class="dmb-title"><span class="dmb-wide">Your to-do list, on sticky notes.</span><span class="dmb-narrow">To-dos on sticky notes</span></strong>
+      <span class="dmb-sub"><span class="dmb-wide" id="dmb-sub-w">Swipe up when it's done. Free Android app, no ads, no sign-up.</span><span class="dmb-narrow" id="dmb-sub-n">doMahan: free app, no ads, no sign-up.</span></span>
+    </span>
+    <span class="dmb-cta"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true" focusable="false"><path d="M6 3.5v17l14-8.5z" fill="currentColor"/></svg><span id="dmb-cta-text">Get it free</span></span>
+  </a>
+  <button class="dmb-x" id="dmb-x" type="button" aria-label="Hide this banner">&times;</button>
+</aside>
+
+<style is:global>
+.dmb, .dmb * { box-sizing: border-box; }
+.dmb { position: relative; max-width: 760px; margin: 16px auto; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.25; text-align: left; }
+.dmb[hidden] { display: none; }
+.dmb-link { display: flex; align-items: center; gap: 14px; min-height: 76px; padding: 10px 44px 10px 14px; border-radius: 18px; background: linear-gradient(100deg, #FFF8D6 0%, #FBFAF7 38%, #E9FBF8 100%); border: 1px solid rgba(30,27,24,.14); box-shadow: 0 1px 2px rgba(30,27,24,.06), 0 10px 24px -14px rgba(30,27,24,.35); color: #1E1B18; text-decoration: none; overflow: hidden; transition: transform .18s ease, box-shadow .18s ease; }
+.dmb-link:hover, .dmb-link:focus-visible { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(30,27,24,.08), 0 16px 30px -14px rgba(30,27,24,.45); text-decoration: none; color: #1E1B18; }
+.dmb-link:focus-visible { outline: 3px solid #8B7CF6; outline-offset: 2px; }
+
+/* the little stack of sticky notes that swipe up, one after another */
+.dmb-stack { position: relative; flex: none; width: 62px; height: 56px; }
+.dmb-back, .dmb-note { position: absolute; left: 2px; top: 2px; width: 58px; height: 52px; border-radius: 7px; }
+.dmb-b1 { background: #B5A9F6; transform: rotate(-9deg); }
+.dmb-b2 { background: #FA9B9B; transform: rotate(6deg); }
+.dmb-note { display: flex; flex-direction: column; justify-content: center; padding: 5px 6px 5px 7px; box-shadow: 0 2px 5px rgba(30,27,24,.22); opacity: 0; animation: dmb-swipe 9s infinite; }
+.dmb-note b { display: block; font-size: 10px; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; color: #1E1B18; }
+.dmb-note i { display: block; font-style: normal; font-size: 9px; font-weight: 600; color: rgba(30,27,24,.62); }
+.dmb-note svg { position: absolute; right: 3px; bottom: 3px; width: 17px; height: 17px; }
+.dmb-note svg path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: dmb-tick 9s infinite; }
+.dmb-n1 { background: #FDE66C; }
+.dmb-n2 { background: #80E5DC; animation-delay: 3s; }
+.dmb-n2 svg path { animation-delay: 3s; }
+.dmb-n3 { background: #FFC58A; animation-delay: 6s; }
+.dmb-n3 svg path { animation-delay: 6s; }
+@keyframes dmb-swipe {
+  0% { opacity: 0; transform: translateY(8px) rotate(-2deg) scale(.94); }
+  3%, 27% { opacity: 1; transform: translateY(0) rotate(-2deg) scale(1); }
+  33% { opacity: 0; transform: translateY(-64px) rotate(-9deg) scale(1); }
+  100% { opacity: 0; transform: translateY(-64px) rotate(-9deg) scale(1); }
+}
+@keyframes dmb-tick {
+  0%, 10% { stroke-dashoffset: 1; }
+  17%, 34% { stroke-dashoffset: 0; }
+  35%, 100% { stroke-dashoffset: 1; }
+}
+
+.dmb-text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.dmb-narrow { display: none; }
+.dmb-kicker { display: flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 700; color: #1E1B18; }
+.dmb-kicker em { font-style: normal; font-weight: 500; color: #5C554D; }
+.dmb-icon { width: 18px; height: 18px; flex: none; }
+.dmb-title { display: block; font-size: 17px; font-weight: 800; letter-spacing: -.02em; color: #1E1B18; }
+.dmb-sub { display: block; font-size: 13px; color: #4A443D; }
+.dmb-cta { flex: none; display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: 999px; background: #1E1B18; color: #FBFAF7; font-size: 14px; font-weight: 700; white-space: nowrap; transition: background .18s ease; }
+.dmb-link:hover .dmb-cta { background: #15963C; }
+.dmb-x { position: absolute; top: 6px; right: 8px; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #5C554D; font: 400 20px/1 system-ui, sans-serif; cursor: pointer; }
+.dmb-x:hover, .dmb-x:focus-visible { background: rgba(30,27,24,.08); color: #1E1B18; }
+
+@media (max-width: 560px) {
+  .dmb { margin: 12px 10px; }
+  .dmb-link { gap: 10px; min-height: 68px; padding: 9px 30px 9px 9px; border-radius: 16px; }
+  .dmb-stack { width: 56px; height: 50px; }
+  .dmb-back, .dmb-note { left: 1px; width: 54px; height: 46px; }
+  .dmb-note b { font-size: 9.5px; }
+  .dmb-note i { font-size: 8px; }
+  .dmb-kicker, .dmb-wide { display: none; }
+  .dmb-narrow { display: inline; }
+  .dmb-title { font-size: 14.5px; }
+  .dmb-sub { font-size: 11.5px; }
+  .dmb-cta { padding: 9px 12px; font-size: 13px; }
+  .dmb-cta svg { display: none; }
+  .dmb-x { top: 2px; right: 3px; width: 26px; height: 26px; font-size: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dmb-note, .dmb-note svg path { animation: none; }
+  .dmb-n1 { opacity: 1; transform: rotate(-2deg); }
+  .dmb-n1 svg path { stroke-dashoffset: 0; }
+  .dmb-link, .dmb-cta { transition: none; }
+}
+</style>
+
+<script>
+(function () {
+  var box = document.getElementById("dmb"), link = document.getElementById("dmb-link");
+  if (!box || !link) return;
+  try { if (sessionStorage.getItem("dmb-hide") === "1") { box.hidden = true; return; } } catch (e) {}
+  // iPhone and iPad visitors can't install an Android app, so send them to the waitlist page instead.
+  var ua = navigator.userAgent || "";
+  if (/iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)) {
+    link.href = "https://domahan.com/iphone/?utm_source=screenshotchecker&utm_medium=banner&utm_campaign=cross_promo";
+    var set = function (id, text) { var el = document.getElementById(id); if (el) el.textContent = text; };
+    set("dmb-cta-text", "Join waitlist");
+    set("dmb-sub-w", "Swipe up when it's done. Live on Android, and the iPhone version is on the way.");
+    set("dmb-sub-n", "doMahan: iPhone version is on the way.");
+  }
+  link.addEventListener("click", function () {
+    if (typeof gtag === "function") gtag("event", "domahan_banner_click", { link_url: link.href });
+  });
+  document.getElementById("dmb-x").addEventListener("click", function () {
+    box.hidden = true;
+    try { sessionStorage.setItem("dmb-hide", "1"); } catch (e) {}
+  });
+})();
+</script>

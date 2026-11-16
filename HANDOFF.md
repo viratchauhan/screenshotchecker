@@ -122,3 +122,8 @@ source alongside GA4 and Clarity.
    fake Amazon/Flipkart order or delivery screenshots; refreshing `/blog/unpaid-toll-text-scam/` (position about 40);
    update the statistics page when FY 2025-26 UPI figures or FTC 2026 data are published.
 6. Lab performance (Lighthouse mobile 69) is not a ranking factor without field data; revisit when CrUX data appears.
+7. doMahan banner (owner request, 16 Nov): `src/components/DomahanBanner.astro` is in the repo but **not placed on any
+   page yet**. It promotes the owner's free Android planner app. The owner wants it under the scan result on the tool
+   pages, shown once per page, on every language version. Read the notes at the top of the component, place it, run
+   `npm test` and `npm run build`, check desktop and 390 px and 340 px widths in light and dark theme, then deploy.
+   Do not change its text, colours or links without asking the owner.
