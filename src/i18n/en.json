@@ -81,7 +81,7 @@
   "metadata.strip_clean": "Strip & Clean Image",
   "metadata.copy_json": "Copy JSON",
 
-  "forensics.workspace_title": "Image Manipulation & Forensics Inspector",
+  "forensics.workspace_title": "Photo Manipulation Detector: Is This Image Edited?",
   "forensics.ela": "Error Level Analysis (ELA)",
   "forensics.original": "Original Image",
   "forensics.noise_map": "Noise Variance Map",
