@@ -122,8 +122,13 @@ source alongside GA4 and Clarity.
    fake Amazon/Flipkart order or delivery screenshots; refreshing `/blog/unpaid-toll-text-scam/` (position about 40);
    update the statistics page when FY 2025-26 UPI figures or FTC 2026 data are published.
 6. Lab performance (Lighthouse mobile 69) is not a ranking factor without field data; revisit when CrUX data appears.
-7. doMahan banner (owner request, 16 Nov): `src/components/DomahanBanner.astro` is in the repo but **not placed on any
-   page yet**. It promotes the owner's free Android planner app. The owner wants it under the scan result on the tool
-   pages, shown once per page, on every language version. Read the notes at the top of the component, place it, run
-   `npm test` and `npm run build`, check desktop and 390 px and 340 px widths in light and dark theme, then deploy.
-   Do not change its text, colours or links without asking the owner.
+7. doMahan banner (done 16 Nov): `src/components/DomahanBanner.astro` promotes the owner's free Android planner app.
+   It sits once per page, directly under the scan result and below the upload box, on 17 tool pages: after
+   `<AnalysisDashboard />` in `ToolLayout.astro` and `src/pages/index.astro`, after `<PaymentAnalysisDashboard />` in
+   `PaymentToolLayout.astro` (English and Hindi), after `</main>` in the AI detector, comparison, forensics, metadata
+   (checker and remover), OCR and redactor (redactor and privacy checker) workspaces, after the checker section in
+   `LinkCheckerWorkspace.astro`, after the result section in `screenshot-detector.astro` and after the provider section
+   in `reverse-image-search.astro`. Other languages on the homepage switch in place, so they share that placement.
+   Tested at desktop, 390 px and 340 px in light and dark: no sideways scroll, no console or CSP errors, the link opens
+   the Play page for com.domahan.app, and the X keeps it hidden after a reload in the same tab. New tool pages should
+   include `<DomahanBanner />` under their result. Do not change its text, colours or links without asking the owner.
