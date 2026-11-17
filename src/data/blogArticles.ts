@@ -320,7 +320,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Review warning signs in UPI payment screenshots and learn why confirming the transaction in your own bank or payment app matters more than an image.",
     "category": "Security",
     "publishedAt": "2026-08-22",
-    "updatedAt": "2026-10-02",
+    "updatedAt": "2026-11-17",
     "authorName": "Virat Chauhan",
     "readTime": "6 min read",
     "excerpt": "Verify a claimed UPI payment against your own records, follow a fictional ₹500 seller example, and understand what screenshot text checks can and cannot establish.",
@@ -336,7 +336,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "title": "Confirm the credit in your own records",
       "text": "A payment screenshot is a claim, not confirmation that you received money. Open your own official bank or payment app independently and match the incoming transaction. If you cannot find the credit, treat the payment as unconfirmed, not automatically fraudulent."
     },
-    "introduction": "To check whether a UPI payment reached you, start with your own transaction history and bank records. A success banner, familiar logo or plausible reference in someone else’s screenshot cannot confirm receipt. Screenshot analysis can help you review a claim, but it cannot access the banking network, authenticate a payment app or establish that a person is lying.",
+    "introduction": "To check whether a UPI payment reached you, start with your own transaction history and bank records. A success banner, familiar logo or plausible reference in someone else’s screenshot cannot confirm receipt. Screenshot analysis can help you review a claim, but it cannot access the banking network, authenticate a payment app or establish that a person is lying. If someone asks you for a payment screenshot with the date, time and UTR, the UTR is the part worth checking: the person who was paid should find the same reference in their own bank records.",
     "contentSections": [
       {
         "heading": "How to Verify a UPI Payment: Start With Your Own Records",
@@ -423,6 +423,10 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "faq": [
+      {
+        "question": "Someone asked for a payment screenshot with the date, time and UTR. What should it show?",
+        "answer": "A UPI receipt normally shows the amount, the date and time, the payee's name or UPI ID, the status and a 12-digit reference number (UTR or RRN). If you are being paid, ask for the UTR and search for it in your own bank statement or app; the screenshot alone proves nothing. If you are sending one, share it only with someone you actually paid, crop out your balance, and never share your UPI PIN or an OTP. Be careful when a stranger asks for payment screenshots as part of an online task job or a refund."
+      },
       {
         "question": "Can a payment screenshot prove that I received money?",
         "answer": "No. Confirm the corresponding incoming credit in your own official bank or payment records. A screenshot and a sender’s debit claim cannot independently establish receipt."
@@ -1957,6 +1961,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "India Post or courier SMS saying your parcel is held for an incomplete address? Do not tap the link. Red flags, how to track safely and where to report.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
+    "updatedAt": "2026-11-17",
     "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "Why the 'parcel held, update your address' text is a common smishing pattern in India, how to check your parcel without the link, what to do if you already paid, and how to report the SMS on Chakshu.",
@@ -1970,9 +1975,9 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     ],
     "keyTakeaway": {
       "title": "Never update your address from an SMS link",
-      "text": "Treat any text that says your parcel is held because of an incomplete address, and asks you to tap a link, as suspicious. Close the message, then check your order through the shop's own app or by typing the official India Post or courier website yourself. Never pay a redelivery fee or enter card, UPI or OTP details on a page you reached from that SMS."
+      "text": "Unsure about a delivery text? Do not tap its link, call the number in it or share personal details to verify your identity. Visit the official India Post or courier website yourself, or the shop's own app, and enter the tracking number manually. Never pay a redelivery fee or enter card, UPI or OTP details on a page you reached from that SMS."
     },
-    "introduction": "Almost certainly not, if it came with a link asking you to update your address. The PIB Fact Check unit has called this kind of India Post message fake and said India Post does not send messages asking people to update their address to get an article delivered. Do not tap the link: check your order in the shop's or courier's own app, or type the official India Post website yourself, and if you already entered card or UPI details, call your bank and the 1930 helpline straight away.",
+    "introduction": "If you are unsure about a courier delivery notification on your phone, visit the official courier website yourself and enter the tracking details manually. Do not click the link in the message, call the number in the text or give personal information to verify your identity. Is the SMS itself real? Almost certainly not, if it came with a link asking you to update your address. The PIB Fact Check unit has called this kind of India Post message fake and said India Post does not send messages asking people to update their address to get an article delivered. Do not tap the link: check your order in the shop's or courier's own app, or type the official India Post website yourself, and if you already entered card or UPI details, call your bank and the 1930 helpline straight away.",
     "contentSections": [
       {
         "heading": "How the Fake Parcel Address SMS Works",
@@ -2081,6 +2086,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "faq": [
+      {
+        "question": "What should you do if you are unsure about a courier delivery notification on your phone?",
+        "answer": "Visit the official courier website (or the India Post website, or the shop's own app) and enter the tracking details manually. Do not click the link in the message, call the number mentioned in the text or provide personal information to verify your identity: those are exactly the steps a fake delivery text wants you to take."
+      },
+      {
+        "question": "I got an SMS saying an update regarding my request has been shared with me. Is it genuine?",
+        "answer": "A line such as \"Dear customer, an update regarding your request has been shared with you via SMS\" is generic and does not prove who sent it. If you did not raise a request, treat it as suspicious. If you did, check the update in the company's own app or on a website you typed yourself, not through a link or phone number in the message."
+      },
       {
         "question": "Does India Post send SMS asking you to update your address?",
         "answer": "The PIB Fact Check unit has said India Post does not send messages asking people to update their address for delivery, and labelled such a message fake. Treat any SMS with a link to update your address as suspicious and check your parcel through the official India Post website or your order page instead."
@@ -2645,6 +2658,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Learn the clues that separate a screenshot from a camera photo: status bars, screen sizes, metadata and moiré, plus what the answer can and cannot prove.",
     "category": "Forensics",
     "publishedAt": "2026-11-06",
+    "updatedAt": "2026-11-17",
     "authorName": "Virat Chauhan",
     "readTime": "7 min read",
     "excerpt": "The visible and file-level clues that show whether an image was captured from a screen or taken with a camera, a worked marketplace example, and why the answer is a clue rather than a verdict.",
@@ -2660,7 +2674,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "title": "Screenshot or photo is a question about source, not truth",
       "text": "Status bars, screen-sized dimensions and missing camera metadata point to a screenshot; perspective, glare, moiré and camera fields point to a photo. None of these is proof on its own, and neither answer tells you whether the content is genuine."
     },
-    "introduction": "Someone sends you a picture and says they just took it. Maybe it is a used bike for sale, a receipt, a parking ticket or a message on their screen. Whether that image is a screenshot or a photo can matter: a \"fresh photo\" that turns out to be a screenshot may have been copied from somewhere else. This guide covers the clues you can see in the picture, the clues stored in the file, a fictional worked example, and the limits of what the answer tells you.",
+    "introduction": "To tell if a picture is a screenshot, check three things. The edges: a phone status bar with the time and battery, app buttons or a browser bar point to a screenshot. The size: screenshots match a screen exactly (an iPhone 14, for example, saves 1170 x 2532 pixels) rather than a camera's usual 4:3 shape. The file details: camera photos usually record the camera make, model and exposure, and screenshots do not. A photo of a screen gives itself away with glare, tilt and wavy moiré lines. On an iPhone, open the image in Photos and swipe up: a screenshot is labelled as one and also sits in the Screenshots album under Media Types. A screenshot is not the same as a photo: it copies what was on the display, while a photo is captured through a camera lens. Someone sends you a picture and says they just took it. Maybe it is a used bike for sale, a receipt, a parking ticket or a message on their screen. Whether that image is a screenshot or a photo can matter: a \"fresh photo\" that turns out to be a screenshot may have been copied from somewhere else. This guide covers the clues you can see in the picture, the clues stored in the file, a fictional worked example, and the limits of what the answer tells you.",
     "contentSections": [
       {
         "heading": "Why it matters whether an image is a screenshot",
@@ -2745,6 +2759,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       {
         "question": "How can I tell if a photo is actually a screenshot?",
         "answer": "Look for a status bar, app interface or screen-shaped dimensions, then check the original file's metadata. Camera photos usually carry camera fields such as make, model and exposure; screenshots usually do not. These are clues, not proof, because cropping and sharing can remove them."
+      },
+      {
+        "question": "Is a screenshot the same as a photo?",
+        "answer": "No. A screenshot is a copy of exactly what a screen was showing, made by the device itself, so it is perfectly flat and usually includes interface elements such as a status bar. A photo is captured through a camera lens and normally records camera details in its file. Both are saved as images, which is why they are easy to confuse once shared."
+      },
+      {
+        "question": "How do I tell if a picture is a screenshot on iPhone?",
+        "answer": "Open the image in the Photos app and swipe up (or tap the info button). A screenshot is labelled as a screenshot, while a camera photo shows the camera, lens and exposure details. iPhone also files screenshots in the Screenshots album under Media Types. This works for images saved on your own iPhone; an image someone sent you may have lost these details."
       },
       {
         "question": "Does missing EXIF data mean an image is a screenshot?",

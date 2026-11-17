@@ -202,7 +202,7 @@ const upiText = upiDoc.querySelector('main').textContent.replace(/\s+/g, ' ');
 const upiSchemas = [...upiDoc.querySelectorAll('script[type="application/ld+json"]')]
   .flatMap(script => { const value = JSON.parse(script.textContent); return value['@graph'] || [value]; });
 const upiFAQ = upiSchemas.find(value => value['@type'] === 'FAQPage');
-assert.equal(upiFAQ.mainEntity.length, 6, 'UPI: six substantive FAQ answers');
+assert.equal(upiFAQ.mainEntity.length, 7, 'UPI: seven substantive FAQ answers (UTR request answer added 17 Nov 2026)');
 assert.equal(upiFAQ.mainEntity.length, upi.faq.length);
 for (const [index, faq] of upi.faq.entries()) {
   assert.equal(upiFAQ.mainEntity[index].name, faq.question);
@@ -212,7 +212,7 @@ for (const [index, faq] of upi.faq.entries()) {
   assert.equal(headings[0].nextElementSibling?.textContent.trim(), faq.answer, 'UPI: visible/schema FAQ parity');
 }
 assert.equal(upi.publishedAt, '2026-08-22', 'UPI: original publication date retained');
-assert.equal(upi.updatedAt, '2026-10-02', 'UPI: substantive correction date');
+assert.equal(upi.updatedAt, '2026-11-17', 'UPI: substantive update date');
 assert.equal(upi.title, 'Fake UPI Payment Screenshot: How to Check If a Payment Is Real');
 assert.equal(upiDoc.querySelector('title').textContent, 'Fake UPI Payment Screenshots: Checks and Warning Signs');
 assert.equal(upiDoc.querySelector('meta[name="description"]').content,

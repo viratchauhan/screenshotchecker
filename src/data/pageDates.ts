@@ -2,7 +2,7 @@
 // Blog posts use publishedAt/updatedAt in blogArticles.ts instead.
 // Update the date when a page's visible content changes (not for layout or code-only edits).
 export const PAGE_UPDATED_AT: Record<string, string> = {
-  '/': '2026-10-15',
+  '/': '2026-11-17',
   '/about/': '2026-10-30',
   '/ai-image-detector/': '2026-11-12',
   '/blog/': '2026-11-12',
@@ -15,7 +15,7 @@ export const PAGE_UPDATED_AT: Record<string, string> = {
   '/author/virat-chauhan/': '2026-10-30',
   '/privacy/': '2026-10-14',
   '/resources/': '2026-11-12',
-  '/reverse-image-search/': '2026-11-12',
+  '/reverse-image-search/': '2026-11-17',
   '/screenshot-analyzer/': '2026-11-12',
   '/screenshot-comparison/': '2026-10-29',
   '/screenshot-detector/': '2026-11-06',
