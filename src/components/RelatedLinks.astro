@@ -113,6 +113,13 @@ const TOOLS_CATALOG: Record<
     action: 'Compare image versions',
     category: 'Comparison',
   },
+  'fake-receipt-checker': {
+    name: 'Fake Receipt Checker',
+    href: '/fake-receipt-checker/',
+    desc: 'Scan a receipt for edit clues and re-add its items, tax and total with the receipt math check.',
+    action: 'Check a receipt',
+    category: 'Receipts',
+  },
   'utr-number-checker': {
     name: 'UTR Number Checker',
     href: '/utr-number-checker/',
@@ -136,6 +143,7 @@ const DEFAULT_TOOL_RELATIONS: Record<string, string[]> = {
   '': ['screenshot-analyzer', 'payment-screenshot-checker', 'image-manipulation-checker'],
   'screenshot-analyzer': ['payment-screenshot-checker', 'image-manipulation-checker', 'screenshot-scam-checker'],
   'payment-screenshot-checker': ['utr-number-checker', 'screenshot-analyzer', 'image-manipulation-checker'],
+  'fake-receipt-checker': ['image-manipulation-checker', 'payment-screenshot-checker', 'screenshot-metadata-checker'],
   'utr-number-checker': ['payment-screenshot-checker', 'screenshot-comparison', 'screenshot-scam-checker'],
   'payment-screenshot-checker/hindi': ['payment-screenshot-checker', 'screenshot-scam-checker', 'screenshot-redactor'],
   'image-manipulation-checker': ['screenshot-comparison', 'ai-image-detector', 'payment-screenshot-checker'],
@@ -149,6 +157,8 @@ const DEFAULT_TOOL_RELATIONS: Record<string, string[]> = {
   'screenshot-privacy-checker': ['screenshot-redactor', 'image-metadata-remover', 'screenshot-metadata-checker'],
   'screenshot-comparison': ['image-manipulation-checker', 'reverse-image-search', 'screenshot-analyzer'],
   'suspicious-link-checker': ['screenshot-scam-checker', 'screenshot-ocr', 'screenshot-analyzer'],
+  'blog/fake-receipt-ai-generated': ['fake-receipt-checker', 'image-manipulation-checker', 'payment-screenshot-checker'],
+  'blog/fake-receipt-kaise-pehchane': ['fake-receipt-checker', 'payment-screenshot-checker', 'image-manipulation-checker'],
   'blog/fake-upi-payment-screenshot': ['payment-screenshot-checker', 'image-manipulation-checker', 'screenshot-redactor'],
   'blog/suspicious-link-checker-online': ['suspicious-link-checker', 'screenshot-scam-checker', 'screenshot-ocr'],
   'blog/exif-metadata': ['screenshot-metadata-checker', 'image-metadata-remover', 'screenshot-redactor'],
@@ -171,6 +181,7 @@ const DEFAULT_ARTICLE_RELATIONS: Record<string, string[]> = {
   'screenshot-privacy-checker': ['redact-screenshot-before-sharing', 'exif-metadata', 'fake-bank-transfer-screenshot', 'whatsapp-telegram-task-job-scam'],
   'screenshot-comparison': ['fake-whatsapp-chat-screenshot', 'fake-bank-transfer-screenshot', 'screenshot-checker-online', 'fake-upi-payment-screenshot'],
   'reverse-image-search': ['reverse-image-search-screenshot', 'fake-social-media-post-screenshot', 'how-to-tell-if-a-photo-is-a-screenshot', 'ai-image-detector-online'],
+  'fake-receipt-checker': ['fake-receipt-ai-generated', 'fake-receipt-kaise-pehchane', 'fake-bank-transfer-screenshot', 'fake-amazon-flipkart-refund-scam'],
   'utr-number-checker': ['fake-upi-payment-screenshot', 'payment-failed-screenshot-scam', 'fake-bank-transfer-screenshot', 'fake-payment-screenshot-kaise-pehchane'],
   'suspicious-link-checker': ['suspicious-link-checker-online', 'e-challan-sms-scam', 'usps-redelivery-text-scam', 'smishing-fake-sms'],
 };

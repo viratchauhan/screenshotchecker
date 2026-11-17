@@ -258,6 +258,13 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
     icon: 'square-2-stack',
   },
   {
+    id: 'fake-receipt-checker', name: 'Fake Receipt Checker', slug: 'fake-receipt-checker',
+    category: 'Image Forensics', route: '/fake-receipt-checker', workspaceType: 'utility', icon: 'document-text',
+    description: 'Scan a receipt image for edit and metadata clues, then re-add its items, tax and total.',
+    keywords: ['fake receipt', 'receipt checker', 'receipt authenticity', 'bill verification', 'fake invoice'],
+    aliases: ['fake receipt detector', 'is this receipt fake', 'check receipt authenticity'],
+  },
+  {
     id: 'utr-number-checker', name: 'UTR Number Checker', slug: 'utr-number-checker',
     category: 'Utilities', route: '/utr-number-checker', workspaceType: 'utility', icon: 'banknotes',
     description: 'Check whether a UTR or UPI reference matches the UPI, IMPS, NEFT or RTGS format, and how to confirm the payment in your bank.',

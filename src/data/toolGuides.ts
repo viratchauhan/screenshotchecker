@@ -303,6 +303,36 @@ export const TOOL_GUIDES: Record<string, ToolGuide> = {
       },
     ],
   },
+  'fake-receipt-checker': {
+    heading: 'How to Check if a Receipt Is Fake',
+    intro:
+      'Fake receipts used to need image-editing skill. Now a receipt generator website or an AI image tool can make one in seconds, so the picture alone proves less than ever. A good check moves from the image to things a forger cannot easily control: the arithmetic, the shop and the payment record.',
+    sections: [
+      {
+        heading: 'A five-point receipt check',
+        paragraphs: ['Work through these in order. One failed point is a reason to ask questions; several together are a strong warning.'],
+        list: [
+          '<strong>The shop:</strong> search for it yourself and confirm the name, address, phone number and tax number (GSTIN in India) match a real business. Do not trust a phone number printed on the receipt.',
+          '<strong>The maths:</strong> quantities times prices must equal the subtotal, and the tax and total must follow. Use the receipt math check above.',
+          '<strong>The tax:</strong> the rate should fit the place. Most standalone Indian restaurants charge 5% GST, split equally into CGST and SGST; US sales tax depends on the state and city.',
+          '<strong>The details:</strong> date and time against opening hours and the claimed trip, card digits (usually the last four only), receipt numbering, and fonts or spacing that change mid-line.',
+          '<strong>The payment:</strong> ask for the matching card or bank statement line, or contact the shop with the receipt number. This is the check a fake cannot pass.',
+        ],
+      },
+      {
+        heading: 'What the image scan adds',
+        paragraphs: [
+          'The upload above reads the text with OCR, recognises receipts and tax invoices, shows any metadata left in the file and draws an error level map that can highlight a pasted or retyped figure on a JPEG photo. These are clues. A receipt made from scratch by a generator, or photographed from a screen, can come through clean, and missing metadata is normal for shared images. For more on edited figures, see <a href="/image-manipulation-checker/">how to read an ELA map</a>.',
+        ],
+      },
+      {
+        heading: 'Common fake receipt situations',
+        paragraphs: [
+          'Inflated expense claims, refund or warranty requests for items never bought, fake rent or deposit receipts, and payment proof in marketplace deals. Our guides cover <a href="/blog/fake-receipt-ai-generated/">AI-generated receipts</a>, the Hindi <a href="/blog/fake-receipt-kaise-pehchane/">नकली रसीद कैसे पहचानें</a>, and <a href="/payment-screenshot-checker/">payment screenshots</a> sent as proof.',
+        ],
+      },
+    ],
+  },
 };
 
 export function getToolGuide(slug: string): ToolGuide | undefined {

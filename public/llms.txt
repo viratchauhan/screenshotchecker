@@ -16,6 +16,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [Screenshot Metadata Checker](https://screenshotchecker.com/screenshot-metadata-checker/) and [Image Metadata Remover](https://screenshotchecker.com/image-metadata-remover/): Inspect and strip EXIF and other metadata before sharing.
 - [Screenshot Redactor](https://screenshotchecker.com/screenshot-redactor/): Cover private details with solid masks and export a separate PNG.
 - [Screenshot OCR](https://screenshotchecker.com/screenshot-ocr/): Extract text from a screenshot in the browser.
+- [Fake Receipt Checker](https://screenshotchecker.com/fake-receipt-checker/): Scan a receipt photo or screenshot for edit and metadata clues, and re-add its items, tax and total with a receipt math check.
 - [UTR Number Checker](https://screenshotchecker.com/utr-number-checker/): Check whether a UTR or UPI reference matches the UPI, IMPS, NEFT or RTGS format; explains why only your own bank records confirm a payment.
 - [Reverse Image Search helper](https://screenshotchecker.com/reverse-image-search/): Prepare a screenshot and search Google Lens, Bing or TinEye to find where an image appeared before.
 - [Suspicious Link Checker](https://screenshotchecker.com/suspicious-link-checker/): Looks a URL up in a historical labelled URL dataset. A match or no match is not a current safety certificate.

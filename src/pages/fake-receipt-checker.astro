@@ -1,0 +1,201 @@
+---
+import ToolLayout from '../components/ToolLayout.astro';
+
+const props = {
+  title: "Fake Receipt Checker: Is This Receipt Real? Free Check",
+  metaDescription: "Check a receipt photo or screenshot for signs of editing, then re-add its items, tax and total. Free fake receipt checker that runs in your browser.",
+  badge: "Receipt & Bill Verification",
+  heading: "Fake Receipt Checker: Is This Receipt Real?",
+  subheading: "Scan a receipt image for edit and metadata clues, then use the receipt math check below to see whether its items, tax and total add up.",
+  howItWorksSteps: [
+    { step: "1", title: "Upload the Receipt", desc: "Upload a photo or screenshot of the receipt, bill or invoice. It is processed in your browser." },
+    { step: "2", title: "Read the Clues", desc: "Review the extracted text, document type, metadata and error level map for signs of editing." },
+    { step: "3", title: "Check the Maths", desc: "Type the items, tax rate and total into the receipt math check, then confirm the purchase with the shop or your card statement." },
+  ],
+  examples: [
+    { title: "Expense Claims and Reimbursements", desc: "Check restaurant, taxi and hotel receipts submitted for reimbursement before approving them." },
+    { title: "Returns and Refund Requests", desc: "Review a receipt a customer sends to claim a refund or warranty repair for an item you sold." },
+    { title: "Rent, Repair and Service Bills", desc: "Look over a bill shared as proof of payment for rent, repairs or a deposit." },
+    { title: "AI-Generated Receipts", desc: "Image generators can now produce realistic receipts. The maths, the shop and the payment record still have to check out." },
+  ],
+  limitations: [
+    "This checker gives clues, not a verdict. It cannot see the shop's records or your card statement, and an AI-generated or carefully edited receipt can pass every image check.",
+    "The decisive checks are outside the image: confirm the shop exists, ask for the card or bank statement line, or contact the shop with the receipt number.",
+  ],
+  faqs: [
+    {
+      question: "How can I tell if a receipt is fake?",
+      answer: "Check four things: the shop (look it up yourself and confirm its name, address and phone), the maths (items, tax and total must add up), the details (date, time, opening hours and card digits must make sense together) and the payment (ask for the matching card or bank statement line). A receipt that fails any of these needs an explanation.",
+    },
+    {
+      question: "Can this tool detect AI-generated receipts?",
+      answer: "Not reliably, and neither can any other tool. Image generators can now make receipts that look real and carry no metadata. That is why the receipt math check and outside checks matter: a fake receipt often gets the arithmetic, the tax rate or the shop details wrong, and it never appears in a real payment record.",
+    },
+    {
+      question: "What does the receipt math check do?",
+      answer: "You type each item's quantity and price, the tax rate and any service charge or discount, plus the subtotal and total printed on the receipt. It re-adds everything and tells you whether the printed figures match, allowing for small rounding differences. It runs in your browser and saves nothing.",
+    },
+    {
+      question: "What GST rate should an Indian restaurant bill show?",
+      answer: "Most standalone restaurant bills in India show 5% GST (2.5% CGST plus 2.5% SGST). Restaurants inside hotels that charge more than ₹7,500 a night for a room charge 18%. A small café bill showing 12% or 18% GST deserves a closer look, though rates can change, so check the current rules if it matters.",
+    },
+    {
+      question: "Is my receipt uploaded to a server?",
+      answer: "The image is processed in your browser for text extraction, metadata and error level analysis, and the math check runs on your device. The site uses analytics; see the privacy policy for the network requests it makes.",
+    },
+    {
+      question: "What should I do if a receipt looks fake?",
+      answer: "Do not pay, refund or approve anything yet. Ask for the original receipt or the card statement line, and contact the shop yourself using details you found independently. For a suspected fraud in India, report at cybercrime.gov.in or call 1930; in the US, report at ReportFraud.ftc.gov.",
+    },
+  ],
+};
+---
+
+<ToolLayout {...props}>
+  <section id="receipt-math" class="max-w-4xl mx-auto px-4 sm:px-6 my-12" aria-labelledby="receipt-math-heading">
+    <div class="bg-surface-card border border-hairline rounded-xl p-5 sm:p-8">
+      <span class="text-xs uppercase tracking-wider font-semibold text-primary">Receipt math check</span>
+      <h2 id="receipt-math-heading" class="font-serif text-2xl sm:text-3xl text-ink font-normal mt-1">Do the items, tax and total add up?</h2>
+      <p class="text-sm text-body mt-2">Type the figures from the receipt. Wrong arithmetic is one of the most common mistakes in edited and AI-made receipts.</p>
+
+      <div class="rm-table mt-6" id="rm-rows">
+        <div class="rm-head" aria-hidden="true"><span>Item</span><span>Qty</span><span>Price each</span><span></span></div>
+      </div>
+      <button type="button" id="rm-add" class="btn-secondary text-sm h-9 mt-3">Add item</button>
+
+      <div class="rm-grid mt-6">
+        <label>Tax rate (%)<input id="rm-tax" type="number" inputmode="decimal" min="0" step="any" placeholder="5" /></label>
+        <label>Service charge, tip or discount (use minus for a discount)<input id="rm-other" type="number" inputmode="decimal" step="any" placeholder="0" /></label>
+        <label>Subtotal printed on the receipt<input id="rm-sub" type="number" inputmode="decimal" step="any" placeholder="Optional" /></label>
+        <label>Total printed on the receipt<input id="rm-total" type="number" inputmode="decimal" step="any" placeholder="Optional" /></label>
+      </div>
+      <label class="rm-check mt-4"><input id="rm-taxbase" type="checkbox" checked /> Tax is charged on the subtotal (untick if prices already include tax)</label>
+
+      <div class="flex flex-wrap gap-3 mt-6">
+        <button type="button" id="rm-run" class="btn-primary text-sm h-10">Check the maths</button>
+        <button type="button" id="rm-reset" class="btn-secondary text-sm h-10">Reset</button>
+      </div>
+      <div id="rm-result" class="rm-result mt-6" role="status" aria-live="polite" hidden></div>
+      <p class="text-xs text-muted mt-4">Runs in your browser and saves nothing. Correct maths does not prove a receipt is real: confirm the purchase with the shop or a card statement.</p>
+    </div>
+  </section>
+</ToolLayout>
+
+<script>
+  const rows = document.getElementById('rm-rows');
+  const result = document.getElementById('rm-result');
+  const num = (el: HTMLInputElement | null) => {
+    const value = el?.value.trim() ?? '';
+    return value === '' ? null : Number(value);
+  };
+  const fmt = (value: number) => value.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  function addRow(name = '', qty = '1', price = '') {
+    if (!rows) return;
+    const row = document.createElement('div');
+    row.className = 'rm-row';
+    const make = (cls: string, type: string, value: string, label: string, placeholder = '') => {
+      const input = document.createElement('input');
+      input.className = cls;
+      input.type = type;
+      input.value = value;
+      input.placeholder = placeholder;
+      input.setAttribute('aria-label', label);
+      if (type === 'number') { input.inputMode = 'decimal'; input.step = 'any'; input.min = '0'; }
+      return input;
+    };
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.className = 'rm-remove';
+    remove.textContent = '×';
+    remove.setAttribute('aria-label', 'Remove item');
+    remove.addEventListener('click', () => row.remove());
+    row.append(make('rm-name', 'text', name, 'Item name', 'Item'), make('rm-qty', 'number', qty, 'Quantity'), make('rm-price', 'number', price, 'Price each', '0.00'), remove);
+    rows.append(row);
+  }
+
+  function line(label: string, value: string, tone = '') {
+    const p = document.createElement('p');
+    if (tone) p.dataset.tone = tone;
+    const strong = document.createElement('strong');
+    strong.textContent = label + ' ';
+    p.append(strong, document.createTextNode(value));
+    return p;
+  }
+
+  function run() {
+    if (!rows || !result) return;
+    let subtotal = 0;
+    let items = 0;
+    for (const row of rows.querySelectorAll('.rm-row')) {
+      const qty = num(row.querySelector('.rm-qty'));
+      const price = num(row.querySelector('.rm-price'));
+      if (price === null || qty === null || Number.isNaN(qty) || Number.isNaN(price)) continue;
+      subtotal += qty * price;
+      items += 1;
+    }
+    const taxRate = num(document.getElementById('rm-tax') as HTMLInputElement) ?? 0;
+    const other = num(document.getElementById('rm-other') as HTMLInputElement) ?? 0;
+    const printedSub = num(document.getElementById('rm-sub') as HTMLInputElement);
+    const printedTotal = num(document.getElementById('rm-total') as HTMLInputElement);
+    const taxOnTop = (document.getElementById('rm-taxbase') as HTMLInputElement | null)?.checked ?? true;
+    const tax = taxOnTop ? subtotal * taxRate / 100 : 0;
+    const total = subtotal + tax + other;
+    const tolerance = (value: number) => Math.max(1, Math.abs(value) * 0.005);
+
+    result.replaceChildren();
+    result.hidden = false;
+    if (items === 0) {
+      result.append(line('Add at least one item', 'with a quantity and a price.', 'warn'));
+      return;
+    }
+    let problems = 0;
+    result.append(line(`Items added up (${items}):`, fmt(subtotal)));
+    if (taxOnTop && taxRate) result.append(line(`Tax at ${taxRate}%:`, fmt(tax)));
+    if (other) result.append(line('Other charges or discount:', fmt(other)));
+    result.append(line('Expected total:', fmt(total)));
+    if (printedSub !== null) {
+      const off = printedSub - subtotal;
+      if (Math.abs(off) > tolerance(subtotal)) { problems += 1; result.append(line('Subtotal does not match:', `the receipt says ${fmt(printedSub)}, the items add up to ${fmt(subtotal)} (difference ${fmt(off)}).`, 'bad')); }
+      else result.append(line('Subtotal matches', 'the items.', 'ok'));
+    }
+    if (printedTotal !== null) {
+      const off = printedTotal - total;
+      if (Math.abs(off) > tolerance(total)) { problems += 1; result.append(line('Total does not match:', `the receipt says ${fmt(printedTotal)}, expected ${fmt(total)} (difference ${fmt(off)}). Check for a missing charge, a different tax rate or an edited figure.`, 'bad')); }
+      else result.append(line('Total matches', 'the expected amount.', 'ok'));
+    }
+    if (printedSub === null && printedTotal === null) result.append(line('Tip:', 'enter the printed subtotal or total to compare.', 'warn'));
+    else if (problems === 0) result.append(line('The maths adds up.', 'That is a good sign but not proof: confirm the shop and the payment record too.', 'ok'));
+  }
+
+  addRow();
+  addRow();
+  document.getElementById('rm-add')?.addEventListener('click', () => addRow());
+  document.getElementById('rm-run')?.addEventListener('click', run);
+  document.getElementById('rm-reset')?.addEventListener('click', () => {
+    rows?.querySelectorAll('.rm-row').forEach((row) => row.remove());
+    addRow();
+    addRow();
+    for (const id of ['rm-tax', 'rm-other', 'rm-sub', 'rm-total']) {
+      const el = document.getElementById(id) as HTMLInputElement | null;
+      if (el) el.value = '';
+    }
+    if (result) { result.hidden = true; result.replaceChildren(); }
+  });
+</script>
+
+<style is:global>
+  #receipt-math input[type='number'], #receipt-math input[type='text'] { width: 100%; min-width: 0; padding: .55rem .7rem; border: 1px solid var(--color-hairline); border-radius: .5rem; background: var(--color-canvas); color: var(--color-ink); font-size: .95rem; }
+  #receipt-math .rm-head, #receipt-math .rm-row { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) minmax(0, 1.6fr) 2.25rem; gap: .5rem; align-items: center; }
+  #receipt-math .rm-head { font-size: .75rem; color: var(--color-muted); text-transform: uppercase; letter-spacing: .06em; }
+  #receipt-math .rm-row { margin-top: .5rem; }
+  #receipt-math .rm-remove { width: 2.25rem; height: 2.25rem; border: 1px solid var(--color-hairline); border-radius: .5rem; color: var(--color-muted); background: transparent; font-size: 1.1rem; }
+  #receipt-math .rm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: 1rem; }
+  #receipt-math .rm-grid label { display: flex; flex-direction: column; gap: .35rem; font-size: .85rem; color: var(--color-ink); }
+  #receipt-math .rm-check { display: flex; gap: .5rem; align-items: flex-start; font-size: .85rem; color: var(--color-body); }
+  #receipt-math .rm-result { border: 1px solid var(--color-hairline); border-radius: .75rem; padding: 1rem; font-size: .9rem; overflow-wrap: anywhere; }
+  #receipt-math .rm-result p { margin: .3rem 0; }
+  #receipt-math .rm-result [data-tone='ok'] strong { color: var(--color-success, #2f7d4f); }
+  #receipt-math .rm-result [data-tone='bad'] strong { color: var(--color-error, #b4372c); }
+  #receipt-math .rm-result [data-tone='warn'] strong { color: var(--color-warning, #b7791f); }
+</style>
