@@ -60,6 +60,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [How to tell if a screenshot is AI-generated](https://screenshotchecker.com/blog/ai-generated-screenshot/)
 - [How to spot a fake or AI-generated receipt](https://screenshotchecker.com/blog/fake-receipt-ai-generated/)
 - [How to spot a fake job offer letter](https://screenshotchecker.com/blog/fake-job-offer-letter/)
+- [नकली जॉब ऑफ़र लेटर कैसे पहचानें (Hindi)](https://screenshotchecker.com/blog/fake-job-offer-letter-kaise-pehchane/)
 - [Fake Amazon or Flipkart order, refund and delivery messages](https://screenshotchecker.com/blog/fake-amazon-flipkart-refund-scam/)
 - [QR code scams: scan to receive money, fake stickers, parking codes](https://screenshotchecker.com/blog/qr-code-scam/)
 - [Fake TRAI call: your SIM will be blocked](https://screenshotchecker.com/blog/trai-sim-block-call-scam/)\n- [Fake customer care number scam](https://screenshotchecker.com/blog/fake-customer-care-number-scam/)
