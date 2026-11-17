@@ -1,6 +1,6 @@
 # ScreenshotChecker handoff (read this first)
 
-Last updated: 16 November 2026. Written so an assistant on a new computer can pick up the work without the old
+Last updated: 17 November 2026. Written so an assistant on a new computer can pick up the work without the old
 conversation. Keep it current: update "Where things stand" and "Next steps" at the end of every session.
 
 ## What this is
@@ -67,7 +67,8 @@ breaks one, update the test in the same commit and say why.
    optional figure/checklist/callout, faq, relatedSlugs, cta). Avoid quotes and ampersands in seoTitle/description.
 3. Add a figure spec to a new `scripts/content/figure-specs/batch-NN.json` and render it:
    `python scripts/content/render-figures.py scripts/content/figure-specs/batch-NN.json .`
-   (needs `pip install playwright` and `python -m playwright install chromium`). Look at the PNG before using it.
+   (needs `pip install playwright` and `python -m playwright install chromium`; on the old PC the SEO skill's
+   `~/.claude/skills/seo/.venv` Python with `PLAYWRIGHT_BROWSERS_PATH=~/.claude/skills/seo/ms-playwright` had it). Look at the PNG before using it.
 4. Insert: `node scripts/content/insert-articles.cjs new-articles.json . "existing-slug>new-slug,..." "llms.txt line|||new line"`.
    Then add the slug to a `TOPICS` section in `src/pages/blog/index.astro`, to `RelatedLinks.astro` where it fits, and,
    for a Hindi translation, to `TRANSLATION_PAIRS`.
@@ -95,7 +96,7 @@ source alongside GA4 and Clarity.
 
 ## Where things stand (16 Nov 2026)
 
-- 66 built pages; 36 guides in `blogArticles.ts` (5 Hindi; the statistics page is one of them), 12+ tools. All tests pass; sitemap 64 URLs; no broken
+- 70 built pages; 40 guides in `blogArticles.ts` (7 Hindi; the statistics page is one of them), 12+ tools. All tests pass; sitemap 64 URLs; no broken
   internal links.
 - 12 Nov: snippet rewrites on 8 low-CTR pages (baseline numbers in GROWTH_LOG, 12 Nov entry) and 2 guides.
 - 12-13 Nov: 14 new guides, topic-grouped blog index, Resources cards linked to real guides, hreflang pairs,
@@ -106,6 +107,9 @@ source alongside GA4 and Clarity.
 - 16 Nov: payment checker CTR rose to 17.7% at position 4.4 (7 days) after the 12 Nov title change; new guides
   already rank around 5-9. Image tools still rank 20-32 for competitive queries: on-page and internal links are done,
   they now need backlinks. H1s were aligned with target queries on 16 Nov.
+- 17 Nov: new guides `fake-job-offer-letter`, `fake-amazon-flipkart-refund-scam`, and Hindi pairs
+  `payment-fail-paisa-kat-gaya`, `fake-receipt-kaise-pehchane`; `unpaid-toll-text-scam` refreshed with FTC 2025-26 data.
+  IndexNow pinged; Search Console indexing not yet requested (the browser session had signed out).
 - Backlinks: 8 directory/editorial submissions from 1 and 6 Oct are pending editorial review (see the ledger);
   none verified as published.
 
@@ -113,14 +117,14 @@ source alongside GA4 and Clarity.
 
 1. Around 10 Dec 2026, compare 28-day CTR and position for the pages retitled on 12 Nov against the GROWTH_LOG
    baseline; keep winners, revise losers.
-2. Check Search Console Pages report: confirm the 12-13 Nov guides are indexed; re-request any still
+2. Request indexing for the four 17 Nov guides (owner must sign in to Search Console first). Check the Pages report:
+   confirm the 12-13 Nov guides are indexed; re-request any still
    "Discovered - currently not indexed".
 3. Restore Cloudflare Git auto-deploys (owner, dashboard), or keep deploying with wrangler.
 4. Owner actions from the outreach kit: send the Gmail drafts, list on AlternativeTo/Product Hunt, answer Quora/Reddit
    questions with disclosure, share Hindi WhatsApp forwards.
-5. Content ideas not yet done: Hindi versions of the payment-failed and fake receipt guides; fake job offer letter;
-   fake Amazon/Flipkart order or delivery screenshots; refreshing `/blog/unpaid-toll-text-scam/` (position about 40);
-   update the statistics page when FY 2025-26 UPI figures or FTC 2026 data are published.
+5. Content ideas not yet done: Hindi versions of the job offer letter and Amazon/Flipkart refund guides; fake
+   loan app / instant loan harassment screenshots; fake electricity or gas bill PDFs; fake rent receipts; update the statistics page when FY 2025-26 UPI figures or FTC 2026 data are published.
 6. Lab performance (Lighthouse mobile 69) is not a ranking factor without field data; revisit when CrUX data appears.
 7. doMahan banner (done 16 Nov): `src/components/DomahanBanner.astro` promotes the owner's free Android planner app.
    It sits once per page, directly under the scan result and below the upload box, on 17 tool pages: after
