@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "loan-app-harassment-morphed-photos",
+    "app": "WhatsApp chat", "sub": "Fictional · +91 9XXXX XXX17 (not in contacts)",
+    "blocks": [
+      {"type": "row", "k": "Sender", "v": "unknown \"recovery agent\"", "badge": 1},
+      {"type": "bubble", "side": "in", "text": "Loan ₹3,000 overdue. Pay ₹9,500 now to close.", "badge": 2},
+      {"type": "bubble", "side": "in", "text": "Or your edited photos go to all 412 contacts.", "badge": 3},
+      {"type": "row", "k": "Deadline", "v": "1 hour", "badge": 4},
+      {"type": "note", "text": "The example loan app names no bank or NBFC", "badge": 5}
+    ],
+    "callouts": [
+      "Real lenders contact you from known, official channels.",
+      "Demands far above the loan are extortion, not dues.",
+      "Threats with morphed photos are a crime: report them.",
+      "Deadlines are there to stop you asking for help.",
+      "Check the app on the RBI's list of lending apps."
+    ]
+  }
+]

@@ -4031,7 +4031,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["trai-sim-block-call-scam", "digital-arrest-kya-hai", 
+    "relatedSlugs": ["loan-app-harassment-morphed-photos", "trai-sim-block-call-scam", "digital-arrest-kya-hai", 
       "smishing-fake-sms",
       "scam-statistics",
       "india-post-courier-sms-scam"
@@ -4954,7 +4954,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fake-amazon-flipkart-refund-scam", 
+    "relatedSlugs": ["loan-app-harassment-morphed-photos", "fake-amazon-flipkart-refund-scam", 
       "qr-code-scam",
       "payment-failed-screenshot-scam",
       "smishing-fake-sms"
@@ -5785,6 +5785,142 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "ऑफ़र का स्क्रीनशॉट जाँचें",
       "url": "/screenshot-scam-checker/",
       "description": "भर्ती करने वाले की चैट या ऑफ़र लेटर के स्क्रीनशॉट में ठगी के निशान देखें, आपके ब्राउज़र में।"
+    }
+  },
+  {
+    "slug": "loan-app-harassment-morphed-photos",
+    "title": "Loan App Harassment and Morphed Photo Threats: What to Do Now",
+    "seoTitle": "Loan App Harassment or Morphed Photos? What to Do Now",
+    "metaDescription": "An instant loan app is threatening you or your contacts with morphed photos? Do not pay more under threat. Save evidence, report on 1930 and Sachet.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-11-17",
+    "authorName": "Virat Chauhan",
+    "readTime": "8 min read",
+    "excerpt": "How illegal instant loan apps trap borrowers, the warning signs before you install one, what to do if recovery agents threaten you or send morphed photos to your contacts, and how to check whether a lending app is linked to an RBI-regulated lender.",
+    "targetKeywords": [
+      "loan app harassment",
+      "loan app morphed photos",
+      "instant loan app fraud",
+      "illegal loan app complaint",
+      "loan app threatening contacts",
+      "how to check loan app is rbi approved"
+    ],
+    "keyTakeaway": {
+      "title": "Threats over a loan app debt are a crime: report them, do not pay more",
+      "text": "If a loan app or its \"recovery agents\" threaten you, message your contacts or send morphed photos, keep screenshots of everything, call 1930 or report at cybercrime.gov.in, and report the app on the RBI's Sachet portal. Paying extra under threat does not guarantee the harassment stops. Warn your contacts that any edited photos are fake."
+    },
+    "introduction": "If an instant loan app is threatening you, calling your contacts or sending morphed photos, stop paying the threatening numbers, save screenshots of every message and call, report at cybercrime.gov.in or on the 1930 helpline, and report the app on the RBI's Sachet portal. Then tell the people in your contact list that any edited photos or messages about you are fake. The Reserve Bank of India warned as early as <a href=\"https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=50846\">December 2020</a> about unauthorised lending apps that charge excessive interest and hidden fees, use high-handed recovery methods and misuse access to data on borrowers' phones. This guide explains how these apps work, how to spot one before you borrow, and what to do if you are already being harassed.",
+    "contentSections": [
+      {
+        "heading": "How illegal loan apps trap borrowers",
+        "paragraphs": [
+          "The pattern is well known. An app or a WhatsApp message promises a quick loan with no paperwork. To \"verify\" you, the app asks for access to your contacts, photos and messages. The loan arrives, often much smaller than promised after unexplained fees are cut, and the repayment date comes within days. Then the demands grow: more interest, late fees, a \"settlement\" amount several times what you borrowed.",
+          "When a borrower cannot or will not pay, the harassment starts: abusive calls, messages to everyone in the phone's contact list, and photos of the borrower edited into obscene or humiliating images. The RBI's press release describes exactly these complaints: <em>excessive rates of interest and additional hidden charges, adoption of unacceptable and high-handed recovery methods, and misuse of agreements to access data on the mobile phones of the borrowers.</em>"
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/loan-app-harassment-morphed-photos/fictional-example.png",
+          "alt": "Fictional WhatsApp message from a made-up loan recovery agent with numbered warning signs: an unknown number, a demand three times the loan, a threat to send morphed photos to contacts, a one-hour deadline and an app with no named bank or NBFC.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional harassment message from a made-up loan app. The names and numbers are invented; the tactics are the ones borrowers report."
+        },
+        "callout": {
+          "type": "golden-rule",
+          "text": "Recovery by threats, abuse or morphed photos is not a legitimate way to collect a debt. Whatever you owe, harassment is something to report, not something to pay off."
+        }
+      },
+      {
+        "heading": "Warning signs before you install a loan app",
+        "paragraphs": [
+          "Many harassment cases begin with an app that should never have been installed. Look for these signs first."
+        ],
+        "checklist": [
+          "The app does not name the bank or NBFC that is lending the money. The RBI has required digital lending platforms working for banks and NBFCs to disclose the lender's name upfront to customers.",
+          "It asks for access to your contacts, photo gallery or messages to approve a loan.",
+          "It is shared as an APK file or a link on WhatsApp, Telegram or SMS instead of an official app store listing.",
+          "It asks for a processing or \"insurance\" fee before the loan is paid out.",
+          "You are not shown a Key Fact Statement with the all-in annual cost of the loan before you accept. The RBI's <a href=\"https://www.rbi.org.in/scripts/NotificationUser.aspx?Id=12382&Mode=0\">digital lending rules</a> require lenders to give borrowers a Key Fact Statement, including the annual percentage rate (APR), before the contract is signed.",
+          "The repayment period is a few days and the amount you receive is far below the amount you must repay."
+        ]
+      },
+      {
+        "heading": "How to check whether a loan app is linked to an RBI-regulated lender",
+        "paragraphs": [
+          "Legitimate lending can be done by banks, NBFCs registered with the RBI and lenders regulated by state money-lending laws, as the RBI's caution notice explains. Since mid-2025 the RBI has also published a list of digital lending apps deployed by the banks and NBFCs it regulates, reached from the Citizen's Corner section of the RBI website, as <a href=\"https://www.business-standard.com/amp/finance/personal-finance/avoiding-fraudulent-loan-apps-rbi-listing-ratings-reviews-key-to-safety-125070900931_1.html\">Business Standard reported</a>. Search that list for the app, then check that the lender named inside the app matches.",
+          "An app that is missing from the list, names no lender, or names a lender that does not mention the app on its own website should be treated as unauthorised. The RBI's advice is to verify the company offering the loan and never share copies of KYC documents with unverified apps."
+        ]
+      },
+      {
+        "heading": "What to do if a loan app is harassing you",
+        "paragraphs": [
+          "Act calmly and in this order. You do not have to prove the photos are fake to report the harassment: threatening and sharing edited images of someone is the crime."
+        ],
+        "checklist": [
+          "<strong>Stop paying the threatening numbers.</strong> Paying extra under threat does not guarantee the messages stop, and new demands often follow.",
+          "<strong>Save evidence first:</strong> screenshots of messages, call logs, the numbers and UPI IDs that contacted you, the app's name and the payment receipts. Keep the original files.",
+          "<strong>Report it:</strong> call the 1930 cyber fraud helpline or file a complaint at cybercrime.gov.in, which also has a category for crimes against women and children. You can also go to your nearest police station.",
+          "<strong>Report the app on <a href=\"https://sachet.rbi.org.in\">Sachet</a></strong>, the RBI portal the central bank asks people to use for complaints about unauthorised lending apps, and report the listing to the app store.",
+          "<strong>Warn your contacts</strong> with a short message: an illegal loan app has my contact list and may send edited photos or false messages about me; please ignore and report them.",
+          "<strong>Remove the app's access:</strong> after you have saved the evidence, revoke its permissions for contacts, photos and messages, then uninstall it. Change passwords if you entered any into the app.",
+          "<strong>If the loan came from a real RBI-regulated lender</strong> whose agents are misbehaving, complain to the lender first, then to the RBI Ombudsman at cms.rbi.org.in."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "Be wary of anyone who calls offering to \"settle\" the loan or \"delete your data\" for a fee. These calls often come from the same people."
+        }
+      },
+      {
+        "heading": "Morphed photos: removal and support",
+        "paragraphs": [
+          "Morphed photos usually start from a profile picture or a selfie taken from your phone, edited onto another image. A <a href=\"/reverse-image-search/\">reverse image search</a> of the edited picture can help you find the original photo it was made from, which is useful evidence for your complaint. The <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> may show areas with a different editing history, but it gives clues, not proof, and you do not need it to report the crime.",
+          "If an intimate image has been made or shared without your consent and you are 18 or older, <a href=\"https://stopncii.org\">StopNCII.org</a> lets you create a digital fingerprint of the image on your own device so that participating platforms can block it, without uploading the image itself. Report posts directly to the platform as well, and mention your cybercrime complaint number."
+        ]
+      },
+      {
+        "heading": "How ScreenshotChecker can help, and what it cannot do",
+        "paragraphs": [
+          "The <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads a screenshot of a loan offer or recovery message and flags warning signs such as threats, deadlines and payment demands. Before you share screenshots in a complaint or with family, the <a href=\"/screenshot-redactor/\">screenshot redactor</a> can hide your account numbers and other details that are not needed.",
+          "No tool can tell you whether a lender is licensed or make harassment stop. Use the RBI's own list and the official complaint channels for that."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "A loan app is sending my morphed photos to my contacts. What should I do?",
+        "answer": "Do not pay more under threat. Save screenshots of the messages and numbers, call 1930 or file a complaint at cybercrime.gov.in, report the app on the RBI's Sachet portal, and warn your contacts that any edited photos are fake. You can also file a complaint at your nearest police station."
+      },
+      {
+        "question": "How do I check if a loan app is RBI approved?",
+        "answer": "The RBI publishes a list of digital lending apps deployed by the banks and NBFCs it regulates, reached from the Citizen's Corner section of its website. Check that the app is on the list and that the lender named inside the app matches. An app that names no bank or NBFC should be avoided."
+      },
+      {
+        "question": "Do I still have to repay a loan from an illegal app?",
+        "answer": "Harassment is a separate matter from the debt. If the app is linked to a regulated lender, you can repay the amount actually owed through official channels and complain about the recovery behaviour. If the app is unauthorised, report it and get advice from the police or a lawyer before paying anything more, especially demands far above what you received."
+      },
+      {
+        "question": "Where do I complain about a loan app in India?",
+        "answer": "Report harassment and fraud on the 1930 helpline or cybercrime.gov.in, report unauthorised lending apps on the RBI's Sachet portal (sachet.rbi.org.in), and complain about a regulated lender's conduct to the lender and then the RBI Ombudsman at cms.rbi.org.in."
+      },
+      {
+        "question": "Will paying the recovery agents stop the harassment?",
+        "answer": "Not reliably. Paying under threat can lead to new demands. Reporting, warning your contacts and removing the app's access to your phone are more effective first steps."
+      },
+      {
+        "question": "Can ScreenshotChecker prove that a photo of me was morphed?",
+        "answer": "It can show clues, such as areas with a different editing history or an earlier original found by reverse image search, but it cannot prove it. You do not need proof from a tool to report harassment: the threats and the sharing are the offence."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "digital-arrest-scam",
+      "fake-customer-care-number-scam",
+      "whatsapp-telegram-task-job-scam"
+    ],
+    "cta": {
+      "label": "Check a loan message screenshot",
+      "url": "/screenshot-scam-checker/",
+      "description": "See warning signs such as threats, deadlines and payment demands in a loan offer or recovery message, processed in your browser."
     }
   },
 ];
