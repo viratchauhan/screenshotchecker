@@ -4,11 +4,11 @@
 export const PAGE_UPDATED_AT: Record<string, string> = {
   '/': '2026-11-17',
   '/about/': '2026-10-30',
-  '/ai-image-detector/': '2026-11-12',
+  '/ai-image-detector/': '2026-11-17',
   '/blog/': '2026-11-12',
   '/contact/': '2026-08-27',
   '/how-it-works/': '2026-10-14',
-  '/image-manipulation-checker/': '2026-11-12',
+  '/image-manipulation-checker/': '2026-11-17',
   '/image-metadata-remover/': '2026-10-29',
   '/payment-screenshot-checker/': '2026-11-12',
   '/payment-screenshot-checker/hindi/': '2026-10-30',

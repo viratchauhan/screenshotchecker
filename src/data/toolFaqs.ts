@@ -29,6 +29,30 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
       question: 'Can I check whether an image was made with Google AI or ChatGPT?',
       answer: 'Sometimes. Google adds an invisible SynthID watermark to images made or edited with its AI, and the Gemini app can check for it, but only for Google AI content. Some generators also attach Content Credentials, which this detector reads when present. Most other images carry no such mark, and screenshots or re-saved copies usually lose it, so a missing mark proves nothing.',
     },
+    {
+      question: "Is this fake image detector free?",
+      answer: "Yes. The AI image and fake photo detector is free and needs no account. The checks run in your browser, so you can test as many images as you like.",
+    },
+    {
+      question: "Can it detect AI-edited photos, not just fully AI-generated images?",
+      answer: "Sometimes. When AI is used to change part of a real photo, such as removing an object or swapping a face, the changed area can show a different compression history on the ELA map or break the natural noise pattern. A clean re-save can hide those traces, so a quiet result does not prove a photo was not edited.",
+    },
+    {
+      question: "Which AI generators can it identify?",
+      answer: "It does not guess a specific generator from the pixels. It names one only when the file says so, through Content Credentials or metadata written by the tool that made it. Detectors that claim to name the model from pixels alone are making a statistical guess that is often wrong on edited or re-shared images.",
+    },
+    {
+      question: "Does it work on a screenshot of an image?",
+      answer: "It works, but the result is weaker. A screenshot creates a new file: Content Credentials and metadata are gone, and the picture is resampled, which blurs texture signals. Use the original file whenever you can get it.",
+    },
+    {
+      question: "What should I do if the signals are mixed?",
+      answer: "Mixed results are common, especially for re-shared images. Treat them as a reason to check the source: find the earliest copy with reverse image search, see who first posted it, and look for a fact check before you share it or act on it.",
+    },
+    {
+      question: "How can I check if a photo of a person is real?",
+      answer: "Do not rely on any detector alone. Search for the image and the claim, check whether the person or a trusted outlet published it, and look closely at hands, ears, jewellery, text and backgrounds. Be especially careful with photos used to ask for money or to shame someone, which are common in scams and deepfake abuse.",
+    },
   ],
 
   'image-manipulation-checker': [
@@ -47,6 +71,22 @@ export const TOOL_FAQS: Record<string, ToolFaqItem[]> = {
     {
       question: 'How can I tell if a picture is photoshopped?',
       answer: 'Start by searching for an earlier copy with a reverse image search: an older version that differs is the clearest proof of an edit. Then zoom in on shadows, edges, repeated patterns and straight lines that bend near people, and use this ELA map as a supporting clue for JPEG photos. A clean map does not prove a photo is genuine.',
+    },
+    {
+      question: "Is this photo manipulation detector free?",
+      answer: "Yes. It is free, needs no account and runs in your browser: the image is re-saved as a JPEG at 75% quality on your device and compared with the original to draw the ELA map.",
+    },
+    {
+      question: "How do I read the ELA heatmap?",
+      answer: "Bright areas changed more when the image was re-saved, dark areas less. Edges and text are naturally bright, so look for inconsistency instead: one number, face or object that glows very differently from similar detail next to it, or a block whose brightness does not match its surroundings.",
+    },
+    {
+      question: "Can ELA detect AI edits or edited screenshots?",
+      answer: "Only sometimes. AI fill and object removal can leave an area with a different compression history, but many tools blend their output well. Screenshots are usually PNG files saved once, so an edit may not show at all. Use ELA as a clue, together with the comparison tool and a search for an earlier copy.",
+    },
+    {
+      question: "What else shows that a photo was altered?",
+      answer: "The strongest proof is an earlier, different copy found with reverse image search. After that, compare two versions with the comparison tool, check the Software field in the metadata, and look for shadows, reflections and straight lines that do not match. No single check proves a photo is genuine.",
     },
   ],
 
