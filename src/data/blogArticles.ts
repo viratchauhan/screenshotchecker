@@ -1799,6 +1799,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Google Pay या PhonePe का पेमेंट स्क्रीनशॉट असली है या नकली? सामान देने से पहले अपना UPI ऐप चेक करें। नकली स्क्रीनशॉट के संकेत और शिकायत का तरीका।",
     "category": "Security",
     "publishedAt": "2026-10-14",
+    "updatedAt": "2026-11-17",
     "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "किराना दुकान, छोटे विक्रेता और OLX/Instagram पर सामान बेचने वालों के लिए आसान गाइड: ग्राहक का स्क्रीनशॉट नहीं, अपना UPI ऐप और बैंक रिकॉर्ड देखकर ही सामान दें। ₹1,850 का एक काल्पनिक उदाहरण भी शामिल है।",
@@ -1814,7 +1815,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "title": "स्क्रीनशॉट नहीं, अपना खाता देखें",
       "text": "ग्राहक के फ़ोन की स्क्रीन या भेजा गया स्क्रीनशॉट सिर्फ़ एक दावा है, पैसा मिलने का सबूत नहीं। सामान देने से पहले अपने UPI ऐप की history, बैंक ऐप या बैंक स्टेटमेंट में वही रकम आई हुई देखें। पैसा न दिखे तो सामान रोक कर रखें। इसका मतलब यह नहीं कि ग्राहक ने पक्का धोखा दिया, बस पेमेंट अभी पक्की नहीं हुई।"
     },
-    "introduction": "ग्राहक ने पेमेंट का स्क्रीनशॉट दिखाया है तो सबसे पहले अपना UPI ऐप या बैंक ऐप खोलें और देखें कि उतनी ही रकम आपके खाते में आई है या नहीं। अगर आपके अपने रिकॉर्ड में पैसा नहीं दिख रहा, तो सामान न दें, चाहे स्क्रीन पर 'Payment Successful' कितना भी असली क्यों न लगे। नकली पेमेंट स्क्रीन बनाने वाले ऐप और एडिट किए गए स्क्रीनशॉट मौजूद हैं, इसलिए दुकान के काउंटर पर भरोसे लायक जांच सिर्फ़ आपके अपने खाते की है। यह गाइड किराना दुकानदारों, छोटे विक्रेताओं और OLX या Instagram पर सामान बेचने वालों के लिए है।",
+    "introduction": "ग्राहक ने पेमेंट का स्क्रीनशॉट या फोटो दिखाया है तो सबसे पहले अपना UPI ऐप या बैंक ऐप खोलें और देखें कि उतनी ही रकम आपके खाते में आई है या नहीं। अगर आपके अपने रिकॉर्ड में पैसा नहीं दिख रहा, तो सामान न दें, चाहे स्क्रीन पर 'Payment Successful' कितना भी असली क्यों न लगे। नकली पेमेंट स्क्रीन बनाने वाले ऐप और एडिट किए गए स्क्रीनशॉट मौजूद हैं, इसलिए दुकान के काउंटर पर भरोसे लायक जांच सिर्फ़ आपके अपने खाते की है। यह गाइड किराना दुकानदारों, छोटे विक्रेताओं और OLX या Instagram पर सामान बेचने वालों के लिए है। स्क्रीनशॉट में दिया UTR नंबर सही फ़ॉर्मेट का है या नहीं, यह <a href=\"/utr-number-checker/\">UTR नंबर चेकर</a> से देख सकते हैं, पर असली जाँच आपके अपने बैंक स्टेटमेंट की ही है।",
     "contentSections": [
       {
         "heading": "पहला नियम: सामान देने से पहले अपने फ़ोन में पैसा देखें",
@@ -3419,6 +3420,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Got a screenshot with no context? Learn to identify the app from its layout, find the original post with text and image search, and check if it is real.",
     "category": "Forensics",
     "publishedAt": "2026-11-12",
+    "updatedAt": "2026-11-17",
     "authorName": "Virat Chauhan",
     "readTime": "7 min read",
     "excerpt": "A step-by-step method for tracing a screenshot back to the app it was taken in and the post, chat or page it shows: read the interface, search the exact words, search the picture, and confirm at the source.",
@@ -3434,7 +3436,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "title": "Trace the words first, then the picture",
       "text": "Most screenshots can be traced by searching their exact text in quotes and the visible account name, then running a reverse image search on any picture inside. A screenshot is only confirmed when you find the original post, page or message and it says the same thing."
     },
-    "introduction": "Screenshots travel without their context. A post is cropped, forwarded into a group, reposted with a new caption, and soon nobody knows where it came from or whether it was ever real. Finding the source answers both questions at once: which app or site the screenshot shows, and whether the original still exists and matches. This guide walks through the method, from reading the interface to searching the text and the image.",
+    "introduction": "To find out what app or site a screenshot is from, read the interface first: fonts, icons, buttons and the layout of names and timestamps usually give the app away. Then search a distinctive phrase from it in quotes, and reverse image search any photo inside it to find the original post. Screenshots travel without their context. A post is cropped, forwarded into a group, reposted with a new caption, and soon nobody knows where it came from or whether it was ever real. Finding the source answers both questions at once: which app or site the screenshot shows, and whether the original still exists and matches. This guide walks through the method, from reading the interface to searching the text and the image.",
     "contentSections": [
       {
         "heading": "Step 1: read the interface for clues",
@@ -4406,6 +4408,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "AI can now make realistic receipts in seconds. How to check a receipt: the merchant, totals, tax, card digits and photo clues, and the checks that settle it.",
     "category": "AI & Forensics",
     "publishedAt": "2026-11-12",
+    "updatedAt": "2026-11-17",
     "authorName": "Virat Chauhan",
     "readTime": "7 min read",
     "excerpt": "Fake receipts used to need an editing app or a template site; now an AI image tool makes one from a sentence. A practical checklist for expense reviewers, small businesses and anyone handed a receipt as proof.",
@@ -4421,7 +4424,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "title": "Check the transaction, not the picture",
       "text": "A receipt image, however realistic, is only a claim. Confirm the purchase another way: the card statement line, the merchant's own records, the booking or order confirmation, or the payment in your own account. Visual checks help you decide which receipts deserve that closer look."
     },
-    "introduction": "Receipts are proof in everyday life: for expense claims, warranty returns, rent and deposits, marketplace sales and insurance. They have always been forged, but generative AI has made it fast and cheap. Expense software company AppZen reported that AI-generated receipts made up about 14% of the fraudulent documents it flagged in September 2025, up from none a year earlier, according to <a href=\"https://www.techradar.com/pro/security/workers-are-scamming-their-employers-using-ai-generated-fake-expense-receipts\">TechRadar</a>. This guide explains what to look for and, more importantly, how to confirm a receipt is real.",
+    "introduction": "To spot a fake receipt, check that the shop really exists, re-add the items, tax and total (the free <a href=\"/fake-receipt-checker/\">fake receipt checker</a> does the maths for you), make sure the date, time and card digits fit together, and ask for the matching card or bank statement line: a fake never appears in a real payment record. Receipts are proof in everyday life: for expense claims, warranty returns, rent and deposits, marketplace sales and insurance. They have always been forged, but generative AI has made it fast and cheap. Expense software company AppZen reported that AI-generated receipts made up about 14% of the fraudulent documents it flagged in September 2025, up from none a year earlier, according to <a href=\"https://www.techradar.com/pro/security/workers-are-scamming-their-employers-using-ai-generated-fake-expense-receipts\">TechRadar</a>. This guide explains what to look for and, more importantly, how to confirm a receipt is real.",
     "contentSections": [
       {
         "heading": "Where fake receipts show up",
@@ -5225,6 +5228,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "AI अब सेकंडों में असली जैसी रसीद बना देता है। दुकान, जोड़, GST, कार्ड नंबर और फ़ोटो के संकेतों से रसीद कैसे जाँचें, और कौन सी जाँच बात पक्की करती है।",
     "category": "AI & Forensics",
     "publishedAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
     "authorName": "Virat Chauhan",
     "readTime": "6 min read",
     "excerpt": "पहले नकली रसीद के लिए एडिटिंग ऐप या टेम्पलेट वेबसाइट चाहिए थी; अब AI इमेज टूल एक वाक्य से बना देता है। ख़र्च के बिल जाँचने वालों, छोटे व्यापारियों और सबूत के तौर पर रसीद पाने वाले हर व्यक्ति के लिए एक आसान चेकलिस्ट।",
@@ -5240,7 +5244,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "title": "तस्वीर नहीं, लेन-देन जाँचिए",
       "text": "रसीद की तस्वीर कितनी भी असली लगे, वह सिर्फ़ एक दावा है। ख़रीद को किसी और तरीके से पक्का करें: कार्ड या बैंक स्टेटमेंट की लाइन, दुकान का अपना रिकॉर्ड, बुकिंग या ऑर्डर की पुष्टि, या आपके अपने खाते में आया पैसा। तस्वीर की जाँच से बस यह तय होता है कि किस रसीद को गहराई से देखना है।"
     },
-    "introduction": "रसीद रोज़मर्रा का सबूत है: ऑफ़िस के ख़र्च, वारंटी और रिटर्न, किराया और एडवांस, पुराना सामान बेचना और बीमा क्लेम। रसीदें हमेशा से नकली बनती रही हैं, पर अब AI ने यह तेज़ और सस्ता कर दिया है। <a href=\"https://www.techradar.com/pro/security/workers-are-scamming-their-employers-using-ai-generated-fake-expense-receipts\">TechRadar</a> के अनुसार, ख़र्च जाँचने वाली सॉफ़्टवेयर कंपनी AppZen ने बताया कि सितंबर 2025 में उसके पकड़े गए नकली दस्तावेज़ों में लगभग 14% AI से बनी रसीदें थीं, जबकि एक साल पहले एक भी नहीं थी। यह गाइड बताती है कि क्या देखें और, उससे ज़रूरी, रसीद असली है यह कैसे पक्का करें। यह हमारी अंग्रेज़ी गाइड <a href=\"/blog/fake-receipt-ai-generated/\">How to spot a fake receipt</a> का हिंदी रूप है।",
+    "introduction": "नकली रसीद पहचानने के लिए दुकान ख़ुद खोजिए, आइटम, टैक्स और टोटल दोबारा जोड़िए (मुफ़्त <a href=\"/fake-receipt-checker/\">फेक रसीद चेकर</a> यह हिसाब कर देता है), तारीख़, समय और कार्ड के अंक मिलाइए, और कार्ड या बैंक स्टेटमेंट की लाइन माँगिए: नकली रसीद किसी असली पेमेंट रिकॉर्ड में नहीं दिखती। रसीद रोज़मर्रा का सबूत है: ऑफ़िस के ख़र्च, वारंटी और रिटर्न, किराया और एडवांस, पुराना सामान बेचना और बीमा क्लेम। रसीदें हमेशा से नकली बनती रही हैं, पर अब AI ने यह तेज़ और सस्ता कर दिया है। <a href=\"https://www.techradar.com/pro/security/workers-are-scamming-their-employers-using-ai-generated-fake-expense-receipts\">TechRadar</a> के अनुसार, ख़र्च जाँचने वाली सॉफ़्टवेयर कंपनी AppZen ने बताया कि सितंबर 2025 में उसके पकड़े गए नकली दस्तावेज़ों में लगभग 14% AI से बनी रसीदें थीं, जबकि एक साल पहले एक भी नहीं थी। यह गाइड बताती है कि क्या देखें और, उससे ज़रूरी, रसीद असली है यह कैसे पक्का करें। यह हमारी अंग्रेज़ी गाइड <a href=\"/blog/fake-receipt-ai-generated/\">How to spot a fake receipt</a> का हिंदी रूप है।",
     "contentSections": [
       {
         "heading": "नकली रसीदें कहाँ दिखती हैं",
