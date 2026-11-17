@@ -1,6 +1,6 @@
 # ScreenshotChecker handoff (read this first)
 
-Last updated: 17 November 2026. Written so an assistant on a new computer can pick up the work without the old
+Last updated: 18 November 2026. Written so an assistant on a new computer can pick up the work without the old
 conversation. Keep it current: update "Where things stand" and "Next steps" at the end of every session.
 
 ## What this is
@@ -44,7 +44,7 @@ Copy `audit/*.local.*` back into `audit/` locally if a task needs them (they are
 | All blog guides (single source) | `src/data/blogArticles.ts` (`lang: "hi"` for Hindi) |
 | Blog index topic sections | `src/pages/blog/index.astro` (`TOPICS`; unlisted guides fall into "More guides", Hindi guides group automatically) |
 | English/Hindi guide pairs (hreflang + visible switch) | `src/pages/blog/[slug].astro` (`TRANSLATION_PAIRS`) |
-| Tool page explainer sections | `src/data/toolGuides.ts` + `src/components/ToolGuide.astro` |
+| Tool page explainer sections | `src/data/toolGuides.ts` + `src/components/ToolGuide.astro` (ToolLayout pages show the guide whose key matches the path; ToolLayout also has a slot under the result for page widgets) |
 | Tool page FAQs | `src/data/toolFaqs.ts` (payment checker FAQs are inline in `src/pages/payment-screenshot-checker.astro`) |
 | Related guide/tool cards per page | `src/components/RelatedLinks.astro` |
 | Sitemap `lastmod` for non-blog pages | `src/data/pageDates.ts` (update when visible content changes) |
@@ -133,6 +133,8 @@ breaks one, update the test in the same commit and say why.
    `python scripts/content/render-figures.py scripts/content/figure-specs/batch-NN.json .`
    (needs `pip install playwright` and `python -m playwright install chromium`; on the old PC the SEO skill's
    `~/.claude/skills/seo/.venv` Python with `PLAYWRIGHT_BROWSERS_PATH=~/.claude/skills/seo/ms-playwright` had it). Look at the PNG before using it.
+   Share card: `node --import tsx scripts/content/og-spec.mjs > spec.json`, edit titles, then
+   `python scripts/content/render-og.py spec.json .` (writes `public/og/blog-<slug>.png`; the layout picks it up).
 4. Insert: `node scripts/content/insert-articles.cjs new-articles.json . "existing-slug>new-slug,..." "llms.txt line|||new line"`.
    Then add the slug to a `TOPICS` section in `src/pages/blog/index.astro`, to `RelatedLinks.astro` where it fits, and,
    for a Hindi translation, to `TRANSLATION_PAIRS`.
@@ -158,9 +160,9 @@ ask the owner to sign in (never enter passwords yourself). Request indexing from
 `https://screenshotchecker.com/sitemap-index.xml` (submit the full URL). Cloudflare Web Analytics is the analytics
 source alongside GA4 and Clarity.
 
-## Where things stand (16 Nov 2026)
+## Where things stand (18 Nov 2026)
 
-- 70 built pages; 40 guides in `blogArticles.ts` (7 Hindi; the statistics page is one of them), 12+ tools. All tests pass; sitemap 64 URLs; no broken
+- 75 built pages; 43 guides in `blogArticles.ts` (9 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
   internal links.
 - 12 Nov: snippet rewrites on 8 low-CTR pages (baseline numbers in GROWTH_LOG, 12 Nov entry) and 2 guides.
 - 12-13 Nov: 14 new guides, topic-grouped blog index, Resources cards linked to real guides, hreflang pairs,
@@ -177,6 +179,10 @@ source alongside GA4 and Clarity.
   before the two Hindi guides.
 - 17 Nov (later): long-query answers added at the top of the courier SMS, screenshot-or-photo and UPI guides, the
   reverse image search page and the homepage (GROWTH_LOG has the queries). Deployed 1af9bfd6.
+- 18 Nov (overnight): competitor research (scamdekho.in is the direct payment-checker rival), UTR checker and fake receipt
+  checker tools, tool explainers/FAQs (scam, analyzer, spam, AI detector, ELA), loan app harassment guides (EN/HI),
+  Hindi job offer guide, share cards for 25 pages, max-image-preview:large, and a fix for raw HTML in guide intros and
+  checklists. GROWTH_LOG has details.
 - Backlinks: 8 directory/editorial submissions from 1 and 6 Oct are pending editorial review (see the ledger);
   none verified as published.
 
@@ -184,14 +190,16 @@ source alongside GA4 and Clarity.
 
 1. Around 10 Dec 2026, compare 28-day CTR and position for the pages retitled on 12 Nov against the GROWTH_LOG
    baseline; keep winners, revise losers.
-2. Request indexing for `/blog/payment-fail-paisa-kat-gaya/` and `/blog/fake-receipt-kaise-pehchane/` (quota ran out on 17 Nov). Check the Pages report:
+2. Request indexing (quota ran out on 18 Nov) for `/blog/loan-app-harassment-morphed-photos/`, `/blog/loan-app-harassment-kya-kare/`,
+   `/blog/fake-job-offer-letter-kaise-pehchane/`, `/screenshot-scam-checker/`, `/ai-image-detector/`, `/screenshot-analyzer/`. Check the Pages report:
    confirm the 12-13 Nov guides are indexed; re-request any still
    "Discovered - currently not indexed".
 3. Restore Cloudflare Git auto-deploys (owner, dashboard), or keep deploying with wrangler.
-4. Owner actions from the outreach kit: send the Gmail drafts, list on AlternativeTo/Product Hunt, answer Quora/Reddit
+4. Owner actions from the outreach kit (see its 18 Nov section: Bing Webmaster Tools import, Featured/Qwoted/SourceBottle): send the Gmail drafts, list on AlternativeTo/Product Hunt, answer Quora/Reddit
    questions with disclosure, share Hindi WhatsApp forwards.
-5. Content ideas not yet done: Hindi versions of the job offer letter and Amazon/Flipkart refund guides; fake
-   loan app / instant loan harassment screenshots; fake electricity or gas bill PDFs; fake rent receipts; update the statistics page when FY 2025-26 UPI figures or FTC 2026 data are published.
+5. Content ideas not yet done: Hindi version of the Amazon/Flipkart refund guide; per-app payment guides only with real
+   differences (PhonePe, Google Pay, Paytm layouts and IDs); an original-data piece (for example testing detectors on
+   fictional fake receipts) to pitch to journalists; fake electricity or gas bill PDFs; fake rent receipts; update the statistics page when FY 2025-26 UPI figures or FTC 2026 data are published.
 6. Lab performance (Lighthouse mobile 69) is not a ranking factor without field data; revisit when CrUX data appears.
 7. doMahan banner (done 16 Nov): `src/components/DomahanBanner.astro` promotes the owner's free Android planner app.
    It sits once per page, directly under the scan result and below the upload box, on 17 tool pages: after
