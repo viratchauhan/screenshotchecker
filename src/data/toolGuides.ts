@@ -365,6 +365,35 @@ export const TOOL_GUIDES: Record<string, ToolGuide> = {
       },
     ],
   },
+  'screenshot-spam-checker': {
+    heading: 'Spam or Scam? How to Read a Message Screenshot',
+    intro:
+      'Spam is unwanted marketing: annoying, but usually selling something real. A scam is built to take your money, codes or personal details. The spam checker looks at how pushy and promotional a message is; if it also asks for money, an OTP or a click on an urgent link, use the <a href="/screenshot-scam-checker/">scam checker</a> as well.',
+    sections: [
+      {
+        heading: 'What the spam checker looks for',
+        paragraphs: [],
+        list: [
+          '<strong>Promotional density:</strong> how much of the text is offers, discounts, free trials and hype words.',
+          '<strong>Pressure formatting:</strong> capital letters, rows of exclamation marks and countdown wording.',
+          '<strong>Repeated calls to action:</strong> tap the link, reply now, call this number.',
+          '<strong>Links:</strong> web addresses in the text, which you can check without opening them in the <a href="/suspicious-link-checker/">suspicious link checker</a>.',
+        ],
+      },
+      {
+        heading: 'When spam turns into a scam',
+        paragraphs: [
+          'Treat a message as a possible scam if it asks you to pay a fee to receive a prize, refund or job, to share an OTP, PIN or password, to install an app from a link, or to act within minutes. Messages about parcels, electricity bills, tolls and traffic fines are common examples; see our guides on <a href="/blog/smishing-fake-sms/">fake SMS</a> and <a href="/blog/india-post-courier-sms-scam/">India Post texts</a>.',
+        ],
+      },
+      {
+        heading: 'How to stop and report spam',
+        paragraphs: [
+          'In India, register for Do Not Disturb by sending START 0 to 1909 or through TRAI\x27s DND app, and report unwanted commercial messages there; report fraud attempts on Chakshu (Sanchar Saathi). In the US, forward spam texts to 7726 (SPAM). For email, use your mail app\x27s report spam button rather than any unsubscribe link in a message you do not trust.',
+        ],
+      },
+    ],
+  },
 };
 
 export function getToolGuide(slug: string): ToolGuide | undefined {

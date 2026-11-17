@@ -26,7 +26,7 @@ export const PAGE_UPDATED_AT: Record<string, string> = {
   '/screenshot-privacy-checker/': '2026-10-29',
   '/screenshot-redactor/': '2026-10-29',
   '/screenshot-scam-checker/': '2026-11-12',
-  '/screenshot-spam-checker/': '2026-11-12',
+  '/screenshot-spam-checker/': '2026-11-17',
   '/spot-the-fake/': '2026-10-16',
   '/spot-the-fake/hindi/': '2026-10-16',
   '/suspicious-link-checker/': '2026-10-14',
