@@ -62,6 +62,14 @@ export const PAYMENT_COPY_EN: PaymentToolCopy = {
       title: 'Compare References With Official Records',
       html: 'Reference labels and formats can differ, and OCR may omit or misread characters. This checker applies configured format rules; it does not query a bank transaction database. A plausible reference can be copied, so digit count alone cannot authenticate a payment.',
     },
+    {
+      title: 'Look Up the UTR in Your Own Bank',
+      html: 'The payment is real only if the credit is in your own account. Open your bank app yourself and search for the same amount, time and UTR. The <a href="/utr-number-checker/" class="text-primary underline">UTR number checker</a> shows whether a reference matches the UPI, IMPS, NEFT or RTGS format, but a correct format is not proof of payment.',
+    },
+    {
+      title: 'Paid a Scammer? Act in the First Hour',
+      html: 'Call your bank&rsquo;s official helpline to block further debits and dispute the payment, call the <strong>1930</strong> cyber fraud helpline and file a complaint at cybercrime.gov.in. Keep the screenshots, the UTR and the chat for your complaint.',
+    },
   ],
   workflowEyebrow: 'Workflow',
   workflowTitle: 'How It Works',
@@ -107,6 +115,14 @@ export const PAYMENT_COPY_HI: PaymentToolCopy = {
     {
       title: 'Reference को अपने रिकॉर्ड से मिलाएं',
       html: 'Reference के लेबल और फ़ॉर्मेट अलग-अलग हो सकते हैं, और OCR कुछ अक्षर छोड़ या गलत पढ़ सकता है। यह टूल बैंक के रिकॉर्ड में reference नहीं खोजता। सही दिखने वाला reference कॉपी भी किया जा सकता है, इसलिए अंकों की गिनती से पेमेंट साबित नहीं होती।',
+    },
+    {
+      title: 'UTR अपने बैंक में खोजें',
+      html: 'पेमेंट तभी असली है जब पैसा आपके अपने खाते में दिखे। अपना बैंक ऐप खुद खोलें और वही रकम, समय और UTR खोजें। <a href="/utr-number-checker/" class="text-primary underline">UTR नंबर चेकर</a> बताता है कि नंबर UPI, IMPS, NEFT या RTGS के फ़ॉर्मेट जैसा है या नहीं, पर सही फ़ॉर्मेट पेमेंट का सबूत नहीं है।',
+    },
+    {
+      title: 'ठगी हो गई? पहले घंटे में कदम उठाएँ',
+      html: 'अपने बैंक की आधिकारिक हेल्पलाइन पर कॉल करके आगे के डेबिट रुकवाएँ और शिकायत करें, <strong>1930</strong> साइबर फ्रॉड हेल्पलाइन पर कॉल करें और cybercrime.gov.in पर शिकायत दर्ज करें। स्क्रीनशॉट, UTR और चैट सबूत के लिए संभालकर रखें।',
     },
   ],
   workflowEyebrow: 'तरीका',
