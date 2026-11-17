@@ -109,7 +109,8 @@ source alongside GA4 and Clarity.
   they now need backlinks. H1s were aligned with target queries on 16 Nov.
 - 17 Nov: new guides `fake-job-offer-letter`, `fake-amazon-flipkart-refund-scam`, and Hindi pairs
   `payment-fail-paisa-kat-gaya`, `fake-receipt-kaise-pehchane`; `unpaid-toll-text-scam` refreshed with FTC 2025-26 data.
-  IndexNow pinged; Search Console indexing not yet requested (the browser session had signed out).
+  IndexNow pinged. Search Console indexing requested for the two English guides on 17 Nov; the daily quota ran out
+  before the two Hindi guides.
 - Backlinks: 8 directory/editorial submissions from 1 and 6 Oct are pending editorial review (see the ledger);
   none verified as published.
 
@@ -117,7 +118,7 @@ source alongside GA4 and Clarity.
 
 1. Around 10 Dec 2026, compare 28-day CTR and position for the pages retitled on 12 Nov against the GROWTH_LOG
    baseline; keep winners, revise losers.
-2. Request indexing for the four 17 Nov guides (owner must sign in to Search Console first). Check the Pages report:
+2. Request indexing for `/blog/payment-fail-paisa-kat-gaya/` and `/blog/fake-receipt-kaise-pehchane/` (quota ran out on 17 Nov). Check the Pages report:
    confirm the 12-13 Nov guides are indexed; re-request any still
    "Discovered - currently not indexed".
 3. Restore Cloudflare Git auto-deploys (owner, dashboard), or keep deploying with wrangler.

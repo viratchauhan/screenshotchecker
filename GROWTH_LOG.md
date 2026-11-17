@@ -171,4 +171,4 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - New: /blog/fake-job-offer-letter/ (RBI BE(A)WARE, FTC, FBI IC3, MEA eMigrate, PIB notices, Wipro), /blog/fake-amazon-flipkart-refund-scam/ (Amazon, Flipkart advisories, FTC alerts, RBI).
 - Hindi pairs with hreflang: /blog/payment-fail-paisa-kat-gaya/, /blog/fake-receipt-kaise-pehchane/; Hindi payment checker now links four Hindi guides.
 - /blog/unpaid-toll-text-scam/ (position about 40) refreshed: FTC top text scams 2024 and May 2026 imposter trend (+40%, toll texts); updatedAt 2026-11-17.
-- Checks: npm test 40/40, build 70 pages, test:seo 0 errors/0 warnings, blog SEO 45 PASS. Deployed (version bab53c39), IndexNow 200 for 9 URLs. Search Console indexing pending owner sign-in.
+- Checks: npm test 40/40, build 70 pages, test:seo 0 errors/0 warnings, blog SEO 45 PASS. Deployed (version bab53c39), IndexNow 200 for 9 URLs. Search Console: indexing requested for the two English guides; daily quota exceeded before the two Hindi guides.
