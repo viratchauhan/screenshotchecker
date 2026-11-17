@@ -183,9 +183,7 @@ const combinedStructuredData = {
         {article.title}
       </h1>
 
-      <p class="text-base sm:text-lg text-body leading-relaxed max-w-3xl pt-2 font-normal">
-        {article.introduction}
-      </p>
+      <p class="text-base sm:text-lg text-body leading-relaxed max-w-3xl pt-2 font-normal article-intro" set:html={article.introduction} />
     </header>
 
     <!-- Key Takeaway Box -->
@@ -232,7 +230,7 @@ const combinedStructuredData = {
 
           {section.checklist && (
             <ul class="article-checklist">
-              {section.checklist.map((item) => <li>{item}</li>)}
+              {section.checklist.map((item) => <li set:html={item} />)}
             </ul>
           )}
 
@@ -342,6 +340,14 @@ const combinedStructuredData = {
 </Layout>
 
 <style>
+  /* Links written into intros, paragraphs and checklists come from set:html, so they need :global. */
+  .article-intro :global(a:not([class])),
+  .article-checklist :global(a:not([class])),
+  .space-y-3\.5 :global(p a:not([class])) {
+    text-decoration: underline;
+    text-decoration-color: var(--color-primary);
+    text-underline-offset: 0.2em;
+  }
   .article-figure {
     margin-block: 1.5rem;
   }
