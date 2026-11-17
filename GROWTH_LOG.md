@@ -172,3 +172,15 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - Hindi pairs with hreflang: /blog/payment-fail-paisa-kat-gaya/, /blog/fake-receipt-kaise-pehchane/; Hindi payment checker now links four Hindi guides.
 - /blog/unpaid-toll-text-scam/ (position about 40) refreshed: FTC top text scams 2024 and May 2026 imposter trend (+40%, toll texts); updatedAt 2026-11-17.
 - Checks: npm test 40/40, build 70 pages, test:seo 0 errors/0 warnings, blog SEO 45 PASS. Deployed (version bab53c39), IndexNow 200 for 9 URLs. Search Console: indexing requested for the two English guides; daily quota exceeded before the two Hindi guides.
+
+## 2026-11-17 (later): answers for long queries
+
+- Search Console, last 3 months, query regex `^(?:\S+\s+){7,}\S+$` (8+ words): 57 queries, 252 impressions, 10 clicks, position 13.5. Many are pasted messages or quiz questions.
+- Answered at the top of the page that already ranks:
+  - india-post-courier-sms-scam: the "unsure about a courier delivery notification" quiz question (41 impressions, 0 clicks, position about 10) and the "update regarding your request has been shared via SMS" text (10 impressions, position 1.8, 0 clicks).
+  - how-to-tell-if-a-photo-is-a-screenshot: direct answer first, plus iPhone and "is a screenshot the same as a photo" FAQs.
+  - fake-upi-payment-screenshot: what a payment screenshot with date, time and UTR should show.
+  - /reverse-image-search/: a quick answer for "how to find where a screenshot is from" (14 impressions, 0 clicks, position 8).
+  - Homepage: a short how-to-tell-if-a-screenshot-is-fake answer under the uploader.
+- Photo-edited queries rank 66-95, too low for this fix; they need links instead.
+- Deployed (version 1af9bfd6), IndexNow 200 for 5 URLs. Compare these pages' clicks for 8+ word queries around 10 Dec.

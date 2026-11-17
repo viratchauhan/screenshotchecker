@@ -61,6 +61,70 @@ breaks one, update the test in the same commit and say why.
 ## Adding a guide (the routine used since November)
 
 1. Pick the topic from Search Console queries with impressions but no matching page, or a clear scam trend.
+   Long questions: Performance > Query filter > Custom (regex) `^(?:S+s+){7,}S+# ScreenshotChecker handoff (read this first)
+
+Last updated: 17 November 2026. Written so an assistant on a new computer can pick up the work without the old
+conversation. Keep it current: update "Where things stand" and "Next steps" at the end of every session.
+
+## What this is
+
+- **Site:** https://screenshotchecker.com: free, mostly in-browser tools to check whether a screenshot, payment receipt or
+  photo is real, edited or part of a scam (OCR, metadata, ELA, AI-image clues, redaction, comparison, link checks),
+  plus plain-language guides in English and Hindi.
+- **Stack:** Astro 7 + TypeScript + Tailwind, static output served by the Cloudflare Worker `screenshotchecker`
+  (static assets, `public/_headers`, build-generated `_redirects`). Repo: github.com/viratchauhan/screenshotchecker
+  (**public**: never commit secrets, account metrics beyond what GROWTH_LOG already states, or private ledgers).
+- **Owner:** Virat Chauhan (author byline, `/author/virat-chauhan/`). Not related to the owner's other project, beMahan.
+
+## Read next
+
+`AGENTS.md` (owner rules), `GROWTH_LOG.md` (dated history, newest entries at the bottom plus older ones at the top),
+`WORK-QUEUE.md` (task queue), `GROWTH-PLAN.md` (strategy), `BLOG-PUBLISHING.md` (date and quality rules).
+
+## Owner preferences and permissions
+
+- Ask before pushing to `main` or deploying unless the owner has said to deploy in the current session.
+  A session-level "deploy freely" covers that session only.
+- Outreach: short natural copy, no em dashes, disclose ownership. Never create accounts, accept terms or submit forms
+  on outside sites without the owner's go-ahead; prepare drafts (Gmail drafts are fine when asked) instead.
+- Do not repeat backlink submissions: check the private ledger (below) first.
+- Accuracy over volume: every claim in a guide is checked against an official or reputable source and linked;
+  figures are labelled "Fictional example"; tools are described with their limits (no "100% accurate" claims).
+
+## Private files (not in Git)
+
+On the owner's Google Drive: `My Drive/beMahan-PC/screenshotchecker-private/`
+- `audit/backlink-ledger.local.json`: every directory/editorial submission and its status.
+- `audit/*.local.jpg`: submission receipts; `audit/search-console-baseline.local.md`: early Search Console baseline.
+- `outreach-kit.md`: backlink and marketing plan, directory listing text, Hindi WhatsApp forwards, social posts.
+  Four matching outreach emails were saved as unsent Gmail drafts ("[ScreenshotChecker] ...") on 12 Nov 2026.
+Copy `audit/*.local.*` back into `audit/` locally if a task needs them (they are gitignored).
+
+## Where things live in the code
+
+| What | File |
+| --- | --- |
+| All blog guides (single source) | `src/data/blogArticles.ts` (`lang: "hi"` for Hindi) |
+| Blog index topic sections | `src/pages/blog/index.astro` (`TOPICS`; unlisted guides fall into "More guides", Hindi guides group automatically) |
+| English/Hindi guide pairs (hreflang + visible switch) | `src/pages/blog/[slug].astro` (`TRANSLATION_PAIRS`) |
+| Tool page explainer sections | `src/data/toolGuides.ts` + `src/components/ToolGuide.astro` |
+| Tool page FAQs | `src/data/toolFaqs.ts` (payment checker FAQs are inline in `src/pages/payment-screenshot-checker.astro`) |
+| Related guide/tool cards per page | `src/components/RelatedLinks.astro` |
+| Sitemap `lastmod` for non-blog pages | `src/data/pageDates.ts` (update when visible content changes) |
+| Author / Person schema | `src/data/author.ts`; Organization schema in `src/layouts/Layout.astro` |
+| Strict CSP (hashed inline scripts) | `astro.config.mjs` `security.csp`; header-only directives in `public/_headers` |
+| AI/LLM summary of the site | `public/llms.txt` (add every new guide) |
+| Footer guide links | `src/components/Footer.astro` |
+| Payment checker copy (EN/HI) | `src/data/paymentToolCopy.ts` |
+
+Tests pin some copy on purpose (for example the payment checker FAQ count in
+`src/lib/paymentAnalyzer/__tests__/paymentLandingCopy.test.mjs` and `scripts/verify-seo.mjs`). If a deliberate change
+breaks one, update the test in the same commit and say why.
+
+## Adding a guide (the routine used since November)
+
+ lists 8+ word queries; answer
+   high-impression, no-click ones at the top of the page that already ranks (URL filter `&query=~<regex>&breakdown=page`).
    Research official sources (RBI/NPCI/I4C/PIB/TRAI for India; FTC/FBI IC3 for the US) and open each link to confirm it.
 2. Write the guide as JSON matching the `BlogArticle` type (slug, title, `seoTitle` <= 60 chars counting `&amp;`/`&quot;`
    as entities, `metaDescription` <= 160, excerpt, targetKeywords, keyTakeaway, introduction, contentSections with
@@ -111,6 +175,8 @@ source alongside GA4 and Clarity.
   `payment-fail-paisa-kat-gaya`, `fake-receipt-kaise-pehchane`; `unpaid-toll-text-scam` refreshed with FTC 2025-26 data.
   IndexNow pinged. Search Console indexing requested for the two English guides on 17 Nov; the daily quota ran out
   before the two Hindi guides.
+- 17 Nov (later): long-query answers added at the top of the courier SMS, screenshot-or-photo and UPI guides, the
+  reverse image search page and the homepage (GROWTH_LOG has the queries). Deployed 1af9bfd6.
 - Backlinks: 8 directory/editorial submissions from 1 and 6 Oct are pending editorial review (see the ledger);
   none verified as published.
 
