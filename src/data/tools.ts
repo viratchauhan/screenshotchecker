@@ -257,4 +257,11 @@ export const TOOLS_REGISTRY: ToolDefinition[] = [
     workspaceType: 'comparison',
     icon: 'square-2-stack',
   },
+  {
+    id: 'utr-number-checker', name: 'UTR Number Checker', slug: 'utr-number-checker',
+    category: 'Utilities', route: '/utr-number-checker', workspaceType: 'utility', icon: 'banknotes',
+    description: 'Check whether a UTR or UPI reference matches the UPI, IMPS, NEFT or RTGS format, and how to confirm the payment in your bank.',
+    keywords: ['utr number', 'utr check', 'upi reference number', 'transaction id', 'neft utr'],
+    aliases: ['utr number checker', 'check utr number', 'upi transaction id format'],
+  },
 ];

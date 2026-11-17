@@ -7,6 +7,7 @@ import Uploader from './Uploader.astro';
 import AnalysisDashboard from './AnalysisDashboard.astro';
 import RedactorModal from './RedactorModal.astro';
 import RelatedLinks from './RelatedLinks.astro';
+import ToolGuide from './ToolGuide.astro';
 
 interface Props {
   title: string;
@@ -172,6 +173,8 @@ const structuredData = {
         ))}
       </div>
     </section>
+
+    <ToolGuide slug={currentPath.replace(/\//g, '')} />
 
     <!-- Limitations & Security Notice -->
     <section class="py-12 max-w-4xl mx-auto px-4 sm:px-6">

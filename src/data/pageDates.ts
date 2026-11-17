@@ -16,6 +16,7 @@ export const PAGE_UPDATED_AT: Record<string, string> = {
   '/privacy/': '2026-10-14',
   '/resources/': '2026-11-12',
   '/reverse-image-search/': '2026-11-17',
+  '/utr-number-checker/': '2026-11-17',
   '/screenshot-analyzer/': '2026-11-12',
   '/screenshot-comparison/': '2026-10-29',
   '/screenshot-detector/': '2026-11-06',

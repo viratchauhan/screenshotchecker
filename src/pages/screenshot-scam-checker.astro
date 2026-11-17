@@ -2,10 +2,10 @@
 import ToolLayout from '../components/ToolLayout.astro';
 
 const props = {
-  title: "Screenshot Scam Checker: Upload a Message, Spot Scams",
-  metaDescription: "Received a suspicious SMS, WhatsApp, or email capture? Review scam signals with browser-local image processing and clear limitations.",
+  title: "Screenshot Scam Checker: Upload a Screenshot, Spot Scams",
+  metaDescription: "Upload a screenshot of a suspicious SMS, WhatsApp chat or email. This free scam checker flags urgency, threats, payment requests and known scam patterns.",
   badge: "Scam & Phishing Risk Analysis",
-  heading: "Check Screenshot Messages for Scam Signals",
+  heading: "Screenshot Scam Checker: Is This Message a Scam?",
   subheading: "Identify common social engineering patterns, artificial urgency, legal threats, and suspicious verification demands in SMS, email, and chat captures.",
   howItWorksSteps: [
     { step: "1", title: "Upload Message Capture", desc: "Upload a screenshot of the suspicious SMS, WhatsApp message, email, or social DM." },
@@ -17,12 +17,26 @@ const props = {
     { title: "Delivery Courier Alerts (USPS, FedEx, DHL)", desc: "Spot fake tracking notices requesting address verification or customs fee payments." },
     { title: "Prize & Lottery Winner Alerts", desc: "Flag unsolicited notifications claiming you've won gift cards, cash prizes, or crypto rewards." },
     { title: "Two-Factor / OTP Phishing", desc: "Detect messages urging you to forward or reveal 6-digit authentication codes." },
+    { title: "Task Jobs and Prepaid Tasks", desc: "Check WhatsApp or Telegram offers to earn money by liking videos or writing reviews, which later ask for a deposit." },
+    { title: "KYC, APK and Toll or Challan Texts", desc: "Review bank KYC update messages with app files, unpaid toll texts and e-challan fines that push you to a link." },
   ],
   limitations: [
     "This tool provides heuristic risk signals; it is NOT a definitive fraud detector. Sophisticated scams may evade pattern rules, while legitimate urgent notices may trigger warnings.",
     "Always independently verify suspicious messages by contacting the official organization through their verified website or phone number.",
   ],
   faqs: [
+    {
+      question: "How do I check if a message is a scam using a screenshot?",
+      answer: "Upload the screenshot here. The checker reads the text and flags urgency, threats, payment or fee requests, requests for OTPs or PINs, app files, impersonation and links, and compares the wording with 28 documented scam patterns. Then confirm the claim yourself in the official app or website, never through the message.",
+    },
+    {
+      question: "Is my screenshot uploaded to a server?",
+      answer: "The image is processed in your browser for text extraction and the scam checks. The site uses analytics; see the privacy policy for the network requests it makes.",
+    },
+    {
+      question: "Where can I report a scam message?",
+      answer: "In India, report scam SMS and calls on Chakshu (Sanchar Saathi), and if you lost money call 1930 and file at cybercrime.gov.in. In the US, forward scam texts to 7726 and report at ReportFraud.ftc.gov. Contact your bank at once if you shared payment details.",
+    },
     {
       question: "Does this tool guarantee whether a message is 100% genuine or fake?",
       answer: "No. Security best practices dictate that no automated tool can definitively guarantee authenticity without backend transaction verification. We provide clear signal indicators and risk explanations to guide your judgment.",

@@ -1,0 +1,166 @@
+---
+import DomahanBanner from '../components/DomahanBanner.astro';
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
+
+const title = 'UTR Number Checker: Check UTR Format for UPI, NEFT, RTGS';
+const description = 'Paste a UTR or UPI reference number to see which payment type its format matches, then learn how to confirm the payment in your own bank app.';
+const url = 'https://screenshotchecker.com/utr-number-checker/';
+
+const faqs: Array<[string, string]> = [
+  ['What is a UTR number?', 'UTR stands for Unique Transaction Reference. Banks give one to every NEFT, RTGS, IMPS and UPI transfer so that the sender, the receiver and both banks can find the same transaction. In UPI apps it may be labelled UPI transaction ID, UPI Ref No or UTR.'],
+  ['How many digits is a UTR number?', 'UPI and IMPS references are usually 12 digits. NEFT UTRs are usually 16 characters and RTGS UTRs 22 characters, both starting with letters for the sending bank. Apps and banks can show their own internal IDs too, so a different length is not proof of fraud.'],
+  ['Can a UTR number prove that a payment is real?', 'No. A UTR in a screenshot can be copied from an old payment, typed into an edited image or simply made up in the right format. Only the receiver\'s own bank records can confirm the money arrived. Search your bank app or statement for the amount, time and UTR, and ask your bank if you cannot find it.'],
+  ['How do I check a payment using a UTR number?', 'If you are the receiver, open your own bank app or statement (not a link from the payer) and look for a credit with the same amount, time and reference. If it is not there, ask your bank\'s official helpline to trace the UTR. If you are the sender, give the UTR to your bank when you raise a complaint about a failed or missing payment.'],
+  ['Where do I find the UTR in Google Pay, PhonePe or Paytm?', 'Open the transaction in the app\'s history. Google Pay shows it as UPI transaction ID, PhonePe lists the UTR under the account it was debited from, and Paytm shows UPI Ref No. Your bank statement shows the same reference next to the entry.'],
+  ['Does this checker contact my bank or NPCI?', 'No. It only looks at the characters you type, in your browser, and tells you which common format they match. It cannot see whether the transaction exists, its amount or who received it.'],
+  ['What should I do if a payment with this UTR never arrived?', 'Do not hand over goods or refund anything until the money is in your own account. If you sent money and it went missing, complain to your bank or UPI app with the UTR. If you were tricked into paying, call 1930 and report on cybercrime.gov.in quickly.'],
+];
+
+const structuredData = { '@context': 'https://schema.org', '@graph': [
+  { '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://screenshotchecker.com/' },
+    { '@type': 'ListItem', position: 2, name: 'Tools', item: 'https://screenshotchecker.com/tools/' },
+    { '@type': 'ListItem', position: 3, name: 'UTR number checker', item: url },
+  ] },
+  { '@type': 'WebApplication', name: 'UTR Number Format Checker', url, description, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Web browser', offers: { '@type': 'Offer', price: '0', priceCurrency: 'INR' } },
+  { '@type': 'FAQPage', mainEntity: faqs.map(([question, answer]) => ({ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } })) },
+] };
+---
+<Layout title={title} description={description} canonicalUrl={url} structuredData={structuredData}>
+  <Header currentPath="/utr-number-checker" />
+  <main class="utr-page">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true"> / </span><a href="/tools/">Tools</a><span aria-hidden="true"> / </span><span aria-current="page">UTR number checker</span></nav>
+    <header class="hero">
+      <p class="eyebrow">A REFERENCE IS NOT A PAYMENT</p>
+      <h1>UTR number checker: is this UTR format valid?</h1>
+      <p class="intro">Paste the UTR or UPI reference from a payment screenshot. You will see which payment type its format matches and what to check next.</p>
+      <p class="quick-answer"><strong>Quick answer:</strong> UPI and IMPS references are usually 12 digits, NEFT UTRs 16 characters and RTGS UTRs 22 characters. A UTR in the right format still does not prove that money reached you: search your own bank app or statement for the same amount, time and reference.</p>
+    </header>
+
+    <section class="panel" aria-labelledby="utr-heading">
+      <h2 id="utr-heading">Check a UTR number</h2>
+      <label for="utr-input">UTR, UPI transaction ID or reference number</label>
+      <input id="utr-input" type="text" inputmode="text" autocomplete="off" spellcheck="false" maxlength="40" placeholder="For example 412345678901" />
+      <div class="actions">
+        <button id="utr-check" type="button" class="btn-primary">Check format</button>
+        <button id="utr-clear" type="button" class="btn-secondary">Clear</button>
+      </div>
+      <div id="utr-result" class="result" role="status" aria-live="polite" hidden></div>
+      <p class="note">Checked in your browser only. Nothing you type is sent anywhere, and this tool cannot see your bank or any transaction.</p>
+    </section>
+    <DomahanBanner />
+
+    <section>
+      <h2>Common UTR formats in India</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Payment type</th><th>Usual format</th><th>Where you see it</th></tr></thead>
+          <tbody>
+            <tr><td>UPI</td><td>12 digits</td><td>UPI transaction ID, UPI Ref No or UTR in Google Pay, PhonePe, Paytm and bank apps</td></tr>
+            <tr><td>IMPS</td><td>12 digits (reference number)</td><td>Bank app transfer receipt and statement</td></tr>
+            <tr><td>NEFT</td><td>16 letters and numbers, starting with the sending bank's letters</td><td>Bank transfer receipt and statement</td></tr>
+            <tr><td>RTGS</td><td>22 letters and numbers, starting with the sending bank's letters</td><td>Bank transfer receipt and statement</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>These are the usual lengths described by banks and payment providers such as <a href="https://business.phonepe.com/articles/utr-number-meaning-what-every-merchant-needs-to-know" rel="noopener" target="_blank">PhonePe Business</a> and <a href="https://www.ujjivansfb.bank.in/banking-blogs/banking-services/utr-number-track-payment" rel="noopener" target="_blank">Ujjivan Small Finance Bank</a>. Apps also show their own order or transaction IDs, which can look different, so check which field you copied.</p>
+    </section>
+
+    <section>
+      <h2>How to confirm a payment with a UTR</h2>
+      <ol>
+        <li><strong>Open your own bank app or statement</strong> yourself. Do not use a link, QR code or app the payer sends.</li>
+        <li><strong>Find a credit</strong> with the same amount at about the same time.</li>
+        <li><strong>Match the reference.</strong> The UTR on your statement should be the one in the payer's screenshot.</li>
+        <li><strong>Not there?</strong> Treat the payment as not received. Pending, processing and failed screens are not payments. Ask your bank's official helpline to trace the UTR if you need to.</li>
+        <li><strong>Only then</strong> hand over goods, services or a refund.</li>
+      </ol>
+      <p>To look for other warning signs in the screenshot itself, use the <a href="/payment-screenshot-checker/">fake payment screenshot checker</a>. Our guides explain <a href="/blog/fake-upi-payment-screenshot/">fake UPI screenshots</a>, <a href="/blog/payment-failed-screenshot-scam/">payment failed screenshots</a> and <a href="/blog/fake-payment-screenshot-kaise-pehchane/">फेक पेमेंट स्क्रीनशॉट कैसे पहचानें</a>.</p>
+    </section>
+
+    <section>
+      <h2>Why a real-looking UTR is not proof</h2>
+      <p>A fake payment screenshot needs a reference that looks right, and that is easy: it can be copied from an older genuine payment, from someone else's receipt, or typed in the correct length. Scammers also send "payment processing" or "money debited, will be credited in 24 hours" screens with a UTR to make a seller hand over goods first. The UTR is useful because you can look it up in your own records. It is not useful as a picture.</p>
+    </section>
+
+    <section>
+      <h2>Paid a scammer or lost money?</h2>
+      <p>Act within the first hour if you can: call your bank's official helpline to block further debits and raise a dispute with the UTR, call the 1930 cyber fraud helpline, and file a complaint at cybercrime.gov.in. Keep the screenshots and the UTR for your complaint.</p>
+    </section>
+
+    <section><h2>UTR number questions</h2>{faqs.map(([question, answer]) => <details><summary>{question}</summary><p>{answer}</p></details>)}</section>
+    <RelatedLinks currentPath="/utr-number-checker" />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  type Verdict = { title: string; body: string; tone: 'ok' | 'warn' };
+
+  function classify(raw: string): Verdict {
+    const value = raw.replace(/[\s-]/g, '').toUpperCase();
+    const after = ' A matching format does not prove the payment happened: look for the same reference in your own bank app or statement.';
+    if (!value) return { title: 'Enter a reference', body: 'Paste the UTR, UPI transaction ID or reference number from the receipt.', tone: 'warn' };
+    if (/^\d{12}$/.test(value)) return { title: 'Matches the UPI or IMPS format (12 digits)', body: 'UPI transaction IDs and IMPS reference numbers are usually 12 digits.' + after, tone: 'ok' };
+    if (/^[A-Z]{4}[A-Z0-9]{12}$/.test(value)) return { title: 'Matches the NEFT UTR format (16 characters)', body: 'NEFT UTRs are usually 16 letters and numbers starting with the sending bank\'s letters.' + after, tone: 'ok' };
+    if (/^[A-Z]{4}[A-Z0-9]{18}$/.test(value)) return { title: 'Matches the RTGS UTR format (22 characters)', body: 'RTGS UTRs are usually 22 letters and numbers starting with the sending bank\'s letters.' + after, tone: 'ok' };
+    if (/^\d+$/.test(value)) return { title: `Not a standard UTR length (${value.length} digits)`, body: 'UPI and IMPS references are usually exactly 12 digits. Check that you copied the UTR or UPI Ref No field, not an order ID, phone number or amount. An unusual format is a reason to check carefully, not proof of fraud.', tone: 'warn' };
+    if (/^T\d{10,}/.test(value)) return { title: 'Looks like an app transaction ID, not a bank UTR', body: 'Some apps show their own transaction ID starting with a letter. Open the transaction details and look for the UTR or UPI Ref No, usually 12 digits.', tone: 'warn' };
+    return { title: `Does not match a common UTR format (${value.length} characters)`, body: 'Common formats are 12 digits (UPI, IMPS), 16 characters (NEFT) or 22 characters (RTGS). Banks and apps also use internal IDs, so this is a reason to confirm in your own bank records, not proof of fraud.', tone: 'warn' };
+  }
+
+  const input = document.getElementById('utr-input') as HTMLInputElement | null;
+  const result = document.getElementById('utr-result');
+  const run = () => {
+    if (!input || !result) return;
+    const verdict = classify(input.value);
+    result.hidden = false;
+    result.dataset.tone = verdict.tone;
+    result.replaceChildren();
+    const strong = document.createElement('strong');
+    strong.textContent = verdict.title;
+    const p = document.createElement('p');
+    p.textContent = verdict.body;
+    result.append(strong, p);
+  };
+  document.getElementById('utr-check')?.addEventListener('click', run);
+  input?.addEventListener('keydown', (event) => { if (event.key === 'Enter') run(); });
+  document.getElementById('utr-clear')?.addEventListener('click', () => {
+    if (input) { input.value = ''; input.focus(); }
+    if (result) { result.hidden = true; result.replaceChildren(); }
+  });
+</script>
+
+<style>
+  .utr-page { width: 100%; min-width: 0; box-sizing: border-box; max-width: 62rem; margin: 2rem auto; padding: 0 1rem 3rem; line-height: 1.7; color: var(--color-body); }
+  .utr-page * { box-sizing: border-box; }
+  .crumbs { font-size: .75rem; color: var(--color-muted); display: flex; flex-wrap: wrap; gap: .5rem; }
+  .crumbs a { text-decoration: none; }
+  .hero { text-align: center; max-width: 48rem; margin: 3rem auto 2rem; }
+  .eyebrow { font-size: .72rem; letter-spacing: .14em; color: var(--color-muted); }
+  .hero h1 { font-family: var(--font-serif); font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 500; letter-spacing: -.03em; line-height: 1.15; color: var(--color-ink); }
+  .hero .intro { font-size: 1.05rem; max-width: 37rem; margin: 1rem auto; }
+  .quick-answer { text-align: left; font-size: .95rem; max-width: 37rem; margin: 1rem auto; padding: .85rem 1rem; border: 1px solid var(--color-hairline); border-radius: .75rem; background: var(--color-surface-card); }
+  h2 { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 500; color: var(--color-ink); margin-bottom: .5rem; }
+  p { margin: .8rem 0; } section { margin: 2.5rem 0; }
+  a { text-decoration: underline; text-underline-offset: .2em; }
+  .panel { border: 1px solid var(--color-hairline); border-radius: 1rem; padding: 1.25rem; background: var(--color-surface-card); }
+  label { display: block; font-weight: 600; color: var(--color-ink); }
+  #utr-input { display: block; width: 100%; max-width: 32rem; margin: .75rem 0; padding: .7rem .9rem; font-size: 1.1rem; font-family: ui-monospace, monospace; letter-spacing: .04em; border: 1px solid var(--color-hairline); border-radius: .6rem; background: var(--color-canvas, transparent); color: var(--color-ink); }
+  .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin: .5rem 0 1rem; }
+  .result { border-radius: .75rem; padding: .9rem 1rem; border: 1px solid var(--color-hairline); overflow-wrap: anywhere; }
+  .result[data-tone='ok'] { border-left: 4px solid var(--color-success, #2f7d4f); }
+  .result[data-tone='warn'] { border-left: 4px solid var(--color-warning, #b7791f); }
+  .result p { margin: .3rem 0 0; }
+  .note { font-size: .8rem; color: var(--color-muted); }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  th, td { text-align: left; padding: .6rem .7rem; border-bottom: 1px solid var(--color-hairline); vertical-align: top; }
+  th { color: var(--color-ink); font-weight: 600; }
+  ol { list-style: decimal; padding-left: 1.5rem; } li { margin: .5rem 0; }
+  details { padding: 1rem 0; border-bottom: 1px solid var(--color-hairline); } summary { cursor: pointer; font-weight: 600; color: var(--color-ink); }
+  @media (max-width: 760px) { .hero { margin: 2rem auto 1.5rem; } }
+</style>

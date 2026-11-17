@@ -262,6 +262,47 @@ export const TOOL_GUIDES: Record<string, ToolGuide> = {
       },
     ],
   },
+  'screenshot-scam-checker': {
+    heading: 'How to Check if a Message Is a Scam From a Screenshot',
+    intro:
+      'Upload a screenshot of the SMS, WhatsApp chat, email or social media DM. The checker reads the words in the picture, compares them with common scam tactics and a set of documented scam message patterns, and explains each warning sign it finds. It is a second opinion before you tap, pay or reply, not a verdict on who sent the message.',
+    sections: [
+      {
+        heading: 'What the scam checker looks for',
+        paragraphs: [
+          'Most scam messages lean on the same few levers, whatever brand or government office they pretend to be. The checker scores each of these separately so you can see why a message was flagged:',
+        ],
+        list: [
+          '<strong>Urgency:</strong> deadlines such as "within 24 hours", "today only" or "last warning".',
+          '<strong>Threats:</strong> account blocks, power disconnection, arrest, fines or legal action.',
+          '<strong>Payment requests:</strong> a fee, fine, deposit, redelivery charge or "prepaid task" before you can get something.',
+          '<strong>Requests for secrets:</strong> OTPs, UPI PINs, passwords, card numbers or a WhatsApp 6-digit code.',
+          '<strong>Files and apps:</strong> APK files or "update" apps sent in a chat.',
+          '<strong>Impersonation:</strong> a bank, courier, toll agency, police, tax office or well-known shop named in an unexpected message.',
+          '<strong>Social engineering:</strong> wrong-number openers, paid "like and review" jobs and investment groups.',
+          '<strong>Links:</strong> web addresses in the text, checked against a labelled dataset of reported phishing links.',
+        ],
+      },
+      {
+        heading: 'Scam patterns it recognises',
+        paragraphs: [
+          'Beyond the general signals, the text is compared with 28 documented scam message patterns from India and the US, including bank re-KYC and APK messages, task job and review scams, parcel and India Post address texts, unpaid toll texts (E-ZPass, SunPass), e-challan and Parivahan messages, electricity disconnection threats, digital arrest calls, income tax refund messages, reward points expiry, WhatsApp code theft, crypto investment groups, instant loan apps and KBC lottery messages. Our guides explain each one in plain language, for example the <a href="/blog/whatsapp-telegram-task-job-scam/">task job scam</a>, the <a href="/blog/india-post-courier-sms-scam/">India Post SMS</a> and the <a href="/blog/digital-arrest-scam/">digital arrest scam</a>.',
+        ],
+      },
+      {
+        heading: 'How to read the result',
+        paragraphs: [
+          'A high score means the message uses several tactics scammers rely on. A low score only means no known pattern matched: new wording, a cropped screenshot or blurry text can slip through, and a real bank alert can also sound urgent. Whatever the score, check the claim yourself by opening the official app or typing the official website, never through a link or number in the message.',
+        ],
+      },
+      {
+        heading: 'Already replied, paid or shared a code?',
+        paragraphs: [
+          'Act quickly. In India, call your bank and the 1930 cyber fraud helpline, and report on cybercrime.gov.in; report a scam SMS or call you did not lose money to through Chakshu on the Sanchar Saathi portal. In the US, contact your bank, forward scam texts to 7726 (SPAM) and report at ReportFraud.ftc.gov. Keep the screenshots: they are useful evidence for your report.',
+        ],
+      },
+    ],
+  },
 };
 
 export function getToolGuide(slug: string): ToolGuide | undefined {

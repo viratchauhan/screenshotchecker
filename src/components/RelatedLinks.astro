@@ -113,6 +113,13 @@ const TOOLS_CATALOG: Record<
     action: 'Compare image versions',
     category: 'Comparison',
   },
+  'utr-number-checker': {
+    name: 'UTR Number Checker',
+    href: '/utr-number-checker/',
+    desc: 'See whether a UTR or UPI reference matches the UPI, IMPS, NEFT or RTGS format, then confirm it in your own bank records.',
+    action: 'Check a UTR format',
+    category: 'Payments',
+  },
   'suspicious-link-checker': {
     name: 'Suspicious Link Checker',
     href: '/suspicious-link-checker',
@@ -128,7 +135,8 @@ const cleanRoute = currentPath.replace(/^\//, '').replace(/\/$/, '');
 const DEFAULT_TOOL_RELATIONS: Record<string, string[]> = {
   '': ['screenshot-analyzer', 'payment-screenshot-checker', 'image-manipulation-checker'],
   'screenshot-analyzer': ['payment-screenshot-checker', 'image-manipulation-checker', 'screenshot-scam-checker'],
-  'payment-screenshot-checker': ['screenshot-analyzer', 'image-manipulation-checker', 'screenshot-redactor'],
+  'payment-screenshot-checker': ['utr-number-checker', 'screenshot-analyzer', 'image-manipulation-checker'],
+  'utr-number-checker': ['payment-screenshot-checker', 'screenshot-comparison', 'screenshot-scam-checker'],
   'payment-screenshot-checker/hindi': ['payment-screenshot-checker', 'screenshot-scam-checker', 'screenshot-redactor'],
   'image-manipulation-checker': ['screenshot-comparison', 'ai-image-detector', 'payment-screenshot-checker'],
   'ai-image-detector': ['image-manipulation-checker', 'screenshot-analyzer', 'screenshot-metadata-checker'],
@@ -163,6 +171,7 @@ const DEFAULT_ARTICLE_RELATIONS: Record<string, string[]> = {
   'screenshot-privacy-checker': ['redact-screenshot-before-sharing', 'exif-metadata', 'fake-bank-transfer-screenshot', 'whatsapp-telegram-task-job-scam'],
   'screenshot-comparison': ['fake-whatsapp-chat-screenshot', 'fake-bank-transfer-screenshot', 'screenshot-checker-online', 'fake-upi-payment-screenshot'],
   'reverse-image-search': ['reverse-image-search-screenshot', 'fake-social-media-post-screenshot', 'how-to-tell-if-a-photo-is-a-screenshot', 'ai-image-detector-online'],
+  'utr-number-checker': ['fake-upi-payment-screenshot', 'payment-failed-screenshot-scam', 'fake-bank-transfer-screenshot', 'fake-payment-screenshot-kaise-pehchane'],
   'suspicious-link-checker': ['suspicious-link-checker-online', 'e-challan-sms-scam', 'usps-redelivery-text-scam', 'smishing-fake-sms'],
 };
 
