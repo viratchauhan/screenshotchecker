@@ -333,6 +333,38 @@ export const TOOL_GUIDES: Record<string, ToolGuide> = {
       },
     ],
   },
+  'screenshot-analyzer': {
+    heading: 'How to Tell if a Screenshot Is Real or Fake',
+    intro:
+      'A screenshot is easy to edit and easy to make from scratch, so no single check can prove it real. The analyzer runs several checks at once and shows what each one found, so you can decide what to verify next.',
+    sections: [
+      {
+        heading: 'What the analyzer checks',
+        paragraphs: [],
+        list: [
+          '<strong>Text (OCR):</strong> reads names, amounts, dates and messages so you can compare them with the original source.',
+          '<strong>Screenshot type:</strong> recognises chats, payment receipts, invoices, store receipts, order confirmations and promotions, and applies checks that fit that type.',
+          '<strong>Metadata:</strong> shows dimensions and any file details left behind, such as editing software. Shared images often carry none, which is normal.',
+          '<strong>Error level analysis:</strong> highlights areas with a different compression history, which can point to a pasted or retyped figure on JPEG images.',
+          '<strong>Scam signals:</strong> flags urgency, threats, payment requests and known scam message patterns in the text.',
+          '<strong>Personal data:</strong> warns about phone numbers, emails, card or account numbers visible in the image before you share it.',
+        ],
+      },
+      {
+        heading: 'A quick routine for any screenshot',
+        paragraphs: [
+          'First, go to the source: open the chat, account, payment app or post yourself and look for the same message, payment or post. Then check the details in the image: fonts and spacing that change mid-line, names and amounts that sit slightly off the line, a status bar time or battery that does not fit the story, and edges that look smudged. Finally, look for the picture elsewhere with a <a href="/reverse-image-search/">reverse image search</a>.',
+          'Type-specific guides go deeper: <a href="/blog/fake-whatsapp-chat-screenshot/">fake WhatsApp chats</a>, <a href="/payment-screenshot-checker/">payment screenshots</a>, <a href="/blog/fake-social-media-post-screenshot/">social media posts</a> and <a href="/blog/ai-generated-screenshot/">AI-generated screenshots</a>.',
+        ],
+      },
+      {
+        heading: 'How to read the result',
+        paragraphs: [
+          'Treat every finding as a clue. A clean result means none of the checks found a problem, not that the screenshot is genuine: a screenshot built from scratch or retaken on another phone can pass. A warning means something deserves a closer look at the source. When the stakes are real, such as money, a job or a reputation, confirm with the person or organisation directly.',
+        ],
+      },
+    ],
+  },
 };
 
 export function getToolGuide(slug: string): ToolGuide | undefined {
