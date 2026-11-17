@@ -11,7 +11,7 @@ const TOPICS = [
   { id: 'payments', title: 'Payment screenshots', intro: 'UPI, bank transfer, PayPal, Venmo and failed-payment screenshots: why a screenshot never proves payment and how to confirm money really arrived.',
     slugs: ['fake-upi-payment-screenshot', 'payment-failed-screenshot-scam', 'qr-code-scam', 'fake-bank-transfer-screenshot', 'fake-payment-screenshot-paypal-venmo-cash-app', 'fake-crypto-profit-screenshots'] },
   { id: 'scam-messages', title: 'Scam texts, calls and messages', intro: 'Delivery, toll, electricity, traffic fine, task job and digital arrest scams: what the messages look like and what to do.',
-    slugs: ['digital-arrest-scam', 'trai-sim-block-call-scam', 'fake-customer-care-number-scam', 'e-challan-sms-scam', 'whatsapp-telegram-task-job-scam', 'smishing-fake-sms', 'india-post-courier-sms-scam', 'electricity-bill-disconnection-sms-scam', 'usps-redelivery-text-scam', 'unpaid-toll-text-scam', 'suspicious-link-checker-online'] },
+    slugs: ['digital-arrest-scam', 'trai-sim-block-call-scam', 'fake-customer-care-number-scam', 'e-challan-sms-scam', 'whatsapp-telegram-task-job-scam', 'fake-job-offer-letter', 'fake-amazon-flipkart-refund-scam', 'smishing-fake-sms', 'india-post-courier-sms-scam', 'electricity-bill-disconnection-sms-scam', 'usps-redelivery-text-scam', 'unpaid-toll-text-scam', 'suspicious-link-checker-online'] },
   { id: 'verify', title: 'Checking chats, posts and screenshots', intro: 'How to verify a screenshot: find its source, check chats and social posts, and run a full verification routine.',
     slugs: ['screenshot-checker-online', 'where-is-this-screenshot-from', 'fake-whatsapp-chat-screenshot', 'fake-social-media-post-screenshot', 'reverse-image-search-screenshot', 'how-to-tell-if-a-photo-is-a-screenshot', 'screenshot-analyzer-online'] },
   { id: 'ai-forensics', title: 'AI images and photo forensics', intro: 'Edited photos, AI-generated images and screenshots, metadata and what forensic tools can and cannot prove.',
@@ -29,7 +29,7 @@ const sections = TOPICS.map((t) => {
 });
 const rest = articles.filter((a) => !placed.has(a.slug));
 if (rest.length) sections.push({ id: 'more', title: 'More guides', intro: 'Other guides from ScreenshotChecker.', lang: 'en', articles: rest });
-sections.push({ id: 'hindi', title: 'हिंदी गाइड', intro: 'पेमेंट स्क्रीनशॉट, डिजिटल अरेस्ट और फर्जी चालान से जुड़ी गाइड हिंदी में।', lang: 'hi', articles: hindi });
+sections.push({ id: 'hindi', title: 'हिंदी गाइड', intro: 'पेमेंट स्क्रीनशॉट, फेल पेमेंट, नकली रसीद, QR कोड, टास्क जॉब, डिजिटल अरेस्ट और फर्जी चालान से जुड़ी गाइड हिंदी में।', lang: 'hi', articles: hindi });
 const featured = bySlug.get('scam-statistics') ?? articles[articles.length - 1];
 
 const canonicalUrl = 'https://screenshotchecker.com/blog/';

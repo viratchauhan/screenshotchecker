@@ -57,6 +57,8 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [How to tell if a photo is edited or fake](https://screenshotchecker.com/blog/how-to-tell-if-a-photo-is-edited/)
 - [How to tell if a screenshot is AI-generated](https://screenshotchecker.com/blog/ai-generated-screenshot/)
 - [How to spot a fake or AI-generated receipt](https://screenshotchecker.com/blog/fake-receipt-ai-generated/)
+- [How to spot a fake job offer letter](https://screenshotchecker.com/blog/fake-job-offer-letter/)
+- [Fake Amazon or Flipkart order, refund and delivery messages](https://screenshotchecker.com/blog/fake-amazon-flipkart-refund-scam/)
 - [QR code scams: scan to receive money, fake stickers, parking codes](https://screenshotchecker.com/blog/qr-code-scam/)
 - [Fake TRAI call: your SIM will be blocked](https://screenshotchecker.com/blog/trai-sim-block-call-scam/)\n- [Fake customer care number scam](https://screenshotchecker.com/blog/fake-customer-care-number-scam/)
 - [UPI fraud and online scam statistics, India and US (official sources)](https://screenshotchecker.com/blog/scam-statistics/)
@@ -66,6 +68,8 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [फर्जी ई-चालान मैसेज कैसे पहचानें (Hindi)](https://screenshotchecker.com/blog/fake-challan-message-kaise-pehchane/)
 - [QR कोड फ्रॉड से कैसे बचें (Hindi)](https://screenshotchecker.com/blog/qr-code-fraud-se-kaise-bache/)
 - [टास्क जॉब स्कैम से कैसे बचें (Hindi)](https://screenshotchecker.com/blog/task-job-scam-se-kaise-bache/)
+- [पेमेंट फेल, पैसा कट गया: स्क्रीनशॉट असली या धोखा (Hindi)](https://screenshotchecker.com/blog/payment-fail-paisa-kat-gaya/)
+- [नकली रसीद कैसे पहचानें (Hindi)](https://screenshotchecker.com/blog/fake-receipt-kaise-pehchane/)
 
 ## Key facts for accurate answers
 

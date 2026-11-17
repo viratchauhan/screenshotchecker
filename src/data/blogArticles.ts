@@ -827,7 +827,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'Report phishing SMS',
       'Fraud SMS detector',
     ],
-    relatedSlugs: ["trai-sim-block-call-scam", "e-challan-sms-scam", "scam-statistics", "usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
+    relatedSlugs: ["fake-amazon-flipkart-refund-scam", "trai-sim-block-call-scam", "e-challan-sms-scam", "scam-statistics", "usps-redelivery-text-scam", "india-post-courier-sms-scam", "unpaid-toll-text-scam", "whatsapp-telegram-task-job-scam", "suspicious-link-checker-online"],
     cta: {
       label: 'Check a Suspicious Message',
       url: '/',
@@ -1939,7 +1939,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["task-job-scam-se-kaise-bache", "qr-code-fraud-se-kaise-bache", "qr-code-scam", "digital-arrest-kya-hai", 
+    "relatedSlugs": ["payment-fail-paisa-kat-gaya", "task-job-scam-se-kaise-bache", "qr-code-fraud-se-kaise-bache", "qr-code-scam", "digital-arrest-kya-hai", 
       "fake-upi-payment-screenshot",
       "smishing-fake-sms",
       "screenshot-checker-online"
@@ -2456,7 +2456,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["task-job-scam-se-kaise-bache", "digital-arrest-scam", "fake-crypto-profit-screenshots", 
+    "relatedSlugs": ["fake-job-offer-letter", "task-job-scam-se-kaise-bache", "digital-arrest-scam", "fake-crypto-profit-screenshots", 
       "fake-whatsapp-chat-screenshot",
       "smishing-fake-sms",
       "fake-upi-payment-screenshot"
@@ -2469,6 +2469,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
   },
   {
     "slug": "unpaid-toll-text-scam",
+    "updatedAt": "2026-11-17",
     "title": "Unpaid Toll Text Scam: Is That E-ZPass, SunPass or FasTrak Message Real?",
     "seoTitle": "Unpaid Toll Text? How to Tell If It's a Scam",
     "metaDescription": "Got a text saying you owe an E-ZPass, SunPass or FasTrak toll? Don't tap the link. Check your account on the agency's own site, then report the text.",
@@ -2504,6 +2505,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         "paragraphs": [
           "The message is short and specific. It names a toll service, states a small balance, sets a deadline and offers a link to pay. In its <a href=\"https://www.ic3.gov/PSA/2024/PSA240412\">public service announcement on toll smishing (I-041224-PSA)</a>, the FBI's Internet Crime Complaint Center described texts claiming an outstanding toll of $12.51 with a threatened $50.00 late fee, a link to a site posing as the state toll service, and sending phone numbers that changed from state to state.",
           "The FTC's <a href=\"https://consumer.ftc.gov/consumer-alerts/2025/01/got-text-about-unpaid-tolls-its-probably-scam\">January 2025 consumer alert</a> says these texts reach people whether or not they have driven on a toll road, and that the link leads to a page asking for card or bank details. The alert adds that scammers may also try to collect personal details such as a driver's license number, which can feed identity theft.",
+          "These texts have not gone away. The FTC counted unpaid toll notices among the <a href=\"https://www.ftc.gov/news-events/data-visualizations/data-spotlight/2025/04/top-text-scams-2024\">top five text scams of 2024</a>, a year when people reported losing $470 million to scams that started with a text. In a <a href=\"https://consumer.ftc.gov/consumer-alerts/2026/05/new-trends-reports-imposter-scams\">May 2026 alert</a>, the FTC said reports of government imposter scams rose 40%, partly because of overdue toll texts naming E-ZPass, SunPass, FasTrak and TxTag, some threatening late fees or a suspended vehicle registration.",
           "The small amount is the point. A $6 or $12 charge feels too minor to question, and the late fee threat pushes you to pay now rather than check. The link is usually a lookalike: a web address that mixes a toll brand or the words toll, pay or turnpike into a domain the agency does not use. The FBI's example was myturnpiketollservices.com, which sounds official but is not a toll agency's site."
         ],
         "callout": {
@@ -3224,7 +3226,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fake-customer-care-number-scam", "qr-code-scam", "scam-statistics", 
+    "relatedSlugs": ["payment-fail-paisa-kat-gaya", "fake-customer-care-number-scam", "qr-code-scam", "scam-statistics", 
       "fake-upi-payment-screenshot",
       "fake-payment-screenshot-kaise-pehchane",
       "fake-bank-transfer-screenshot"
@@ -4495,7 +4497,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["fake-receipt-kaise-pehchane", 
       "ai-generated-screenshot",
       "how-to-tell-if-a-photo-is-edited",
       "fake-bank-transfer-screenshot"
@@ -4611,7 +4613,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fake-customer-care-number-scam", "qr-code-fraud-se-kaise-bache", 
+    "relatedSlugs": ["fake-amazon-flipkart-refund-scam", "fake-customer-care-number-scam", "qr-code-fraud-se-kaise-bache", 
       "fake-upi-payment-screenshot",
       "payment-failed-screenshot-scam",
       "suspicious-link-checker-online"
@@ -4927,7 +4929,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["fake-amazon-flipkart-refund-scam", 
       "qr-code-scam",
       "payment-failed-screenshot-scam",
       "smishing-fake-sms"
@@ -5038,7 +5040,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["fake-job-offer-letter", 
       "whatsapp-telegram-task-job-scam",
       "fake-payment-screenshot-kaise-pehchane",
       "digital-arrest-kya-hai"
@@ -5047,6 +5049,574 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "संदिग्ध संदेश चेक करें",
       "url": "/screenshot-scam-checker/",
       "description": "जॉब ऑफ़र या टास्क ग्रुप के मैसेज का स्क्रीनशॉट डालें और देखें कि उसमें ठगी के कौन से संकेत हैं।"
+    }
+  },
+  {
+    "slug": "payment-fail-paisa-kat-gaya",
+    "lang": "hi",
+    "title": "\"पेमेंट फेल, पैसा कट गया\" स्क्रीनशॉट: असली है या धोखा?",
+    "seoTitle": "Payment Fail, पैसा कट गया? स्क्रीनशॉट असली या धोखा",
+    "metaDescription": "ग्राहक ने पेमेंट फेल या प्रोसेसिंग का स्क्रीनशॉट दिखाया? फेल UPI पेमेंट का पैसा कहाँ जाता है, RBI की समय सीमा, ठगी की चालें और सही कदम।",
+    "category": "Security",
+    "publishedAt": "2026-11-17",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "फेल, पेंडिंग या बैंक एरर वाले पेमेंट स्क्रीनशॉट का असली मतलब, फेल UPI पेमेंट पर RBI के नियम, इन स्क्रीन के इर्द-गिर्द बनी ठगी की चालें, और दुकानदार व पैसे भेजने वाले दोनों को क्या करना चाहिए।",
+    "targetKeywords": [
+      "payment fail paisa kat gaya",
+      "पेमेंट फेल पैसा कट गया",
+      "upi payment fail paisa kab wapas aayega",
+      "payment processing screenshot",
+      "payment failed screenshot fraud",
+      "फेल पेमेंट स्क्रीनशॉट"
+    ],
+    "keyTakeaway": {
+      "title": "फेल या पेंडिंग स्क्रीन का मतलब है: पैसा आपको नहीं मिला",
+      "text": "अगर आपके अपने UPI ऐप या बैंक में पैसा नहीं आया, तो पेमेंट नहीं हुआ, ग्राहक की स्क्रीन पर कुछ भी लिखा हो। असली फेल पेमेंट का पैसा बैंक भेजने वाले को लौटाते हैं, आपको नहीं। इसलिए सामान देने, \"ज़्यादा आया पैसा\" लौटाने या QR स्कैन करने की कोई ज़रूरत नहीं।"
+    },
+    "introduction": "ग्राहक फ़ोन दिखाता है: \"पेमेंट फेल हो गया, पर पैसा कट गया है। आपके पास आ जाएगा, सामान दे दीजिए।\" या कोई \"बैंक एरर\" का स्क्रीनशॉट भेजकर फ़ीस माँगता है या पैसा वापस करने को कहता है। असली पेमेंट फेल रोज़ होते हैं, और उनके नाम पर ठगी भी। यह गाइड बताती है कि फेल UPI पेमेंट में असल में क्या होता है, किन चालों से सावधान रहें, और आप दुकानदार हों या पैसे भेजने वाले, आपको क्या करना है। यह हमारी अंग्रेज़ी गाइड <a href=\"/blog/payment-failed-screenshot-scam/\">Payment failed screenshot scam</a> का हिंदी रूप है।",
+    "contentSections": [
+      {
+        "heading": "एक जैसी स्क्रीन, दो बिल्कुल अलग हालात",
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/payment-fail-paisa-kat-gaya/fictional-example.png",
+          "alt": "₹1,200 के फेल UPI पेमेंट की काल्पनिक स्क्रीन जिसमें लिखा है कि कटा पैसा वापस आएगा, और दुकानदार को क्या जाँचना है इसके नंबर वाले निशान।",
+          "width": 1200,
+          "height": 760,
+          "caption": "चित्र 1. फेल पेमेंट की एक काल्पनिक स्क्रीन। उस पर कुछ भी लिखा हो, पैसा आया या नहीं यह सिर्फ़ दुकानदार का अपना ऐप बताता है।"
+        },
+        "paragraphs": [
+          "कई बार पेमेंट सच में फेल होता है: बैंक का सर्वर जवाब नहीं देता, नेटवर्क चला जाता है, या पेमेंट प्रोसेसिंग में अटक जाता है। भेजने वाले के खाते से कुछ देर के लिए पैसा कटा हुआ भी दिख सकता है। इसमें कोई झूठ नहीं बोल रहा।",
+          "दूसरी बार स्क्रीन ही चाल होती है। प्रैंक ऐप और एडिट किए गए स्क्रीनशॉट ऐसा एरर दिखा सकते हैं जो कभी हुआ ही नहीं। और फेल पेमेंट एक आसान कहानी है: \"पैसा रास्ते में है, सामान अभी दे दो\", या \"बैंक से गलती से ज़्यादा चला गया, वापस कर दो\"।"
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "दोनों हालात में दुकानदार का जवाब एक ही है: अपना UPI ऐप या बैंक देखिए। पैसा नहीं आया तो पेमेंट नहीं हुआ। ग्राहक का फेल पेमेंट सुलझते ही वह दोबारा पेमेंट कर सकता है।"
+        }
+      },
+      {
+        "heading": "फेल UPI पेमेंट का पैसा असल में कहाँ जाता है",
+        "paragraphs": [
+          "भारतीय रिज़र्व बैंक ने <a href=\"https://www.rbi.org.in/commonman/English/scripts/Notification.aspx?Id=3074\">फेल ट्रांज़ैक्शन के टर्नअराउंड टाइम के ढाँचे</a> में समय सीमा तय की है। UPI ट्रांसफ़र में अगर भेजने वाले का खाता कट गया पर पाने वाले के खाते में पैसा नहीं पहुँचा, तो पैसा अगले दिन (T+1) तक अपने आप वापस होना चाहिए। दुकान या मर्चेंट को किए पेमेंट में अगर पैसा कट गया पर मर्चेंट को पुष्टि नहीं मिली, तो यह सीमा पाँच दिन (T+5) है।",
+          "बैंक ये सीमाएँ पार करें तो इसी ढाँचे में देरी के हर दिन के लिए ₹100 मुआवज़ा तय है। ये अधिकतम सीमाएँ हैं; ज़्यादातर फेल पेमेंट इससे कहीं जल्दी लौट आते हैं।",
+          "दुकानदार के लिए सबसे ज़रूरी बात: असली फेल पेमेंट में पैसा भेजने वाले को वापस जाता है, आगे आपकी तरफ़ नहीं आता। फेल पेमेंट बाद में आपका पैसा नहीं बनता। इसलिए \"इंतज़ार\" करने लायक कुछ है तो सिर्फ़ एक नया, सफल पेमेंट।"
+        ]
+      },
+      {
+        "heading": "प्रोसेसिंग या पेंडिंग वाले स्क्रीनशॉट",
+        "paragraphs": [
+          "\"Processing\", \"Pending\" या \"Payment in progress\" वाली स्क्रीन पूरा हुआ पेमेंट नहीं है। इसका मतलब है कि भेजने वाले के ऐप को बैंकों से अभी आख़िरी जवाब नहीं मिला। ज़्यादातर ऐसे पेमेंट कुछ मिनटों में Success या Failed हो जाते हैं, कुछ में ज़्यादा समय लगता है।",
+          "जब तक आपके अपने ऐप या बैंक में पैसा न दिखे, प्रोसेसिंग स्क्रीनशॉट को भी फेल जैसा ही मानिए। सच्चा ग्राहक आख़िरी स्टेटस आने तक आपके साथ रुक सकता है, या पहला पेमेंट फेल होने पर दोबारा भेज सकता है। जो प्रोसेसिंग स्क्रीन पर ही सामान ले जाने की ज़िद करे, या जिसकी स्क्रीन कभी अपडेट ही न हो, वहाँ रुक जाइए।"
+        ],
+        "checklist": [
+          "ग्राहक से कहिए कि ऐप रिफ़्रेश करके आख़िरी स्टेटस दिखाए, सेव किया हुआ स्क्रीनशॉट नहीं।",
+          "अपने UPI ऐप या बैंक में पैसा और UTR या रेफ़रेंस नंबर देखिए।",
+          "पहला पेमेंट फेल हो तो नया पेमेंट तभी मानिए जब वह आपके खाते में दिखे।"
+        ]
+      },
+      {
+        "heading": "फेल और एरर स्क्रीन के नाम पर होने वाली चालें",
+        "paragraphs": [
+          "ये तरीके बार-बार दिखते हैं। हर एक में आपसे अपने रिकॉर्ड के बजाय ग्राहक की स्क्रीन पर भरोसा करने को कहा जाता है।"
+        ],
+        "checklist": [
+          "\"पैसा कट गया है, कुछ घंटों में आपके पास आ जाएगा, सामान दे दो।\" फेल पेमेंट का पैसा भेजने वाले को लौटता है, आपको बाद में नहीं मिलता।",
+          "\"बैंक ने गलती से दोगुना भेज दिया, ज़्यादा वाला लौटा दो।\" अपना खाता देखिए; कुछ ज़्यादा आया ही नहीं तो लौटाने को कुछ नहीं।",
+          "\"रिफ़ंड पाने के लिए यह QR स्कैन करो या PIN डालो।\" <a href=\"https://npci.org.in/what-we-do/upi/upi-safety-shield\">NPCI का UPI Safety Shield</a> कहता है कि UPI PIN और QR कोड सिर्फ़ पैसा भेजने के लिए हैं, पैसा लेने के लिए कभी नहीं। और पढ़ें: <a href=\"/blog/qr-code-fraud-se-kaise-bache/\">QR कोड फ्रॉड से कैसे बचें</a>।",
+          "किसी अनजान का भेजा \"बैंक एरर\" स्क्रीनशॉट जिसमें पेमेंट छुड़ाने के लिए फ़ीस माँगी गई हो। असली बैंक चैट पर ऐसी फ़ीस नहीं माँगते।",
+          "दबाव और नाटक: लंबी लाइन, गुस्सा या किसी इमरजेंसी की कहानी, ताकि आप फ़ोन देखना ही भूल जाएँ।"
+        ]
+      },
+      {
+        "heading": "उदाहरण: एक काल्पनिक बेकरी",
+        "paragraphs": [
+          "रिया पुणे में छोटी बेकरी चलाती हैं। ₹1,200 का केक लेने आया ग्राहक एक स्क्रीन दिखाता है: \"Payment failed. Money debited will be refunded within 3–5 working days\", और कहता है कि केक अभी ले जाने दो, पैसे बाद में दे दूँगा।",
+          "रिया अपना UPI ऐप खोलती हैं। ₹1,200 नहीं आए। वे समझाती हैं कि पेमेंट फेल हुआ है तो बैंक पैसा उसी को लौटाएगा, और अभी UPI या नकद से दोबारा पेमेंट करने को कहती हैं।",
+          "ग्राहक सच्चा है तो वह दोबारा पेमेंट करेगा या बाद में आएगा; उसका पहला पैसा उसके खाते में लौट आएगा। अगर वह बहस करे, बिना पैसे दिए जाने लगे या \"रिफ़ंड लेने\" के लिए QR स्कैन करवाए, तो भी रिया का कोई नुकसान नहीं, क्योंकि उन्होंने केक देने से पहले अपना रिकॉर्ड देख लिया।"
+        ],
+        "cta": {
+          "label": "पेमेंट स्क्रीनशॉट जाँचें (हिंदी)",
+          "url": "/payment-screenshot-checker/hindi/",
+          "description": "स्क्रीनशॉट से स्टेटस, रकम और रेफ़रेंस पढ़ें और चेतावनी के संकेत देखें, फिर अपने ऐप में पैसा पक्का करें।"
+        }
+      },
+      {
+        "heading": "अगर आपने पैसा भेजा और पेमेंट फेल हो गया",
+        "paragraphs": [
+          "अपने UPI ऐप में वह ट्रांज़ैक्शन खोलकर स्टेटस देखिए। प्रोसेसिंग वाले पेमेंट अक्सर अपने आप Success या Failed हो जाते हैं, इसलिए स्टेटस साफ़ होने तक दोबारा पेमेंट न करें, जब तक दुकानदार यह न बताए कि उसे कुछ नहीं मिला।",
+          "खाते से पैसा कटा और पेमेंट फेल हुआ, तो अपने आप वापसी का इंतज़ार करें। समय सीमा में पैसा न लौटे तो UPI ऐप में उसी ट्रांज़ैक्शन से या अपने बैंक में शिकायत करें। बैंक हल न करे तो RBI का <a href=\"https://cms.rbi.org.in/\">शिकायत पोर्टल (CMS)</a> अगला कदम है।",
+          "मदद सिर्फ़ अपने UPI ऐप या बैंक के आधिकारिक ऐप से लें। सर्च और सोशल मीडिया पर नकली \"कस्टमर केयर\" नंबर भरे पड़े हैं जो और पैसा ठगने के लिए बने हैं; देखें <a href=\"/blog/fake-customer-care-number-scam/\">fake customer care number scam</a>।"
+        ]
+      },
+      {
+        "heading": "ScreenshotChecker क्या बता सकता है और क्या नहीं",
+        "paragraphs": [
+          "<a href=\"/payment-screenshot-checker/hindi/\">पेमेंट स्क्रीनशॉट चेकर</a> OCR से UPI रसीद का टेक्स्ट पढ़ता है, जिसमें Failed या Pending जैसे स्टेटस शब्द भी शामिल हैं, और रकम व रेफ़रेंस में चेतावनी के संकेत दिखाता है।",
+          "यह आपका बैंक खाता नहीं देख सकता, बैंक से बात नहीं कर सकता और पैसा पहुँचा या नहीं यह पक्का नहीं कर सकता। साफ़ नतीजा पेमेंट का सबूत नहीं है और चेतावनी ठगी का सबूत नहीं। जवाब सिर्फ़ आपके अपने UPI ऐप या बैंक स्टेटमेंट में है। पूरा तरीका: <a href=\"/blog/fake-payment-screenshot-kaise-pehchane/\">नकली पेमेंट स्क्रीनशॉट कैसे पहचानें</a>।"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "ग्राहक की स्क्रीन पर लिखा है पेमेंट फेल, पैसा कट गया। क्या पैसा मुझे मिलेगा?",
+        "answer": "नहीं। असली फेल पेमेंट में बैंक पैसा भेजने वाले को लौटाते हैं। RBI के ढाँचे के अनुसार UPI ट्रांसफ़र में यह अगले दिन तक होना चाहिए। अपने ऐप में पक्का करें कि कुछ नहीं आया, फिर ग्राहक से दोबारा पेमेंट करवाएँ।"
+      },
+      {
+        "question": "फेल UPI पेमेंट का पैसा कितने दिन में वापस आता है?",
+        "answer": "RBI के टर्नअराउंड ढाँचे के अनुसार UPI ट्रांसफ़र का कटा पैसा T+1 तक और मर्चेंट पेमेंट का T+5 तक लौटना चाहिए। इससे ज़्यादा देरी पर हर दिन ₹100 मुआवज़ा तय है। ज़्यादातर पैसा इससे पहले लौट आता है।"
+      },
+      {
+        "question": "किसी ने बैंक एरर का स्क्रीनशॉट भेजकर ज़्यादा आया पैसा लौटाने को कहा। क्या करूँ?",
+        "answer": "अपना बैंक या UPI ऐप देखें। ज़्यादा पैसा आया ही नहीं तो लौटाने को कुछ नहीं। सच में कुछ आया हो तो चैट वाले नंबर पर भेजने के बजाय अपने बैंक से बात करें, क्योंकि असली गलती सुधारना बैंक का काम है।"
+      },
+      {
+        "question": "क्या रिफ़ंड पाने के लिए QR स्कैन करना या PIN डालना पड़ता है?",
+        "answer": "नहीं। NPCI के अनुसार UPI PIN सिर्फ़ पैसा भेजने के लिए है और QR कोड सिर्फ़ पैसा भेजने के लिए स्कैन होता है। पैसा लेने के लिए स्कैन या PIN माँगने वाला ठग है।"
+      },
+      {
+        "question": "क्या पेमेंट फेल का स्क्रीनशॉट नकली हो सकता है?",
+        "answer": "हाँ। प्रैंक ऐप और एडिट की गई तस्वीरें कोई भी स्टेटस दिखा सकती हैं। इसलिए दूसरे की स्क्रीन का स्टेटस मायने नहीं रखता, सिर्फ़ आपके खाते में आया पैसा रखता है।"
+      },
+      {
+        "question": "क्या ScreenshotChecker बता सकता है कि पेमेंट फेल हुआ या नहीं?",
+        "answer": "नहीं। यह स्क्रीनशॉट का टेक्स्ट पढ़कर चेतावनी के संकेत दिखाता है, पर इसकी पहुँच बैंकों तक नहीं है। अपना UPI ऐप या बैंक स्टेटमेंट देखें।"
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-payment-screenshot-kaise-pehchane",
+      "qr-code-fraud-se-kaise-bache",
+      "payment-failed-screenshot-scam"
+    ],
+    "cta": {
+      "label": "पेमेंट स्क्रीनशॉट जाँचें",
+      "url": "/payment-screenshot-checker/hindi/",
+      "description": "स्क्रीनशॉट से पढ़ा गया स्टेटस, रकम और रेफ़रेंस देखें, फिर अपने UPI ऐप या बैंक में पैसा पक्का करें।"
+    }
+  },
+  {
+    "slug": "fake-receipt-kaise-pehchane",
+    "lang": "hi",
+    "title": "नकली रसीद कैसे पहचानें: AI से बनी और एडिट की गई रसीदें",
+    "seoTitle": "Fake Receipt कैसे पहचानें? AI से बनी नकली रसीद की जाँच",
+    "metaDescription": "AI अब सेकंडों में असली जैसी रसीद बना देता है। दुकान, जोड़, GST, कार्ड नंबर और फ़ोटो के संकेतों से रसीद कैसे जाँचें, और कौन सी जाँच बात पक्की करती है।",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-17",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "पहले नकली रसीद के लिए एडिटिंग ऐप या टेम्पलेट वेबसाइट चाहिए थी; अब AI इमेज टूल एक वाक्य से बना देता है। ख़र्च के बिल जाँचने वालों, छोटे व्यापारियों और सबूत के तौर पर रसीद पाने वाले हर व्यक्ति के लिए एक आसान चेकलिस्ट।",
+    "targetKeywords": [
+      "fake receipt kaise pehchane",
+      "नकली रसीद कैसे पहचानें",
+      "fake bill kaise check kare",
+      "ai se bani fake receipt",
+      "नकली बिल",
+      "fake receipt detector hindi"
+    ],
+    "keyTakeaway": {
+      "title": "तस्वीर नहीं, लेन-देन जाँचिए",
+      "text": "रसीद की तस्वीर कितनी भी असली लगे, वह सिर्फ़ एक दावा है। ख़रीद को किसी और तरीके से पक्का करें: कार्ड या बैंक स्टेटमेंट की लाइन, दुकान का अपना रिकॉर्ड, बुकिंग या ऑर्डर की पुष्टि, या आपके अपने खाते में आया पैसा। तस्वीर की जाँच से बस यह तय होता है कि किस रसीद को गहराई से देखना है।"
+    },
+    "introduction": "रसीद रोज़मर्रा का सबूत है: ऑफ़िस के ख़र्च, वारंटी और रिटर्न, किराया और एडवांस, पुराना सामान बेचना और बीमा क्लेम। रसीदें हमेशा से नकली बनती रही हैं, पर अब AI ने यह तेज़ और सस्ता कर दिया है। <a href=\"https://www.techradar.com/pro/security/workers-are-scamming-their-employers-using-ai-generated-fake-expense-receipts\">TechRadar</a> के अनुसार, ख़र्च जाँचने वाली सॉफ़्टवेयर कंपनी AppZen ने बताया कि सितंबर 2025 में उसके पकड़े गए नकली दस्तावेज़ों में लगभग 14% AI से बनी रसीदें थीं, जबकि एक साल पहले एक भी नहीं थी। यह गाइड बताती है कि क्या देखें और, उससे ज़रूरी, रसीद असली है यह कैसे पक्का करें। यह हमारी अंग्रेज़ी गाइड <a href=\"/blog/fake-receipt-ai-generated/\">How to spot a fake receipt</a> का हिंदी रूप है।",
+    "contentSections": [
+      {
+        "heading": "नकली रसीदें कहाँ दिखती हैं",
+        "paragraphs": [
+          "ज़्यादातर नकली रसीदें कुछ ही तरह की होती हैं। आपके सामने कौन सी है, इससे पता चलता है कि क्या जाँचना है।"
+        ],
+        "checklist": [
+          "ऑफ़िस के ख़र्च: खाना, टैक्सी, होटल या सामान जो कभी ख़रीदा ही नहीं, या असली ख़रीद की बढ़ाई हुई रकम।",
+          "पेमेंट का सबूत: असली पैसे की जगह दुकानदार, मकान मालिक या फ़्रीलांसर को दिखाई गई \"रसीद\"। इसके लिए देखें <a href=\"/blog/fake-payment-screenshot-kaise-pehchane/\">नकली पेमेंट स्क्रीनशॉट कैसे पहचानें</a>।",
+          "रिटर्न और वारंटी: कहीं और से, पुराना या बिना ख़रीदे सामान की रसीद।",
+          "पुराना सामान बेचना: इस्तेमाल किए या नकली सामान को असली दिखाने के लिए \"ओरिजिनल बिल\"।"
+        ]
+      },
+      {
+        "heading": "रसीद पर क्या-क्या जाँचें",
+        "paragraphs": [
+          "नकली रसीद बनाने वाले को एक साथ बहुत सी छोटी बातें सही करनी पड़ती हैं। एक-एक करके देखिए; अक्सर एक गलती ही सबूत माँगने के लिए काफ़ी होती है।"
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-receipt-kaise-pehchane/fictional-example.png",
+          "alt": "रेस्टोरेंट की काल्पनिक रसीद पर नंबर वाली जाँचें: ऐसी दुकान जो कहीं नहीं मिलती, जोड़ जो टोटल से मेल नहीं खाता, गलत GST दर, कार्ड नंबर में ज़्यादा अंक, और ऐसा समय जब दुकान बंद थी।",
+          "width": 1200,
+          "height": 760,
+          "caption": "चित्र 1. आम गलतियों वाली एक काल्पनिक रसीद। हर गलती लेन-देन को दूसरे तरीके से जाँचने की वजह है।"
+        },
+        "checklist": [
+          "दुकान: क्या उस पते पर यह दुकान है? नाम, पता और फ़ोन नंबर उसकी वेबसाइट या मैप लिस्टिंग से मिलाइए।",
+          "जोड़: क्या सामान की क़ीमतें जोड़कर सबटोटल बनती हैं, और टैक्स, टिप और टोटल सही हैं?",
+          "टैक्स: क्या उस जगह और सामान के लिए GST की दर सही है? गलत दर एक आम गलती है।",
+          "तारीख़ और समय: क्या उस समय दुकान खुली थी? क्या वह व्यक्ति उस दिन उस शहर में था?",
+          "पेमेंट की लाइन: कार्ड का प्रकार और आख़िरी चार अंक इस्तेमाल हुए कार्ड से मिलें; ट्रांज़ैक्शन या ऑथराइज़ेशन नंबर सामान्य फ़ॉर्मैट में हो।",
+          "बनावट: फ़ॉन्ट, अलाइनमेंट और दूरी एक जैसी; असली थर्मल रसीदों की छपाई एक तय चौड़ाई वाली होती है।",
+          "दोहराव: एक ही रसीद नंबर, रकम या बनावट कई क्लेम में।"
+        ]
+      },
+      {
+        "heading": "रसीद की तस्वीर AI से बनी या एडिट हुई है, इसके संकेत",
+        "paragraphs": [
+          "AI इमेज टूल अब पढ़ने लायक टेक्स्ट बना लेते हैं, इसलिए साफ़ बकवास टेक्स्ट पहले से कम दिखता है। फिर भी, बनी या एडिट की गई रसीदों में अक्सर कुछ संकेत होते हैं, ख़ासकर जब उसी दुकान की असली रसीदों से मिलाकर देखें।"
+        ],
+        "checklist": [
+          "रसीद की फ़ोटो जो ज़रूरत से ज़्यादा परफ़ेक्ट लगे, या जिसकी सिलवटें और रोशनी अनायास नहीं, सजाई हुई लगें।",
+          "लोगो जो थोड़ा गलत, धुँधला या दुकान की असली रसीदों से अलग हो।",
+          "एक ही लाइन में टेक्स्ट का आकार या तीखापन बदलना, या अंक जो चिपकाए हुए लगें।",
+          "असली रसीदों में होने वाली बातें गायब: GSTIN, स्टोर नंबर, टर्मिनल ID या रिटर्न पॉलिसी।",
+          "फ़ाइल के संकेत: मेटाडेटा में किसी एडिटर या AI टूल का नाम, या Content Credentials जो बताएँ कि तस्वीर बनाई गई है। इनका न होना कुछ साबित नहीं करता।"
+        ],
+        "callout": {
+          "type": "info",
+          "text": "<a href=\"/screenshot-metadata-checker/\">मेटाडेटा चेकर</a>, <a href=\"/ai-image-detector/\">फ़ेक इमेज डिटेक्टर</a> और <a href=\"/image-manipulation-checker/\">फ़ोटो मैनिपुलेशन चेकर</a> ये संकेत आपके ब्राउज़र में ही दिखाते हैं। ये रसीद को जाँच के लिए चिह्नित कर सकते हैं; उसे असली साबित नहीं कर सकते।"
+        }
+      },
+      {
+        "heading": "वे जाँचें जो बात पक्की करती हैं",
+        "paragraphs": [
+          "असली ख़रीद रसीद के बाहर भी निशान छोड़ती है। ये जाँचें किसी भी तस्वीर देखने से ज़्यादा भरोसेमंद हैं।"
+        ],
+        "checklist": [
+          "उसी दुकान, तारीख़ और रकम वाली कार्ड या बैंक स्टेटमेंट की लाइन माँगिए।",
+          "होटल, फ़्लाइट और कैब के लिए कंपनी के ऐप या ईमेल की बुकिंग पुष्टि माँगिए, या कंपनी से पूछिए।",
+          "रिटर्न के लिए अपने बिलिंग सिस्टम में रसीद नंबर, तारीख़ या कार्ड से लेन-देन ढूँढिए।",
+          "आपको किए गए पेमेंट के लिए अपने बैंक या पेमेंट ऐप में पैसा देखिए। रसीद उसकी जगह कभी नहीं ले सकती।",
+          "बड़ी रकम के क्लेम में दुकान से ख़ुद ढूँढे गए नंबर या ईमेल पर सीधे संपर्क कीजिए।"
+        ]
+      },
+      {
+        "heading": "व्यापारियों और कंपनियों के लिए: जोखिम कम करना",
+        "paragraphs": [
+          "ख़र्च की धोखाधड़ी पकड़ने से ज़्यादा आसान उसे प्रक्रिया से रोकना है। कंपनी कार्ड या सीधी बिलिंग से पेमेंट हो तो हर क्लेम का ट्रांज़ैक्शन रिकॉर्ड रहता है। तय रकम से ऊपर के क्लेम पर आइटम वाली रसीद और स्टेटमेंट मिलान ज़रूरी करने से नकली रसीद का लालच ही ख़त्म हो जाता है।",
+          "बीच-बीच की जाँच भी डर पैदा करती है। हर तस्वीर को बारीकी से देखने के बजाय कुछ क्लेम बेतरतीब चुनकर, और गोल रकम, दोहराई गई रकम या न मिलने वाली दुकान वाले हर क्लेम को देखना ज़्यादा पकड़ता है। जानबूझकर धोखे का शक हो तो डिटेक्टर के स्कोर से किसी पर आरोप लगाने के बजाय HR और क़ानूनी प्रक्रिया अपनाइए।"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "रसीद नकली है, यह कैसे पता करें?",
+        "answer": "देखिए कि दुकान सच में है, सामान का जोड़ सही है, GST दर और तारीख़ ठीक हैं और कार्ड की जानकारी मेल खाती है। फिर ख़रीद को किसी और तरीके से पक्का कीजिए, जैसे कार्ड स्टेटमेंट या दुकान का अपना रिकॉर्ड।"
+      },
+      {
+        "question": "क्या AI नकली रसीद बना सकता है?",
+        "answer": "हाँ। आज के इमेज जनरेटर एक छोटे से निर्देश से पढ़ने लायक टेक्स्ट वाली असली जैसी रसीद बना देते हैं, और ख़र्च जाँचने वाली कंपनियों ने पकड़ी गई नकली रसीदों में AI से बनी रसीदों का तेज़ उछाल बताया है।"
+      },
+      {
+        "question": "क्या कोई फ़ेक रसीद डिटेक्टर है?",
+        "answer": "टूल एडिटिंग के निशान, मेटाडेटा और Content Credentials जैसे संकेत दिखा सकते हैं। कोई भी टूल रसीद को असली साबित नहीं कर सकता, इसलिए हर टूल के साथ असली लेन-देन भी जाँचिए।"
+      },
+      {
+        "question": "क्या रसीद पेमेंट का सबूत है?",
+        "answer": "अकेले नहीं। रसीद या स्क्रीनशॉट एक दावा है। पेमेंट तब साबित होता है जब पैसा पाने वाले के खाते में दिखे या भेजने वाले के स्टेटमेंट में लेन-देन दिखे।"
+      },
+      {
+        "question": "कोई कर्मचारी नकली रसीद जमा करे तो क्या करें?",
+        "answer": "क्लेम और सबूत संभालकर रखिए, कार्ड स्टेटमेंट जैसे सहायक रिकॉर्ड माँगिए और कंपनी की HR व क़ानूनी प्रक्रिया अपनाइए। सिर्फ़ तस्वीर देखकर किसी पर आरोप न लगाइए।"
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-payment-screenshot-kaise-pehchane",
+      "fake-receipt-ai-generated",
+      "payment-fail-paisa-kat-gaya"
+    ],
+    "cta": {
+      "label": "तस्वीर में एडिटिंग जाँचें",
+      "url": "/image-manipulation-checker/",
+      "description": "रसीद की फ़ोटो या स्क्रीनशॉट में एडिटिंग के निशान देखें, सब कुछ आपके ब्राउज़र में।"
+    }
+  },
+  {
+    "slug": "fake-job-offer-letter",
+    "title": "Fake Job Offer Letter: How to Spot One Before You Pay or Send Documents",
+    "seoTitle": "Fake Job Offer Letter? How to Spot It Before You Pay",
+    "metaDescription": "Got an offer letter that asks for a fee, deposit or laptop payment? How fake job offers work in India and the US, the red flags, and how to verify the job.",
+    "category": "Security",
+    "publishedAt": "2026-11-17",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "Fake appointment and offer letters ask for registration, training, laptop, visa or security deposit payments. What official warnings from the FTC, FBI, RBI and India's Ministry of External Affairs say, the red flags on the letter itself, and how to check a job is real.",
+    "targetKeywords": [
+      "fake job offer letter",
+      "how to check if offer letter is fake",
+      "fake appointment letter",
+      "job offer letter scam",
+      "offer letter asking for security deposit",
+      "fake overseas job offer"
+    ],
+    "keyTakeaway": {
+      "title": "A real employer never charges you to be hired",
+      "text": "If an offer letter asks you to pay for registration, training, a laptop, a background check, a visa or a refundable deposit before you start, treat it as a scam. Verify the job through the company's own careers page or HR contact that you find yourself, and for overseas jobs, check the recruiting agent's licence on India's eMigrate portal."
+    },
+    "introduction": "A fake job offer letter usually looks professional: a company logo, a salary that is a little better than expected, an HR signature and a joining date. The catch comes in the next message, which asks for a fee, a deposit or your bank details. The FTC reported that losses to job and employment agency scams rose from about $90 million in 2020 to $501 million in 2024, according to its <a href=\"https://www.ftc.gov/news-events/news/press-releases/2025/03/new-ftc-data-show-big-jump-reported-losses-fraud-125-billion-2024\">March 2025 data release</a>. This guide explains how these letters work, the warning signs on the letter itself, and the checks that tell you whether the job exists.",
+    "contentSections": [
+      {
+        "heading": "How the fake offer letter scam works",
+        "paragraphs": [
+          "The pattern is similar in India and the US. You see a job ad or get a message on WhatsApp, Telegram, LinkedIn or email. There may be a short chat or video interview, sometimes none at all. Then an official-looking offer or appointment letter arrives, and soon after, a request for money.",
+          "The Reserve Bank of India's <a href=\"https://www.rbi.org.in/commonman/Upload/english/Content/PDFs/English%20BEAWARE.pdf\">BE(A)WARE booklet</a> describes exactly this: after a fake interview, the job seeker is induced to transfer funds for registration, a mandatory training programme or a laptop. In the US, the FBI's Internet Crime Complaint Center warned in a <a href=\"https://www.ic3.gov/PSA/2020/PSA200121\">2020 public service announcement</a> that scammers copy real company websites, post fake jobs and then ask new \"hires\" to buy start-up equipment."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-job-offer-letter/fictional-example.png",
+          "alt": "Fictional offer letter from a made-up IT company with numbered red flags: a free email address, an unusually high salary with no interview, a refundable laptop deposit, a 24-hour deadline and a request for Aadhaar and bank details.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional fake offer letter. Any one of these signs is a reason to stop and verify the job independently."
+        },
+        "callout": {
+          "type": "golden-rule",
+          "text": "The RBI booklet puts it plainly: a genuine company offering a job will never ask for money. The FTC's advice is the same: do not pay for the promise of a job."
+        }
+      },
+      {
+        "heading": "Red flags on the letter and in the messages",
+        "paragraphs": [
+          "No single sign proves a letter is fake, and real HR teams make typing mistakes too. But scam letters tend to share several of these at once."
+        ],
+        "checklist": [
+          "Any payment before joining: registration, training, certification, a laptop or kit, a background check, a uniform, a visa or a \"refundable security deposit\".",
+          "An offer with no real interview, or after a chat-only interview on WhatsApp or Telegram. Wipro's <a href=\"https://careers.wipro.com/content/Fraud-Awareness/?locale=en_US\">fraud awareness page</a> says it does not charge any fee at any stage of recruitment and does not interview over WhatsApp or Telegram.",
+          "A sender using a free email address or a domain that only looks like the company's, such as an extra word or a different ending.",
+          "A salary well above the market rate for the role, or vague duties.",
+          "Pressure: accept within 24 hours, or the seat goes to someone else.",
+          "Requests for your bank login, card details, OTP or UPI PIN. A real employer asks for bank details only for payroll, after you are hired, as the FBI notes.",
+          "A cheque that arrives before you start, with instructions to buy equipment from a \"vendor\". The FTC's <a href=\"https://consumer.ftc.gov/articles/job-scams\">job scams page</a> warns that the cheque will bounce and you will owe the money."
+        ]
+      },
+      {
+        "heading": "How to verify a job offer is real",
+        "paragraphs": [
+          "Check the job through channels you find yourself, never through the phone numbers, links or email addresses in the letter."
+        ],
+        "checklist": [
+          "Find the company's official website by searching for it yourself, and check whether the role is listed on its careers page.",
+          "Contact the company's HR through a number or email from that official site and ask them to confirm the offer and the recruiter's name.",
+          "Look at the recruiter's profile: a new account, few connections or a stock photo is a warning sign. A <a href=\"/reverse-image-search/\">reverse image search</a> can show whether the profile photo appears elsewhere.",
+          "Read the letter carefully: does the company name, address and registration number match official records? Is the signatory a real person at that company?",
+          "Never pay, and never share Aadhaar, PAN, passport or bank details until you have confirmed the offer with the company directly."
+        ],
+        "cta": {
+          "label": "Check a recruiter's message",
+          "url": "/screenshot-scam-checker/",
+          "description": "Upload a screenshot of the chat or offer and see scam warning signs such as fees, urgency and payment requests, processed in your browser."
+        }
+      },
+      {
+        "heading": "Fake government job and appointment letters in India",
+        "paragraphs": [
+          "Fake appointment letters often use the names of government departments. India Post said in a <a href=\"https://www.pib.gov.in/PressReleasePage.aspx?PRID=1969732\">2023 notice</a> that fake selection orders and offer letters were demanding money, and that it does not accept money in any form before employment. The Income Tax Department warned in <a href=\"https://www.pib.gov.in/PressReleasePage.aspx?PRID=1714095\">2021</a> about a fake Income Tax Officer appointment letter shared on WhatsApp, and pointed people to the official SSC and UPSC websites.",
+          "Government recruitment happens through published notifications, exams and results on official websites. A letter that arrives on WhatsApp without an exam you sat, or that asks for a fee to confirm your joining, is not how these jobs are filled. In May 2026 the Ministry of Housing and Urban Affairs also <a href=\"https://www.pib.gov.in/PressReleasePage.aspx?PRID=2260999\">warned</a> about a fake recruiter asking applicants for money, and asked people not to pay and to report it on the National Cyber Crime Reporting Portal."
+        ]
+      },
+      {
+        "heading": "Overseas job offers: check the recruiting agent",
+        "paragraphs": [
+          "Offers of jobs in Canada, Europe, Israel or the Gulf, shared through Facebook or WhatsApp, are a common route for fake letters and even trafficking. The Ministry of External Affairs' <a href=\"https://www.pib.gov.in/PressReleasePage.aspx?PRID=1985025\">advisory against illegal recruiting agents</a> asks job seekers to check the agent on the eMigrate portal (emigrate.gov.in) under the list of active recruiting agents. It says a licensed agent can charge at most ₹30,000 plus 18% GST as a service charge, against a receipt.",
+          "Raids on unregistered agents have found fake overseas offer letters. A <a href=\"https://www.pib.gov.in/PressReleasePage.aspx?PRID=2136419\">June 2025 PIB release</a> describes one such seizure and repeats that nobody may recruit for overseas jobs without an MEA licence. If an agent is not on the list, or asks for more than the legal fee, do not pay."
+        ]
+      },
+      {
+        "heading": "Fake offer letters in the US and elsewhere",
+        "paragraphs": [
+          "In the US, fake offers often come with a cheque for equipment, a request to buy gift cards, or a task-based \"work from home\" role where you pay to unlock earnings. The FBI's <a href=\"https://www.ic3.gov/PSA/2024/PSA240604\">June 2024 PSA</a> on task scams says the earnings shown on screen are fake and advises never sending money to an employer. The FTC's <a href=\"https://consumer.ftc.gov/articles/job-scams\">job scams guidance</a> adds that federal and postal jobs never charge a fee to apply or be hired.",
+          "For the task-based version in India, see our guide to <a href=\"/blog/whatsapp-telegram-task-job-scam/\">WhatsApp and Telegram task job scams</a> (also in <a href=\"/blog/task-job-scam-se-kaise-bache/\">Hindi</a>)."
+        ]
+      },
+      {
+        "heading": "What to do if you already paid or shared documents",
+        "paragraphs": [
+          "<strong>India:</strong> call the 1930 cyber fraud helpline as soon as possible and file a complaint on the National Cyber Crime Reporting Portal (cybercrime.gov.in), as the <a href=\"https://www.pib.gov.in/PressReleasePage.aspx?PRID=2036395\">Home Ministry advises</a>. Tell your bank through its official app or helpline. If you shared Aadhaar or PAN, watch for loans or accounts opened in your name.",
+          "<strong>US:</strong> contact your bank or card issuer, report the scam at ReportFraud.ftc.gov and ic3.gov, and if you shared your Social Security number, visit IdentityTheft.gov.",
+          "Keep the letter, screenshots of the chats, the payment receipt and the recruiter's numbers and profiles. Before you share those screenshots with others, the <a href=\"/screenshot-redactor/\">screenshot redactor</a> can hide your own personal details."
+        ]
+      },
+      {
+        "heading": "What ScreenshotChecker can and cannot tell you",
+        "paragraphs": [
+          "The <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads a recruiter's chat or offer screenshot and flags warning signs such as fees, urgency and requests for payment or personal data. The <a href=\"/suspicious-link-checker/\">suspicious link checker</a> looks up a link from the message without opening it, and the <a href=\"/screenshot-metadata-checker/\">metadata checker</a> shows what an image file says about how it was made.",
+          "None of these tools can confirm that a job exists or that a company sent the letter. Only the company itself, contacted through details you find independently, can do that."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can I check if a job offer letter is fake?",
+        "answer": "Look for payment requests, a free or lookalike email address, no real interview, an unusually high salary and pressure to accept fast. Then contact the company's HR through its official website, not the letter, and ask them to confirm the offer."
+      },
+      {
+        "question": "Is it normal for a company to ask for a security deposit after an offer letter?",
+        "answer": "No. Genuine employers do not charge candidates for joining, training, laptops or deposits. The RBI says a genuine company offering a job will never ask for money, and the FTC advises never paying for the promise of a job."
+      },
+      {
+        "question": "How do I check if an overseas recruitment agent is genuine?",
+        "answer": "Search for the agent on India's eMigrate portal (emigrate.gov.in) in the list of active recruiting agents. The MEA says licensed agents can charge at most ₹30,000 plus GST, with a receipt."
+      },
+      {
+        "question": "Can a fake offer letter use a real company's name and logo?",
+        "answer": "Yes. Scammers copy logos, letterheads and even real employees' names. That is why you should verify the offer with the company directly rather than judging the letter by how it looks."
+      },
+      {
+        "question": "I paid a fee for a fake job. What should I do?",
+        "answer": "In India, call 1930 and report on cybercrime.gov.in, then inform your bank. In the US, contact your bank and report at ReportFraud.ftc.gov and ic3.gov. Act quickly and keep all chats and receipts."
+      },
+      {
+        "question": "Can ScreenshotChecker tell me if an offer letter is real?",
+        "answer": "No. It can flag warning signs in a screenshot of the offer or chat, but it cannot confirm that a job or company is genuine. Only the company, contacted through its official channels, can confirm an offer."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "whatsapp-telegram-task-job-scam",
+      "task-job-scam-se-kaise-bache",
+      "fake-customer-care-number-scam"
+    ],
+    "cta": {
+      "label": "Check a job offer screenshot",
+      "url": "/screenshot-scam-checker/",
+      "description": "See scam warning signs in a recruiter's chat or offer letter screenshot, processed in your browser."
+    }
+  },
+  {
+    "slug": "fake-amazon-flipkart-refund-scam",
+    "title": "Fake Amazon or Flipkart Order, Refund and Delivery Messages: How to Check",
+    "seoTitle": "Fake Amazon or Flipkart Refund Message? How to Check",
+    "metaDescription": "A text, call or screenshot about an Amazon or Flipkart order, refund or suspicious purchase? How these scams work, the red flags and how to check safely.",
+    "category": "Threat Analysis",
+    "publishedAt": "2026-11-17",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "Fake order confirmations, refund links, \"suspicious purchase\" calls and overpayment stories that borrow Amazon and Flipkart's names. What the companies, the FTC and the RBI say, and how to check an order without tapping anything in the message.",
+    "targetKeywords": [
+      "amazon refund scam",
+      "flipkart refund scam",
+      "fake amazon order message",
+      "amazon suspicious purchase call scam",
+      "fake flipkart customer care",
+      "amazon refund text scam"
+    ],
+    "keyTakeaway": {
+      "title": "Check orders only in the app you already use",
+      "text": "Open the Amazon or Flipkart app or website yourself and look at Your Orders. If the order, refund or problem is not there, the message is not real. Neither company asks for payment by phone, gift cards, personal UPI IDs or QR codes, and neither needs your PIN or password to give you a refund."
+    },
+    "introduction": "Online shopping scams borrow trusted names. Amazon was the second most impersonated company in FTC reports in 2023, with about 34,000 reports, according to the <a href=\"https://www.ftc.gov/news-events/news/press-releases/2024/05/new-ftc-data-shed-light-companies-most-frequently-impersonated-scammers\">FTC's May 2024 data</a>, and Flipkart publishes regular scam advisories in India. The messages vary: a refund for a recalled product, a call about a suspicious purchase, a fake order confirmation, or a screenshot showing that you were \"refunded too much\". This guide shows how to check any of them safely.",
+    "contentSections": [
+      {
+        "heading": "The common versions",
+        "paragraphs": [
+          "Most of these scams fall into a few patterns. Each one tries to move you out of the official app and into a link, a phone call or a payment."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/fake-amazon-flipkart-refund-scam/fictional-example.png",
+          "alt": "Fictional text message claiming a refund for a recalled item from an online store, with numbered red flags: an unknown sender, a refund you did not ask for, a lookalike link and a request for card details.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional fake refund text. The real check is in the shopping app's Your Orders page, not the link."
+        },
+        "checklist": [
+          "Refund or recall texts: \"your item failed a quality inspection, claim your refund\". The FTC's <a href=\"https://consumer.ftc.gov/consumer-alerts/2025/07/scammy-texts-offering-refunds-amazon-purchases\">July 2025 alert</a> says there is no refund; the link is phishing for your account and card details.",
+          "\"Suspicious purchase\" calls or texts: someone claims an expensive order was placed on your account and offers to cancel it. The FTC's <a href=\"https://consumer.ftc.gov/consumer-alerts/2024/03/did-you-get-call-or-text-about-suspicious-purchase-amazon-its-scam\">2024 alert</a> notes that caller ID can be faked and tells people to check through the app.",
+          "Overpayment refunds: a fake agent says you were refunded too much and asks you to send back the difference. The FTC listed this among common <a href=\"https://www.ftc.gov/news-events/data-visualizations/data-spotlight/2021/10/amazon-tops-list-impersonated-businesses\">Amazon impersonator tactics</a>.",
+          "Fake customer care: a number from a search result or social media post that \"helps\" with a refund and then asks for payment, a remote access app or your PIN.",
+          "Fake sites and offers using the brand's name, with payment taken by personal UPI ID or QR code."
+        ]
+      },
+      {
+        "heading": "What Amazon and Flipkart say they will never do",
+        "paragraphs": [
+          "Amazon's guide on <a href=\"https://www.aboutamazon.com/news/retail/how-to-avoid-amazon-scams\">how to avoid Amazon scams</a> says it will not ask for payment over the phone or email, will never ask you to buy gift cards, and advises against calling numbers found in texts, emails or search results. <a href=\"https://www.aboutamazon.in/news/amazon-india-news/how-to-avoid-scams-impersonating-amazon-this-holiday-season\">Amazon India</a> gives the same advice.",
+          "Flipkart's <a href=\"https://stories.flipkart.com/scam-advisory-beware-of-fraudulent-sites-and-fake-offers-misusing-flipkarts-name\">scam advisory</a> says Flipkart will never ask for your password, OTP, PIN or banking details, and warns that once you pay someone outside Flipkart you are unprotected. It names payments to personal UPI IDs or QR codes, fake \"Flipkart Care\" numbers and fake support accounts on WhatsApp as common tricks. Its <a href=\"https://stories.flipkart.com/keep-yourself-safe-otp-fraud\">OTP fraud page</a> adds that representatives never ask for payment OTPs over a call or text."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "A refund never needs you to pay, scan a QR code or enter a PIN. The RBI's <a href=\"https://www.rbi.org.in/commonman/Upload/english/Content/PDFs/English%20BEAWARE.pdf\">BE(A)WARE booklet</a> says there is no need to enter a PIN or password anywhere to receive money, and never to scan a QR code to receive money."
+        }
+      },
+      {
+        "heading": "How to check an order, refund or delivery message",
+        "checklist": [
+          "Do not tap the link, call the number or reply to the message.",
+          "Open the Amazon or Flipkart app, or type the website address yourself, and go to Your Orders or My Orders.",
+          "If the order, refund or delivery is not there, the message is not real. If it is there, use the help options inside the app.",
+          "For calls, hang up and contact support from inside the app. Real support will not ask you to keep the call secret or install a remote access app.",
+          "Check your bank or card statement for any charge the message mentions."
+        ],
+        "paragraphs": [
+          "This works for every version of the scam, because the scammer controls the message but not your account."
+        ]
+      },
+      {
+        "heading": "Fake order and refund screenshots",
+        "paragraphs": [
+          "Screenshots appear in these scams in two ways. A fake agent may send a screenshot of a \"refund initiated\" screen or an \"excess refund\" to make the overpayment story look real. And on marketplaces, a buyer or seller may share an order confirmation or delivery screenshot as proof of something that never happened.",
+          "A screenshot can be edited or generated in minutes, so it is never proof by itself. The order page in your own account, or the money in your own bank account, is the only thing to trust. For payment screenshots in particular, see our guides on <a href=\"/blog/fake-upi-payment-screenshot/\">fake UPI payment screenshots</a> and <a href=\"/blog/payment-failed-screenshot-scam/\">payment failed screenshots</a>."
+        ],
+        "cta": {
+          "label": "Check a screenshot for edits",
+          "url": "/image-manipulation-checker/",
+          "description": "Look for editing traces in an order or refund screenshot, processed in your browser."
+        }
+      },
+      {
+        "heading": "Fictional example: the refund call",
+        "paragraphs": [
+          "Arjun searches online for a shopping site's customer care number to ask about a late refund. He calls the first number he finds. The \"agent\" says the refund failed and sends a QR code on WhatsApp to \"receive\" ₹2,499.",
+          "Arjun remembers that scanning a QR code and entering a PIN only ever sends money. He hangs up, opens the shopping app, and finds that the refund is already shown as processed to his original payment method. He reports the fake number on cybercrime.gov.in and blocks it."
+        ]
+      },
+      {
+        "heading": "What to do if you clicked, paid or shared details",
+        "paragraphs": [
+          "<strong>India:</strong> call the 1930 helpline and report on cybercrime.gov.in, then contact your bank through its official app. If you shared an OTP or password, change your Amazon or Flipkart password and check your saved cards and addresses. Flipkart's advisory lists its helpline 044-45614700 and @flipkartsupport on X.",
+          "<strong>US and elsewhere:</strong> contact your bank or card issuer, change your Amazon password, report the message through Amazon's report-a-scam tool, and report it at ReportFraud.ftc.gov. Forward scam texts to 7726 so your carrier can block similar messages. Our guide to the <a href=\"/blog/fake-customer-care-number-scam/\">fake customer care number scam</a> covers the call version in more detail."
+        ]
+      },
+      {
+        "heading": "What ScreenshotChecker can and cannot tell you",
+        "paragraphs": [
+          "The <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads a screenshot of the text or chat and flags warning signs such as urgency, refund bait and payment requests. The <a href=\"/suspicious-link-checker/\">suspicious link checker</a> looks up a link without opening it.",
+          "Neither can see your Amazon or Flipkart account or your bank. A clean result does not make a message genuine; your Your Orders page and bank statement are the answer."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "I got a text about an Amazon refund I did not request. Is it real?",
+        "answer": "Almost certainly not. The FTC has warned about fake Amazon refund and recall texts that lead to phishing pages. Open the Amazon app yourself and check Your Orders; if there is no refund there, delete the text and forward it to 7726 in the US."
+      },
+      {
+        "question": "Does Flipkart ask for OTP or UPI PIN for a refund?",
+        "answer": "No. Flipkart says it will never ask for your password, OTP, PIN or banking details, and that its representatives never ask for payment OTPs over a call or text. Refunds go back to your original payment method or Flipkart account without a PIN."
+      },
+      {
+        "question": "Someone called about a suspicious purchase on my Amazon account. What should I do?",
+        "answer": "Hang up. Open the Amazon app or website yourself and check your orders and payment methods. Caller ID can be faked, and Amazon does not ask for payment over the phone."
+      },
+      {
+        "question": "How do I find the real Amazon or Flipkart customer care number?",
+        "answer": "Use the help or contact options inside the official app or website. Numbers in search results, social media posts and messages are a common source of fake customer care."
+      },
+      {
+        "question": "Can an order or refund screenshot be fake?",
+        "answer": "Yes. Screenshots can be edited or generated easily. Check the order in your own account, and for payments, check your own bank or UPI app."
+      },
+      {
+        "question": "Can ScreenshotChecker confirm an Amazon or Flipkart order?",
+        "answer": "No. It can flag warning signs in a screenshot, but it has no access to shopping accounts or banks. Check Your Orders in the official app."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "fake-customer-care-number-scam",
+      "qr-code-scam",
+      "smishing-fake-sms"
+    ],
+    "cta": {
+      "label": "Check a message screenshot",
+      "url": "/screenshot-scam-checker/",
+      "description": "See scam warning signs in a refund text, order message or chat screenshot, processed in your browser."
     }
   },
 ];

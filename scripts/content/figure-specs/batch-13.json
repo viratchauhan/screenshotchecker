@@ -1,0 +1,37 @@
+[
+  {
+    "slug": "fake-job-offer-letter",
+    "app": "Nimbus Infotech Pvt Ltd", "sub": "Fictional offer letter · from hr.nimbus.jobs@gmail.com",
+    "blocks": [
+      {"type": "row", "k": "Sender", "v": "free Gmail address", "badge": 1},
+      {"type": "row", "k": "Role: Data Entry", "v": "₹68,000/month, no interview", "badge": 2},
+      {"type": "bubble", "side": "in", "text": "Pay ₹4,999 refundable laptop deposit to confirm joining.", "badge": 3},
+      {"type": "row", "k": "Deadline", "v": "accept within 24 hours", "badge": 4},
+      {"type": "note", "text": "Send Aadhaar, PAN and bank login for payroll", "badge": 5}
+    ],
+    "callouts": [
+      "Real HR mails come from the company's own domain.",
+      "High pay with no interview is bait.",
+      "Any fee or deposit before joining means scam.",
+      "Pressure stops you from checking.",
+      "Never share bank logins; documents only after verifying."
+    ]
+  },
+  {
+    "slug": "fake-amazon-flipkart-refund-scam",
+    "app": "+1 (762) 555-0148", "sub": "Fictional text message",
+    "blocks": [
+      {"type": "row", "k": "Sender", "v": "unknown number", "badge": 1},
+      {"type": "bubble", "side": "in", "text": "Your recent order failed our quality inspection. A refund of $89.99 is waiting for you.", "badge": 2},
+      {"type": "bubble", "side": "in", "text": "Claim within 24h: shop-refunds-center.co/claim", "badge": 3},
+      {"type": "note", "text": "Page asks for card number and login", "badge": 4}
+    ],
+    "callouts": [
+      "Sender names and numbers can be faked: never trust them.",
+      "A refund you never asked for is the bait.",
+      "Lookalike links lead to phishing pages.",
+      "A refund never needs your card number or PIN.",
+      "Check Your Orders in the app you already use."
+    ]
+  }
+]

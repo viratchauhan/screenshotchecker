@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "payment-fail-paisa-kat-gaya", "lang": "hi",
+    "banner": "काल्पनिक उदाहरण · ScreenshotChecker",
+    "app": "UPI ऐप", "sub": "ग्राहक का फ़ोन",
+    "callout_title": "दुकानदार क्या जाँचे",
+    "blocks": [
+      {"type": "big", "text": "✕ Payment failed", "sub": "₹1,200 · रिया की बेकरी", "badge": 1, "tone": "bad"},
+      {"type": "bubble", "side": "in", "text": "Money debited will be refunded within 3–5 working days", "badge": 2},
+      {"type": "row", "k": "ग्राहक कहता है", "v": "\"अभी ले जाने दो, पैसे बाद में\"", "badge": 3},
+      {"type": "note", "text": "रिया का अपना ऐप: ₹1,200 नहीं आए"}
+    ],
+    "callouts": [
+      "फेल पेमेंट का मतलब: दुकानदार को पैसा नहीं मिला।",
+      "बैंक फेल पैसा भेजने वाले को लौटाते हैं, आपको नहीं।",
+      "पहले सामान देने का दबाव ही असली जोखिम है।",
+      "अपना ऐप देखिए, फिर नया पेमेंट माँगिए।"
+    ]
+  },
+  {
+    "slug": "fake-receipt-kaise-pehchane", "lang": "hi",
+    "banner": "काल्पनिक उदाहरण · ScreenshotChecker",
+    "app": "The Green Spoon Café", "sub": "काल्पनिक रसीद · 14 मेन रोड",
+    "callout_title": "हर नंबर एक जाँच",
+    "blocks": [
+      {"type": "row", "k": "दुकान", "v": "कोई लिस्टिंग नहीं मिली", "badge": 1},
+      {"type": "row", "k": "2 × Lunch 450", "v": "Subtotal ₹1,150", "badge": 2},
+      {"type": "row", "k": "GST 12%", "v": "₹138", "badge": 3},
+      {"type": "row", "k": "VISA ****48213", "v": "Total ₹1,288", "badge": 4},
+      {"type": "row", "k": "रवि 11:52 PM", "v": "कैफ़े 10 बजे बंद", "badge": 5},
+      {"type": "note", "text": "कार्ड स्टेटमेंट की लाइन माँगिए"}
+    ],
+    "callouts": [
+      "दुकान ख़ुद ढूँढिए: नाम, पता, फ़ोन।",
+      "2 × 450 = 900, 1,150 नहीं: जोड़ गलत है।",
+      "रेस्टोरेंट पर GST आमतौर पर 5% है, 12% नहीं।",
+      "स्टार के बाद पाँच अंक: असली रसीद में चार होते हैं।",
+      "खुलने का समय और यात्रा की तारीख़ मेल खाएँ।"
+    ]
+  }
+]
