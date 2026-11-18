@@ -97,7 +97,7 @@
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  h1, h2, h3, h4, .font-display {
+  h1, h2, h3, h4, [role="heading"], .font-display {
     font-family: var(--font-serif);
     font-weight: 400;
     color: var(--color-ink);

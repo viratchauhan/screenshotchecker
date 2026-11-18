@@ -16,9 +16,9 @@
             UPI Transfer
           </span>
         </div>
-        <h2 id="payment-verdict-headline" class="font-serif text-2xl sm:text-4xl text-ink font-normal tracking-tight">
+        <div role="heading" aria-level="2" id="payment-verdict-headline" class="font-serif text-2xl sm:text-4xl text-ink font-normal tracking-tight">
           Analyzing Screenshot...
-        </h2>
+        </div>
         <p id="payment-verdict-subtext" class="text-xs sm:text-sm text-body mt-2 max-w-2xl leading-relaxed">
           Review of extracted receipt text and transaction-reference formatting; fonts and layout are not measured.
         </p>
@@ -61,7 +61,6 @@
         <div class="relative bg-canvas rounded-xl overflow-hidden border border-hairline flex items-center justify-center min-h-[260px] max-h-[500px]">
           <img
             id="payment-preview-image"
-            src=""
             alt="Payment Screenshot Preview"
             class="max-w-full max-h-[480px] object-contain block mx-auto select-none"
           />
@@ -91,7 +90,7 @@
       <!-- Key Payment Entities Card -->
       <div class="bg-surface-card border border-hairline rounded-2xl p-6 space-y-4">
         <div class="flex items-center justify-between pb-3 border-b border-hairline">
-          <h3 class="font-serif text-lg text-ink font-normal">Grounded Payment Details</h3>
+          <div role="heading" aria-level="3" class="font-serif text-lg text-ink font-normal">Grounded Payment Details</div>
           <span class="text-[11px] font-mono text-muted">Extracted from current image only</span>
         </div>
 
@@ -157,7 +156,7 @@
 
       <!-- Grounded "What We Found" List -->
       <div class="bg-surface-card border border-hairline rounded-2xl p-6 space-y-3">
-        <h4 class="font-serif text-base text-ink font-normal">Observed Evidence Traces</h4>
+        <div role="heading" aria-level="4" class="font-serif text-base text-ink font-normal">Observed Evidence Traces</div>
         <ul id="payment-what-we-found-list" class="list-disc list-inside text-xs text-body space-y-1.5 leading-relaxed">
           <!-- Grounded facts injected here -->
         </ul>
