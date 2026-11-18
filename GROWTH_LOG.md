@@ -195,3 +195,8 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - Share cards for 25 pages that used the default image (scripts/content/render-og.py, og-spec.mjs); robots meta now allows max-image-preview:large.
 - 12 deploys, all checks green (76 pages, test:seo 0/0, blog SEO 49 PASS, no broken internal links). IndexNow for every changed URL. Search Console indexing requested for the UTR checker, receipt checker and both 17 Nov Hindi guides; quota ran out at the scam checker.
 - Owner actions and drafts in the private outreach kit (18 Nov section): Bing Webmaster Tools import, Featured/Qwoted/SourceBottle, resource-list pitch, listing copy.
+
+## 2026-11-18: homepage audit fixes and semantic gap sections
+
+- Page audit (86/100): hidden result-panel placeholder headings converted to role=heading (no h2 to h4 skips), empty img src removed.
+- Semantic gap analysis: Google India "fake screenshot" is creation intent (generators, editors); for "fake screenshot detector" we rank #5 (FauxLens, DeepAI, TruthScan above) and are named in the AI Overview. Added three homepage sections: how fake screenshots are made and how to catch each kind (table), screenshot vs photo forensics, what a result looks like. Homepage now about 4,550 words, 0 heading skips. Remaining plan items: AI section (SynthID, named generators), screenshots as evidence (verify legal wording first), visual tells list, sources block. Compare "fake screenshot detector" position around 10 Dec.
