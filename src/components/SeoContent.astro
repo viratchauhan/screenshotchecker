@@ -206,6 +206,14 @@
         <li><strong>Look for edited regions.</strong> The <a href="/image-manipulation-checker/" class="text-primary underline hover:text-primary-active">error level analysis view</a> can highlight areas that were saved differently. Treat a bright patch as a reason to look closer, not proof.</li>
         <li><strong>Compare versions.</strong> If you have two copies, the <a href="/screenshot-comparison/" class="text-primary underline hover:text-primary-active">comparison tool</a> shows exactly what changed.</li>
       </ol>
+      <h3 class="font-serif text-xl text-ink font-normal pt-2">Visual Giveaways to Check by Eye</h3>
+      <ul class="list-disc list-inside space-y-1.5 text-sm pl-1">
+        <li><strong>Status bar:</strong> the clock, battery and network icons should fit the story. A chat "sent at 11:40 PM" in a screenshot whose clock reads 9:05 AM was captured later, or put together.</li>
+        <li><strong>Fonts:</strong> every app uses the phone's system font (San Francisco on iPhone, Roboto or the maker's own font on Android). A name or amount in a slightly different typeface, weight or size stands out when you zoom in.</li>
+        <li><strong>Alignment:</strong> edited text often sits a pixel above or below the line, or has a faint box of slightly different background around it.</li>
+        <li><strong>Message details:</strong> WhatsApp shows two grey ticks when a message is delivered and two blue ticks when it is read; times should run in order, and day dividers should match the dates.</li>
+        <li><strong>Theme and version:</strong> a mix of dark and light elements, or icons from an older app design, suggests a template rather than a real capture.</li>
+      </ul>
       <p>
         Guides for common cases: <a href="/blog/fake-whatsapp-chat-screenshot/" class="text-primary underline hover:text-primary-active">WhatsApp chats</a>, <a href="/blog/fake-social-media-post-screenshot/" class="text-primary underline hover:text-primary-active">tweets and Instagram posts</a>, <a href="/blog/fake-upi-payment-screenshot/" class="text-primary underline hover:text-primary-active">UPI payments</a>, <a href="/blog/fake-payment-screenshot-paypal-venmo-cash-app/" class="text-primary underline hover:text-primary-active">PayPal, Venmo and Cash App</a> and <a href="/blog/fake-bank-transfer-screenshot/" class="text-primary underline hover:text-primary-active">bank transfers</a>.
       </p>
@@ -223,7 +231,14 @@
         Screenshots are commonly shared as proof of bank transfers, WhatsApp chats, emails, delivery updates, and social media posts. However, visual interfaces can easily be simulated through browser developer tools, templates, or mockup software.
       </p>
       <p>
-        For critical transactions, visual evidence alone is never conclusive. <strong>Always verify the transaction in your own bank or payment application rather than relying only on a screenshot.</strong> A <strong>screenshot authenticity checker</strong> is a valuable inspection aid, but verifying the original source remains essential.
+        For critical transactions, visual evidence alone is never conclusive. <strong>Always verify the transaction in your own bank or payment application rather than relying only on a screenshot.</strong>         A <strong>screenshot authenticity checker</strong> is a valuable inspection aid, but verifying the original source remains essential.
+      </p>
+      <h3 class="font-serif text-xl text-ink font-normal pt-2">Can a Screenshot Be Used as Evidence?</h3>
+      <p>
+        Courts can accept screenshots, but they ask how you know the image is what you say it is. In the United States, <a href="https://www.law.cornell.edu/rules/fre/rule_901" class="text-primary underline hover:text-primary-active" rel="noopener" target="_blank">Federal Rule of Evidence 901</a> requires evidence sufficient to support a finding that an item is what its proponent claims, often testimony from someone who saw the messages, or details only the real sender would know. In India, a copy of an electronic record such as a screenshot or printout generally needs a certificate under Section 63 of the Bharatiya Sakshya Adhiniyam, 2023, which replaced Section 65B of the Evidence Act from 1 July 2024; the certificate includes the record's hash value, a requirement the <a href="https://www.livelaw.in/top-stories/supreme-court-rejects-challenge-to-s634-bsa-mandating-hash-value-disclosure-for-electronic-evidence-535950" class="text-primary underline hover:text-primary-active" rel="noopener" target="_blank">Supreme Court upheld</a>.
+      </p>
+      <p>
+        If a conversation or payment might end up in a dispute, keep the original phone and file, export the full chat, and record the screen while scrolling through the conversation instead of relying on one screenshot. This is general information, not legal advice.
       </p>
     </section>
 
@@ -287,6 +302,9 @@
         <li><strong>C2PA Content Credentials:</strong> Embedded cryptographic metadata where present.</li>
       </ul>
       <p>
+        Image tools in ChatGPT and Google Gemini (including Gemini's Nano Banana image model) can now produce chats, receipts and app screens that look real at a glance. Two marks can help when they survive. Some generators attach Content Credentials (C2PA), a signed record of how the file was made, which you can inspect with the <a href="https://contentcredentials.org/verify" class="text-primary underline hover:text-primary-active" rel="noopener" target="_blank">Content Credentials verify tool</a>. Google embeds <a href="https://deepmind.google/models/synthid/" class="text-primary underline hover:text-primary-active" rel="noopener" target="_blank">SynthID</a>, an invisible watermark, in content made or altered with its AI, and the Gemini app can check images for it. Both are easily lost: a screenshot of the image, a crop or a re-save through a chat app usually removes them, so a missing mark proves nothing.
+      </p>
+      <p>
         Because AI tools continually evolve, automated detection does not offer 100% certainty. It serves as a helpful clue alongside human evaluation.
       </p>
     </section>
@@ -308,6 +326,18 @@
       <p>
         ScreenshotChecker is designed as an <strong>investigation aid</strong> to help you explore visible data, text, and metadata responsibly.
       </p>
+    </section>
+
+    <!-- 10. Sources and last update -->
+    <section class="space-y-2 text-sm text-muted">
+      <h2 class="font-serif text-xl text-ink font-normal">Sources</h2>
+      <ul class="list-disc list-inside space-y-1 pl-1">
+        <li><a href="https://www.law.cornell.edu/rules/fre/rule_901" class="text-primary underline hover:text-primary-active" rel="noopener" target="_blank">Federal Rules of Evidence, Rule 901 (Cornell Law School LII)</a></li>
+        <li><a href="https://www.livelaw.in/top-stories/supreme-court-rejects-challenge-to-s634-bsa-mandating-hash-value-disclosure-for-electronic-evidence-535950" class="text-primary underline hover:text-primary-active" rel="noopener" target="_blank">LiveLaw: Supreme Court on the Section 63(4) BSA certificate and hash value</a></li>
+        <li><a href="https://deepmind.google/models/synthid/" class="text-primary underline hover:text-primary-active" rel="noopener" target="_blank">Google DeepMind: SynthID</a></li>
+        <li><a href="https://contentcredentials.org/verify" class="text-primary underline hover:text-primary-active" rel="noopener" target="_blank">Content Credentials: verify a file</a></li>
+      </ul>
+      <p>Last updated 18 November 2026 by <a href="/author/virat-chauhan/" class="underline">Virat Chauhan</a>.</p>
     </section>
   </div>
 
