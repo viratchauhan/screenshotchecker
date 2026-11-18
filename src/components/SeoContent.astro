@@ -74,6 +74,21 @@
           </p>
         </div>
       </div>
+      <h3 class="font-serif text-xl text-ink font-normal pt-2">What a Result Looks Like</h3>
+      <p>
+        The report starts with a verdict label, such as <em>Unverifiable</em> when no check can settle the question, and then lists what each check found. A fictional example for a payment screenshot someone sent you:
+      </p>
+      <ul class="list-disc list-inside space-y-1.5 text-sm pl-1">
+        <li><strong>Text:</strong> the amount appears twice and the two readings differ, or the reference number has an unusual format.</li>
+        <li><strong>Scam wording:</strong> "sent by mistake, please refund the extra" is flagged as a known pressure pattern.</li>
+        <li><strong>Metadata:</strong> none found. For a forwarded screenshot this is normal, not a warning.</li>
+        <li><strong>Error level analysis:</strong> one small area responds differently from the text around it, a reason to zoom in.</li>
+        <li><strong>Personal data:</strong> a phone number and part of an account number are visible, worth hiding before you share the image.</li>
+        <li><strong>Next step:</strong> confirm the payment in your own bank or UPI app.</li>
+      </ul>
+      <p>
+        A clean report means none of the checks found a problem. It does not mean the screenshot is real: a screenshot made with a generator, or taken after editing a live page, can pass every image check. That is why the report also tells you how to verify the claim at its source.
+      </p>
       <p class="text-xs text-muted pt-1">
         This <strong>free screenshot checker</strong> processes selected images in your browser without an image-processing upload. Analytics, resource requests, and optional browser storage are described in the <a href="/privacy/" class="underline">privacy policy</a>.
       </p>
@@ -118,8 +133,61 @@
         <li><strong>Localized Compression Inconsistencies:</strong> Modifying a portion of an image and resaving can produce varying JPEG compression rates between modified and original regions.</li>
         <li><strong>Contradictory Metadata:</strong> Internal EXIF tags or editor software fingerprints may contradict visible timestamps.</li>
       </ul>
+      <h3 class="font-serif text-xl text-ink font-normal pt-2">Why Screenshot Forensics Differs from Photo Forensics</h3>
+      <p>
+        Checking a screenshot like a camera photo leads to the wrong answer. A photo usually records the camera make and model, exposure settings and sometimes a GPS location, and its pixels carry the noise pattern of a camera sensor. A screenshot is copied straight from the screen: it has no lens, no sensor noise and, by design, little or no camera metadata. Most phones save screenshots as PNG files, and chat apps often re-save them as compressed JPEGs when they are forwarded.
+      </p>
+      <p>
+        So missing EXIF data is expected on a screenshot and proves nothing on its own, and a screenshot forwarded through a chat app has been recompressed all over, which can hide the traces of an edit. For screenshots, the text, the layout and the original source tell you more than the file does. For camera photos, the <a href="/blog/how-to-tell-if-a-photo-is-edited/" class="text-primary underline hover:text-primary-active">photo editing guide</a> covers the camera-specific checks.
+      </p>
       <p>
         ScreenshotChecker does not claim to always tell if a screenshot is fake. Instead, it identifies signals that may indicate manipulation and helps you investigate the image further.
+      </p>
+    </section>
+
+    <!-- 4a. How fake screenshots are made -->
+    <section class="space-y-4">
+      <h2 class="font-serif text-2xl sm:text-3xl text-ink font-normal tracking-tight">
+        How Fake Screenshots Are Made, and How to Catch Each Kind
+      </h2>
+      <p>
+        Fake screenshots are made in four main ways. Each leaves different traces, so knowing the likely method tells you which check to trust.
+      </p>
+      <div class="overflow-x-auto">
+        <table class="fake-methods w-full text-sm border-collapse">
+          <thead>
+            <tr class="border-b border-hairline text-left text-ink">
+              <th class="py-2 pr-4 font-semibold">How it is made</th>
+              <th class="py-2 pr-4 font-semibold">What it can leave behind</th>
+              <th class="py-2 font-semibold">The check that works</th>
+            </tr>
+          </thead>
+          <tbody class="align-top">
+            <tr class="border-b border-hairline">
+              <td class="py-2 pr-4"><strong>Inspect Element</strong>: the browser's developer tools change the text on a live web page, such as a bank balance or a post, before the screenshot is taken.</td>
+              <td class="py-2 pr-4">Usually nothing in the image. It is a genuine screenshot of an edited page, so fonts and spacing look perfect.</td>
+              <td class="py-2">Open the account or post yourself, or ask for a screen recording or a live screen share.</td>
+            </tr>
+            <tr class="border-b border-hairline">
+              <td class="py-2 pr-4"><strong>Fake screenshot generators</strong>: websites and apps that draw chats, posts and payment screens from templates.</td>
+              <td class="py-2 pr-4">A status bar, spacing or icons that do not match a real phone or the current app version, and timestamps that are too tidy.</td>
+              <td class="py-2">Compare it with a real screenshot from the same app and phone type, and check the claim at the source.</td>
+            </tr>
+            <tr class="border-b border-hairline">
+              <td class="py-2 pr-4"><strong>Photo editors</strong>: a real screenshot with an amount, name or time changed in Photoshop, GIMP or a phone editor.</td>
+              <td class="py-2 pr-4">Letters of a slightly different weight or position, a smudged background around the change, and on JPEG files an area compressed twice.</td>
+              <td class="py-2">Zoom in, run <a href="/image-manipulation-checker/" class="text-primary underline hover:text-primary-active">error level analysis</a>, and <a href="/screenshot-comparison/" class="text-primary underline hover:text-primary-active">compare two copies</a> if you have them.</td>
+            </tr>
+            <tr>
+              <td class="py-2 pr-4"><strong>AI image tools</strong>: generators and editors that create a whole screenshot or rewrite the words in one.</td>
+              <td class="py-2 pr-4">Garbled small print, icons that are almost right, and sometimes Content Credentials (C2PA) or a Google SynthID watermark, which are lost once the image is re-saved.</td>
+              <td class="py-2">Run the <a href="/ai-image-detector/" class="text-primary underline hover:text-primary-active">AI image detector</a>, then confirm the claim at the source.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Fake screenshot makers are a search away and free to use, which is why a screenshot on its own is never proof of a payment, a conversation or a post. The question to ask is not "does this look real?" but "can I see this in the original app, account or bank record?" Our guide to <a href="/blog/ai-generated-screenshot/" class="text-primary underline hover:text-primary-active">AI-generated screenshots</a> goes deeper on the newest method.
       </p>
     </section>
 
@@ -307,3 +375,14 @@
     </div>
   </section>
 </article>
+
+<style>
+  /* On phones the three-column table of fake-screenshot methods stacks into one card per method. */
+  @media (max-width: 640px) {
+    .fake-methods thead { display: none; }
+    .fake-methods tr { display: block; padding: 0.75rem 0; }
+    .fake-methods td { display: block; padding: 0.2rem 0 !important; }
+    .fake-methods td:nth-child(2)::before { content: "Can leave behind: "; font-weight: 600; color: var(--color-ink); }
+    .fake-methods td:nth-child(3)::before { content: "Check: "; font-weight: 600; color: var(--color-ink); }
+  }
+</style>
