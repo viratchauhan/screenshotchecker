@@ -200,3 +200,9 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 
 - Page audit (86/100): hidden result-panel placeholder headings converted to role=heading (no h2 to h4 skips), empty img src removed.
 - Semantic gap analysis: Google India "fake screenshot" is creation intent (generators, editors); for "fake screenshot detector" we rank #5 (FauxLens, DeepAI, TruthScan above) and are named in the AI Overview. Added three homepage sections: how fake screenshots are made and how to catch each kind (table), screenshot vs photo forensics, what a result looks like. Homepage now about 4,550 words, 0 heading skips. Later the same day: AI marks (C2PA, SynthID), visual giveaways, screenshots as evidence (FRE 901, BSA s.63) and a sources block added; homepage about 5,000 words. Compare "fake screenshot detector" position around 10 Dec.
+
+## 2026-11-21: routine check
+
+- Live check: key pages, sitemaps (74 URLs), robots.txt, llms.txt and share cards all 200 in under 1 s; live site matches git.
+- Search Console, last 7 days by page: payment checker 327 clicks, 1,867 impressions, CTR 17.5%, position 4.3 (about 75% more clicks a week than its 28-day average on 17 Nov); homepage 110 clicks, 6.1%, position 5.3 (flat); reverse image search position 12.0 (diluted by new broad queries such as "free image checker" at 52-58, core screenshot-search queries still 4-9); AI detector 26.9; fake-amazon-flipkart-refund-scam already position 4.1.
+- URL inspection: indexed now: fake-receipt-checker, loan-app-harassment-morphed-photos, fake-job-offer-letter-kaise-pehchane, amazon-flipkart-refund-fraud-se-bache, payment-fail-paisa-kat-gaya, fake-receipt-kaise-pehchane. Not indexed: loan-app-harassment-kya-kare (indexing requested), fake-job-offer-letter (crawled 21 Nov, still "Crawled - currently not indexed"; homepage and scam checker now link it). Homepage recrawl requested; quota ran out at the scam checker.

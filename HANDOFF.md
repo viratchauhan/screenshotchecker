@@ -1,6 +1,6 @@
 # ScreenshotChecker handoff (read this first)
 
-Last updated: 18 November 2026. Written so an assistant on a new computer can pick up the work without the old
+Last updated: 21 November 2026. Written so an assistant on a new computer can pick up the work without the old
 conversation. Keep it current: update "Where things stand" and "Next steps" at the end of every session.
 
 ## What this is
@@ -160,7 +160,7 @@ ask the owner to sign in (never enter passwords yourself). Request indexing from
 `https://screenshotchecker.com/sitemap-index.xml` (submit the full URL). Cloudflare Web Analytics is the analytics
 source alongside GA4 and Clarity.
 
-## Where things stand (18 Nov 2026)
+## Where things stand (21 Nov 2026)
 
 - 76 built pages; 44 guides in `blogArticles.ts` (10 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
   internal links.
@@ -183,6 +183,7 @@ source alongside GA4 and Clarity.
   checker tools, tool explainers/FAQs (scam, analyzer, spam, AI detector, ELA), loan app harassment guides (EN/HI),
   Hindi job offer and Amazon/Flipkart refund guides, share cards for 25 pages, max-image-preview:large, and a fix for raw HTML in guide intros and
   checklists. GROWTH_LOG has details.
+- 21 Nov routine check: payment checker 327 clicks in 7 days at 17.5% CTR, position 4.3; homepage flat (110 clicks, 5.3).
 - Backlinks: 8 directory/editorial submissions from 1 and 6 Oct are pending editorial review (see the ledger);
   none verified as published.
 
@@ -190,10 +191,7 @@ source alongside GA4 and Clarity.
 
 1. Around 10 Dec 2026, compare 28-day CTR and position for the pages retitled on 12 Nov against the GROWTH_LOG
    baseline; keep winners, revise losers.
-2. Request indexing (quota ran out on 18 Nov) for `/blog/loan-app-harassment-morphed-photos/`, `/blog/loan-app-harassment-kya-kare/`,
-   `/blog/fake-job-offer-letter-kaise-pehchane/`, `/blog/amazon-flipkart-refund-fraud-se-bache/`, `/screenshot-scam-checker/`, `/ai-image-detector/`, `/screenshot-analyzer/`. Check the Pages report:
-   confirm the 12-13 Nov guides are indexed; re-request any still
-   "Discovered - currently not indexed".
+2. Search Console (21 Nov): every new page from 17-18 Nov is indexed except `/blog/fake-job-offer-letter/` (crawled 21 Nov, "Crawled - currently not indexed"; homepage and scam checker now link it, re-check around 28 Nov and request again if still out) and `/blog/loan-app-harassment-kya-kare/` (requested 21 Nov). Still to recrawl when quota allows: `/screenshot-scam-checker/`, `/ai-image-detector/`, `/screenshot-analyzer/`. Search Console signs out in the browser pane from time to time: ask the owner to sign in; at narrow pane widths the Inspect box is hidden, so set the viewport to 1280 px first.
 3. Restore Cloudflare Git auto-deploys (owner, dashboard), or keep deploying with wrangler.
 4. Owner actions from the outreach kit (see its 18 Nov section: Bing Webmaster Tools import, Featured/Qwoted/SourceBottle): send the Gmail drafts, list on AlternativeTo/Product Hunt, answer Quora/Reddit
    questions with disclosure, share Hindi WhatsApp forwards.
