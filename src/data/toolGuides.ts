@@ -286,7 +286,7 @@ export const TOOL_GUIDES: Record<string, ToolGuide> = {
       {
         heading: 'Scam patterns it recognises',
         paragraphs: [
-          'Beyond the general signals, the text is compared with 28 documented scam message patterns from India and the US, including bank re-KYC and APK messages, task job and review scams, parcel and India Post address texts, unpaid toll texts (E-ZPass, SunPass), e-challan and Parivahan messages, electricity disconnection threats, digital arrest calls, income tax refund messages, reward points expiry, WhatsApp code theft, crypto investment groups, instant loan apps and KBC lottery messages. Our guides explain each one in plain language, for example the <a href="/blog/whatsapp-telegram-task-job-scam/">task job scam</a>, the <a href="/blog/india-post-courier-sms-scam/">India Post SMS</a> and the <a href="/blog/digital-arrest-scam/">digital arrest scam</a>.',
+          'Beyond the general signals, the text is compared with 28 documented scam message patterns from India and the US, including bank re-KYC and APK messages, task job and review scams, <a href="/blog/fake-job-offer-letter/">fake job offer letters</a>, parcel and India Post address texts, unpaid toll texts (E-ZPass, SunPass), e-challan and Parivahan messages, electricity disconnection threats, digital arrest calls, income tax refund messages, reward points expiry, WhatsApp code theft, crypto investment groups, instant loan apps and KBC lottery messages. Our guides explain each one in plain language, for example the <a href="/blog/whatsapp-telegram-task-job-scam/">task job scam</a>, the <a href="/blog/india-post-courier-sms-scam/">India Post SMS</a> and the <a href="/blog/digital-arrest-scam/">digital arrest scam</a>.',
         ],
       },
       {
