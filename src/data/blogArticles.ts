@@ -571,7 +571,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       'AI image detector remover',
       'Winston AI image detector',
     ],
-    relatedSlugs: ["how-to-tell-if-a-photo-is-edited", "fake-social-media-post-screenshot", "exif-metadata", "screenshot-analyzer-online", "screenshot-checker-online"],
+    relatedSlugs: ["how-to-tell-if-an-image-is-ai-generated", "how-to-tell-if-a-photo-is-edited", "fake-social-media-post-screenshot", "exif-metadata", "screenshot-analyzer-online", "screenshot-checker-online"],
     cta: {
       label: 'Analyze an Image',
       url: '/ai-image-detector',
@@ -3402,7 +3402,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["where-is-this-screenshot-from", 
+    "relatedSlugs": ["photo-se-search-kaise-kare", "where-is-this-screenshot-from", 
       "fake-social-media-post-screenshot",
       "how-to-tell-if-a-photo-is-a-screenshot",
       "ai-image-detector-online"
@@ -3659,7 +3659,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fake-receipt-ai-generated", 
+    "relatedSlugs": ["how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "reverse-image-search-screenshot",
       "exif-metadata"
@@ -3778,7 +3778,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fake-receipt-ai-generated", 
+    "relatedSlugs": ["how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "how-to-tell-if-a-photo-is-edited",
       "fake-whatsapp-chat-screenshot"
@@ -6583,6 +6583,263 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "UTR का फ़ॉर्मेट जाँचें",
       "url": "/utr-number-checker/",
       "description": "देखिए कि UTR या UPI रेफ़रेंस UPI, IMPS, NEFT या RTGS के फ़ॉर्मेट जैसा है या नहीं, फिर पेमेंट अपने बैंक में पक्का कीजिए।"
+    }
+  },
+  {
+    "slug": "how-to-tell-if-an-image-is-ai-generated",
+    "title": "How to Tell If an Image Is AI-Generated: 7 Checks That Work in 2026",
+    "seoTitle": "How to Tell If an Image Is AI-Generated: 7 Checks",
+    "metaDescription": "Is this image AI or not? Check the source, Content Credentials and SynthID watermarks, visual tells and edit traces. What each check can and cannot prove.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-22",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "Seven practical checks for telling whether a picture was made or altered by AI: where it came from, Content Credentials, SynthID and other watermarks, visual tells, AI edits inside real photos, detectors, and when the answer really matters.",
+    "targetKeywords": [
+      "how to tell if an image is ai generated",
+      "is this image ai generated",
+      "is this image ai or not",
+      "how to tell if an image is ai edited",
+      "ai generated image checker",
+      "how to know if a picture is ai"
+    ],
+    "keyTakeaway": {
+      "title": "Start with the source and the watermark, not the pixels",
+      "text": "The strongest evidence is outside the image: who posted it first, whether a reverse image search finds an older original, and whether the file carries Content Credentials or a SynthID watermark. Visual tells and detectors add clues, but newer generators avoid many tells and no detector is certain."
+    },
+    "introduction": "To tell if an image is AI-generated, run these checks in order: find where it first appeared with a reverse image search; look for Content Credentials or an AI watermark such as Google's SynthID; zoom in on hands, text, jewellery, reflections and backgrounds; check whether part of a real photo was edited; and use an AI image detector as one more clue. The first two checks give the strongest evidence. The rest help, but none proves an image is real. Here is how to do each one and what it can tell you.",
+    "contentSections": [
+      {
+        "heading": "1. Find where the image came from",
+        "paragraphs": [
+          "A real photo of a real event usually has a history: an earlier post, a photographer, a news report or several angles from different people. Run a <a href=\"/reverse-image-search/\">reverse image search</a> with Google Lens, TinEye, Bing or Yandex and open the oldest, most complete match. If the image first appears on an AI art account, in a prompt-sharing group or with a caption saying it was generated, you have your answer.",
+          "No earlier copy is not proof either way: a new photo and a new AI image both start with no history. But an image claiming to show a major public event that nobody else captured deserves real doubt."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/how-to-tell-if-an-image-is-ai-generated/fictional-example.png",
+          "alt": "A fictional checklist card ranking the checks for an AI-generated image: source and earlier copies, Content Credentials, SynthID or other watermark, visual tells, edited areas and detector signals, from strongest to weakest evidence.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. The checks from strongest to weakest evidence. A fictional example card, not a real result."
+        }
+      },
+      {
+        "heading": "2. Look for Content Credentials",
+        "paragraphs": [
+          "Content Credentials (C2PA) are a signed record, stored with the file, of how an image was made and edited. Malwarebytes notes that they are supported by companies including Adobe, Google, Microsoft and Sony. Upload the original file to the <a href=\"https://contentcredentials.org/verify\">Content Credentials verify tool</a>, or to our <a href=\"/ai-image-detector/\">AI image detector</a>, which reads them when present. Credentials naming an AI tool are strong evidence. Missing credentials prove nothing, because most images do not carry them and screenshots or re-saves remove them."
+        ]
+      },
+      {
+        "heading": "3. Check for an AI watermark such as SynthID",
+        "paragraphs": [
+          "Google embeds <a href=\"https://deepmind.google/models/synthid/\">SynthID</a>, an invisible watermark, in content made or edited with its AI. Since November 2025 you can <a href=\"https://blog.google/technology/ai/ai-image-verification-gemini-app/\">upload an image to the Gemini app</a> and ask whether it was created or edited with Google AI; Gemini checks for the SynthID watermark. According to <a href=\"https://www.malwarebytes.com/blog/ai/2026/07/how-to-tell-if-an-image-is-ai-generated\">Malwarebytes' July 2026 guide</a>, SynthID now also covers images made with ChatGPT and DALL·E through a 2026 partnership, and OpenAI offers its own Verify tool.",
+          "As with credentials, a watermark found is strong evidence, while no watermark found only means none was detected: the image may come from another tool, or the mark may have been lost."
+        ]
+      },
+      {
+        "heading": "4. Zoom in on the usual visual tells",
+        "paragraphs": [
+          "Generators have improved, so treat these as reasons to look closer, not proof. Check several at once:"
+        ],
+        "checklist": [
+          "<strong>Hands and teeth:</strong> extra, fused or bent fingers, and teeth that blur into one shape.",
+          "<strong>Text:</strong> signs, labels, number plates and screens with letters that almost make words. Our <a href=\"/blog/ai-generated-screenshot/\">guide to AI-generated screenshots</a> covers fake chats and receipts.",
+          "<strong>Pairs and patterns:</strong> earrings, glasses, buttons or tiles that do not match or repeat oddly.",
+          "<strong>Light and reflections:</strong> shadows falling different ways, or reflections in windows and eyes that show a different scene.",
+          "<strong>Edges and backgrounds:</strong> hair melting into the background, faces in a crowd that turn into smudges, objects merging into each other.",
+          "<strong>Too perfect:</strong> waxy skin with no pores, studio lighting in a supposedly casual phone photo."
+        ]
+      },
+      {
+        "heading": "5. Check whether part of a real photo was edited",
+        "paragraphs": [
+          "Many misleading pictures are real photos with AI edits: an object removed, a face swapped, a sign rewritten. The rest of the image looks genuine, so whole-image tells miss them. Compare it with any earlier copy from the reverse search, and look at the edited-looking area with <a href=\"/image-manipulation-checker/\">error level analysis</a>, which can show a region with a different compression history. A clean map does not prove the photo is untouched, especially after it has been shared through a chat app."
+        ]
+      },
+      {
+        "heading": "6. Use an AI image detector, and read it as a clue",
+        "paragraphs": [
+          "Detectors look for statistical patterns that generators leave in texture and noise. Our <a href=\"/ai-image-detector/\">AI image detector</a> lists each signal it checks (Content Credentials, metadata, texture statistics, error levels and malformed text) instead of giving a single percentage, because a confident-looking number on a re-shared or edited image is often wrong. Mixed signals are common; use them to decide what to verify next, not as a verdict. Our <a href=\"/blog/ai-image-detector-online/\">explainer on how AI detection works</a> goes deeper."
+        ]
+      },
+      {
+        "heading": "7. Decide how much certainty you need",
+        "paragraphs": [
+          "For a funny picture on social media, a couple of these checks is enough. When an image is used to ask for money, prove a purchase, shame someone or support a news claim, ask for the original file, check the source directly and look for confirmation from people or outlets you trust. AI-made images now appear in fake profiles, <a href=\"/blog/fake-receipt-ai-generated/\">fake receipts</a> and <a href=\"/blog/loan-app-harassment-morphed-photos/\">harassment with morphed photos</a>."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "Proof that an image is real comes from its source, not from how it looks. Proof that it is AI comes from credentials, watermarks or an admission, not from a detector score."
+        }
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can I tell if an image is AI-generated?",
+        "answer": "Check where it first appeared with a reverse image search, look for Content Credentials or a SynthID watermark, zoom in on hands, text, reflections and backgrounds, and use an AI image detector as a clue. The source and watermark checks give the strongest evidence."
+      },
+      {
+        "question": "Is there a free way to check if an image is AI?",
+        "answer": "Yes. Reverse image search is free, the Content Credentials verify tool is free, the Gemini app can check for Google's SynthID watermark, and ScreenshotChecker's AI image detector runs in your browser for free. None of them is certain on its own."
+      },
+      {
+        "question": "Can AI detectors be wrong?",
+        "answer": "Yes. Detectors miss some AI images and flag some real photos, especially after resizing, compression, screenshots or editing. Treat a detector result as one clue alongside the source and any watermark."
+      },
+      {
+        "question": "How do I know if a photo was edited with AI rather than fully generated?",
+        "answer": "Look for an earlier, different copy of the photo with reverse image search, compare the two, and check the suspicious area with error level analysis. Partial AI edits often leave the rest of the photo looking completely real."
+      },
+      {
+        "question": "Does no watermark mean the image is real?",
+        "answer": "No. Most images carry no watermark or Content Credentials, and screenshots or re-saves remove them. Only a watermark that is found tells you something."
+      },
+      {
+        "question": "Can Gemini tell if an image is AI?",
+        "answer": "The Gemini app can check whether an image was created or edited with Google AI by looking for the SynthID watermark. It cannot confirm images from tools that do not use SynthID."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "ai-image-detector-online",
+      "ai-generated-screenshot",
+      "how-to-tell-if-a-photo-is-edited"
+    ],
+    "cta": {
+      "label": "Check an image for AI signals",
+      "url": "/ai-image-detector/",
+      "description": "See Content Credentials, metadata, texture and error-level signals for any image, processed in your browser."
+    }
+  },
+  {
+    "slug": "photo-se-search-kaise-kare",
+    "lang": "hi",
+    "title": "फोटो से सर्च कैसे करें? Google Lens से Reverse Image Search, मोबाइल और कंप्यूटर पर",
+    "seoTitle": "फोटो से सर्च कैसे करें? Google Lens Reverse Image Search",
+    "metaDescription": "फोटो या स्क्रीनशॉट से Google पर सर्च करने का तरीका: Android, iPhone और कंप्यूटर पर Google Lens, TinEye, Bing, और नतीजे कैसे समझें।",
+    "category": "Forensics",
+    "publishedAt": "2026-11-22",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "Android, iPhone और कंप्यूटर पर फोटो से सर्च करने के आसान तरीके, स्क्रीनशॉट से सर्च करने से पहले क्रॉप क्यों करें, दूसरे सर्च इंजन, और नतीजों से असली स्रोत कैसे पहचानें।",
+    "targetKeywords": [
+      "photo se search kaise kare",
+      "फोटो से सर्च कैसे करे",
+      "google par photo se search kaise kare",
+      "reverse image search kaise kare",
+      "photo se search kaise kare online",
+      "screenshot se search kaise kare"
+    ],
+    "keyTakeaway": {
+      "title": "Google Lens खोलिए, फोटो चुनिए, सबसे पुरानी कॉपी देखिए",
+      "text": "मोबाइल पर Google ऐप में Lens का आइकन दबाकर फोटो चुनिए; कंप्यूटर पर google.com पर Search by image से फोटो अपलोड कीजिए। स्क्रीनशॉट हो तो पहले सिर्फ़ तस्वीर वाला हिस्सा क्रॉप कीजिए। नतीजों में सबसे पुरानी और पूरी कॉपी असली स्रोत के सबसे क़रीब होती है।"
+    },
+    "introduction": "फोटो से सर्च करने का सबसे आसान तरीका Google Lens है: मोबाइल में Google ऐप खोलिए, सर्च बार में Lens (कैमरा) आइकन दबाइए और गैलरी से फोटो चुनिए। कंप्यूटर पर google.com खोलकर Search by image पर क्लिक कीजिए और फोटो अपलोड कीजिए। इससे पता चलता है कि वह तस्वीर इंटरनेट पर कहाँ-कहाँ है, किसकी है, या कोई प्रोफ़ाइल फोटो कहीं और से तो नहीं ली गई। नीचे हर डिवाइस के कदम और नतीजे समझने का तरीका है। <a href=\"/blog/reverse-image-search-screenshot/\">स्क्रीनशॉट से सर्च की अंग्रेज़ी गाइड यहाँ है।</a>",
+    "contentSections": [
+      {
+        "heading": "Android फोन पर फोटो से सर्च कैसे करें",
+        "paragraphs": [
+          "Google ऐप खोलिए और सर्च बार में Lens (कैमरा) आइकन पर टैप कीजिए। गैलरी या Screenshots फ़ोल्डर से फोटो चुनिए। फोटो में जिस हिस्से को खोजना है, उसके चारों ओर बॉक्स को खींचकर छोटा-बड़ा कीजिए। नीचे मिलते-जुलते फोटो और वे वेबसाइटें दिखेंगी जिन पर वह तस्वीर है।"
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/photo-se-search-kaise-kare/fictional-example.png",
+          "alt": "फोटो से सर्च के कदमों का काल्पनिक कार्ड: Android और iPhone पर Google ऐप में Lens, कंप्यूटर पर Search by image, Chrome में राइट-क्लिक, और स्क्रीनशॉट पहले क्रॉप करने की सलाह।",
+          "width": 1200,
+          "height": 760,
+          "caption": "चित्र 1. हर डिवाइस पर फोटो से सर्च के कदम। ऐप के बटन और नाम समय के साथ बदल सकते हैं।"
+        }
+      },
+      {
+        "heading": "iPhone पर फोटो से सर्च कैसे करें",
+        "paragraphs": [
+          "iPhone या iPad पर Google ऐप खोलिए, सर्च बार में Lens पर टैप कीजिए और फोटो पिकर से अपनी सेव की हुई फोटो या स्क्रीनशॉट चुनिए। जिस हिस्से को खोजना है, उस पर चुनाव वाला बॉक्स ले आइए और नतीजे देखिए।"
+        ]
+      },
+      {
+        "heading": "कंप्यूटर पर फोटो से सर्च कैसे करें",
+        "paragraphs": [
+          "Google की <a href=\"https://support.google.com/websearch/answer/1325808?hl=en\">हेल्प गाइड</a> कंप्यूटर के ये तरीके बताती है:"
+        ],
+        "checklist": [
+          "<strong>फोटो अपलोड:</strong> google.com खोलिए, Search by image (कैमरा आइकन) पर क्लिक कीजिए, Upload a file चुनिए और फोटो खोलिए।",
+          "<strong>खींचकर छोड़ें:</strong> फोटो फ़ाइल को खींचकर Google के सर्च बॉक्स में छोड़ दीजिए।",
+          "<strong>फोटो का लिंक:</strong> वेबसाइट पर फोटो पर राइट-क्लिक करके Copy Image Address कीजिए, फिर Search by image में Paste image link वाली जगह पर लिंक डालिए।",
+          "<strong>Chrome में सीधे:</strong> किसी वेबसाइट की फोटो पर राइट-क्लिक करके Search with Google Lens चुनिए; नतीजे साइड में खुलेंगे।"
+        ]
+      },
+      {
+        "heading": "स्क्रीनशॉट से सर्च करने से पहले क्रॉप कीजिए",
+        "paragraphs": [
+          "स्क्रीनशॉट में फ़ोन की स्टेटस बार, ऐप के बटन और कैप्शन भी होते हैं, जिनसे सर्च भटक जाता है। पहले सिर्फ़ तस्वीर वाला हिस्सा काटिए। हमारे मुफ़्त <a href=\"/reverse-image-search/\">रिवर्स इमेज सर्च टूल</a> में फोटो डालकर उस पर उंगली या माउस से हिस्सा चुनिए और Crop to selection दबाइए, या Auto-trim borders से सादे किनारे हटाइए। फिर क्रॉप की हुई कॉपी डाउनलोड करके Google Lens, TinEye, Bing या Yandex पर अपलोड कीजिए। यह सब आपके ब्राउज़र में होता है।"
+        ]
+      },
+      {
+        "heading": "Google के अलावा और कहाँ सर्च करें",
+        "paragraphs": [
+          "हर सर्च इंजन का अपना इंडेक्स होता है, इसलिए एक जगह कुछ न मिले तो दूसरी जगह आज़माइए:"
+        ],
+        "checklist": [
+          "<strong>TinEye:</strong> उसी फोटो की कॉपियाँ खोजने में अच्छा, कुछ क्रॉप या एडिट की हुई कॉपियाँ भी।",
+          "<strong>Bing Visual Search:</strong> मिलते-जुलते फोटो, पेज और प्रोडक्ट।",
+          "<strong>Yandex Images:</strong> जब बाकी कुछ न दें, तब आज़माने लायक एक अलग इंडेक्स।"
+        ]
+      },
+      {
+        "heading": "नतीजे कैसे समझें",
+        "paragraphs": [
+          "सबसे पुरानी और सबसे पूरी (बड़ी, बिना कटी) कॉपी असली स्रोत के सबसे क़रीब होती है, पर पक्का सबूत नहीं, क्योंकि सर्च इंजन ने शायद पहली पोस्ट देखी ही न हो। पेज खोलकर तारीख़, कैप्शन और फ़ोटोग्राफ़र का नाम देखिए।",
+          "कुछ न मिलने का मतलब यह नहीं कि फोटो असली या नई है। निजी, नई या बहुत बदली हुई तस्वीरें अक्सर नहीं मिलतीं। फोटो AI से बनी लगे तो हमारी गाइड <a href=\"/blog/how-to-tell-if-an-image-is-ai-generated/\">कैसे पहचानें कि इमेज AI से बनी है</a> (अंग्रेज़ी) देखिए।"
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "ठगी से बचने में यह बहुत काम आता है: ऑनलाइन दोस्त की प्रोफ़ाइल फोटो, OLX पर सामान की फोटो या नौकरी देने वाले की तस्वीर सर्च कीजिए। वही फोटो किसी और नाम से कहीं और मिले, तो सावधान हो जाइए।"
+        }
+      },
+      {
+        "heading": "प्राइवेसी का ध्यान रखें",
+        "paragraphs": [
+          "फोटो अपलोड करने पर वह सर्च करने वाली कंपनी तक जाती है और उसकी नीतियों के अनुसार इस्तेमाल हो सकती है। अपनी निजी तस्वीरें, बच्चों की फोटो या पहचान पत्र जैसी चीज़ें सर्च के लिए अपलोड न करें। स्क्रीनशॉट में नाम, नंबर या खाते की जानकारी हो, तो पहले <a href=\"/screenshot-redactor/\">स्क्रीनशॉट रिडैक्टर</a> से छिपा दीजिए।"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "मोबाइल में फोटो से सर्च कैसे करें?",
+        "answer": "Google ऐप खोलिए, सर्च बार में Lens (कैमरा) आइकन दबाइए, गैलरी से फोटो चुनिए और खोजने वाले हिस्से पर बॉक्स ले आइए। Android और iPhone दोनों पर यही तरीका है।"
+      },
+      {
+        "question": "कंप्यूटर पर Google में फोटो से सर्च कैसे करें?",
+        "answer": "google.com खोलकर Search by image पर क्लिक कीजिए और फोटो अपलोड कीजिए, या फोटो को सर्च बॉक्स में खींचकर छोड़िए। Chrome में किसी फोटो पर राइट-क्लिक करके Search with Google Lens भी चुन सकते हैं।"
+      },
+      {
+        "question": "क्या स्क्रीनशॉट से भी सर्च कर सकते हैं?",
+        "answer": "हाँ। पहले स्टेटस बार, बटन और कैप्शन हटाकर सिर्फ़ तस्वीर वाला हिस्सा क्रॉप कीजिए, फिर उस कॉपी से सर्च कीजिए। हमारे रिवर्स इमेज सर्च टूल में यह क्रॉप आपके ब्राउज़र में हो जाता है।"
+      },
+      {
+        "question": "फोटो से किसी व्यक्ति को कैसे ढूँढें?",
+        "answer": "Reverse image search यह दिखा सकता है कि वही फोटो इंटरनेट पर कहाँ छपी है, जैसे नकली प्रोफ़ाइल पकड़ने के लिए। पर किसी अनजान व्यक्ति की निजी जानकारी खोजना या उसका पीछा करना ग़लत है, और कई जगह अपराध भी।"
+      },
+      {
+        "question": "कुछ भी न मिले तो इसका क्या मतलब है?",
+        "answer": "इसका मतलब सिर्फ़ इतना है कि उस सर्च इंजन के इंडेक्स में मिलती फोटो नहीं है। फोटो नई, निजी या बदली हुई हो सकती है। दूसरा सर्च इंजन आज़माइए, और कुछ न मिलना असली होने का सबूत मत मानिए।"
+      },
+      {
+        "question": "क्या फोटो से सर्च करना सुरक्षित है?",
+        "answer": "सार्वजनिक फोटो के लिए हाँ, पर अपलोड की गई फोटो सर्च कंपनी तक जाती है। निजी फोटो, बच्चों की तस्वीरें और पहचान पत्र अपलोड न करें।"
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "reverse-image-search-screenshot",
+      "how-to-tell-if-an-image-is-ai-generated",
+      "fake-payment-screenshot-kaise-pehchane"
+    ],
+    "cta": {
+      "label": "फोटो क्रॉप करके सर्च करें",
+      "url": "/reverse-image-search/",
+      "description": "फोटो या स्क्रीनशॉट का ज़रूरी हिस्सा अपने ब्राउज़र में क्रॉप कीजिए, फिर Google Lens, TinEye, Bing या Yandex पर सर्च कीजिए।"
     }
   },
 ];

@@ -1,0 +1,40 @@
+[
+  {
+    "slug": "how-to-tell-if-an-image-is-ai-generated",
+    "app": "Is this image AI?", "sub": "Fictional checklist · strongest evidence first",
+    "blocks": [
+      {"type": "row", "k": "Source", "v": "earliest copy, who posted it", "badge": 1},
+      {"type": "row", "k": "Content Credentials", "v": "AI tool named in C2PA", "badge": 2},
+      {"type": "row", "k": "Watermark", "v": "SynthID found by Gemini", "badge": 3},
+      {"type": "row", "k": "Visual tells", "v": "hands, text, reflections", "badge": 4},
+      {"type": "row", "k": "Detector", "v": "signals, not a verdict", "badge": 5}
+    ],
+    "callouts": [
+      "An older original or an AI art account usually settles it.",
+      "Signed credentials naming an AI tool are strong evidence.",
+      "A watermark found is strong; none found proves nothing.",
+      "Reasons to look closer; new generators avoid many.",
+      "Mixed signals are common: verify at the source."
+    ]
+  },
+  {
+    "slug": "photo-se-search-kaise-kare", "lang": "hi",
+    "banner": "काल्पनिक उदाहरण · ScreenshotChecker",
+    "app": "फोटो से सर्च", "sub": "हर डिवाइस के कदम · बटन बदल सकते हैं",
+    "callout_title": "कैसे करें",
+    "blocks": [
+      {"type": "row", "k": "Android", "v": "Google ऐप › Lens › फोटो", "badge": 1},
+      {"type": "row", "k": "iPhone", "v": "Google ऐप › Lens › फोटो", "badge": 2},
+      {"type": "row", "k": "कंप्यूटर", "v": "google.com › Search by image", "badge": 3},
+      {"type": "row", "k": "Chrome", "v": "राइट-क्लिक › Google Lens", "badge": 4},
+      {"type": "note", "text": "स्क्रीनशॉट हो तो पहले सिर्फ़ तस्वीर क्रॉप करें", "badge": 5}
+    ],
+    "callouts": [
+      "गैलरी से फोटो चुनिए, खोजने वाले हिस्से पर बॉक्स लाइए।",
+      "फोटो पिकर से सेव की हुई फोटो या स्क्रीनशॉट चुनिए।",
+      "Upload a file या फोटो को सर्च बॉक्स में खींचिए।",
+      "वेबसाइट की फोटो पर सीधे, नतीजे साइड में।",
+      "स्टेटस बार और बटन हटाने से सही नतीजे मिलते हैं।"
+    ]
+  }
+]

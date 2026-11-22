@@ -41,3 +41,20 @@ test('preparation uses a PNG copy and releases source URL on success, decode fai
     if (oldDocument) Object.defineProperty(globalThis, 'document', oldDocument); else Reflect.deleteProperty(globalThis, 'document');
   }
 });
+
+test('crop rectangles stay inside the image with a minimum size', async () => {
+  const { clampCropRect } = await import('../reverseImage');
+  assert.deepEqual(clampCropRect({ x: -10, y: -5, width: 500, height: 500 }, 200, 100), { x: 0, y: 0, width: 200, height: 100 });
+  assert.deepEqual(clampCropRect({ x: 195, y: 10, width: 2, height: 2 }, 200, 100), { x: 184, y: 10, width: 16, height: 16 });
+});
+
+test('auto-trim removes solid borders and keeps the whole image when there are none', async () => {
+  const { findTrimBounds } = await import('../reverseImage');
+  const w = 10, h = 8; const px = new Uint8ClampedArray(w * h * 4).fill(255);
+  for (let y = 2; y <= 5; y++) for (let x = 3; x <= 7; x++) { const i = (y * w + x) * 4; px[i] = 10; px[i + 1] = 20; px[i + 2] = 30; }
+  assert.deepEqual(findTrimBounds(px, w, h), { x: 3, y: 2, width: 5, height: 4 });
+  const noisy = new Uint8ClampedArray(w * h * 4); for (let i = 0; i < noisy.length; i += 4) { noisy[i] = (i * 7) % 255; noisy[i + 3] = 255; }
+  assert.deepEqual(findTrimBounds(noisy, w, h), { x: 0, y: 0, width: w, height: h });
+  const blank = new Uint8ClampedArray(w * h * 4).fill(255);
+  assert.deepEqual(findTrimBounds(blank, w, h), { x: 0, y: 0, width: w, height: h });
+});

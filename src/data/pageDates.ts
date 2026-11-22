@@ -4,7 +4,7 @@
 export const PAGE_UPDATED_AT: Record<string, string> = {
   '/': '2026-11-18',
   '/about/': '2026-10-30',
-  '/ai-image-detector/': '2026-11-17',
+  '/ai-image-detector/': '2026-11-22',
   '/blog/': '2026-11-12',
   '/contact/': '2026-08-27',
   '/how-it-works/': '2026-10-14',
@@ -15,7 +15,7 @@ export const PAGE_UPDATED_AT: Record<string, string> = {
   '/author/virat-chauhan/': '2026-10-30',
   '/privacy/': '2026-10-14',
   '/resources/': '2026-11-12',
-  '/reverse-image-search/': '2026-11-17',
+  '/reverse-image-search/': '2026-11-22',
   '/utr-number-checker/': '2026-11-22',
   '/fake-receipt-checker/': '2026-11-17',
   '/screenshot-analyzer/': '2026-11-17',

@@ -234,7 +234,7 @@ export const TOOL_GUIDES: Record<string, ToolGuide> = {
       {
         heading: 'Checking a viral image',
         paragraphs: [
-          'Start with where the image came from: run a <a href="/reverse-image-search/">reverse image search</a> to find earlier copies, and look for the original post or a fact check. Then use the detector\'s signals as supporting evidence. The <a href="/blog/ai-image-detector-online/">guide to AI image detection</a> explains each signal and its blind spots in more detail. For a step-by-step routine, see <a href="/blog/how-to-tell-if-a-photo-is-edited/">how to tell if a photo is edited or fake</a> and <a href="/blog/ai-generated-screenshot/">how to tell if a screenshot is AI-generated</a>.',
+          'Start with where the image came from: run a <a href="/reverse-image-search/">reverse image search</a> to find earlier copies, and look for the original post or a fact check. Then use the detector\'s signals as supporting evidence. The <a href="/blog/ai-image-detector-online/">guide to AI image detection</a> explains each signal and its blind spots in more detail. For a step-by-step routine, see <a href="/blog/how-to-tell-if-an-image-is-ai-generated/">how to tell if an image is AI-generated</a>, <a href="/blog/how-to-tell-if-a-photo-is-edited/">how to tell if a photo is edited or fake</a> and <a href="/blog/ai-generated-screenshot/">how to tell if a screenshot is AI-generated</a>.',
         ],
       },
     ],

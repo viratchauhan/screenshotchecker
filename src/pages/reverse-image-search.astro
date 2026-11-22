@@ -25,8 +25,8 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
     <p class="eyebrow">FOLLOW THE IMAGE. FIND THE CONTEXT.</p>
     <h1>Search by screenshot: free reverse image search</h1>
     <p class="intro">Find an image source from a photo or screenshot. Prepare a search copy, choose a provider, and check where the picture appears online.</p>
-    <p class="quick-answer"><strong>How to find where a screenshot is from:</strong> crop it to just the picture (cut off the status bar, captions and buttons), upload that copy to Google Lens, then try TinEye or Bing, and open the earliest, most complete match to read its date and caption. On a phone, save the cropped copy and pick it from the provider&rsquo;s upload button. No match does not mean the picture is new or genuine.</p>
-    <ul class="benefits"><li>No signup</li><li>Local image preparation</li><li>Three search providers</li></ul>
+    <p class="quick-answer"><strong>How to find where a screenshot is from:</strong> crop it to just the picture (cut off the status bar, captions and buttons; you can crop right here in step 1), upload that copy to Google Lens, then try TinEye or Bing, and open the earliest, most complete match to read its date and caption. On a phone, save the cropped copy and pick it from the provider&rsquo;s upload button. No match does not mean the picture is new or genuine.</p>
+    <ul class="benefits"><li>No signup</li><li>Local image preparation</li><li>Crop in your browser</li><li>Four search providers</li></ul>
     <p><strong>Results open on the provider’s site.</strong> This tool does not have its own image index or automatically submit your file.</p>
     </header>
     <nav class="guide-nav" aria-label="Reverse image search guide">
@@ -46,8 +46,17 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
       </div>
       <p>File preparation stays in your browser. The PNG copy omits the original file’s metadata, but visible private information remains. <a href="/screenshot-redactor">Redact sensitive details first</a>.</p>
       <div id="reverse-ready" hidden>
-        <img id="reverse-preview" alt="Preview of your prepared search image" />
+        <div id="reverse-crop-stage" class="crop-stage">
+          <img id="reverse-preview" alt="Preview of your prepared search image" draggable="false" />
+          <div id="reverse-crop-box" class="crop-box" hidden></div>
+        </div>
         <p id="reverse-info"></p>
+        <p class="crop-hint">Search only the picture: drag across the image to select it, then choose <strong>Crop to selection</strong>. <strong>Auto-trim borders</strong> removes plain bars and padding.</p>
+        <div class="actions crop-actions">
+          <button id="reverse-trim" type="button" class="btn-secondary">Auto-trim borders</button>
+          <button id="reverse-crop" type="button" class="btn-secondary" disabled>Crop to selection</button>
+          <button id="reverse-uncrop" type="button" class="btn-secondary" hidden>Undo crop</button>
+        </div>
         <div class="actions">
           <button id="reverse-copy" type="button" class="btn-secondary">Copy image</button>
           <a id="reverse-download" class="btn-primary" download="search-image.png">Download PNG</a>
@@ -76,7 +85,7 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
       <h2 id="screenshot-search">How to find an image source from a screenshot</h2>
       <p>Reverse image search uses a picture as the search input. It can find matching copies or similar images in a provider’s index. To trace a screenshot, search the picture inside it, then open matching pages to compare their dates, captions and credits.</p>
       <ol>
-        <li><strong>Keep the original.</strong> Save a separate search copy. If you crop it in your photo editor, remove app borders and unrelated text while keeping useful visual details. This page prepares a PNG; it does not crop your image.</li>
+        <li><strong>Keep the original.</strong> Save a separate search copy. Crop away app borders, status bars and unrelated text while keeping useful visual details: drag across the preview above and choose Crop to selection, or use Auto-trim borders for plain bars.</li>
         <li><strong>Choose a provider.</strong> Try TinEye for copies of the same image, or Google Lens and Bing for matching pages and visually similar results. Use the controls above to prepare a copy, then upload it on the provider’s site.</li>
         <li><strong>Check the page behind the result.</strong> Compare landmarks, objects and image details. A similar-looking photo is not necessarily the same picture.</li>
         <li><strong>Follow the credit.</strong> Look for a photographer, publisher or linked earlier source. An old search result is a lead, not proof of the first publication or permission to reuse the image.</li>
@@ -114,7 +123,7 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
     <section aria-labelledby="no-matches">
       <h2 id="no-matches">No matches, or only similar pictures?</h2>
       <dl class="troubleshooting">
-        <div><dt>Results show the wrong object</dt><dd>Try the original photo if available, or crop a separate copy around the relevant subject in your photo editor. Keep the uncropped original for context.</dd></div>
+        <div><dt>Results show the wrong object</dt><dd>Try the original photo if available, or crop a copy around the relevant subject with Crop to selection above. Keep the uncropped original for context.</dd></div>
         <div><dt>Every result is a similar product</dt><dd>Try TinEye for copies of the same image. Similar products alone do not establish where your particular photo came from.</dd></div>
         <div><dt>No provider finds a match</dt><dd>The image may be new, private, unindexed or changed too much to match. Ask for the original source. No results do not prove that a picture is real, fake or AI-generated.</dd></div>
         <div><dt>The screenshot is mostly text</dt><dd>Try <a href="/screenshot-ocr/">extracting the screenshot text</a> and searching a distinctive public phrase. Avoid pasting private messages or account details into a search engine.</dd></div>
@@ -137,6 +146,11 @@ const structuredData = { '@context': 'https://schema.org', '@graph': [
   label { display: block; font-weight: 600; } input { display: block; max-width: 100%; margin: .75rem 0; }
   #reverse-preview { display: block; max-width: 100%; max-height: 22rem; margin: 1rem auto; object-fit: contain; }
   #reverse-info { overflow-wrap: anywhere; }
+  .crop-stage { position: relative; width: fit-content; max-width: 100%; margin: 1rem auto; touch-action: none; cursor: crosshair; user-select: none; }
+  .crop-stage #reverse-preview { margin: 0; }
+  .crop-box { position: absolute; border: 2px solid var(--color-primary); background: color-mix(in srgb, var(--color-primary) 18%, transparent); box-shadow: 0 0 0 9999px rgba(0,0,0,.35); pointer-events: none; }
+  .crop-hint { font-size: .85rem; color: var(--color-muted); }
+  .crop-actions button:disabled { opacity: .5; cursor: not-allowed; }
   ol { list-style: decimal; padding-left: 1.5rem; } li { margin: .5rem 0; }
   details { padding: 1rem 0; border-bottom: 1px solid var(--color-hairline, #ccc); } summary { cursor: pointer; font-weight: 600; }
   .reverse-page { max-width: 76rem; padding: 0 1.5rem 3rem; color: var(--color-body); }
