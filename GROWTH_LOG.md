@@ -218,3 +218,7 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - New guides: /blog/what-is-utr-number/, /blog/how-to-find-utr-number/ and Hindi pair /blog/utr-number-kya-hota-hai/ (hreflang with the explainer). Built from Google autocomplete demand ("utr number kya hota hai", "kaise nikale", "in gpay/phonepe/paytm", "utr vs transaction id/rrn") and the ~50k/month India estimate. Sources: Paytm support, Google Pay help, PhonePe Business, RBI TAT framework.
 - Linked from the UTR checker page, blog index (payments), related links (UTR checker, Hindi payment checker), and from fake-upi, payment-failed, kaise-pehchane and payment-fail guides. Deployed c58171b5; IndexNow 200; Google indexing requested for all three on 22 Nov.
 - Next: AI image detector and reverse image search push (the two global head terms the sizing says 100k depends on).
+
+## 2026-11-22 (later): 8+ word queries re-run
+
+- Same regex, 28 days: mostly the questions answered on 17 Nov (their 28-day numbers still include the days before the answers). New: "how to check utr number is valid or not" (position 5) answered first in the UTR checker FAQ. Re-run in about two weeks once the 17 Nov answers have a full 28 days.
