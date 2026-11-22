@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "what-is-utr-number",
+    "app": "UPI app", "sub": "Fictional receipt · paid to Riya's Bakery",
+    "blocks": [
+      {"type": "big", "text": "✓ ₹1,250 paid", "sub": "22 Nov 2026, 6:42 PM", "badge": 1, "tone": "good"},
+      {"type": "row", "k": "UPI transaction ID", "v": "412356789012", "badge": 2},
+      {"type": "row", "k": "App transaction ID", "v": "TXN26112218424X7Q", "badge": 3},
+      {"type": "row", "k": "Debited from", "v": "Bank ••••4821", "badge": 4},
+      {"type": "note", "text": "Receiver checks the same reference in their own bank app"}
+    ],
+    "callouts": [
+      "The amount and time help you find the entry in your statement.",
+      "The 12-digit UPI reference is the UTR or RRN your bank can trace.",
+      "The app's own ID is for that app's support, not the other bank.",
+      "Your statement shows the same reference in the description.",
+      "A screenshot of this screen is not proof of payment."
+    ]
+  },
+  {
+    "slug": "how-to-find-utr-number",
+    "app": "Where is the UTR?", "sub": "Usual labels · can change between app versions",
+    "blocks": [
+      {"type": "row", "k": "Google Pay", "v": "UPI transaction ID", "badge": 1},
+      {"type": "row", "k": "PhonePe", "v": "UTR", "badge": 2},
+      {"type": "row", "k": "Paytm", "v": "UPI Ref No / UTR / RRN", "badge": 3},
+      {"type": "row", "k": "Bank statement", "v": "Description or Ref No", "badge": 4},
+      {"type": "row", "k": "NEFT / RTGS receipt", "v": "UTR (16 / 22 chars)", "badge": 5}
+    ],
+    "callouts": [
+      "Manage your money › See transaction history › tap the payment.",
+      "History › tap the payment › details.",
+      "Balance & History › payment › Transaction Details.",
+      "Look next to the entry; Google Pay IDs sit after a slash.",
+      "On the transfer receipt in your bank app."
+    ]
+  },
+  {
+    "slug": "utr-number-kya-hota-hai", "lang": "hi",
+    "banner": "काल्पनिक उदाहरण · ScreenshotChecker",
+    "app": "UPI ऐप", "sub": "काल्पनिक रसीद · रिया की बेकरी को पेमेंट",
+    "callout_title": "कौन सा नंबर किस काम का",
+    "blocks": [
+      {"type": "big", "text": "✓ ₹1,250 भेजे गए", "sub": "22 नवंबर 2026, शाम 6:42", "badge": 1, "tone": "good"},
+      {"type": "row", "k": "UPI transaction ID", "v": "412356789012", "badge": 2},
+      {"type": "row", "k": "ऐप की ट्रांज़ैक्शन ID", "v": "TXN26112218424X7Q", "badge": 3},
+      {"type": "row", "k": "किस खाते से", "v": "बैंक ••••4821", "badge": 4},
+      {"type": "note", "text": "पाने वाला यही रेफ़रेंस अपने बैंक ऐप में देखे"}
+    ],
+    "callouts": [
+      "रकम और समय से स्टेटमेंट में एंट्री खोजिए।",
+      "12 अंकों वाला UPI रेफ़रेंस ही UTR या RRN है।",
+      "ऐप की अपनी ID सिर्फ़ उसी ऐप के सपोर्ट के लिए है।",
+      "स्टेटमेंट के विवरण में यही रेफ़रेंस दिखता है।",
+      "इस स्क्रीन का स्क्रीनशॉट पेमेंट का सबूत नहीं है।"
+    ]
+  }
+]

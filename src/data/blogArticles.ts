@@ -453,7 +453,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["qr-code-scam", "scam-statistics", "payment-failed-screenshot-scam", "fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
+    "relatedSlugs": ["what-is-utr-number", "qr-code-scam", "scam-statistics", "payment-failed-screenshot-scam", "fake-payment-screenshot-kaise-pehchane", "screenshot-checker-online", "fake-payment-screenshot-paypal-venmo-cash-app", "screenshot-analyzer-online", "redact-screenshot-before-sharing"],
     "cta": {
       "label": "Review a Payment Screenshot",
       "url": "/payment-screenshot-checker/",
@@ -1944,7 +1944,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["payment-fail-paisa-kat-gaya", "task-job-scam-se-kaise-bache", "qr-code-fraud-se-kaise-bache", "qr-code-scam", "digital-arrest-kya-hai", 
+    "relatedSlugs": ["utr-number-kya-hota-hai", "payment-fail-paisa-kat-gaya", "task-job-scam-se-kaise-bache", "qr-code-fraud-se-kaise-bache", "qr-code-scam", "digital-arrest-kya-hai", 
       "fake-upi-payment-screenshot",
       "smishing-fake-sms",
       "screenshot-checker-online"
@@ -3249,7 +3249,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["payment-fail-paisa-kat-gaya", "fake-customer-care-number-scam", "qr-code-scam", "scam-statistics", 
+    "relatedSlugs": ["how-to-find-utr-number", "payment-fail-paisa-kat-gaya", "fake-customer-care-number-scam", "qr-code-scam", "scam-statistics", 
       "fake-upi-payment-screenshot",
       "fake-payment-screenshot-kaise-pehchane",
       "fake-bank-transfer-screenshot"
@@ -5209,7 +5209,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["utr-number-kya-hota-hai", 
       "fake-payment-screenshot-kaise-pehchane",
       "qr-code-fraud-se-kaise-bache",
       "payment-failed-screenshot-scam"
@@ -6196,6 +6196,393 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "मैसेज का स्क्रीनशॉट जाँचें",
       "url": "/screenshot-scam-checker/",
       "description": "रिफ़ंड, ऑर्डर या डिलीवरी मैसेज के स्क्रीनशॉट में ठगी के निशान देखें, आपके ब्राउज़र में।"
+    }
+  },
+  {
+    "slug": "what-is-utr-number",
+    "title": "What Is a UTR Number? Meaning, Format and How to Check a Payment",
+    "seoTitle": "What Is a UTR Number? Meaning, Format and How to Check",
+    "metaDescription": "UTR means Unique Transaction Reference: the number banks use to trace a UPI, IMPS, NEFT or RTGS payment. Formats, UTR vs RRN, and how to check a payment.",
+    "category": "Security",
+    "publishedAt": "2026-11-22",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "What a UTR number is, the usual formats for UPI, IMPS, NEFT and RTGS, how it differs from an app's transaction ID and the RRN, how to use it to check or trace a payment, and why a UTR in a screenshot is not proof of payment.",
+    "targetKeywords": [
+      "what is utr number",
+      "utr number",
+      "utr full form",
+      "utr number meaning",
+      "utr vs transaction id",
+      "utr vs rrn"
+    ],
+    "keyTakeaway": {
+      "title": "A UTR identifies a payment; only your bank record confirms it",
+      "text": "A UTR (Unique Transaction Reference) is the number banks use to identify one transfer. UPI and IMPS references are usually 12 digits, NEFT UTRs 16 characters and RTGS UTRs 22. Use it to find the payment in your own statement or to trace it with your bank, but never accept a UTR in a screenshot as proof that money arrived."
+    },
+    "introduction": "A UTR number (Unique Transaction Reference) is the reference a bank gives to a single money transfer, so the sender, the receiver and both banks can find the same payment. UPI and IMPS references are usually 12 digits, NEFT UTRs 16 letters and numbers, and RTGS UTRs 22. You will see it in your UPI app's transaction details, your bank statement and payment SMS, sometimes labelled UPI transaction ID, UPI Ref No or RRN. This guide explains the formats, how a UTR differs from other IDs, and how to use one to check a payment. To find it in a specific app, see <a href=\"/blog/how-to-find-utr-number/\">how to find your UTR number in Google Pay, PhonePe, Paytm and your bank</a>.",
+    "contentSections": [
+      {
+        "heading": "UTR full form and meaning",
+        "paragraphs": [
+          "UTR stands for Unique Transaction Reference. When money moves between bank accounts in India, through UPI, IMPS, NEFT or RTGS, the system attaches one reference to that transfer. It stays the same on the sender's side and the receiver's side, which is what makes it useful: two people can talk about the same payment without sharing account details.",
+          "Paytm's support page notes that, depending on the bank or payment system, the same reference may be labelled <a href=\"https://paytm.com/support/upi/upi-reference-number-utr-rrn-paytm\">UPI Reference Number, UTR or RRN</a>. The terms have slightly different technical meanings, but for an everyday UPI payment they all point to the reference you would give your bank."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/what-is-utr-number/fictional-example.png",
+          "alt": "A fictional UPI payment receipt with numbered labels showing the amount, the 12-digit UPI reference (UTR or RRN), the app's own transaction ID and the status, with notes on which number to use.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. A fictional UPI receipt. The 12-digit UPI reference is the one your bank can trace; the app's own ID is for that app's support."
+        }
+      },
+      {
+        "heading": "UTR number formats for UPI, IMPS, NEFT and RTGS",
+        "paragraphs": [
+          "The length of a UTR usually tells you which system carried the payment. PhonePe's <a href=\"https://business.phonepe.com/articles/utr-number-meaning-what-every-merchant-needs-to-know\">merchant guide</a> gives the common formats:"
+        ],
+        "checklist": [
+          "<strong>UPI:</strong> 12 digits, often shown as UPI transaction ID, UPI Ref No or UTR.",
+          "<strong>IMPS:</strong> 12 digits, shown on the transfer receipt and statement.",
+          "<strong>NEFT:</strong> 16 letters and numbers, starting with letters for the sending bank.",
+          "<strong>RTGS:</strong> 22 letters and numbers, also starting with the sending bank's letters."
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "Not sure which kind of reference you have? Paste it into the free <a href=\"/utr-number-checker/\">UTR number checker</a>. It shows which format the number matches, in your browser, without contacting any bank."
+        }
+      },
+      {
+        "heading": "UTR vs transaction ID vs RRN",
+        "paragraphs": [
+          "Payment apps show more than one number, and mixing them up is the most common reason a bank cannot find a payment."
+        ],
+        "checklist": [
+          "<strong>UTR / UPI reference / RRN:</strong> the bank-level reference for the transfer. For UPI it is usually 12 digits. This is the number your bank, the receiver's bank and dispute teams use.",
+          "<strong>The app's own transaction or order ID:</strong> an internal ID created by the app, often longer and sometimes starting with letters. It helps that app's customer support, but the other person's bank may not recognise it.",
+          "<strong>Bank statement reference:</strong> your statement usually shows the reference inside the transaction description or a Ref No column. Google Pay's help page says the UPI transaction ID usually appears after a slash (/) in the statement's transaction details."
+        ]
+      },
+      {
+        "heading": "How to check a payment with a UTR number",
+        "paragraphs": [
+          "There is no public website where anyone can look up a UTR and see a payment. Only the banks involved, and the apps acting for you, can see it. So a check always happens in your own records:"
+        ],
+        "checklist": [
+          "<strong>If you received money:</strong> open your bank app or statement yourself and look for a credit with the same amount, time and reference. If it is not there, the payment has not reached you.",
+          "<strong>If you sent money and it is stuck:</strong> note the UTR and raise the issue in your UPI app's help section or with your bank. Under the RBI's <a href=\"https://www.rbi.org.in/commonman/English/scripts/Notification.aspx?Id=3074\">turnaround time framework</a>, when a UPI transfer debits the payer but does not credit the receiver, the money should be reversed automatically by the next day (T+1).",
+          "<strong>If a NEFT or RTGS transfer is missing:</strong> give the UTR to your bank and ask them to trace it with the receiving bank."
+        ]
+      },
+      {
+        "heading": "Why a UTR in a screenshot is not proof of payment",
+        "paragraphs": [
+          "Sellers are often shown a payment screenshot with a UTR to make it look real. A UTR can be copied from an old payment or another person's receipt, typed into an edited image, or simply made up in the right number of digits. Its format can be correct and the payment still not exist.",
+          "That is why the only test that matters is your own account. Our guides on <a href=\"/blog/fake-upi-payment-screenshot/\">fake UPI payment screenshots</a> and <a href=\"/blog/payment-failed-screenshot-scam/\">payment failed screenshots</a> cover the common tricks, and the <a href=\"/payment-screenshot-checker/\">payment screenshot checker</a> flags warning signs in a receipt image."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "Hand over goods or refunds only after the money shows in your own bank or UPI app. A UTR helps you find the payment; it does not prove it."
+        }
+      },
+      {
+        "heading": "Is it safe to share a UTR number?",
+        "paragraphs": [
+          "A UTR on its own identifies a payment; it cannot be used to take money out of your account. Sharing it with the person you paid, or with your bank, is normal. What you must never share is your UPI PIN, a one-time password or your card details, whoever asks. Be careful with people who call or message offering to \"track\" a UTR for you and then ask for those details or a fee."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "What is the full form of UTR?",
+        "answer": "UTR stands for Unique Transaction Reference. It is the reference given to one bank transfer, such as a UPI, IMPS, NEFT or RTGS payment, so that both banks can identify it."
+      },
+      {
+        "question": "How many digits is a UTR number?",
+        "answer": "UPI and IMPS references are usually 12 digits. NEFT UTRs are usually 16 characters and RTGS UTRs 22 characters, both starting with letters for the sending bank."
+      },
+      {
+        "question": "Is the UTR number the same as the UPI transaction ID?",
+        "answer": "For UPI payments, the 12-digit UPI transaction ID or UPI Ref No shown in most apps is the reference banks use, often called the UTR or RRN. Apps may also show their own longer transaction or order ID, which is different."
+      },
+      {
+        "question": "Can I track a UTR number online?",
+        "answer": "Not on a public website. Check the payment in your own bank app or statement, or give the UTR to your bank or UPI app support and ask them to trace it."
+      },
+      {
+        "question": "Does a valid UTR prove that I was paid?",
+        "answer": "No. A UTR can be copied or made up in the right format. Only a matching credit in your own bank or UPI app confirms that the money arrived."
+      },
+      {
+        "question": "Is it safe to share my UTR number?",
+        "answer": "Yes, with the person you paid or your bank. A UTR cannot be used to withdraw money. Never share your UPI PIN, OTP or card details."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "how-to-find-utr-number",
+      "fake-upi-payment-screenshot",
+      "payment-failed-screenshot-scam"
+    ],
+    "cta": {
+      "label": "Check a UTR format",
+      "url": "/utr-number-checker/",
+      "description": "See whether a UTR or UPI reference matches the UPI, IMPS, NEFT or RTGS format, then confirm the payment in your own bank."
+    }
+  },
+  {
+    "slug": "how-to-find-utr-number",
+    "title": "How to Find Your UTR Number in Google Pay, PhonePe, Paytm and Your Bank",
+    "seoTitle": "How to Find UTR Number in GPay, PhonePe, Paytm and Bank",
+    "metaDescription": "Find the UTR or UPI reference number of any payment: steps for Google Pay, PhonePe, Paytm, bank apps, statements and SMS, and what to do if you cannot find it.",
+    "category": "Security",
+    "publishedAt": "2026-11-22",
+    "authorName": "Virat Chauhan",
+    "readTime": "5 min read",
+    "excerpt": "Where the UTR or UPI reference number appears in Google Pay, PhonePe, Paytm, bank apps, statements and SMS, what each app calls it, and what to do when you cannot find it or the number does not match.",
+    "targetKeywords": [
+      "how to find utr number",
+      "utr number in gpay",
+      "utr number in phonepe",
+      "utr number in paytm",
+      "utr number in bank statement",
+      "how to find utr number in google pay"
+    ],
+    "keyTakeaway": {
+      "title": "Open the payment in your history and look for the 12-digit reference",
+      "text": "In any UPI app, open your transaction history, tap the payment and look for the 12-digit UPI transaction ID, UPI Ref No, UTR or RRN. In a bank statement, it sits in the transaction description or Ref No column. For NEFT and RTGS, check the transfer receipt in your bank app."
+    },
+    "introduction": "To find a UTR number, open the payment in your UPI or bank app's transaction history and look in its details for the UPI transaction ID, UPI Ref No, UTR or RRN, usually a 12-digit number for UPI. Each app uses a slightly different label and path, so here are the steps for Google Pay, PhonePe, Paytm, bank apps, statements and SMS. If you are not sure what the number means, start with <a href=\"/blog/what-is-utr-number/\">what a UTR number is</a>.",
+    "contentSections": [
+      {
+        "heading": "Find the UTR number in Google Pay",
+        "paragraphs": [
+          "Google's <a href=\"https://support.google.com/pay/india/answer/9739577?hl=en\">Google Pay help page</a> describes the route: open the app, go to <strong>Manage your money</strong>, tap <strong>See transaction history</strong>, then tap the payment to see its details, including the UPI transaction ID. Compare it with your bank statement, where Google says the UPI transaction ID usually appears after a slash (/) in the transaction details, and check that the amounts match."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/how-to-find-utr-number/fictional-example.png",
+          "alt": "A fictional reference card showing what each app calls the UTR: Google Pay UPI transaction ID, PhonePe UTR, Paytm UPI Ref No, bank statement Ref No or description, and NEFT or RTGS receipt UTR.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. Where the reference usually appears and what it is called. Labels can change between app versions."
+        }
+      },
+      {
+        "heading": "Find the UTR number in PhonePe",
+        "paragraphs": [
+          "Open PhonePe, go to <strong>History</strong>, tap the payment and open its details. The bank reference is shown as the UTR, usually 12 digits for UPI. PhonePe's <a href=\"https://business.phonepe.com/articles/utr-number-meaning-what-every-merchant-needs-to-know\">guide to UTR numbers</a> describes the same general route for any UPI app: open the transaction history, tap the payment, and look for the 12-digit UPI transaction ID or reference number.",
+          "PhonePe also shows its own transaction ID for the payment. That ID is for PhonePe support; when the other person's bank asks for a reference, give the UTR."
+        ]
+      },
+      {
+        "heading": "Find the UTR number in Paytm",
+        "paragraphs": [
+          "Paytm's <a href=\"https://paytm.com/support/upi/upi-reference-number-utr-rrn-paytm\">support page</a> gives these steps: open the Paytm app, go to <strong>Balance &amp; History</strong> (or Transaction History), select the UPI payment and open the <strong>Transaction Details</strong> page. The reference is shown as the UPI Reference Number, UTR or RRN, depending on how the details are displayed."
+        ]
+      },
+      {
+        "heading": "Find the UTR in your bank app, statement or SMS",
+        "paragraphs": [
+          "Every UPI payment also appears in your bank account, which is the most reliable place to look:"
+        ],
+        "checklist": [
+          "<strong>Bank app or net banking:</strong> open the account's transaction history and tap the payment. The reference may be called Reference Number, Ref No, Transaction ID or UTR.",
+          "<strong>Statement or passbook:</strong> download the statement and look in the description, remarks or Ref No column next to the entry.",
+          "<strong>SMS and email alerts:</strong> your bank's debit or credit alert often includes the UPI reference. Search your messages for the amount.",
+          "<strong>NEFT and RTGS:</strong> the UTR is on the transfer receipt in your bank app and on the statement entry. It is 16 characters for NEFT and 22 for RTGS."
+        ]
+      },
+      {
+        "heading": "Can't find the UTR, or it does not match?",
+        "paragraphs": [
+          "Labels change between app versions, so look for any of these on the details screen: UTR, UPI Ref No, UPI transaction ID, RRN, Reference Number. If a payment failed before reaching your bank, there may be no bank reference yet; contact the app's support from inside the app. If the number someone sent you does not appear in your records at all, treat the payment as not received.",
+          "Not sure the number you copied is a UTR at all? The <a href=\"/utr-number-checker/\">UTR number checker</a> shows whether it matches the UPI, IMPS, NEFT or RTGS format."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "Your UTR is safe to share with the person you paid or your bank. Your UPI PIN, OTP and card details are not, and no genuine support team will ask for them to find a UTR."
+        }
+      },
+      {
+        "heading": "What to do with the UTR once you have it",
+        "paragraphs": [
+          "Use it to match a payment in your own records, to raise a complaint about a failed or stuck payment in your UPI app or with your bank, or to give a seller the reference for a payment you made. If you are the seller, remember that a UTR in a screenshot is not proof: check your own account before handing anything over. Our guide to <a href=\"/blog/fake-upi-payment-screenshot/\">fake UPI payment screenshots</a> explains why."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Where is the UTR number in Google Pay?",
+        "answer": "Open Google Pay, go to Manage your money, tap See transaction history and tap the payment. The UPI transaction ID in the details is the reference your bank can trace."
+      },
+      {
+        "question": "Where is the UTR number in PhonePe?",
+        "answer": "Open PhonePe, go to History, tap the payment and open its details. The UTR is usually a 12-digit number for UPI payments. PhonePe's own transaction ID is a separate number."
+      },
+      {
+        "question": "Where is the UTR number in Paytm?",
+        "answer": "Open Paytm, go to Balance & History, select the UPI payment and open Transaction Details. The reference appears as UPI Reference Number, UTR or RRN."
+      },
+      {
+        "question": "How do I find the UTR number in my bank statement?",
+        "answer": "Look at the description, remarks or Ref No column next to the payment. For Google Pay payments, Google says the UPI transaction ID usually appears after a slash (/) in the transaction details."
+      },
+      {
+        "question": "Why can't I find a UTR for my payment?",
+        "answer": "The label may be different (UPI Ref No, RRN, Reference Number), or the payment may have failed before reaching the bank. Check your bank app or statement, and contact the UPI app's support from inside the app if it is still missing."
+      },
+      {
+        "question": "Can someone take money from my account with my UTR number?",
+        "answer": "No. A UTR only identifies a payment. Never share your UPI PIN, OTP or card details, which are what fraudsters actually need."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "what-is-utr-number",
+      "fake-upi-payment-screenshot",
+      "payment-failed-screenshot-scam"
+    ],
+    "cta": {
+      "label": "Check a UTR format",
+      "url": "/utr-number-checker/",
+      "description": "Paste the reference you found to see whether it matches the UPI, IMPS, NEFT or RTGS format."
+    }
+  },
+  {
+    "slug": "utr-number-kya-hota-hai",
+    "lang": "hi",
+    "title": "UTR नंबर क्या होता है? कैसे निकालें और पेमेंट कैसे चेक करें",
+    "seoTitle": "UTR नंबर क्या होता है? कैसे निकालें और कैसे चेक करें",
+    "metaDescription": "UTR नंबर यानी Unique Transaction Reference: हर UPI, IMPS, NEFT या RTGS पेमेंट का पहचान नंबर। Google Pay, PhonePe, Paytm में कैसे निकालें और पेमेंट कैसे जाँचें।",
+    "category": "Security",
+    "publishedAt": "2026-11-22",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "UTR नंबर का मतलब और फ़ुल फ़ॉर्म, UPI, NEFT और RTGS में इसका फ़ॉर्मेट, Google Pay, PhonePe, Paytm और बैंक स्टेटमेंट में इसे कैसे निकालें, और स्क्रीनशॉट में दिखा UTR पेमेंट का सबूत क्यों नहीं है।",
+    "targetKeywords": [
+      "utr number kya hota hai",
+      "UTR नंबर क्या है",
+      "utr number kaise nikale",
+      "UTR नंबर कैसे पता करें",
+      "utr full form in hindi",
+      "utr number check kaise kare"
+    ],
+    "keyTakeaway": {
+      "title": "UTR पेमेंट पहचानता है, पक्का सिर्फ़ आपका बैंक करता है",
+      "text": "UTR (Unique Transaction Reference) वह नंबर है जिससे बैंक किसी एक पेमेंट को पहचानते हैं। UPI और IMPS में यह आम तौर पर 12 अंकों का होता है, NEFT में 16 और RTGS में 22 अक्षर-अंकों का। इससे अपने स्टेटमेंट में पेमेंट खोजिए या बैंक से ट्रेस करवाइए, पर स्क्रीनशॉट में दिखे UTR को कभी पेमेंट का सबूत मत मानिए।"
+    },
+    "introduction": "UTR नंबर (Unique Transaction Reference) वह पहचान नंबर है जो बैंक हर एक पेमेंट को देता है, ताकि भेजने वाला, पाने वाला और दोनों बैंक एक ही पेमेंट को पहचान सकें। UPI और IMPS में यह आम तौर पर 12 अंकों का होता है। इसे निकालने के लिए अपने UPI ऐप की हिस्ट्री में पेमेंट खोलिए और उसकी डिटेल में UTR, UPI Ref No, UPI transaction ID या RRN देखिए। नीचे Google Pay, PhonePe, Paytm और बैंक स्टेटमेंट के तरीके, और पेमेंट जाँचने का सही तरीका दिया है। <a href=\"/blog/what-is-utr-number/\">यह गाइड अंग्रेज़ी में भी है।</a>",
+    "contentSections": [
+      {
+        "heading": "UTR का फ़ुल फ़ॉर्म और मतलब",
+        "paragraphs": [
+          "UTR का फ़ुल फ़ॉर्म है Unique Transaction Reference। जब UPI, IMPS, NEFT या RTGS से पैसा एक खाते से दूसरे में जाता है, तो उस पेमेंट को एक रेफ़रेंस नंबर मिलता है। यह भेजने वाले और पाने वाले, दोनों तरफ़ एक जैसा रहता है, इसलिए खाते की जानकारी बताए बिना दोनों लोग उसी पेमेंट की बात कर सकते हैं।",
+          "Paytm का <a href=\"https://paytm.com/support/upi/upi-reference-number-utr-rrn-paytm\">सपोर्ट पेज</a> बताता है कि बैंक या पेमेंट सिस्टम के हिसाब से इसी नंबर को UPI Reference Number, UTR या RRN कहा जा सकता है। तकनीकी मतलब थोड़ा अलग है, पर रोज़ के UPI पेमेंट में ये सब वही रेफ़रेंस हैं जो आप बैंक को बताते हैं।"
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/utr-number-kya-hota-hai/fictional-example.png",
+          "alt": "एक काल्पनिक UPI रसीद जिस पर नंबर वाले निशान हैं: रकम, 12 अंकों का UPI रेफ़रेंस (UTR या RRN), ऐप की अपनी ट्रांज़ैक्शन ID और स्टेटस, और कौन सा नंबर किस काम का है।",
+          "width": 1200,
+          "height": 760,
+          "caption": "चित्र 1. एक काल्पनिक UPI रसीद। 12 अंकों वाला UPI रेफ़रेंस बैंक ट्रेस कर सकता है; ऐप की अपनी ID सिर्फ़ उसी ऐप के सपोर्ट के काम की है।"
+        }
+      },
+      {
+        "heading": "UTR नंबर कितने अंकों का होता है",
+        "paragraphs": [
+          "UTR की लंबाई से अक्सर पता चल जाता है कि पेमेंट किस सिस्टम से गया। PhonePe की <a href=\"https://business.phonepe.com/articles/utr-number-meaning-what-every-merchant-needs-to-know\">गाइड</a> के अनुसार:"
+        ],
+        "checklist": [
+          "<strong>UPI:</strong> 12 अंक, जिसे UPI transaction ID, UPI Ref No या UTR लिखा जाता है।",
+          "<strong>IMPS:</strong> 12 अंक।",
+          "<strong>NEFT:</strong> 16 अक्षर-अंक, शुरुआत भेजने वाले बैंक के अक्षरों से।",
+          "<strong>RTGS:</strong> 22 अक्षर-अंक, शुरुआत भेजने वाले बैंक के अक्षरों से।"
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "आपके पास कौन सा नंबर है, पक्का नहीं? मुफ़्त <a href=\"/utr-number-checker/\">UTR नंबर चेकर</a> में डालिए। यह आपके ब्राउज़र में बताता है कि नंबर किस फ़ॉर्मेट जैसा है, किसी बैंक से संपर्क किए बिना।"
+        }
+      },
+      {
+        "heading": "Google Pay, PhonePe और Paytm में UTR नंबर कैसे निकालें",
+        "paragraphs": [
+          "हर ऐप में तरीका लगभग एक जैसा है: हिस्ट्री खोलिए, पेमेंट पर टैप कीजिए और डिटेल में 12 अंकों वाला नंबर देखिए।"
+        ],
+        "checklist": [
+          "<strong>Google Pay:</strong> ऐप खोलिए, <strong>Manage your money</strong> में जाइए, <strong>See transaction history</strong> पर टैप कीजिए और पेमेंट चुनिए। डिटेल में UPI transaction ID दिखेगी, जैसा <a href=\"https://support.google.com/pay/india/answer/9739577?hl=en\">Google Pay का हेल्प पेज</a> बताता है।",
+          "<strong>PhonePe:</strong> <strong>History</strong> में जाइए, पेमेंट पर टैप कीजिए और डिटेल खोलिए। वहाँ UTR लिखा होता है। PhonePe की अपनी ट्रांज़ैक्शन ID अलग नंबर है।",
+          "<strong>Paytm:</strong> <strong>Balance &amp; History</strong> में UPI पेमेंट चुनिए और <strong>Transaction Details</strong> खोलिए। वहाँ UPI Reference Number, UTR या RRN दिखेगा।",
+          "<strong>बैंक ऐप, स्टेटमेंट या SMS:</strong> बैंक की ट्रांज़ैक्शन हिस्ट्री में पेमेंट खोलिए, या स्टेटमेंट में विवरण (description) या Ref No वाले कॉलम में देखिए। बैंक के डेबिट या क्रेडिट SMS में भी अक्सर यह नंबर होता है।"
+        ]
+      },
+      {
+        "heading": "UTR नंबर से पेमेंट कैसे चेक करें",
+        "paragraphs": [
+          "कोई सार्वजनिक वेबसाइट नहीं है जहाँ UTR डालकर कोई भी पेमेंट देख सके। यह सिर्फ़ संबंधित बैंक और आपकी ओर से काम करने वाले ऐप देख सकते हैं। इसलिए जाँच हमेशा अपने रिकॉर्ड में होती है:"
+        ],
+        "checklist": [
+          "<strong>पैसा आना है:</strong> अपना बैंक ऐप या स्टेटमेंट ख़ुद खोलिए और उसी रकम, समय और रेफ़रेंस वाला क्रेडिट खोजिए। नहीं है, तो पैसा आपको नहीं मिला।",
+          "<strong>पैसा भेजा और अटक गया:</strong> UTR नोट कीजिए और UPI ऐप के हेल्प सेक्शन में या बैंक से शिकायत कीजिए। RBI के <a href=\"https://www.rbi.org.in/commonman/English/scripts/Notification.aspx?Id=3074\">टर्नअराउंड टाइम फ़्रेमवर्क</a> के अनुसार, अगर UPI पेमेंट में आपका खाता कटा पर पाने वाले को पैसा नहीं मिला, तो पैसा अगले दिन तक (T+1) अपने आप वापस आना चाहिए।",
+          "<strong>NEFT या RTGS नहीं पहुँचा:</strong> बैंक को UTR दीजिए और पाने वाले बैंक से ट्रेस करवाने को कहिए।"
+        ]
+      },
+      {
+        "heading": "स्क्रीनशॉट में दिखा UTR पेमेंट का सबूत नहीं",
+        "paragraphs": [
+          "दुकानदारों को अक्सर UTR वाला पेमेंट स्क्रीनशॉट दिखाया जाता है ताकि वह असली लगे। पर UTR किसी पुराने पेमेंट या किसी और की रसीद से कॉपी किया जा सकता है, एडिट की हुई तस्वीर में टाइप किया जा सकता है, या सही अंकों में बस बना लिया जा सकता है। फ़ॉर्मेट सही होने पर भी पेमेंट न हुआ हो, ऐसा हो सकता है।",
+          "इसलिए असली जाँच सिर्फ़ आपका अपना खाता है। हमारी गाइड <a href=\"/blog/fake-payment-screenshot-kaise-pehchane/\">फेक पेमेंट स्क्रीनशॉट कैसे पहचानें</a> और <a href=\"/blog/payment-fail-paisa-kat-gaya/\">पेमेंट फेल, पैसा कट गया</a> आम चालें बताती हैं।"
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "सामान या रिफ़ंड तभी दीजिए जब पैसा आपके अपने बैंक या UPI ऐप में दिख जाए। UTR पेमेंट खोजने में मदद करता है, उसे साबित नहीं करता।"
+        }
+      },
+      {
+        "heading": "क्या UTR नंबर बताना सुरक्षित है?",
+        "paragraphs": [
+          "UTR सिर्फ़ एक पेमेंट की पहचान है; इससे आपके खाते से पैसा नहीं निकाला जा सकता। जिसे आपने पेमेंट किया या अपने बैंक को इसे बताना सामान्य है। अपना UPI PIN, OTP या कार्ड की जानकारी कभी किसी को मत बताइए, चाहे कोई भी पूछे। जो लोग फ़ोन या मैसेज करके आपका UTR \"ट्रैक\" करने के बदले यह जानकारी या फ़ीस माँगें, उनसे सावधान रहिए।"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "UTR का फ़ुल फ़ॉर्म क्या है?",
+        "answer": "UTR का फ़ुल फ़ॉर्म Unique Transaction Reference है। यह किसी एक UPI, IMPS, NEFT या RTGS पेमेंट का पहचान नंबर है, जिससे दोनों बैंक उस पेमेंट को पहचानते हैं।"
+      },
+      {
+        "question": "UTR नंबर कितने अंकों का होता है?",
+        "answer": "UPI और IMPS में आम तौर पर 12 अंकों का। NEFT में 16 और RTGS में 22 अक्षर-अंकों का, जिसकी शुरुआत भेजने वाले बैंक के अक्षरों से होती है।"
+      },
+      {
+        "question": "PhonePe में UTR नंबर कहाँ मिलेगा?",
+        "answer": "PhonePe में History खोलिए, पेमेंट पर टैप कीजिए और डिटेल देखिए। UPI पेमेंट का UTR आम तौर पर 12 अंकों का होता है। PhonePe की अपनी ट्रांज़ैक्शन ID अलग है।"
+      },
+      {
+        "question": "Google Pay में UTR नंबर कैसे देखें?",
+        "answer": "Google Pay में Manage your money, फिर See transaction history पर जाइए और पेमेंट पर टैप कीजिए। डिटेल में दिखने वाली UPI transaction ID वही रेफ़रेंस है जिसे बैंक ट्रेस कर सकता है।"
+      },
+      {
+        "question": "क्या UTR नंबर ऑनलाइन चेक कर सकते हैं?",
+        "answer": "किसी सार्वजनिक वेबसाइट पर नहीं। पेमेंट अपने बैंक ऐप या स्टेटमेंट में देखिए, या UTR अपने बैंक या UPI ऐप के सपोर्ट को देकर ट्रेस करवाइए।"
+      },
+      {
+        "question": "क्या सही UTR से साबित होता है कि पैसा आ गया?",
+        "answer": "नहीं। UTR कॉपी किया जा सकता है या सही फ़ॉर्मेट में बनाया जा सकता है। पैसा आया है, यह सिर्फ़ आपके अपने बैंक या UPI ऐप में दिखा क्रेडिट बताता है।"
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "what-is-utr-number",
+      "fake-payment-screenshot-kaise-pehchane",
+      "payment-fail-paisa-kat-gaya"
+    ],
+    "cta": {
+      "label": "UTR का फ़ॉर्मेट जाँचें",
+      "url": "/utr-number-checker/",
+      "description": "देखिए कि UTR या UPI रेफ़रेंस UPI, IMPS, NEFT या RTGS के फ़ॉर्मेट जैसा है या नहीं, फिर पेमेंट अपने बैंक में पक्का कीजिए।"
     }
   },
 ];
