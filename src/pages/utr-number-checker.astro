@@ -10,6 +10,7 @@ const description = 'Paste a UTR or UPI reference number to see which payment ty
 const url = 'https://screenshotchecker.com/utr-number-checker/';
 
 const faqs: Array<[string, string]> = [
+  ['How do I check if a UTR number is valid or not?', 'Check it in two steps. First the format: paste it into the checker above to see whether it matches a common pattern (12 digits for UPI and IMPS, 16 characters for NEFT, 22 for RTGS). Then the payment itself: look for the same reference, amount and time in your own bank app or statement. Only that second step shows the payment is real; there is no public website that confirms a UTR.'],
   ['What is a UTR number?', 'UTR stands for Unique Transaction Reference. Banks give one to every NEFT, RTGS, IMPS and UPI transfer so that the sender, the receiver and both banks can find the same transaction. In UPI apps it may be labelled UPI transaction ID, UPI Ref No or UTR.'],
   ['How many digits is a UTR number?', 'UPI and IMPS references are usually 12 digits. NEFT UTRs are usually 16 characters and RTGS UTRs 22 characters, both starting with letters for the sending bank. Apps and banks can show their own internal IDs too, so a different length is not proof of fraud.'],
   ['Can a UTR number prove that a payment is real?', 'No. A UTR in a screenshot can be copied from an old payment, typed into an edited image or simply made up in the right format. Only the receiver\'s own bank records can confirm the money arrived. Search your bank app or statement for the amount, time and UTR, and ask your bank if you cannot find it.'],
