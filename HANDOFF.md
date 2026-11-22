@@ -162,7 +162,7 @@ source alongside GA4 and Clarity.
 
 ## Where things stand (22 Nov 2026)
 
-- 79 built pages; 47 guides in `blogArticles.ts` (11 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
+- 81 built pages; 49 guides in `blogArticles.ts` (12 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
   internal links.
 - 12 Nov: snippet rewrites on 8 low-CTR pages (baseline numbers in GROWTH_LOG, 12 Nov entry) and 2 guides.
 - 12-13 Nov: 14 new guides, topic-grouped blog index, Resources cards linked to real guides, hreflang pairs,
@@ -196,7 +196,7 @@ source alongside GA4 and Clarity.
 3. Restore Cloudflare Git auto-deploys (owner, dashboard), or keep deploying with wrangler.
 4. Owner actions from the outreach kit (see its 18 Nov section: Bing Webmaster Tools import, Featured/Qwoted/SourceBottle): send the Gmail drafts, list on AlternativeTo/Product Hunt, answer Quora/Reddit
    questions with disclosure, share Hindi WhatsApp forwards.
-5. Next push: AI image detector and reverse image search (tool upgrades, content, links). Content ideas not yet done: per-app payment guides only with real
+5. AI image detector and reverse image search push started 22 Nov (crop tool, Yandex, two guides). Remaining lever is links: owner submits the 22 Nov directory drafts in the outreach kit. Content ideas not yet done: per-app payment guides only with real
    differences (PhonePe, Google Pay, Paytm layouts and IDs); an original-data piece (for example testing detectors on
    fictional fake receipts) to pitch to journalists; fake electricity or gas bill PDFs; fake rent receipts; update the statistics page when FY 2025-26 UPI figures or FTC 2026 data are published.
 6. Lab performance (Lighthouse mobile 69) is not a ranking factor without field data; revisit when CrUX data appears.

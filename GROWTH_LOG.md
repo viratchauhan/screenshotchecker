@@ -222,3 +222,10 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 ## 2026-11-22 (later): 8+ word queries re-run
 
 - Same regex, 28 days: mostly the questions answered on 17 Nov (their 28-day numbers still include the days before the answers). New: "how to check utr number is valid or not" (position 5) answered first in the UTR checker FAQ. Re-run in about two weeks once the 17 Nov answers have a full 28 days.
+
+## 2026-11-22 (later): AI image detector and reverse image search push
+
+- Reverse image search tool: in-browser crop (drag to select, Crop to selection, Undo), Auto-trim borders, Yandex as a fourth provider; quick answer and guide text updated (the page used to say it could not crop). Unit tests for clampCropRect and findTrimBounds; tested in the browser at desktop and phone width.
+- AI image detector: already on par with competitors on features (verdict, evidence strength, C2PA, ELA view, paste); no percentage score by design. Its explainer now links the new guide.
+- New guides: how-to-tell-if-an-image-is-ai-generated (EN, targets "is this image ai generated / or not / ai edited") and Hindi photo-se-search-kaise-kare ("photo se search kaise kare", "google par photo se search kaise kare"). Google indexing requested for both and a recrawl of /reverse-image-search/.
+- Links: drafts for AI tool directories (There's An AI For That, Futurepedia, Toolify, TopAI.tools, SaaSHub, AlternativeTo) and awesome-osint in the private outreach kit; ledger updated (prospect_drafted). Owner submits.
