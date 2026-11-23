@@ -210,3 +210,6 @@ source alongside GA4 and Clarity.
    Tested at desktop, 390 px and 340 px in light and dark: no sideways scroll, no console or CSP errors, the link opens
    the Play page for com.domahan.app, and the X keeps it hidden after a reload in the same tab. New tool pages should
    include `<DomahanBanner />` under their result. Do not change its text, colours or links without asking the owner.
+   Footer link (owner said yes, 23 Nov): the bottom bar of `Footer.astro` has one plain followed link to https://domahan.com/
+   ("Also by the same maker: doMahan, a free day planner app"). It is a link between two sites of the same owner, so keep it
+   to this single line; do not add keyword-stuffed or repeated links.
