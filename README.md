@@ -34,6 +34,7 @@ Contributions, bug reports and labelled test examples (synthetic only, please) a
 - Repository: https://github.com/viratchauhan/screenshotchecker
 - Hack for Social Cause team: Team CyberSuraksha, HSC|UP|00001
 - Developer: Virat Chauhan, sole team member
+- Also by the same developer: [doMahan](https://domahan.com/), a free sticky-note day planner for Android, with [free printable planners](https://domahan.com/printables/)
 
 ## Local setup
 
