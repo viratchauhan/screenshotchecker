@@ -2288,7 +2288,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Paid to like videos, then asked to deposit for a prepaid or merchant task? It is a task scam. How it works, the messages they send and what to do now.",
     "category": "Threat Analysis",
     "publishedAt": "2026-10-16",
-    "updatedAt": "2026-11-12",
+    "updatedAt": "2026-11-27",
     "authorName": "Virat Chauhan",
     "readTime": "8 min read",
     "excerpt": "How WhatsApp and Telegram task scams build trust with small payouts, why the earnings screenshots in the group prove nothing, and what to do in India, the US and the UK once they ask for a deposit.",
@@ -2299,7 +2299,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "whatsapp task scam",
       "telegram task scam",
       "youtube like job scam",
-      "prepaid task scam",
+      "telegram task scam complaint",
+      "telegram task scam money recovery",
       "hotel rating job scam",
       "part time job scam whatsapp",
       "task scam how to get money back"
@@ -2423,6 +2424,22 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         ]
       },
       {
+        "heading": "Telegram task scam complaint and money recovery in India",
+        "paragraphs": [
+          "There is no separate complaint number for Telegram or task scams in India. The complaint goes where every online financial fraud goes: call 1930, or file it at cybercrime.gov.in. The <a href=\"https://i4c.mha.gov.in/ncrp.aspx\">I4C page on the reporting portal</a> says the 1930 helpline runs in all States and Union Territories and feeds a system that connects 85 banks, payment intermediaries and wallets, so that quick action can be taken to stop money flowing on to the fraudsters.",
+          "<strong>Can the money be recovered?</strong> Sometimes, and never with a guarantee. In a <a href=\"https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2042130&reg=48&lang=2\">Home Ministry statement of 6 August 2024</a>, the government said this reporting system, launched in 2021, had saved more than Rs 2,400 crore across more than 7.6 lakh complaints. That is money stopped before the fraudsters could take it out, which is why the first hours count. It is not a promise of a refund in any single case, and nobody can sell you one.",
+          "<strong>What happens after you file.</strong> The same statement explains that complaints on the portal, their conversion into FIRs and the action that follows are handled by the police of your State or Union Territory. The portal has online status tracking for the complainant, so keep the complaint number you are given and use it when you follow up.",
+          "<strong>Report the group on Telegram as well.</strong> <a href=\"https://telegram.org/faq#q-there-39s-illegal-content-on-telegram-how-do-i-take-it-down\">Telegram’s FAQ</a> says every Telegram app has a Report button: on Android tap the message and choose Report, on iPhone press and hold the message, and on desktop right-click it, then pick a reason. You can also email abuse@telegram.org with the t.me link or @username of the group or account. This puts the group in front of Telegram’s moderators. It does not get money back, so do it in addition to the police complaint, not instead of it, and only after you have saved your evidence."
+        ],
+        "checklist": [
+          "Keep ready before you call 1930: the date, time and amount of every payment, and the UTR or reference number of each one.",
+          "The UPI IDs, account numbers and receiver names the money went to, exactly as your bank or UPI app shows them.",
+          "The Telegram group link, the @usernames and phone numbers of the people who instructed you, and the task website or app link.",
+          "Screenshots of the chat, the deposit demands and the balance page, saved before you leave the group.",
+          "Your complaint number afterwards, for status tracking and for your bank."
+        ]
+      },
+      {
         "heading": "Beware \"recovery agents\" who contact you afterwards",
         "paragraphs": [
           "People who have lost money to a scam are often targeted again. Someone may message you claiming to be a lawyer, a cyber cell officer, a \"fund recovery\" firm or even the original platform, promising to get your money back for a fee.",
@@ -2459,6 +2476,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       {
         "question": "Is liking YouTube videos or rating hotels for money a real job?",
         "answer": "Treat any unsolicited offer to pay you for likes, subscribes or ratings as a scam. The FTC advises not to trust anyone offering payment for positive ratings or likes, and real employers do not recruit through random WhatsApp or Telegram messages."
+      },
+      {
+        "question": "What is the complaint number for a Telegram task scam in India?",
+        "answer": "Call 1930, the national cyber fraud helpline, or file the complaint online at cybercrime.gov.in. There is no separate number for Telegram or task scams. Keep your payment details and UTR numbers ready, and note the complaint number you receive."
+      },
+      {
+        "question": "How do I report a task scam group to Telegram?",
+        "answer": "Use the Report button in the app: tap the message on Android, press and hold it on iPhone, or right-click it on desktop, then choose a reason. Telegram’s FAQ also gives abuse@telegram.org for reports with the t.me link. Reporting to Telegram does not recover money, so file the police complaint too."
       },
       {
         "question": "Someone says they can recover my lost money for a fee. Should I trust them?",
@@ -5015,11 +5040,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "YouTube वीडियो लाइक करने पर पैसे मिले, अब प्रीपेड टास्क के लिए पैसा जमा करने को कहा जा रहा है? यह टास्क स्कैम है। यह कैसे होता है और क्या करें।",
     "category": "Security",
     "publishedAt": "2026-11-12",
+    "updatedAt": "2026-11-27",
     "authorName": "Virat Chauhan",
     "readTime": "6 min read",
     "excerpt": "पार्ट-टाइम जॉब के नाम पर WhatsApp और Telegram पर चलने वाला टास्क स्कैम कैसे काम करता है, \"प्रीपेड\" या \"मर्चेंट\" टास्क क्या होता है, ठग कौन से मैसेज भेजते हैं, और पैसा फँस जाए तो क्या करें।",
     "targetKeywords": [
       "task job scam kya hai",
+      "telegram task scam complaint",
+      "task scam ki shikayat kaise kare",
       "telegram task scam hindi",
       "प्रीपेड टास्क",
       "youtube like karke paise scam",
@@ -5082,6 +5110,22 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         ]
       },
       {
+        "heading": "टास्क स्कैम की शिकायत कैसे करें और पैसा वापस कैसे मिल सकता है",
+        "paragraphs": [
+          "Telegram या टास्क स्कैम के लिए कोई अलग शिकायत नंबर नहीं है। शिकायत वहीं होती है जहाँ हर ऑनलाइन पैसों की ठगी की होती है: 1930 पर कॉल करें या cybercrime.gov.in पर शिकायत दर्ज करें। <a href=\"https://i4c.mha.gov.in/ncrp.aspx\">I4C के पोर्टल पेज</a> के अनुसार 1930 हेल्पलाइन सभी राज्यों और केंद्र शासित प्रदेशों में चलती है और एक ऐसे सिस्टम से जुड़ी है जिसमें 85 बैंक, पेमेंट कंपनियाँ और वॉलेट शामिल हैं, ताकि पैसा ठगों तक पहुँचने से पहले रोका जा सके।",
+          "<strong>क्या पैसा वापस मिल सकता है?</strong> कभी-कभी, पर इसकी कोई गारंटी नहीं है। <a href=\"https://www.pib.gov.in/PressReleaseIframePage.aspx?PRID=2042130&reg=48&lang=2\">गृह मंत्रालय के 6 अगस्त 2024 के बयान</a> में बताया गया कि 2021 में शुरू हुए इस सिस्टम से 7.6 लाख से ज़्यादा शिकायतों में ₹2,400 करोड़ से ज़्यादा की रकम बचाई गई। यह वह पैसा है जो ठगों के निकालने से पहले रोक लिया गया, इसलिए शुरुआती घंटे सबसे ज़रूरी हैं। किसी एक मामले में रिफंड का वादा कोई नहीं कर सकता।",
+          "<strong>शिकायत के बाद क्या होता है।</strong> उसी बयान के अनुसार पोर्टल पर आई शिकायतों को FIR में बदलना और आगे की कार्रवाई आपके राज्य की पुलिस करती है। पोर्टल पर शिकायत की स्थिति ऑनलाइन देखी जा सकती है, इसलिए शिकायत नंबर संभालकर रखें और फ़ॉलो-अप में वही बताएँ।",
+          "<strong>Telegram पर ग्रुप की रिपोर्ट भी करें।</strong> <a href=\"https://telegram.org/faq#q-there-39s-illegal-content-on-telegram-how-do-i-take-it-down\">Telegram के FAQ</a> के अनुसार हर Telegram ऐप में Report बटन है: Android पर मैसेज पर टैप करके Report चुनें, iPhone पर मैसेज को दबाकर रखें, और डेस्कटॉप पर राइट-क्लिक करें, फिर कारण चुनें। ग्रुप का t.me लिंक या @username लिखकर abuse@telegram.org पर ईमेल भी कर सकते हैं। इससे पैसा वापस नहीं आता, इसलिए यह पुलिस शिकायत के साथ करें, उसकी जगह नहीं, और पहले सबूत सेव कर लें।"
+        ],
+        "checklist": [
+          "1930 पर कॉल से पहले तैयार रखें: हर पेमेंट की तारीख, समय, रकम और UTR नंबर।",
+          "जिन UPI ID, खाता नंबर और नामों पर पैसा गया, ठीक वैसे जैसे आपके बैंक या UPI ऐप में दिखते हैं।",
+          "Telegram ग्रुप का लिंक, निर्देश देने वालों के @username और फ़ोन नंबर, और टास्क वेबसाइट या ऐप का लिंक।",
+          "चैट, पैसे की माँग और बैलेंस वाले पेज के स्क्रीनशॉट, ग्रुप छोड़ने से पहले।",
+          "शिकायत के बाद मिला शिकायत नंबर, स्थिति देखने और बैंक को बताने के लिए।"
+        ]
+      },
+      {
         "heading": "अंग्रेज़ी में पूरी गाइड",
         "paragraphs": [
           "ठगों के आम मैसेज और पूरी जानकारी के लिए अंग्रेज़ी <a href=\"/blog/whatsapp-telegram-task-job-scam/\">WhatsApp and Telegram task job scam गाइड</a> देखें। संदिग्ध मैसेज का स्क्रीनशॉट <a href=\"/screenshot-scam-checker/\">स्क्रीनशॉट स्कैम चेकर</a> में डालकर उसके ख़तरे के संकेत भी देख सकते हैं।"
@@ -5104,6 +5148,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       {
         "question": "टास्क स्कैम की शिकायत कहाँ करें?",
         "answer": "साइबर हेल्पलाइन 1930 पर कॉल करें या cybercrime.gov.in पर शिकायत दर्ज करें। संदिग्ध नंबर संचार साथी पोर्टल की चक्षु सुविधा पर भी रिपोर्ट कर सकते हैं।"
+      },
+      {
+        "question": "Telegram टास्क स्कैम की शिकायत का नंबर क्या है?",
+        "answer": "1930, जो राष्ट्रीय साइबर ठगी हेल्पलाइन है। Telegram या टास्क स्कैम के लिए अलग नंबर नहीं है। ऑनलाइन शिकायत cybercrime.gov.in पर होती है। पेमेंट की जानकारी और UTR नंबर तैयार रखें और शिकायत नंबर नोट कर लें।"
+      },
+      {
+        "question": "Telegram पर टास्क स्कैम ग्रुप की रिपोर्ट कैसे करें?",
+        "answer": "ऐप के Report बटन से: Android पर मैसेज पर टैप करें, iPhone पर दबाकर रखें, डेस्कटॉप पर राइट-क्लिक करें और कारण चुनें। Telegram का FAQ रिपोर्ट के लिए abuse@telegram.org भी बताता है। इससे पैसा वापस नहीं आता, इसलिए पुलिस शिकायत भी ज़रूर करें।"
       }
     ],
     "peopleAlsoSearch": [],
