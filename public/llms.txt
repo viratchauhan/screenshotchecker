@@ -44,6 +44,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [How to find your UTR number in Google Pay, PhonePe, Paytm and your bank](https://screenshotchecker.com/blog/how-to-find-utr-number/)
 - [UTR number tracking online: how to track a payment by its UTR](https://screenshotchecker.com/blog/utr-number-tracking/)
 - [UTR नंबर क्या होता है? कैसे निकालें (Hindi)](https://screenshotchecker.com/blog/utr-number-kya-hota-hai/)
+- [UTR नंबर से पेमेंट कैसे चेक करें: स्टेटस और ट्रैकिंग (Hindi)](https://screenshotchecker.com/blog/utr-number-se-payment-kaise-check-kare/)
 - [फर्जी पेमेंट स्क्रीनशॉट कैसे पहचानें (Hindi)](https://screenshotchecker.com/blog/fake-payment-screenshot-kaise-pehchane/)
 - [Smishing: fake SMS and WhatsApp messages](https://screenshotchecker.com/blog/smishing-fake-sms/)
 - [India Post or courier address-update SMS scams](https://screenshotchecker.com/blog/india-post-courier-sms-scam/)
