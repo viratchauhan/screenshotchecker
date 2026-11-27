@@ -236,3 +236,10 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - Linked from what-is-utr-number (in text and related), how-to-find-utr-number, the UTR checker's related cards, the blog index (payments) and llms.txt. Figure batch-20, share card.
 - Checks: npm test 40/40, build 82 pages, test:seo 0 errors/0 warnings, blog SEO 55 PASS. Deployed 850f475b, live URLs 200, IndexNow 200 for 5 URLs. Google indexing not requested: Search Console was signed out in the browser pane.
 - Also fast-forwarded the worktree to main (footer and README link commits from 23 Nov).
+
+## 2026-11-27 (later): digital arrest complaint section
+
+- Autocomplete showed a cluster the digital arrest guides only covered in one FAQ line: "digital arrest complaint", "complaint number", "complaint online", "digital arrest ki complaint kaise kare", "digital arrest helpline number", "how to report digital arrest".
+- Added a section to /blog/digital-arrest-scam/ and the Hindi /blog/digital-arrest-kya-hai/: the number is 1930 (no separate digital arrest helpline), online at cybercrime.gov.in, Chakshu for calls with no loss (within 30 days), which channel to use when, and a warning about fake helpline numbers. Two new FAQs in English, one in Hindi; updatedAt set. Sources opened on 27 Nov: I4C NCRP page (1930 in all States/UTs, bank-linked fraud reporting system, online status tracking) and Sanchar Saathi Chakshu page.
+- Checks: npm test 40/40, build 82 pages, test:seo 0 errors/0 warnings, blog SEO 55 PASS. Deployed 8cd4d6db, both URLs 200, IndexNow 200 for 2 URLs. Google indexing not requested: Search Console still signed out in the browser pane.
+- HANDOFF.md repaired: a duplicated copy of its first half had been pasted into the regex line of "Adding a guide".
