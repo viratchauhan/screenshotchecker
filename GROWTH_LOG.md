@@ -229,3 +229,10 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - AI image detector: already on par with competitors on features (verdict, evidence strength, C2PA, ELA view, paste); no percentage score by design. Its explainer now links the new guide.
 - New guides: how-to-tell-if-an-image-is-ai-generated (EN, targets "is this image ai generated / or not / ai edited") and Hindi photo-se-search-kaise-kare ("photo se search kaise kare", "google par photo se search kaise kare"). Google indexing requested for both and a recrawl of /reverse-image-search/.
 - Links: drafts for AI tool directories (There's An AI For That, Futurepedia, Toolify, TopAI.tools, SaaSHub, AlternativeTo) and awesome-osint in the private outreach kit; ledger updated (prospect_drafted). Owner submits.
+
+## 2026-11-27: UTR number tracking guide
+
+- New guide /blog/utr-number-tracking/ for the autocomplete cluster "utr number tracking online", "utr number tracking sbi", "track payment by utr number", "utr number status check", "how to track utr number" (only one FAQ line covered it before). Answer first: no public tracker exists; track in your own app or through your bank. Time limits from sources opened on 27 Nov: RBI NEFT FAQ (bank CFC, two hours from batch settlement), RBI RTGS FAQ (22-character UTR, 30 minutes, customers cannot track, return within one hour), RBI 2019 TAT circular (UPI/IMPS T+1, Rs 100 a day, merchant T+5), RBI CMS for complaints. The NPCI dispute page did not load, so nothing is cited from it.
+- Linked from what-is-utr-number (in text and related), how-to-find-utr-number, the UTR checker's related cards, the blog index (payments) and llms.txt. Figure batch-20, share card.
+- Checks: npm test 40/40, build 82 pages, test:seo 0 errors/0 warnings, blog SEO 55 PASS. Deployed 850f475b, live URLs 200, IndexNow 200 for 5 URLs. Google indexing not requested: Search Console was signed out in the browser pane.
+- Also fast-forwarded the worktree to main (footer and README link commits from 23 Nov).

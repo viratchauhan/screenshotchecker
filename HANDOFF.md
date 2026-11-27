@@ -1,6 +1,6 @@
 # ScreenshotChecker handoff (read this first)
 
-Last updated: 22 November 2026. Written so an assistant on a new computer can pick up the work without the old
+Last updated: 27 November 2026. Written so an assistant on a new computer can pick up the work without the old
 conversation. Keep it current: update "Where things stand" and "Next steps" at the end of every session.
 
 ## What this is
@@ -160,9 +160,9 @@ ask the owner to sign in (never enter passwords yourself). Request indexing from
 `https://screenshotchecker.com/sitemap-index.xml` (submit the full URL). Cloudflare Web Analytics is the analytics
 source alongside GA4 and Clarity.
 
-## Where things stand (22 Nov 2026)
+## Where things stand (27 Nov 2026)
 
-- 81 built pages; 49 guides in `blogArticles.ts` (12 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
+- 82 built pages; 50 guides in `blogArticles.ts` (12 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
   internal links.
 - 12 Nov: snippet rewrites on 8 low-CTR pages (baseline numbers in GROWTH_LOG, 12 Nov entry) and 2 guides.
 - 12-13 Nov: 14 new guides, topic-grouped blog index, Resources cards linked to real guides, hreflang pairs,
@@ -184,6 +184,7 @@ source alongside GA4 and Clarity.
   Hindi job offer and Amazon/Flipkart refund guides, share cards for 25 pages, max-image-preview:large, and a fix for raw HTML in guide intros and
   checklists. GROWTH_LOG has details.
 - 22 Nov: UTR topic group (what-is-utr-number, how-to-find-utr-number, Hindi utr-number-kya-hota-hai), indexing requested. Rough market sizing in GROWTH_LOG (22 Nov): 20-45k visits a month realistic in 12-24 months; 100k needs a top-3 win on AI image detector or screenshot reverse search.
+- 27 Nov: new guide `utr-number-tracking` ("utr number tracking online" cluster; RBI NEFT/RTGS FAQs, 2019 TAT circular). Deployed 850f475b, IndexNow pinged. Google indexing NOT yet requested (Search Console signed out in the browser pane).
 - 21 Nov routine check: payment checker 327 clicks in 7 days at 17.5% CTR, position 4.3; homepage flat (110 clicks, 5.3).
 - Backlinks: 8 directory/editorial submissions from 1 and 6 Oct are pending editorial review (see the ledger);
   none verified as published.
@@ -192,7 +193,7 @@ source alongside GA4 and Clarity.
 
 1. Around 10 Dec 2026, compare 28-day CTR and position for the pages retitled on 12 Nov against the GROWTH_LOG
    baseline; keep winners, revise losers.
-2. Search Console (21 Nov): every new page from 17-18 Nov is indexed except `/blog/fake-job-offer-letter/` (crawled 21 Nov, "Crawled - currently not indexed"; homepage and scam checker now link it, re-check around 28 Nov and request again if still out) and `/blog/loan-app-harassment-kya-kare/` (requested 21 Nov). Still to recrawl when quota allows: `/screenshot-scam-checker/`, `/ai-image-detector/`, `/screenshot-analyzer/`. Search Console signs out in the browser pane from time to time: ask the owner to sign in; at narrow pane widths the Inspect box is hidden, so set the viewport to 1280 px first.
+2. Search Console (21 Nov): every new page from 17-18 Nov is indexed except `/blog/fake-job-offer-letter/` (crawled 21 Nov, "Crawled - currently not indexed"; homepage and scam checker now link it, re-check around 28 Nov and request again if still out) and `/blog/loan-app-harassment-kya-kare/` (requested 21 Nov). To request once the owner has signed in to Search Console in the browser pane: `/blog/utr-number-tracking/` (new 27 Nov). Ideas from 27 Nov autocomplete: a Hindi pair for the tracking guide ("utr number status kaise check kare") and "digital arrest complaint" (how and where to complain) answered on the digital arrest guide. Still to recrawl when quota allows: `/screenshot-scam-checker/`, `/ai-image-detector/`, `/screenshot-analyzer/`. Search Console signs out in the browser pane from time to time: ask the owner to sign in; at narrow pane widths the Inspect box is hidden, so set the viewport to 1280 px first.
 3. Restore Cloudflare Git auto-deploys (owner, dashboard), or keep deploying with wrangler.
 4. Owner actions from the outreach kit (see its 18 Nov section: Bing Webmaster Tools import, Featured/Qwoted/SourceBottle): send the Gmail drafts, list on AlternativeTo/Product Hunt, answer Quora/Reddit
    questions with disclosure, share Hindi WhatsApp forwards.
