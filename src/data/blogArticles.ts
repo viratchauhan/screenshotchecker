@@ -7022,7 +7022,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "seoTitle": "UTR नंबर से पेमेंट कैसे चेक करें: स्टेटस और ट्रैकिंग",
     "metaDescription": "UTR नंबर ट्रैक करने की कोई सार्वजनिक वेबसाइट नहीं है। UPI, IMPS, NEFT या RTGS पेमेंट का स्टेटस अपने बैंक या ऐप से कैसे चेक करें और कब शिकायत करें।",
     "category": "Security",
-    "publishedAt": "2026-11-28",
+    "publishedAt": "2026-11-27",
     "authorName": "Virat Chauhan",
     "readTime": "6 min read",
     "excerpt": "UTR नंबर से पेमेंट का स्टेटस किसी सार्वजनिक वेबसाइट पर नहीं दिखता। UPI, IMPS, NEFT और RTGS पेमेंट को अपने बैंक या ऐप से कैसे चेक करें, RBI ने हर एक के लिए कितना समय तय किया है, बैंक कौन सी जानकारी माँगेगा और शिकायत कहाँ करें।",
