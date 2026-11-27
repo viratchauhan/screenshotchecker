@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "utr-number-tracking",
+    "app": "Track a payment by UTR", "sub": "Fictional summary · limits from RBI FAQs and circular",
+    "blocks": [
+      {"type": "row", "k": "UPI", "v": "app or bank · reversal by T+1", "badge": 1},
+      {"type": "row", "k": "IMPS", "v": "bank · reversal by T+1", "badge": 2},
+      {"type": "row", "k": "NEFT", "v": "bank · 2 hours after batch", "badge": 3},
+      {"type": "row", "k": "RTGS", "v": "bank · credit in 30 minutes", "badge": 4},
+      {"type": "note", "text": "No public website tracks a UTR", "badge": 5}
+    ],
+    "callouts": [
+      "Open the payment in your app: its status is the tracking.",
+      "Not credited? The receiving bank reverses it next day.",
+      "Give your bank the UTR, date, amount and IFSC.",
+      "Customers cannot track RTGS; the bank tells you.",
+      "Never share a PIN or OTP with a tracking helper."
+    ]
+  }
+]

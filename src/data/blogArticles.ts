@@ -6267,7 +6267,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       {
         "heading": "How to check a payment with a UTR number",
         "paragraphs": [
-          "There is no public website where anyone can look up a UTR and see a payment. Only the banks involved, and the apps acting for you, can see it. So a check always happens in your own records:"
+          "There is no public website where anyone can look up a UTR and see a payment. Only the banks involved, and the apps acting for you, can see it. So a check always happens in your own records (the full steps and time limits are in <a href=\"/blog/utr-number-tracking/\">UTR number tracking</a>):"
         ],
         "checklist": [
           "<strong>If you received money:</strong> open your bank app or statement yourself and look for a credit with the same amount, time and reference. If it is not there, the payment has not reached you.",
@@ -6320,7 +6320,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["utr-number-tracking", 
       "how-to-find-utr-number",
       "fake-upi-payment-screenshot",
       "payment-failed-screenshot-scam"
@@ -6439,7 +6439,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["utr-number-tracking", 
       "what-is-utr-number",
       "fake-upi-payment-screenshot",
       "payment-failed-screenshot-scam"
@@ -6840,6 +6840,137 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "फोटो क्रॉप करके सर्च करें",
       "url": "/reverse-image-search/",
       "description": "फोटो या स्क्रीनशॉट का ज़रूरी हिस्सा अपने ब्राउज़र में क्रॉप कीजिए, फिर Google Lens, TinEye, Bing या Yandex पर सर्च कीजिए।"
+    }
+  },
+  {
+    "slug": "utr-number-tracking",
+    "title": "UTR Number Tracking Online: How to Track a Payment by Its UTR",
+    "seoTitle": "UTR Number Tracking Online: How to Track a Payment by UTR",
+    "metaDescription": "No public website tracks a UTR number. How to track a UPI, IMPS, NEFT or RTGS payment through your bank, how long each takes, and when to complain.",
+    "category": "Security",
+    "publishedAt": "2026-11-27",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "There is no public website that tracks a UTR number. How to track a UPI, IMPS, NEFT or RTGS payment with its UTR through your own bank or app, the time limits the RBI sets for each, what details the bank will ask for, and how to escalate.",
+    "targetKeywords": [
+      "utr number tracking",
+      "utr number tracking online",
+      "track payment by utr number",
+      "utr number status check",
+      "how to track utr number",
+      "utr tracking"
+    ],
+    "keyTakeaway": {
+      "title": "You track a UTR through your bank, not a website",
+      "text": "No public website shows the status of a payment from its UTR number. You track it in your own bank or UPI app, or by giving the UTR to your bank. The RBI expects a NEFT credit within two hours of batch settlement and an RTGS credit within 30 minutes, and a failed UPI or IMPS transfer should be reversed by the next day (T+1)."
+    },
+    "introduction": "You cannot track a UTR number on a public website: only the sending bank, the receiving bank and the apps acting for them can see a payment's status. To track a payment, look it up in your own bank or UPI app, or give the UTR to your bank and ask them to trace it. This guide covers how that works for UPI, IMPS, NEFT and RTGS, how long each should take under the RBI's rules, and what to do when the money still has not arrived. If you do not have the number yet, see <a href=\"/blog/how-to-find-utr-number/\">how to find your UTR number</a>.",
+    "contentSections": [
+      {
+        "heading": "Is there a website for UTR number tracking?",
+        "paragraphs": [
+          "No. The Reserve Bank of India's own FAQs describe tracking as something you do through your bank. For NEFT, the <a href=\"https://www.rbi.org.in/commonman/english/scripts/FAQs.aspx?Id=274\">RBI's NEFT FAQ</a> says the sender and the receiver can each track a transfer by contacting their own bank's NEFT Customer Facilitation Centre. For RTGS, the <a href=\"https://www.rbi.org.in/Scripts/FAQView.aspx?Id=65\">RBI's RTGS FAQ</a> says customers do not have a facility to track the transaction themselves; the sending bank is told when the money is credited and should inform you.",
+          "That is the same whichever bank you use. A site or a caller that promises to \"track any UTR online\" cannot see inside the banking system. At best it checks the format of the number, as our own <a href=\"/utr-number-checker/\">UTR number checker</a> does. At worst it is collecting your details."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/utr-number-tracking/fictional-example.png",
+          "alt": "A fictional tracking card showing where to track a payment by its UTR: UPI and IMPS in the app or bank with reversal by the next day, NEFT through the bank within two hours of batch settlement, RTGS through the bank within 30 minutes, and a warning that no public website tracks a UTR.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. Where a payment is tracked and how long it should take, based on RBI FAQs and its 2019 turnaround time circular."
+        },
+        "callout": {
+          "type": "warning",
+          "text": "Never give your UPI PIN, an OTP, card details or remote access to someone who offers to track a UTR for you. Tracking a payment needs only the UTR and the payment details, and only your bank can do it."
+        }
+      },
+      {
+        "heading": "How to track a UPI or IMPS payment by UTR",
+        "paragraphs": [
+          "For UPI and IMPS, the 12-digit reference is the UTR. Tracking it is mostly a matter of checking the right record:"
+        ],
+        "checklist": [
+          "<strong>Open the payment in your UPI or bank app.</strong> The transaction's own page shows whether it is successful, pending or failed. That status is the tracking.",
+          "<strong>Check your bank statement or SMS.</strong> Look for a debit or credit with the same amount, time and reference. If you were meant to receive the money and there is no credit, it has not reached you, whatever a screenshot shows.",
+          "<strong>If the money left your account but did not reach the other person,</strong> wait until the next day. Under the RBI's <a href=\"https://www.rbi.org.in/Scripts/NotificationUser.aspx?Id=11693\">2019 turnaround time circular</a>, when a UPI or IMPS transfer debits the sender and the receiver is not credited, the receiving bank must reverse it automatically at the latest on T+1, the day after the transaction.",
+          "<strong>If it is not reversed by then,</strong> raise it in the app's help section or with your bank and quote the UTR. The same circular sets compensation of Rs 100 a day for delays beyond T+1, to be credited without you having to claim it.",
+          "<strong>Paid a shop and the shop did not get a confirmation?</strong> The circular gives UPI merchant payments up to T+5 days for the automatic reversal."
+        ]
+      },
+      {
+        "heading": "How to track a NEFT payment by UTR",
+        "paragraphs": [
+          "NEFT moves money in batches that run every half hour. According to the RBI's NEFT FAQ, the receiver should normally be credited within two hours of the batch being settled. If that time has passed and the money has not arrived:"
+        ],
+        "checklist": [
+          "Contact your own bank, through the branch, the app or its NEFT Customer Facilitation Centre. Sender and receiver each ask their own bank.",
+          "Keep the details the RBI says a bank may need for faster tracking: the UTR or transaction reference number, the date, the sending branch's IFSC, the amount, the receiver's name and the receiving branch's IFSC.",
+          "Ask whether the transfer was credited, is still pending or was returned. A transfer that cannot be credited is sent back to the sender's bank."
+        ]
+      },
+      {
+        "heading": "How to track an RTGS payment by UTR",
+        "paragraphs": [
+          "The RBI's RTGS FAQ describes the RTGS UTR as a 22-character code that identifies the transaction. RTGS is meant to be immediate: the receiving bank has to credit the account within 30 minutes of getting the transfer message. If it cannot credit the money, it has to return it to the sending bank within one hour, or before the end of the RTGS business day if that is earlier, and the sending bank then puts the money back in your account.",
+          "Because customers cannot track RTGS themselves, the step is simple: give the UTR to your bank or branch and ask for the status. The FAQ also says that when a credit is delayed, compensation at the current repo rate plus 2% is payable to the customer automatically."
+        ]
+      },
+      {
+        "heading": "What to do if the bank does not resolve it",
+        "paragraphs": [
+          "Both RBI FAQs give the same order. First complain to your bank's grievance redressal cell, in writing, with the UTR. If the bank does not resolve it within the time allowed under the Reserve Bank's Integrated Ombudsman Scheme, you can file a complaint under that scheme on the RBI's <a href=\"https://cms.rbi.org.in/\">Complaint Management System</a>. It is free.",
+          "If you sent the money because of a fraud, do not wait for tracking. Call the cyber crime helpline 1930 or report at cybercrime.gov.in as soon as you can, and tell your bank. Our guide on <a href=\"/blog/payment-failed-screenshot-scam/\">payment failed screenshot scams</a> covers the cases where a stranger claims a payment is stuck and asks you to send it again."
+        ]
+      },
+      {
+        "heading": "Someone sent you a UTR to prove they paid",
+        "paragraphs": [
+          "Sellers often search for UTR tracking because a buyer has sent a screenshot with a UTR and the money is not showing. You cannot look up their UTR anywhere, and you do not need to. Open your own bank or UPI app and look for the credit. If it is not there, you have not been paid yet, and the buyer is the one who should ask their bank to trace the payment.",
+          "A UTR can be copied from an old receipt or typed into an edited image, so its format proves nothing. The <a href=\"/payment-screenshot-checker/\">payment screenshot checker</a> flags warning signs in the image, and <a href=\"/blog/what-is-utr-number/\">what is a UTR number</a> explains the formats."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "The only tracking that counts is your own account. Hand over goods or a refund after the credit shows in your bank or UPI app, not after you see a UTR."
+        }
+      }
+    ],
+    "faq": [
+      {
+        "question": "Can I track a UTR number online?",
+        "answer": "Not on a public website. You can see the status of your own payment in your bank or UPI app, or give the UTR to your bank and ask them to trace it. The RBI's FAQs describe tracking through the bank only."
+      },
+      {
+        "question": "Does the RBI have a UTR tracking website?",
+        "answer": "No. The RBI's NEFT FAQ says to contact your bank's NEFT Customer Facilitation Centre, and its RTGS FAQ says customers cannot track a transaction themselves. The RBI's Complaint Management System is for complaints, not for looking up a payment."
+      },
+      {
+        "question": "How do I track a NEFT transaction with a UTR number?",
+        "answer": "Contact your own bank with the UTR, the date, the amount and the IFSC and name details of the transfer. The RBI expects a NEFT credit within two hours of the batch being settled."
+      },
+      {
+        "question": "How long does a failed UPI payment take to come back?",
+        "answer": "Under the RBI's 2019 turnaround time circular, a UPI transfer that debits the sender without crediting the receiver must be reversed at the latest on the next day (T+1). For UPI payments to merchants the limit is T+5 days."
+      },
+      {
+        "question": "Can I track someone else's payment with their UTR?",
+        "answer": "No. Only the banks involved can see it. If someone says they paid you, check for the credit in your own account. If it is missing, they should ask their bank to trace the payment."
+      },
+      {
+        "question": "Is the process different for SBI, PNB, Bank of Baroda or another bank?",
+        "answer": "The route is the same for every bank: your own bank's app, statement, branch or customer care. Menus and names differ from bank to bank, but none of them can be replaced by a third-party tracking site."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "what-is-utr-number",
+      "how-to-find-utr-number",
+      "payment-failed-screenshot-scam"
+    ],
+    "cta": {
+      "label": "Check a UTR format",
+      "url": "/utr-number-checker/",
+      "description": "See which payment system a UTR or UPI reference matches, in your browser, then track the payment with your own bank."
     }
   },
 ];
