@@ -3919,8 +3919,9 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "Told on a video call that you are under digital arrest? There is no such thing. How the scam works, the fake notices it uses and what to do right now.",
     "category": "Security",
     "publishedAt": "2026-11-12",
+    "updatedAt": "2026-11-27",
     "authorName": "Virat Chauhan",
-    "readTime": "7 min read",
+    "readTime": "8 min read",
     "excerpt": "How the digital arrest scam works in India, the fake warrants and ID cards scammers show on video calls, why no agency arrests anyone online, and the exact steps to take if you or a family member is on such a call now.",
     "targetKeywords": [
       "digital arrest scam",
@@ -4002,6 +4003,20 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         ]
       },
       {
+        "heading": "Digital arrest complaint: the number and how to file online",
+        "paragraphs": [
+          "The digital arrest complaint number is 1930, the national cybercrime helpline, and the online route is the National Cybercrime Reporting Portal at <a href=\"https://cybercrime.gov.in/\">cybercrime.gov.in</a>. There is no separate helpline only for digital arrest: the same two channels take every kind of cyber fraud. The helpline runs in all States and Union Territories, and it is linked to a system that connects police with banks, wallets and payment companies so that stolen money can be stopped before it moves on (<a href=\"https://i4c.mha.gov.in/ncrp.aspx\">I4C, Ministry of Home Affairs</a>).",
+          "Which channel to use depends on whether money has left your account. The portal accepts complaints from anywhere in India and lets you track the status of your complaint online afterwards, so keep the acknowledgement number it gives you."
+        ],
+        "checklist": [
+          "Money was sent: call 1930 first, then your bank's official helpline. Keep the transaction reference (UTR), amount, date and time ready.",
+          "No money lost, but you want the callers reported: file a complaint on cybercrime.gov.in with the numbers, call log and screenshots.",
+          "Only a suspicious call, SMS or WhatsApp message so far: report the number on <a href=\"https://sancharsaathi.gov.in/sfc/\">Chakshu on the Sanchar Saathi portal</a>, which takes reports of people posing as government officials. Report within 30 days of the call or message.",
+          "You would rather speak to someone in person: go to your nearest police station or cyber police station with the same evidence.",
+          "Never search for a \"digital arrest helpline\" and dial a number from an ad, a comment or a forwarded message. Use only 1930 and the two government sites above."
+        ]
+      },
+      {
         "heading": "Checking a document someone sent you",
         "paragraphs": [
           "ScreenshotChecker's <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> reads the text in a screenshot or document photo and flags pressure tactics, threats and requests for money. The <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> can show signs that an image was edited. These tools give clues, not verdicts. The real answer is simpler: no genuine agency arrests anyone on a video call, so any digital arrest is a scam regardless of how real the paperwork looks."
@@ -4024,6 +4039,14 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       {
         "question": "Where do I report a digital arrest scam?",
         "answer": "Call the cybercrime helpline 1930 or file a complaint at cybercrime.gov.in. You can also report suspicious numbers on the Chakshu facility of the Sanchar Saathi portal."
+      },
+      {
+        "question": "What is the digital arrest complaint number?",
+        "answer": "1930, the national cybercrime helpline. It works in every State and Union Territory and is the fastest route if money was sent. There is no separate number only for digital arrest, so do not trust any other helpline number you find online."
+      },
+      {
+        "question": "How do I file a digital arrest complaint online?",
+        "answer": "Go to cybercrime.gov.in, the National Cybercrime Reporting Portal, and file a complaint with the caller's numbers, call log, screenshots and any transaction details. You can track the complaint's status on the portal afterwards. If you only received a call and lost nothing, you can also report the number on Chakshu at sancharsaathi.gov.in within 30 days."
       },
       {
         "question": "Will I get my money back after a digital arrest scam?",
@@ -4174,8 +4197,9 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "वीडियो कॉल पर कोई कहे कि आप डिजिटल अरेस्ट में हैं? ऐसा कोई कानून नहीं है। यह ठगी कैसे होती है, नकली वारंट कैसे पहचानें और तुरंत क्या करें।",
     "category": "Security",
     "publishedAt": "2026-11-12",
+    "updatedAt": "2026-11-27",
     "authorName": "Virat Chauhan",
-    "readTime": "6 min read",
+    "readTime": "7 min read",
     "excerpt": "डिजिटल अरेस्ट ठगी कैसे होती है, ठग वीडियो कॉल पर कौन से नकली वारंट और ID कार्ड दिखाते हैं, कोई भी एजेंसी ऑनलाइन गिरफ़्तारी क्यों नहीं करती, और अगर आप या घर का कोई सदस्य ऐसी कॉल पर है तो क्या करें।",
     "targetKeywords": [
       "digital arrest kya hai",
@@ -4257,6 +4281,20 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         ]
       },
       {
+        "heading": "डिजिटल अरेस्ट की शिकायत कैसे करें: नंबर और ऑनलाइन तरीक़ा",
+        "paragraphs": [
+          "डिजिटल अरेस्ट की शिकायत का नंबर 1930 है, यानी राष्ट्रीय साइबर क्राइम हेल्पलाइन, और ऑनलाइन शिकायत <a href=\"https://cybercrime.gov.in/\">cybercrime.gov.in</a> (नेशनल साइबर क्राइम रिपोर्टिंग पोर्टल) पर होती है। सिर्फ़ डिजिटल अरेस्ट के लिए कोई अलग हेल्पलाइन नहीं है। 1930 सभी राज्यों और केंद्र शासित प्रदेशों में चलता है और ऐसे सिस्टम से जुड़ा है जो पुलिस को बैंकों, वॉलेट और पेमेंट कंपनियों से जोड़ता है, ताकि ठगा गया पैसा आगे जाने से पहले रोका जा सके (<a href=\"https://i4c.mha.gov.in/ncrp.aspx\">I4C, गृह मंत्रालय</a>)।",
+          "पोर्टल पर देश में कहीं से भी शिकायत दर्ज हो सकती है और बाद में उसकी स्थिति ऑनलाइन देखी जा सकती है, इसलिए शिकायत का नंबर संभालकर रखें।"
+        ],
+        "checklist": [
+          "पैसे भेज दिए हैं: पहले 1930 पर कॉल करें, फिर बैंक की आधिकारिक हेल्पलाइन पर। ट्रांज़ैक्शन का UTR, रक़म, तारीख़ और समय तैयार रखें।",
+          "पैसा नहीं गया, पर कॉल करने वालों की शिकायत करनी है: cybercrime.gov.in पर नंबर, कॉल लॉग और स्क्रीनशॉट के साथ शिकायत दर्ज करें।",
+          "अभी सिर्फ़ संदिग्ध कॉल, SMS या WhatsApp मैसेज आया है: नंबर को <a href=\"https://sancharsaathi.gov.in/sfc/\">संचार साथी पोर्टल की चक्षु सुविधा</a> पर रिपोर्ट करें। यह कॉल या मैसेज आने के 30 दिन के अंदर करें।",
+          "आमने-सामने बात करनी है: यही सबूत लेकर नज़दीकी थाने या साइबर थाने जाएँ।",
+          "इंटरनेट पर \"digital arrest helpline number\" खोजकर किसी विज्ञापन, कमेंट या फ़ॉरवर्ड मैसेज का नंबर न मिलाएँ। सिर्फ़ 1930 और ऊपर की दो सरकारी साइटें इस्तेमाल करें।"
+        ]
+      },
+      {
         "heading": "भेजा गया काग़ज़ या स्क्रीनशॉट कैसे चेक करें",
         "paragraphs": [
           "ScreenshotChecker का <a href=\"/screenshot-scam-checker/\">स्क्रीनशॉट स्कैम चेकर</a> स्क्रीनशॉट या काग़ज़ की फ़ोटो में लिखा टेक्स्ट पढ़कर धमकी, जल्दबाज़ी और पैसे की माँग जैसे संकेत दिखाता है। ये टूल सिर्फ़ संकेत देते हैं, फ़ैसला नहीं। असली जवाब सीधा है: कोई भी असली एजेंसी वीडियो कॉल पर गिरफ़्तारी नहीं करती, इसलिए काग़ज़ कितना भी असली लगे, हर डिजिटल अरेस्ट ठगी ही है। अंग्रेज़ी में पूरी जानकारी के लिए <a href=\"/blog/digital-arrest-scam/\">digital arrest scam गाइड</a> देखें।"
@@ -4279,6 +4317,10 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       {
         "question": "डिजिटल अरेस्ट की शिकायत कहाँ करें?",
         "answer": "साइबर हेल्पलाइन 1930 पर कॉल करें या cybercrime.gov.in पर शिकायत दर्ज करें। संदिग्ध नंबर संचार साथी पोर्टल की चक्षु सुविधा पर भी रिपोर्ट कर सकते हैं।"
+      },
+      {
+        "question": "डिजिटल अरेस्ट की शिकायत का नंबर क्या है?",
+        "answer": "1930, राष्ट्रीय साइबर क्राइम हेल्पलाइन। यह हर राज्य और केंद्र शासित प्रदेश में चलता है और पैसे जा चुके हों तो सबसे तेज़ रास्ता यही है। सिर्फ़ डिजिटल अरेस्ट के लिए कोई अलग नंबर नहीं है, इसलिए इंटरनेट पर मिले किसी और हेल्पलाइन नंबर पर भरोसा न करें।"
       },
       {
         "question": "क्या डिजिटल अरेस्ट में गया पैसा वापस मिल सकता है?",
