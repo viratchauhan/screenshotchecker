@@ -7,6 +7,7 @@ import {
   describeElaGrid,
   elaGridSize,
   findUnevenElaCells,
+  summarizeForensicsStatus,
   measureElaGrid,
   type ElaGridCell,
 } from '../elaGrid';
@@ -149,4 +150,58 @@ test('page wiring: the verdict uses the grid and the card states what it shows a
   const card = page.slice(page.indexOf('id="ela-grid-card"'), page.indexOf('id="jpeg-quality-card"'));
   assert.match(card, /What this shows:/);
   assert.match(card, /What it cannot prove:/);
+});
+
+test('result wording: green only when areas were compared and none stood out', () => {
+  const cell = (i: number, detail: number, error: number): ElaGridCell => ({ col: i % 8, row: i >> 3, detail, error });
+  const even = findUnevenElaCells(Array.from({ length: 64 }, (_, i) => cell(i, 3 + (i % 4), 1 + (i % 4) * 0.2)), 8, 8);
+  const clear = summarizeForensicsStatus(even, false, false);
+  assert.equal(clear.tone, 'clear');
+  assert.equal(clear.pill, 'No Uneven Areas Found');
+  assert.equal(clear.summary, 'No uneven areas found');
+
+  // Half or more of the picture is flat colour: the same words, but never green.
+  const halfFlat = findUnevenElaCells(
+    Array.from({ length: 64 }, (_, i) => (i < 40 ? cell(i, 0.1, 0.1) : cell(i, 3 + (i % 4), 1 + (i % 4) * 0.2))),
+    8,
+    8,
+  );
+  assert.equal(halfFlat.enoughData, true);
+  const flat = summarizeForensicsStatus(halfFlat, false, false);
+  assert.equal(flat.tone, 'neutral');
+  assert.match(flat.areas, /24 of 64/);
+  assert.match(flat.summary, /24 of 64 areas could be compared/);
+
+  // Too flat or too small to compare, or no grid at all: neutral, and it says so.
+  const mostlyFlat = findUnevenElaCells(Array.from({ length: 64 }, (_, i) => cell(i, i < 60 ? 0.1 : 4, 0.2)), 8, 8);
+  assert.equal(summarizeForensicsStatus(mostlyFlat, false, false).pill, 'Not Enough Detail');
+  assert.equal(summarizeForensicsStatus(mostlyFlat, false, false).tone, 'neutral');
+  assert.equal(summarizeForensicsStatus(undefined, false, false).tone, 'neutral');
+
+  // Flagged areas keep the warning wording the page already used.
+  const spliced = findUnevenElaCells(
+    Array.from({ length: 64 }, (_, i) => cell(i, 3 + (i % 4), i === 27 || i === 28 ? 9 : 1 + (i % 4) * 0.2)),
+    8,
+    8,
+  );
+  assert.equal(spliced.flagged.length, 2);
+  const uneven = summarizeForensicsStatus(spliced, true, true);
+  assert.deepEqual([uneven.pill, uneven.tone, uneven.areas, uneven.summary], ['Uneven Areas', 'warning', '2 outlined', 'Uneven areas observed']);
+  assert.equal(summarizeForensicsStatus(even, true, false).pill, 'Compression Anomaly');
+
+  // No wording anywhere claims the picture is consistent, clean or untouched.
+  for (const s of [clear, flat, uneven, summarizeForensicsStatus(mostlyFlat, false, false)]) {
+    assert.doesNotMatch(`${s.pill} ${s.areas} ${s.summary}`, /consistent|uniform|clean|authentic|untouched|genuine/i);
+  }
+});
+
+test('page wiring: the pill and figures use the shared wording and no green default', () => {
+  const page = readFileSync(new URL('../../../components/workspaces/ForensicsWorkspace.astro', import.meta.url), 'utf8');
+  assert.match(page, /summarizeForensicsStatus\(result\.elaGrid, result\.anomaliesDetected, unevenOnly\)/);
+  assert.doesNotMatch(page, /Consistent Compression|Uniform Compression|None Detected/);
+  assert.match(page, /id="forensics-status-pill" class="badge-status-neutral"/);
+  const forensics = readFileSync(new URL('../forensics.ts', import.meta.url), 'utf8');
+  assert.doesNotMatch(forensics, /Uniform compression characteristics/);
+  const css = readFileSync(new URL('../../../styles/global.css', import.meta.url), 'utf8');
+  assert.match(css, /\.badge-status-neutral \{/);
 });

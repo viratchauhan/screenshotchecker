@@ -223,6 +223,21 @@
   gap: 4px;
 }
 
+.badge-status-neutral {
+  background-color: var(--color-canvas);
+  color: var(--color-body);
+  border: 1px solid var(--color-hairline);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .badge-status-risk {
   background-color: rgba(198, 69, 69, 0.12);
   color: var(--color-error);

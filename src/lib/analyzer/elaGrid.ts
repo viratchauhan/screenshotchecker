@@ -229,3 +229,57 @@ export function describeElaGrid(finding: ElaGridFinding): { headline: string; no
     notes,
   };
 }
+
+export type ForensicsTone = 'warning' | 'neutral' | 'clear';
+
+export interface ForensicsStatus {
+  /** Short text for the result pill. */
+  pill: string;
+  /** warning: look at the outlined areas. clear: areas were compared and none stood out. neutral: too little could be judged. */
+  tone: ForensicsTone;
+  /** Text for the "areas that stand out" figure. */
+  areas: string;
+  /** One line for summaries on other pages. */
+  summary: string;
+}
+
+/**
+ * The wording of the result. It says only what the comparison found: "no uneven areas found" is
+ * not "consistent" or "untouched", and when half or more of the picture could not be judged
+ * (flat colour, too small) the result is neutral, never green.
+ */
+export function summarizeForensicsStatus(
+  finding: ElaGridFinding | undefined,
+  anomaliesDetected: boolean,
+  unevenOnly: boolean,
+): ForensicsStatus {
+  if (anomaliesDetected) {
+    const n = finding?.flagged.length ?? 0;
+    return unevenOnly
+      ? { pill: 'Uneven Areas', tone: 'warning', areas: `${n} outlined`, summary: 'Uneven areas observed' }
+      : {
+          pill: 'Compression Anomaly',
+          tone: 'warning',
+          areas: n > 0 ? `${n} outlined` : 'Uneven halves',
+          summary: 'Regional compression variance observed',
+        };
+  }
+  if (!finding || !finding.enoughData) {
+    return {
+      pill: 'Not Enough Detail',
+      tone: 'neutral',
+      areas: 'Could not compare',
+      summary: 'Not enough detail to compare areas',
+    };
+  }
+  const total = finding.cols * finding.rows;
+  if (finding.flatCells * 2 >= total) {
+    return {
+      pill: 'No Uneven Areas Found',
+      tone: 'neutral',
+      areas: `None in ${finding.judgedCells} of ${total} compared`,
+      summary: `No uneven areas found (${finding.judgedCells} of ${total} areas could be compared)`,
+    };
+  }
+  return { pill: 'No Uneven Areas Found', tone: 'clear', areas: 'None found', summary: 'No uneven areas found' };
+}

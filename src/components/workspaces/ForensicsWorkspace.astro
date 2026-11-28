@@ -74,7 +74,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
             </button>
           </div>
 
-          <span id="forensics-status-pill" class="badge-status-safe">Consistent Compression</span>
+          <span id="forensics-status-pill" class="badge-status-neutral">Checking</span>
         </div>
 
         <!-- Comparative Image Display -->
@@ -130,16 +130,16 @@ const faqs = getToolFaqs('image-manipulation-checker');
         <!-- Metric KPI Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
           <div class="bg-canvas border border-hairline rounded-xl p-3.5 text-xs">
-            <span class="text-muted block mb-0.5">Compression Uniformity</span>
-            <strong id="forensics-kpi-uniformity" class="font-mono text-ink text-sm">Normal</strong>
+            <span class="text-muted block mb-0.5">Re-save comparison</span>
+            <strong id="forensics-kpi-uniformity" class="font-mono text-ink text-sm">Checking</strong>
           </div>
           <div class="bg-canvas border border-hairline rounded-xl p-3.5 text-xs">
             <span class="text-muted block mb-0.5">Noise Variance Score</span>
             <strong id="forensics-kpi-noise" class="font-mono text-ink text-sm">12.4</strong>
           </div>
           <div class="bg-canvas border border-hairline rounded-xl p-3.5 text-xs">
-            <span class="text-muted block mb-0.5">Regional Edits Flagged</span>
-            <strong id="forensics-kpi-anomalies" class="font-mono text-success text-sm">None Detected</strong>
+            <span class="text-muted block mb-0.5">Areas that stand out</span>
+            <strong id="forensics-kpi-anomalies" class="font-mono text-ink text-sm">Checking</strong>
           </div>
         </div>
 
@@ -221,7 +221,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
     isDefaultElaView,
     type ElaViewRenderer,
   } from '../../lib/analyzer/elaView';
-  import { describeElaGrid, type ElaGridFinding } from '../../lib/analyzer/elaGrid';
+  import { describeElaGrid, summarizeForensicsStatus, type ElaGridFinding } from '../../lib/analyzer/elaGrid';
   import { buildJpegQualityReport, dataUrlHeadBytes, type JpegQualityReport } from '../../lib/analyzer/jpegQuality';
 
   let currentDataUrl = '';
@@ -347,15 +347,18 @@ const faqs = getToolFaqs('image-manipulation-checker');
 
     if (kpiUniformity) kpiUniformity.innerText = result.compressionInconsistency;
     if (kpiNoise) kpiNoise.innerText = String(result.noiseVarianceScore);
-    if (kpiAnomalies) {
-      kpiAnomalies.innerText = result.anomaliesDetected ? 'Discrepancies Found' : 'Uniform Compression';
-      kpiAnomalies.className = result.anomaliesDetected ? 'font-mono text-error text-sm' : 'font-mono text-success text-sm';
-    }
-
+    // Wording and colour come from one place: green only when areas were compared and none stood out.
     const unevenOnly = Boolean(result.elaGrid?.flagged.length) && result.compressionInconsistency === 'Uneven areas observed';
+    const status = summarizeForensicsStatus(result.elaGrid, result.anomaliesDetected, unevenOnly);
+    const toneText = { warning: 'text-warning', neutral: 'text-ink', clear: 'text-success' }[status.tone];
+    const toneBadge = { warning: 'badge-status-warning', neutral: 'badge-status-neutral', clear: 'badge-status-safe' }[status.tone];
+    if (kpiAnomalies) {
+      kpiAnomalies.innerText = status.areas;
+      kpiAnomalies.className = `font-mono ${toneText} text-sm`;
+    }
     if (statusPill) {
-      statusPill.innerText = result.anomaliesDetected ? (unevenOnly ? 'Uneven Areas' : 'Compression Anomaly') : 'Consistent Compression';
-      statusPill.className = result.anomaliesDetected ? 'badge-status-warning' : 'badge-status-safe';
+      statusPill.innerText = status.pill;
+      statusPill.className = toneBadge;
     }
     showElaGrid(result.elaGrid);
   }

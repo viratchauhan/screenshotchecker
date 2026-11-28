@@ -1,6 +1,6 @@
 import type { ForensicsInfo } from './types';
 import { fitElaViewSize } from './elaView';
-import { describeElaGrid, elaGridSize, findUnevenElaCells, measureElaGrid } from './elaGrid';
+import { describeElaGrid, elaGridSize, findUnevenElaCells, measureElaGrid, summarizeForensicsStatus } from './elaGrid';
 
 /**
  * Performs Error Level Analysis (ELA) and noise variance checks in browser canvas.
@@ -121,8 +121,7 @@ export async function analyzeImageForensics(img: HTMLImageElement): Promise<Fore
     notes.push('Localized compression level disparity detected across image regions.');
     notes.push('Highlighted high-contrast ELA areas may suggest spliced or re-compressed elements.');
   } else if (!unevenAreas) {
-    notes.push('Compression error distribution is relatively uniform across the image plane.');
-    notes.push('No obvious high-gradient compression boundary anomalies detected.');
+    notes.push('The four quarters of the picture changed by a similar amount in the test re-save.');
   }
   if (unevenAreas) anomaliesDetected = true;
   notes.push(...describeElaGrid(elaGrid).notes);
@@ -130,11 +129,11 @@ export async function analyzeImageForensics(img: HTMLImageElement): Promise<Fore
   return {
     elaDataUrl,
     anomaliesDetected,
-    compressionInconsistency: anomaliesDetected
-      ? unevenAreas && !(stdDev > 4.5 && maxDiff > 35)
-        ? 'Uneven areas observed'
-        : 'Regional compression variance observed'
-      : 'Uniform compression characteristics',
+    compressionInconsistency: summarizeForensicsStatus(
+      elaGrid,
+      anomaliesDetected,
+      unevenAreas && !(stdDev > 4.5 && maxDiff > 35),
+    ).summary,
     noiseVarianceScore: Math.round(stdDev * 10) / 10,
     cloneRegionsFound: false,
     notes,
