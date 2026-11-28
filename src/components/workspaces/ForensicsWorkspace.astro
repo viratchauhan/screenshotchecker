@@ -70,7 +70,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
               Original Image
             </button>
             <button type="button" data-mode="noise" class="forensics-mode-btn px-3 py-1.5 rounded-lg text-xs font-medium text-body hover:text-ink hover:bg-canvas transition-all">
-              Noise Variance Map
+              Noise Analysis
             </button>
           </div>
 
@@ -126,6 +126,29 @@ const faqs = getToolFaqs('image-manipulation-checker');
             <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Text, sharp edges and re-saved or forwarded pictures light up by themselves, and these sliders change only the view, not the result below.
           </p>
         </div>
+
+        <!-- Noise view controls (they change the picture only, never the result) -->
+        <div id="noise-controls" class="hidden bg-canvas border border-hairline rounded-xl p-4 space-y-3">
+          <h2 class="text-sm font-semibold text-ink">Noise analysis</h2>
+          <div class="text-xs sm:max-w-sm">
+            <label for="noise-amplitude" class="flex items-center justify-between gap-2 text-body mb-1.5">
+              <span>Amplitude</span>
+              <output id="noise-amplitude-value" for="noise-amplitude" class="font-mono text-ink">20x</output>
+            </label>
+            <input id="noise-amplitude" type="range" min="2" max="60" step="1" value="20" class="w-full h-6 [accent-color:var(--color-primary)] cursor-pointer" aria-describedby="noise-amplitude-hint" />
+            <p id="noise-amplitude-hint" class="text-muted mt-1 leading-snug">How much the grain is brightened. Raise it if the map looks black, lower it if it looks white.</p>
+          </div>
+          <p id="noise-view-status" class="text-xs text-muted" role="status" aria-live="polite">Fine grain shown 20 times brighter. Dark means smooth, bright means grain or a thin edge.</p>
+          <p id="noise-headline" class="text-sm text-ink font-medium" role="status" aria-live="polite">Measuring the grain of the picture.</p>
+          <ul id="noise-notes" class="text-xs text-body leading-relaxed space-y-1.5 list-disc pl-4"></ul>
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-ink">What this shows:</strong> the fine grain left when each pixel is compared with the middle value of its neighbours (a median filter). A camera spreads grain fairly evenly over similar surfaces, so a patch with different grain than the same kind of surface nearby, such as airbrushed skin or a pasted part, can stand out here even when it looks natural in the picture.
+          </p>
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Sky, walls and blurred backgrounds are smooth by themselves, hair, grass and text are grainy by themselves, phone cameras smooth faces and sharpen detail on their own, and a messaging app's compression evens the grain out. The slider and the notes change only this view, not the result at the top.
+          </p>
+        </div>
+        <!-- /noise controls -->
 
         <!-- Metric KPI Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
@@ -223,12 +246,24 @@ const faqs = getToolFaqs('image-manipulation-checker');
   } from '../../lib/analyzer/elaView';
   import { describeElaGrid, summarizeForensicsStatus, type ElaGridFinding } from '../../lib/analyzer/elaGrid';
   import { buildJpegQualityReport, dataUrlHeadBytes, type JpegQualityReport } from '../../lib/analyzer/jpegQuality';
+  import {
+    DEFAULT_NOISE_AMPLITUDE,
+    clampNoiseAmplitude,
+    createNoiseViewRenderer,
+    describeNoise,
+    describeNoiseView,
+    type NoiseViewRenderer,
+  } from '../../lib/analyzer/noiseView';
 
   let currentDataUrl = '';
   let currentElaUrl = '';
   let currentForensics: any = null;
   let currentMode = 'ela';
   let elaRenderer: ElaViewRenderer | null = null;
+  let currentImage: HTMLImageElement | null = null;
+  let noiseRenderer: NoiseViewRenderer | null = null;
+  let currentNoiseUrl = '';
+  let noiseFailed = false;
 
   const dropZone = document.getElementById('forensics-upload-container');
   const fileInput = document.getElementById('forensics-file-input') as HTMLInputElement | null;
@@ -327,6 +362,16 @@ const faqs = getToolFaqs('image-manipulation-checker');
     img.src = dataUrl;
     await new Promise((r) => (img.onload = r));
 
+    // The noise map is worked out the first time its tab is opened for this picture.
+    currentImage = img;
+    noiseRenderer = null;
+    currentNoiseUrl = '';
+    noiseFailed = false;
+    if (noiseInput) noiseInput.value = String(DEFAULT_NOISE_AMPLITUDE);
+    showNoiseAmplitude();
+    if (noiseHeadline) noiseHeadline.textContent = 'Measuring the grain of the picture.';
+    noiseNotes?.replaceChildren();
+
     const { analyzeImageForensics } = await import('../../lib/analyzer/forensics');
     const result = await analyzeImageForensics(img);
     currentForensics = result;
@@ -415,13 +460,69 @@ const faqs = getToolFaqs('image-manipulation-checker');
       b.classList.toggle('font-semibold', active);
       b.classList.toggle('text-body', !active);
       b.classList.toggle('font-medium', !active);
+      b.classList.toggle('border', active);
+      b.classList.toggle('border-hairline', active);
       b.setAttribute('aria-pressed', String(active));
     });
     elaControls?.classList.toggle('hidden', mode !== 'ela');
-    if (activeView) activeView.src = mode === 'original' ? currentDataUrl : currentElaUrl;
+    noiseControls?.classList.toggle('hidden', mode !== 'noise');
+    if (mode === 'noise') ensureNoiseView();
+    if (activeView) {
+      activeView.src = mode === 'original' ? currentDataUrl : mode === 'noise' ? currentNoiseUrl || currentDataUrl : currentElaUrl;
+    }
     applyOverlay();
     applyGridMarks();
   }
+
+  const noiseControls = document.getElementById('noise-controls');
+  const noiseInput = document.getElementById('noise-amplitude') as HTMLInputElement | null;
+  const noiseValue = document.getElementById('noise-amplitude-value');
+  const noiseStatus = document.getElementById('noise-view-status');
+  const noiseHeadline = document.getElementById('noise-headline');
+  const noiseNotes = document.getElementById('noise-notes');
+
+  function showNoiseAmplitude() {
+    const amplitude = clampNoiseAmplitude(noiseInput?.value);
+    if (noiseValue) noiseValue.textContent = `${amplitude}x`;
+    if (noiseStatus && !noiseFailed) noiseStatus.textContent = describeNoiseView(amplitude);
+    return amplitude;
+  }
+
+  /** Builds the noise map for the current picture once. Runs in this tab only. */
+  function ensureNoiseView() {
+    if (noiseRenderer || noiseFailed || !currentImage) return;
+    try {
+      noiseRenderer = createNoiseViewRenderer(currentImage);
+      currentNoiseUrl = noiseRenderer.render(showNoiseAmplitude());
+      const report = describeNoise(noiseRenderer.finding);
+      if (noiseHeadline) noiseHeadline.textContent = report.headline;
+      noiseNotes?.replaceChildren(
+        ...report.notes.map((note) => {
+          const li = document.createElement('li');
+          li.textContent = note;
+          return li;
+        }),
+      );
+    } catch {
+      noiseFailed = true;
+      noiseRenderer = null;
+      currentNoiseUrl = '';
+      if (noiseInput) noiseInput.disabled = true;
+      if (noiseHeadline) noiseHeadline.textContent = 'The noise view is not available for this picture.';
+      if (noiseStatus) noiseStatus.textContent = 'The original picture is shown instead.';
+    }
+  }
+
+  let noiseRenderTimer: number | undefined;
+  noiseInput?.addEventListener('input', () => {
+    const amplitude = showNoiseAmplitude();
+    window.clearTimeout(noiseRenderTimer);
+    noiseRenderTimer = window.setTimeout(() => {
+      if (!noiseRenderer) return;
+      currentNoiseUrl = noiseRenderer.render(amplitude);
+      if (currentMode === 'noise' && activeView) activeView.src = currentNoiseUrl;
+    }, 120);
+  });
 
   function readElaSettings() {
     return clampElaViewSettings({
@@ -482,7 +583,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
         // A newer slider move or a new picture wins.
         if (run !== elaRenderRun || renderer !== elaRenderer) return;
         currentElaUrl = url;
-        if (currentMode !== 'original' && activeView) activeView.src = url;
+        if (currentMode === 'ela' && activeView) activeView.src = url;
       } catch {
         if (elaStatus) elaStatus.textContent = 'Could not redraw the map with these settings. Try Reset view.';
       }
