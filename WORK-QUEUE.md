@@ -13,8 +13,10 @@ Rules: logic in `src/lib/analyzer/` with unit tests; every view gets a one-line 
 
 TOOL items (ForensicsWorkspace, `/image-manipulation-checker/`):
 - [x] T1 ELA controls: JPEG quality slider, error scale slider, overlay opacity over the original (Forensically and FotoForensics both have these). Done 28 Nov 2026 (b2f4172, `src/lib/analyzer/elaView.ts`).
-- [ ] T1b `forensics.ts` caps width and height at 1600 separately, which squashes very large pictures before the verdict analysis; use `fitElaViewSize` there and add a test (the adjustable view already keeps the shape).
-- [ ] T2 JPEG quality estimate: read the quantization tables, show "last saved at about N% quality", list the tables, and flag signs of a re-save.
+- [x] T1b (28 Nov, 00bd2b5) `forensics.ts` capped width and height at 1600 separately, which squashes very large pictures before the verdict analysis; use `fitElaViewSize` there and add a test (the adjustable view already keeps the shape).
+- [x] T2 (28 Nov, 00bd2b5) JPEG save quality: reads the quantization tables, shows "Last saved at N% JPEG quality", lists the tables, button sets the ELA re-save quality (`src/lib/analyzer/jpegQuality.ts`).
+- [ ] T2b Double-compression sign: the tables give the last save only; a real re-save flag needs the DCT coefficient histogram (periodic gaps) of the decoded blocks. Own run, with a fictional once-saved and twice-saved pair as tests; say what it cannot prove.
+- [ ] T2c The result pill said "Consistent Compression" for a fictional picture with a pasted flat patch (2400x1000, saved at 70%): the verdict compares only four quadrants. Use a finer grid (for example 8x8 cells, flag cells far above the median) with tests on an edited and an untouched fictional picture; keep the wording cautious.
 - [ ] T3 Noise analysis view (median-filter residual) with amplitude control; explain airbrushing and pasted areas.
 - [ ] T4 Embedded thumbnail check: extract the EXIF thumbnail and show it beside the image; a thumbnail that differs from the picture is strong edit evidence.
 - [ ] T5 Magnifier with contrast enhancement (histogram equalisation, auto contrast) that works on touch.
