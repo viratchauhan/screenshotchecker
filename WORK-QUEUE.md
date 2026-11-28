@@ -35,7 +35,7 @@ CONTENT items:
 - [x] C3a (28 Nov) `/blog/fotoforensics-alternative/` published (FotoForensics, Forensically, Image Edited? compared; facts from their own FAQ and tutorial pages).
 - [ ] C3b "Forensically alternative / Forensically vs FotoForensics" page: same honest pattern; only after T2-T4 ship, so our tool has more to show. Also consider "is fotoforensics safe" as its own short guide if the alternatives page gets impressions for it.
 - [x] C6 (28 Nov, 2820282, `/blog/free-tools-to-check-if-a-photo-is-edited/`; the four newer rivals are not named yet, open each first) "Free tools to check if a photo is edited or photoshopped" guide: list FotoForensics, Forensically, Image Edited?, TinEye/Lens and our checker fairly, with what each is best at. This is the article type that earned imageedited.com its links (HowToGeek, MakeUseOf, Lifehacker, Yahoo). Also name the newer rivals found on 28 Nov only after opening each: truthscan.com, fakeimagedetector.com, fauxlens.com, snapwonders.com.
-- [ ] C4 Refresh `/blog/how-to-tell-if-a-photo-is-edited/` (position 20, 628 impressions): answer first, add the new views as steps.
+- [x] C4 (28 Nov, 93e4799) Refreshed `/blog/how-to-tell-if-a-photo-is-edited/` (position 20, 628 impressions): answer first, the new views as steps, iPhone "Revert to Original" paragraph and FAQ. Compare position around 26 Dec. Possible follow-up: "how to tell if a photo is edited with ai" (autocomplete) as a section once sources are opened.
 - [ ] C5 Outreach DRAFTS only (owner sends): OSINT lists that carry FotoForensics (osintframework.com, start.me pages, awesome-osint), journalism tool lists, and a Wikipedia "Error level analysis" external-link suggestion for the talk page.
 
 

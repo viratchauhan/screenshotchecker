@@ -376,3 +376,12 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - Testing: built files in headless Chrome with request interception at 375 px and 1280 px with four fictional pictures made from random numbers for the test (untouched, sticker and badge, caption, pasted patch): untouched and caption "No uneven areas found", sticker "2 uneven areas found, 1 of them looks like added text or graphics" with one dashed and one solid outline on the badge, pasted patch "4 uneven areas found" with no hint, no overflow. Repeated on the live page under the real CSP: same results, no console errors.
 - Checks: npm test 43/43, build 88 pages, test:seo 0 errors/0 warnings, blog SEO 61 PASS. Commit 226b3f1, deployed 6ca839cb, live URL 200, IndexNow 200 for 1 URL. Google indexing not requested (a hint on a tool card, not a new page; the recrawl of this page is still on the HANDOFF list for 29 Nov).
 - Next: a CONTENT run (C4 refresh of `/blog/how-to-tell-if-a-photo-is-edited/`). Next tool items: T3 noise view, T2f, T2b.
+
+## 28 Nov 2026 (hourly run, CONTENT): refreshed "how to tell if a photo is edited"
+
+- Work queue C4. `/blog/how-to-tell-if-a-photo-is-edited/` (position 20, 628 impressions at the 28 Nov baseline) now answers the question in its first sentence, and step 5 walks through the checker's newer readings in order: JPEG save quality, the area by area check, the added text or graphics hint and the ELA controls, each with what it cannot prove. Links added to the ELA and JPEG quality tutorials.
+- Autocomplete (gl=us) shows "how to tell if a photo is edited on iphone": added a short paragraph and an FAQ on Revert to Original, sourced from Apple's iPhone User Guide page "Undo and revert photo edits on iPhone" (opened this run). The call to action no longer mentions clone checks (the tool has none yet).
+- `updatedAt` 2026-11-28, 9 min read. No new figure (the existing one still fits). No planning run today beyond the owner session's; decision: the owner's 28 Nov session read the numbers and ordered the queue, so this run stayed on content.
+- Checks: 43 entrypoints, 88 pages, SEO Errors 0 Warnings 0, blog checks PASS. Commit 93e4799, deployed f4938542, live page 200, IndexNow 200, Google recrawl requested (Search Console: "Indexing requested").
+- Next run: TOOL (T2f, then T3, T4).
+
