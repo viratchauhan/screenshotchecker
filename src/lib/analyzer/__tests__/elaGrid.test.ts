@@ -7,6 +7,7 @@ import {
   describeElaGrid,
   elaGridSize,
   findUnevenElaCells,
+  looksLikeGraphic,
   summarizeForensicsStatus,
   measureElaGrid,
   type ElaGridCell,
@@ -204,4 +205,67 @@ test('page wiring: the pill and figures use the shared wording and no green defa
   assert.doesNotMatch(forensics, /Uniform compression characteristics/);
   const css = readFileSync(new URL('../../../styles/global.css', import.meta.url), 'utf8');
   assert.match(css, /\.badge-status-neutral \{/);
+});
+
+/** The patch of the fictional picture redrawn as hard black and white bars, like big letters or a sticker. */
+function withDrawnPatch(picture: ReturnType<typeof fictionalPicture>, error: number) {
+  for (let y = 120; y < 180; y++) {
+    for (let x = 80; x < 160; x++) {
+      const value = (x >> 3) & 1 ? 230 : 30;
+      const i = (y * picture.width + x) * 4;
+      for (let c = 0; c < 3; c++) {
+        picture.original[i + c] = value;
+        picture.resaved[i + c] = value + ((x + y) & 1 ? -error : error);
+      }
+    }
+  }
+  return picture;
+}
+
+test('added text or graphics: hard, clean edges are told apart from photographed detail', () => {
+  // Hand-made cells: many abrupt steps per edge is drawn, many gentle ones is photographed.
+  const cell = (hardEdgeShare: number, edgeShare: number) => ({ col: 0, row: 0, error: 3, detail: 5, hardEdgeShare, edgeShare });
+  assert.equal(looksLikeGraphic(cell(0.04, 0.08)), true, 'sticker-like');
+  assert.equal(looksLikeGraphic(cell(0.04, 0.3)), false, 'busy photo texture: few of its edges are hard');
+  assert.equal(looksLikeGraphic(cell(0.004, 0.006)), false, 'too few hard edges to say anything');
+  assert.equal(looksLikeGraphic({ col: 0, row: 0, error: 3, detail: 5 }), false, 'cells without edge counts');
+
+  // A pasted grainy patch (photographed material): flagged, but not called a graphic.
+  const pasted = check(fictionalPicture((x, y, grain) => (inPatch(x, y) ? 12 : 1 + grain * 0.05)));
+  assert.ok(pasted.flagged.length > 0);
+  assert.ok(pasted.flagged.every((c) => !c.graphicLike));
+  const pastedReport = describeElaGrid(pasted);
+  assert.doesNotMatch(pastedReport.headline + pastedReport.notes.join(' '), /dashed|added text or/i);
+
+  // The same patch drawn as hard bars: flagged, and every flagged cell is graphic-like.
+  const drawn = check(withDrawnPatch(fictionalPicture((_x, _y, grain) => 1 + grain * 0.05), 14));
+  assert.equal(drawn.flagged.length, 4);
+  assert.ok(drawn.flagged.every((c) => c.graphicLike));
+  const report = describeElaGrid(drawn);
+  assert.match(report.headline, /^4 uneven areas found, and they look like added text or graphics$/);
+  const hint = report.notes.find((note) => /dashed outline/.test(note));
+  assert.ok(hint, 'a note explains the dashed outline');
+  assert.match(hint, /^All 4 outlined areas/);
+  assert.match(hint, /most likely/);
+  // A hint only: never a statement that text was added, and the result stays a warning to look.
+  assert.doesNotMatch(report.notes.join(' '), /(is|are) added text|proves|certainly|definitely/i);
+  assert.equal(summarizeForensicsStatus(drawn, true, true).tone, 'warning');
+});
+
+test('added text or graphics: a mixed result names how many areas and where', () => {
+  const drawn = check(withDrawnPatch(fictionalPicture((_x, _y, grain) => 1 + grain * 0.05), 14));
+  const mixed = { ...drawn, flagged: drawn.flagged.map((c, i) => ({ ...c, graphicLike: i === 0 })) };
+  const report = describeElaGrid(mixed);
+  assert.match(report.headline, /^4 uneven areas found, 1 of them looks like added text or graphics$/);
+  assert.match(report.notes.join(' '), /1 of the 4 outlined areas \([a-z ]+; dashed outline\) has hard, clean edges/);
+  const one = describeElaGrid({ ...drawn, flagged: drawn.flagged.slice(0, 1) });
+  assert.match(one.headline, /^1 uneven area found, and it looks like added text or a graphic$/);
+  assert.match(one.notes.join(' '), /The outlined area \(dashed outline\) has hard, clean edges/);
+});
+
+test('page wiring: graphic-like areas get a dashed outline and the card explains it', () => {
+  const page = readFileSync(new URL('../../../components/workspaces/ForensicsWorkspace.astro', import.meta.url), 'utf8');
+  assert.match(page, /cell\.graphicLike \? 'dashed' : 'solid'/);
+  assert.match(page, /A dashed outline means the area has hard, clean edges/);
+  assert.match(page, /the dashed outline is a guess/);
 });

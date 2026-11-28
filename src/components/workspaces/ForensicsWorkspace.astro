@@ -149,10 +149,10 @@ const faqs = getToolFaqs('image-manipulation-checker');
           <p id="ela-grid-headline" class="text-sm text-ink font-medium" role="status" aria-live="polite">Comparing the areas of the picture.</p>
           <ul id="ela-grid-notes" class="text-xs text-body leading-relaxed space-y-1.5 list-disc pl-4"></ul>
           <p class="text-xs text-muted leading-relaxed">
-            <strong class="text-ink">What this shows:</strong> the picture is cut into up to 64 areas, and each one is compared with areas that have a similar amount of detail. An area that changes far more than its detail explains is outlined on the ELA map.
+            <strong class="text-ink">What this shows:</strong> the picture is cut into up to 64 areas, and each one is compared with areas that have a similar amount of detail. An area that changes far more than its detail explains is outlined on the ELA map. A dashed outline means the area has hard, clean edges like added text, a sticker or a logo.
           </p>
           <p class="text-xs text-muted leading-relaxed">
-            <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Added text, stickers and watermarks stand out by themselves, and an edit saved together with the rest of the picture, or flattened by a messaging app, does not stand out at all.
+            <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Added text, stickers and watermarks stand out by themselves, the dashed outline is a guess from the shape of the edges (a sharp photographed sign can get one too), and an edit saved together with the rest of the picture, or flattened by a messaging app, does not stand out at all.
           </p>
         </div>
 
@@ -389,7 +389,8 @@ const faqs = getToolFaqs('image-manipulation-checker');
       for (const cell of finding.flagged) {
         const mark = document.createElement('div');
         mark.className = 'absolute rounded-sm';
-        mark.style.border = '2px solid var(--color-warning)';
+        // Dashed: the area looks like added text or a graphic (a hint from its edges, not proof).
+        mark.style.border = `2px ${cell.graphicLike ? 'dashed' : 'solid'} var(--color-warning)`;
         mark.style.left = `${(cell.col / finding.cols) * 100}%`;
         mark.style.top = `${(cell.row / finding.rows) * 100}%`;
         mark.style.width = `${100 / finding.cols}%`;

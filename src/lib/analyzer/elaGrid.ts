@@ -18,11 +18,17 @@ export interface ElaGridCell {
   error: number;
   /** Mean brightness step between neighbouring pixels of the picture (0 to 255). */
   detail: number;
+  /** Share of pixels (0 to 1) with any visible brightness step to a neighbour. */
+  edgeShare?: number;
+  /** Share of pixels (0 to 1) with a very large brightness step to a neighbour. */
+  hardEdgeShare?: number;
 }
 
 export interface ElaGridFlag extends ElaGridCell {
   /** The error the other cells predict for this amount of detail. */
   expected: number;
+  /** True when the cell's edges are mostly hard and clean, as in added text, stickers and logos. */
+  graphicLike: boolean;
 }
 
 export interface ElaGridFinding {
@@ -57,6 +63,30 @@ export const ELA_GRID = {
   maxFlaggedShare: 0.25,
 } as const;
 
+/**
+ * Drawn shapes (letters, stickers, logos, app screens) have edges that jump from one colour to
+ * another in a single pixel. Photographed things mostly have softer edges, with many gentle
+ * steps for every abrupt one. The numbers come from fictional test pictures (photos with a
+ * caption, a sticker, a badge and a watermark added); see the tests.
+ */
+export const ELA_GRAPHIC = {
+  /** A brightness step above this counts as an edge at all ... */
+  edgeStep: 20,
+  /** ... and above this as a hard edge. */
+  hardStep: 80,
+  /** A graphic-like cell has at least this share of hard-edge pixels ... */
+  minHardShare: 0.01,
+  /** ... and at least this many hard edges for every edge of any kind. */
+  minHardRatio: 0.35,
+} as const;
+
+/** True when the edges in a cell look drawn (text, sticker, logo), not photographed. A hint, not proof. */
+export function looksLikeGraphic(cell: ElaGridCell): boolean {
+  const hard = cell.hardEdgeShare ?? 0;
+  const edges = cell.edgeShare ?? 0;
+  return hard >= ELA_GRAPHIC.minHardShare && edges > 0 && hard / edges >= ELA_GRAPHIC.minHardRatio;
+}
+
 export type ElaGridRules = { readonly [K in keyof typeof ELA_GRID]: number };
 
 /** Grid size for a picture: up to 8 x 8, fewer cells when the picture is small. */
@@ -82,6 +112,8 @@ export function measureElaGrid(
   const detailSum = new Float64Array(count);
   const pixels = new Uint32Array(count);
   const detailPixels = new Uint32Array(count);
+  const edgePixels = new Uint32Array(count);
+  const hardPixels = new Uint32Array(count);
   const luma = (i: number) => 0.299 * original[i] + 0.587 * original[i + 1] + 0.114 * original[i + 2];
 
   for (let y = 0; y < height; y++) {
@@ -98,8 +130,13 @@ export function measureElaGrid(
       pixels[cell]++;
       if (x + 1 < width && y + 1 < height) {
         const here = luma(i);
-        detailSum[cell] += (Math.abs(here - luma(i + 4)) + Math.abs(here - luma(i + width * 4))) / 2;
+        const right = Math.abs(here - luma(i + 4));
+        const down = Math.abs(here - luma(i + width * 4));
+        detailSum[cell] += (right + down) / 2;
         detailPixels[cell]++;
+        const step = Math.max(right, down);
+        if (step > ELA_GRAPHIC.edgeStep) edgePixels[cell]++;
+        if (step > ELA_GRAPHIC.hardStep) hardPixels[cell]++;
       }
     }
   }
@@ -113,6 +150,8 @@ export function measureElaGrid(
         row,
         error: pixels[cell] ? errorSum[cell] / pixels[cell] : 0,
         detail: detailPixels[cell] ? detailSum[cell] / detailPixels[cell] : 0,
+        edgeShare: detailPixels[cell] ? edgePixels[cell] / detailPixels[cell] : 0,
+        hardEdgeShare: detailPixels[cell] ? hardPixels[cell] / detailPixels[cell] : 0,
       });
     }
   }
@@ -164,7 +203,7 @@ export function findUnevenElaCells(
   const spread = Math.max(0.15, 1.4826 * median(residuals.map((r) => Math.abs(r - centre))));
 
   const flagged = judged
-    .map((c) => ({ ...c, expected: expectedFor(c) }))
+    .map((c) => ({ ...c, expected: expectedFor(c), graphicLike: looksLikeGraphic(c) }))
     .filter(
       (c) =>
         c.error - c.expected > rules.deviations * spread &&
@@ -211,6 +250,20 @@ export function describeElaGrid(finding: ElaGridFinding): { headline: string; no
     notes.push(
       'That can happen when something was pasted in or redrawn after the picture was first saved. Added text, stickers, watermarks and very sharp or brightly coloured objects do the same without any trickery, so look at what sits inside the outlines.',
     );
+    const graphic = finding.flagged.filter((c) => c.graphicLike);
+    if (graphic.length > 0) {
+      const where = [...new Set(graphic.map((c) => describeCellPlace(c, finding.cols, finding.rows)))];
+      const g = graphic.length;
+      const subject =
+        g < n
+          ? `${g} of the ${n} outlined areas (${where.join(', ')}; dashed outline) ${g === 1 ? 'has' : 'have'}`
+          : n === 1
+            ? 'The outlined area (dashed outline) has'
+            : `All ${n} outlined areas (dashed outline) have`;
+      notes.push(
+        `${subject} hard, clean edges, the kind that letters, stickers, logos and app screens have. If you can see a caption, sticker, logo or watermark there, that is most likely what this check picked up. It is still something added to the picture, so read it: on a receipt or a screenshot, the added text may be the part that matters.`,
+      );
+    }
   } else {
     notes.push(
       `${finding.judgedCells} of ${total} areas were compared and none changed far more than its detail explains.`,
@@ -225,9 +278,21 @@ export function describeElaGrid(finding: ElaGridFinding): { headline: string; no
     );
   }
   return {
-    headline: finding.flagged.length > 0 ? `${finding.flagged.length} uneven ${finding.flagged.length === 1 ? 'area' : 'areas'} found` : 'No uneven areas found',
+    headline:
+      finding.flagged.length > 0
+        ? `${finding.flagged.length} uneven ${finding.flagged.length === 1 ? 'area' : 'areas'} found${describeGraphicShare(finding)}`
+        : 'No uneven areas found',
     notes,
   };
+}
+
+/** Headline ending that says how many flagged areas look like added text or graphics. */
+function describeGraphicShare(finding: ElaGridFinding): string {
+  const n = finding.flagged.length;
+  const graphic = finding.flagged.filter((c) => c.graphicLike).length;
+  if (graphic === 0) return '';
+  if (graphic === n) return n === 1 ? ', and it looks like added text or a graphic' : ', and they look like added text or graphics';
+  return `, ${graphic} of them ${graphic === 1 ? 'looks' : 'look'} like added text or graphics`;
 }
 
 export type ForensicsTone = 'warning' | 'neutral' | 'clear';
