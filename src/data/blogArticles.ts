@@ -3574,8 +3574,9 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "metaDescription": "How to tell if a photo is edited, photoshopped or AI-made: find earlier copies, read metadata and Content Credentials, look for visual clues and use ELA.",
     "category": "Forensics",
     "publishedAt": "2026-11-12",
+    "updatedAt": "2026-11-28",
     "authorName": "Virat Chauhan",
-    "readTime": "8 min read",
+    "readTime": "9 min read",
     "excerpt": "A practical order of checks for a suspicious photo: where it came from, earlier copies, Content Credentials and metadata, visual clues, and forensic tools such as Error Level Analysis, with what each one can and cannot prove.",
     "targetKeywords": [
       "how to tell if a photo is edited",
@@ -3589,7 +3590,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "title": "The source beats every detector",
       "text": "Finding an earlier, unedited copy of a photo, or the original from a trusted source, is the strongest evidence you can get. Metadata, visual clues and forensic maps are useful hints, but none of them can prove on its own that a photo is real or fake."
     },
-    "introduction": "Editing a photo has never been easier: phone apps remove people, change text and swap backgrounds in seconds, and AI tools can create a convincing picture from a sentence. That makes \"is this photo real?\" a fair question for almost anything that surprises you online. There is no single button that answers it, but a short sequence of checks will settle most cases. This guide gives that sequence, starting with the checks that prove the most.",
+    "introduction": "To tell if a photo is edited, look for an earlier copy with a reverse image search and compare the two, then read the file's Content Credentials and metadata, zoom in on shadows, edges, text and reflections, and finish with a forensic check such as Error Level Analysis. An earlier copy that differs is the only one of these that comes close to proof; the rest are clues that add up. Phone apps now remove people, change text and swap backgrounds in seconds, and AI tools can create a convincing picture from a sentence, so no single button answers the question. This guide gives the checks in order, starting with the ones that prove the most.",
     "contentSections": [
       {
         "heading": "1. Find out where the photo came from",
@@ -3617,7 +3618,8 @@ export const BLOG_ARTICLES: BlogArticle[] = [
         "heading": "3. Check Content Credentials and metadata",
         "paragraphs": [
           "Some cameras, editing apps and AI generators attach Content Credentials, a signed record based on the C2PA standard that describes how the file was made and edited. You can upload an image at <a href=\"https://contentcredentials.org/verify\">contentcredentials.org/verify</a>, and the <a href=\"/ai-image-detector/\">fake image detector</a> also looks for them. Valid credentials are strong evidence of a file's history, but most images do not carry them and social apps often remove them, so their absence proves nothing.",
-          "Ordinary metadata (EXIF) can include the camera model, the date taken, the editing software and sometimes the location. The <a href=\"/screenshot-metadata-checker/\">metadata checker</a> reads it locally. An editing program's name is a hint that the file was opened in an editor, which is normal for many genuine photos. Metadata is also easy to change or delete, so treat it as a clue, not a verdict."
+          "Ordinary metadata (EXIF) can include the camera model, the date taken, the editing software and sometimes the location. The <a href=\"/screenshot-metadata-checker/\">metadata checker</a> reads it locally. An editing program's name is a hint that the file was opened in an editor, which is normal for many genuine photos. Metadata is also easy to change or delete, so treat it as a clue, not a verdict.",
+          "On an iPhone, a photo that was edited in the Photos app on that phone keeps its original: Apple's guide says you can open the edited photo and choose <a href=\"https://support.apple.com/guide/iphone/undo-and-revert-photo-edits-iph2413db0ab/ios\">Revert to Original</a>. That helps with pictures in your own library. A photo someone sent you arrives as a finished file, so for those, use the other steps in this guide."
         ]
       },
       {
@@ -3638,8 +3640,15 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       {
         "heading": "5. Use forensic tools, and know their limits",
         "paragraphs": [
-          "Error Level Analysis (ELA) re-saves a JPEG and shows how much each area changes. A pasted object or retouched region can respond differently from the rest of the photo and stand out. The <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> runs ELA in your browser; its guide explains how to read the map.",
-          "ELA works best on JPEG photos saved only a few times. Text and sharp edges always look bright, and an image resized or re-sent through a chat app loses most of the differences. A clean ELA map does not mean a photo is genuine, and a bright patch does not mean it is fake."
+          "Error Level Analysis (ELA) re-saves a JPEG and shows how much each area changes. A pasted object or retouched region can respond differently from the rest of the photo and stand out. The <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> runs ELA in your browser; and the guide on <a href=\"/blog/how-to-read-error-level-analysis/\">how to read error level analysis</a> explains the map with examples of false alarms.",
+          "ELA works best on JPEG photos saved only a few times. Text and sharp edges always look bright, and an image resized or re-sent through a chat app loses most of the differences. A clean ELA map does not mean a photo is genuine, and a bright patch does not mean it is fake.",
+          "The checker adds three readings that make the map easier to judge. Use them in this order:"
+        ],
+        "checklist": [
+          "JPEG save quality: the checker reads the file's own tables and tells you the quality of the last save. A low figure means the picture has been compressed hard, so ELA has little left to show. It tells you about the last save only, not how many saves came before. More in <a href=\"/blog/how-to-check-jpeg-quality/\">how to check JPEG quality</a>.",
+          "Area by area check: the picture is split into areas and each one is compared with areas that have similar detail. Areas that respond differently are outlined on the map. It cannot judge flat areas such as clear sky or a plain wall, and it says so when most of the picture is flat.",
+          "Added text or graphics hint: an outlined area with hard, clean edges gets a dashed outline and a note that it looks like added text or a sticker. A logo or caption that was always part of the picture looks the same, so treat it as a place to look, not a finding.",
+          "ELA controls: change the re-save quality and the brightness of the map, and fade the original over it, to see whether a bright patch follows an object's outline or only its texture."
         ],
         "callout": {
           "type": "warning",
@@ -3668,7 +3677,11 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "question": "Is there a free fake photo detector?",
-        "answer": "Yes. ScreenshotChecker's fake image detector and photo manipulation checker are free and run in your browser. They list clues such as Content Credentials, metadata, texture statistics and ELA, but no detector can give a guaranteed verdict."
+        "answer": "Yes. ScreenshotChecker's fake image detector and photo manipulation checker are free and run in your browser. They list clues such as Content Credentials, metadata, texture statistics, JPEG save quality and an area by area ELA check, but no detector can give a guaranteed verdict."
+      },
+      {
+        "question": "How do I tell if a photo is edited on an iPhone?",
+        "answer": "For a photo in your own library that was edited in the Photos app, open it for editing and look for Revert to Original, which Apple's guide says brings back the unedited picture. A photo someone sent you arrives as a finished file, so search for earlier copies, read the metadata and run it through an in-browser checker."
       },
       {
         "question": "Can metadata prove a photo is real?",
@@ -3692,7 +3705,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
     "cta": {
       "label": "Check a photo for edits",
       "url": "/image-manipulation-checker/",
-      "description": "Run Error Level Analysis and clone checks on a photo in your browser, then weigh the results with the other clues."
+      "description": "Run Error Level Analysis, the JPEG save quality reading and the area by area check on a photo in your browser, then weigh the results with the other clues."
     }
   },
   {
