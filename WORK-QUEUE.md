@@ -22,11 +22,13 @@ TOOL items (ForensicsWorkspace, `/image-manipulation-checker/`):
 - [ ] T7 Luminance gradient view and T8 level sweep (two small views; do one per run).
 - [ ] T9 One combined "edit report": every view on one page with a plain summary, downloadable as a branded image/PDF (people share results; FotoForensics grows through shared result links, mostly on Reddit).
 - [ ] T10 Three fictional sample images (untouched photo, spliced photo, re-saved screenshot) so a first-time visitor sees a result in one tap.
+- [ ] T11 Clone (copy-move) detection: block matching on a downscaled image, matched regions outlined and joined; Forensically has it, we do not. Explain that repeated patterns (tiles, sky, text) match by themselves.
 
 CONTENT items:
-- [ ] C1 Retitle `/image-manipulation-checker/` for the real searches ("Is This Photo Edited? Free Photoshop and Edit Detector"); keep ELA in the description; log the old title and date for a 28-day comparison.
+- [x] C1 (28 Nov) Retitled `/image-manipulation-checker/`: old "Photo Manipulation Detector: Is This Image Edited?" -> new "Is This Photo Edited? Free Edit & Photoshop Detector". Baseline 28 days to 27 Nov: 17 clicks, 441 impressions, position 38.5. Compare around 26 Dec. The description no longer claims clone detection (the tool has none yet).
 - [ ] C2 Tutorial guides, one per run, each linking to the matching view: how to read an ELA result (with fictional examples of false alarms), clone detection, noise analysis, JPEG quality and re-saves, thumbnail mismatch. These are what Wikipedia, courses and OSINT lists link to on FotoForensics.
-- [ ] C3 "FotoForensics alternative" and "Forensically alternative" pages: honest comparison table (what each does, privacy, phone support), no knocking copy; say plainly where they are stronger.
+- [x] C3a (28 Nov) `/blog/fotoforensics-alternative/` published (FotoForensics, Forensically, Image Edited? compared; facts from their own FAQ and tutorial pages).
+- [ ] C3b "Forensically alternative / Forensically vs FotoForensics" page: same honest pattern; only after T2-T4 ship, so our tool has more to show. Also consider "is fotoforensics safe" as its own short guide if the alternatives page gets impressions for it.
 - [ ] C4 Refresh `/blog/how-to-tell-if-a-photo-is-edited/` (position 20, 628 impressions): answer first, add the new views as steps.
 - [ ] C5 Outreach DRAFTS only (owner sends): OSINT lists that carry FotoForensics (osintframework.com, start.me pages, awesome-osint), journalism tool lists, and a Wikipedia "Error level analysis" external-link suggestion for the talk page.
 
