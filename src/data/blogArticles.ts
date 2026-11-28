@@ -3684,7 +3684,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
+    "relatedSlugs": ["fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "reverse-image-search-screenshot",
       "exif-metadata"
@@ -6795,7 +6795,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["fotoforensics-alternative", 
       "ai-image-detector-online",
       "ai-generated-screenshot",
       "how-to-tell-if-a-photo-is-edited"
@@ -7347,6 +7347,128 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check a suspicious message",
       "url": "/screenshot-scam-checker/",
       "description": "Paste or upload a message that claims to be about your complaint or refund and see the scam warning signs, in your browser."
+    }
+  },
+  {
+    "slug": "fotoforensics-alternative",
+    "title": "FotoForensics Alternatives: Private Photo Forensics Tools, and When FotoForensics Is Still the Better Choice",
+    "seoTitle": "FotoForensics Alternative: Private In-Browser Options",
+    "metaDescription": "FotoForensics is a public site: uploads are not private. Compare it with in-browser alternatives (ScreenshotChecker, Forensically) and pick the right one.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-28",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "An honest comparison of FotoForensics with three alternatives: what each one checks, where your image goes, how it works on a phone, and which to pick for a private photo, a payment screenshot or a news image.",
+    "targetKeywords": [
+      "fotoforensics alternative",
+      "fotoforensics com alternative",
+      "websites like fotoforensics",
+      "is fotoforensics safe",
+      "how does fotoforensics work",
+      "fotoforensics vs forensically"
+    ],
+    "keyTakeaway": {
+      "title": "Same technique, different privacy",
+      "text": "FotoForensics, Forensically and ScreenshotChecker all offer error level analysis. The big difference is where the picture goes: FotoForensics stores uploads on a public research site, while Forensically and ScreenshotChecker analyse the image inside your browser. Use FotoForensics for public images and its deeper file views; use an in-browser tool for anything private."
+    },
+    "introduction": "The closest alternatives to FotoForensics are tools that run the same checks inside your browser, so the picture is not uploaded to a public site: <a href=\"/image-manipulation-checker/\">ScreenshotChecker's photo manipulation checker</a> (error level analysis and a noise map, with a short reading of the result) and <a href=\"https://29a.ch/photo-forensics/\">Forensically</a> (a larger set of expert views). FotoForensics is still the better choice for a public image you want to examine in depth, because it has more file-level views and the best tutorials. Below is what each tool does, where your image goes, and which one fits which job. We make ScreenshotChecker, so we have tried to say plainly where the others are stronger.",
+    "contentSections": [
+      {
+        "heading": "What FotoForensics does well",
+        "paragraphs": [
+          "FotoForensics is run by Hacker Factor, the company of Dr. Neal Krawetz, who presented error level analysis (ELA) at the Black Hat security conference in 2007. According to its <a href=\"https://fotoforensics.com/faq.php\">FAQ</a>, the site opened in 2012 as a replacement for an earlier free ELA service, and its home page now counts more than nine million unique images analysed.",
+          "You upload a file or paste an image URL, and the site shows several views of the same picture. Its <a href=\"https://fotoforensics.com/tutorial.php\">tutorials</a> list them: error level analysis, metadata, an estimate of the last JPEG quality, hidden pixels, colour profile rendering, raw text strings, a file digest and more. It accepts JPEG, PNG, WebP, HEIC and AVIF files. The tutorials are the clearest free explanation of how to read these views and of the mistakes beginners make."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/fotoforensics-alternative/fictional-example.png",
+          "alt": "A fictional comparison card: FotoForensics for public images and deep file views, Forensically for expert views in the browser, ScreenshotChecker for private photos and screenshots, and reverse image search for finding the original.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. Which tool fits which job. A fictional summary card, not a test result."
+        }
+      },
+      {
+        "heading": "Is FotoForensics safe and private?",
+        "paragraphs": [
+          "It is safe to use, but it is not private, and the site says so itself. Its FAQ describes it as a public research site and states that \"there is no privacy\": submitted pictures are stored, may be viewed by the operators and research partners, and are used for research. The free service is meant for personal use; commercial, legal and bulk users are pointed to a separate private service, FotoForensics Lab.",
+          "That is fine for a viral photo or a news image that is already public. It is the wrong place for an ID card, a bank statement, a payment screenshot with account details, a private chat, or a photo of someone who has not agreed to it. For those, use a tool that does not upload the image."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "Before you upload any picture to any online checker, ask where it goes. If it shows a name, number, address, face or account detail that is not already public, pick an in-browser tool or hide those parts first."
+        }
+      },
+      {
+        "heading": "The alternatives, and what each is best at",
+        "paragraphs": [
+          "All of these are free. None of them can prove a picture is genuine; they show evidence that you still have to interpret."
+        ],
+        "checklist": [
+          "<strong>ScreenshotChecker photo manipulation checker:</strong> error level analysis with adjustable settings and a noise variance map that run in your browser, with a short reading of the result and a note on what each view can and cannot prove. It works in a phone browser. Best for private photos, screenshots and payment proofs. It has fewer expert views than the other two, and no clone detection yet. <a href=\"/image-manipulation-checker/\">Open the checker</a>.",
+          "<strong>Forensically:</strong> a free in-browser toolkit by Jonas Wagner with a magnifier, clone detection, error level analysis, noise analysis, level sweep, luminance gradient, principal component analysis, metadata, thumbnail analysis, JPEG analysis and string extraction. It also works offline once loaded. Best for people who already know what these views mean; it shows the images and leaves the reading to you. <a href=\"https://29a.ch/photo-forensics/\">Forensically</a>.",
+          "<strong>FotoForensics:</strong> the deepest file-level views and the best tutorials, plus analysis by image URL. Uploads go to a public research site, so use it only for images that are already public.",
+          "<strong>Image Edited?:</strong> a simple yes-or-no answer based mainly on the file's metadata. Quick, but metadata is missing from most screenshots and from pictures sent through chat apps. The image is uploaded, and its <a href=\"https://imageedited.com/faq.html\">FAQ</a> says staff may view images during quality checks.",
+          "<strong>Reverse image search:</strong> not forensics, but often the fastest proof. An older, different copy of the same picture shows it was edited. <a href=\"/reverse-image-search/\">Search with Google Lens, TinEye, Bing or Yandex</a>."
+        ]
+      },
+      {
+        "heading": "Which one should you use?",
+        "paragraphs": [
+          "Pick by what the picture is, not by which tool is most famous:"
+        ],
+        "checklist": [
+          "<strong>A payment screenshot, receipt or chat someone sent you:</strong> keep it in the browser. Use the <a href=\"/payment-screenshot-checker/\">payment screenshot checker</a> or the <a href=\"/image-manipulation-checker/\">photo manipulation checker</a>, then confirm the payment in your own bank or UPI app.",
+          "<strong>A personal photo, ID or document:</strong> an in-browser tool only (ScreenshotChecker or Forensically).",
+          "<strong>A viral or news photo that is already public:</strong> start with reverse image search, then FotoForensics or Forensically for a closer look.",
+          "<strong>You want to learn photo forensics:</strong> read the FotoForensics tutorials, then practise in Forensically.",
+          "<strong>You suspect the picture is AI-made:</strong> error level analysis is the wrong tool. Check the source, Content Credentials and watermarks first, as in our guide on <a href=\"/blog/how-to-tell-if-an-image-is-ai-generated/\">how to tell if an image is AI-generated</a>, or use the <a href=\"/ai-image-detector/\">AI image detector</a>."
+        ]
+      },
+      {
+        "heading": "How error level analysis works, on any of these tools",
+        "paragraphs": [
+          "ELA saves the picture again as a JPEG at a known quality and shows how much each area changed. Parts of a photo that were saved the same number of times should change by a similar amount. An area that was pasted in or redrawn later can stand out as brighter or darker than its surroundings.",
+          "The catch is false alarms. Sharp edges, text, bright colours and high-contrast patterns are naturally bright in ELA, and a picture that has been through WhatsApp, Instagram or a screenshot has been recompressed so heavily that an edit may leave no trace. Treat a bright patch as a place to look closer, and treat a clean result as no proof of anything. Our guide on <a href=\"/blog/how-to-tell-if-a-photo-is-edited/\">how to tell if a photo is edited</a> walks through the other checks to run alongside it."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "What is the best alternative to FotoForensics?",
+        "answer": "For private images, an in-browser tool: ScreenshotChecker's photo manipulation checker for a quick check with a short reading of the result, or Forensically for more expert views. Both analyse the image in your browser instead of uploading it to a public site."
+      },
+      {
+        "question": "Is FotoForensics safe to use?",
+        "answer": "Yes, but it is not private. Its own FAQ says it is a public research site with no privacy, and that uploaded pictures are stored and used for research. Do not upload IDs, bank details, private chats or other people's personal photos."
+      },
+      {
+        "question": "How does FotoForensics work?",
+        "answer": "You upload a picture or paste its URL, and the site shows error level analysis, metadata and several other file views. It does not give a verdict; you read the views yourself, using its tutorials."
+      },
+      {
+        "question": "Is FotoForensics free?",
+        "answer": "The public site is free for personal use. Its FAQ directs commercial, legal and bulk users to a separate private service called FotoForensics Lab."
+      },
+      {
+        "question": "Can FotoForensics or ELA detect AI-generated images?",
+        "answer": "Error level analysis shows compression differences inside a picture. It was designed to find edits, not to identify AI-generated images, so use source checks, Content Credentials and watermark checks for that."
+      },
+      {
+        "question": "Is there a FotoForensics app for phones?",
+        "answer": "FotoForensics is a website, and its FAQ says Mobile Safari is only partially supported. ScreenshotChecker's checker works in a phone browser, with no app to install."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "how-to-tell-if-a-photo-is-edited",
+      "how-to-tell-if-an-image-is-ai-generated",
+      "reverse-image-search-screenshot"
+    ],
+    "cta": {
+      "label": "Check a photo privately",
+      "url": "/image-manipulation-checker/",
+      "description": "Run error level analysis and a noise map on a photo or screenshot in your browser, with a note on what each view can and cannot prove."
     }
   },
 ];
