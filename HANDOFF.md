@@ -1,6 +1,6 @@
 # ScreenshotChecker handoff (read this first)
 
-Last updated: 28 November 2026. Written so an assistant on a new computer can pick up the work without the old
+Last updated: 29 November 2026. Written so an assistant on a new computer can pick up the work without the old
 conversation. Keep it current: update "Where things stand" and "Next steps" at the end of every session.
 
 ## What this is
@@ -100,7 +100,7 @@ source alongside GA4 and Clarity.
 
 ## Where things stand (28 Nov 2026)
 
-- 88 built pages; 53 guides in `blogArticles.ts` (13 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
+- 89 built pages; 54 guides in `blogArticles.ts` (13 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
   internal links.
 - 12 Nov: snippet rewrites on 8 low-CTR pages (baseline numbers in GROWTH_LOG, 12 Nov entry) and 2 guides.
 - 12-13 Nov: 14 new guides, topic-grouped blog index, Resources cards linked to real guides, hreflang pairs,
@@ -122,6 +122,7 @@ source alongside GA4 and Clarity.
   Hindi job offer and Amazon/Flipkart refund guides, share cards for 25 pages, max-image-preview:large, and a fix for raw HTML in guide intros and
   checklists. GROWTH_LOG has details.
 - 22 Nov: UTR topic group (what-is-utr-number, how-to-find-utr-number, Hindi utr-number-kya-hota-hai), indexing requested. Rough market sizing in GROWTH_LOG (22 Nov): 20-45k visits a month realistic in 12-24 months; 100k needs a top-3 win on AI image detector or screenshot reverse search.
+- 29 Nov (hourly CONTENT run, 00:00 IST): new guide `how-to-tell-if-a-photo-is-edited-with-ai` (work queue C7; where Google Photos, the Gemini app, Samsung, Apple, Adobe and ChatGPT mark AI edits, each from its own help page, and why a missing mark proves nothing). Deployed 31b96588, IndexNow pinged, Google indexing requested. 89 pages, 54 guides. Content items C8 to C11 were added from autocomplete. Next run should be TOOL (T3 noise view, then T2g, T4, T2b). Still to do on 29 Nov: the planning run (first run after 09:00) and the recrawl request for `/image-manipulation-checker/`. Search Console tip: click the Inspect box for real before typing; focusing it from page JavaScript did not take the URL.
 - 28 Nov (hourly TOOL run, 23:00): `/image-manipulation-checker/` now says when text or graphics cover several areas without standing out (T2f; `findGraphicAreas` in `src/lib/analyzer/elaGrid.ts`): a note from 3 areas, a neutral pill from a quarter of the compared areas, "mostly text or drawn graphics" from half (screenshots, posters, memes). Deployed 4a52adf6, IndexNow pinged. Next run should be CONTENT (add items from autocomplete first); next tool items: T3 noise view, T2g (coloured title bar outlined on an untouched screenshot), T4, T2b. The 29 Nov recrawl request for `/image-manipulation-checker/` is still to do.
 - 28 Nov (hourly CONTENT run, late night): refreshed `/blog/how-to-tell-if-a-photo-is-edited/` (work queue C4): answer in the first sentence, the checker's JPEG save quality, area check, text hint and ELA controls as steps, an iPhone "Revert to Original" paragraph and FAQ (Apple iPhone User Guide as source), `updatedAt` 28 Nov. Deployed f4938542, IndexNow pinged, Google recrawl requested. Content items left are blocked on tools (C2 after T3/T4/T11, C3b after T2-T4) or drafts (C5, planning runs), so the next CONTENT run should add items from autocomplete. Next run should be TOOL (T2f, then T3, T4).
 - 28 Nov (hourly TOOL run, late night): `/image-manipulation-checker/` area check now says when an outlined area looks like added text or graphics (dashed outline, plain hint; `looksLikeGraphic` in `src/lib/analyzer/elaGrid.ts`, T2e). Tested on fictional pictures: stickers and badges are flagged often, big captions, watermarks and small text almost never. Deployed 6ca839cb, IndexNow pinged. Next run should be CONTENT (C4 refresh of the photo-edited guide); next tool items: T3 noise view, T2f (captions that are not flagged), T2b.
