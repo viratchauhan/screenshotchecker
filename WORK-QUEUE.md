@@ -1,5 +1,35 @@
 # ScreenshotChecker bounded work queue
 
+## OPEN QUEUE (hourly runs take the top unticked item; tick it and add the date when done)
+
+### Photo forensics push (added 28 Nov 2026, from competitor research)
+
+Why: FotoForensics (about 77-107k visits a month, falling; 54% direct, brand searches), Forensically (12 in-browser tools) and
+ImageEdited (about 5k visits a month, 3 pages) own "is this photo edited / photoshop detector / error level analysis" searches.
+Our `/image-manipulation-checker/` has ELA and clone detection only and sits around position 38 (441 impressions, 17 clicks in
+28 days); "check if photo is edited" is position 85, "detect edited image" 66. Our edge: private in-browser analysis (FotoForensics
+stores uploads publicly and says "there is no privacy"; ImageEdited staff may view uploads), plain-language verdicts, phone layout, Hindi.
+Rules: logic in `src/lib/analyzer/` with unit tests; every view gets a one-line "what this shows" and "what it cannot prove"; no certainty claims.
+
+TOOL items (ForensicsWorkspace, `/image-manipulation-checker/`):
+- [ ] T1 ELA controls: JPEG quality slider, error scale slider, overlay opacity over the original (Forensically and FotoForensics both have these).
+- [ ] T2 JPEG quality estimate: read the quantization tables, show "last saved at about N% quality", list the tables, and flag signs of a re-save.
+- [ ] T3 Noise analysis view (median-filter residual) with amplitude control; explain airbrushing and pasted areas.
+- [ ] T4 Embedded thumbnail check: extract the EXIF thumbnail and show it beside the image; a thumbnail that differs from the picture is strong edit evidence.
+- [ ] T5 Magnifier with contrast enhancement (histogram equalisation, auto contrast) that works on touch.
+- [ ] T6 Software traces: scan the file's text strings and metadata for editor names (Photoshop, Lightroom, GIMP, Canva, Snapseed, PicsArt, AI tools) and show them as evidence, with the caveat that messaging apps strip them.
+- [ ] T7 Luminance gradient view and T8 level sweep (two small views; do one per run).
+- [ ] T9 One combined "edit report": every view on one page with a plain summary, downloadable as a branded image/PDF (people share results; FotoForensics grows through shared result links, mostly on Reddit).
+- [ ] T10 Three fictional sample images (untouched photo, spliced photo, re-saved screenshot) so a first-time visitor sees a result in one tap.
+
+CONTENT items:
+- [ ] C1 Retitle `/image-manipulation-checker/` for the real searches ("Is This Photo Edited? Free Photoshop and Edit Detector"); keep ELA in the description; log the old title and date for a 28-day comparison.
+- [ ] C2 Tutorial guides, one per run, each linking to the matching view: how to read an ELA result (with fictional examples of false alarms), clone detection, noise analysis, JPEG quality and re-saves, thumbnail mismatch. These are what Wikipedia, courses and OSINT lists link to on FotoForensics.
+- [ ] C3 "FotoForensics alternative" and "Forensically alternative" pages: honest comparison table (what each does, privacy, phone support), no knocking copy; say plainly where they are stronger.
+- [ ] C4 Refresh `/blog/how-to-tell-if-a-photo-is-edited/` (position 20, 628 impressions): answer first, add the new views as steps.
+- [ ] C5 Outreach DRAFTS only (owner sends): OSINT lists that carry FotoForensics (osintframework.com, start.me pages, awesome-osint), journalism tool lists, and a Wikipedia "Error level analysis" external-link suggestion for the talk page.
+
+
 **Latest 30 October 2026 SEO audit release:** Owner-requested claude-seo audit fixes released on 29 October (`5a45030`, rollback version `466ded5b`): security headers, 301 slash redirects, sitemap lastmod, tool-page guides, internal links, example figures, schema fixes. 30 October: Virat Chauhan author page and bylines, Hindi payment checker page, strict hashed CSP. 40/40 entrypoints, 47-page build and both SEO checks pass. See GROWTH_LOG.md. Owner explicitly overrode the one-task rule for this batch.
 
 **6 October 2026 additional owner-authorized outreach batch:** Completed five new tailored submissions: OSINT4ALL, The Tool Directory, public.tools, OSINT R. and Nexo Hub. All five displayed successful receipt messages; all remain pending editorial review, with no live backlink claim. Owner says OSINT Radar was already done; its prepared form was not submitted. Writing preference saved in AGENTS.md. See `audit/OUTREACH-2026-10-06.md` and local-only ledger/receipt images. No push, deploy, spending or automatic follow-up.
