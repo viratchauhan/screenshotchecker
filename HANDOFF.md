@@ -100,7 +100,7 @@ source alongside GA4 and Clarity.
 
 ## Where things stand (28 Nov 2026)
 
-- 84 built pages; 52 guides in `blogArticles.ts` (13 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
+- 88 built pages; 53 guides in `blogArticles.ts` (13 Hindi; the statistics page is one of them), 14+ tools (UTR number checker and fake receipt checker added 18 Nov). All tests pass; sitemap 64 URLs; no broken
   internal links.
 - 12 Nov: snippet rewrites on 8 low-CTR pages (baseline numbers in GROWTH_LOG, 12 Nov entry) and 2 guides.
 - 12-13 Nov: 14 new guides, topic-grouped blog index, Resources cards linked to real guides, hreflang pairs,
@@ -122,6 +122,7 @@ source alongside GA4 and Clarity.
   Hindi job offer and Amazon/Flipkart refund guides, share cards for 25 pages, max-image-preview:large, and a fix for raw HTML in guide intros and
   checklists. GROWTH_LOG has details.
 - 22 Nov: UTR topic group (what-is-utr-number, how-to-find-utr-number, Hindi utr-number-kya-hota-hai), indexing requested. Rough market sizing in GROWTH_LOG (22 Nov): 20-45k visits a month realistic in 12-24 months; 100k needs a top-3 win on AI image detector or screenshot reverse search.
+- 28 Nov (hourly CONTENT run, night): new guide `free-tools-to-check-if-a-photo-is-edited` (work queue C6; FotoForensics, Forensically, Image Edited?, TinEye and our checker compared by job, facts from their own FAQ and help pages). Deployed 3eacff95, IndexNow pinged, Google indexing requested. 88 pages, 53 guides. Next run should be TOOL (T2e, then T3, T2b).
 - 28 Nov (hourly TOOL run, night): `/image-manipulation-checker/` result wording made honest (T2d): "No Uneven Areas Found" instead of "Consistent Compression", green only when most areas could be compared, neutral when half or more are flat, "Not Enough Detail" when nothing can be compared (`summarizeForensicsStatus` in `src/lib/analyzer/elaGrid.ts`). Deployed 913beaf4, IndexNow pinged. Next run should be CONTENT (C6 free tools guide); next tool items: T2e, T3, T2b.
 - 28 Nov (hourly TOOL run): `/image-manipulation-checker/` gained adjustable ELA controls (JPEG quality, error scale, original overlay, reset; `src/lib/analyzer/elaView.ts`, work queue T1). Deployed 8618f409, IndexNow pinged. Next tool item: T2 JPEG quality estimate; next run should be CONTENT/SEO. preview_start was declined in the unattended run, so testing used headless Chrome on the built files (see GROWTH_LOG).
 - 28 Nov (hourly TOOL run, later): `/image-manipulation-checker/` gained the JPEG save quality card (reads the file's quantization tables, "Last saved at N% JPEG quality", tables on request, button to use the estimate in the ELA view; `src/lib/analyzer/jpegQuality.ts`, T2) and the verdict analysis keeps the shape of large pictures (T1b). Deployed f1ab44dd, IndexNow pinged. Next tool item: T2c (finer verdict grid) or T3 noise view; next run should be CONTENT. Headless-Chrome testing recipe: Playwright with request interception on dist, poll with page.evaluate (wait_for_function is blocked by the CSP).
