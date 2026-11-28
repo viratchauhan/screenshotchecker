@@ -3684,7 +3684,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
+    "relatedSlugs": ["how-to-check-jpeg-quality", "how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "reverse-image-search-screenshot",
       "exif-metadata"
@@ -7460,7 +7460,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-read-error-level-analysis", 
+    "relatedSlugs": ["how-to-check-jpeg-quality", "how-to-read-error-level-analysis", 
       "how-to-tell-if-a-photo-is-edited",
       "how-to-tell-if-an-image-is-ai-generated",
       "reverse-image-search-screenshot"
@@ -7597,7 +7597,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["how-to-check-jpeg-quality", 
       "how-to-tell-if-a-photo-is-edited",
       "fotoforensics-alternative",
       "how-to-tell-if-an-image-is-ai-generated"
@@ -7606,6 +7606,138 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Try ELA on your own picture",
       "url": "/image-manipulation-checker/",
       "description": "Run error level analysis in your browser with adjustable quality and error scale, and a note on what the view can and cannot prove."
+    }
+  },
+  {
+    "slug": "how-to-check-jpeg-quality",
+    "title": "How to Check the JPEG Quality of a Photo, and What the Number Tells You About Re-saves",
+    "seoTitle": "How to Check JPEG Quality and Compression Level of a Photo",
+    "metaDescription": "Check the JPEG quality a photo was last saved at by reading the tables stored in the file. What the percentage means, why apps disagree, and its limits.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-28",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "A plain guide to the JPEG quality number: where it is stored in the file, how a checker reads it, why Photoshop and cameras do not agree with it, and what it can and cannot tell you about re-saves and edits.",
+    "targetKeywords": [
+      "jpeg quality checker",
+      "how to check jpeg quality",
+      "check jpeg compression level",
+      "jpeg quality estimator",
+      "what is jpeg quality",
+      "jpeg quantization table quality factor"
+    ],
+    "keyTakeaway": {
+      "title": "The number describes the last save only",
+      "text": "A JPEG file stores the tables it was compressed with, and a checker turns those tables into a quality percentage. That percentage tells you how hard the picture was compressed the last time it was saved. It does not tell you how many times it was saved before, who saved it or whether anything in it was changed. A low number is still useful: it warns you that other forensic views, such as error level analysis, will have little left to show."
+    },
+    "introduction": "To check the JPEG quality of a photo, open it in a tool that reads the quantization tables stored inside the file and matches them to the standard JPEG scale. Our <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> does this in your browser, without uploading the picture, and shows a line such as \"Last saved at 85% JPEG quality\". The number describes the last save only. It cannot show how many earlier saves there were, and it is not proof of editing. This guide explains what the percentage means, why different apps give different numbers for the same file, and how to use the result when you are judging whether a picture has been re-saved or changed.",
+    "contentSections": [
+      {
+        "heading": "What JPEG quality means",
+        "paragraphs": [
+          "JPEG is a lossy format. When a picture is saved, fine detail is rounded off, and the quality setting decides how coarse the rounding is. A high setting keeps more detail and makes a larger file. A low setting throws more away and makes a smaller file with visible blocks and smeared edges.",
+          "The quality is usually written as a percentage, but it is not a percentage of anything you can measure. The <a href=\"https://fotoforensics.com/tutorial-estq.php\">FotoForensics tutorial on JPEG quality</a> says so plainly: the percent sign is just the way the setting is named. So 90% does not mean that 90% of the picture survived. It is a position on a scale, nothing more."
+        ]
+      },
+      {
+        "heading": "Where the number comes from: the tables inside the file",
+        "paragraphs": [
+          "The rounding rules of a JPEG are written into the file as small grids of numbers called quantization tables. A viewer needs them to open the picture, so they travel with every copy. Larger numbers in the tables mean coarser rounding and lower quality.",
+          "A quality checker reads those tables. If they are the standard JPEG tables scaled up or down, the scaling gives an exact quality level. If they are not, the checker reports the level on the standard scale that would give about the same result. That is the method the FotoForensics tutorial describes, and it is the one our checker uses: it says \"Last saved at N% JPEG quality\" for standard tables and \"about N%, nearest match\" for custom ones. You can open the tables themselves if you want to see the numbers.",
+          "Because the answer is read from the file and not guessed from how the picture looks, it works on a tiny thumbnail as well as on a large photo. It also means the checker needs the real file. A screenshot of a photo, or a copy your phone converted to another format, carries its own save and not the original one."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/how-to-check-jpeg-quality/fictional-example.png",
+          "alt": "A fictional reading card for a JPEG quality result: last saved at 70 percent, what that tells you about the last save, and what it cannot tell you about earlier saves, the app used or edits.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. How to read a JPEG quality result, on a fictional example. A summary card, not a test result."
+        }
+      },
+      {
+        "heading": "How to check the JPEG quality of your photo",
+        "paragraphs": [
+          "It takes a few seconds, and the picture stays on your device."
+        ],
+        "checklist": [
+          "<strong>Get the file itself.</strong> Use the downloaded or forwarded file, sent as a document if possible. Do not take a screenshot of it.",
+          "<strong>Open the <a href=\"/image-manipulation-checker/\">photo manipulation checker</a></strong> and choose the picture. Nothing is uploaded; the reading happens in your browser.",
+          "<strong>Find the JPEG save quality card</strong> under the result. It gives the percentage and says whether the tables are standard or a nearest match.",
+          "<strong>Read the note for other formats.</strong> PNG, WebP and GIF files have no JPEG quality. The card tells you so in one sentence instead of showing a number.",
+          "<strong>Use the estimate in the ELA view.</strong> One button sets the test re-save of the error level analysis to the quality you just read, which is a sensible starting point for that view."
+        ]
+      },
+      {
+        "heading": "Why Photoshop, cameras and checkers give different numbers",
+        "paragraphs": [
+          "There is no single quality scale. The FotoForensics tutorial explains that Adobe products use their own tables, with Save As levels and a Save for Web scale from 0 to 100, and that Adobe's 75 is not the same as 75% on the JPEG standard scale. Cameras use tables fixed by the maker, and a setting with the same name, such as High, differs from one make to another.",
+          "So if you saved a picture at 80 in an editor and a checker reports 88% or 72%, neither is wrong. The checker is translating the editor's tables onto the standard scale. Treat the number as a measure for comparing files with each other, not as the setting someone typed.",
+          "The kind of table is a clue in itself. <a href=\"https://29a.ch/photo-forensics/\">Forensically</a>, another in-browser tool, sorts tables into standard JPEG, Adobe and non-standard, and notes that a table type that does not fit the camera the picture is said to come from can point to an edit or a re-save. A re-save is not an edit, though. Every app that forwards, resizes or uploads a JPEG writes new tables."
+        ]
+      },
+      {
+        "heading": "What the number says about re-saves, and what it cannot",
+        "paragraphs": [
+          "The tables in the file belong to the last save. Earlier saves are overwritten. The FotoForensics tutorial gives an example: a picture saved at 90% and then at 75% is reported as 75%, not as some mix of the two. No tool can read the number of earlier saves from the tables.",
+          "Repeated saving does cost quality. The <a href=\"https://en.wikipedia.org/wiki/Generation_loss\">Wikipedia article on generation loss</a> describes how opening a picture in an editor and saving it again makes a new, re-encoded version, and how repeated re-encoding can degrade it noticeably. Changing the quality between saves adds loss because different rounding is used, and cropping away from the 8 by 8 block grid shifts the blocks and degrades the picture more. A plain file copy loses nothing.",
+          "This gives you a few honest readings of the number."
+        ],
+        "checklist": [
+          "<strong>A high number on a rough-looking picture.</strong> If the file says 95% but you can see blocks and smeared edges, it was probably saved at a lower quality before and saved again at a high one. The number cannot prove it, but the mismatch is worth noting.",
+          "<strong>A low number.</strong> The picture was compressed hard in its last save, as happens when it passes through social networks and chat apps. It is a normal result for a forwarded picture.",
+          "<strong>A custom table.</strong> The file was last written by a camera or by software with its own tables. That narrows down what touched it last, nothing more.",
+          "<strong>A claim that does not fit.</strong> A file presented as straight from a camera should carry tables that camera writes. Standard tables at a middling quality suggest it went through another program on the way. That may be a messaging app and not an editor."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "A JPEG quality number is never proof that a photo was edited or untouched. Every re-save, innocent or not, replaces the tables. Use the number to decide how much the other checks can tell you, and confirm any suspicion with the original picture or an independent source."
+        }
+      },
+      {
+        "heading": "Why a low quality number matters for other checks",
+        "paragraphs": [
+          "The most practical use of the number is to judge your other evidence. The FotoForensics tutorial warns that low quality reduces what error level analysis and noise analysis can detect, and that after a re-save at about 75% or lower, as large social networks do, ELA is unlikely to show changes.",
+          "So read the quality first. If it is high, an ELA view is worth studying, and our guide on <a href=\"/blog/how-to-read-error-level-analysis/\">how to read error level analysis</a> shows how. If it is low, a clean ELA result means very little, and your time is better spent finding a larger or earlier copy with a <a href=\"/reverse-image-search/\">reverse image search</a> and following the other steps in <a href=\"/blog/how-to-tell-if-a-photo-is-edited/\">how to tell if a photo is edited</a>."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How do I check the JPEG quality of an image?",
+        "answer": "Open the file in a tool that reads its quantization tables. ScreenshotChecker's photo manipulation checker shows the quality the JPEG was last saved at, in your browser and without uploading the picture."
+      },
+      {
+        "question": "What is JPEG quality?",
+        "answer": "It is the setting that decides how much fine detail is rounded away when a JPEG is saved. Higher values keep more detail and make larger files. It is written as a percentage but is only a position on a scale, not a share of the picture that was kept."
+      },
+      {
+        "question": "Why does the checker show a different number from the one I saved with?",
+        "answer": "Programs use different scales. Adobe products and cameras write their own tables, so their settings do not line up with the standard JPEG scale. A checker reports the nearest level on the standard scale, which can differ from the number you chose."
+      },
+      {
+        "question": "Can you tell how many times a JPEG has been saved?",
+        "answer": "Not from the quality number. The file keeps the tables of the last save only, so a picture saved at 90% and then at 75% reads as 75%. Visible blocks at a high reported quality can hint at an earlier low-quality save, but that is a hint, not a count."
+      },
+      {
+        "question": "Does a low JPEG quality mean the photo was edited?",
+        "answer": "No. It means the last save compressed the picture hard, which chat apps and social networks do to almost every picture. It does tell you that error level analysis will have little to show on that copy."
+      },
+      {
+        "question": "Do PNG or WebP files have a JPEG quality?",
+        "answer": "No. The JPEG quality is read from tables that exist only in JPEG files. A PNG is lossless, and WebP uses its own compression, so a checker has no JPEG tables to read in either."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "how-to-read-error-level-analysis",
+      "how-to-tell-if-a-photo-is-edited",
+      "fotoforensics-alternative"
+    ],
+    "cta": {
+      "label": "Check your photo's JPEG quality",
+      "url": "/image-manipulation-checker/",
+      "description": "Read the quality a JPEG was last saved at, see its tables and run error level analysis, all in your browser with a note on what each view cannot prove."
     }
   },
 ];
