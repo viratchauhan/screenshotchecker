@@ -2495,7 +2495,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fake-job-offer-letter", "task-job-scam-se-kaise-bache", "digital-arrest-scam", "fake-crypto-profit-screenshots", 
+    "relatedSlugs": ["cyber-crime-complaint-status", "fake-job-offer-letter", "task-job-scam-se-kaise-bache", "digital-arrest-scam", "fake-crypto-profit-screenshots", 
       "fake-whatsapp-chat-screenshot",
       "smishing-fake-sms",
       "fake-upi-payment-screenshot"
@@ -4071,7 +4071,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       },
       {
         "question": "How do I file a digital arrest complaint online?",
-        "answer": "Go to cybercrime.gov.in, the National Cybercrime Reporting Portal, and file a complaint with the caller's numbers, call log, screenshots and any transaction details. You can track the complaint's status on the portal afterwards. If you only received a call and lost nothing, you can also report the number on Chakshu at sancharsaathi.gov.in within 30 days."
+        "answer": "Go to cybercrime.gov.in, the National Cybercrime Reporting Portal, and file a complaint with the caller's numbers, call log, screenshots and any transaction details. You can track the complaint's status on the portal afterwards; see <a href=\"/blog/cyber-crime-complaint-status/\">how to check a cyber crime complaint status</a>. If you only received a call and lost nothing, you can also report the number on Chakshu at sancharsaathi.gov.in within 30 days."
       },
       {
         "question": "Will I get my money back after a digital arrest scam?",
@@ -4079,7 +4079,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["loan-app-harassment-morphed-photos", "trai-sim-block-call-scam", "digital-arrest-kya-hai", 
+    "relatedSlugs": ["cyber-crime-complaint-status", "loan-app-harassment-morphed-photos", "trai-sim-block-call-scam", "digital-arrest-kya-hai", 
       "smishing-fake-sms",
       "scam-statistics",
       "india-post-courier-sms-scam"
@@ -5021,7 +5021,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["loan-app-harassment-morphed-photos", "fake-amazon-flipkart-refund-scam", 
+    "relatedSlugs": ["cyber-crime-complaint-status", "loan-app-harassment-morphed-photos", "fake-amazon-flipkart-refund-scam", 
       "qr-code-scam",
       "payment-failed-screenshot-scam",
       "smishing-fake-sms"
@@ -7197,6 +7197,156 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "UTR का फ़ॉर्मेट जाँचें",
       "url": "/utr-number-checker/",
       "description": "देखिए कि UTR या UPI रेफ़रेंस किस पेमेंट सिस्टम के फ़ॉर्मेट से मिलता है, अपने ब्राउज़र में, फिर पेमेंट अपने बैंक से ट्रैक कीजिए।"
+    }
+  },
+  {
+    "slug": "cyber-crime-complaint-status",
+    "title": "Cyber Crime Complaint Status: How to Check It Online",
+    "seoTitle": "Cyber Crime Complaint Status: How to Check It Online",
+    "metaDescription": "Check a cyber crime complaint status on cybercrime.gov.in with your acknowledgement number and an OTP. Lost numbers, 1930 complaints and what pending means.",
+    "category": "Security",
+    "publishedAt": "2026-11-28",
+    "authorName": "Virat Chauhan",
+    "readTime": "6 min read",
+    "excerpt": "How to check the status of a cyber crime complaint in India: the Track Your Complaint page on cybercrime.gov.in, the acknowledgement number and OTP it asks for, what to do if you lost the number or complained on 1930, what a pending status tells you, and the fake status helpers to avoid.",
+    "targetKeywords": [
+      "cyber crime complaint status",
+      "cyber crime complaint status check",
+      "1930 complaint status",
+      "cyber crime complaint status by acknowledgement number",
+      "cyber crime complaint status without otp",
+      "how to check cyber crime complaint status"
+    ],
+    "keyTakeaway": {
+      "title": "Acknowledgement number plus OTP, on the official portal only",
+      "text": "You check a cyber crime complaint status on the Track Your Complaint page of cybercrime.gov.in. It asks for your acknowledgement number, an OTP and a captcha. There is no option to search by mobile number or bank account number, and no fee. The complaint itself is handled by the police of the State or UT you selected, so they are the ones to ask when the status does not move."
+    },
+    "introduction": "To check a cyber crime complaint status, open <a href=\"https://cybercrime.gov.in/\">cybercrime.gov.in</a>, choose Track Your Complaint, enter your acknowledgement number, get the OTP, fill in the captcha and submit. That is the only official status check, and it is free. This guide covers each step, what to do if you have lost the acknowledgement number or made the complaint by calling 1930, what a pending status does and does not tell you, and how to spot people who offer to check or speed up a complaint for money.",
+    "contentSections": [
+      {
+        "heading": "How to check your cyber crime complaint status online",
+        "paragraphs": [
+          "The National Cybercrime Reporting Portal has a Track Your Complaint link in its menu. When we opened the page on 28 November 2026 it had four things on it: a box for the acknowledgement number, a Get OTP button, a box for the OTP and a captcha, followed by Submit. The steps are:"
+        ],
+        "checklist": [
+          "<strong>Open cybercrime.gov.in yourself.</strong> Type the address or use a saved bookmark. Do not follow a link from a message, a caller or an advert.",
+          "<strong>Choose Track Your Complaint.</strong> It opens the page titled Track Your Complaint Status.",
+          "<strong>Enter the acknowledgement number.</strong> It is the reference you were given when the complaint was submitted.",
+          "<strong>Press Get OTP and enter the code.</strong> Keep the phone you registered the complaint with near you.",
+          "<strong>Type the captcha and press Submit.</strong> The page then shows where the complaint stands."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/cyber-crime-complaint-status/fictional-example.png",
+          "alt": "A fictional summary card of the steps to check a cyber crime complaint status: open cybercrime.gov.in, choose Track Your Complaint, enter the acknowledgement number, get the OTP, type the captcha and submit, with a note that there is no fee.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. The status check as the official portal showed it on 28 November 2026. The numbers in this card are fictional."
+        },
+        "callout": {
+          "type": "warning",
+          "text": "The official status page asks for an acknowledgement number, an OTP and a captcha. It does not ask for money, a UPI PIN, card details or a remote access app. Anyone who asks for those to check a complaint is not the portal."
+        }
+      },
+      {
+        "heading": "Which complaints can be tracked",
+        "paragraphs": [
+          "Not every report gets a status. The <a href=\"https://cybercrime.gov.in/faq\">portal's FAQ</a> says you can check the status if you reported through the Report and Track option or the Report Other Cybercrime section. In those cases you receive an acknowledgement number, and an SMS and an email with the complaint reference go to your registered mobile number and email address.",
+          "A report made anonymously, which the portal allows for certain crimes against women and children, is filed without your personal details. The FAQ lists status tracking only for the two options above, so use Report and Track when you want to follow a complaint. The FAQ recommends it for another reason too: it lets the police contact you for more details.",
+          "The Indian Cyber Crime Coordination Centre, which runs the portal, lists an online status tracking facility for the complainant among the portal's features on <a href=\"https://i4c.mha.gov.in/ncrp.aspx\">its page about the portal</a>."
+        ]
+      },
+      {
+        "heading": "Can you check the status without an OTP, or with a mobile number?",
+        "paragraphs": [
+          "Many people search for a cyber crime complaint status check without OTP, with a mobile number or by account number. The official page offers none of these. It has one box for the acknowledgement number and it needs the OTP and the captcha before it shows anything. There is no search by phone number, name or bank account number.",
+          "So if a website says it can show a complaint status from only a phone number or an account number, it is not reading the government portal. Do not enter your details there. If the OTP does not arrive or the page does not accept your number, the practical route is the police unit handling the complaint, covered below."
+        ]
+      },
+      {
+        "heading": "Lost the acknowledgement number?",
+        "paragraphs": [
+          "Look for it before doing anything else. According to the portal's FAQ, a complaint filed with Report and Track or under Report Other Cybercrime triggers an SMS and an email with the complaint reference number. Search your messages and your inbox, including the spam folder, for the day you filed the complaint.",
+          "If you cannot find it, contact your local cyber crime police station or cyber cell with your ID, the mobile number you used, the date of the complaint and your transaction details, and ask them to locate it. The FAQ says complaints are handled by the police of the State or UT you selected while reporting, so that is where the record sits."
+        ]
+      },
+      {
+        "heading": "Status of a complaint made by calling 1930",
+        "paragraphs": [
+          "1930 is the national helpline for financial cyber fraud. The Indian Cyber Crime Coordination Centre says it runs in all States and UTs and is connected to 85 banks, payment intermediaries and wallets through its fraud reporting system. If you were given an acknowledgement number after your call, by SMS or by the operator, use it on the Track Your Complaint page in the same way.",
+          "If you were not given a number, or it does not work on the portal, call 1930 again or go to your local cyber crime police station with the transaction details and ask for the reference. Do not search the web for a separate 1930 status phone number. Fake helpline numbers are a scam of their own, as our guide to <a href=\"/blog/fake-customer-care-number-scam/\">fake customer care numbers</a> explains."
+        ]
+      },
+      {
+        "heading": "What does a pending status mean?",
+        "paragraphs": [
+          "The portal's FAQ does not define the status words it shows, so be careful with websites that claim an official meaning for each one. What the FAQ does say is that complaints reported on the portal are handled by the State or UT police chosen at the time of reporting. In plain terms, a pending complaint is one that the police unit has not finished acting on. It does not mean the complaint was rejected, and it does not tell you whether any money has been held or returned.",
+          "If the status has not moved for a while, take the acknowledgement number to the cyber crime police station or cyber cell for your area and ask who is handling it and whether they need anything more from you. For money lost in a fraud, also keep in touch with your own bank about the disputed transaction. Our guide on <a href=\"/blog/utr-number-tracking/\">tracking a payment by its UTR</a> explains what a bank can trace."
+        ],
+        "checklist": [
+          "Keep the acknowledgement number, the SMS and the email together.",
+          "Keep the evidence you uploaded: the FAQ lists bank statements, online transfer receipts, emails, web addresses, chat transcripts, screenshots of the suspect's number, images and videos.",
+          "Note the date and the name of anyone you speak to at the police station or the bank."
+        ]
+      },
+      {
+        "heading": "Can you withdraw a complaint?",
+        "paragraphs": [
+          "The portal's FAQ answers this directly. A complaint filed under the cybercrime section can be withdrawn before it is converted into an FIR. A complaint filed under the section for crimes against women and children cannot be withdrawn. The FAQ also warns that giving false information in a complaint can lead to penal action."
+        ]
+      },
+      {
+        "heading": "Watch for fake status checks and recovery agents",
+        "paragraphs": [
+          "People who have just lost money are a target for a second scam. A caller, a social media account or a website offers to check the complaint, move it faster or recover the money for a fee, and then asks for an advance payment, an OTP or a screen sharing app. The official status check needs none of that, and the police do not charge for looking up a complaint.",
+          "If someone sends you a screenshot of a complaint status, a refund order or a letter from the police as proof, treat it like any other screenshot: it can be edited in a minute. Paste the message into the <a href=\"/screenshot-scam-checker/\">screenshot scam checker</a> to see the warning signs, and confirm the status yourself on the portal. The same pressure tactics appear in <a href=\"/blog/digital-arrest-scam/\">digital arrest calls</a> and in <a href=\"/blog/whatsapp-telegram-task-job-scam/\">task job scams</a>, where our guides also cover how to file the complaint in the first place."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "Check the status only on cybercrime.gov.in, typed by you, with your own acknowledgement number. Nobody needs your OTP, your PIN or a fee to do it for you."
+        }
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can I check my cyber crime complaint status?",
+        "answer": "Open cybercrime.gov.in, choose Track Your Complaint, enter your acknowledgement number, press Get OTP, enter the OTP and the captcha, and submit. It is free."
+      },
+      {
+        "question": "Can I check a cyber crime complaint status without an OTP?",
+        "answer": "No. When we checked on 28 November 2026 the official Track Your Complaint page needed the acknowledgement number, an OTP and a captcha. A site that shows a status without them is not the government portal."
+      },
+      {
+        "question": "Can I check the status with my mobile number or bank account number?",
+        "answer": "The official page has no search by mobile number, name or account number. It asks for the acknowledgement number. If you have lost it, look for the SMS and email sent when you filed the complaint, or ask your local cyber crime police station."
+      },
+      {
+        "question": "How do I check the status of a 1930 complaint?",
+        "answer": "If you received an acknowledgement number after calling 1930, enter it on the Track Your Complaint page of cybercrime.gov.in. If you did not, call 1930 again or contact your local cyber crime police station with your transaction details."
+      },
+      {
+        "question": "What does pending mean in a cyber crime complaint status?",
+        "answer": "The portal's FAQ does not define the status words. In plain terms, pending means the State or UT police unit handling the complaint has not finished acting on it. Ask that unit, with your acknowledgement number, if it does not change."
+      },
+      {
+        "question": "Can I withdraw a cyber crime complaint?",
+        "answer": "According to the portal's FAQ, a complaint under the cybercrime section can be withdrawn before it is converted into an FIR. A complaint under the women and child related crime section cannot be withdrawn."
+      },
+      {
+        "question": "Is there a fee to check or speed up a complaint?",
+        "answer": "No. The official status page has no payment step. Anyone asking for a fee, an OTP or remote access to check or speed up your complaint is running a scam."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "digital-arrest-scam",
+      "whatsapp-telegram-task-job-scam",
+      "fake-customer-care-number-scam"
+    ],
+    "cta": {
+      "label": "Check a suspicious message",
+      "url": "/screenshot-scam-checker/",
+      "description": "Paste or upload a message that claims to be about your complaint or refund and see the scam warning signs, in your browser."
     }
   },
 ];

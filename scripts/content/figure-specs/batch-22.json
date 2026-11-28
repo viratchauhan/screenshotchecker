@@ -1,0 +1,20 @@
+[
+  {
+    "slug": "cyber-crime-complaint-status",
+    "app": "Track Your Complaint", "sub": "Fictional summary · steps from cybercrime.gov.in",
+    "blocks": [
+      {"type": "row", "k": "Website", "v": "cybercrime.gov.in", "badge": 1},
+      {"type": "row", "k": "Acknowledgement no.", "v": "from your SMS or email", "badge": 2},
+      {"type": "row", "k": "OTP", "v": "press Get OTP", "badge": 3},
+      {"type": "row", "k": "Captcha", "v": "type it, then Submit", "badge": 4},
+      {"type": "note", "text": "No fee · no PIN · no remote app", "badge": 5}
+    ],
+    "callouts": [
+      "Type the address yourself, never follow a link.",
+      "The number came when you filed the complaint.",
+      "No search by mobile or account number.",
+      "The status shows after you submit.",
+      "Anyone charging to check it is a scam."
+    ]
+  }
+]
