@@ -3697,7 +3697,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-tell-if-a-photo-is-edited-with-ai", "free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", "how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
+    "relatedSlugs": ["how-to-read-noise-analysis", "how-to-tell-if-a-photo-is-edited-with-ai", "free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", "how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "reverse-image-search-screenshot",
       "exif-metadata"
@@ -7610,7 +7610,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", 
+    "relatedSlugs": ["how-to-read-noise-analysis", "free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", 
       "how-to-tell-if-a-photo-is-edited",
       "fotoforensics-alternative",
       "how-to-tell-if-an-image-is-ai-generated"
@@ -7742,7 +7742,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["free-tools-to-check-if-a-photo-is-edited", 
+    "relatedSlugs": ["how-to-read-noise-analysis", "free-tools-to-check-if-a-photo-is-edited", 
       "how-to-read-error-level-analysis",
       "how-to-tell-if-a-photo-is-edited",
       "fotoforensics-alternative"
@@ -7897,7 +7897,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-tell-if-a-photo-is-edited-with-ai", 
+    "relatedSlugs": ["how-to-read-noise-analysis", "how-to-tell-if-a-photo-is-edited-with-ai", 
       "how-to-tell-if-a-photo-is-edited",
       "fotoforensics-alternative",
       "how-to-read-error-level-analysis",
@@ -8056,6 +8056,147 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check a photo for AI signals",
       "url": "/ai-image-detector/",
       "description": "Read Content Credentials and other AI signals in your browser, with a note on what each one cannot prove."
+    }
+  },
+  {
+    "slug": "how-to-read-noise-analysis",
+    "title": "How to Read a Noise Analysis Map of a Photo, and What It Can and Cannot Show",
+    "seoTitle": "Image Noise Analysis: How to Read a Photo's Noise Map",
+    "metaDescription": "Noise analysis shows the fine grain of a photo so you can spot airbrushed, warped or pasted areas. How to read the map, the false alarms and its limits.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-28",
+    "authorName": "Virat Chauhan",
+    "readTime": "7 min read",
+    "excerpt": "A plain guide to image noise analysis: what the grey map is made of, what even and uneven grain look like, which innocent things look suspicious, and why a clean map is not proof that a photo is untouched.",
+    "targetKeywords": [
+      "image noise analysis",
+      "noise analysis photo",
+      "image noise analysis online",
+      "image noise analysis tool",
+      "how to read noise analysis",
+      "noise analysis photo forensics"
+    ],
+    "keyTakeaway": {
+      "title": "Compare like with like",
+      "text": "A noise analysis map removes the picture and keeps its fine grain. Dark means smooth and bright means grain or a thin edge. Grain that changes along the outline of an object or a straight box, on a surface that should be even, is worth a closer look. Grain that changes where the scene changes, such as sky against trees, is normal. A map with even grain does not prove a photo is untouched, because an edit can keep the grain and a later re-save can flatten the difference."
+    },
+    "introduction": "To read a noise analysis map, look for places where the fine grain of the photo changes without a reason in the scene. The map is a grey picture in which smooth areas are dark and grainy areas are bright. Our <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> draws it in your browser, without uploading the picture, under the Noise Analysis tab. An area that is much smoother or much grainier than the same kind of surface elsewhere can be airbrushed, warped or pasted in. It can also be plain sky, a blurred background or a patch of grass. This guide explains what the map is made of, how to read it step by step, the false alarms, and what the view cannot prove.",
+    "contentSections": [
+      {
+        "heading": "What noise is, and why it helps to look at it",
+        "paragraphs": [
+          "Every photo from a camera carries a little random variation in brightness and colour. The <a href=\"https://en.wikipedia.org/wiki/Image_noise\">Wikipedia article on image noise</a> describes it as random variation that in digital photography usually comes from the electronics of the image sensor, and says it can range from specks you can hardly see in good light to much heavier grain. Most people call it grain.",
+          "The grain of one photo was made in one moment by one sensor, so it tends to look alike across similar surfaces. Editing disturbs it. Jonas Wagner, who built the Forensically tool, puts the idea simply in his <a href=\"https://29a.ch/2015/08/21/noise-analysis-for-image-forensics\">post on noise analysis</a>: natural images are full of noise, and modifying them often leaves visible traces in that noise. In his own example, a warp tool lost some of the fine noise and left a dark halo around the changed part of a face.",
+          "You cannot see this by looking at the photo, because the grain is faint and the picture is strong. A noise view turns that around."
+        ]
+      },
+      {
+        "heading": "How the map is made",
+        "paragraphs": [
+          "The trick is to run a noise remover backwards. The <a href=\"https://29a.ch/photo-forensics/\">Forensically help page</a> calls its noise view a reverse denoising algorithm: instead of removing the noise it removes the rest of the image, using a simple median filter. A <a href=\"https://en.wikipedia.org/wiki/Median_filter\">median filter</a> is a common way to clean noise from a picture, widely used because under certain conditions it removes noise while keeping edges.",
+          "Our checker works the same way. For every pixel it takes the brightness, finds the middle value of the 3 by 3 block of pixels around it, and keeps only the difference. On a smooth, noise-free surface the difference is zero and the map is black. Where there is grain, the difference is small but not zero, so the checker brightens it. The Amplitude slider sets how much, from 2 to 60 times, starting at 20.",
+          "Thin lines and letters also differ from their neighbours, so they show up as bright threads on the map. That is expected. They are detail, not noise, and they are the main reason the map of a screenshot looks like a drawing in white on black."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/how-to-read-noise-analysis/fictional-example.png",
+          "alt": "A reading card for a noise analysis map: dark means smooth, bright means grain or a thin edge, an even map across similar surfaces is the normal case, and a smooth or grainy patch with a sharp outline is worth a closer look.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. How to read a noise analysis map. A summary card, not a test result."
+        }
+      },
+      {
+        "heading": "How to read the map, step by step",
+        "paragraphs": [
+          "Start with the best copy of the picture you can get. Then work through these steps."
+        ],
+        "checklist": [
+          "<strong>Open the <a href=\"/image-manipulation-checker/\">photo manipulation checker</a></strong>, choose the picture and tap the Noise Analysis tab. Nothing is uploaded. The map is worked out on your device.",
+          "<strong>Set the Amplitude.</strong> If the map is almost black, raise it. If it is almost white, lower it. You want to see texture, not a flat sheet.",
+          "<strong>Read the headline under the slider.</strong> The checker cuts the picture into up to 8 by 8 areas and compares the grain of each with the typical area. It tells you whether the grain looks alike, how many areas are much smoother or much grainier, or that the picture has almost no grain to compare.",
+          "<strong>Compare like with like.</strong> One patch of sky against another, one cheek against the other, one stretch of wall against the next. The same kind of surface in the same light should carry the same kind of grain.",
+          "<strong>Follow the borders.</strong> Ask whether a change of grain runs along the natural edge between two surfaces or along the outline of one object or a straight box. The second kind is the one to look at closely.",
+          "<strong>Switch back to the original.</strong> Look at the same spot in the picture itself. If the scene explains the change, such as blur, shadow or a plain surface, it is not a finding."
+        ]
+      },
+      {
+        "heading": "What edits tend to leave behind",
+        "paragraphs": [
+          "The Forensically help page lists what its noise view can be useful for: airbrushing, deformations, warping and perspective corrected cloning. The blog post adds that it can catch changes that clone detection and error level analysis might miss. In plain terms, these are the patterns to know.",
+          "We tried the view on three fictional pictures drawn for the test. On a photo-like picture with even grain, the checker reported that the grain looks alike across the picture. On the same picture with one patch blurred smooth, it reported two areas much smoother than the typical area, and the patch was plainly black on the map. On a made-up app screen, it reported almost no grain to compare. That is a small check on drawn pictures, not a study of real photos."
+        ],
+        "checklist": [
+          "<strong>A dark patch on a grainy surface.</strong> Airbrushing, healing and erasing tools smooth the grain away. Skin that is much smoother than the rest of the same face, or a dark blob on a textured wall, fits this pattern.",
+          "<strong>A dark halo around a shape.</strong> Warping and reshaping tools resample the pixels and lose fine noise near the change, as in the example in the Forensically post.",
+          "<strong>A block with different grain and straight borders.</strong> A part pasted from another picture brings its own grain with it, finer or coarser than the surroundings.",
+          "<strong>Grain that is too strong in one place.</strong> Heavy sharpening of one area makes it brighter on the map than the same surface nearby."
+        ]
+      },
+      {
+        "heading": "False alarms: uneven grain that means nothing",
+        "paragraphs": [
+          "Most uneven maps are innocent. A photo is not one surface, and its grain is not supposed to be the same everywhere.",
+          "The lighting matters too. The Wikipedia article explains that the steady noise level in dark areas comes largely from the amplifier, while at higher exposures a different kind of noise, shot noise, takes over. So the shadows and the bright parts of one untouched photo can carry different grain."
+        ],
+        "checklist": [
+          "<strong>Sky, plain walls and blown-out highlights</strong> are dark on the map because there is little grain or detail in them.",
+          "<strong>Blurred backgrounds</strong>, from a wide lens opening or a phone's portrait mode, are much smoother than the sharp subject in front.",
+          "<strong>Hair, grass, fabric, gravel and text</strong> are bright because fine detail passes through the filter along with the grain.",
+          "<strong>Phone processing.</strong> The Wikipedia article notes that most methods for turning sensor data into a picture include some noise reduction, in the camera or on a computer. Phones smooth some parts more than others, so a phone photo can look patchy before anyone edits it.",
+          "<strong>Captions, stickers and logos</strong> added on top are drawn, not photographed. They have no grain and show only their outlines. That is an edit of a kind, but usually an open one."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "A noise map is never proof that a photo was edited or untouched. Uneven grain has many innocent causes, and even grain can survive an edit. Treat anything you notice as a reason to look closer and to find the original picture or an independent source."
+        }
+      },
+      {
+        "heading": "When the map has little to say",
+        "paragraphs": [
+          "Noise analysis needs noise. The Forensically help page says its view works best on high quality images and that smaller images tend to contain too little information. The <a href=\"https://fotoforensics.com/tutorial-estq.php\">FotoForensics tutorial on JPEG quality</a> makes a similar point about low quality files: analysis based on signal noise is unlikely to be effective on them. Hard compression wipes out fine grain and replaces it with its own blocky pattern.",
+          "So a picture that has passed through a chat app or a social network is a poor subject. Screenshots, drawings and posters are poor subjects too, because they never had camera grain. Our checker says so directly with the line \"This picture has almost no grain to compare\" and points you to the other views.",
+          "A clean, even map also has a limit in the other direction. Someone who adds matching grain after an edit, or saves the picture small and compressed afterwards, leaves little for this view to find. Use it beside the other checks: read the <a href=\"/blog/how-to-check-jpeg-quality/\">JPEG quality</a> first to see how much the file can still show, study the <a href=\"/blog/how-to-read-error-level-analysis/\">error level analysis</a> view, and follow the wider steps in <a href=\"/blog/how-to-tell-if-a-photo-is-edited/\">how to tell if a photo is edited</a>. If you want the noise view with histogram equalisation, Forensically offers that option and ours does not yet."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "What is noise analysis in photo forensics?",
+        "answer": "It is a view that removes the picture and keeps its fine grain, so you can see whether the grain is even. Areas that were airbrushed, warped or pasted in often carry grain that does not match the rest."
+      },
+      {
+        "question": "How do I read a noise analysis map?",
+        "answer": "Dark means smooth and bright means grain or a thin edge. Compare the same kind of surface in different places. A change of grain that follows the outline of an object or a straight box, with no reason in the scene, deserves a closer look."
+      },
+      {
+        "question": "Is there a free image noise analysis tool online?",
+        "answer": "Yes. ScreenshotChecker's photo manipulation checker has a Noise Analysis tab that runs in your browser without uploading the picture. Forensically is another free in-browser tool with a noise view."
+      },
+      {
+        "question": "Does uneven noise prove a photo was edited?",
+        "answer": "No. Sky, plain walls, blurred backgrounds and phone noise reduction all make some areas smoother than others, and fine detail such as hair or grass looks grainy. Uneven noise is a reason to look closer, not proof."
+      },
+      {
+        "question": "Why is the noise map of my screenshot almost black?",
+        "answer": "A screenshot is drawn by the device and has no camera grain, so only the edges of letters and shapes show. Noise analysis has little to say about screenshots. Error level analysis and the area by area check are more useful for them."
+      },
+      {
+        "question": "Does noise analysis work on photos sent through WhatsApp or social media?",
+        "answer": "Poorly. Hard compression removes most of the fine grain, and the tools' own documentation says noise based checks work best on high quality images. Try to get the original file or a larger copy."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "how-to-read-error-level-analysis",
+      "how-to-check-jpeg-quality",
+      "how-to-tell-if-a-photo-is-edited",
+      "free-tools-to-check-if-a-photo-is-edited"
+    ],
+    "cta": {
+      "label": "Open the noise analysis view",
+      "url": "/image-manipulation-checker/",
+      "description": "See the fine grain of a photo, compare its areas and run error level analysis, all in your browser with a note on what each view cannot prove."
     }
   },
 ];
