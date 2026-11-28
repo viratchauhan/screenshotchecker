@@ -56,6 +56,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [AI image detection explained](https://screenshotchecker.com/blog/ai-image-detector-online/)
 - [How to tell if an image is AI-generated: 7 checks](https://screenshotchecker.com/blog/how-to-tell-if-an-image-is-ai-generated/)
 - [FotoForensics alternatives: private in-browser photo forensics tools](https://screenshotchecker.com/blog/fotoforensics-alternative/)
+- [How to read error level analysis (ELA): bright and dark areas, false alarms and limits](https://screenshotchecker.com/blog/how-to-read-error-level-analysis/)
 - [How to check a suspicious link](https://screenshotchecker.com/blog/suspicious-link-checker-online/)
 - [Is it a screenshot or a photo?](https://screenshotchecker.com/blog/how-to-tell-if-a-photo-is-a-screenshot/)
 - [USPS redelivery text scams](https://screenshotchecker.com/blog/usps-redelivery-text-scam/)

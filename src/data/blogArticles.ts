@@ -3684,7 +3684,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
+    "relatedSlugs": ["how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "reverse-image-search-screenshot",
       "exif-metadata"
@@ -7460,7 +7460,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["how-to-read-error-level-analysis", 
       "how-to-tell-if-a-photo-is-edited",
       "how-to-tell-if-an-image-is-ai-generated",
       "reverse-image-search-screenshot"
@@ -7469,6 +7469,143 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check a photo privately",
       "url": "/image-manipulation-checker/",
       "description": "Run error level analysis and a noise map on a photo or screenshot in your browser, with a note on what each view can and cannot prove."
+    }
+  },
+  {
+    "slug": "how-to-read-error-level-analysis",
+    "title": "How to Read Error Level Analysis (ELA): What Bright and Dark Areas Mean, and the False Alarms to Ignore",
+    "seoTitle": "How to Read Error Level Analysis (ELA) Results",
+    "metaDescription": "Read an ELA image by comparing like with like: edges with edges, flat areas with flat areas. What bright and dark mean, common false alarms, and limits.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-28",
+    "authorName": "Virat Chauhan",
+    "readTime": "8 min read",
+    "excerpt": "A plain guide to reading an error level analysis result: what the bright and dark areas mean, how to compare edges, textures and flat surfaces, the false alarms that fool beginners, and when ELA cannot tell you anything.",
+    "targetKeywords": [
+      "how to read error level analysis",
+      "what does error level analysis do",
+      "what is error level analysis",
+      "ela image analysis",
+      "error level analysis online",
+      "ela fake image"
+    ],
+    "keyTakeaway": {
+      "title": "Compare like with like",
+      "text": "Brightness in an ELA image is not a sign of editing by itself. Sharp edges and busy textures are always brighter than flat areas. What matters is a mismatch between things that should look alike: one flat surface brighter than the other flat surfaces, or one edge far brighter than similar edges. A mismatch is a place to look closer, not proof, and a clean result does not prove the picture is untouched."
+    },
+    "introduction": "To read an error level analysis (ELA) image, compare like with like: edges with edges, textures with textures and flat surfaces with flat surfaces. In a picture that was saved as one piece, similar areas should have similar brightness in the ELA view. An area that is clearly brighter or darker than other areas of the same kind may have been pasted in or redrawn later. Brightness alone means little, because sharp edges, text and fine detail are bright in every picture. This guide explains what ELA does, how to read it step by step, the false alarms that catch beginners and the cases where it cannot help. You can follow along with the <a href=\"/image-manipulation-checker/\">photo manipulation checker</a>, which runs ELA in your browser without uploading the picture.",
+    "contentSections": [
+      {
+        "heading": "What error level analysis does",
+        "paragraphs": [
+          "JPEG is a lossy format: every save throws away a little colour information. The first save loses the most, and each later save at the same setting loses less. ELA uses this. It saves the picture again as a JPEG at a known quality, subtracts the new copy from the one you gave it, and shows the difference, brightened so you can see it. The <a href=\"https://fotoforensics.com/tutorial-ela.php\">FotoForensics ELA tutorial</a> describes the result as showing the areas most likely to change during a re-save.",
+          "JPEG compresses a picture in small squares of 8 by 8 pixels, each on its own. If the whole picture went through the same saves, the squares should change at about the same rate. A part that was added later has been saved fewer times than the rest, so it has more left to lose and shows up brighter. The method was named by Dr. Neal Krawetz in 2007, as the <a href=\"https://en.wikipedia.org/wiki/Error_level_analysis\">Wikipedia article on error level analysis</a> notes."
+        ]
+      },
+      {
+        "heading": "How to read an ELA image, step by step",
+        "paragraphs": [
+          "Do not start by hunting for bright spots. Start by sorting the picture into kinds of area, then compare each kind with itself. This is the method the FotoForensics tutorial teaches."
+        ],
+        "checklist": [
+          "<strong>Look at the original first.</strong> Note the sharp edges (text, outlines, a dark object against a light wall), the textures (hair, grass, fabric) and the flat surfaces (sky, walls, plain backgrounds).",
+          "<strong>Compare edges with edges.</strong> Similar edges should be about as bright as each other. One outline that glows while similar outlines stay dim deserves a closer look.",
+          "<strong>Compare textures with textures.</strong> Detailed areas are brighter than smooth ones, and that is normal. Two patches of the same texture should look alike.",
+          "<strong>Compare flat surfaces with flat surfaces.</strong> Whatever their colour, flat areas should all be about equally dark. A flat patch that is brighter or blockier than the other flat areas is the most useful sign ELA gives.",
+          "<strong>Check the shape of anything odd.</strong> An edit often follows the outline of an object or forms a neat rectangle, such as an amount or a name on a receipt.",
+          "<strong>Change the settings and see if it holds.</strong> Move the JPEG quality and the error scale. A real difference usually stays visible across several settings; a trick of one setting fades."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/how-to-read-error-level-analysis/fictional-example.png",
+          "alt": "A fictional reading card for an ELA result: edges are compared with edges, textures with textures and flat areas with flat areas, and a bright rectangle over a flat area is marked as the place to look closer.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. How to read an ELA view, on a fictional example. A summary card, not a test result."
+        }
+      },
+      {
+        "heading": "What bright and dark areas usually mean",
+        "paragraphs": [
+          "<strong>Bright all over:</strong> the picture has more to lose in a re-save. The FotoForensics tutorial says original photos straight from a digital camera have high ELA values, because cameras do not optimise for the quality level. A bright result can mean a fresh, little-saved picture, not an edited one.",
+          "<strong>Dark all over:</strong> the picture has been saved many times or at a low quality. Each re-save lowers the error level, and after enough of them the squares stop changing. Pictures that have travelled through chat apps and social networks often look like this, and an edit made before those saves may leave no trace.",
+          "<strong>One area brighter than similar areas:</strong> that area may have been saved fewer times than the rest, which is what a pasted or redrawn part looks like. This is the pattern worth checking against the original.",
+          "<strong>One area darker than similar areas:</strong> ELA shows different compression levels, not where a part came from. The tutorial notes that a lower-quality image spliced into a higher-quality picture can appear as a darker region.",
+          "<strong>Blue, purple and red patches:</strong> this is called rainbowing. According to the tutorial it points to a colour adjustment, commonly from Adobe products and from the automatic colour correction on newer iPhones and some Android phones. It does not show that someone changed the content on purpose."
+        ]
+      },
+      {
+        "heading": "False alarms that fool beginners",
+        "paragraphs": [
+          "Most wrong readings come from treating normal brightness as evidence. These are the usual ones, with the reason each is harmless by itself."
+        ],
+        "checklist": [
+          "<strong>Text, logos and outlines glow.</strong> High-contrast edges are bright in every picture. Black text on white is the classic case. Compare it with other text in the same picture, not with the background.",
+          "<strong>Strongly contrasting colours side by side.</strong> The tutorial lists pairs such as black and white, orange and blue or green and purple as producing higher values than similar colours.",
+          "<strong>Sharpened pictures.</strong> Saving with an Adobe product can sharpen edges and textures, which makes them brighter. That shows the software used, not a deliberate change.",
+          "<strong>Resized pictures.</strong> Scaling a picture smaller can boost high-contrast edges. Scaling, recolouring or adding noise changes the whole picture and raises the error level everywhere.",
+          "<strong>Watermarks and added captions.</strong> A site logo or caption in a corner was added after the photo was taken, so it can stand out. It is an edit, but an honest one.",
+          "<strong>Screenshots.</strong> A screenshot is mostly sharp text and flat colour, so its ELA view is bright lines on black. That is how every screenshot looks."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "A bright patch is a question, not an answer. Before you accuse anyone of faking a picture, look for the original, check the details the picture claims (a payment in your bank app, a post on the real account) and treat ELA as one clue among several."
+        }
+      },
+      {
+        "heading": "When ELA cannot help",
+        "paragraphs": [
+          "ELA has hard limits, and both the FotoForensics tutorial and Wikipedia state them. A small change, such as a single pixel or a slight colour shift, may not show. A picture saved many times can be at its minimum error level, where the ELA view is black and no edit can be found with this method. And an edit made on a lossless copy that is then saved once as a JPEG is compressed evenly with everything else, so a uniform result does not rule out editing.",
+          "File type matters too. ELA is designed for JPEG. The tutorial says it is not applicable to pictures reduced to few colours, such as GIF. A PNG is lossless, so it carries whatever was done before it became a PNG: a PNG made from a JPEG keeps the JPEG traces, while a picture that never was a JPEG has none.",
+          "Reading the result is also a matter of judgement. Wikipedia records the criticism by image forensics researcher Hany Farid that the method labels altered images as original and original images as altered, and Krawetz's reply that interpreting the result is up to the user. Both points are fair: ELA gives you something to look at, not a verdict.",
+          "Finally, ELA was built to find edits inside a photo. It is not a detector for AI-generated pictures; for those, start with our guide on <a href=\"/blog/how-to-tell-if-an-image-is-ai-generated/\">how to tell if an image is AI-generated</a>."
+        ]
+      },
+      {
+        "heading": "Get a better result: quality, settings and the original",
+        "paragraphs": [
+          "The result depends on the quality of the copy you test. The tutorial's advice is to find the best version of the picture: the original file if you can get it, otherwise the largest copy, since pictures on news sites and social networks are usually resized and re-saved. A <a href=\"/reverse-image-search/\">reverse image search</a> helps find an earlier or larger copy, and an older copy that looks different is stronger evidence of editing than any ELA view.",
+          "In our <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> you can move three sliders under the ELA view: the JPEG quality of the test re-save, the error scale that brightens the differences, and how much of the original shows on top. The checker also reads the quality the JPEG was last saved at from the file itself, and one button sets the test re-save to that value. Raise the error scale when the view is too dark to read, and lower it when everything looks white. Use the overlay to see exactly which object a bright patch sits on.",
+          "Then check the claim another way. For a payment screenshot, confirm the money in your own bank or UPI app. For a photo, follow the other steps in <a href=\"/blog/how-to-tell-if-a-photo-is-edited/\">how to tell if a photo is edited</a>. If you want more expert views, our <a href=\"/blog/fotoforensics-alternative/\">comparison of FotoForensics and its alternatives</a> says which tool offers what, and where each one sends your picture."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "What does error level analysis do?",
+        "answer": "It saves the picture again as a JPEG at a known quality and shows how much each area changed. Areas that went through the same saves change by a similar amount, so a part that was added or redrawn later can stand out from its surroundings."
+      },
+      {
+        "question": "What do the white or bright areas in ELA mean?",
+        "answer": "Bright areas changed more in the test re-save. Edges, text and detailed textures are always brighter than flat areas, so brightness alone is normal. It matters only when an area is brighter than other areas of the same kind in the same picture."
+      },
+      {
+        "question": "Does a dark ELA image mean the photo is real?",
+        "answer": "No. A dark result usually means the picture was saved many times or at low quality, for example after passing through chat apps. Edits made before those saves may no longer show, so a dark or even result proves nothing either way."
+      },
+      {
+        "question": "Can ELA prove that a photo was edited?",
+        "answer": "No. ELA shows compression differences that you have to interpret, and it gives both false alarms and misses. Use it to find areas to look at more closely, then confirm with the original picture, an earlier copy or an independent check."
+      },
+      {
+        "question": "Does ELA work on PNG files and screenshots?",
+        "answer": "Only partly. ELA is designed for JPEG. A PNG that was made from a JPEG keeps the earlier JPEG traces, but a screenshot that never was a JPEG is mostly sharp text on flat colour, so its ELA view shows bright lines everywhere and says little about editing."
+      },
+      {
+        "question": "Can I run ELA without uploading my photo?",
+        "answer": "Yes. ScreenshotChecker's photo manipulation checker and Forensically both run error level analysis inside your browser. FotoForensics is a public research site that stores uploads, so use it only for pictures that are already public."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "how-to-tell-if-a-photo-is-edited",
+      "fotoforensics-alternative",
+      "how-to-tell-if-an-image-is-ai-generated"
+    ],
+    "cta": {
+      "label": "Try ELA on your own picture",
+      "url": "/image-manipulation-checker/",
+      "description": "Run error level analysis in your browser with adjustable quality and error scale, and a note on what the view can and cannot prove."
     }
   },
 ];
