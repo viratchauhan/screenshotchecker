@@ -268,3 +268,11 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - Linked from the digital arrest guide's complaint section (in text), related lists of digital-arrest-scam, whatsapp-telegram-task-job-scam and fake-customer-care-number-scam, the scam checker's related cards, the blog index (scam messages) and llms.txt. Figure batch-22, share card.
 - Checks: npm test 40/40, build 84 pages, test:seo 0 errors/0 warnings, blog SEO 57 PASS. Deployed c7ca72ec, 8 URLs 200, IndexNow 200 for 6 URLs. Google indexing not requested (signed out).
 - Next idea: Hindi pair for this guide ("cyber crime complaint kaise check kare", "kaise track kare", "kaise wapas le").
+
+## 28 Nov 2026 (indexing, owner signed in to Search Console)
+
+- Type: SEO housekeeping (no site change, no deploy needed: repo clean, nothing unpushed, live pages checked 200 with the new sections).
+- `/blog/fake-job-offer-letter/` is now indexed (was "Crawled - currently not indexed" on 21 Nov; the homepage and scam checker links were added then).
+- Indexing requested for three new guides that were "URL is unknown to Google": utr-number-tracking, utr-number-se-payment-kaise-check-kare, cyber-crime-complaint-status.
+- Recrawls requested: digital-arrest-scam, digital-arrest-kya-hai, whatsapp-telegram-task-job-scam, task-job-scam-se-kaise-bache, screenshot-scam-checker, ai-image-detector, screenshot-analyzer. 11 requests in all, none refused.
+- The scheduled task now runs every hour and alternates TOOL and CONTENT runs (owner request, 28 Nov).
