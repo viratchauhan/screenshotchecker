@@ -276,3 +276,14 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - Indexing requested for three new guides that were "URL is unknown to Google": utr-number-tracking, utr-number-se-payment-kaise-check-kare, cyber-crime-complaint-status.
 - Recrawls requested: digital-arrest-scam, digital-arrest-kya-hai, whatsapp-telegram-task-job-scam, task-job-scam-se-kaise-bache, screenshot-scam-checker, ai-image-detector, screenshot-analyzer. 11 requests in all, none refused.
 - The scheduled task now runs every hour and alternates TOOL and CONTENT runs (owner request, 28 Nov).
+
+## 28 Nov 2026 (hourly run, TOOL): adjustable ELA view on the photo manipulation checker
+
+- Type: TOOL (the run before was SEO housekeeping). Work queue item T1, first of the photo forensics push.
+- `/image-manipulation-checker/` now has three sliders under the picture in ELA mode: JPEG quality of the test re-save (50 to 98%), error scale (5x to 60x) and "Show original on top" (0 to 100%), plus Reset view and a live sentence that states the current settings. Forensically and FotoForensics both offer these controls.
+- The sliders redraw only the picture. The result pill and the three result cards still come from the fixed analysis (75% quality, 25x), and a unit test pins the slider defaults to those values. The panel says what ELA shows and what it cannot prove.
+- Also fixed in the view: pictures larger than 1600 px on one side were squashed (each side was capped separately); the adjustable view keeps the shape. Mode buttons now expose aria-pressed. The sliders are hidden in Original and Noise modes.
+- Code: `src/lib/analyzer/elaView.ts` (clamping, pixel maths, size fit, renderer that reuses the re-saved copy while only the scale moves) and `src/lib/analyzer/__tests__/elaView.test.ts` (9 tests).
+- Testing: preview_start was declined in this unattended run, so the built site was tested in headless Chrome with the dist files served by request interception (no server), with a fictional test picture (noisy gradient with a pasted "FICTIONAL TEST PATCH"), at 375 px and 1280 px: scale, quality, overlay, mode switch, keyboard arrow, reset and a second upload all behaved, no horizontal overflow, no page errors. Repeated on the live page after deploy under the real CSP header: no console errors.
+- Checks: npm test 41/41, build 84 pages, test:seo 0 errors/0 warnings, blog SEO 57 PASS. Commit b2f4172, deployed 8618f409, live URL 200, IndexNow 200 for 1 URL. Google indexing not requested (a tool control, not a new page).
+- Notes for later runs: `forensics.ts` (the verdict analysis) still caps each side at 1600 separately; fixing it changes scores for very large pictures, so it needs its own tested run. The "Noise Variance Map" button still shows the ELA map until T3 is built. The run lock cannot live at `.git\work-run.lock` because `.git` is a file in this worktree; this run kept it at the path `git rev-parse --git-dir` prints, plus `work-run.lock`.

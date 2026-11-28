@@ -12,7 +12,8 @@ stores uploads publicly and says "there is no privacy"; ImageEdited staff may vi
 Rules: logic in `src/lib/analyzer/` with unit tests; every view gets a one-line "what this shows" and "what it cannot prove"; no certainty claims.
 
 TOOL items (ForensicsWorkspace, `/image-manipulation-checker/`):
-- [ ] T1 ELA controls: JPEG quality slider, error scale slider, overlay opacity over the original (Forensically and FotoForensics both have these).
+- [x] T1 ELA controls: JPEG quality slider, error scale slider, overlay opacity over the original (Forensically and FotoForensics both have these). Done 28 Nov 2026 (b2f4172, `src/lib/analyzer/elaView.ts`).
+- [ ] T1b `forensics.ts` caps width and height at 1600 separately, which squashes very large pictures before the verdict analysis; use `fitElaViewSize` there and add a test (the adjustable view already keeps the shape).
 - [ ] T2 JPEG quality estimate: read the quantization tables, show "last saved at about N% quality", list the tables, and flag signs of a re-save.
 - [ ] T3 Noise analysis view (median-filter residual) with amplitude control; explain airbrushing and pasted areas.
 - [ ] T4 Embedded thumbnail check: extract the EXIF thumbnail and show it beside the image; a thumbnail that differs from the picture is strong edit evidence.
