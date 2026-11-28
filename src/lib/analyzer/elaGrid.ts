@@ -78,6 +78,15 @@ export const ELA_GRAPHIC = {
   minHardShare: 0.01,
   /** ... and at least this many hard edges for every edge of any kind. */
   minHardRatio: 0.35,
+  /** Fewer graphic-like areas than this are not worth a line of their own. */
+  severalAreas: 3,
+  /**
+   * From this share of the compared areas on, text or graphics are part of the picture's normal:
+   * the fit absorbs them, so the check cannot single them out and the result is never green.
+   */
+  manyShare: 0.25,
+  /** From this share on the picture reads as a screenshot, poster or other drawn graphic. */
+  mostShare: 0.5,
 } as const;
 
 /** True when the edges in a cell look drawn (text, sticker, logo), not photographed. A hint, not proof. */
@@ -85,6 +94,55 @@ export function looksLikeGraphic(cell: ElaGridCell): boolean {
   const hard = cell.hardEdgeShare ?? 0;
   const edges = cell.edgeShare ?? 0;
   return hard >= ELA_GRAPHIC.minHardShare && edges > 0 && hard / edges >= ELA_GRAPHIC.minHardRatio;
+}
+
+export interface GraphicAreas {
+  /** Compared areas that were not outlined and whose edges look drawn. */
+  count: number;
+  places: string[];
+  /** none: too few to mention. some: worth a line. many: too many for the check to single out. most: the picture is mostly text or graphics. */
+  level: 'none' | 'some' | 'many' | 'most';
+}
+
+/**
+ * Looks for drawn edges in every compared area, outlined or not. A big caption or an app screen
+ * covers so many areas that it becomes the picture's normal and nothing is outlined; this count
+ * lets the result say so instead of reading as a plain "nothing found".
+ */
+export function findGraphicAreas(finding: ElaGridFinding, rules: ElaGridRules = ELA_GRID): GraphicAreas {
+  const outlined = new Set(finding.flagged.map((c) => `${c.col},${c.row}`));
+  const graphic = finding.cells.filter(
+    (c) => c.detail >= rules.flatDetail && !outlined.has(`${c.col},${c.row}`) && looksLikeGraphic(c),
+  );
+  const count = graphic.length;
+  const places = [...new Set(graphic.map((c) => describeCellPlace(c, finding.cols, finding.rows)))];
+  const share = finding.judgedCells > 0 ? count / finding.judgedCells : 0;
+  const level =
+    !finding.enoughData || count < ELA_GRAPHIC.severalAreas
+      ? 'none'
+      : share >= ELA_GRAPHIC.mostShare
+        ? 'most'
+        : share >= ELA_GRAPHIC.manyShare
+          ? 'many'
+          : 'some';
+  return { count, places, level };
+}
+
+/** One plain line about text or graphics that the area check did not outline. Empty when there is little of it. */
+function describeGraphicAreas(finding: ElaGridFinding): string {
+  const graphic = findGraphicAreas(finding);
+  if (graphic.level === 'none') return '';
+  const total = finding.cols * finding.rows;
+  const other = finding.flagged.length > 0 ? ' that are not outlined' : '';
+  if (graphic.level === 'most') {
+    return `Most of this picture is text or drawn graphics (${graphic.count} of ${total} areas${other}), as in a screenshot, a poster or a meme. The check compares the areas of one picture with each other, so here it can only notice a part that was saved differently from the rest. Text that was changed and saved together with the whole picture looks even, so read the words and numbers themselves.`;
+  }
+  const where = graphic.places.length <= 4 ? ` (${graphic.places.join(', ')})` : '';
+  const tail =
+    graphic.level === 'many'
+      ? 'That is too much of the picture for this check to single out: a large caption or banner becomes part of what the picture normally looks like, whether it was there from the start or added later.'
+      : 'They did not stand out in the test re-save. That fits text that was always part of the picture, and also text that was added and then saved together with the rest.';
+  return `${graphic.count} of ${total} areas${other}${where} carry hard, clean edges, the kind that letters, captions, stickers and logos have. ${tail}`;
 }
 
 export type ElaGridRules = { readonly [K in keyof typeof ELA_GRID]: number };
@@ -272,6 +330,8 @@ export function describeElaGrid(finding: ElaGridFinding): { headline: string; no
       'This does not show the picture is untouched. An edit that was saved together with the rest, a re-save by a messaging app, or a careful edit leaves an even result too.',
     );
   }
+  const graphicLine = describeGraphicAreas(finding);
+  if (graphicLine) notes.push(graphicLine);
   if (finding.flatCells > 0) {
     notes.push(
       `${finding.flatCells} of ${total} areas are flat colour. Flat areas barely change in a re-save whether they are original or pasted, so this check cannot judge them.`,
@@ -311,7 +371,8 @@ export interface ForensicsStatus {
 /**
  * The wording of the result. It says only what the comparison found: "no uneven areas found" is
  * not "consistent" or "untouched", and when half or more of the picture could not be judged
- * (flat colour, too small) the result is neutral, never green.
+ * (flat colour, too small), or a quarter or more of the compared areas carry text or graphics
+ * the check cannot single out, the result is neutral, never green.
  */
 export function summarizeForensicsStatus(
   finding: ElaGridFinding | undefined,
@@ -344,6 +405,15 @@ export function summarizeForensicsStatus(
       tone: 'neutral',
       areas: `None in ${finding.judgedCells} of ${total} compared`,
       summary: `No uneven areas found (${finding.judgedCells} of ${total} areas could be compared)`,
+    };
+  }
+  const graphic = findGraphicAreas(finding);
+  if (graphic.level === 'many' || graphic.level === 'most') {
+    return {
+      pill: 'No Uneven Areas Found',
+      tone: 'neutral',
+      areas: `None found, text in ${graphic.count} of ${total}`,
+      summary: `No uneven areas found (text or graphics in ${graphic.count} of ${total} areas)`,
     };
   }
   return { pill: 'No Uneven Areas Found', tone: 'clear', areas: 'None found', summary: 'No uneven areas found' };

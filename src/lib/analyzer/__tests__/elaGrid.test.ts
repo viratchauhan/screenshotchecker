@@ -6,6 +6,7 @@ import {
   describeCellPlace,
   describeElaGrid,
   elaGridSize,
+  findGraphicAreas,
   findUnevenElaCells,
   looksLikeGraphic,
   summarizeForensicsStatus,
@@ -268,4 +269,69 @@ test('page wiring: graphic-like areas get a dashed outline and the card explains
   assert.match(page, /cell\.graphicLike \? 'dashed' : 'solid'/);
   assert.match(page, /A dashed outline means the area has hard, clean edges/);
   assert.match(page, /the dashed outline is a guess/);
+});
+
+/** Fictional cells for the text tests: photographed detail, with drawn edges where `drawn(i)` says so. */
+function cellsWithText(drawn: (i: number) => boolean): ElaGridCell[] {
+  return Array.from({ length: 64 }, (_, i) => ({
+    col: i % 8,
+    row: i >> 3,
+    detail: 3 + (i % 4),
+    error: 1 + (i % 4) * 0.2,
+    edgeShare: drawn(i) ? 0.08 : 0.3,
+    hardEdgeShare: drawn(i) ? 0.04 : 0.02,
+  }));
+}
+
+test('text that is not outlined: a big caption or a screenshot is named and the result is never green', () => {
+  // A photo with a sign in two areas: too little to mention, the result stays as it was.
+  const sign = findUnevenElaCells(cellsWithText((i) => i < 2), 8, 8);
+  assert.equal(findGraphicAreas(sign).level, 'none');
+  assert.equal(summarizeForensicsStatus(sign, false, false).tone, 'clear');
+  assert.doesNotMatch(describeElaGrid(sign).notes.join(' '), /hard, clean edges/);
+
+  // Text in one row of eight areas: worth a line, still below a quarter of the picture.
+  const strip = findUnevenElaCells(cellsWithText((i) => i < 8), 8, 8);
+  assert.equal(strip.flagged.length, 0);
+  assert.deepEqual([findGraphicAreas(strip).count, findGraphicAreas(strip).level], [8, 'some']);
+  assert.match(describeElaGrid(strip).notes.join(' '), /8 of 64 areas \(top left, top centre, top right\) carry hard, clean edges/);
+  assert.equal(summarizeForensicsStatus(strip, false, false).tone, 'clear');
+
+  // A meme caption over the top three rows: nothing is outlined, and the result says why.
+  const caption = findUnevenElaCells(cellsWithText((i) => i < 24), 8, 8);
+  assert.equal(caption.flagged.length, 0);
+  assert.equal(findGraphicAreas(caption).level, 'many');
+  const captionReport = describeElaGrid(caption);
+  assert.equal(captionReport.headline, 'No uneven areas found');
+  assert.match(captionReport.notes.join(' '), /24 of 64 areas .*too much of the picture for this check to single out/);
+  const captionStatus = summarizeForensicsStatus(caption, false, false);
+  assert.deepEqual([captionStatus.pill, captionStatus.tone], ['No Uneven Areas Found', 'neutral']);
+  assert.match(captionStatus.areas, /text in 24 of 64/);
+  assert.match(captionStatus.summary, /text or graphics in 24 of 64 areas/);
+
+  // An app screenshot: drawn edges everywhere.
+  const screen = findUnevenElaCells(cellsWithText(() => true), 8, 8);
+  assert.equal(findGraphicAreas(screen).level, 'most');
+  assert.match(describeElaGrid(screen).notes.join(' '), /Most of this picture is text or drawn graphics \(64 of 64 areas\), as in a screenshot/);
+  assert.equal(summarizeForensicsStatus(screen, false, false).tone, 'neutral');
+
+  // Outlined areas are not counted twice, and the line says the others are not outlined.
+  const mixed = { ...caption, flagged: [{ ...caption.cells[0], expected: 1, graphicLike: true }] };
+  assert.equal(findGraphicAreas(mixed).count, 23);
+  assert.match(describeElaGrid(mixed).notes.join(' '), /23 of 64 areas that are not outlined/);
+
+  // A hint only: no certainty either way.
+  for (const f of [strip, caption, screen, mixed]) {
+    const s = summarizeForensicsStatus(f, false, false);
+    assert.doesNotMatch(
+      `${describeElaGrid(f).notes.join(' ')} ${s.pill} ${s.areas} ${s.summary}`,
+      /proves|certainly|definitely|authentic|genuine|consistent/i,
+    );
+  }
+});
+
+test('page wiring: the card explains text that is not outlined', () => {
+  const page = readFileSync(new URL('../../../components/workspaces/ForensicsWorkspace.astro', import.meta.url), 'utf8');
+  assert.match(page, /a note says how many/);
+  assert.match(page, /stays grey, not green/);
 });
