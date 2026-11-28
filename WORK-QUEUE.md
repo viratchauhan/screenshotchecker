@@ -29,6 +29,7 @@ CONTENT items:
 - [ ] C2 Tutorial guides, one per run, each linking to the matching view: how to read an ELA result (with fictional examples of false alarms), clone detection, noise analysis, JPEG quality and re-saves, thumbnail mismatch. These are what Wikipedia, courses and OSINT lists link to on FotoForensics.
 - [x] C3a (28 Nov) `/blog/fotoforensics-alternative/` published (FotoForensics, Forensically, Image Edited? compared; facts from their own FAQ and tutorial pages).
 - [ ] C3b "Forensically alternative / Forensically vs FotoForensics" page: same honest pattern; only after T2-T4 ship, so our tool has more to show. Also consider "is fotoforensics safe" as its own short guide if the alternatives page gets impressions for it.
+- [ ] C6 "Free tools to check if a photo is edited or photoshopped" guide: list FotoForensics, Forensically, Image Edited?, TinEye/Lens and our checker fairly, with what each is best at. This is the article type that earned imageedited.com its links (HowToGeek, MakeUseOf, Lifehacker, Yahoo). Also name the newer rivals found on 28 Nov only after opening each: truthscan.com, fakeimagedetector.com, fauxlens.com, snapwonders.com.
 - [ ] C4 Refresh `/blog/how-to-tell-if-a-photo-is-edited/` (position 20, 628 impressions): answer first, add the new views as steps.
 - [ ] C5 Outreach DRAFTS only (owner sends): OSINT lists that carry FotoForensics (osintframework.com, start.me pages, awesome-osint), journalism tool lists, and a Wikipedia "Error level analysis" external-link suggestion for the talk page.
 

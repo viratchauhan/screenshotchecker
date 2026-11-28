@@ -296,3 +296,11 @@ Pushed scoped commit 80229af to GitHub main and deployed Cloudflare version ac55
 - Competitor data: Ahrefs Domain Rating FotoForensics 70, 29a.ch 67, imageedited.com 20, screenshotchecker.com 0.5; FotoForensics has about 16K backlinks from 3.8K sites (Ahrefs free checker) and about 77-107k visits a month, falling (Similarweb; its own status page shows unique uploads down from 64k in Nov 2025 to about 43k). Linker types and the send-first order for drafts are in the private outreach kit.
 - Checks: npm test 41/41, build 85 pages, test:seo 0 errors/0 warnings, blog SEO 58 PASS. Deployed 982bfc9e, 5 URLs 200, IndexNow 200 for 4 URLs. Google indexing requested for the new guide; the checker page recrawl hit the daily quota (request it tomorrow).
 - The lock file path in the hourly task was wrong (`.git` is a file in this worktree); the lock now lives at D:\screenshotchecker\.git\worktrees\screenshotchecker-seo\work-run.lock.
+
+## 28 Nov 2026 (owner session, later): backlink reality check with SEO Review Tools
+
+- Type: PLANNING (no site change).
+- Our links: 162 backlinks from 136 sites, but 99 of the top 100 are auto-made spam pages that advertise link-selling gigs; one real link (the OSINT Newsletter tools directory). Decision: ignore the spam, no disavow unless Search Console shows a manual action, never buy links.
+- imageedited.com (3 pages) has about 2.9K linking sites, mostly old "how to spot a photoshopped photo" articles on big publishers that name it as a tool. FotoForensics shares keywords with truthscan.com, fakeimagedetector.com, fauxlens.com, 29a.ch and snapwonders.com.
+- Next: a fair "free tools to check if a photo is edited" guide, and drafts to authors of still-maintained tool articles and OSINT lists (details in the private outreach kit).
+- SEO Review Tools and the Ahrefs free checker only work in the owner's Chrome (the built-in browser pane fails their human check).

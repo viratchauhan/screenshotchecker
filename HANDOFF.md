@@ -131,6 +131,7 @@ source alongside GA4 and Clarity.
 - 27 Nov: new guide `utr-number-tracking` ("utr number tracking online" cluster; RBI NEFT/RTGS FAQs, 2019 TAT circular). Deployed 850f475b, IndexNow pinged. Google indexing NOT yet requested (Search Console signed out in the browser pane).
 - 21 Nov routine check: payment checker 327 clicks in 7 days at 17.5% CTR, position 4.3; homepage flat (110 clicks, 5.3).
 - Backlinks: 8 directory/editorial submissions from 1 and 6 Oct are pending editorial review (see the ledger);
+- Backlink check 28 Nov (SEO Review Tools): 136 linking sites, but nearly all are auto-made link-seller spam pages; one real link (tools.osintnewsletter.com). Ahrefs Domain Rating 0.5 against FotoForensics 70. Ignore the spam (no disavow unless a manual action appears); real links are the main gap.
   none verified as published.
 
 ## Next steps
