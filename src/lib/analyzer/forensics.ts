@@ -1,5 +1,6 @@
 import type { ForensicsInfo } from './types';
 import { fitElaViewSize } from './elaView';
+import { describeElaGrid, elaGridSize, findUnevenElaCells, measureElaGrid } from './elaGrid';
 
 /**
  * Performs Error Level Analysis (ELA) and noise variance checks in browser canvas.
@@ -102,6 +103,16 @@ export async function analyzeImageForensics(img: HTMLImageElement): Promise<Fore
   const variance = quadAverages.reduce((sum, v) => sum + Math.pow(v - meanQuad, 2), 0) / 4;
   const stdDev = Math.sqrt(variance);
 
+  // Finer comparison: every area against areas with similar detail (a small pasted patch
+  // disappears in the four quadrant averages above).
+  const gridSize = elaGridSize(width, height);
+  const elaGrid = findUnevenElaCells(
+    measureElaGrid(origPixels, resavedPixels, width, height, gridSize),
+    gridSize.cols,
+    gridSize.rows,
+  );
+  const unevenAreas = elaGrid.flagged.length > 0;
+
   const notes: string[] = [];
   let anomaliesDetected = false;
 
@@ -109,19 +120,24 @@ export async function analyzeImageForensics(img: HTMLImageElement): Promise<Fore
     anomaliesDetected = true;
     notes.push('Localized compression level disparity detected across image regions.');
     notes.push('Highlighted high-contrast ELA areas may suggest spliced or re-compressed elements.');
-  } else {
+  } else if (!unevenAreas) {
     notes.push('Compression error distribution is relatively uniform across the image plane.');
     notes.push('No obvious high-gradient compression boundary anomalies detected.');
   }
+  if (unevenAreas) anomaliesDetected = true;
+  notes.push(...describeElaGrid(elaGrid).notes);
 
   return {
     elaDataUrl,
     anomaliesDetected,
     compressionInconsistency: anomaliesDetected
-      ? 'Regional compression variance observed'
+      ? unevenAreas && !(stdDev > 4.5 && maxDiff > 35)
+        ? 'Uneven areas observed'
+        : 'Regional compression variance observed'
       : 'Uniform compression characteristics',
     noiseVarianceScore: Math.round(stdDev * 10) / 10,
     cloneRegionsFound: false,
     notes,
+    elaGrid,
   };
 }

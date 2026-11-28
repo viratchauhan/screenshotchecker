@@ -381,6 +381,8 @@ export interface ForensicsInfo {
   noiseVarianceScore: number;
   cloneRegionsFound: boolean;
   notes: string[];
+  /** Area-by-area comparison of the ELA result (8 x 8 grid on normal pictures). */
+  elaGrid?: import('./elaGrid').ElaGridFinding;
 }
 
 export interface ImageInfo {

@@ -82,6 +82,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
           <div class="relative inline-block max-w-full">
             <img id="forensics-active-view" src="" alt="Forensic Analysis View" class="block max-h-[560px] max-w-full w-auto h-auto shadow-md rounded" />
             <img id="forensics-overlay-view" src="" alt="" aria-hidden="true" class="hidden absolute inset-0 w-full h-full rounded pointer-events-none" />
+            <div id="forensics-grid-marks" aria-hidden="true" class="hidden absolute inset-0 pointer-events-none"></div>
           </div>
         </div>
 
@@ -140,6 +141,19 @@ const faqs = getToolFaqs('image-manipulation-checker');
             <span class="text-muted block mb-0.5">Regional Edits Flagged</span>
             <strong id="forensics-kpi-anomalies" class="font-mono text-success text-sm">None Detected</strong>
           </div>
+        </div>
+
+        <!-- Area-by-area comparison of the ELA result (feeds the result pill) -->
+        <div id="ela-grid-card" class="bg-canvas border border-hairline rounded-xl p-4 space-y-2.5">
+          <h2 class="text-sm font-semibold text-ink">Area by area check</h2>
+          <p id="ela-grid-headline" class="text-sm text-ink font-medium" role="status" aria-live="polite">Comparing the areas of the picture.</p>
+          <ul id="ela-grid-notes" class="text-xs text-body leading-relaxed space-y-1.5 list-disc pl-4"></ul>
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-ink">What this shows:</strong> the picture is cut into up to 64 areas, and each one is compared with areas that have a similar amount of detail. An area that changes far more than its detail explains is outlined on the ELA map.
+          </p>
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Added text, stickers and watermarks stand out by themselves, and an edit saved together with the rest of the picture, or flattened by a messaging app, does not stand out at all.
+          </p>
         </div>
 
         <!-- JPEG quality card (reads the file's own tables; nothing leaves the browser) -->
@@ -207,6 +221,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
     isDefaultElaView,
     type ElaViewRenderer,
   } from '../../lib/analyzer/elaView';
+  import { describeElaGrid, type ElaGridFinding } from '../../lib/analyzer/elaGrid';
   import { buildJpegQualityReport, dataUrlHeadBytes, type JpegQualityReport } from '../../lib/analyzer/jpegQuality';
 
   let currentDataUrl = '';
@@ -337,10 +352,54 @@ const faqs = getToolFaqs('image-manipulation-checker');
       kpiAnomalies.className = result.anomaliesDetected ? 'font-mono text-error text-sm' : 'font-mono text-success text-sm';
     }
 
+    const unevenOnly = Boolean(result.elaGrid?.flagged.length) && result.compressionInconsistency === 'Uneven areas observed';
     if (statusPill) {
-      statusPill.innerText = result.anomaliesDetected ? 'Compression Anomaly' : 'Consistent Compression';
+      statusPill.innerText = result.anomaliesDetected ? (unevenOnly ? 'Uneven Areas' : 'Compression Anomaly') : 'Consistent Compression';
       statusPill.className = result.anomaliesDetected ? 'badge-status-warning' : 'badge-status-safe';
     }
+    showElaGrid(result.elaGrid);
+  }
+
+  const gridHeadline = document.getElementById('ela-grid-headline');
+  const gridNotes = document.getElementById('ela-grid-notes');
+  const gridMarks = document.getElementById('forensics-grid-marks');
+
+  function showElaGrid(finding: ElaGridFinding | undefined) {
+    if (gridMarks) gridMarks.replaceChildren();
+    if (!finding) {
+      if (gridHeadline) gridHeadline.textContent = 'The area by area check is not available for this picture.';
+      if (gridNotes) gridNotes.replaceChildren();
+      return;
+    }
+    const report = describeElaGrid(finding);
+    if (gridHeadline) gridHeadline.textContent = report.headline;
+    if (gridNotes) {
+      gridNotes.replaceChildren(
+        ...report.notes.map((note) => {
+          const li = document.createElement('li');
+          li.textContent = note;
+          return li;
+        }),
+      );
+    }
+    if (gridMarks) {
+      for (const cell of finding.flagged) {
+        const mark = document.createElement('div');
+        mark.className = 'absolute rounded-sm';
+        mark.style.border = '2px solid var(--color-warning)';
+        mark.style.left = `${(cell.col / finding.cols) * 100}%`;
+        mark.style.top = `${(cell.row / finding.rows) * 100}%`;
+        mark.style.width = `${100 / finding.cols}%`;
+        mark.style.height = `${100 / finding.rows}%`;
+        mark.style.boxShadow = '0 0 0 1px rgba(0,0,0,0.7)';
+        gridMarks.appendChild(mark);
+      }
+    }
+    applyGridMarks();
+  }
+
+  function applyGridMarks() {
+    gridMarks?.classList.toggle('hidden', currentMode !== 'ela' || !gridMarks.childElementCount);
   }
 
   function setMode(mode: string) {
@@ -357,6 +416,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
     elaControls?.classList.toggle('hidden', mode !== 'ela');
     if (activeView) activeView.src = mode === 'original' ? currentDataUrl : currentElaUrl;
     applyOverlay();
+    applyGridMarks();
   }
 
   function readElaSettings() {

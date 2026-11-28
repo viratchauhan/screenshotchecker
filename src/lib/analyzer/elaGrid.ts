@@ -1,0 +1,231 @@
+/**
+ * Finer look at an Error Level Analysis (ELA) result.
+ *
+ * The first verdict compared four quadrants only, so a small pasted area disappeared in the
+ * average. Here the picture is cut into a grid (8 x 8 on normal pictures). For every cell we
+ * measure two things: how much it changed in the test re-save (error) and how much fine detail
+ * it has (detail). Busy areas always change more than calm ones, so a cell is flagged only when
+ * its error is far above what its own detail explains, judged against the other cells of the
+ * same picture. Flat cells are set aside: ELA has nothing to say about them.
+ *
+ * Pure functions, no DOM, so they run in unit tests.
+ */
+
+export interface ElaGridCell {
+  col: number;
+  row: number;
+  /** Mean per-channel difference between the picture and its re-saved copy (0 to 255). */
+  error: number;
+  /** Mean brightness step between neighbouring pixels of the picture (0 to 255). */
+  detail: number;
+}
+
+export interface ElaGridFlag extends ElaGridCell {
+  /** The error the other cells predict for this amount of detail. */
+  expected: number;
+}
+
+export interface ElaGridFinding {
+  cols: number;
+  rows: number;
+  cells: ElaGridCell[];
+  /** Cells whose re-save error is far above what their detail explains. */
+  flagged: ElaGridFlag[];
+  /** Cells with almost no detail. ELA cannot judge them, so they are never flagged. */
+  flatCells: number;
+  /** Cells that were compared with each other. */
+  judgedCells: number;
+  /** False when the picture is too small or too flat for a fair comparison. */
+  enoughData: boolean;
+}
+
+export const ELA_GRID = {
+  maxCells: 8,
+  /** Smallest cell side in pixels. Smaller cells are too noisy to compare. */
+  minCellSide: 24,
+  /** Below this detail a cell counts as flat. */
+  flatDetail: 0.6,
+  /** Fewest comparable cells needed before anything is flagged. */
+  minJudged: 12,
+  /** A flagged cell must be this many robust deviations above the fit ... */
+  deviations: 4,
+  /** ... and at least this many times the expected error ... */
+  minRatio: 1.8,
+  /** ... and at least this far above it in absolute terms. */
+  minExcess: 0.8,
+  /** More flagged cells than this share means the fit does not describe the picture. */
+  maxFlaggedShare: 0.25,
+} as const;
+
+export type ElaGridRules = { readonly [K in keyof typeof ELA_GRID]: number };
+
+/** Grid size for a picture: up to 8 x 8, fewer cells when the picture is small. */
+export function elaGridSize(width: number, height: number): { cols: number; rows: number } {
+  const fit = (side: number) => Math.max(1, Math.min(ELA_GRID.maxCells, Math.floor(side / ELA_GRID.minCellSide)));
+  return { cols: fit(width), rows: fit(height) };
+}
+
+/** Measures error and detail for every grid cell from two RGBA buffers of the same size. */
+export function measureElaGrid(
+  original: ArrayLike<number>,
+  resaved: ArrayLike<number>,
+  width: number,
+  height: number,
+  size: { cols: number; rows: number } = elaGridSize(width, height),
+): ElaGridCell[] {
+  if (original.length !== resaved.length || original.length !== width * height * 4) {
+    throw new Error('The ELA grid needs two RGBA buffers that match the picture size');
+  }
+  const { cols, rows } = size;
+  const count = cols * rows;
+  const errorSum = new Float64Array(count);
+  const detailSum = new Float64Array(count);
+  const pixels = new Uint32Array(count);
+  const detailPixels = new Uint32Array(count);
+  const luma = (i: number) => 0.299 * original[i] + 0.587 * original[i + 1] + 0.114 * original[i + 2];
+
+  for (let y = 0; y < height; y++) {
+    const row = Math.min(rows - 1, Math.floor((y * rows) / height));
+    for (let x = 0; x < width; x++) {
+      const col = Math.min(cols - 1, Math.floor((x * cols) / width));
+      const cell = row * cols + col;
+      const i = (y * width + x) * 4;
+      errorSum[cell] +=
+        (Math.abs(original[i] - resaved[i]) +
+          Math.abs(original[i + 1] - resaved[i + 1]) +
+          Math.abs(original[i + 2] - resaved[i + 2])) /
+        3;
+      pixels[cell]++;
+      if (x + 1 < width && y + 1 < height) {
+        const here = luma(i);
+        detailSum[cell] += (Math.abs(here - luma(i + 4)) + Math.abs(here - luma(i + width * 4))) / 2;
+        detailPixels[cell]++;
+      }
+    }
+  }
+
+  const cells: ElaGridCell[] = [];
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < cols; col++) {
+      const cell = row * cols + col;
+      cells.push({
+        col,
+        row,
+        error: pixels[cell] ? errorSum[cell] / pixels[cell] : 0,
+        detail: detailPixels[cell] ? detailSum[cell] / detailPixels[cell] : 0,
+      });
+    }
+  }
+  return cells;
+}
+
+function median(values: number[]): number {
+  if (values.length === 0) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = sorted.length >> 1;
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+/**
+ * Compares the cells of one picture with each other. A robust line (Theil-Sen) gives the error
+ * to expect for a given amount of detail; a cell is flagged only when it sits far above it.
+ */
+export function findUnevenElaCells(
+  cells: ElaGridCell[],
+  cols: number,
+  rows: number,
+  rules: ElaGridRules = ELA_GRID,
+): ElaGridFinding {
+  const judged = cells.filter((c) => c.detail >= rules.flatDetail);
+  const base: ElaGridFinding = {
+    cols,
+    rows,
+    cells,
+    flagged: [],
+    flatCells: cells.length - judged.length,
+    judgedCells: judged.length,
+    enoughData: judged.length >= rules.minJudged,
+  };
+  if (!base.enoughData) return base;
+
+  const slopes: number[] = [];
+  for (let i = 0; i < judged.length; i++) {
+    for (let j = i + 1; j < judged.length; j++) {
+      const run = judged[j].detail - judged[i].detail;
+      if (Math.abs(run) > 1e-6) slopes.push((judged[j].error - judged[i].error) / run);
+    }
+  }
+  const slope = Math.max(0, median(slopes));
+  const offset = median(judged.map((c) => c.error - slope * c.detail));
+  const expectedFor = (c: ElaGridCell) => Math.max(0, offset + slope * c.detail);
+  const residuals = judged.map((c) => c.error - expectedFor(c));
+  const centre = median(residuals);
+  // 1.4826 turns the median absolute deviation into a standard-deviation-like spread.
+  const spread = Math.max(0.15, 1.4826 * median(residuals.map((r) => Math.abs(r - centre))));
+
+  const flagged = judged
+    .map((c) => ({ ...c, expected: expectedFor(c) }))
+    .filter(
+      (c) =>
+        c.error - c.expected > rules.deviations * spread &&
+        c.error - c.expected >= rules.minExcess &&
+        c.error >= rules.minRatio * Math.max(c.expected, 0.5),
+    );
+
+  // When a large share of the picture "stands out", the picture is simply varied: flag nothing.
+  if (flagged.length > judged.length * rules.maxFlaggedShare) return base;
+  return { ...base, flagged };
+}
+
+/** Where a cell sits, in words a visitor can match to the picture. */
+export function describeCellPlace(cell: { col: number; row: number }, cols: number, rows: number): string {
+  const third = (index: number, total: number, names: [string, string, string]) =>
+    total < 3 ? names[index < total / 2 ? 0 : 2] : names[Math.min(2, Math.floor((index * 3) / total))];
+  const vertical = third(cell.row, rows, ['top', 'middle', 'bottom']);
+  const horizontal = third(cell.col, cols, ['left', 'centre', 'right']);
+  if (vertical === 'middle' && horizontal === 'centre') return 'centre';
+  if (vertical === 'middle') return `middle ${horizontal}`;
+  return `${vertical} ${horizontal}`;
+}
+
+/** Plain-language lines for the result card. Never claims an edit or a clean picture. */
+export function describeElaGrid(finding: ElaGridFinding): { headline: string; notes: string[] } {
+  const total = finding.cols * finding.rows;
+  const notes: string[] = [];
+  if (!finding.enoughData) {
+    return {
+      headline: 'Not enough detail to compare areas',
+      notes: [
+        finding.cells.length < ELA_GRID.minJudged
+          ? 'The picture is too small to compare its parts with each other.'
+          : 'Most of this picture is flat colour, and flat areas barely change in a re-save, so there is little to compare.',
+      ],
+    };
+  }
+  if (finding.flagged.length > 0) {
+    const places = [...new Set(finding.flagged.map((c) => describeCellPlace(c, finding.cols, finding.rows)))];
+    const n = finding.flagged.length;
+    notes.push(
+      `${n} of ${total} areas changed far more in the test re-save than areas with similar detail (${places.join(', ')}). They are outlined on the ELA map.`,
+    );
+    notes.push(
+      'That can happen when something was pasted in or redrawn after the picture was first saved. Added text, stickers, watermarks and very sharp or brightly coloured objects do the same without any trickery, so look at what sits inside the outlines.',
+    );
+  } else {
+    notes.push(
+      `${finding.judgedCells} of ${total} areas were compared and none changed far more than its detail explains.`,
+    );
+    notes.push(
+      'This does not show the picture is untouched. An edit that was saved together with the rest, a re-save by a messaging app, or a careful edit leaves an even result too.',
+    );
+  }
+  if (finding.flatCells > 0) {
+    notes.push(
+      `${finding.flatCells} of ${total} areas are flat colour. Flat areas barely change in a re-save whether they are original or pasted, so this check cannot judge them.`,
+    );
+  }
+  return {
+    headline: finding.flagged.length > 0 ? `${finding.flagged.length} uneven ${finding.flagged.length === 1 ? 'area' : 'areas'} found` : 'No uneven areas found',
+    notes,
+  };
+}
