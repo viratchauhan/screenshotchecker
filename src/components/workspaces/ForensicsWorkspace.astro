@@ -79,7 +79,51 @@ const faqs = getToolFaqs('image-manipulation-checker');
 
         <!-- Comparative Image Display -->
         <div class="relative bg-surface-dark-soft rounded-xl overflow-hidden flex items-center justify-center min-h-[380px] max-h-[580px] border border-hairline p-2">
-          <img id="forensics-active-view" src="" alt="Forensic Analysis View" class="max-h-[560px] w-auto object-contain shadow-md rounded" />
+          <div class="relative inline-block max-w-full">
+            <img id="forensics-active-view" src="" alt="Forensic Analysis View" class="block max-h-[560px] max-w-full w-auto h-auto shadow-md rounded" />
+            <img id="forensics-overlay-view" src="" alt="" aria-hidden="true" class="hidden absolute inset-0 w-full h-full rounded pointer-events-none" />
+          </div>
+        </div>
+
+        <!-- ELA view controls (they change the picture only, never the result below) -->
+        <div id="ela-controls" class="bg-canvas border border-hairline rounded-xl p-4 space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h2 class="text-sm font-semibold text-ink">Adjust the ELA view</h2>
+            <button type="button" id="ela-reset" class="btn-secondary text-xs h-9 px-3" disabled>Reset view</button>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-x-5 gap-y-4 text-xs">
+            <div>
+              <label for="ela-quality" class="flex items-center justify-between gap-2 text-body mb-1.5">
+                <span>JPEG quality</span>
+                <output id="ela-quality-value" for="ela-quality" class="font-mono text-ink">75%</output>
+              </label>
+              <input id="ela-quality" type="range" min="50" max="98" step="1" value="75" class="w-full h-6 [accent-color:var(--color-primary)] cursor-pointer" aria-describedby="ela-quality-hint" />
+              <p id="ela-quality-hint" class="text-muted mt-1 leading-snug">The quality of the test re-save. Try a value close to how the picture was last saved.</p>
+            </div>
+            <div>
+              <label for="ela-scale" class="flex items-center justify-between gap-2 text-body mb-1.5">
+                <span>Error scale</span>
+                <output id="ela-scale-value" for="ela-scale" class="font-mono text-ink">25x</output>
+              </label>
+              <input id="ela-scale" type="range" min="5" max="60" step="1" value="25" class="w-full h-6 [accent-color:var(--color-primary)] cursor-pointer" aria-describedby="ela-scale-hint" />
+              <p id="ela-scale-hint" class="text-muted mt-1 leading-snug">How much the differences are brightened. Raise it if the map looks black.</p>
+            </div>
+            <div>
+              <label for="ela-overlay" class="flex items-center justify-between gap-2 text-body mb-1.5">
+                <span>Show original on top</span>
+                <output id="ela-overlay-value" for="ela-overlay" class="font-mono text-ink">0%</output>
+              </label>
+              <input id="ela-overlay" type="range" min="0" max="100" step="5" value="0" class="w-full h-6 [accent-color:var(--color-primary)] cursor-pointer" aria-describedby="ela-overlay-hint" />
+              <p id="ela-overlay-hint" class="text-muted mt-1 leading-snug">Fades the picture over the map so you can see what a bright patch belongs to.</p>
+            </div>
+          </div>
+          <p id="ela-view-status" class="text-xs text-muted" role="status" aria-live="polite">Compared with a 75% quality re-save, differences shown 25 times brighter.</p>
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-ink">What this shows:</strong> how strongly each part of the picture changes when it is saved again as a JPEG. A patch that stays much brighter than similar areas around it at several settings is worth a closer look.
+          </p>
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Text, sharp edges and re-saved or forwarded pictures light up by themselves, and these sliders change only the view, not the result below.
+          </p>
         </div>
 
         <!-- Metric KPI Cards -->
@@ -135,10 +179,20 @@ const faqs = getToolFaqs('image-manipulation-checker');
 
 <script>
   import { setHandoffImage, getHandoffImage } from '../../lib/utils/toolHandoff';
+  import {
+    DEFAULT_ELA_VIEW,
+    clampElaViewSettings,
+    createElaViewRenderer,
+    describeElaView,
+    isDefaultElaView,
+    type ElaViewRenderer,
+  } from '../../lib/analyzer/elaView';
 
   let currentDataUrl = '';
   let currentElaUrl = '';
   let currentForensics: any = null;
+  let currentMode = 'ela';
+  let elaRenderer: ElaViewRenderer | null = null;
 
   const dropZone = document.getElementById('forensics-upload-container');
   const fileInput = document.getElementById('forensics-file-input') as HTMLInputElement | null;
@@ -151,6 +205,17 @@ const faqs = getToolFaqs('image-manipulation-checker');
   const kpiUniformity = document.getElementById('forensics-kpi-uniformity');
   const kpiNoise = document.getElementById('forensics-kpi-noise');
   const kpiAnomalies = document.getElementById('forensics-kpi-anomalies');
+
+  const overlayView = document.getElementById('forensics-overlay-view') as HTMLImageElement | null;
+  const elaControls = document.getElementById('ela-controls');
+  const qualityInput = document.getElementById('ela-quality') as HTMLInputElement | null;
+  const scaleInput = document.getElementById('ela-scale') as HTMLInputElement | null;
+  const overlayInput = document.getElementById('ela-overlay') as HTMLInputElement | null;
+  const qualityValue = document.getElementById('ela-quality-value');
+  const scaleValue = document.getElementById('ela-scale-value');
+  const overlayValue = document.getElementById('ela-overlay-value');
+  const elaStatus = document.getElementById('ela-view-status');
+  const resetBtn = document.getElementById('ela-reset') as HTMLButtonElement | null;
 
   async function processForensics(dataUrl: string) {
     (window as any).scTrack?.('analysis_completed', { result: 'forensics' });
@@ -167,7 +232,18 @@ const faqs = getToolFaqs('image-manipulation-checker');
     currentForensics = result;
     currentElaUrl = result.elaDataUrl || dataUrl;
 
-    if (activeView) activeView.src = currentElaUrl;
+    // The adjustable view starts at the same settings as the analysis and keeps the picture's shape.
+    elaRenderer = null;
+    resetElaInputs();
+    try {
+      elaRenderer = createElaViewRenderer(img);
+      currentElaUrl = await elaRenderer.render(DEFAULT_ELA_VIEW);
+    } catch {
+      elaRenderer = null;
+    }
+    setElaControlsEnabled(Boolean(elaRenderer));
+    if (overlayView) overlayView.src = dataUrl;
+    setMode('ela');
 
     if (kpiUniformity) kpiUniformity.innerText = result.compressionInconsistency;
     if (kpiNoise) kpiNoise.innerText = String(result.noiseVarianceScore);
@@ -182,23 +258,101 @@ const faqs = getToolFaqs('image-manipulation-checker');
     }
   }
 
-  modeBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      modeBtns.forEach((b) => {
-        b.classList.remove('bg-surface-cream-strong', 'text-primary', 'font-semibold');
-        b.classList.add('text-body', 'font-medium');
-      });
-      btn.classList.add('bg-surface-cream-strong', 'text-primary', 'font-semibold');
-      btn.classList.remove('text-body', 'font-medium');
-
-      const mode = btn.getAttribute('data-mode');
-      if (!activeView) return;
-      if (mode === 'original') {
-        activeView.src = currentDataUrl;
-      } else {
-        activeView.src = currentElaUrl;
-      }
+  function setMode(mode: string) {
+    currentMode = mode;
+    modeBtns.forEach((b) => {
+      const active = b.getAttribute('data-mode') === mode;
+      b.classList.toggle('bg-surface-cream-strong', active);
+      b.classList.toggle('text-primary', active);
+      b.classList.toggle('font-semibold', active);
+      b.classList.toggle('text-body', !active);
+      b.classList.toggle('font-medium', !active);
+      b.setAttribute('aria-pressed', String(active));
     });
+    elaControls?.classList.toggle('hidden', mode !== 'ela');
+    if (activeView) activeView.src = mode === 'original' ? currentDataUrl : currentElaUrl;
+    applyOverlay();
+  }
+
+  function readElaSettings() {
+    return clampElaViewSettings({
+      quality: qualityInput?.value,
+      scale: scaleInput?.value,
+      overlay: overlayInput?.value,
+    });
+  }
+
+  function showElaSettings() {
+    const settings = readElaSettings();
+    if (qualityValue) qualityValue.textContent = `${settings.quality}%`;
+    if (scaleValue) scaleValue.textContent = `${settings.scale}x`;
+    if (overlayValue) overlayValue.textContent = `${settings.overlay}%`;
+    if (elaStatus) elaStatus.textContent = describeElaView(settings);
+    if (resetBtn) resetBtn.disabled = !elaRenderer || isDefaultElaView(settings);
+    return settings;
+  }
+
+  function applyOverlay() {
+    if (!overlayView) return;
+    const { overlay } = readElaSettings();
+    const visible = currentMode === 'ela' && overlay > 0;
+    overlayView.classList.toggle('hidden', !visible);
+    overlayView.style.opacity = String(overlay / 100);
+  }
+
+  function resetElaInputs() {
+    if (qualityInput) qualityInput.value = String(DEFAULT_ELA_VIEW.quality);
+    if (scaleInput) scaleInput.value = String(DEFAULT_ELA_VIEW.scale);
+    if (overlayInput) overlayInput.value = String(DEFAULT_ELA_VIEW.overlay);
+    showElaSettings();
+    applyOverlay();
+  }
+
+  function setElaControlsEnabled(enabled: boolean) {
+    [qualityInput, scaleInput].forEach((input) => {
+      if (input) input.disabled = !enabled;
+    });
+    if (!enabled && elaStatus) {
+      elaStatus.textContent = 'The adjustable view is not available for this picture. The standard ELA map is shown.';
+    }
+  }
+
+  let elaRenderTimer: number | undefined;
+  let elaRenderRun = 0;
+
+  function scheduleElaRender() {
+    const settings = showElaSettings();
+    if (!elaRenderer) return;
+    window.clearTimeout(elaRenderTimer);
+    elaRenderTimer = window.setTimeout(async () => {
+      const run = ++elaRenderRun;
+      const renderer = elaRenderer;
+      if (!renderer) return;
+      try {
+        const url = await renderer.render(settings);
+        // A newer slider move or a new picture wins.
+        if (run !== elaRenderRun || renderer !== elaRenderer) return;
+        currentElaUrl = url;
+        if (currentMode !== 'original' && activeView) activeView.src = url;
+      } catch {
+        if (elaStatus) elaStatus.textContent = 'Could not redraw the map with these settings. Try Reset view.';
+      }
+    }, 120);
+  }
+
+  qualityInput?.addEventListener('input', scheduleElaRender);
+  scaleInput?.addEventListener('input', scheduleElaRender);
+  overlayInput?.addEventListener('input', () => {
+    showElaSettings();
+    applyOverlay();
+  });
+  resetBtn?.addEventListener('click', () => {
+    resetElaInputs();
+    scheduleElaRender();
+  });
+
+  modeBtns.forEach((btn) => {
+    btn.addEventListener('click', () => setMode(btn.getAttribute('data-mode') || 'ela'));
   });
 
   dropZone?.addEventListener('click', () => fileInput?.click());
