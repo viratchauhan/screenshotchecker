@@ -87,3 +87,9 @@ test('large pictures are scaled down without changing their shape', () => {
   assert.deepEqual(fitElaViewSize(1080, 2400), { width: 720, height: 1600 });
   assert.deepEqual(fitElaViewSize(5000, 2), { width: 1600, height: 1 });
 });
+
+test('the verdict analysis scales large pictures with the same shape-keeping helper', () => {
+  const forensics = readFileSync(new URL('../forensics.ts', import.meta.url), 'utf8');
+  assert.match(forensics, /fitElaViewSize\(naturalWidth, naturalHeight\)/);
+  assert.doesNotMatch(forensics, /Math\.min\([^)]*, 1600\)/);
+});

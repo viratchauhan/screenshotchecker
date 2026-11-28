@@ -141,6 +141,26 @@ const faqs = getToolFaqs('image-manipulation-checker');
             <strong id="forensics-kpi-anomalies" class="font-mono text-success text-sm">None Detected</strong>
           </div>
         </div>
+
+        <!-- JPEG quality card (reads the file's own tables; nothing leaves the browser) -->
+        <div id="jpeg-quality-card" class="bg-canvas border border-hairline rounded-xl p-4 space-y-2.5">
+          <h2 class="text-sm font-semibold text-ink">JPEG save quality</h2>
+          <p id="jpeg-quality-headline" class="text-sm text-ink font-medium" role="status" aria-live="polite">Reading the file.</p>
+          <ul id="jpeg-quality-notes" class="text-xs text-body leading-relaxed space-y-1.5 list-disc pl-4"></ul>
+          <button type="button" id="jpeg-quality-apply" class="btn-secondary text-xs h-9 px-3 hidden"></button>
+          <details id="jpeg-quality-tables-wrap" class="text-xs hidden">
+            <summary class="cursor-pointer text-body hover:text-ink py-1.5">Show the quantization tables stored in the file</summary>
+            <div id="jpeg-quality-tables" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2"></div>
+            <p class="text-muted mt-2 leading-snug">Each number is how coarsely one detail level of an 8 by 8 block was rounded when the file was saved. Larger numbers mean stronger compression.</p>
+          </details>
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-ink">What this shows:</strong> the compression level written into the file the last time it was saved as a JPEG, read from the file's own tables.
+          </p>
+          <p class="text-xs text-muted leading-relaxed">
+            <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Every app that saves or forwards a JPEG writes new tables, with or without an edit.
+          </p>
+        </div>
+        <!-- /JPEG quality card -->
       </div>
 
       <!-- Educational Interpretation Guidance -->
@@ -187,6 +207,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
     isDefaultElaView,
     type ElaViewRenderer,
   } from '../../lib/analyzer/elaView';
+  import { buildJpegQualityReport, dataUrlHeadBytes, type JpegQualityReport } from '../../lib/analyzer/jpegQuality';
 
   let currentDataUrl = '';
   let currentElaUrl = '';
@@ -217,11 +238,75 @@ const faqs = getToolFaqs('image-manipulation-checker');
   const elaStatus = document.getElementById('ela-view-status');
   const resetBtn = document.getElementById('ela-reset') as HTMLButtonElement | null;
 
+  const jpegHeadline = document.getElementById('jpeg-quality-headline');
+  const jpegNotes = document.getElementById('jpeg-quality-notes');
+  const jpegApply = document.getElementById('jpeg-quality-apply') as HTMLButtonElement | null;
+  const jpegTablesWrap = document.getElementById('jpeg-quality-tables-wrap') as HTMLDetailsElement | null;
+  const jpegTables = document.getElementById('jpeg-quality-tables');
+  let jpegSuggestedQuality: number | null = null;
+
+  /** Reads the file's own quantization tables. Runs on the bytes in this tab only. */
+  function showJpegQuality(dataUrl: string) {
+    let report: JpegQualityReport;
+    try {
+      report = buildJpegQualityReport(dataUrlHeadBytes(dataUrl));
+    } catch {
+      report = { format: 'other', tables: [], quality: null, standardTables: false, headline: 'The save quality could not be read from this file.', notes: [] };
+    }
+    if (jpegHeadline) jpegHeadline.textContent = report.headline;
+    if (jpegNotes) {
+      jpegNotes.replaceChildren(
+        ...report.notes.map((note) => {
+          const li = document.createElement('li');
+          li.textContent = note;
+          return li;
+        }),
+      );
+    }
+    if (jpegTables && jpegTablesWrap) {
+      jpegTablesWrap.open = false;
+      jpegTablesWrap.classList.toggle('hidden', report.tables.length === 0);
+      jpegTables.replaceChildren(
+        ...report.tables.map((table, index) => {
+          const box = document.createElement('div');
+          const title = document.createElement('p');
+          title.className = 'text-body mb-1';
+          title.textContent = `Table ${table.id} (${index === 0 ? 'brightness' : 'colour'})`;
+          const grid = document.createElement('pre');
+          grid.className = 'font-mono text-[11px] leading-5 text-ink bg-surface-card border border-hairline rounded-lg p-2 overflow-x-auto';
+          const rows: string[] = [];
+          for (let r = 0; r < 8; r++) {
+            rows.push(table.values.slice(r * 8, r * 8 + 8).map((v) => String(v).padStart(3, ' ')).join(' '));
+          }
+          grid.textContent = rows.join('\n');
+          box.append(title, grid);
+          return box;
+        }),
+      );
+    }
+    // Offer the estimate as the ELA re-save quality when the slider can reach it.
+    const clamped = report.quality === null ? null : clampElaViewSettings({ quality: report.quality }).quality;
+    jpegSuggestedQuality = clamped !== null && clamped !== DEFAULT_ELA_VIEW.quality ? clamped : null;
+    if (jpegApply) {
+      jpegApply.classList.toggle('hidden', jpegSuggestedQuality === null);
+      if (jpegSuggestedQuality !== null) jpegApply.textContent = `Use ${jpegSuggestedQuality}% in the ELA view`;
+    }
+  }
+
+  jpegApply?.addEventListener('click', () => {
+    if (jpegSuggestedQuality === null || !qualityInput || qualityInput.disabled) return;
+    qualityInput.value = String(jpegSuggestedQuality);
+    setMode('ela');
+    scheduleElaRender();
+    elaControls?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  });
+
   async function processForensics(dataUrl: string) {
     (window as any).scTrack?.('analysis_completed', { result: 'forensics' });
     currentDataUrl = dataUrl;
     dropZone?.classList.add('hidden');
     workspace?.classList.remove('hidden');
+    showJpegQuality(dataUrl);
 
     const img = new Image();
     img.src = dataUrl;

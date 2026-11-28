@@ -1,13 +1,14 @@
 import type { ForensicsInfo } from './types';
+import { fitElaViewSize } from './elaView';
 
 /**
  * Performs Error Level Analysis (ELA) and noise variance checks in browser canvas.
  */
 export async function analyzeImageForensics(img: HTMLImageElement): Promise<ForensicsInfo> {
-  const width = Math.min(img.naturalWidth || img.width, 1600);
-  const height = Math.min(img.naturalHeight || img.height, 1600);
+  const naturalWidth = img.naturalWidth || img.width;
+  const naturalHeight = img.naturalHeight || img.height;
 
-  if (width === 0 || height === 0) {
+  if (naturalWidth === 0 || naturalHeight === 0) {
     return {
       anomaliesDetected: false,
       compressionInconsistency: 'Insufficient image data',
@@ -16,6 +17,9 @@ export async function analyzeImageForensics(img: HTMLImageElement): Promise<Fore
       notes: ['Image dimensions too small for forensic analysis.'],
     };
   }
+
+  // Large pictures are scaled down to 1600 pixels on the longest side, keeping their shape.
+  const { width, height } = fitElaViewSize(naturalWidth, naturalHeight);
 
   const canvasOrig = document.createElement('canvas');
   canvasOrig.width = width;
