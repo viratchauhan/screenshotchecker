@@ -3684,7 +3684,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-check-jpeg-quality", "how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
+    "relatedSlugs": ["free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", "how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "reverse-image-search-screenshot",
       "exif-metadata"
@@ -7460,7 +7460,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-check-jpeg-quality", "how-to-read-error-level-analysis", 
+    "relatedSlugs": ["free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", "how-to-read-error-level-analysis", 
       "how-to-tell-if-a-photo-is-edited",
       "how-to-tell-if-an-image-is-ai-generated",
       "reverse-image-search-screenshot"
@@ -7597,7 +7597,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["how-to-check-jpeg-quality", 
+    "relatedSlugs": ["free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", 
       "how-to-tell-if-a-photo-is-edited",
       "fotoforensics-alternative",
       "how-to-tell-if-an-image-is-ai-generated"
@@ -7729,7 +7729,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["free-tools-to-check-if-a-photo-is-edited", 
       "how-to-read-error-level-analysis",
       "how-to-tell-if-a-photo-is-edited",
       "fotoforensics-alternative"
@@ -7738,6 +7738,162 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check your photo's JPEG quality",
       "url": "/image-manipulation-checker/",
       "description": "Read the quality a JPEG was last saved at, see its tables and run error level analysis, all in your browser with a note on what each view cannot prove."
+    }
+  },
+  {
+    "slug": "free-tools-to-check-if-a-photo-is-edited",
+    "title": "Free Tools to Check if a Photo Is Edited or Photoshopped: Which One to Use for What",
+    "seoTitle": "5 Free Tools to Check if a Photo Is Edited or Photoshopped",
+    "metaDescription": "Five free online tools to check if a photo is edited or photoshopped, what each one is best at, what it does with your picture, and what none can prove.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-28",
+    "authorName": "Virat Chauhan",
+    "readTime": "8 min read",
+    "excerpt": "FotoForensics, Forensically, Image Edited?, TinEye and our own checker, compared fairly: what each free tool is best at, what happens to the picture you give it, and which one to open first for the question you have.",
+    "targetKeywords": [
+      "free tools to check if a photo is edited",
+      "how to check if a photo is photoshopped online free",
+      "photoshop detector online free",
+      "check if photo is edited online free",
+      "is this image edited checker",
+      "photo forensics tools"
+    ],
+    "keyTakeaway": {
+      "title": "Pick the tool by the question, and use two",
+      "text": "No free tool can say for certain that a photo is edited or untouched. Each one shows a different kind of clue. A reverse image search finds earlier copies, a metadata check reads what the file says about itself, and views such as error level analysis show how the pixels were compressed. Start with the tool that fits your question, confirm with a second one, and remember that a private picture should only go into a tool that does not upload it."
+    },
+    "introduction": "The free tools worth using to check if a photo is edited or photoshopped are FotoForensics, Forensically, Image Edited?, TinEye and our own <a href=\"/image-manipulation-checker/\">photo manipulation checker</a>. They do different jobs. TinEye finds earlier versions of a picture, Image Edited? reads the file's metadata and gives a short answer, FotoForensics and Forensically show expert views such as error level analysis, and our checker runs those views in your browser with a plain note under each one. None of them can prove that a photo is real. This guide says what each is best at, what happens to the picture you give it, and which to open first. We make one of the five, so the facts about the other four are taken from their own pages, which are linked.",
+    "contentSections": [
+      {
+        "heading": "Which tool for which question",
+        "paragraphs": [
+          "Most people open one detector, get one answer and stop. A better habit is to ask what you want to know and pick the tool built for that."
+        ],
+        "checklist": [
+          "<strong>Has this picture been online before, maybe in another form?</strong> Use a reverse image search such as TinEye.",
+          "<strong>What does the file say about itself?</strong> Use a metadata check such as Image Edited? or our <a href=\"/screenshot-metadata-checker/\">metadata checker</a>. This needs the original file, not a screenshot or a forwarded copy.",
+          "<strong>Do some parts of the picture behave differently from the rest?</strong> Use error level analysis in FotoForensics, Forensically or our checker.",
+          "<strong>Was something copied inside the picture, or smoothed over?</strong> Use the clone detection and noise analysis in Forensically.",
+          "<strong>Is the picture private?</strong> Use a tool that works inside your browser and does not upload it."
+        ],
+        "figure": {
+          "afterParagraph": 0,
+          "src": "/images/blog/free-tools-to-check-if-a-photo-is-edited/fictional-example.png",
+          "alt": "A summary card listing five free photo checking tools and what each one is best at: TinEye for earlier copies, Image Edited for a metadata answer, FotoForensics for error level analysis with tutorials, Forensically for many expert views, and ScreenshotChecker for private checks with plain notes.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. The five tools and the job each one suits best. A summary card, not a test result."
+        }
+      },
+      {
+        "heading": "1. FotoForensics: the classic error level analysis site",
+        "paragraphs": [
+          "FotoForensics is the best known site for error level analysis (ELA). Its <a href=\"https://fotoforensics.com/faq.php\">FAQ</a> tells the history: Dr. Neal Krawetz presented the method at the Black Hat security conference in 2007, and his company Hacker Factor has run the site since 2012 as a free introduction to photo forensics. You upload a picture or give its web address, and the site shows the ELA view, an estimate of the JPEG quality and the metadata. It accepts JPEG, PNG, WebP, HEIC and AVIF files.",
+          "<strong>Best at:</strong> learning. The tutorials are the clearest free explanation of ELA and JPEG quality that we know of.",
+          "<strong>Keep in mind:</strong> the FAQ is direct about privacy. It calls the site public, says there is no privacy and warns you not to assume that submitted pictures will be kept private. Uploads are used for research. The free site is for personal use, and a paid Lab service exists for business and private work. The FAQ also says the site does not draw conclusions or interpret results and only shows raw data, so the reading is up to you. On an iPhone, it says, file uploads from Mobile Safari are altered before they arrive, so only web addresses are supported there."
+        ]
+      },
+      {
+        "heading": "2. Forensically: the most views in one place",
+        "paragraphs": [
+          "<a href=\"https://29a.ch/photo-forensics/\">Forensically</a> is a free set of tools made by Jonas Wagner. Its help page lists a magnifier, clone detection, error level analysis, noise analysis, level sweep, luminance gradient, principal component analysis, metadata, geo tags, thumbnail analysis, JPEG analysis and string extraction. The page says the app can be used offline once it has loaded.",
+          "<strong>Best at:</strong> depth. No other free tool here has as many views, and the sliders let you tune each one. Clone detection marks areas that are similar to each other, which can point to the clone tool, and noise analysis can help with airbrushing and warping.",
+          "<strong>Keep in mind:</strong> it is built for people who already know what the views mean. The help page compares the app to a magnifying glass that cannot tell true from false, says ELA results can be misleading and calls its own clone detection a first attempt. There is no summary and no answer in words."
+        ]
+      },
+      {
+        "heading": "3. Image Edited?: a short answer from the metadata",
+        "paragraphs": [
+          "Image Edited? is the simplest of the five. You upload a file and get a short answer. Its <a href=\"https://imageedited.com/about.html\">about page</a> explains that the free tool checks only basic metadata: the camera or scanner model, the modification date and the colour profiles, including profiles that some websites apply. Deeper tests on the pixels are described as a paid service with a price on request.",
+          "<strong>Best at:</strong> a quick first look at an original file, for example a photo sent to you by email as an attachment, when you do not want to read any charts.",
+          "<strong>Keep in mind:</strong> the about page says that checking metadata requires the original file, and that a scan or a screenshot cannot be checked this way. Most chat apps and social networks remove metadata, so a picture that came through them has little left to read. The page also notes that some editing programs keep the camera data, so finding it does not mean the picture was not edited. On privacy, the <a href=\"https://imageedited.com/faq.html\">site's rules</a> say that uploaded files are deleted on a regular basis and that staff may view images during spot quality checks."
+        ]
+      },
+      {
+        "heading": "4. TinEye: find the earlier version",
+        "paragraphs": [
+          "TinEye is a reverse image search, not a forensic viewer, and it is often the fastest way to catch an edit. If you can find the picture as it looked before, you do not need to guess from pixels. The <a href=\"https://tineye.com/faq\">TinEye FAQ</a> says you can use it to find where an image was first used, whether modified versions exist and whether a higher resolution version is available. It finds matches of the same picture, including copies that were cropped, edited or resized, and results can be sorted by most changed, oldest or biggest image.",
+          "<strong>Best at:</strong> pictures that have been published somewhere. A match that is larger, older or framed differently often settles the question in a minute. The FAQ says TinEye does not save or share the images you search with.",
+          "<strong>Keep in mind:</strong> it cannot help with a picture that was never online, such as a photo someone sent only to you. The FAQ also explains that the oldest result is the earliest copy TinEye's crawlers found, which is not the date the picture first appeared. Our <a href=\"/reverse-image-search/\">reverse image search page</a> opens the same picture in several search engines, because each one has crawled a different part of the web."
+        ]
+      },
+      {
+        "heading": "5. ScreenshotChecker: private, with a note under every view",
+        "paragraphs": [
+          "This is our tool, so read this part knowing that. The <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> runs in your browser and the picture is not uploaded. It shows error level analysis with sliders for the re-save quality and the error scale, reads the JPEG quality the file was last saved at, and compares the picture area by area so that a part which stands out is outlined and named in words. Under each view there is one line on what it shows and one on what it cannot prove.",
+          "<strong>Best at:</strong> a private picture, a phone screen, and a first reading when you are not an expert. It also works for screenshots, payment receipts and chats, which is what the rest of this site is about.",
+          "<strong>Keep in mind:</strong> it has fewer views than Forensically. There is no clone detection, noise view or thumbnail check yet. It does not make a result page you can share as a link. Like every tool on this page, it shows clues and not proof. Pictures with added text, stickers or watermarks can be outlined even though nothing was faked."
+        ]
+      },
+      {
+        "heading": "What none of these tools can tell you",
+        "paragraphs": [
+          "The limits are the same for all five, and they matter more than the differences."
+        ],
+        "checklist": [
+          "<strong>A clean result is not proof.</strong> A careful edit that was saved again at a low quality, or passed through a chat app, can leave nothing to see. Forensically's help page says it shortly: absence of evidence is not evidence of absence.",
+          "<strong>A flagged result is not proof either.</strong> Text, sharp edges, strong colours and resizing light up in error level analysis on untouched pictures. Our guide on <a href=\"/blog/how-to-read-error-level-analysis/\">how to read error level analysis</a> lists the common false alarms.",
+          "<strong>Missing metadata means little.</strong> Most apps strip it when a picture is sent or uploaded.",
+          "<strong>Small, heavily compressed copies hide edits.</strong> Read the <a href=\"/blog/how-to-check-jpeg-quality/\">JPEG quality</a> first. If it is low, look for a larger or earlier copy before you trust any view.",
+          "<strong>AI pictures are a different problem.</strong> A picture made entirely by an AI model has no pasted parts to find. See <a href=\"/blog/how-to-tell-if-an-image-is-ai-generated/\">how to tell if an image is AI generated</a>."
+        ],
+        "callout": {
+          "type": "warning",
+          "text": "Do not accuse anyone, refuse a payment or publish a claim on the result of one tool. Use two different kinds of check, and where it matters, ask for the original file or confirm the facts with an independent source."
+        }
+      },
+      {
+        "heading": "A simple order to work in",
+        "paragraphs": [
+          "If you are not sure where to start, this order wastes the least time. The longer method, with examples, is in <a href=\"/blog/how-to-tell-if-a-photo-is-edited/\">how to tell if a photo is edited</a>."
+        ],
+        "checklist": [
+          "<strong>Search for the picture first.</strong> An earlier or larger copy answers more than any pixel view.",
+          "<strong>Read the metadata</strong> if you have the original file. Look for an editing program's name or a modification date that does not fit the story.",
+          "<strong>Check the JPEG quality.</strong> It tells you how much the next step can show.",
+          "<strong>Run error level analysis</strong> and compare like with like: edges with edges, flat areas with flat areas.",
+          "<strong>Go deeper only if something stands out.</strong> Open Forensically for clone detection and noise analysis on that area.",
+          "<strong>Write down what you found and what you could not check.</strong> An honest \"cannot tell\" is a valid result."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "Is there a free tool to check if a photo is photoshopped?",
+        "answer": "Yes, several. FotoForensics, Forensically, Image Edited?, TinEye and ScreenshotChecker's photo manipulation checker are all free. Each shows a different kind of clue, and none can prove on its own that a photo was or was not edited."
+      },
+      {
+        "question": "Which photo edit checker is the most accurate?",
+        "answer": "There is no honest ranking by accuracy, because the tools answer different questions and the result depends on the copy you have. A reverse image search is strongest when the picture has been published before. Error level analysis is useful on a high quality JPEG and weak on a small, heavily compressed one."
+      },
+      {
+        "question": "Which tools do not upload my photo?",
+        "answer": "ScreenshotChecker's photo manipulation checker analyses the picture inside your browser. Forensically says on its help page that it can be used offline. FotoForensics and Image Edited? work on files you upload to them, and FotoForensics states that its free site is public and has no privacy."
+      },
+      {
+        "question": "Can I check if a photo is edited on my phone?",
+        "answer": "Yes. Use the file itself, not a screenshot of it. ScreenshotChecker's checker is laid out for a phone screen. FotoForensics says file uploads from Mobile Safari on iPhone are altered before they arrive, so it supports only web addresses there."
+      },
+      {
+        "question": "Can these tools detect AI generated images?",
+        "answer": "Not reliably. They look for signs of a picture being changed after it was made. A picture created entirely by AI needs different checks, such as content credentials, visible errors in the scene and a search for its source."
+      },
+      {
+        "question": "Why do two tools give different answers for the same photo?",
+        "answer": "They measure different things. One reads metadata, another compares compression, a third searches the web. Different answers are normal and are a reason to look closer, not a sign that one tool is broken."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "how-to-tell-if-a-photo-is-edited",
+      "fotoforensics-alternative",
+      "how-to-read-error-level-analysis",
+      "how-to-check-jpeg-quality"
+    ],
+    "cta": {
+      "label": "Check a photo in your browser",
+      "url": "/image-manipulation-checker/",
+      "description": "Run error level analysis, read the JPEG save quality and compare the picture area by area, without uploading it, with a note on what each view cannot prove."
     }
   },
 ];

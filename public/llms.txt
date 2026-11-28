@@ -56,6 +56,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [AI image detection explained](https://screenshotchecker.com/blog/ai-image-detector-online/)
 - [How to tell if an image is AI-generated: 7 checks](https://screenshotchecker.com/blog/how-to-tell-if-an-image-is-ai-generated/)
 - [FotoForensics alternatives: private in-browser photo forensics tools](https://screenshotchecker.com/blog/fotoforensics-alternative/)
+- [Free tools to check if a photo is edited or photoshopped: FotoForensics, Forensically, Image Edited?, TinEye and ScreenshotChecker compared by what each is best at](https://screenshotchecker.com/blog/free-tools-to-check-if-a-photo-is-edited/)
 - [How to read error level analysis (ELA): bright and dark areas, false alarms and limits](https://screenshotchecker.com/blog/how-to-read-error-level-analysis/)
 - [How to check the JPEG quality of a photo: what the percentage means, why apps disagree and what it says about re-saves](https://screenshotchecker.com/blog/how-to-check-jpeg-quality/)
 - [How to check a suspicious link](https://screenshotchecker.com/blog/suspicious-link-checker-online/)
