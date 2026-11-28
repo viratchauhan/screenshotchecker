@@ -22,6 +22,8 @@ export interface ElaGridCell {
   edgeShare?: number;
   /** Share of pixels (0 to 1) with a very large brightness step to a neighbour. */
   hardEdgeShare?: number;
+  /** How strongly coloured the area is: mean gap between a pixel's strongest and weakest channel (0 to 255). */
+  colour?: number;
 }
 
 export interface ElaGridFlag extends ElaGridCell {
@@ -29,6 +31,8 @@ export interface ElaGridFlag extends ElaGridCell {
   expected: number;
   /** True when the cell's edges are mostly hard and clean, as in added text, stickers and logos. */
   graphicLike: boolean;
+  /** True when the cell is strongly coloured and far more so than the picture's typical area (a title bar, a button, an icon). */
+  colourful?: boolean;
 }
 
 export interface ElaGridFinding {
@@ -89,6 +93,25 @@ export const ELA_GRAPHIC = {
   mostShare: 0.5,
 } as const;
 
+/**
+ * JPEG keeps colour less finely than brightness, so letters and edges on a strongly coloured
+ * background change more in a re-save than the same letters on white or grey. On fictional app
+ * screens (see the tests) untouched title bars, buttons and icons in green, blue, orange and
+ * purple were outlined for that reason alone; a dark grey bar was not.
+ */
+export const ELA_COLOUR = {
+  /** A strongly coloured area has at least this mean colour strength ... */
+  minColour: 25,
+  /** ... and at least this many times the colour strength of the picture's typical compared area. */
+  minRatio: 3,
+  /**
+   * The rim of a coloured bar, button or icon fills only part of its area, so its mean colour is
+   * lower. An outlined area with at least this colour strength counts too when it touches an
+   * outlined area that is strongly coloured.
+   */
+  rimColour: 12,
+} as const;
+
 /** True when the edges in a cell look drawn (text, sticker, logo), not photographed. A hint, not proof. */
 export function looksLikeGraphic(cell: ElaGridCell): boolean {
   const hard = cell.hardEdgeShare ?? 0;
@@ -145,6 +168,43 @@ function describeGraphicAreas(finding: ElaGridFinding): string {
   return `${graphic.count} of ${total} areas${other}${where} carry hard, clean edges, the kind that letters, captions, stickers and logos have. ${tail}`;
 }
 
+export interface ColouredOutlines {
+  /** Outlined areas that are strongly coloured. */
+  count: number;
+  places: string[];
+  /** True when the picture is mostly text or drawn graphics, counting the outlined areas too. */
+  mostlyGraphic: boolean;
+  /** True when the picture is mostly text or graphics and every outlined area is strongly coloured. */
+  explainsAll: boolean;
+}
+
+/**
+ * On a screenshot, a coloured title bar, button or icon is outlined by itself (see ELA_COLOUR).
+ * This says how many outlined areas are of that kind, and whether they are all of them, so the
+ * result of a plain screenshot does not open with a warning. Photos are left alone: a coloured
+ * sticker on a photo is still worth a look.
+ */
+export function findColouredOutlines(finding: ElaGridFinding, rules: ElaGridRules = ELA_GRID): ColouredOutlines {
+  const coloured = finding.flagged.filter((c) => c.colourful);
+  const drawn = finding.cells.filter((c) => c.detail >= rules.flatDetail && looksLikeGraphic(c)).length;
+  const mostlyGraphic =
+    finding.enoughData && finding.judgedCells > 0 && drawn / finding.judgedCells >= ELA_GRAPHIC.mostShare;
+  return {
+    count: coloured.length,
+    places: [...new Set(coloured.map((c) => describeCellPlace(c, finding.cols, finding.rows)))],
+    mostlyGraphic,
+    explainsAll: mostlyGraphic && coloured.length > 0 && coloured.length === finding.flagged.length,
+  };
+}
+
+/** Summary line when the only outlined areas are coloured bars, buttons or icons on a screenshot. */
+export const COLOURED_SUMMARY = 'Strongly coloured areas stand out (title bars, buttons or icons)';
+
+/** True for the summary lines of results where only the area check found something. The page uses it to pick the pill. */
+export function isAreaOnlySummary(summary: string): boolean {
+  return summary === 'Uneven areas observed' || summary === COLOURED_SUMMARY;
+}
+
 export type ElaGridRules = { readonly [K in keyof typeof ELA_GRID]: number };
 
 /** Grid size for a picture: up to 8 x 8, fewer cells when the picture is small. */
@@ -172,6 +232,7 @@ export function measureElaGrid(
   const detailPixels = new Uint32Array(count);
   const edgePixels = new Uint32Array(count);
   const hardPixels = new Uint32Array(count);
+  const colourSum = new Float64Array(count);
   const luma = (i: number) => 0.299 * original[i] + 0.587 * original[i + 1] + 0.114 * original[i + 2];
 
   for (let y = 0; y < height; y++) {
@@ -185,6 +246,8 @@ export function measureElaGrid(
           Math.abs(original[i + 1] - resaved[i + 1]) +
           Math.abs(original[i + 2] - resaved[i + 2])) /
         3;
+      colourSum[cell] +=
+        Math.max(original[i], original[i + 1], original[i + 2]) - Math.min(original[i], original[i + 1], original[i + 2]);
       pixels[cell]++;
       if (x + 1 < width && y + 1 < height) {
         const here = luma(i);
@@ -210,6 +273,7 @@ export function measureElaGrid(
         detail: detailPixels[cell] ? detailSum[cell] / detailPixels[cell] : 0,
         edgeShare: detailPixels[cell] ? edgePixels[cell] / detailPixels[cell] : 0,
         hardEdgeShare: detailPixels[cell] ? hardPixels[cell] / detailPixels[cell] : 0,
+        colour: pixels[cell] ? colourSum[cell] / pixels[cell] : 0,
       });
     }
   }
@@ -260,14 +324,30 @@ export function findUnevenElaCells(
   // 1.4826 turns the median absolute deviation into a standard-deviation-like spread.
   const spread = Math.max(0.15, 1.4826 * median(residuals.map((r) => Math.abs(r - centre))));
 
+  const typicalColour = median(judged.map((c) => c.colour ?? 0));
   const flagged = judged
-    .map((c) => ({ ...c, expected: expectedFor(c), graphicLike: looksLikeGraphic(c) }))
+    .map((c) => ({
+      ...c,
+      expected: expectedFor(c),
+      graphicLike: looksLikeGraphic(c),
+      colourful: (c.colour ?? 0) >= ELA_COLOUR.minColour && (c.colour ?? 0) >= ELA_COLOUR.minRatio * typicalColour,
+    }))
     .filter(
       (c) =>
         c.error - c.expected > rules.deviations * spread &&
         c.error - c.expected >= rules.minExcess &&
         c.error >= rules.minRatio * Math.max(c.expected, 0.5),
     );
+  // The rim of a coloured object: weaker colour, next to an outlined area that is strongly coloured.
+  const strong = flagged.filter((c) => c.colourful);
+  for (const c of flagged) {
+    if (c.colourful) continue;
+    const colour = c.colour ?? 0;
+    c.colourful =
+      colour >= ELA_COLOUR.rimColour &&
+      colour >= ELA_COLOUR.minRatio * typicalColour &&
+      strong.some((o) => Math.abs(o.col - c.col) + Math.abs(o.row - c.row) === 1);
+  }
 
   // When a large share of the picture "stands out", the picture is simply varied: flag nothing.
   if (flagged.length > judged.length * rules.maxFlaggedShare) return base;
@@ -322,6 +402,19 @@ export function describeElaGrid(finding: ElaGridFinding): { headline: string; no
         `${subject} hard, clean edges, the kind that letters, stickers, logos and app screens have. If you can see a caption, sticker, logo or watermark there, that is most likely what this check picked up. It is still something added to the picture, so read it: on a receipt or a screenshot, the added text may be the part that matters.`,
       );
     }
+    const coloured = findColouredOutlines(finding);
+    if (coloured.mostlyGraphic && coloured.count > 0) {
+      const c = coloured.count;
+      const subject =
+        c < n
+          ? `${c} of the ${n} outlined areas (${coloured.places.join(', ')}) ${c === 1 ? 'is' : 'are'}`
+          : n === 1
+            ? 'The outlined area is'
+            : `All ${n} outlined areas are`;
+      notes.push(
+        `${subject} strongly coloured, as title bars, buttons and icons are. JPEG keeps colour less finely than brightness, so letters and edges on a strong colour change more in a re-save by themselves, on an untouched screenshot too. This check cannot tell a coloured bar that was always there from one that was redrawn, so read what it says.`,
+      );
+    }
   } else {
     notes.push(
       `${finding.judgedCells} of ${total} areas were compared and none changed far more than its detail explains.`,
@@ -338,8 +431,9 @@ export function describeElaGrid(finding: ElaGridFinding): { headline: string; no
     );
   }
   return {
-    headline:
-      finding.flagged.length > 0
+    headline: findColouredOutlines(finding).explainsAll
+      ? `${finding.flagged.length} strongly coloured ${finding.flagged.length === 1 ? 'area stands' : 'areas stand'} out, as title bars and buttons do`
+      : finding.flagged.length > 0
         ? `${finding.flagged.length} uneven ${finding.flagged.length === 1 ? 'area' : 'areas'} found${describeGraphicShare(finding)}`
         : 'No uneven areas found',
     notes,
@@ -372,7 +466,8 @@ export interface ForensicsStatus {
  * The wording of the result. It says only what the comparison found: "no uneven areas found" is
  * not "consistent" or "untouched", and when half or more of the picture could not be judged
  * (flat colour, too small), or a quarter or more of the compared areas carry text or graphics
- * the check cannot single out, the result is neutral, never green.
+ * the check cannot single out, the result is neutral, never green. A screenshot whose only
+ * outlined areas are strongly coloured bars, buttons or icons is neutral too, not a warning.
  */
 export function summarizeForensicsStatus(
   finding: ElaGridFinding | undefined,
@@ -381,6 +476,9 @@ export function summarizeForensicsStatus(
 ): ForensicsStatus {
   if (anomaliesDetected) {
     const n = finding?.flagged.length ?? 0;
+    if (unevenOnly && finding && findColouredOutlines(finding).explainsAll) {
+      return { pill: 'Coloured Areas Stand Out', tone: 'neutral', areas: `${n} outlined, coloured`, summary: COLOURED_SUMMARY };
+    }
     return unevenOnly
       ? { pill: 'Uneven Areas', tone: 'warning', areas: `${n} outlined`, summary: 'Uneven areas observed' }
       : {

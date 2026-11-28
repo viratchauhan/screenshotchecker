@@ -2,12 +2,15 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import {
+  COLOURED_SUMMARY,
   ELA_GRID,
   describeCellPlace,
   describeElaGrid,
   elaGridSize,
+  findColouredOutlines,
   findGraphicAreas,
   findUnevenElaCells,
+  isAreaOnlySummary,
   looksLikeGraphic,
   summarizeForensicsStatus,
   measureElaGrid,
@@ -334,4 +337,121 @@ test('page wiring: the card explains text that is not outlined', () => {
   const page = readFileSync(new URL('../../../components/workspaces/ForensicsWorkspace.astro', import.meta.url), 'utf8');
   assert.match(page, /a note says how many/);
   assert.match(page, /stays grey, not green/);
+});
+
+/**
+ * Fictional cells for a made-up app screen: drawn edges everywhere. `standsOut(i)` areas change far
+ * more in the re-save; `colourOf(i)` is how strongly coloured each area is (a title bar is about 100).
+ */
+function screenCells(standsOut: (i: number) => boolean, colourOf: (i: number) => number, drawn = true): ElaGridCell[] {
+  return cellsWithText(() => drawn).map((c, i) => ({
+    ...c,
+    error: standsOut(i) ? c.error + 4 : c.error,
+    colour: colourOf(i),
+  }));
+}
+
+test('coloured bars on a screenshot: outlined and explained, but not a warning', () => {
+  // A green title bar across four areas of an untouched screen.
+  const bar = findUnevenElaCells(screenCells((i) => i < 4, (i) => (i < 8 ? 100 : 0)), 8, 8);
+  assert.equal(bar.flagged.length, 4, 'the outlines stay');
+  assert.ok(bar.flagged.every((c) => c.colourful));
+  assert.deepEqual(
+    [findColouredOutlines(bar).count, findColouredOutlines(bar).mostlyGraphic, findColouredOutlines(bar).explainsAll],
+    [4, true, true],
+  );
+  const status = summarizeForensicsStatus(bar, true, true);
+  assert.deepEqual([status.pill, status.tone, status.areas], ['Coloured Areas Stand Out', 'neutral', '4 outlined, coloured']);
+  assert.equal(status.summary, COLOURED_SUMMARY);
+  assert.equal(isAreaOnlySummary(status.summary), true);
+  assert.equal(isAreaOnlySummary('Uneven areas observed'), true);
+  assert.equal(isAreaOnlySummary('Regional compression variance observed'), false);
+  const report = describeElaGrid(bar);
+  assert.equal(report.headline, '4 strongly coloured areas stand out, as title bars and buttons do');
+  const note = report.notes.find((n) => /strongly coloured, as title bars/.test(n));
+  assert.ok(note, 'a note explains the coloured areas');
+  assert.match(note, /^All 4 outlined areas are strongly coloured/);
+  assert.match(note, /cannot tell a coloured bar that was always there from one that was redrawn/);
+
+  // One coloured icon: singular wording.
+  const icon = findUnevenElaCells(screenCells((i) => i === 20, (i) => (i === 20 ? 45 : 0)), 8, 8);
+  assert.equal(describeElaGrid(icon).headline, '1 strongly coloured area stands out, as title bars and buttons do');
+  assert.match(describeElaGrid(icon).notes.join(' '), /The outlined area is strongly coloured/);
+
+  // An icon that spills into the next area: its rim is less coloured but belongs to the same object.
+  const rim = findUnevenElaCells(screenCells((i) => i === 20 || i === 21, (i) => (i === 20 ? 45 : i === 21 ? 15 : 0)), 8, 8);
+  assert.deepEqual(rim.flagged.map((c) => c.colourful), [true, true]);
+  assert.equal(summarizeForensicsStatus(rim, true, true).tone, 'neutral');
+  // The same weak colour away from any coloured outline is not explained away (a small coloured number pasted in).
+  const alone = findUnevenElaCells(screenCells((i) => i === 20 || i === 42, (i) => (i === 20 ? 45 : i === 42 ? 15 : 0)), 8, 8);
+  assert.deepEqual(alone.flagged.map((c) => c.colourful), [true, false]);
+  assert.equal(summarizeForensicsStatus(alone, true, true).tone, 'warning');
+
+  // The quadrant test also fired: that stays a warning.
+  assert.deepEqual(
+    [summarizeForensicsStatus(bar, true, false).pill, summarizeForensicsStatus(bar, true, false).tone],
+    ['Compression Anomaly', 'warning'],
+  );
+});
+
+test('coloured bars: a part that stands out without strong colour still warns', () => {
+  // A number pasted into the screen: it stands out, but the area is black on white.
+  const pasted = findUnevenElaCells(screenCells((i) => i === 18, (i) => (i === 18 ? 8 : 0)), 8, 8);
+  assert.equal(pasted.flagged.length, 1);
+  assert.equal(pasted.flagged[0].colourful, false);
+  assert.deepEqual(
+    [summarizeForensicsStatus(pasted, true, true).pill, summarizeForensicsStatus(pasted, true, true).tone],
+    ['Uneven Areas', 'warning'],
+  );
+  assert.match(describeElaGrid(pasted).headline, /^1 uneven area found/);
+  assert.doesNotMatch(describeElaGrid(pasted).notes.join(' '), /strongly coloured/);
+
+  // The title bar and the pasted number together: the warning stays, and the note says which are which.
+  const both = findUnevenElaCells(screenCells((i) => i < 4 || i === 18, (i) => (i < 8 ? 100 : i === 18 ? 8 : 0)), 8, 8);
+  assert.equal(both.flagged.length, 5);
+  assert.equal(findColouredOutlines(both).explainsAll, false);
+  assert.equal(summarizeForensicsStatus(both, true, true).tone, 'warning');
+  assert.match(describeElaGrid(both).headline, /^5 uneven areas found/);
+  assert.match(describeElaGrid(both).notes.join(' '), /4 of the 5 outlined areas \(top left, top centre\) are strongly coloured/);
+
+  // A screen tinted all over: the outlined area is no more coloured than the rest, so nothing is explained away.
+  const tinted = findUnevenElaCells(screenCells((i) => i === 18, () => 60), 8, 8);
+  assert.equal(tinted.flagged[0].colourful, false);
+  assert.equal(summarizeForensicsStatus(tinted, true, true).tone, 'warning');
+
+  // A photo with a coloured sticker: photos are left alone, the result is still a warning to look.
+  const photo = findUnevenElaCells(screenCells((i) => i === 18, (i) => (i === 18 ? 120 : 5), false), 8, 8);
+  assert.equal(photo.flagged[0].colourful, true);
+  assert.equal(findColouredOutlines(photo).mostlyGraphic, false);
+  assert.equal(summarizeForensicsStatus(photo, true, true).tone, 'warning');
+  assert.doesNotMatch(describeElaGrid(photo).notes.join(' '), /strongly coloured/);
+
+  // No certainty either way.
+  for (const f of [pasted, both, tinted, photo]) {
+    const s = summarizeForensicsStatus(f, true, true);
+    assert.doesNotMatch(
+      `${describeElaGrid(f).headline} ${describeElaGrid(f).notes.join(' ')} ${s.pill} ${s.areas} ${s.summary}`,
+      /proves|certainly|definitely|authentic|genuine|untouched screenshot is|harmless|safe/i,
+    );
+  }
+});
+
+test('colour strength is measured per area', () => {
+  const width = 48;
+  const height = 24;
+  const pixels = new Uint8ClampedArray(width * height * 4);
+  for (let i = 0; i < width * height; i++) {
+    const left = i % width < width / 2;
+    pixels.set(left ? [200, 30, 30, 255] : [128, 128, 128, 255], i * 4);
+  }
+  const cells = measureElaGrid(pixels, pixels, width, height, { cols: 2, rows: 1 });
+  assert.equal(cells[0].colour, 170, 'a red area');
+  assert.equal(cells[1].colour, 0, 'a grey area has no colour');
+});
+
+test('page wiring: the card explains coloured bars and the pill uses the shared check', () => {
+  const page = readFileSync(new URL('../../../components/workspaces/ForensicsWorkspace.astro', import.meta.url), 'utf8');
+  assert.match(page, /isAreaOnlySummary\(result\.compressionInconsistency\)/);
+  assert.match(page, /strongly coloured bars, buttons or icons/);
+  assert.match(page, /cannot tell whether such a bar was redrawn/);
 });

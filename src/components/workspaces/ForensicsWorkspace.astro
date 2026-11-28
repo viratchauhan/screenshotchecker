@@ -172,10 +172,10 @@ const faqs = getToolFaqs('image-manipulation-checker');
           <p id="ela-grid-headline" class="text-sm text-ink font-medium" role="status" aria-live="polite">Comparing the areas of the picture.</p>
           <ul id="ela-grid-notes" class="text-xs text-body leading-relaxed space-y-1.5 list-disc pl-4"></ul>
           <p class="text-xs text-muted leading-relaxed">
-            <strong class="text-ink">What this shows:</strong> the picture is cut into up to 64 areas, and each one is compared with areas that have a similar amount of detail. An area that changes far more than its detail explains is outlined on the ELA map. A dashed outline means the area has hard, clean edges like added text, a sticker or a logo. When several areas carry text or graphics without standing out, a note says how many.
+            <strong class="text-ink">What this shows:</strong> the picture is cut into up to 64 areas, and each one is compared with areas that have a similar amount of detail. An area that changes far more than its detail explains is outlined on the ELA map. A dashed outline means the area has hard, clean edges like added text, a sticker or a logo. When several areas carry text or graphics without standing out, a note says how many. On a screenshot, a note also says when the outlined areas are strongly coloured bars, buttons or icons.
           </p>
           <p class="text-xs text-muted leading-relaxed">
-            <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Added text, stickers and watermarks stand out by themselves, the dashed outline is a guess from the shape of the edges (a sharp photographed sign can get one too), and an edit saved together with the rest of the picture, or flattened by a messaging app, does not stand out at all. A large caption, or a screenshot that is text all over, is treated as the picture's normal, so nothing is outlined and the result stays grey, not green.
+            <strong class="text-ink">What it cannot prove:</strong> that a picture was edited or is untouched. Added text, stickers and watermarks stand out by themselves, the dashed outline is a guess from the shape of the edges (a sharp photographed sign can get one too), and an edit saved together with the rest of the picture, or flattened by a messaging app, does not stand out at all. A large caption, or a screenshot that is text all over, is treated as the picture's normal, so nothing is outlined and the result stays grey, not green. Coloured title bars, buttons and icons on a screenshot stand out by themselves, so that result is grey too, and the check cannot tell whether such a bar was redrawn.
           </p>
         </div>
 
@@ -244,7 +244,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
     isDefaultElaView,
     type ElaViewRenderer,
   } from '../../lib/analyzer/elaView';
-  import { describeElaGrid, summarizeForensicsStatus, type ElaGridFinding } from '../../lib/analyzer/elaGrid';
+  import { describeElaGrid, isAreaOnlySummary, summarizeForensicsStatus, type ElaGridFinding } from '../../lib/analyzer/elaGrid';
   import { buildJpegQualityReport, dataUrlHeadBytes, type JpegQualityReport } from '../../lib/analyzer/jpegQuality';
   import {
     DEFAULT_NOISE_AMPLITUDE,
@@ -393,7 +393,7 @@ const faqs = getToolFaqs('image-manipulation-checker');
     if (kpiUniformity) kpiUniformity.innerText = result.compressionInconsistency;
     if (kpiNoise) kpiNoise.innerText = String(result.noiseVarianceScore);
     // Wording and colour come from one place: green only when areas were compared and none stood out.
-    const unevenOnly = Boolean(result.elaGrid?.flagged.length) && result.compressionInconsistency === 'Uneven areas observed';
+    const unevenOnly = Boolean(result.elaGrid?.flagged.length) && isAreaOnlySummary(result.compressionInconsistency);
     const status = summarizeForensicsStatus(result.elaGrid, result.anomaliesDetected, unevenOnly);
     const toneText = { warning: 'text-warning', neutral: 'text-ink', clear: 'text-success' }[status.tone];
     const toneBadge = { warning: 'badge-status-warning', neutral: 'badge-status-neutral', clear: 'badge-status-safe' }[status.tone];
