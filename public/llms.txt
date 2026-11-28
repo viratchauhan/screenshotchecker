@@ -55,6 +55,7 @@ Interface languages: English, Hindi, Spanish, French, German, Japanese (a langua
 - [What is EXIF metadata?](https://screenshotchecker.com/blog/exif-metadata/)
 - [AI image detection explained](https://screenshotchecker.com/blog/ai-image-detector-online/)
 - [How to tell if an image is AI-generated: 7 checks](https://screenshotchecker.com/blog/how-to-tell-if-an-image-is-ai-generated/)
+- [How to tell if a photo was edited with AI: where Google Photos, Gemini (SynthID), Samsung, Apple, Adobe and ChatGPT mark AI edits, and why a missing mark proves nothing](https://screenshotchecker.com/blog/how-to-tell-if-a-photo-is-edited-with-ai/)
 - [FotoForensics alternatives: private in-browser photo forensics tools](https://screenshotchecker.com/blog/fotoforensics-alternative/)
 - [Free tools to check if a photo is edited or photoshopped: FotoForensics, Forensically, Image Edited?, TinEye and ScreenshotChecker compared by what each is best at](https://screenshotchecker.com/blog/free-tools-to-check-if-a-photo-is-edited/)
 - [How to read error level analysis (ELA): bright and dark areas, false alarms and limits](https://screenshotchecker.com/blog/how-to-read-error-level-analysis/)

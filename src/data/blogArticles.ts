@@ -3697,7 +3697,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", "how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
+    "relatedSlugs": ["how-to-tell-if-a-photo-is-edited-with-ai", "free-tools-to-check-if-a-photo-is-edited", "how-to-check-jpeg-quality", "how-to-read-error-level-analysis", "fotoforensics-alternative", "how-to-tell-if-an-image-is-ai-generated", "fake-receipt-ai-generated", 
       "ai-image-detector-online",
       "reverse-image-search-screenshot",
       "exif-metadata"
@@ -6808,7 +6808,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": ["fotoforensics-alternative", 
+    "relatedSlugs": ["how-to-tell-if-a-photo-is-edited-with-ai", "fotoforensics-alternative", 
       "ai-image-detector-online",
       "ai-generated-screenshot",
       "how-to-tell-if-a-photo-is-edited"
@@ -7897,7 +7897,7 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       }
     ],
     "peopleAlsoSearch": [],
-    "relatedSlugs": [
+    "relatedSlugs": ["how-to-tell-if-a-photo-is-edited-with-ai", 
       "how-to-tell-if-a-photo-is-edited",
       "fotoforensics-alternative",
       "how-to-read-error-level-analysis",
@@ -7907,6 +7907,155 @@ export const BLOG_ARTICLES: BlogArticle[] = [
       "label": "Check a photo in your browser",
       "url": "/image-manipulation-checker/",
       "description": "Run error level analysis, read the JPEG save quality and compare the picture area by area, without uploading it, with a note on what each view cannot prove."
+    }
+  },
+  {
+    "slug": "how-to-tell-if-a-photo-is-edited-with-ai",
+    "title": "How to Tell if a Photo Was Edited With AI: The Marks Each App Leaves, and Why a Missing Mark Proves Nothing",
+    "seoTitle": "How to Tell if a Photo Was Edited With AI: App by App",
+    "metaDescription": "Check a photo for AI edits: AI info in Google Photos, the SynthID check in Gemini, Content Credentials, the Galaxy AI watermark, and what a missing mark means.",
+    "category": "AI & Forensics",
+    "publishedAt": "2026-11-28",
+    "authorName": "Virat Chauhan",
+    "readTime": "8 min read",
+    "excerpt": "Google Photos, Samsung Gallery, Apple Photos, Adobe apps and ChatGPT each mark AI edits in their own way. Where to look for each mark, how to check a picture in the Gemini app, and why a photo with no mark can still be edited.",
+    "targetKeywords": [
+      "how to tell if a photo is edited with ai",
+      "is this photo edited with ai",
+      "can you tell if a photo has been edited with ai",
+      "can you tell if a photo has been edited by chatgpt",
+      "how can you tell if a picture has been altered by ai",
+      "how to tell if a screenshot is ai edited"
+    ],
+    "keyTakeaway": {
+      "title": "A mark that is found tells you something. A mark that is missing does not",
+      "text": "AI editing tools leave three kinds of marks: a visible watermark, a note in the file's metadata, and an invisible watermark such as SynthID. Each can be checked for free, and each is strong evidence when found. But a screenshot, a crop or a converted copy can lose all three, so no mark never means no edit."
+    },
+    "introduction": "To tell if a photo was edited with AI, look for the marks the editing app leaves: the AI info in Google Photos, a Galaxy AI watermark in the corner, Content Credentials in the file, or the invisible SynthID watermark, which you can check by uploading the picture to the Gemini app. A mark that is found is strong evidence. A missing mark proves nothing, because the companies themselves say these marks can be lost when a picture is screenshotted, converted or passed through another app. Below is where each app puts its mark, how to check it, and what to do when there is none.",
+    "contentSections": [
+      {
+        "heading": "The three kinds of marks an AI edit can leave",
+        "paragraphs": [
+          "This guide is about real photos that were changed with AI: a person removed, a sky replaced, a background stretched, an object added. For pictures made by AI from nothing, see our guide on <a href=\"/blog/how-to-tell-if-an-image-is-ai-generated/\">how to tell if an image is AI-generated</a>.",
+          "Apps mark AI edits in three ways, and one app may use more than one:"
+        ],
+        "checklist": [
+          "<strong>A visible watermark:</strong> a small logo or sparkle printed on the picture itself, usually in a corner.",
+          "<strong>A note in the metadata:</strong> a line stored inside the file, either a simple IPTC field or signed Content Credentials (the C2PA standard), saying an AI tool was used.",
+          "<strong>An invisible watermark:</strong> a pattern hidden in the pixels, such as Google's SynthID, that only a detector can read."
+        ],
+        "figure": {
+          "afterParagraph": 1,
+          "src": "/images/blog/how-to-tell-if-a-photo-is-edited-with-ai/fictional-example.png",
+          "alt": "A summary card listing where five apps mark AI edits: Google Photos in the About panel, the Gemini app with a SynthID check, Samsung Gallery with a corner watermark, Adobe apps with Content Credentials, and ChatGPT with Content Credentials and SynthID.",
+          "width": 1200,
+          "height": 760,
+          "caption": "Figure 1. Where each app marks an AI edit. A summary card, not a test result."
+        }
+      },
+      {
+        "heading": "Google Photos: the AI info in the About panel",
+        "paragraphs": [
+          "Open the photo in Google Photos, tap More, then About, and look for the section called How this was made. <a href=\"https://support.google.com/photos/answer/15532903?hl=en\">Google's help page</a> describes this AI info and also states its limits: not every image has it, and the IPTC metadata behind it can be modified or removed.",
+          "In its <a href=\"https://blog.google/products/photos/ai-editing-transparency/\">October 2024 announcement</a>, Google said photos edited with Magic Editor and Magic Eraser already carried IPTC metadata, and that the app would start showing AI edits beside details such as the file name and location. The same metadata also flags pictures combined from several shots without generative AI, such as Best Take and Add Me.",
+          "Edits made with Reimagine in Magic Editor also get an invisible SynthID watermark. Google's <a href=\"https://blog.google/feed/synthid-reimagine-magic-editor/\">February 2025 note</a> adds a useful caution: some edits, such as changing the colour of a small flower, may be too small to label and detect."
+        ]
+      },
+      {
+        "heading": "Check any picture for SynthID in the Gemini app",
+        "paragraphs": [
+          "You do not need the app that made the edit. According to <a href=\"https://support.google.com/gemini/answer/16722517?hl=en\">Gemini's help page</a>, you can upload one file of up to 100 MB at gemini.google.com and ask a question such as \"Is this AI-generated?\". Gemini looks for the SynthID watermark, which can show that all or part of a picture was created or edited with Google AI, and it reads C2PA Content Credentials too.",
+          "The same page lists the limits. There is a cap of about 10 image checks in 24 hours. SynthID only recognises content from Google AI, so a picture with no SynthID may still have been made or edited by another AI system. Detection can fail after a picture has been altered many times, and a small edit may not carry a watermark at all."
+        ],
+        "callout": {
+          "type": "tip",
+          "text": "Give the checker the best copy you can get. Ask the sender for the original file instead of a screenshot or a forwarded copy."
+        }
+      },
+      {
+        "heading": "Samsung Galaxy AI: a watermark in the corner",
+        "paragraphs": [
+          "Samsung's <a href=\"https://www.samsung.com/ca/support/mobile-devices/how-to-use-generative-photo-editing-on-the-galaxy-s24\">support page for generative photo editing</a> says images generated by AI include an AI watermark in the bottom-left corner. Look there first on a photo that came from a Galaxy phone.",
+          "A mark printed in a corner only helps while the corner is still there. If the picture looks cropped tight on the left or the bottom, treat the missing watermark as no information. Samsung also said in its <a href=\"https://samsungmobilepress.com/articles/samsung-galaxy-s25-series-arrives-worldwide\">Galaxy S25 announcement</a> that the series supports C2PA Content Credentials for content created and edited with generative AI, so the original file from a recent Galaxy phone may carry a signed record as well."
+        ]
+      },
+      {
+        "heading": "Apple Photos: a hidden SynthID watermark",
+        "paragraphs": [
+          "<a href=\"https://support.apple.com/guide/iphone/clean-up-extend-and-reframe-photos-xy0grrlxue5w/ios\">Apple's iPhone User Guide</a> says that in iOS 27.2 or later, most images created or edited with Apple Intelligence tools include a SynthID hidden watermark, and that the SynthID Detector can check for it. The page covers the Clean Up, Extend and Reframe tools.",
+          "Note the two limits in that sentence: \"most\" images, and only from that iOS version on. A photo cleaned up on an older iPhone may carry no hidden watermark."
+        ]
+      },
+      {
+        "heading": "Adobe apps and ChatGPT: Content Credentials",
+        "paragraphs": [
+          "Adobe's <a href=\"https://helpx.adobe.com/creative-cloud/apps/generative-ai/ai-content-labeling-faq.html\">generative AI content labeling FAQ</a> says that when qualifying generative AI tools create or modify content in Adobe apps, C2PA metadata is attached to the file automatically and cannot be switched off for that content. It records the app, the AI model, whether the content was wholly generated or modified, and the date. Adobe adds no visible label to the picture, and it is up to other platforms whether they show the metadata.",
+          "OpenAI's <a href=\"https://help.openai.com/en/articles/8912793-c2pa-in-chatgpt-images\">help page on provenance signals</a> says images generated with ChatGPT or its API include both Content Credentials and a SynthID watermark. It is also frank about what the signals cannot do. The watermark does not tell you whether the model was editing a photo that someone uploaded, the metadata can be lost through everyday actions such as taking a screenshot or converting a file, and the signals do not guarantee that content is accurate or unedited.",
+          "To read Content Credentials, upload the original file to the Content Authenticity Initiative's <a href=\"https://verify.contentauthenticity.org/\">Verify tool</a>. Our <a href=\"/ai-image-detector/\">AI image detector</a> also reads Content Credentials when the file has them, without uploading the picture."
+        ]
+      },
+      {
+        "heading": "Why a missing mark proves nothing",
+        "paragraphs": [
+          "Every company quoted above says its mark can go missing. The <a href=\"https://www.c2pa.org/faq\">C2PA FAQ</a> says metadata can be removed by accident or on purpose. The Content Authenticity Initiative's <a href=\"https://opensource.contentauthenticity.org/docs/getting-started/faqs/\">developer FAQ</a> says a screenshot of an image does not include the original's C2PA metadata, and that credentials do not give a negative signal about whether an image is authentic.",
+          "So read the result one way only. A mark found: the picture was very likely made or changed with that tool. No mark found: you have learned nothing yet. The edit may have been made in an app that does not mark its work, or the copy in front of you may be a screenshot or a converted file."
+        ],
+        "callout": {
+          "type": "golden-rule",
+          "text": "A label can show that AI was used. No label, watermark or detector can show that a photo is untouched."
+        }
+      },
+      {
+        "heading": "What to do when there is no mark",
+        "paragraphs": [
+          "Fall back on the checks that do not depend on the editing app being honest:"
+        ],
+        "checklist": [
+          "<strong>Find an earlier copy.</strong> Run a <a href=\"/reverse-image-search/\">reverse image search</a>. An older version of the same photo with the person, sign or object still in place settles the question better than any detector.",
+          "<strong>Ask for the original file.</strong> Metadata and credentials only survive in the file that came out of the camera or the editing app.",
+          "<strong>Look at the changed-looking area.</strong> AI fills often show as a patch that is smoother than its surroundings, with repeated texture, bent lines behind a removed object, or text that almost makes words.",
+          "<strong>Compare how the areas were compressed.</strong> Our <a href=\"/image-manipulation-checker/\">photo manipulation checker</a> runs error level analysis in your browser and outlines areas that behave differently from similar ones. It can miss an edit, especially in a flat area or after the picture has been saved again, and an outlined area is a reason to look closer, not proof. Our guide on <a href=\"/blog/how-to-read-error-level-analysis/\">reading an ELA result</a> explains the false alarms.",
+          "<strong>Check the claim, not only the picture.</strong> When a photo is used to ask for money or to accuse someone, confirm it with the person or place it shows. Our general guide on <a href=\"/blog/how-to-tell-if-a-photo-is-edited/\">how to tell if a photo is edited</a> has the full routine."
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "How can I tell if a photo was edited with AI?",
+        "answer": "Look for the mark the editing app leaves: the AI info under About in Google Photos, a Galaxy AI watermark in the bottom-left corner, Content Credentials in the file, or a SynthID watermark, which the Gemini app can check. If nothing is found, search for an earlier copy of the photo and look closely at the area that seems changed."
+      },
+      {
+        "question": "Can you tell if a photo has been edited by ChatGPT?",
+        "answer": "Sometimes. OpenAI says images generated with ChatGPT include Content Credentials and a SynthID watermark, but it also says the watermark does not tell you whether the model was editing an uploaded photo, and that the metadata can be lost in a screenshot or a file conversion."
+      },
+      {
+        "question": "Does Google Photos show if a picture was edited with AI?",
+        "answer": "Yes, for edits made with its own tools. Open the photo, tap More, then About, and look for the How this was made section. Google says not all images have this AI info and that the metadata behind it can be removed."
+      },
+      {
+        "question": "Does no AI label mean the photo is real?",
+        "answer": "No. Labels, metadata and watermarks can be lost when a picture is screenshotted, cropped, converted or edited in an app that does not mark its work. Only a mark that is found tells you something."
+      },
+      {
+        "question": "Can Gemini tell if a photo was edited with AI?",
+        "answer": "It can check for Google's SynthID watermark and read Content Credentials. Google's help page says SynthID only recognises content from Google AI, that small edits may not carry a watermark, and that there is a daily cap on image checks."
+      },
+      {
+        "question": "Is there a free tool to check for AI edits without uploading the photo?",
+        "answer": "ScreenshotChecker's AI image detector and photo manipulation checker run in your browser. They read Content Credentials when present and show areas with a different compression history. They give clues, not a verdict, and cannot prove a photo is untouched."
+      }
+    ],
+    "peopleAlsoSearch": [],
+    "relatedSlugs": [
+      "how-to-tell-if-an-image-is-ai-generated",
+      "how-to-tell-if-a-photo-is-edited",
+      "free-tools-to-check-if-a-photo-is-edited",
+      "how-to-read-error-level-analysis"
+    ],
+    "cta": {
+      "label": "Check a photo for AI signals",
+      "url": "/ai-image-detector/",
+      "description": "Read Content Credentials and other AI signals in your browser, with a note on what each one cannot prove."
     }
   },
 ];
